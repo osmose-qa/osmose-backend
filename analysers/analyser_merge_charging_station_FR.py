@@ -38,6 +38,47 @@ class Analyser_Merge_Charging_station_FR(Analyser_Merge_Point):
         "Izivia": "Q86671322",
     }
 
+    # puisssance max de borne en kW connue
+    limit_kw_known = 401
+
+    def keepMaxValueIfEnum(str):
+        # si la valeur contient un ; on sépare et on prend la plus haute valeur
+        if ';' in str:
+            boom = str.split(';')
+            max = 0
+            for p in boom:
+                p = int(p)
+                if p > max:
+                    max = p
+
+            if max > 0:
+                str = max
+        return str
+
+    def getPuissanceNominaleInKw(self, puissance_nominale):
+        # deviner un nombre en kw dans la puissance nominale,
+        # les valeurs de plus de 401 sont à diviser par mille,
+        # il faut aussi évacuer le leftpad de 0
+        if puissance_nominale is None:
+            return None
+        puissance_nominale = str(puissance_nominale)
+
+        if puissance_nominale is None:
+            return None
+        # Convertir en chaîne et supprimer les zéros à gauche
+        puissance_str = str(puissance_nominale).lstrip('0')
+        if not puissance_str:
+            return 0
+
+        puissance_str = self.keepMaxValueIfEnum(puissance_str)
+        # Reconvertir en entier
+        puissance_nominale = int(puissance_str)
+        if puissance_nominale > limit_kw_known:
+            return str(puissance_nominale / 1000 ) + ' kW'
+        else:
+            return str(puissance_nominale) + ' kW'
+            
+
     def __init__(self, config, logger=None):
         Analyser_Merge_Point.__init__(self, config, logger)
         doc = dict(
@@ -85,6 +126,7 @@ with `capacity=6` can sometimes match to 3 charging station with `capacity=2`'''
                         "ref:EU:EVSE": "id_station_itinerance"
                     },
                     mapping2={
+                        "charging_station:output": lambda fields: self.getPuissanceNominaleInKw(fields["puissance_nominale"]),
                         "operator:phone": "telephone_operateur",
                         "operator:email": "contact_operateur",
                         "start_date": "date_mise_en_service",
