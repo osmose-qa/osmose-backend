@@ -194,6 +194,51 @@
     <tag k='note' v='Should raise class 1 warning isolated power tower' />
     <tag k='power' v='tower' />
   </node>
+  <node id='26980' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.19101084274' lon='4.475601043'>
+    <tag k='line_management' v='transition' />
+    <tag k='location:transition' v='yes' />
+    <tag k='power' v='tower' />
+  </node>
+  <node id='26981' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.1917632542' lon='4.47749077471'>
+    <tag k='power' v='tower' />
+  </node>
+  <node id='26982' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.19086548934' lon='4.47978809561'>
+    <tag k='power' v='tower' />
+  </node>
+  <node id='26983' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.1916008026' lon='4.48173958326'>
+    <tag k='line_management' v='transition' />
+    <tag k='location:transition' v='yes' />
+    <tag k='power' v='tower' />
+  </node>
+  <node id='26984' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.19018146391' lon='4.48178899418'>
+    <tag k='line_management' v='termination' />
+    <tag k='power' v='tower' />
+  </node>
+  <way id='-598' timestamp='2025-04-24T15:00:00Z' version='1'>
+    <nd ref='26980' />
+    <nd ref='26981' />
+    <nd ref='26982' />
+    <tag k='cables' v='9' />
+    <tag k='circuits' v='2;1' />
+    <tag k='power' v='line' />
+    <tag k='voltage' v='400000;225000' />
+  </way>
+  <way id='-602' timestamp='2025-04-24T15:00:00Z' version='1'>
+    <nd ref='26982' />
+    <nd ref='26983' />
+    <tag k='cables' v='6' />
+    <tag k='circuits' v='2' />
+    <tag k='power' v='line' />
+    <tag k='voltage' v='400000' />
+  </way>
+  <way id='-604' timestamp='2025-04-24T15:00:00Z' version='1'>
+    <nd ref='26982' />
+    <nd ref='26984' />
+    <tag k='cables' v='3' />
+    <tag k='circuits' v='1' />
+    <tag k='power' v='line' />
+    <tag k='voltage' v='225000' />
+  </way>
   <way id='1343' timestamp='2025-04-24T15:00:00Z' version='1'>
     <nd ref='26925' />
     <nd ref='26924' />

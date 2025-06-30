@@ -28,17 +28,33 @@ from modules.Stablehash import stablehash64
 # Lines with no voltage get null voltage instead empty array
 sql01 = """
 CREATE TEMP TABLE power_lines_nodes AS
+WITH power_lines_norm AS (
+    SELECT
+        w.id,
+        w.nodes,
+        w.tags,
+        coalesce(w.tags->'circuits', '1') as circuits,
+        w.tags->'voltage' as voltage,
+        regexp_replace (w.tags->'voltage', ';', '_', 1,  greatest(1, char_length(w.tags->'circuits') - char_length(replace(w.tags->'circuits', ';', '')) - 1)) as voltage_norm
+    FROM ways w
+    WHERE
+        w.tags != ''::hstore AND
+        w.tags?'power' AND
+        w.tags->'power' IN ('line', 'minor_line', 'cable')
+)
+
 SELECT
     w.id as wid,
     unnest('{NULL}' || w.nodes[1:array_length(w.nodes, 1) - 1]) AS nid_prec,
     unnest(w.nodes) AS nid,
     unnest(w.nodes[2:]) AS nid_next,
     w.tags->'cables' AS cables,
-    coalesce((w.tags->'circuits')::integer, 1) AS circuits,
+    w.tags->'line' AS line,
+    t.circuits,
     coalesce(w.tags->'location', 'overhead') AS location,
-    voltages
+    t.voltages
 FROM
-    ways AS w
+    power_lines_norm AS w
     JOIN LATERAL (
         -- Creating a voltage list consistent with number of circuits by padding with the first voltage when necessary or limiting:
         -- Filling size is the difference between circuits (defaults to 1) and the number of voltages in the list
@@ -46,25 +62,44 @@ FROM
         -- circuits=2 + voltage=20000 => voltage={20000;20000} (filling with first value and no limiting)
         -- circuits=2 + voltage=20000;400 => voltage={20000;400} (no fill and no limiting)
         -- circuits=3 + voltage=20000;400 => voltage={20000;20000;400} (filling with first value and no limiting)
-        SELECT array_agg(lpad(v, 99, '0'))
-        FROM (SELECT
-            unnest(array_cat(
+        -- circuits=2;1 + voltage=400000;63000 => voltage={400000;400000;63000}
+        SELECT
+            count(*) as circuits,
+            array_agg(lpad(t3.v, 99, '0'))
+        FROM
+            -- circuits table
+            string_to_table(w.circuits, ';') WITH ORDINALITY AS t1(c, s),
+
+            -- voltages table
+            unnest(
+                CASE WHEN char_length(w.circuits) - char_length(replace(w.circuits, ';', '')) > 0 THEN
+                    array_cat(
+                        regexp_split_to_array(split_part(w.voltage_norm, '_', 1), '; *'),
+                        ARRAY[split_part(w.voltage_norm, '_', 2)]
+                    )
+                ELSE
+                    ARRAY[w.voltage]
+                END
+            ) WITH ORDINALITY AS t2(v, s)
+
+            JOIN LATERAL (SELECT
+                t1.c,
+                t1.s,
+                unnest(array_cat(
                 array_fill(
-                    split_part(w.tags->'voltage', ';', 1)::text, -- voltage1 in voltage1;voltage2
-                    ARRAY[greatest(0, coalesce((w.tags->'circuits')::integer, 1) - (1 + length(coalesce(w.tags->'voltage', '')) - length(replace(coalesce(w.tags->'voltage',''), ';', ''))))]
+                    split_part(t2.v, ';', t1.s::integer)::text, -- voltage1 in voltage1;voltage2
+                    ARRAY[greatest(0, (t1.c)::integer - (1 + length(coalesce(t2.v, '')) - length(replace(coalesce(t2.v,''), ';', ''))))]
                 ),
-                regexp_split_to_array(w.tags->'voltage', '; *'))
-            ) LIMIT coalesce((w.tags->'circuits')::integer, 1)
-        ) AS t(v)) AS t(voltages)
+                regexp_split_to_array(t2.v, '; *'))
+            ) LIMIT (t1.c)::integer
+            ) AS t3(c, s, v) ON t3.s=t2.s
+        ) AS t(circuits, voltages)
         ON TRUE
 WHERE
-    w.tags != ''::hstore AND
-    w.tags?'power' AND
-    w.tags->'power' IN ('line', 'minor_line', 'cable') AND
     w.tags?'voltage' AND
     (
         NOT w.tags?'circuits' OR
-        w.tags->'circuits' ~ '^[0-9]+$'
+        w.tags->'circuits' ~ '^[0-9;]+$'
     )
 
 UNION ALL
@@ -75,20 +110,16 @@ SELECT
     unnest(w.nodes) AS nid,
     unnest(w.nodes[2:]) AS nid_next,
     w.tags->'cables' AS cables,
+    w.tags->'line' AS line,
     coalesce((w.tags->'circuits')::integer, 1) AS circuits,
     coalesce(w.tags->'location', 'overhead') AS location,
     NULL AS voltages
 FROM
    ways AS w
 WHERE
-    w.tags != ''::hstore AND
-    w.tags?'power' AND
-    w.tags->'power' IN ('line', 'minor_line', 'cable') AND
-    (
-        NOT w.tags?'voltage' OR (
-            w.tags?'circuits' AND
-            w.tags->'circuits' !~ '^[0-9]+$'
-        )
+    NOT w.tags?'voltage' OR (
+        w.tags?'circuits' AND
+        w.tags->'circuits' !~ '^[0-9;]+$'
     )
 """
 
@@ -105,6 +136,7 @@ WITH topotuples as (
         n.nid,
         n.location,
         n.cables,
+        n.line,
         n.circuits,
         voltages
     FROM
@@ -120,6 +152,7 @@ WITH topotuples as (
         n.nid,
         n.location,
         n.cables,
+        n.line,
         n.circuits,
         voltages
     FROM
@@ -132,13 +165,14 @@ SELECT
     p.nid,
     p.tid,
     p.location,
+    p.line, 
     count(distinct p.wid) AS cw,
     sum(p.circuits::integer) AS circuits,
     regexp_split_to_array(string_agg(array_to_string(p.voltages, ';'), ';'), '; *') AS voltages
 FROM
     topotuples p
 GROUP BY
-    p.nid, p.tid, p.location
+    p.nid, p.tid, p.location, p.line
 HAVING
     bool_and(p.circuits IS NOT NULL)
 """
@@ -540,10 +574,16 @@ WITH vertices AS (
         string_agg(CASE WHEN e.location!='overhead' THEN e.circuits::varchar ELSE NULL END, '-' ORDER BY e.circuits desc) AS circuits_elsewhere
     FROM
         power_lines_topoedges e
+    JOIN nodes n ON
+        n.id=e.nid
     GROUP BY
         e.nid
     HAVING
-        count(*) > 1 AND sum(e.circuits) > 2
+        count(*) > 1 AND
+        sum(e.circuits) > 2 AND
+        NOT(COALESCE('busbar' = ANY(array_agg(e.line)),false)) AND
+        NOT(COALESCE('bay' = ANY(array_agg(e.line)),false)) AND
+        NOT(COALESCE('substation' = ANY(array_agg(array_append(akeys(n.tags), NULL))),false)) --Array_append to avoid empty arrays
 )
 
 SELECT
@@ -733,4 +773,5 @@ class Test(TestAnalyserOsmosis):
         self.check_err(cl="6", elems=[("node", "26191"), ("way", "2088")])
         self.check_err(cl="8", elems=[("node", "25956")])
         self.check_err(cl="8", elems=[("node", "26383")])
-        self.check_num_err(11)
+        self.check_err(cl="8", elems=[("node", "26982")])
+        self.check_num_err(12)
