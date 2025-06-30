@@ -35,7 +35,8 @@ class TagFix_Maxspeed_AT(Plugin):
         'sign': '',
         'AT:motorway': '130', 'AT:trunk': '100', 'AT:rural': '100', 'AT:urban': '50',
         'AT:city_limit30': '30', 'AT:city_limit40': '40',
-        'AT:zone15': '15', 'AT:zone20': '20', 'AT:zone30': '30', 'AT:zone40': '40', 'AT:zone50': '50', 'AT:zone70': '70',
+        'AT:zone10': '10', 'AT:zone15': '15', 'AT:zone20': '20', 'AT:zone30': '30', 'AT:zone40': '40',
+        'AT:zone50': '50', 'AT:zone70': '70',
         'AT:shared_zone20': '20', 'AT:shared_zone30': '30',
         'AT:bicycle_road': '30',
         # Alternatives
@@ -70,7 +71,7 @@ see [Implicit maxspeed values](https://wiki.openstreetmap.org/wiki/Key:maxspeed#
 Always check `highway`, all other tags related to speed and verify on the ground.'''),
             resource='https://wiki.openstreetmap.org/wiki/Key:maxspeed')
 
-        self.errors[309111] = self.def_class(item=3091, level=2, tags=['maxspeed'],
+        self.errors[309111] = self.def_class(item=3091, level=3, tags=['maxspeed'],
             title=T_('Low speed limit value'),
             detail=T_(
 '''The speed limit in `maxspeed` is very low and no type is given in `maxspeed:type` or `source:maxspeed`.'''),
