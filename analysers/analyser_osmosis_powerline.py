@@ -43,6 +43,7 @@ WITH power_lines_norm AS (
         w.tags->'power' IN ('line', 'minor_line', 'cable')
 )
 
+-- Lines with voltages and appropriate circuits values
 SELECT
     w.id as wid,
     unnest('{NULL}' || w.nodes[1:array_length(w.nodes, 1) - 1]) AS nid_prec,
@@ -72,7 +73,7 @@ FROM
 
             -- voltages table
             unnest(
-                CASE WHEN char_length(w.circuits) - char_length(replace(w.circuits, ';', '')) > 0 THEN
+                CASE WHEN strpos(w.circuits, ';') > 0 THEN
                     array_cat(
                         regexp_split_to_array(split_part(w.voltage_norm, '_', 1), '; *'),
                         ARRAY[split_part(w.voltage_norm, '_', 2)]
@@ -104,6 +105,7 @@ WHERE
 
 UNION ALL
 
+-- Lines with no voltage or not appropriate circuits value
 SELECT
     w.id AS wid,
     unnest('{NULL}' || w.nodes[1:array_length(w.nodes, 1) - 1]) AS nid_prec,
@@ -111,7 +113,13 @@ SELECT
     unnest(w.nodes[2:]) AS nid_next,
     w.tags->'cables' AS cables,
     w.tags->'line' AS line,
-    coalesce((w.tags->'circuits')::integer, 1) AS circuits,
+    CASE WHEN w.tags?'circuits' AND w.tags->'circuits' ~ '^[0-9]+$' THEN
+        (w.tags->'circuits')::integer
+    WHEN w.tags?'circuits' AND w.tags->'circuits' ~ '^[0-9;]+$' THEN
+        (SELECT SUM(c::integer) FROM unnest(regexp_split_to_array(w.tags->'circuits', '; *')) c) -- Sum circuits list 2;1 => 3
+    ELSE
+        1 -- Every line with not resolvable circuits definition count as one
+    END AS circuits,
     coalesce(w.tags->'location', 'overhead') AS location,
     NULL AS voltages
 FROM
