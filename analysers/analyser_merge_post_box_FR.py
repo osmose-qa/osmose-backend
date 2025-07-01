@@ -39,9 +39,9 @@ class Analyser_Merge_Post_box_FR(Analyser_Merge_Point):
             "Liste des boîtes aux lettres de rue - France métropolitaine et DOM avec heure limite de dépôt",
             CSV(
                 SourceDataFair(
-                    attribution = "data.gouv.fr:LaPoste",
-                    url="https://datanova.laposte.fr/datasets/laposte-boiterue", file_name="Datanova_20240126_def.csv"),
-                separator = ";"),
+                    attribution = "La Poste",
+                    url="https://datanova.laposte.fr/datasets/laposte-boiterue", file_name="BAL_de_rues_janv2025.csv"),
+                separator = ","),
             Load_XY("VA_COORD_ADR_X", "VA_COORD_ADR_Y"),
             Conflate(
                 select = Select(
