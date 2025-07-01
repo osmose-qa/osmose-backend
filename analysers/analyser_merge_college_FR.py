@@ -21,7 +21,7 @@
 ###########################################################################
 
 from modules.OsmoseTranslation import T_
-from .Analyser_Merge import Analyser_Merge_Point, Source, CSV, Load_XY, Conflate, Select, Mapping
+from .Analyser_Merge import Analyser_Merge_Point, SourceDataGouv, CSV, Load_XY, Conflate, Select, Mapping
 
 
 class Analyser_Merge_College_FR(Analyser_Merge_Point):
@@ -37,14 +37,51 @@ class Analyser_Merge_College_FR(Analyser_Merge_Point):
             title = T_('College update'))
 
         self.init(
-            u"https://www.data.gouv.fr/fr/datasets/etablissements-denseignement-superieur-2",
-            u"Etablissements d'enseignement supérieur",
-            CSV(Source(attribution = u"Etablissements d'enseignement supérieur", millesime = "09/2017",
-                    fileUrl = u"https://api.opendata.onisep.fr/downloads/57da952417293/57da952417293.csv", encoding = "utf-8-sig"),
-                separator = u';'),
+            u"https://www.data.gouv.fr/fr/datasets/ideo-structures-denseignement-superieur/",
+            u"Idéo-Structures d'enseignement supérieur",
+            CSV(
+                SourceDataGouv(
+                    attribution="Onisep - Idéo-Structures d'enseignement supérieur",
+                    dataset="5fa5e386afdaa6152360f323",
+                    resource="a1aaf5b8-2cd2-400f-860c-488f124397e4",
+                    encoding = "utf-8-sig"),
+                separator = ";"),
             Load_XY("longitude (X)", "latitude (Y)",
                 xFunction = Load_XY.float_comma,
-                yFunction = Load_XY.float_comma),
+                yFunction = Load_XY.float_comma,
+                select = {"type d'établissement": ["autre établissement d’enseignement",
+                                                   #"campus connecté",
+                                                   #"centre de formation d'apprentis",
+                                                   #"centre de formation de fonctionnaires",
+                                                   #"centre de formation professionnelle",
+                                                   #"conservatoire départemental",
+                                                   #"conservatoire national",
+                                                   #"conservatoire régional",
+                                                   #"CREPS",
+                                                   "école d'architecture",
+                                                   "école d'art",
+                                                   "école d'ingénieurs",
+                                                   "école de formation sportive",
+                                                   "école de gestion et de commerce",
+                                                   "école de santé",
+                                                   "école des beaux-arts",
+                                                   "école du secteur social",
+                                                   "école vétérinaire",
+                                                   #"enseignement public à distance",
+                                                   #"établissement national de sport",
+                                                   #"établissement régional d'enseignement adapté",
+                                                   "grande école de commerce",
+                                                   "institut d'études politiques",
+                                                   "institut national polytechnique",
+                                                   "institut national supérieur du professorat et de l'éducation",
+                                                   "institut universitaire de technologie",
+                                                   #"lycée agricole",
+                                                   #"lycée général, technologique ou polyvalent",
+                                                   #"lycée professionnel",
+                                                   #"maison familiale rurale",
+                                                   "unité de formation et de recherche",
+                                                   "université",
+                                                   ]}),
             Conflate(
                 select = Select(
                     types = ["nodes", "ways", "relations"],
@@ -52,11 +89,11 @@ class Analyser_Merge_College_FR(Analyser_Merge_Point):
                 osmRef = "ref:UAI",
                 conflationDistance = 500,
                 mapping = Mapping(
-                    static1 = {"amenity": "college"},
-                    static2 = {"source": self.source},
+                    static1 = {"source": self.source},
                     mapping1 = {
+                        "amenity": lambda res: "university" if res["type d'établissement"] in [u"institut national supérieur du professorat et de l'éducation", u"institut universitaire de technologie", u"unité de formation et de recherche", u"université"] else "college",
                         "ref:UAI": "code UAI",
-                        "operator:type": lambda res: "private" if res["statut"] in [u"Privé hors contrat", u"Privé reconnu", u"Privé sous contrat"] else None,
+                        "operator:type": lambda res: "private" if res["statut"] in [u"privé hors contrat", u"privé reconnu par l’Etat", u"privé sous contrat", u"privé"] else None,
                         "short_name": "sigle"},
                     mapping2 = {"name": lambda res: res["nom"].replace(u"Ecole", u"École")},
                     text = lambda tags, fields: {"en": " - ".join(filter(lambda i: i is not None, [fields["sigle"], fields["nom"].replace(u"Ecole", u"École")]))} )))
