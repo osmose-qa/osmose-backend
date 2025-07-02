@@ -62,5 +62,5 @@ class Analyser_Merge_Recycling_FR_bm(Analyser_Merge_Point):
                         "ref:FR:CUB": "ident",
                         "recycling:glass_bottles": lambda res: "yes" if res["nature"] == "Verre" else None,
                         "recycling:food_waste": lambda res: "yes" if res["nature"] == "Biodéchets" else None,
-                        "location": lambda res: "underground" if res["type_emplacement"] in ["ENTERRE", "SEMI_ENTERRE"] else None
+                        "location": lambda res: "underground" if res["type_emplac"] in ["ENTERRE", "SEMI_ENTERRE"] else None
                     } )))
