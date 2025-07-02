@@ -30,12 +30,12 @@ class Analyser_Merge_Parking_FR_IDF_park_ride(Analyser_Merge_Point):
             title = T_('P+R parking in Île-de-France not integrated'))
 
         self.init(
-            "https://stif.opendatasoft.com/explore/dataset/parcs-relais-idf/information/",
+            "https://stif.opendatasoft.com/explore/dataset/parking_relais_idf/information/",
             "Parcs Relais en Île-de-France",
             CSV(SourceOpenDataSoft(
                 attribution="Île-de-France Mobilités",
-                url="https://stif.opendatasoft.com/explore/dataset/parcs-relais-idf")),
-            Load_XY("Geo Point", "Geo Point",
+                url="https://stif.opendatasoft.com/explore/dataset/parking_relais_idf")),
+            Load_XY("GEO POINT", "GEO POINT",
                 xFunction = lambda x: x.split(",")[1],
                 yFunction = lambda y: y.split(",")[0]),
             Conflate(
