@@ -37,8 +37,8 @@ class Analyser_Merge_College_FR(Analyser_Merge_Point):
             title = T_('College update'))
 
         self.init(
-            u"https://www.data.gouv.fr/fr/datasets/ideo-structures-denseignement-superieur/",
-            u"Idéo-Structures d'enseignement supérieur",
+            "https://www.data.gouv.fr/fr/datasets/ideo-structures-denseignement-superieur/",
+            "Idéo-Structures d'enseignement supérieur",
             CSV(
                 SourceDataGouv(
                     attribution="Onisep - Idéo-Structures d'enseignement supérieur",
@@ -91,9 +91,9 @@ class Analyser_Merge_College_FR(Analyser_Merge_Point):
                 mapping = Mapping(
                     static1 = {"source": self.source},
                     mapping1 = {
-                        "amenity": lambda res: "university" if res["type d'établissement"] in [u"institut national supérieur du professorat et de l'éducation", u"institut universitaire de technologie", u"unité de formation et de recherche", u"université"] else "college",
+                        "amenity": lambda res: "university" if res["type d'établissement"] in ["institut national supérieur du professorat et de l'éducation", "institut universitaire de technologie", "unité de formation et de recherche", "université"] else "college",
                         "ref:UAI": "code UAI",
-                        "operator:type": lambda res: "private" if res["statut"] in [u"privé hors contrat", u"privé reconnu par l’Etat", u"privé sous contrat", u"privé"] else None,
+                        "operator:type": lambda res: "private" if res["statut"] in ["privé hors contrat", "privé reconnu par l’Etat", "privé sous contrat", "privé"] else None,
                         "short_name": "sigle"},
                     mapping2 = {"name": lambda res: res["nom"].replace(u"Ecole", u"École")},
                     text = lambda tags, fields: {"en": " - ".join(filter(lambda i: i is not None, [fields["sigle"], fields["nom"].replace(u"Ecole", u"École")]))} )))
