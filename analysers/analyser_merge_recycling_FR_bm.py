@@ -44,7 +44,7 @@ class Analyser_Merge_Recycling_FR_bm(Analyser_Merge_Point):
                 zip='en_empac_p.shp'),
             LoadGeomCentroid(
                 select = {
-                    "type_emplacement": ["AERIEN", "ENTERRE", "SEMI_ENTERRE", "INCONNU"], # do not select PROJET
+                    "type_emplac": ["AERIEN", "ENTERRE", "SEMI_ENTERRE", "INCONNU"], # do not select PROJET
                     "ident": {"like": "%"}
                 }),
             Conflate(
