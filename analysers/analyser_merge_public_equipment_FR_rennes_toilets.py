@@ -50,4 +50,4 @@ class Analyser_Merge_Public_Equipment_FR_Rennes_Toilets(Analyser_Merge_Point):
                         "access": "yes"},
                     static2 = {"source": self.source},
                     mapping1 = {
-                        "wheelchair": lambda res: "yes" if res["pmr"] == "OUI" else "no" if res["pmr"] == "NON" else None} )))
+                        "wheelchair": lambda res: "yes" if res["acces_pmr"] == "1" else "no" if res["acces_pmr"] == "0" else None} )))
