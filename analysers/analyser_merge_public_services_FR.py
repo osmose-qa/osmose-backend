@@ -51,8 +51,6 @@ class _Generic_Analyser_Merge_Public_Services_FR_(Analyser_Merge_Point):
                     static1 = osm_default_tags,
                     mapping1 = dict({
                         "name": "name",
-                        "wheelchair": "wheelchair",
-                        "wheelchair:description": lambda feature: feature["wheelchair:description"] if feature["wheelchair"] == "limited" else None,
                         "contact:email": "contact:email",
                         "contact:website": "contact:website",
                         "ref:FR:SIRET": "ref:FR:SIRET",
@@ -184,13 +182,6 @@ class Public_Services_Source(Source):
 
         export = []
 
-        wheelchair_mapping = {
-            "ACC": "yes",
-            "DEM": "limited",
-            "NAC": "no",
-            "": None
-        }
-
         for feature in data["service"]:
             elem = {}
             if not feature.get("pivot"):
@@ -249,10 +240,6 @@ class Public_Services_Source(Source):
                 feature_address["code_postal"],
                 feature_address["nom_commune"],
             ).strip()
-            access_info = feature_address.get("accessibilite")
-            if access_info:
-                elem["wheelchair"] = wheelchair_mapping[access_info]
-                elem["wheelchair:description"] = feature_address.get("note_accessibilite")
 
             elem["opening_hours"] = parse_opening_hours(feature["plage_ouverture"])
 
