@@ -123,7 +123,7 @@ SELECT
     coalesce(w.tags->'location', 'overhead') AS location,
     NULL AS voltages
 FROM
-   ways AS w
+   power_lines_norm AS w
 WHERE
     NOT w.tags?'voltage' OR (
         w.tags?'circuits' AND

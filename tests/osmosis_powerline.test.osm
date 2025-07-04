@@ -214,31 +214,12 @@
     <tag k='line_management' v='termination' />
     <tag k='power' v='tower' />
   </node>
-  <way id='-598' timestamp='2025-04-24T15:00:00Z' version='1'>
-    <nd ref='26980' />
-    <nd ref='26981' />
-    <nd ref='26982' />
-    <tag k='cables' v='9' />
-    <tag k='circuits' v='2;1' />
-    <tag k='power' v='line' />
-    <tag k='voltage' v='400000;225000' />
-  </way>
-  <way id='-602' timestamp='2025-04-24T15:00:00Z' version='1'>
-    <nd ref='26982' />
-    <nd ref='26983' />
-    <tag k='cables' v='6' />
-    <tag k='circuits' v='2' />
-    <tag k='power' v='line' />
-    <tag k='voltage' v='400000' />
-  </way>
-  <way id='-604' timestamp='2025-04-24T15:00:00Z' version='1'>
-    <nd ref='26982' />
-    <nd ref='26984' />
-    <tag k='cables' v='3' />
-    <tag k='circuits' v='1' />
-    <tag k='power' v='line' />
-    <tag k='voltage' v='225000' />
-  </way>
+  <node id='26985' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.18670895062' lon='4.47577208092' />
+  <node id='26986' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.18634994724' lon='4.47577337953' />
+  <node id='26987' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.1863507352' lon='4.47622786467' />
+  <node id='26988' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.18670973857' lon='4.47622656607' />
+  <node id='26989' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.18671054883' lon='4.47669391588' />
+  <node id='26990' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.18635154547' lon='4.47669521449' />
   <way id='1343' timestamp='2025-04-24T15:00:00Z' version='1'>
     <nd ref='26925' />
     <nd ref='26924' />
@@ -417,5 +398,46 @@
     <tag k='circuits' v='1' />
     <tag k='power' v='minor_line' />
     <tag k='voltage' v='medium' />
+  </way>
+  <way id='2090' timestamp='2025-04-24T15:00:00Z' version='1'>
+    <nd ref='26980' />
+    <nd ref='26981' />
+    <nd ref='26982' />
+    <tag k='cables' v='9' />
+    <tag k='circuits' v='2;1' />
+    <tag k='power' v='line' />
+    <tag k='voltage' v='400000;225000' />
+  </way>
+  <way id='2091' timestamp='2025-04-24T15:00:00Z' version='1'>
+    <nd ref='26982' />
+    <nd ref='26983' />
+    <tag k='cables' v='6' />
+    <tag k='circuits' v='2' />
+    <tag k='power' v='line' />
+    <tag k='voltage' v='400000' />
+  </way>
+  <way id='2092' timestamp='2025-04-24T15:00:00Z' version='1'>
+    <nd ref='26982' />
+    <nd ref='26984' />
+    <tag k='cables' v='3' />
+    <tag k='circuits' v='1' />
+    <tag k='power' v='line' />
+    <tag k='voltage' v='225000' />
+  </way>
+  <way id='2094' timestamp='2025-04-24T15:00:00Z' version='1'>
+    <nd ref='26985' />
+    <nd ref='26986' />
+    <nd ref='26987' />
+    <nd ref='26988' />
+    <nd ref='26985' />
+    <tag k='building' v='yes' />
+  </way>
+  <way id='2096' timestamp='2025-04-24T15:00:00Z' version='1'>
+    <nd ref='26988' />
+    <nd ref='26989' />
+    <nd ref='26990' />
+    <nd ref='26987' />
+    <nd ref='26988' />
+    <tag k='building' v='yes' />
   </way>
 </osm>
