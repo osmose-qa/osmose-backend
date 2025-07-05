@@ -103,5 +103,5 @@ class Test(TestPluginCommon):
             assert not a.node(None, {k: 'Mo-Su 09:00-00:00'})
             assert not a.node(None, {k: 'Mo-Su 09:00-24:00'})
 
-        # Should be OK https://github.com/osm-fr/osmose-backend/issues/1568
+        # Should be OK https://github.com/osmose-qa/osmose-backend/issues/1568
         assert not a.node(None, {'opening_hours': 'Tu-Fr 11:00-19:00; Sa 10:00-22:15; 14:00-15:00 closed'})

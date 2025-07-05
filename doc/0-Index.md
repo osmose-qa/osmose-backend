@@ -146,7 +146,7 @@ TODO diff, change mode, resume mode.
 ### Environment
 There are multiple way to run Osmose-QA Backend and test your code. The easier to setup is by using with Docker. Docker avoid you to deals with install process and dependencies.
 
-[Jupyter](https://en.wikipedia.org/wiki/Project_Jupyter) can be used from Docker to have web shell on Osmose-QA and make this doc interactive (the `*.ipynb` part). A static view of the Jupyter notebook can also be view online at [Github repository](https://github.com/osm-fr/osmose-backend/tree/master/doc).
+[Jupyter](https://en.wikipedia.org/wiki/Project_Jupyter) can be used from Docker to have web shell on Osmose-QA and make this doc interactive (the `*.ipynb` part). A static view of the Jupyter notebook can also be view online at [Github repository](https://github.com/osmose-qa/osmose-backend/tree/master/doc).
 
 Lastly, if you don’t support Docker and love the old school way, you can directly use Python Virtualenv. You will also have to install and setup PostgreSQL yourself.
 

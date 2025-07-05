@@ -51,7 +51,7 @@ class SubAnalyser_Merge_Pitch_FR(SubAnalyser_Merge_Dynamic):
             "https://equipements-sgsocialgouv.opendatasoft.com/explore/dataset/data-es/table/",
             "Data ES",
             # Source fileUrl is HTTP 404, but keeping it as per
-            # https://github.com/osm-fr/osmose-backend/pull/1092#pullrequestreview-577717867
+            # https://github.com/osmose-qa/osmose-backend/pull/1092#pullrequestreview-577717867
             CSV(SourceOpenDataSoft(
                 attribution = "Le ministère de la ville, de la jeunesse et des sports",
                 url = "https://equipements-sgsocialgouv.opendatasoft.com/explore/dataset/data-es/"),
