@@ -21,7 +21,7 @@
 ###########################################################################
 
 from modules.OsmoseTranslation import T_
-from .Analyser_Merge import Analyser_Merge_Point, SourceDataGouv, CSV, Load_XY, Conflate, Select, Mapping
+from .Analyser_Merge import Analyser_Merge_Point, Source, CSV, Load_XY, Conflate, Select, Mapping
 
 
 class Analyser_Merge_College_FR(Analyser_Merge_Point):
@@ -40,10 +40,10 @@ class Analyser_Merge_College_FR(Analyser_Merge_Point):
             "https://www.data.gouv.fr/fr/datasets/ideo-structures-denseignement-superieur/",
             "Idéo-Structures d'enseignement supérieur",
             CSV(
-                SourceDataGouv(
+                Source(
                     attribution="Onisep - Idéo-Structures d'enseignement supérieur",
-                    dataset="5fa5e386afdaa6152360f323",
-                    resource="a1aaf5b8-2cd2-400f-860c-488f124397e4",
+                    millesime = "07/2025",
+                    fileUrl="https://api.opendata.onisep.fr/downloads/5fa586da5c4b6/5fa586da5c4b6.csv",
                     encoding = "utf-8-sig"),
                 separator = ";"),
             Load_XY("longitude (X)", "latitude (Y)",
