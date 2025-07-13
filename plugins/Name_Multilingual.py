@@ -56,7 +56,7 @@ class Name_Multilingual(Plugin):
                 str2 = tags.get("name:" + lang[1])
 
                 combined = self.merge_sp_eu(str1, str2)
-   
+
                 if name and (name == str1 or name == str2) and not combined:
                     return []
 
@@ -404,7 +404,7 @@ class Test(TestPluginCommon):
             config = _config()
         self.p.father = father()
         self.p.init(None)
-        
+
         assert not self.p.way(None, {"name": "Carretera Ollaretxe errepidea", "name:es": "Carretera Ollaretxe", "name:eu": "Ollaretxe errepidea"}, None)
         assert not self.p.way(None, {"name": "Kale Nagusia / Calle Mayor", "name:es": "Calle Mayor", "name:eu": "Kale Nagusia"}, None)
         assert not self.p.way(None, {"name": "Vicente Blasco Ibañez kalea / Calle Vicente Blasco Ibáñez", "name:es": "Calle Vicente Blasco Ibáñez", "name:eu": "Vicente Blasco Ibañez kalea"}, None)
