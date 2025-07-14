@@ -40,7 +40,7 @@ class TagFix_Maxspeed_AT(Plugin):
         'AT:shared_zone20': '20', 'AT:shared_zone30': '30',
         'AT:bicycle_road': '30',
         # Alternatives
-        'AT:zone:20': '20', 'AT:zone:30': '30', 'AT:zone:40': '40', 'AT:zone:50': '50',
+        'AT:zone:10': '10', 'AT:zone:20': '20', 'AT:zone:30': '30', 'AT:zone:40': '40', 'AT:zone:50': '50',
         'AT:zone': ''
     }
 
@@ -149,10 +149,10 @@ Always check `highway`, all other tags related to speed and verify on the ground
             return {'class': 309110, 'text': T_('Invalid maxspeed: `{0}`', maxspeed)}
 
         # Error: maxspeed suspiciously low, probably 'walk'; needs verification
-        # except for speeds < 5 (covered in Number.py) and if signposted
+        # except for speeds < 5 (covered in Number.py) or if speed limit type is given
         if maxspeed.isdigit():
             maxspeed_num = int(maxspeed)
-            if (maxspeed_num > 4) and (maxspeed_num < 15) and (maxspeed_type != 'sign') and (source_maxspeed != 'sign'):
+            if (maxspeed_num > 4) and (maxspeed_num < 15) and not maxspeed_type and not source_maxspeed:
                 return {'class': 309111, 'text': T_('Low maxspeed: `{0}`', maxspeed)}
 
         valid_type = None
