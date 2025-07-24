@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2014-04-30 17:25+0000\n"
-"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>, 2020\n"
-"Language-Team: Hebrew (http://app.transifex.com/openstreetmap-france/osmose/"
-"language/he/)\n"
+"PO-Revision-Date: 2025-07-24 08:43+0000\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: Hebrew <https://hosted.weblate.org/projects/osmose/backend/he/"
+">\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % "
-"1 == 0) ? 1: 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n == 2) ? 1 : 2);\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -5871,10 +5871,8 @@ msgid ""
 msgstr ""
 
 #: ../plugins/TagFix_Maxspeed_AT.py:63
-#, fuzzy
-#| msgid "Invalid capacity value"
 msgid "Invalid speed limit value"
-msgstr "ערך קיבולת שגוי"
+msgstr "ערך מגבלת מהירות שגוי"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:65
 msgid ""
