@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-07-15 03:38+0000\n"
+"PO-Revision-Date: 2025-07-25 22:07+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -74,7 +74,7 @@ msgstr ""
 #: ../analysers/analyser_osmosis_boundary_administrative.py:138
 #: ../analysers/analyser_osmosis_boundary_intersect.py:96
 msgid "Boundary intersection"
-msgstr ""
+msgstr "Gränskorsning"
 
 #: ../analysers/analyser_osmosis_boundary_administrative.py:144
 msgid "Lone boundary fragment"
@@ -90,7 +90,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_boundary_relation.py:138
 msgid "Invalid role"
-msgstr ""
+msgstr "Ogiltig roll"
 
 #: ../analysers/analyser_osmosis_highway_broken_level_continuity.py:110
 msgid "Broken highway level continuity"
@@ -129,7 +129,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:425
 msgid "Unconnected cycleway"
-msgstr ""
+msgstr "Ej ansluten cykelväg"
 
 #: ../analysers/analyser_osmosis_highway_features.py:78
 msgid "Missing way on level crossing"
@@ -145,7 +145,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_traffic_signals.py:170
 msgid "Possible crossing=traffic_signals"
-msgstr ""
+msgstr "Möjlig crossing=traffic_signals"
 
 #: ../analysers/analyser_osmosis_highway_link.py:132
 #: ../analysers/analyser_osmosis_highway_link.py:148
@@ -182,7 +182,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_polygon.py:110
 msgid "Invalid polygon"
-msgstr ""
+msgstr "Ogiltig polygon"
 
 #: ../analysers/analyser_osmosis_powerline.py:661
 msgid "Lone power tower or pole"
@@ -3715,7 +3715,7 @@ msgstr ""
 
 #: tmp.json:25
 msgid "roundabout"
-msgstr ""
+msgstr "cirkulationsplats"
 
 #: tmp.json:26
 msgid "road bump"
@@ -3739,7 +3739,7 @@ msgstr ""
 
 #: tmp.json:31
 msgid "stop"
-msgstr ""
+msgstr "stopp"
 
 #: tmp.json:37
 msgid "max speed limit 25"
@@ -3763,19 +3763,19 @@ msgstr ""
 
 #: tmp.json:55
 msgid "Church"
-msgstr ""
+msgstr "Kyrka"
 
 #: tmp.json:56
 msgid "Camping"
-msgstr ""
+msgstr "Camping"
 
 #: tmp.json:57
 msgid "Restaurant"
-msgstr ""
+msgstr "Restaurang"
 
 #: tmp.json:58
 msgid "Museum"
-msgstr ""
+msgstr "Museum"
 
 #: tmp.json:59
 msgid "Winery"
@@ -3783,7 +3783,7 @@ msgstr ""
 
 #: tmp.json:60
 msgid "Viewpoint"
-msgstr ""
+msgstr "Utsiktsplats"
 
 #: tmp.json:61
 msgid "Picnic site"
