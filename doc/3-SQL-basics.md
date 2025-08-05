@@ -169,7 +169,7 @@ FROM
 #### Common Factorized tables
 May analyzers work on same topic. To avoid recomputing intermediate tables many time, and not always on the ways in interpreting OSM tags, some generic tables are available. There are computed only on request, but reused once it is done.
 
-The available common tables are (see full definition in [Analyser_Osmosis.py](https://github.com/osm-fr/osmose-backend/blob/master/analysers/Analyser_Osmosis.py)):
+The available common tables are (see full definition in [Analyser_Osmosis.py](https://github.com/osmose-qa/osmose-backend/blob/master/analysers/Analyser_Osmosis.py)):
 * `highways`: with tags normalization, levels classification and re projected in local country _projection_.
 * `highway_ends`: the start and ends of all highways ways.
 * `buildings`: from ways (and not from multipolygon relations), with tags normalization and re-projected in local country _projection_ as _polygons_.

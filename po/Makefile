@@ -5,7 +5,7 @@ PO:=$(wildcard *.po)
 
 .PRECIOUS: $(PO)
 
-all: osmose-backend.pot %.po josm_po
+all: osmose-backend.pot josm_po
 
 tmp.json: $(JSON) Makefile
 	for json in $(JSON); do cat $$json | jq -r '.[].title' | grep -v 'null' | sed -e 's/\(.*\)/_("\1")/'; done > $@
@@ -17,10 +17,6 @@ osmose-backend.pot: $(PYFILES) tmp.json
           --force-po --omit-header --from-code=utf-8 \
           --output=$@ $(PYFILES) tmp.json
 
-%.po:
-	tx pull -a --minimum-perc=3
-	@sed -i.bak 's/^# 4004.*, 2017/# 4004, 2017/' ru.po  # redact email following request
-
 statistics:
 	@for i in $(PO); do \
 	  (msgfmt --statistics --verbose -o - $$i > /dev/null) 2>&1; \
@@ -28,5 +24,11 @@ statistics:
 
 josm_po:
 	@for i in $(PO); do \
-	  sed -n '1,/^$$/p;/\.mapcss:[0-9]/,/^$$/p' josm/josm_trans/josm/$$i > josm/$$i; \
+          j="$$i"; \
+	  if [ "$$i" = "en_devel.po" ]; then \
+	    continue; \
+	  elif [ "$$i" = "nb_NO.po" ]; then \
+	    i="nb.po"; \
+	  fi; \
+	  sed -n '1,/^$$/p;/\.mapcss:[0-9]/,/^$$/p' josm/josm_trans/josm/$$i > josm/$$j; \
 	done

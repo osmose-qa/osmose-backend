@@ -44,7 +44,7 @@ class Analyser_Merge_Recycling_FR_bm(Analyser_Merge_Point):
                 zip='en_empac_p.shp'),
             LoadGeomCentroid(
                 select = {
-                    "type_emplacement": ["AERIEN", "ENTERRE", "SEMI_ENTERRE", "INCONNU"], # do not select PROJET
+                    "type_emplac": ["AERIEN", "ENTERRE", "SEMI_ENTERRE", "INCONNU"], # do not select PROJET
                     "ident": {"like": "%"}
                 }),
             Conflate(
@@ -62,5 +62,5 @@ class Analyser_Merge_Recycling_FR_bm(Analyser_Merge_Point):
                         "ref:FR:CUB": "ident",
                         "recycling:glass_bottles": lambda res: "yes" if res["nature"] == "Verre" else None,
                         "recycling:food_waste": lambda res: "yes" if res["nature"] == "Biodéchets" else None,
-                        "location": lambda res: "underground" if res["type_emplacement"] in ["ENTERRE", "SEMI_ENTERRE"] else None
+                        "location": lambda res: "underground" if res["type_emplac"] in ["ENTERRE", "SEMI_ENTERRE"] else None
                     } )))

@@ -35,11 +35,12 @@ class TagFix_Maxspeed_AT(Plugin):
         'sign': '',
         'AT:motorway': '130', 'AT:trunk': '100', 'AT:rural': '100', 'AT:urban': '50',
         'AT:city_limit30': '30', 'AT:city_limit40': '40',
-        'AT:zone15': '15', 'AT:zone20': '20', 'AT:zone30': '30', 'AT:zone40': '40', 'AT:zone50': '50', 'AT:zone70': '70',
+        'AT:zone10': '10', 'AT:zone15': '15', 'AT:zone20': '20', 'AT:zone30': '30', 'AT:zone40': '40',
+        'AT:zone50': '50', 'AT:zone70': '70',
         'AT:shared_zone20': '20', 'AT:shared_zone30': '30',
         'AT:bicycle_road': '30',
         # Alternatives
-        'AT:zone:20': '20', 'AT:zone:30': '30', 'AT:zone:40': '40', 'AT:zone:50': '50',
+        'AT:zone:10': '10', 'AT:zone:20': '20', 'AT:zone:30': '30', 'AT:zone:40': '40', 'AT:zone:50': '50',
         'AT:zone': ''
     }
 
@@ -70,7 +71,7 @@ see [Implicit maxspeed values](https://wiki.openstreetmap.org/wiki/Key:maxspeed#
 Always check `highway`, all other tags related to speed and verify on the ground.'''),
             resource='https://wiki.openstreetmap.org/wiki/Key:maxspeed')
 
-        self.errors[309111] = self.def_class(item=3091, level=2, tags=['maxspeed'],
+        self.errors[309111] = self.def_class(item=3091, level=3, tags=['maxspeed'],
             title=T_('Low speed limit value'),
             detail=T_(
 '''The speed limit in `maxspeed` is very low and no type is given in `maxspeed:type` or `source:maxspeed`.'''),
@@ -148,10 +149,10 @@ Always check `highway`, all other tags related to speed and verify on the ground
             return {'class': 309110, 'text': T_('Invalid maxspeed: `{0}`', maxspeed)}
 
         # Error: maxspeed suspiciously low, probably 'walk'; needs verification
-        # except for speeds < 5 (covered in Number.py) and if signposted
+        # except for speeds < 5 (covered in Number.py) or if speed limit type is given
         if maxspeed.isdigit():
             maxspeed_num = int(maxspeed)
-            if (maxspeed_num > 4) and (maxspeed_num < 15) and (maxspeed_type != 'sign') and (source_maxspeed != 'sign'):
+            if (maxspeed_num > 4) and (maxspeed_num < 15) and not maxspeed_type and not source_maxspeed:
                 return {'class': 309111, 'text': T_('Low maxspeed: `{0}`', maxspeed)}
 
         valid_type = None

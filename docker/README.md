@@ -141,7 +141,7 @@ docker-compose -f docker-compose.yml -f docker-compose-dev.yml run -p 8888:8888 
 ```
 Note the `8888:8888`, which exposes port `8888` to localhost.
 
-Follow the displayed link on http://localhost:8888/... Use this [password](https://github.com/osm-fr/osmose-backend/blob/master/docker/work/.jupyter/jupyter_notebook_config.py#L13).
+Follow the displayed link on http://localhost:8888/... Use this [password](https://github.com/osmose-qa/osmose-backend/blob/master/docker/work/.jupyter/jupyter_notebook_config.py#L13).
 
 
 Start by reading the index documentation, and copy template to test your
@@ -184,7 +184,7 @@ Quick Osmose Frontend setup.
 
 First time build
 ```
-git clone https://github.com/osm-fr/osmose-frontend.git
+git clone https://github.com/osmose-qa/osmose-frontend.git
 cd osmose-frontend/docker
 curl https://osmose.openstreetmap.fr/export/osmose-menu.sql.bz2 | bzcat > osmose-menu.sql
 docker-compose build
@@ -200,7 +200,7 @@ docker-compose -f docker-compose.yml -f docker-compose-test.yml up
 ```
 
 For a detailed description of the procedure see
-https://github.com/osm-fr/osmose-frontend/tree/master/docker
+https://github.com/osmose-qa/osmose-frontend/tree/master/docker
 
 
 To upload the results of the analysis to the frontend, use:

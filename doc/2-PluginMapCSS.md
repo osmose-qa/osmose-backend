@@ -119,7 +119,7 @@ Note: the conditions related to multiple objects are not implement on Osmose-QA.
 
 #### Functions
 
-Functions may be used in selector (and properties, see below). Thank to these it is possible to rework string, number, regex... all the details are on the [JOSM documentation](https://josm.openstreetmap.de/wiki/Help/Styles/MapCSSImplementation#Evalexpressions). The full list of implemented function in Osmose-QA can be found in the [source code](https://github.com/osm-fr/osmose-backend/blob/master/mapcss/mapcss_lib.py).
+Functions may be used in selector (and properties, see below). Thank to these it is possible to rework string, number, regex... all the details are on the [JOSM documentation](https://josm.openstreetmap.de/wiki/Help/Styles/MapCSSImplementation#Evalexpressions). The full list of implemented function in Osmose-QA can be found in the [source code](https://github.com/osmose-qa/osmose-backend/blob/master/mapcss/mapcss_lib.py).
 
 One of the most present function is `tr()` for translation. Fist parameter of the `tr()` will be send to translator, and replaced by translation at runtime.
 

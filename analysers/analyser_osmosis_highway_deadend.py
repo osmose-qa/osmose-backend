@@ -529,11 +529,13 @@ class Test(TestAnalyserOsmosis):
         self.check_err(cl="3", elems=[("node", "102"), ("way", "1052")])
         # Detections of deadend circular oneway highways. Note that some test cases have multiple valid 'solutions'
         # for dead-end oneway islands upon traversing, so results may change upon code update and still be valid
-        self.check_err(cl="3", elems=[("node", "4"), ("way", "1001")]) # way 1001 or 1002 are both fine
+        self.check_err(cl="3", elems=[("node", "4"), ("way", "1002")]) # way 1001 or 1002 are both fine
+        self.check_err(cl="3", elems=[("node", "5"), ("way", "1001")]) # way 1001 or 1002 are both fine
         self.check_err(cl="3", elems=[("node", "21"), ("way", "1009")]) # way 1009 or 1034 are both fine
-        self.check_err(cl="3", elems=[("node", "108"), ("way", "1058")]) # way 1058 or 1059 are both fine
+        self.check_err(cl="3", elems=[("node", "23"), ("way", "1034")]) # way 1009 or 1034 are both fine
+        self.check_err(cl="3", elems=[("node", "110"), ("way", "1058")]) # way 1058 or 1059 are both fine, node 108 or 110
         self.check_err(cl="3", elems=[("node", "109"), ("way", "1060")]) # way 1058 or 1060 are both fine
 
         self.check_err(cl="5", elems=[("node", "73"), ("way", "1031")])
 
-        self.check_num_err(23)
+        self.check_num_err(25) # May change if the circular checks change after a code change

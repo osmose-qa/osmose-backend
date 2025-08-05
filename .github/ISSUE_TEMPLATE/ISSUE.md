@@ -1,7 +1,15 @@
+---
+name: Issue
+about: Create an issue to suggest a feature or report a bug
+title: ""
+labels: ""
+assignees: ""
+---
+
 This is the osmose-backend repository, it is about analysers to check the OSM data.
 
 For issues about the website please report it to osmose-frontend
-https://github.com/osm-fr/osmose-frontend/
+https://github.com/osmose-qa/osmose-frontend/
 
 When report an issue on existing analyser, in addition on the name of the issue, report:
 - the item and class number,

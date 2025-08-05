@@ -17,9 +17,9 @@ osm_pbf_parser$(PYTHON3_SUFFIX): osm_pbf_parser.cc osmpbfreader.h
 	@# generates a different error message if it cannot find library.
 	@BOOST_LIB1=boost_python-py$(PYTHON3_VERSION_MN); \
 	BOOST_LIB2=boost_python$(PYTHON3_VERSION_MN); \
-	if [ "`LANG=C gcc -l$$BOOST_LIB1 2>&1 | grep -c 'undefined reference to .main.'`" -eq 1 ]; then \
+	if [ "`LANG=C gcc -l$$BOOST_LIB1 2>&1 | grep -c 'undefined reference to .main.'`" -ge 1 ]; then \
 	  BOOST_LIB=$$BOOST_LIB1; \
-	elif [ "`LANG=C gcc -l$$BOOST_LIB2 2>&1 | grep -c 'undefined reference to .main.'`" -eq 1 ]; then \
+	elif [ "`LANG=C gcc -l$$BOOST_LIB2 2>&1 | grep -c 'undefined reference to .main.'`" -ge 1 ]; then \
 	  BOOST_LIB=$$BOOST_LIB2; \
 	else \
 	  echo Cannot find boost_python3 library from $$BOOST_LIB1 or $$BOOST_LIB2; \

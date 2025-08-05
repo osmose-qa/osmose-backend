@@ -96,7 +96,7 @@ class template_config:
     db_schema_path: Optional[str] = None
     db_persistent = False
 
-    source_url = 'https://github.com/osm-fr/osmose-backend/blob/master'
+    source_url = 'https://github.com/osmose-qa/osmose-backend/blob/master'
 
     def __init__(self, country, polygon_id=None, analyser_options=None, download_repo=GEOFABRIK):
         config[country] = self

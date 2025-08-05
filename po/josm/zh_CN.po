@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: josm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-17 10:01+0200\n"
-"PO-Revision-Date: 2025-05-17 13:00+0000\n"
-"Last-Translator: Dirk Stöcker <launchpad@dstoecker.de>\n"
+"POT-Creation-Date: 2025-07-16 07:13+0200\n"
+"PO-Revision-Date: 2025-07-06 11:55+0000\n"
+"Last-Translator: rice Price <Unknown>\n"
 "Language-Team: 汉语 <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2025-05-18 07:02+0000\n"
-"X-Generator: Launchpad (build fb7816c0224c8da2b221957e8afc3706cb6505f5)\n"
+"X-Launchpad-Export-Date: 2025-07-16 08:55+0000\n"
+"X-Generator: Launchpad (build 2d6e9435c2df831e66deb7fcbe9f03f78dd14743)\n"
 "Language: zh_CN\n"
 
 #: ../core/resources/data/validator/combinations.mapcss:82
@@ -298,7 +298,7 @@ msgstr "两个对象，其一含有{0}，另一含有{1} + {2} + {3}"
 #: ../core/resources/data/validator/combinations.mapcss:407
 #, java-format
 msgid "{0} on an inner multipolygon ring without further tags"
-msgstr ""
+msgstr "复合多边形内边界{0}缺失更多标签"
 
 #: ../core/resources/data/validator/combinations.mapcss:432
 #: ../core/resources/data/validator/combinations.mapcss:447
@@ -1817,12 +1817,12 @@ msgstr "\"wikipedia\"=\"语言代码:页面标题\""
 #: ../core/resources/data/validator/wikipedia.mapcss:28
 #, java-format
 msgid "wikipedia ''{0}'' language is obsolete, use ''{1}'' instead"
-msgstr "维基百科“{0}”语言过时，使用“{1}”"
+msgstr "维基百科“{0}”语言过时，请使用“{1}”代替"
 
 #: ../core/resources/data/validator/wikipedia.mapcss:35
 #, java-format
 msgid "wikipedia ''{0}'' language is invalid, use ''{1}'' instead"
-msgstr "维基百科“{0}”语言无效，使用“{1}”"
+msgstr "维基百科“{0}”语言无效，请使用“{1}”代替"
 
 #: ../core/resources/data/validator/wikipedia.mapcss:42
 #: ../core/resources/data/validator/wikipedia.mapcss:49
@@ -1833,7 +1833,7 @@ msgstr "{0}标签不应有类似''%27''的URL编码值"
 
 #: ../core/resources/data/validator/wikipedia.mapcss:63
 msgid "wikipedia title should not start with a space after language code"
-msgstr "在语言码后的维基百科标题不应以空格开头"
+msgstr "维基百科标题不应以语言代码后的空格开头"
 
 #: ../core/resources/data/validator/wikipedia.mapcss:70
 #, java-format
@@ -1847,7 +1847,7 @@ msgstr "维基百科页面标题首字母应大写"
 #: ../core/resources/data/validator/wikipedia.mapcss:89
 msgid ""
 "wikipedia page title should have spaces instead of underscores (''_''→'' '')"
-msgstr "维基百科页面标题应有空格而不是(''_''→'' '')"
+msgstr "维基百科页面标题应使用空格而不是下划线 (''_''→'' '')"
 
 #: ../core/resources/data/validator/wikipedia.mapcss:118
 msgid "wikipedia language seems to be duplicated, e.g. en:en:Foo"
@@ -1861,7 +1861,7 @@ msgstr "维基数据标签必须符合Qnnnn格式（n为数字）"
 msgid ""
 "wikipedia tag is set, but there is no wikidata tag. Wikipedia plugin might "
 "help with wikidata id lookups"
-msgstr "维基百科标签已设定，但是没有维基数据标签。维基百科插件可能可以帮助查找维基数据id"
+msgstr "维基百科标签已设定，但缺少维基数据标签。维基百科插件可能有助于维基数据 ID 查询"
 
 #: ../core/resources/data/validator/wikipedia.mapcss:148
 #, java-format
