@@ -3,7 +3,7 @@
 
 ###########################################################################
 ##                                                                       ##
-## Copyrights Frédéric Rodrigo 2012-2020                                 ##
+## Copyrights Frédéric Rodrigo 2012-2020, Noémie Lehuby 2025             ##
 ##                                                                       ##
 ## This program is free software: you can redistribute it and/or modify  ##
 ## it under the terms of the GNU General Public License as published by  ##
@@ -23,32 +23,30 @@
 from modules.OsmoseTranslation import T_
 from .Analyser_Merge import Analyser_Merge_Point, SourceOpenDataSoft, CSV, Load_XY, Conflate, Select, Mapping
 
-# https://gitorious.org/osm-hacks/osm-hacks/trees/master/etablissements-scolaires
-
 class Analyser_Merge_School_FR(Analyser_Merge_Point):
     def __init__(self, config, logger = None):
         Analyser_Merge_Point.__init__(self, config, logger)
 
         if config.db_schema == 'france_guadeloupe':
             classs = 10
-            officialName = "Guadeloupe"
-            self.is_in = lambda code_postal: code_postal[0:3] == "971"
+            region_name = "Guadeloupe"
+            self.is_in = lambda departement: departement == "Guadeloupe"
         elif config.db_schema == 'france_guyane':
             classs = 20
-            officialName = "Guyane"
-            self.is_in = lambda code_postal: code_postal[0:3] == "973"
+            region_name = "Guyane"
+            self.is_in = lambda departement: departement == "Guyane"
         elif config.db_schema == 'france_reunion':
             classs = 30
-            officialName = "Réunion"
-            self.is_in = lambda code_postal: code_postal[0:3] == "974"
+            region_name = "Réunion"
+            self.is_in = lambda departement: departement == "Réunion"
         elif config.db_schema == 'france_martinique':
             classs = 40
-            officialName = "Martinique"
-            self.is_in = lambda code_postal: code_postal[0:3] == "972"
+            region_name = "Martinique"
+            self.is_in = lambda departement: departement == "Martinique"
         else:
             classs = 0
-            officialName = "Métropole"
-            self.is_in = lambda code_postal: code_postal[0:2] != "97"
+            region_name = "Métropole"
+            self.is_in = lambda departement: departement not in ["Guadeloupe", "Guyane", "Martinique", "Réunion", "Mayotte", "St-Pierre-et-Miquelon", "Saint-Martin", "Saint-Barthélemy", "Nouvelle-Calédonie", "Polynésie Française"]
 
         trap = T_(
 '''Check the location. Warning data from the Ministry may have several
@@ -69,15 +67,14 @@ administrative schools for a single physical school.''')
 
 
         self.init(
-            "https://data.education.gouv.fr/explore/dataset/fr-en-adresse-et-geolocalisation-etablissements-premier-et-second-degre",
-            "Adresse et géolocalisation des établissements d'enseignement du premier et second degrés - " + officialName,
+            "https://data.education.gouv.fr/explore/dataset/fr-en-annuaire-education",
+            "Annuaire de l'éducation - " + region_name,
             CSV(SourceOpenDataSoft(
-                attribution="Ministère de l'Éducation nationale et de la Jeunesse",
-                url="https://data.education.gouv.fr/explore/dataset/fr-en-adresse-et-geolocalisation-etablissements-premier-et-second-degre",
-                filter=lambda t: t.replace("Ecole", "École").replace("ecole", "école").replace("Saint ", "Saint-").replace("Sainte ", "Sainte-").replace("élementaire", "élémentaire").replace("elementaire", "élémentaire").replace("Elémentaire", "Élémentaire").replace("elémentaire", "élémentaire").replace("College", "Collège"))),
-            Load_XY("Longitude WGS84", "Latitude WGS84",
-                select = {"Etat de l'établissement": ["1", "3"]},
-                where = lambda res: res["Adresse : code postal"] and self.is_in(res["Adresse : code postal"])),
+                attribution="Ministère de l'Éducation nationale, de l'Enseignement supérieur et de la Recherche",
+                url="https://data.education.gouv.fr/explore/dataset/fr-en-annuaire-education/")),
+            Load_XY("longitude", "latitude",
+                select = {"etat": ["OUVERT"], "Type_etablissement": ["Ecole", "Collège", "Lycée"]},
+                where = lambda res: res["Libelle_departement"] and self.is_in(res["Libelle_departement"])),
             Conflate(
                 select = Select(
                     types = ["nodes", "ways", "relations"],
@@ -89,18 +86,73 @@ administrative schools for a single physical school.''')
                         "source": self.source,
                         "amenity": "school"},
                     mapping1 = {
-                        "ref:UAI": "Numéro d'UAI",
-                        "school:FR": lambda res: self.School_FR_nature_uai[res["Code nature de l'UAI"]],
-                        "operator:type": lambda res: "private" if res["Secteur"] == "Privé" else "public" if res["Secteur"] == "Public" else None},
-                    mapping2 = {"name": lambda res: res["Appellation officielle"].replace("ECOLE", "École").replace("ELEMENTAIRE", "élémentaire") if res["Appellation officielle"] not in [None, "A COMPLETER", "École primaire", "École Primaire", "ECOLE PRIMAIRE", "École PRIMAIRE", "ECOLE Primaire", "école primaire", "École primaire publique", "ECOLE PRIMAIRE PUBLIQUE", "École Primaire Publique", "École PRIMAIRE publique", "École primaire privée", "ECOLE PRIMAIRE PRIVÉE", "École primaire intercommunale", "École primaire Intercommunale", "École Primaire Intercommunale", "École élémentaire", "École Élémentaire", "ECOLE ELEMENTAIRE", "École ELEMENTAIRE", "École Elementaire", "école élémentaire", "École élémentaire publique", "École élémentaire Publique", "ECOLE ELEMENTAIRE PUBLIQUE", "École élémentaire privée", "École élémentaire intercommunale", "École élémentaire école publique", "École maternelle", "ECOLE MATERNELLE", "École Maternelle", "École MATERNELLE", "École Maternelle", "école maternelle", "École maternelle publique", "ECOLE MATERNELLE PUBLIQUE", "École Maternelle Publique", "École maternelle Publique", "école maternelle publique", "École maternelle intercommunale", "École maternelle Intercommunale", "Collège"] else None},
+                        "ref:UAI": "Identifiant_de_l_etablissement",
+                        "school:FR": lambda res: self.School_FR(res),
+                        "contact:phone": lambda res: self.retreat_phone_number(res["Code_commune"], res["Telephone"]),
+                        "contact:website": "Web",
+                        "contact:email": "Mail",
+                        "ref:FR:SIRET": "SIREN_SIRET",
+                        "start_date": lambda res: res["date_ouverture"] if res["date_ouverture"] != "1965-05-01" else None,
+                        "operator:type": lambda res: "private" if res["Statut_public_prive"] == "Privé" else "public" if res["Statut_public_prive"] == "Public" else None},
+                    mapping2 = {"name": lambda res: res["Nom_etablissement"].replace("Ecole", "École").replace("Saint ", "Saint-").replace("Sainte ", "Sainte-").replace("élementaire", "élémentaire").replace("elementaire", "élémentaire").replace("Elémentaire", "Élémentaire").replace("elémentaire", "élémentaire").replace("College", "Collège") if res["Nom_etablissement"] else None,},
                     text = self.text)))
 
     def text(self, tags, fields):
-        lib = ', '.join(filter(lambda x: x and x != "None", [fields["Appellation officielle"], fields["Adresse : désignation de la voie"], fields["Adresse : 5e ligne"], fields["Adresse : boite postale ou course spéciale"], fields["Adresse : code postal"], fields["Localité d'acheminement"], fields["Libellé de la commune"]]))
+        lib = ', '.join(filter(lambda x: x and x != "None", [fields["Nom_etablissement"], fields["Adresse_1"], fields["Adresse_3"], fields["Code_postal"], fields["Adresse : code postal"], fields["Nom_commune"]]))
         return {
-            "en": lib + " (positioned: {0}, matching: {1})".format(self.School_FR_loc[fields["localisation par IGN"]]["en"], self.School_FR_app[fields["Appariement par IGN"]]["en"]),
-            "fr": lib + " (position : {0}, appariement : {1})".format(self.School_FR_loc[fields["localisation par IGN"]]["fr"], self.School_FR_app[fields["Appariement par IGN"]]["fr"]),
+            "en": lib + " (positioned: {0})".format(self.School_FR_loc[fields["precision_localisation"]]["en"]),
+            "fr": lib + " (position : {0})".format(self.School_FR_loc[fields["precision_localisation"]]["fr"]),
         }
+
+    def School_FR(self, fields):
+        if fields["Type_etablissement"] == "Ecole":
+            if fields["Ecole_maternelle"] == '1' and fields["Ecole_elementaire"] == '0':
+                return "maternelle"
+            elif fields["Ecole_maternelle"] == '1' and fields["Ecole_elementaire"] == '1':
+                return "primaire"
+            elif fields["Ecole_maternelle"] == '0' and fields["Ecole_elementaire"] == '1':
+                return "élémentaire"
+            else:
+                return None
+        elif fields["Type_etablissement"] == "Collège":
+            return "collège"
+        elif fields["Type_etablissement"] == "Lycée":
+            return "lycée"
+        else:
+            return None
+
+    def retreat_phone_number(self, insee, phone_number):
+        if not phone_number:
+            return
+        if len(phone_number) < 9:
+            return
+        if '(' in phone_number:
+            return
+        if not phone_number.startswith("0"):
+            return
+        if insee.startswith("971"):
+            return "+590 " + phone_number[1:]
+        if insee.startswith("972"):
+            return "+596 " + phone_number[1:]
+        if insee.startswith("973"):
+            return "+594 " + phone_number[1:]
+        if insee.startswith("974"):
+            return "+262 " + phone_number[1:]
+        if insee.startswith("975"):
+            return "+508 " + phone_number[1:]
+        if insee.startswith("976"):
+            return "+262 " + phone_number[1:]
+        if insee.startswith("977"):
+            return "+590 " + phone_number[1:]
+        if insee.startswith("978"):
+            return "+590 " + phone_number[1:]
+        if insee.startswith("986"):
+            return "+681 " + phone_number[1:]
+        if insee.startswith("987"):
+            return "+689 " + phone_number[1:]
+        if insee.startswith("988"):
+            return "+687 " + phone_number[1:]
+        return "+33 " + phone_number[1:]
 
     School_FR_loc = {
         "None": {"en": "none", "fr": "aucun"},
@@ -113,6 +165,7 @@ administrative schools for a single physical school.''')
         "DEFAUT_DE_TRONCON": {"en": "missing street", "fr": "défaut de troncon"},
         "ENTREE PRINCIPALE": {"en": "main entrance", "fr": "entrée principale"},
         "INTERPOLATION": {"en": "interpolated", "fr": "interpolation"},
+        "MANUEL": {"en": "manual", "fr": "manuel"},
         "Lieu-dit": {"en": "locality", "fr": "lieu-dit"},
         "NUMERO (ADRESSE)": {"en": "addresse number", "fr": "numéro d'adresse"},
         "Numéro de rue": {"en": "street number", "fr": "numéro de rue"},
@@ -120,62 +173,9 @@ administrative schools for a single physical school.''')
         "Rue": {"en": "street", "fr": "rue"},
         "Ville": {"en": "city", "fr": "ville"},
         "ZONE_ADRESSAGE": {"en": "addresse area", "fr": "zone d'adressage"},
-        "CENTROIDE (D'EMPRISE)": {"en": "Centroid", "fr": "centroïde d'emprise"},
-    }
-
-    School_FR_app = {
-        "None": {"en": "none", "fr": "aucun"},
-        "Erreur": {"en": "none", "fr": "aucun"},
-        "NE SAIT PAS": {"en": "none", "fr": "aucun"},
-        "COMMUNE": {"en": "municipality", "fr": "commune"},
         "Correcte": {"en": "good", "fr": "correcte"},
-        "Mauvaise": {"en": "bad", "fr": "imparfaite"},
-        "DIFF_NOM": {"en": "different name", "fr": "nom dfférent"},
-        "DIFF_TYPE": {"en": "different type", "fr": "type différent"},
-        "Imparfaite": {"en": "imperfect", "fr": "imparfaite"},
-        "MANUEL": {"en": "manual", "fr": "manuel"},
-        "METRE": {"en": "meter", "fr": "metre"},
-        "Moyenne": {"en": "medium", "fr": "moyenne"},
         "Parfaite": {"en": "parfect", "fr": "parfaite"},
-        "SIMILAIRE": {"en": "similar", "fr": "similaire"},
-    }
-
-    School_FR_nature_uai = {
-        "101": "maternelle",
-        "102": "maternelle",
-        "103": "maternelle",
-        "111": "maternelle",
-        "151": "primaire",
-        "152": "primaire",
-        "153": "primaire",
-        "154": "primaire",
-        "160": None,
-        "161": None,
-        "162": "élémentaire",
-        "169": "primaire",
-        "170": None,
-        "300": "lycée",
-        "301": "lycée",
-        "302": "lycée",
-        "306": "lycée",
-        "307": "lycée",
-        "310": "lycée",
-        "312": "secondaire",
-        "315": None,
-        "320": "lycée",
-        "332": None,
-        "334": None,
-        "335": None,
-        "336": None,
-        "340": "collège",
-        "342": None,
-        "344": None,
-        "345": None,
-        "346": None,
-        "349": None,
-        "350": "collège",
-        "352": "collège",
-        "370": None,
-        "380": None,
-        "390": None,
+        "Mauvaise": {"en": "bad", "fr": "imparfaite"},
+        "Moyenne": {"en": "medium", "fr": "moyenne"},
+        "CENTROIDE (D'EMPRISE)": {"en": "Centroid", "fr": "centroïde d'emprise"},
     }
