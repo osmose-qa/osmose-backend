@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-07-19 02:03+0000\n"
+"PO-Revision-Date: 2025-08-12 18:02+0000\n"
 "Last-Translator: Jim Kats <jim-kats@hotmail.com>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/osmose/backend/el/>"
 "\n"
@@ -92,14 +92,14 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_boundary_relation.py:138
 msgid "Invalid role"
-msgstr "μη έγκυρος ρόλος"
+msgstr "Μη έγκυρος ρόλος"
 
 #: ../analysers/analyser_osmosis_highway_broken_level_continuity.py:110
 msgid "Broken highway level continuity"
-msgstr ""
+msgstr "Σπασμένη συνέχιση επιπέδου δρόμου"
 
 msgid "Merge building (triangle)"
-msgstr ""
+msgstr "Συγχώνευση κτηρίου (τρίγωνο)"
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:162
 msgid "Building intersection"
@@ -107,7 +107,7 @@ msgstr "Διασταυρούμενο κτήριο"
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:165
 msgid "Large building intersection"
-msgstr ""
+msgstr "Μεγάλη διασταύρωση κτηρίου"
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:169
 msgid "Building too small"
@@ -131,7 +131,7 @@ msgstr "Ειδικό κτήριο (μεγάλο)"
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:425
 msgid "Unconnected cycleway"
-msgstr "ασύνδετος ποδηλατόδρομος"
+msgstr "Ασύνδετος ποδηλατόδρομος"
 
 #: ../analysers/analyser_osmosis_highway_features.py:78
 msgid "Missing way on level crossing"
