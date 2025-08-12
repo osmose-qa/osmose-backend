@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-11 12:02+0000\n"
+"PO-Revision-Date: 2025-08-12 18:02+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -1936,6 +1936,10 @@ msgid ""
 "a `highway=tertiary` should remain `highway=tertiary` until it intersects\n"
 "with a road of higher classification."
 msgstr ""
+"Kontrollera kontinuiteten för vägklasserna. Klassificeringen är normalt "
+"samma längs ett helt segment, alltså exempelvis en `highway=tertiary` bör "
+"förbli `highway=tertiary` fram till en korsning med en väg av högre "
+"klassificering."
 
 #: ../analysers/analyser_osmosis_highway_broken_level_continuity.py:117
 msgid ""
@@ -1943,12 +1947,16 @@ msgid ""
 "\n"
 "`highway=secondary` should not become a residential."
 msgstr ""
+"![](https://wiki.openstreetmap.org/w/images/e/e8/Osmose-eg-error-1120.png)\n"
+"\n"
+"`highway=secondary` bör inte övergå direkt till en `residential`."
 
 #: ../analysers/analyser_osmosis_highway_cul-de-sac_level.py:65
 msgid ""
 "A way connects directly to one with much\n"
 "lower classification."
 msgstr ""
+"En väg ansluter direkt till en annan väg med mycket lägre klassificering."
 
 #: ../analysers/analyser_osmosis_highway_cul-de-sac_level.py:68
 msgid ""
@@ -1956,47 +1964,58 @@ msgid ""
 "\n"
 "Secondary connecting directly to a residential."
 msgstr ""
+"![](https://wiki.openstreetmap.org/w/images/b/be/Osmose-eg-error-1090.png)\n"
+"\n"
+"Sekundär väg ansluter direkt till en bostadsområdesväg."
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:423
 #: ../analysers/analyser_osmosis_highway_floating_islands.py:130
 msgid "The end of the way is not connected to another way."
-msgstr ""
+msgstr "Slutet på vägen är inte ansluten till en annan väg."
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:430
 msgid ""
 "Connect the `cycleway` to the road, even with a little virtual\n"
 "path."
 msgstr ""
+"Anslut cykelvägen till vägen, om så bara med en liten virtuell stig om inget "
+"annat är lämpligt."
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:435
 msgid ""
 "Highway from `motorway` to `tertiary` are important ways. They should\n"
 "lead to somewhere and in particular to a network of minor roads."
 msgstr ""
+"Vägar klassificerade från`motorway` till `tertiary` är viktiga prioriterade "
+"vägar. De ska leda till någonting, och ofta till ett nätverk av mindre vägar."
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:438
 msgid "Review the classification of road or draw the local road network."
 msgstr ""
+"Kontrollera klassificeringen av vägen, eller kartera det lokala vägnätet."
 
 #: ../analysers/analyser_osmosis_highway_features.py:80
 msgid "Crossing for which it lacks the road or railway. "
-msgstr ""
+msgstr "Plankorsning som saknar vägen eller järnvägen. "
 
 #: ../analysers/analyser_osmosis_highway_features.py:84
 msgid "The node must be common to rail and road."
-msgstr ""
+msgstr "Node måste vara gemensam för både järnvägen och vägen."
 
 #: ../analysers/analyser_osmosis_highway_link.py:134
 msgid ""
 "Check the consistency of highway type for\n"
 "`highway=trunk_link|primary_link|secondary_link`."
 msgstr ""
+"Kontrollera kontinuiteten av vägklasserna för\n"
+"`highway=trunk_link|primary_link|secondary_link`."
 
 #: ../analysers/analyser_osmosis_highway_link.py:137
 msgid ""
 "Change classification of `*_link` to match the way which is\n"
 "connected."
 msgstr ""
+"Ändra klassificering av `*_link` för att matcha vägen som den ansluter till."
 
 #: ../analysers/analyser_osmosis_highway_link.py:140
 msgid ""
@@ -2013,6 +2032,8 @@ msgid ""
 "Check if the highway is a `*_link`, else remove `*_link`. Be sure to check "
 "both ends of the way."
 msgstr ""
+"Kontrollera om vägen faktiskt är en `*_link`, annars ta bort `*_link`. Se "
+"till att kolla i båda ändarna av vägen."
 
 #: ../analysers/analyser_osmosis_highway_noexit.py:89
 msgid "Noexit on node with exit"
@@ -2020,7 +2041,7 @@ msgstr "Noexit på nod med en annan utväg"
 
 #: ../analysers/analyser_osmosis_highway_noexit.py:91
 msgid "Noexit on way with multiple exits"
-msgstr ""
+msgstr "`noexit` på väg med många utfarter"
 
 #: ../analysers/analyser_osmosis_highway_traffic_signals.py:166
 msgid ""
