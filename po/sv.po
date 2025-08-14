@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-14 00:02+0000\n"
+"PO-Revision-Date: 2025-08-15 01:02+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -2699,29 +2699,31 @@ msgstr ""
 
 #: ../plugins/Structural_Multipolygon.py:37
 msgid "Members must be ways."
-msgstr "Medlemmar måste vara linjer."
+msgstr "Medlemmar måste vara sträckor."
 
 #: ../plugins/Structural_Multipolygon.py:41
 msgid "At least one outer ring must be present."
-msgstr ""
+msgstr "Minst en yttre ring måste finnas."
 
 #: ../plugins/Structural_Multipolygon.py:48
 msgid "Multipolygon relation actually defines a simple polygon."
-msgstr ""
+msgstr "Multipolygon-relation definierar en vanlig enkel polygon."
 
 #: ../plugins/Structural_UnclosedArea.py:32
 msgid "A way has the tag area=yes, but is not closed."
-msgstr ""
+msgstr "En sträcka har taggen `area=yes` men är inte en sluten polygon."
 
 #: ../plugins/Structural_UnclosedArea.py:34
 msgid ""
 "If the object is not a surface, remove the tag `area=yes`, otherwise\n"
 "ensure that the way is a loop."
 msgstr ""
+"Om objektet inte är en yta, ta bort taggen `area=yes`.\n"
+"Annars, se till att sträckan kopplas ihop till en sluten polygon."
 
 #: ../plugins/Structural_Useless_Relation.py:33
 msgid "The relation only contains one member."
-msgstr ""
+msgstr "Relationen innehåller bara en medlem."
 
 #: ../plugins/Structural_Useless_Relation.py:35
 msgid ""
@@ -2729,14 +2731,17 @@ msgid ""
 "another similar relation with more members. A one-member relation may\n"
 "sometimes be justified."
 msgstr ""
+"Kontrollera att ingen medlem saknas, kolla historiken, om det finns en annan "
+"liknande relation med fler medlemmar.\n"
+"Ibland kan relationer med bara en medlem vara befogat."
 
 #: ../plugins/Structural_Useless_Relation.py:39
 msgid "Do not remove a relation without understanding why it is there."
-msgstr ""
+msgstr "Ta inte bort en relation utan att helt förstå varför den är där."
 
 #: ../plugins/Structural_Waterway.py:32
 msgid "A waterway cannot flow in closed loop."
-msgstr ""
+msgstr "Ett vattendrag kan inte rinna i en sluten loop."
 
 #: ../plugins/Structural_Waterway.py:34
 msgid "It is probably a river bank `waterway=riverbank`."
