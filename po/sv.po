@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-15 01:02+0000\n"
+"PO-Revision-Date: 2025-08-17 12:02+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -174,7 +174,7 @@ msgstr "Simbassäng, reservoar, damm med natural=water"
 
 #: ../analysers/analyser_osmosis_node_like_way.py:80
 msgid "Way node tagged like way"
-msgstr "Vägnod taggad som väg"
+msgstr "Nod i sträcka taggad som sträcka"
 
 #: ../analysers/analyser_osmosis_orphan_nodes_cluster.py:56
 msgid "Orphan nodes cluster"
@@ -311,7 +311,7 @@ msgstr ""
 
 #: ../plugins/Administrative_TooManyWays.py:31
 msgid "Duplicated way in relation"
-msgstr "Duplicerad linje i relation"
+msgstr "Duplicerad sträcka i relation"
 
 #: ../plugins/Construction.py:34
 msgid "Finished construction"
@@ -383,7 +383,7 @@ msgstr "Source-tagg saknas"
 
 #: ../plugins/Structural_DuplicateNodes.py:34
 msgid "Duplicated nodes"
-msgstr ""
+msgstr "Duplicerade noder"
 
 #: ../plugins/Structural_Multipolygon.py:31
 msgid "Inadequate role for multipolygon"
@@ -411,7 +411,7 @@ msgstr ""
 
 #: ../plugins/Structural_WayOneNode.py:31
 msgid "Way with one node"
-msgstr "Linje med en nod"
+msgstr "Sträcka med en nod"
 
 #: ../plugins/TagFix_Deprecated.py:74 ../plugins/TagFix_MultipleTag2.py:29
 msgid "Deprecated tag"
@@ -498,7 +498,7 @@ msgstr "Ogiltigt Wikipedia-suffix"
 
 #: ../plugins/TagFix_Wikipedia.py:82
 msgid "Duplicate wikipedia tag as suffix and prefix"
-msgstr ""
+msgstr "Duplicerad Wikipedia-tagg som både suffix och prefix"
 
 #: ../plugins/TagRemove_FR.py:33
 msgid "Misused tag in this country"
@@ -770,11 +770,11 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_duplicated_geotag.py:286
 msgid "Duplicated way geometry and tags"
-msgstr "Duplicerad linje, geometri och taggar"
+msgstr "Duplicerad sträcka, geometri och taggar"
 
 #: ../analysers/analyser_osmosis_duplicated_geotag.py:290
 msgid "Duplicated way geometry but different tags"
-msgstr "Duplicerad linjegeometri, olika taggar"
+msgstr "Duplicerad sträcka, samma geometri men olika taggar"
 
 #: ../analysers/analyser_osmosis_duplicated_geotag.py:294
 msgid "Duplicated node geometry and tags"
@@ -1580,7 +1580,7 @@ msgstr ""
 #: ../plugins/Highway_Parking_Lane.py:105
 #: ../plugins/TagFix_DuplicateValue.py:44
 msgid "Duplicated values"
-msgstr ""
+msgstr "Duplicerade värden"
 
 #: ../plugins/TagFix_DuplicateValue.py:47
 msgid "Similar values"
@@ -2000,7 +2000,7 @@ msgstr "Plankorsning som saknar vägen eller järnvägen. "
 
 #: ../analysers/analyser_osmosis_highway_features.py:84
 msgid "The node must be common to rail and road."
-msgstr "Node måste vara gemensam för både järnvägen och vägen."
+msgstr "Noden måste vara gemensam för både järnvägen och vägen."
 
 #: ../analysers/analyser_osmosis_highway_link.py:134
 msgid ""
@@ -2114,11 +2114,13 @@ msgstr ""
 msgid ""
 "Same surfaces type overlapped (`waterway`, `natural` or\n"
 "`landuse`.)"
-msgstr ""
+msgstr "Samma områdestyp överlappar (`waterway`, `natural` eller `landuse`.)"
 
 #: ../analysers/analyser_osmosis_polygon_overlaps.py:91
 msgid "Separate the surface or merge, pay attention on other tags"
 msgstr ""
+"Separera områdena, anslut alla angränsande noder, eller slå ihop områdena. "
+"Var uppmärksam på andra taggar."
 
 #: ../analysers/analyser_osmosis_polygon.py:100
 msgid ""
@@ -2324,11 +2326,11 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_roundabout_level.py:304
 msgid "Way through the roundabout without stopping."
-msgstr ""
+msgstr "Sträcka genom cirkulationsplats utan uppehåll."
 
 #: ../analysers/analyser_osmosis_roundabout_level.py:306
 msgid "Check if it is really a roundabout and cut the way."
-msgstr ""
+msgstr "Kolla att det verkligen är en cirkulationsplats, och dela sträckan."
 
 #: ../analysers/analyser_osmosis_roundabout.py:92
 msgid "Missing `junction=roundabout`"
@@ -2399,6 +2401,9 @@ msgid ""
 "opposite direction around a square or a central roundabout, or a driveway\n"
 "separated by traffic islands at an intersection without cross)."
 msgstr ""
+"Kontrollera att det faktiskt är del av en cirkulationsplats (inte t.ex. en "
+"sidogata runt en cirkulationsplats eller torg, eller en vanlig körbana i en "
+"korsning med refuger)."
 
 #: ../analysers/analyser_osmosis_roundabout_reverse.py:63
 #: ../plugins/TagFix_MultipleTag.py:61
@@ -2533,23 +2538,27 @@ msgstr "Icke-numeriskt värde, `lanes=*` måste anges med ett heltal."
 
 #: ../plugins/Highway_Lanes.py:45
 msgid "You can not set opposite lanes data on a one way."
-msgstr ""
+msgstr "Du kan inte ange information om mötande körfält på en enkelriktad väg."
 
 #: ../plugins/Highway_Lanes.py:53
 msgid "Right must be on the right and left on the left."
-msgstr ""
+msgstr "Höger måste vara till höger och vänster till vänster."
 
 #: ../plugins/Highway_Lanes.py:55
 msgid ""
 "Conflict between lanes number of same suffix (\"\", forward, backward or "
 "both_ways)"
 msgstr ""
+"Konflikt mellan antal körfält med samma suffix (\"\", forward, backward "
+"eller both_ways)"
 
 #: ../plugins/Highway_Lanes.py:57
 msgid ""
 "The number of lanes defined by many lane tags are not the same for a\n"
 "given direction."
 msgstr ""
+"Antalet körfält angivna av olika taggar är inte samma för en given "
+"färdriktning."
 
 #: ../plugins/Highway_Lanes.py:67
 msgid ""
@@ -2560,7 +2569,7 @@ msgstr ""
 
 #: ../plugins/Highway_Parking_Lane.py:58
 msgid "A parking condition is present but without parking kind."
-msgstr ""
+msgstr "Ett parkeringsvillkor är angivet, men parkeringstyp saknas."
 
 #: ../plugins/Name_MisspelledWordByRegex.py:33
 msgid "Often a lack of accent on a capital letter (e.g. Ecole for École)"
@@ -2572,6 +2581,9 @@ msgid ""
 "the houses on one side are in a different city. In this case, you can use\n"
 "the tag `name:left=*` and `name:right=*`."
 msgstr ""
+"Vissa gator har inte samma namn på båda sidor, särskilt om husen på vardera "
+"sida är i olika städer eller kommuner. \n"
+"Om så är fallet kan du använda taggarna `name:left=*` och `name:right=*`."
 
 #: ../plugins/Name_Quotation.py:31
 msgid "Unbalanced quotation mark or bracket in name"
@@ -2589,7 +2601,7 @@ msgstr ""
 
 #: ../plugins/Name_Saint_FR.py:40
 msgid "This rule does not apply in particular to the Belgium."
-msgstr ""
+msgstr "Denna regel tillämpas inte i Belgien, framförallt."
 
 #: ../plugins/Name_Saint_FR.py:42
 msgid ""
@@ -2602,7 +2614,7 @@ msgstr ""
 msgid ""
 "Words are not written in the appropriate alphabet of the\n"
 "language."
-msgstr ""
+msgstr "Texten är inte skriven i ett lämpligt alfabet för språket."
 
 #: ../plugins/Name_Script.py:43
 msgid ""
@@ -2612,22 +2624,28 @@ msgid ""
 "untranslated name) or `name:en=Peace` (translated) or `name:ar=سلام`\n"
 "(original)."
 msgstr ""
+"Vanligtvis har bara fel språkkod valts.\n"
+"Ibland har ett ord translittererats, och behöver ändras till sitt ordinarie "
+"alfabet.\n"
+"`name:ar=Salaam` borde vara antingen `name:en=Salaam` (om det är känt under "
+"sitt ej översatta namn) eller `name:en=Peace` (översatt) eller `name:ar=سلام`"
+" (originalspråk och alfabet)."
 
 #: ../plugins/Name_Script.py:53
 msgid "Remove the character."
-msgstr ""
+msgstr "Ta bort tecknet."
 
 #: ../plugins/Name_Script.py:57
 msgid ""
 "A symbol is used instead of a letter from the appropriate\n"
 "alphabet."
-msgstr ""
+msgstr "En symbol används istället för bokstaven från ett lämpligt alfabet."
 
 #: ../plugins/Name_Script.py:60
 msgid ""
 "Change the character into a punctuation mark or something else more\n"
 "appropriate."
-msgstr ""
+msgstr "Ändra tecknet till ett skiljetecken eller något annat mer lämpligt."
 
 #: ../plugins/Name_UpperCaseNumber.py:35
 msgid "Number written in capital letters: \"N°\" in place of \"n°\"."
@@ -2635,13 +2653,15 @@ msgstr ""
 
 #: ../plugins/Phone.py:57
 msgid "Local short code can not be internationalized"
-msgstr ""
+msgstr "Lokal kortkod kan inte internationaliseras"
 
 #: ../plugins/Source.py:38
 msgid ""
 "The `source` tag is incorrect. For example, an illegal source like\n"
 "Google."
 msgstr ""
+"Taggen `source` är felaktig. Exempelvis; den hänvisar till en olaglig källa, "
+"som Google."
 
 #: ../plugins/Source.py:41
 msgid ""
@@ -2649,12 +2669,17 @@ msgid ""
 "source is illegal, promptly notify the contributor to remove\n"
 "contributions."
 msgstr ""
+"Korrigera källan, och objektets geometri/placering om nödvändigt.\n"
+"Om källan är olaglig, meddela skyndsamt användaren att ta bort andra "
+"eventuella ändringar de gjort från samma källa."
 
 #: ../plugins/Source.py:47
 msgid ""
 "An administrative boundary does not contain tag `source=*` sourcing\n"
 "the origin."
 msgstr ""
+"En administrativ gräns saknar taggen `source=*` för att ange gränsens källa "
+"och ursprung."
 
 #: ../plugins/Source.py:50
 msgid ""
@@ -2664,7 +2689,7 @@ msgstr ""
 
 #: ../plugins/Structural_DuplicateNodes.py:36
 msgid "A path passes several times by the same node."
-msgstr ""
+msgstr "En sträcka passerar samma nod flera gånger."
 
 #: ../plugins/Structural_DuplicateNodes.py:38
 msgid ""
@@ -2679,12 +2704,24 @@ msgid ""
 "several roads / areas than a single complex one so that tools working\n"
 "with OSM data can function properly."
 msgstr ""
+"Det finns flera olika typer av problem:\n"
+"\n"
+"* En sträcka som gör en eller flera \"loopar\"; sträckan behöver delas upp i "
+"flera segment\n"
+"* En sträcka som vänder tillbaka till sig själv (ofta i ena änden); den "
+"felaktiga sträckan kan behöva klippas bort och återskapas korrekt.\n"
+"\n"
+"Och det finns många fler typer av fel. Generellt är det bättre att rita "
+"flera kopplade men separata sträckor/polygoner, än en stor och komplex, så "
+"att verktyg och funktioner baserade på OSM-data kan fungera bra."
 
 #: ../plugins/Structural_DuplicateNodes.py:49
 msgid ""
 "These errors require a good command of your editing tool. Some\n"
 "corrections are not necessarily intuitive."
 msgstr ""
+"Dessa fel kräver mycket god kontroll och förståelse för dina "
+"redigeringsverktyg. Vissa ändringar kan vara kontraintuitiva!"
 
 #: ../plugins/Structural_DuplicateNodes.py:52
 msgid ""
@@ -2696,6 +2733,7 @@ msgstr ""
 #: ../plugins/Structural_Multipolygon.py:33
 msgid "Possible roles are `outer`, `inner` or nothing (not recommended)."
 msgstr ""
+"Möjliga roller är `outer`, `inner`, eller ingenting (rekommenderas inte)."
 
 #: ../plugins/Structural_Multipolygon.py:37
 msgid "Members must be ways."
@@ -2753,16 +2791,21 @@ msgid ""
 "features comes from [Deprecated\n"
 "features](https://wiki.openstreetmap.org/wiki/Deprecated_features)"
 msgstr ""
+"Taggen eller kombinationen nyckel=värde avråds från att användas.\n"
+"Lista på föråldrade taggar kommer ifrån [Deprecated features](https://"
+"wiki.openstreetmap.org/wiki/Deprecated_features)"
 
 #: ../plugins/TagFix_DuplicateValue.py:35
 msgid ""
 "The tag contains two values (separated by ';') which are very\n"
 "similar."
 msgstr ""
+"Taggen innehåller två värden (separerade med ';') som är väldigt lika "
+"varandra."
 
 #: ../plugins/TagFix_DuplicateValue.py:38
 msgid "Delete one value."
-msgstr ""
+msgstr "Ta bort ett värde."
 
 #: ../plugins/TagFix_Housenumber.py:38
 msgid ""
@@ -2782,7 +2825,7 @@ msgstr ""
 
 #: ../plugins/TagFix_Pharmacy.py:38
 msgid "Add tag `dispensing=yes`."
-msgstr ""
+msgstr "Lägg till tagg `dispensing=yes`."
 
 #: ../plugins/TagFix_MultipleTag2.py:20 ../plugins/TagFix_MultipleTag2.py:21
 msgid "Check if it is really a highway and it is not already mapped."
@@ -3373,6 +3416,8 @@ msgid ""
 "Large intersections may also be duplicates - in which case you should delete "
 "the less accurate elements."
 msgstr ""
+"Stora överlappningar kan också vara dubbletter - i så fall bör det sämre, "
+"mer inkorrekta objektet tas bort."
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:170
 msgid "The area of this feature is too small to possibly be a building."
@@ -3969,7 +4014,7 @@ msgstr ""
 #: ../plugins/TagFix_DuplicateValue.py:157
 #, python-brace-format
 msgid "Duplicated values {key}={val}"
-msgstr ""
+msgstr "Duplicerade värden {key}={val}"
 
 #: ../plugins/TagFix_Postcode.py:111
 #, python-brace-format
@@ -4043,6 +4088,10 @@ msgid ""
 "The editor JOSM can easily visualize the relationships and see duplicates\n"
 "(in colour)."
 msgstr ""
+"Oftast är detta ett användarfel där någon lagt till samma sträcka flera "
+"gånger.\n"
+"JOSM-editorn kan enkelt visualisera relationerna och visa dubbletter (i "
+"färg)."
 
 #: ../plugins/Cuisine_Guess.py:36
 msgid "Possible mistake or lack of precision of `cuisine` value"
@@ -4509,6 +4558,10 @@ msgid ""
 "changes at a crossroads, if this is the case, split the street and set the\n"
 "proper names of both parts."
 msgstr ""
+"* Om samma namn är duplicerat, radera den ena.\n"
+"* Annars kan en undersökning i fält krävas: kolla om det är en gata som "
+"byter namn, t.ex. i en korsning. Är det så; dela sträckan på lämpligt ställe "
+"och sätt korrekta namn på respektive delar."
 
 #: ../analysers/analyser_merge_bicycle_parking_ES_madrid.py:31
 #: ../analysers/analyser_merge_bicycle_parking_FR_brest.py:30
@@ -5600,6 +5653,7 @@ msgstr ""
 #: ../analysers/analyser_osmosis_relation_duplicate_member.py:66
 msgid "Remove the duplicate members until only unique members remain."
 msgstr ""
+"Ta bort de duplicerade medlemmarna så att endast unika medlemmar kvarstår."
 
 #: ../analysers/analyser_osmosis_relation_route_access.py:110
 #, python-brace-format
@@ -5880,18 +5934,22 @@ msgstr ""
 #: ../plugins/TagFix_Maxspeed.py:90
 msgid "Advisory or practical maxspeed exceeds legal speed limit"
 msgstr ""
+"Rekommenderad eller praktisk hastighet högre än den legala hastighetsgränsen"
 
 #: ../plugins/TagFix_MultipleTag2.py:33 ../plugins/TagFix_MultipleTag2.py:241
 #: ../plugins/TagFix_MultipleTag2.py:566 ../plugins/TagFix_MultipleTag2.py:752
 #, python-brace-format
 msgid "{0} contains the value of {1}"
-msgstr ""
+msgstr "{0} innehåller värdet av {1}"
 
 #: ../plugins/TagFix_MultipleTag2.py:33
 msgid ""
 "Possibly a different `alt_name` that is very similar to `name` was meant. "
 "Alternative names are often similar (but never equal) to the name."
 msgstr ""
+"Möjligen menades ett annat `alt_name` som är väldigt lika `name`. "
+"Alternativa namn är ofta snarlika (men aldrig identiska) med det ordinarie "
+"namnet."
 
 #: ../plugins/TagFix_MultipleTag2.py:37
 msgid ""
@@ -5900,6 +5958,10 @@ msgid ""
 "parking lots and roadside parking. Add access tags and/or service ways "
 "through the parking lot as desired."
 msgstr ""
+"Ange typen av parkering, exempelvis `parking=street_side`, `parking=surface` "
+"eller `parking=underground`, för att skilja på stora parkeringsplatser, "
+"parkering längs gatan mm. Lägg till `access`-taggar för tillträde och/eller "
+"vägar genom parkeringen om lämpligt."
 
 #: ../plugins/TagFix_Tree.py:58
 msgid "Conflicting tree properties"
