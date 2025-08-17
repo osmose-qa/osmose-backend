@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-17 12:02+0000\n"
+"PO-Revision-Date: 2025-08-18 14:02+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -2830,6 +2830,7 @@ msgstr "Lägg till tagg `dispensing=yes`."
 #: ../plugins/TagFix_MultipleTag2.py:20 ../plugins/TagFix_MultipleTag2.py:21
 msgid "Check if it is really a highway and it is not already mapped."
 msgstr ""
+"Kontrollera att det verkligen är en väg och att den inte redan är karterad."
 
 #: ../plugins/TagFix_MultipleTag.py:52
 msgid ""
@@ -2841,37 +2842,43 @@ msgstr ""
 
 #: ../plugins/TagFix_MultipleValue.py:66
 msgid "The tag contains multiple values."
-msgstr ""
+msgstr "Taggen innehåller flera värden."
 
 #: ../plugins/TagFix_MultipleValue.py:68
 msgid ""
 "Check the accuracy of the values, if necessary, delete the obsolete\n"
 "values."
 msgstr ""
+"Kolla värdenas korrekthet och, om möjligt, ta bort felaktigt eller "
+"inaktuellt värde."
 
 #: ../plugins/TagFix_Note_Lang_fr.py:40
 msgid "Analyzes the tag `note=*` with French and English keywords."
-msgstr ""
+msgstr "Analyserar taggen `note=*` med franska och engelska nyckelord."
 
 #: ../plugins/TagFix_Note_Lang_fr.py:42
 msgid ""
 "Use a more appropriate tag as `description=*`, `opening_hours=*` or\n"
 "`fixme=*` so it can be found more easily."
 msgstr ""
+"Använd en mer passande tagg, som `description=*`, `opening_hours=*` eller "
+"`fixme=*` så informationen lättare kan hittas."
 
 #: ../plugins/TagFix_Note_Lang_fr.py:45
 msgid "The analysis can provide crazy result."
-msgstr ""
+msgstr "Analysen kan ge tokiga resultat."
 
 #: ../plugins/TagFix_Postcode.py:88
 msgid ""
 "Check the postcode format as described on\n"
 "[Wikipedia](https://en.wikipedia.org/wiki/List_of_postal_codes)"
 msgstr ""
+"Kolla formatet för postnummer som det beskrivs på [Wikipedia](https://"
+"en.wikipedia.org/wiki/List_of_postal_codes)"
 
 #: ../plugins/TagFix_Role.py:34
 msgid "The role is not a keyword as expected."
-msgstr ""
+msgstr "Rollen är inte ett förväntat nyckelord."
 
 #: ../plugins/TagFix_Role.py:36
 msgid ""
@@ -2882,10 +2889,13 @@ msgstr ""
 #: ../plugins/TagFix_Tree_Lang_fr.py:73
 msgid "Put the right data in the correct tag, in this case species."
 msgstr ""
+"Placera rätt information i rätt tagg, i det här fallet arten i `species`."
 
 #: ../plugins/TagFix_Tree_Lang_fr.py:75
 msgid "Specify the language for the tag `species`: `species:en=oak`"
 msgstr ""
+"Ange språket för artnamnet i taggen: `species:sv = Skogsek`. Enbart `species`"
+" används för det vetenskapliga (latinska) namnet"
 
 #: ../plugins/TagFix_Vatin.py:38
 msgid "Invalid value format of tag `ref:vatin`"
@@ -2902,12 +2912,23 @@ msgid ""
 "some cases they are different from the standard language codes BCP47 used\n"
 "as suffixes in other keys such as \"name:[LANG]=*\")."
 msgstr ""
+"Ersätt det felaktiga värdet med titeln så som den visas ovanför artikeln på "
+"Wikipedia, och språkkoden för artikeln framför titeln, separerade med komma "
+"':'. Ex. `wikipedia = sv:Karlsborgs fästning`.\n"
+"(Utan språkkod kommer artikeln sökas efter på engelska Wikipedia som "
+"standard, men det rekommenderas att explicit sätta språkkoden 'en' även för "
+"engelska artiklar.)\n"
+"Språkkoderna som stöds är de olika språkupplagor som Wikipedia finns i. I "
+"vissa fall skiljer de sig från IETF/BCP47 koderna som används i andra OSM-"
+"taggar, t.ex. `name:[språk] = *`."
 
 #: ../plugins/TagFix_Wikipedia.py:51
 msgid ""
 "The tag `wikipedia=*` should include the title of the article\n"
 "mentioned and not the URL of the page."
 msgstr ""
+"Taggen `wikipedia=*` ska innehålla artikelns titel med ett språkkod-prefix, "
+"och inte webbsidans URL."
 
 #: ../plugins/TagFix_Wikipedia.py:57
 msgid ""
@@ -2916,55 +2937,71 @@ msgid ""
 "the English Wikipedia, or the respective language code if the article is in "
 "a different language."
 msgstr ""
+"Titeln ska föregås av ett språkkod-prefix, 'sv:' om artikeln är på svenska "
+"Wikipedia, 'en:' för engelska Wikipedia, eller motsvarande kod om artikeln "
+"är på ett annat språk."
 
 #: ../plugins/TagFix_Wikipedia.py:65
 msgid ""
 "Spaces must not be replaced by underscore but be like in the name of\n"
 "the article. Same for accented letters. Letter must be readable."
 msgstr ""
+"Mellanslag ska inte ersättas av understreck, utan vara så som artikelns "
+"titel visar. Gäller även accenttecken och liknande. Tecknen måste vara "
+"läsbara."
 
 #: ../plugins/TagFix_Wikipedia.py:75
 msgid ""
 "A `wikipedia=*` must be present before using tags\n"
 "`wikipedia:LANG=*`."
 msgstr ""
+"Standard-taggen `wikipedia=*` bör finnas innan ytterligare taggar med andra "
+"språk används, `wikipedia:LANG=*`."
 
 #: ../plugins/TagRemove_Fixme.py:37
 msgid ""
 "`highway=road` has been used, choose a correct value, such as\n"
 "`highway=unclassified`."
 msgstr ""
+"Den tillfälliga oprecisa taggen `highway=road` har använts. Ange om möjligt "
+"en lämplig specifik klassificering, som `highway=service` "
+"eller`highway=unclassified`."
 
 #: ../plugins/TagRemove_FR.py:35
 msgid "`designation=*` is a United Kingdom-specific tag."
 msgstr ""
+"`designation=*` är en specifik tagg som bara används i vissa länder, "
+"framförallt Storbritannien."
 
 #: ../plugins/TagRemove_FR.py:37
 msgid "Translate it to another tag or remove."
-msgstr ""
+msgstr "Flytta informationen till en lämpligare tagg, eller ta bort."
 
 #: ../plugins/TagFix_MultipleTag2.py:31
 msgid "The object contains two incompatible tags."
-msgstr ""
+msgstr "Objektet har två inkompatibla taggar."
 
 #: ../plugins/TagFix_MultipleTag2.py:31
 #: ../plugins/TagRemove_Incompatibles.py:37
 msgid "Sometimes the object needs both tags."
-msgstr ""
+msgstr "I vissa fall kan objektet behöva båda taggarna."
 
 #: ../plugins/TagRemove_NameIsRef_FR.py:36
 msgid ""
 "Reference (e.g. D 73) is in the tag `name=*` and not in the tag\n"
 "`ref=*`."
 msgstr ""
+"Referens (ex. D 73) verkar vara angivet i taggen `name=*` istället för i "
+"taggen `ref=*`."
 
 #: ../plugins/TagRemove_NameIsRef_FR.py:39
 msgid "Transfer the value from the tag `name=*` to the tag `ref=*`."
-msgstr ""
+msgstr "Flytta värdet i `name=*` till `ref=*` istället."
 
 #: ../plugins/TagRemove_OpenSeaMap.py:35
 msgid "Seamark was imported but needs manual review (`seamark:fixme=*`)."
 msgstr ""
+"Sjömärke har importerats men behöver manuell granskning (`seamark:fixme=*`)."
 
 #: ../plugins/TagRemove_OpenSeaMap.py:37
 msgid ""
