@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-18 14:02+0000\n"
+"PO-Revision-Date: 2025-08-19 10:20+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -3008,6 +3008,8 @@ msgid ""
 "Move the seamark to the correct position and remove the tag\n"
 "`seamark:fixme=*`."
 msgstr ""
+"Flytta sjömärket till korrekt läge, och rätta eventuella andra fel som "
+"anges, ta sedan bort taggen `seamark:fixme=*`."
 
 #: ../plugins/TagRemove_Roundabout.py:33
 #: ../plugins/TagRemove_Roundabout_Ref.py:35
@@ -3016,6 +3018,10 @@ msgid ""
 "The tag `name=*` must be present if this is the name of the roundabout\n"
 "and not a road connected, same thing for `ref=*`."
 msgstr ""
+"Taggarna `oneway=*` och `ref=*` är normalt överflödiga för "
+"cirkulationsplatser.\n"
+"`name=*` ska anges om det är ett namn specifikt för cirkulationsplatsen, och "
+"inte en anslutande väg, detsamma gäller för `ref=*`."
 
 #: ../analysers/analyser_merge_street_objects.py:47
 #: ../analysers/analyser_merge_traffic_signs.py:83
@@ -3046,20 +3052,25 @@ msgid ""
 "Two features overlap with no shared node to indicate a physical connection "
 "or tagging to indicate a vertical separation."
 msgstr ""
+"Två objekt överlappar, utan någon gemensam nod som indikerar att de hör ihop "
+"fysiskt eller taggar som indikerar att de är vertikalt åtskilda."
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:455
 msgid ""
 "Move a feature if it's in the wrong place. Connect the features if "
 "appropriate or update the tags if not."
 msgstr ""
+"Flytta ett eller båda objekt om de är felplacerade. Anslut gemensamma noder "
+"om objekten hänger ihop, eller uppdatera taggarna för att ange typ av "
+"separation."
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:471
 msgid "Highway intersecting highway"
-msgstr ""
+msgstr "Väg korsar väg"
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:473
 msgid "Waterway intersecting waterway"
-msgstr ""
+msgstr "Vattendrag korsar vattendrag"
 
 #: ../analysers/analyser_osmosis_relation_enforcement.py:59
 msgid "Disconnected speed camera"
@@ -3070,6 +3081,8 @@ msgid ""
 "Speed camera should be mapped as a node on the highway or use an "
 "`enforcement` relation."
 msgstr ""
+"Fartkamera bör anges på nod i den relevanta vägen, eller ingå i en relation "
+"av typ `enforcement`."
 
 #: ../plugins/Name_Script.py:55
 msgid "Unexpected symbol in name"
@@ -3077,7 +3090,7 @@ msgstr "Oväntad symbol i namn"
 
 #: ../plugins/TagFix_BadValue.py:33
 msgid "Bad tag value"
-msgstr ""
+msgstr "Felaktigt värde för tagg"
 
 #: ../plugins/TagFix_MultipleTag.py:38
 msgid "Untagged named object"
@@ -3133,18 +3146,24 @@ msgid ""
 "roles](https://wiki.openstreetmap.org/wiki/Relation:boundary) on boundary\n"
 "relations."
 msgstr ""
+"Se möjliga roller för [gränsrelationer (wiki)] (https://"
+"wiki.openstreetmap.org/wiki/Relation:boundary)"
 
 #: ../analysers/analyser_osmosis_building_shapes.py:65
 msgid ""
 "The shape of the building is characteristic and as such would be\n"
 "tagged."
 msgstr ""
+"Byggnadens form är karaktäristisk och distinkt, och förväntas därför ha mer "
+"specifika taggar."
 
 #: ../analysers/analyser_osmosis_parking_highway.py:109
 msgid ""
 "There should be a `highway` feature leading to this parking facility to "
 "allow for correct routing."
 msgstr ""
+"Det borde finnas någon form av väg `highway` som leder till den här "
+"parkeringen, så att navigering och vägbeskrivning fungerar korrekt."
 
 #: ../analysers/analyser_osmosis_powerline.py:665
 #: ../analysers/analyser_osmosis_powerline.py:674
@@ -3155,6 +3174,10 @@ msgid ""
 "In which case make use of the `disused:` [lifecycle prefix](https://wiki."
 "openstreetmap.org/wiki/Lifecycle_prefix)."
 msgstr ""
+"Det är möjligt att nedlagda el/energianläggningar finns kvar men har "
+"kopplats bort från kraftnätet.\n"
+"Om så är fallet bör `disused:` läggas till objektet, se [livscykel prefix]"
+"(https://wiki.openstreetmap.org/wiki/Lifecycle_prefix)."
 
 #: ../analysers/analyser_osmosis_powerline.py:670
 #: ../analysers/analyser_osmosis_powerline.py:679
