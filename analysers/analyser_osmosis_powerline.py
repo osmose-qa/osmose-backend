@@ -398,7 +398,7 @@ nodes_voltage_values AS (
 
     UNION
 
-    -- Nodes with no voltages
+    -- Nodes with no (numerical) voltages
     SELECT
         nid,
         tid,
@@ -575,13 +575,32 @@ ORDER BY
 sql70 = """
 CREATE TEMP TABLE power_lines_mgmt AS
 
-WITH vertices AS (
+WITH nodes_voltage AS (
+    SELECT
+        nid,
+        tid,
+        unnest(voltages)::varchar AS voltage
+    FROM
+        power_lines_topoedges
+),
+-- We process nodes with voltage > 50 kV only
+nodes_selected AS (
+    SELECT
+        nid
+    FROM nodes_voltage
+    WHERE voltage ~ '^[0-9.]+$' AND
+        voltage::numeric >= 50000
+    GROUP BY nid
+),
+vertices AS (
     SELECT
         e.nid,
         string_agg(CASE e.location WHEN 'overhead' THEN e.circuits::varchar ELSE NULL END, '-' ORDER BY e.circuits desc) AS circuits_overhead,
         string_agg(CASE WHEN e.location!='overhead' THEN e.circuits::varchar ELSE NULL END, '-' ORDER BY e.circuits desc) AS circuits_elsewhere
     FROM
         power_lines_topoedges e
+    JOIN nodes_selected ns ON
+        ns.nid=e.nid
     JOIN nodes n ON
         n.id=e.nid
     GROUP BY
@@ -749,9 +768,9 @@ there's likely an unmapped pole nearby.'''))
                 result.append({"~": {"line_management": res[2]}})
         if res[3]:
             if res[5] is None:
-                result.append({"+": {"line_management": res[3]}})
+                result.append({"+": {"location:transition": res[3]}})
             elif res[5] != res[3]:
-                result.append({"~": {"line_management": res[3]}})
+                result.append({"~": {"location:transition": res[3]}})
 
         return result
 

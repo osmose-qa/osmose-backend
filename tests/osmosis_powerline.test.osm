@@ -17,8 +17,8 @@
     <tag k='location' v='underground' />
     <tag k='power' v='pole' />
   </node>
-  <node id='25880' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.19018976738' lon='4.47730911825'>
-    <tag k='line_management' v='branch' />
+  <node id='25880' action='modify' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.19018976738' lon='4.47730911825'>
+    <tag k='note' v='Should NOT raise class 8 warning line_management suggestion: below 50 kV' />
     <tag k='power' v='pole' />
   </node>
   <node id='25881' timestamp='2025-04-24T15:00:00Z' version='1' lat='46.19025116596' lon='4.47738773173'>
