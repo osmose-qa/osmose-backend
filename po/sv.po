@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-19 10:20+0000\n"
+"PO-Revision-Date: 2025-08-21 00:02+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -3186,12 +3186,19 @@ msgid ""
 "a transformer (`power=transformer`), a generator (`power=generator`)\n"
 "or marked as transitioning into ground (`location:transition=yes`)."
 msgstr ""
+"Luftledningen slutar i tomma intet. Borde vara antingen ansluten till en "
+"annan luftledning, en transformatorstation (`power=substation`), en "
+"generator/kraftkälla (`power=generator`), en angöringspunkt "
+"(`power=terminal`) eller taggad som övergående till markkabel "
+"(`location:transition=yes`).\n"
+"Läs [mer på wikin] (https://wiki.openstreetmap.org/wiki/Power_networks/"
+"Guidelines/Power_lines)"
 
 #: ../analysers/analyser_osmosis_powerline.py:687
 msgid ""
 "Two power lines meet at this point, but have inconsistent voltages "
 "(`voltage=*`)."
-msgstr ""
+msgstr "Två luftledningar möts här, men har olika spänning (`voltage=*`)."
 
 #: ../analysers/analyser_osmosis_powerline.py:694
 msgid ""
@@ -3199,18 +3206,24 @@ msgid ""
 "shouldn't\n"
 "have additional nodes that aren't tagged as a `power` feature."
 msgstr ""
+"Kraftledningar bildar alltid raka linjer mellan stolpar eller master, och "
+"ska därför inte ha några extra noder som inte är taggade som `power`."
 
 #: ../analysers/analyser_osmosis_powerline.py:697
 msgid ""
 "If this node is a tower or pole, use the tag `power=tower` or\n"
 "`power=pole`. Otherwise remove it."
 msgstr ""
+"Om det är en kraftledningsstolpe eller mast, använd taggen `power=pole` "
+"respektive `power=tower`. Om inte, ta bort noden."
 
 #: ../analysers/analyser_osmosis_powerline.py:702
 msgid ""
 "Based on the statistical frequency of the poles on this power line,\n"
 "there's likely an unmapped pole nearby."
 msgstr ""
+"Baserat på den statistiska förekomsten av stolpar på den här kraftledningen, "
+"finns det sannolikt en stolpe nära här som inte har karterats."
 
 #: ../plugins/TagFix_Area.py:43
 #, python-brace-format
@@ -3219,25 +3232,31 @@ msgstr "Ta bort taggen `{0}`."
 
 #: ../plugins/TagFix_Area.py:33
 msgid "Untagged area object"
-msgstr ""
+msgstr "Område-objekt utan taggar"
 
 #: ../plugins/TagFix_Area.py:34
 msgid ""
 "The object is missing any tag which defines what kind of feature it is. This "
 "is unexpected for something tagged with `area=yes`."
 msgstr ""
+"Ett objekt med taggen `area=yes` förväntas ha en tagg som definierar vilken "
+"typ av objekt eller område det är, men det saknas här."
 
 #: ../plugins/TagFix_Area.py:36
 msgid ""
 "Add a top level tag to state what this feature is. Considered acceptable "
 "`area=yes` features are:"
 msgstr ""
+"Lägg till en grundläggande tagg som specificerar vad området representerar. "
+"Företeelser där `area=yes` kan vara en lämplig tagg är :"
 
 #: ../plugins/TagFix_Area.py:38 ../plugins/TagFix_MultipleTag.py:43
 msgid ""
 "It may be more appropriate to remove the object completely if it isn't "
 "useful."
 msgstr ""
+"Det kan vara lämpligt att ta bort objektet helt om det inte bidrar med någon "
+"användbar information."
 
 #: ../plugins/TagFix_Area.py:41
 msgid "Redundant area negation"
@@ -3245,23 +3264,29 @@ msgstr "Överflödig area-negation"
 
 #: ../plugins/TagFix_Area.py:42
 msgid "This feature is already implicitly not an area."
-msgstr ""
+msgstr "Det är underförstått att den här företeelsen inte är ett område."
 
 #: ../plugins/TagFix_MultipleTag.py:39
 msgid ""
 "The object is missing any tag which defines what kind of feature it is. This "
 "is unexpected for something with a `name` tag."
 msgstr ""
+"Ett objekt med namn (`name`) förväntas ha en tagg som definierar vilken typ "
+"av objekt eller företeelse det är, men det saknas här."
 
 #: ../plugins/TagFix_MultipleTag.py:41
 msgid ""
 "Add a top level tag to state what this feature is. Considered top level tags "
 "are (with derived `disused:`, `abandoned:` and `historic:` variants):"
 msgstr ""
+"Lägg till en grundläggande tagg som specificerar vad det är för objekt eller "
+"företeelse. Följande taggar betraktas som grundläggande (inklusive "
+"varianterna `disused:`, `abandoned:` och `historic:`):"
 
 #: ../plugins/TagFix_MultipleTag2.py:23
 msgid "The relation is missing a `type` tag to define what it represents."
 msgstr ""
+"Relationen saknar en `type`-tagg som specificerar vad den representerar."
 
 #: ../analysers/analyser_merge_bicycle_rental_FR_bm.py:31
 #: ../analysers/analyser_merge_bicycle_rental_FR_IDF.py:31
@@ -3309,7 +3334,7 @@ msgstr ""
 #: ../plugins/TagFix_MultipleTag2.py:125
 #, python-brace-format
 msgid "The tag `{0}` is deprecated in favour of {1}"
-msgstr ""
+msgstr "Taggen `{0}` är föråldrad och avråds från till förmån för {1}"
 
 #: ../analysers/analyser_merge_traffic_signs.py:84
 #, python-brace-format
@@ -3322,6 +3347,8 @@ msgid ""
 "The date entered is not in the expected format described at\n"
 "[Key:start_date](https://wiki.openstreetmap.org/wiki/Key:start_date)"
 msgstr ""
+"Angivet datum är inte i det förväntade formatet, så som det beskrivs i wikin "
+"[Key:start_date](https://wiki.openstreetmap.org/wiki/Key:start_date)"
 
 #: ../plugins/Date.py:84 ../plugins/Date.py:86
 #: ../plugins/Name_ShouldBeHousenumber.py:63 ../plugins/Name_UpperCase.py:70
@@ -3349,6 +3376,8 @@ msgid ""
 "words).\n"
 " This is not expected for the majority of named features."
 msgstr ""
+"Objektet har ett namn med ett eller flera ord helt i stora bokstäver.\n"
+"Detta förväntas normalt inte för en stor majoritet av namngivna objekt."
 
 #: ../plugins/Name_UpperCase.py:44
 msgid ""
@@ -3356,11 +3385,17 @@ msgid ""
 " This is particularly the case for corporate/branded locations as well as "
 "acronyms."
 msgstr ""
+"Även om det är ovanligt, är det möjligt för namn att vara helt i stora "
+"bokstäver.\n"
+"Särskilt för företag, varumärken och akronymer kan det förekomma (men tänk "
+"på att svenska skrivregler förordar att akronymer som uttalas som ord ändå "
+"skrivs med små bokstäver, ex. Ikea)."
 
 #: ../plugins/Number.py:133
 #, python-format, python-brace-format
 msgid "`height={0}` is really tall, consider changing to `ele=*`"
 msgstr ""
+"`height={0}` är väldigt högt, överväg om det egentligen är `ele=*`som avses"
 
 #: ../plugins/TagFix_BadValue.py:35
 msgid ""
@@ -3369,12 +3404,17 @@ msgid ""
 " (lowercase alphanumeric characters with no spaces). It's most likely not an "
 "expected tagging."
 msgstr ""
+"Objektet har taggats med ett värde som inte matchar det typiska formatet för "
+"en tagg med distinkt värdetyp (alfanumeriska tecken, små bokstäver, inga "
+"mellanslag). Det är troligen inte ett förväntat värde eller tagg."
 
 #: ../plugins/TagFix_BadValue.py:37
 msgid ""
 "Check the value of the tag in question and update the tagging to reflect "
 "what this feature is."
 msgstr ""
+"Kontrollera värdet för aktuell tagg, och ändra värdet eller taggen för att "
+"bättre representera vad det är för objekt."
 
 #: ../plugins/TagFix_BadValue.py:39
 msgid ""
@@ -3383,6 +3423,10 @@ msgid ""
 "However, this should probably still conform to the typical format used for "
 "values of the given tag."
 msgstr ""
+"Det är möjligt att en karterare har försökt att tillföra en typ av objekt "
+"som ännu saknar ett bra överenskommet tagg-schema.\n"
+"Trots det borde värden för denna tagg ändå förhålla sig till det givna "
+"förväntade formatet."
 
 #: ../analysers/analyser_merge_fuel_IT.py:49
 msgid "Gas station without tag `ref:mise` or invalid"
@@ -3448,22 +3492,28 @@ msgid ""
 "Make sure the relevant tag value is numeric and in the expected format\n"
 "(with valid units if required)."
 msgstr ""
+"Se till att den aktuella taggens värde är numeriskt och i det förväntade "
+"formatet (med angiven enhet om så krävs)."
 
 #: ../plugins/Number.py:42
 msgid "Suspicious numerical value"
-msgstr ""
+msgstr "Suspekt numeriskt värde"
 
 #: ../plugins/Number.py:44
 msgid ""
 "The feature is tagged with an uncommonly high or low numeric value for\n"
 "the specified tag."
 msgstr ""
+"Objektet har ett ovanligt högt eller lågt numeriskt värde för den angivna "
+"taggen."
 
 #: ../plugins/Number.py:47 ../plugins/Number.py:55
 msgid ""
 "Check that the value is accurate. Consider whether another tag should\n"
 "be used if the value is valid."
 msgstr ""
+"Dubbelkolla att värdet faktiskt är korrekt. Om det är korrekt, fundera på om "
+"det kanske finns en annan tagg som passar bättre."
 
 #: ../plugins/Number.py:136
 #, python-brace-format
@@ -3482,20 +3532,25 @@ msgstr ""
 #: ../analysers/analyser_osmosis_building_overlaps.py:170
 msgid "The area of this feature is too small to possibly be a building."
 msgstr ""
+"Ytan för det här objektet är alldeles för liten för att vara en byggnad."
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:178
 msgid ""
 "It looks like these buildings should be physically joined, but they don't "
 "share nodes to indicate this."
 msgstr ""
+"Det ser ut som att de här byggnaderna borde hänga ihop fysiskt, men de "
+"saknar gemensamma noder som faktiskt kopplar ihop dem."
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:179
 msgid "Connect the buildings by joining nodes where appropriate."
 msgstr ""
+"Anslut byggnaderna till varandra genom att koppla ihop noder där det är "
+"lämpligt."
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:187
 msgid "Merge the building parts together as appropriate."
-msgstr ""
+msgstr "Sammanfoga/slå ihop byggnadsdelar med varandra där det är lämpligt."
 
 #: ../plugins/TagFix_MultipleTag.py:65 ../plugins/TagFix_MultipleTag.py:71
 msgid "Overly permissive access"
@@ -3508,6 +3563,12 @@ msgid ""
 "should be used instead. For further detail, see [the wiki](https://wiki."
 "openstreetmap.org/wiki/Key:access#Transport_mode_restrictions)."
 msgstr ""
+"Taggarna `access=yes` och `access=permissive` definierar ett objekt/"
+"företeelse som fritt tillgängligt för alla transportslag och fordon, men det "
+"är nästan aldrig fallet i verkligheten. Mer specifika taggar är att föredra "
+"och bör användas istället.\n"
+"För mer information, se [wikin om Key:access](https://wiki.openstreetmap.org/"
+"wiki/Key:access#Transport_mode_restrictions)."
 
 #: ../analysers/analyser_merge_parapharmacy_IT.py:32
 #: ../analysers/analyser_merge_pharmacy_IT.py:32
@@ -3532,21 +3593,23 @@ msgstr ""
 #: ../analysers/analyser_osmosis_relation_route_access.py:109
 #, python-brace-format
 msgid "Way access mismatch relation route={0}"
-msgstr ""
+msgstr "Sträckans tillträde (`access`) matchar inte relation route={0}"
 
 #: ../plugins/TagFix_MultipleTag2.py:20
 msgid "The way has a tag `junction=*` but without `highway=*`."
-msgstr ""
+msgstr "Sträckan har taggen `junction=*` men saknar `highway=*`."
 
 #: ../plugins/TagFix_MultipleTag2.py:21
 msgid "The way has a tag `oneway=*` but without `highway=*`."
-msgstr ""
+msgstr "Sträckan har taggen `oneway=*` men saknar `highway=*`."
 
 #: ../plugins/Highway_Lanes.py:62
 msgid ""
 "`psv:lanes=*` is an access restriction tag, while `lanes:psv=*` is\n"
 "the number of lanes."
 msgstr ""
+"Taggen `psv:lanes=*` beskriver legal åtkomst (jmf `access`) , medan "
+"`lanes:psv=*` beskriver antalet körfält."
 
 #: ../plugins/TagFix_Note_Lang_fr.py:94 ../plugins/TagFix_Note_Lang_fr.py:98
 #, python-format, python-brace-format
@@ -3632,16 +3695,20 @@ msgid ""
 "If after review you are sure that it is new data and right for\n"
 "OpenStreetMap, then you can add it."
 msgstr ""
+"Om du efter granskning är säker på att det är ny information och lämpligt "
+"att inkludera i OpenStreetMap, då kan du lägga till den."
 
 #: ../analysers/Analyser_Merge.py:1230
 msgid "Be sure that it does not already exist in another place."
-msgstr ""
+msgstr "Säkerställ att den inte redan finns på en annan plats."
 
 #: ../analysers/Analyser_Merge.py:1235
 msgid ""
 "This is reported from an open data source, without any prior individual\n"
 "verification of this data."
 msgstr ""
+"Det här har förmedlats från en öppen datakälla, utan någon som helst "
+"verifiering av informationen på förhand."
 
 #: ../analysers/Analyser_Merge.py:1392
 msgid ""
@@ -3666,11 +3733,11 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_traffic_signals.py:164
 msgid "A nearby node already has the `highway=traffic_signals` tag."
-msgstr ""
+msgstr "En nod i närheten har redan taggen `highway=traffic_signals`."
 
 #: ../analysers/analyser_osmosis_highway_turn_lanes.py:141
 msgid "Bad lanes number or `turn:lanes` before and after this node"
-msgstr ""
+msgstr "Felaktigt antal körfält eller `turn:lanes` före och efter den här noden"
 
 #: ../plugins/Ele_MontainPass_Peak.py:33
 msgid ""
@@ -3678,6 +3745,9 @@ msgid ""
 "(mountain_pass=yes), has an elevation. This is shown in OSM with tag\n"
 "ele=* in meters."
 msgstr ""
+"Några företeelser, som bergstoppar (`natural=peak`) och bergspass "
+"(`mountain_pass=yes`), har en given höjd över havet. Detta anges i "
+"OpenStreetMap i meter med taggen `ele=*`."
 
 #: ../plugins/TagFix_Brand.py:36
 msgid ""
@@ -3706,6 +3776,10 @@ msgid ""
 "been in construction for more than two years or opening data is\n"
 "exceeded."
 msgstr ""
+"Det finns ingen tagg likt `opening_date`, `check_date`, `open_date`, "
+"`construction:date`, `temporary:date_on`, `date_on`, och objektet har varit "
+"under konstruktion i mer än två år eller så har ett eventuellt öppningsdatum "
+"passerat redan."
 
 #: ../plugins/Covid19.py:23 ../plugins/Covid19.py:100 ../plugins/Covid19.py:191
 #: ../plugins/Covid19.py:269
@@ -3736,12 +3810,17 @@ msgstr ""
 #: ../plugins/TagFix_Brand.py:32
 msgid "This name is very common, is this store part of the brand network?"
 msgstr ""
+"Det här namnet är väldigt vanligt, är den här butiken del av en kedja under "
+"samma varumärke?"
 
 #: ../plugins/TagFix_Brand.py:34
 msgid ""
 "This object has a very common name that probably corresponds to a brand "
 "name. All objects of the same brand should be tagged the same way."
 msgstr ""
+"Det här objektet har ett väldigt vanligt namn som troligen motsvarar ett "
+"namn på ett varumärke. Alla förekomster av samma varumärke bör taggas på "
+"samma sätt."
 
 #: ../analysers/analyser_merge_milestone_FR.py:41
 msgid ""
@@ -3780,7 +3859,7 @@ msgstr ""
 #: ../analysers/analyser_osmosis_boundary_hole.py:66
 #, python-brace-format
 msgid "Hole between administrative boundaries of admin_level {0}"
-msgstr ""
+msgstr "Hålrum mellan administrativa gränser för `admin_level` {0}"
 
 #: ../analysers/analyser_osmosis_relation_public_transport.py:590
 msgid ""
@@ -3813,16 +3892,17 @@ msgstr ""
 
 #: ../plugins/Phone2.py:20
 msgid "Different value of tag contact:* and *"
-msgstr ""
+msgstr "Olika värden för taggarna contact:* och *"
 
 #: ../plugins/Phone2.py:74 ../plugins/Phone2.py:125 ../plugins/Phone2.py:176
 #, python-brace-format
 msgid "Different values of {0} and of {1}"
-msgstr ""
+msgstr "Olika värden för {0} och {1}"
 
 #: ../plugins/TagFix_Maxspeed.py:92
 msgid "Discordant maxspeed and source:maxspeed or maxspeed:type"
 msgstr ""
+"`maxspeed` och `source:maxspeed` eller `maxspeed:type` överensstämmer inte"
 
 #: ../analysers/analyser_merge_defibrillators_FR.py:62
 #: ../analysers/analyser_merge_defibrillators_FR.py:65
@@ -3833,11 +3913,13 @@ msgstr ""
 
 #: ../plugins/TagFix_MultipleTag2.py:26
 msgid "Remove `level` and check if `layer` is needed instead."
-msgstr ""
+msgstr "Ta bort `level`, och undersök om `layer` behövs istället."
 
 #: ../plugins/TagFix_MultipleTag2.py:26
 msgid "The tag `level` should be used for buildings, shops, amenities, etc."
 msgstr ""
+"Taggen `level` beskriver våningsplan och ska användas för byggnader, "
+"affärer, faciliteter, etc."
 
 #: ../plugins/TagRemove_Layer.py:43
 msgid "Waterway/water underground and no tunnel"
@@ -3845,7 +3927,7 @@ msgstr "Vatten/vattendrag under marknivå utan tunnel"
 
 #: ../plugins/TagRemove_Layer.py:45
 msgid "Long Waterway/water underground and no tunnel"
-msgstr ""
+msgstr "Långt vattendrag under marknivå utan tunnel"
 
 #: ../plugins/TagRemove_Layer.py:47
 msgid "Waterway/water above ground and no bridge"
