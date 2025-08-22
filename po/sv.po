@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-21 00:02+0000\n"
+"PO-Revision-Date: 2025-08-22 20:02+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -3931,11 +3931,11 @@ msgstr "Långt vattendrag under marknivå utan tunnel"
 
 #: ../plugins/TagRemove_Layer.py:47
 msgid "Waterway/water above ground and no bridge"
-msgstr ""
+msgstr "Vattendrag/vattenyta över marknivå men utan bro"
 
 #: ../plugins/TagRemove_Layer.py:49
 msgid "Long Waterway/water above ground and no bridge"
-msgstr ""
+msgstr "Långt vattendrag/vattenyta över marknivå men utan bro"
 
 #: ../analysers/analyser_merge_heritage_FR_merimee.py:114
 #, python-brace-format
@@ -4044,23 +4044,23 @@ msgstr "cirkulationsplats"
 
 #: tmp.json:26
 msgid "road bump"
-msgstr ""
+msgstr "fartgupp"
 
 #: tmp.json:27
 msgid "traffic signals"
-msgstr ""
+msgstr "trafiksignaler"
 
 #: tmp.json:28
 msgid "living street"
-msgstr ""
+msgstr "gångfartsområde"
 
 #: tmp.json:29
 msgid "bus stop"
-msgstr ""
+msgstr "busshållplats"
 
 #: tmp.json:30
 msgid "animal crossing"
-msgstr ""
+msgstr "faunapassage"
 
 #: tmp.json:31
 msgid "stop"
@@ -4084,7 +4084,7 @@ msgstr "hastighetsgräns 75"
 
 #: tmp.json:54
 msgid "Tourism office"
-msgstr ""
+msgstr "Turistbyrå"
 
 #: tmp.json:55
 msgid "Church"
@@ -4104,7 +4104,7 @@ msgstr "Museum"
 
 #: tmp.json:59
 msgid "Winery"
-msgstr ""
+msgstr "Vineri"
 
 #: tmp.json:60
 msgid "Viewpoint"
@@ -4112,7 +4112,7 @@ msgstr "Utsiktsplats"
 
 #: tmp.json:61
 msgid "Picnic site"
-msgstr ""
+msgstr "Picnicplats"
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:158
 msgid ""
@@ -4121,6 +4121,10 @@ msgid ""
 "If geometry is correct and there's some vertical difference then make use of "
 "the `layer` tag to indicate this."
 msgstr ""
+"Fixa geometrin så att byggnader inte överlappar, men delar gemensamma noder "
+"om de fysiskt sitter ihop.\n"
+"Om geometrin är korrekt men byggnaderna är på olika höjd, använd taggen "
+"`layer` för att påvisa detta."
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:172
 msgid ""
@@ -4128,6 +4132,9 @@ msgid ""
 "- Correct the tagging if this isn't a building.\n"
 "- Delete the feature if it's invalid."
 msgstr ""
+"- Korrigera geometrin om den är felaktigt ritad.\n"
+"- Korrigera taggarna om detta inte är en byggnad.\n"
+"- Ta bort objektet om det är ogiltigt."
 
 #: ../analysers/analyser_osmosis_natural_swimming-pool.py:90
 msgid ""
@@ -4140,18 +4147,22 @@ msgstr ""
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:676
 #, python-brace-format
 msgid "Multiple numbers \"{numbers}\" in way \"{way}\""
-msgstr ""
+msgstr "Flera nummer \"{numbers}\" för gatan \"{way}\""
 
 #: ../analysers/analyser_osmosis_way_approximate.py:169
 msgid ""
 "Geometry seems to be draw crudely, there is a discrepancy between the\n"
 "drawing and the real way especially in the curve."
 msgstr ""
+"Geometrin ser ut att vara förenklat eller ungefärligt ritad. Det är skillnad "
+"mellan den ritade och den verkliga sträckan, särskilt i kurvan."
 
 #: ../analysers/analyser_osmosis_way_angle.py:94
 #: ../analysers/analyser_osmosis_way_approximate.py:172
 msgid "After checking orthophotos, add nodes or move existing nodes."
 msgstr ""
+"Efter att ha granskat flygbilder, lägg till nya noder eller flytta de "
+"existerande noderna."
 
 #: ../plugins/TagFix_DuplicateValue.py:157
 #, python-brace-format
@@ -4161,12 +4172,12 @@ msgstr "Duplicerade värden {key}={val}"
 #: ../plugins/TagFix_Postcode.py:111
 #, python-brace-format
 msgid "Invalid area postcode {postcode} for country code {country}"
-msgstr ""
+msgstr "Ogiltigt postnummerområde {postcode} för landskod {country}"
 
 #: ../plugins/TagFix_Postcode.py:113
 #, python-brace-format
 msgid "Invalid street level postcode {postcode} for country code {country}"
-msgstr ""
+msgstr "Ogiltigt postnummer på gatunivå {postcode} för landskod {country}"
 
 #: ../plugins/Website.py:58
 #, python-brace-format
@@ -4175,13 +4186,16 @@ msgstr "Dålig URL {k}={v}"
 
 #: ../analysers/analyser_osmosis_orphan_nodes_cluster.py:58
 msgid "Nodes in the vicinity without tag and not part of a way."
-msgstr ""
+msgstr "Noder i närheten utan tagg och inte del av en sträcka."
 
 #: ../analysers/analyser_osmosis_orphan_nodes_cluster.py:60
 msgid ""
 "Find the origin of these nodes. They probably result from a bad import.\n"
 "Contact the contributor submitting the nodes or remove them."
 msgstr ""
+"Hitta orsaken och källan till dessa noder. De kan ha uppstått som ett "
+"resultat av en dålig eller misslyckad import.\n"
+"Ta bort noderna eller kontakta användaren som lade till dem."
 
 #: ../analysers/analyser_osmosis_relation_public_transport.py:599
 msgid "Stop position without platform nor bus stop"
@@ -4192,10 +4206,12 @@ msgid ""
 "A bus `public_transport=stop_position` without close "
 "`public_transport=platform` nor `highway=bus_stop`."
 msgstr ""
+"En `public_transport=stop_position` för buss utan en näraliggande "
+"`public_transport=platform` eller `highway=bus_stop`."
 
 #: tmp.json:53
 msgid "cycling infrastructure"
-msgstr ""
+msgstr "cykelinfrastruktur"
 
 #: ../plugins/Capacity.py:35
 msgid "Invalid capacity value"
@@ -4203,11 +4219,12 @@ msgstr "Ogiltigt värde för kapacitet"
 
 #: ../plugins/Capacity.py:43
 msgid "Specific capacity is greater than total capacity"
-msgstr ""
+msgstr "Angiven specifik kapacitet är större än den totala kapaciteten"
 
 #: ../plugins/Capacity.py:44
 msgid "A capacity:* value is greater than the total capacity."
 msgstr ""
+"Värdet för en `capacity:*`-tagg är större än den angivna totala kapaciteten."
 
 #: ../plugins/Capacity.py:79 ../plugins/Capacity.py:135
 #, python-brace-format
@@ -4217,12 +4234,14 @@ msgstr "\"{0}\"-värdet \"{1}\" är negativt"
 #: ../plugins/Capacity.py:105 ../plugins/Capacity.py:141
 #, python-brace-format
 msgid "\"{0}\" value \"{1}\" is not an integer"
-msgstr ""
+msgstr "\"{0}\"-värdet \"{1}\" är inte ett heltal"
 
 #: ../plugins/Capacity.py:124
 #, python-brace-format
 msgid "Specific \"{0}\" value \"{1}\" should be lower than total capacity {2}"
 msgstr ""
+"Den specifika \"{0}\"-taggens värde \"{1}\" borde vara lägre än den totala "
+"kapaciteten {2}"
 
 #: ../plugins/Administrative_TooManyWays.py:35
 msgid ""
@@ -4253,6 +4272,8 @@ msgid ""
 "The end of a `highway=cycleway` must be connected to the rest of the\n"
 "road network to ensure continuity, especially for routes planner."
 msgstr ""
+"Slutet på en `highway=cycleway` måste vara ansluten till övriga vägnätet för "
+"att säkerställa kontinuitet, särskilt för navigering och ruttplanering."
 
 #: ../analysers/analyser_merge_cemetery_FR.py:31
 msgid "Cemetery not integrated"
@@ -4398,7 +4419,7 @@ msgstr ""
 
 #: tmp.json:32
 msgid "one-directional roads"
-msgstr ""
+msgstr "enkelriktade vägar"
 
 #: ../analysers/analyser_merge_cycle_parking_FR_bm.py:32
 msgid "Bordeaux Metropole bicycle parking not integrated"
@@ -4420,7 +4441,7 @@ msgstr ""
 
 #: ../plugins/TagFix_Brand.py:41
 msgid "Operator can be completed with operator:wikidata"
-msgstr ""
+msgstr "Operatör kan kompletteras med `operator:wikidata`"
 
 #: ../plugins/TagFix_Brand.py:43
 msgid ""
@@ -4428,6 +4449,9 @@ msgid ""
 "additional tags, especially operator:wikidata. All objects with the same "
 "operator should be tagged the same way."
 msgstr ""
+"Namnet på operatören för detta objekt är ofta förknippat med ytterligare "
+"taggar, särskilt `operator:wikidata`. Alla objekt med samma operatör bör "
+"taggas på liknande sätt."
 
 #: ../plugins/TagFix_Brand.py:45
 msgid ""
@@ -4436,6 +4460,11 @@ msgid ""
 "github.com/osmlab/name-suggestion-index/blob/master/CONTRIBUTING.md) which "
 "is used to register common operators."
 msgstr ""
+"Om det här faktiskt är samma operatör, lägg till `operator:wikidata`.\n"
+"Om inte, kolla om du kan hjälpa till att förbättra projektet "
+"[namn-förslag-index](https://github.com/osmlab/name-suggestion-index/blob/"
+"master/CONTRIBUTING.md) som används för att hålla koll på ofta återkommande "
+"operatörer."
 
 #: ../analysers/analyser_merge_defibrillators_FR.py:64
 msgid "Defibrillator integration suggestion"
@@ -4458,6 +4487,13 @@ msgid ""
 "* bicycle: `railway=platform`, `public_transport=platform` or "
 "`highway=pedestrian`."
 msgstr ""
+"Vägen eller gruppen av vägar måste vara ansluten till någon form av "
+"inreseställe:\n"
+"* Väg: `route=ferry`, `man_made=pier`, `aeroway=taxiway|runway|apron`, "
+"`railway=platform` eller "
+"`highway=motorway|motorway_link|trunk|trunk_link|primary|primary_link`.\n"
+"* Cykel: `railway=platform`, `public_transport=platform` eller "
+"`highway=pedestrian`."
 
 #: ../analysers/analyser_merge_natural_FR.py:84
 msgid "Peak not integrated"
@@ -4493,32 +4529,37 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_waterway.py:169
 msgid "Unconnected river or wrong way flow"
-msgstr ""
+msgstr "Flod utan förbindelse eller fel flödesriktning"
 
 #: ../analysers/analyser_osmosis_waterway.py:173
 msgid "Unconnected stream or wrong way flow"
-msgstr ""
+msgstr "Bäck utan förbindelse eller fel flödesriktning"
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:662
 #, python-brace-format
 msgid "No street with name \"{0}\" found around"
-msgstr ""
+msgstr "Ingen gata med namnet \"{0}\" hittas i närheten"
 
 #: ../analysers/analyser_osmosis_waterway.py:156
 msgid "River bank without river"
-msgstr ""
+msgstr "Flod-vattenyta utan vattendrag"
 
 #: ../analysers/analyser_osmosis_waterway.py:158
 msgid ""
 "There is one `natural=water` + `water=river` (or `waterway=riverbank`)\n"
 "but there is no `waterway=river|canal|stream` inside it."
 msgstr ""
+"Det finns en vattenyta taggad som flod `natural=water` + `water=river`, men "
+"det finns inget tillhörande vattendrag `waterway=river|canal|stream` inuti "
+"området."
 
 #: ../analysers/analyser_osmosis_waterway.py:161
 msgid ""
 "After checking, create a \"river\" line inside the river bank polygon or\n"
 "eliminate the river bank polygon."
 msgstr ""
+"Efter granskning, lägg till en sträcka med vattendraget längs med "
+"flodbädden, eller ta bort vattenytan för floden om den är felaktig."
 
 #: ../plugins/Highway_Lanes.py:71
 msgid "Merge lane and other turn lane in a single lane"
@@ -4575,6 +4616,12 @@ msgid ""
 "Parentheses `()` must be used around the condition if the condition itself "
 "contains semicolons `;`, i.e. `value @ (date;date)`."
 msgstr ""
+"Villkorliga restriktioner ska följa formatet `värde @ villkor; värde2 @ "
+"villkor2`.\n"
+"Kombination av flera villkor ska följa formatet `värde @ (villkor1 AND "
+"villkor2)`.\n"
+"Parenteser `()` behöver omge villkoret om villkoret i sig innehåller "
+"semikolon `;`, ex. `värde @ (datum;datum)`."
 
 #: ../plugins/ConditionalRestrictions.py:64
 msgid "Expired conditional"
@@ -4585,27 +4632,31 @@ msgid ""
 "This conditional was only valid up to a date in the past. It can likely be "
 "removed."
 msgstr ""
+"Det här villkoret var bara giltigt fram till ett datum som nu har passerat. "
+"Det kan troligen tas bort."
 
 #: ../plugins/ConditionalRestrictions.py:66
 msgid "Other tags might need to be updated too to reflect the new situation."
 msgstr ""
+"Andra taggar kan också behöva uppdateras för att korrekt återspegla den nya "
+"situationen."
 
 #: ../plugins/ConditionalRestrictions.py:106
 #: ../plugins/ConditionalRestrictions.py:129
 #, python-brace-format
 msgid "Missing `@` in \"{0}\""
-msgstr ""
+msgstr "Saknas ett `@` i \"{0}\""
 
 #: ../plugins/ConditionalRestrictions.py:121
 #, python-brace-format
 msgid "Missing value for the condition in \"{0}\""
-msgstr ""
+msgstr "Värde saknas för villkoret i \"{0}\""
 
 #: ../plugins/ConditionalRestrictions.py:139
 #: ../plugins/ConditionalRestrictions.py:170
 #, python-brace-format
 msgid "Mismatch in the number of parentheses in \"{0}\""
-msgstr ""
+msgstr "Ojämnt antal parenteser i \"{0}\""
 
 #: ../plugins/ConditionalRestrictions.py:183
 #, python-brace-format
