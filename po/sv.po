@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-22 20:02+0000\n"
+"PO-Revision-Date: 2025-08-23 21:01+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -4661,16 +4661,16 @@ msgstr "Ojämnt antal parenteser i \"{0}\""
 #: ../plugins/ConditionalRestrictions.py:183
 #, python-brace-format
 msgid "Missing condition before or after AND combinator in \"{0}\""
-msgstr ""
+msgstr "Villkor saknas före eller efter AND-operatorn i \"{0}\""
 
 #: ../plugins/ConditionalRestrictions.py:234
 #, python-brace-format
 msgid "Condition \"{0}\" in \"{1}\" was only valid until {2}"
-msgstr ""
+msgstr "Villkoret \"{0}\" i \"{1}\" var bara giltigt till och med {2}"
 
 #: ../plugins/ConditionalRestrictions.py:55
 msgid "Improve style of conditional"
-msgstr ""
+msgstr "Formatanpassning av villkor"
 
 #: ../plugins/ConditionalRestrictions.py:56
 msgid ""
@@ -4682,17 +4682,25 @@ msgid ""
 "For example, use `no @ (weight > 5 AND wet)` rather than `no@weight>5 and "
 "wet`."
 msgstr ""
+"Även om denna är giltig, så rekommenderas att formatera villkorliga "
+"restriktioner med:\n"
+"- mellanslag runt ` @ `;\n"
+"- versaliserad `AND` (i kombinerade villkor);\n"
+"- parenteser runt alla utom de allra enklaste villkoren.\n"
+"Detta hjälper till att undvika fel och förbättrar läsbarheten.\n"
+"Som exempel; skriv `no @ (weight > 5 AND wet)` istället för `no@weight>5 and "
+"wet`."
 
 #: ../plugins/ConditionalRestrictions.py:147
 #: ../plugins/ConditionalRestrictions.py:166
 #, python-brace-format
 msgid "Missing condition, `@` or parentheses in \"{0}\""
-msgstr ""
+msgstr "Saknar villkor, `@`eller parentes i \"{0}\""
 
 #: ../plugins/ConditionalRestrictions.py:240
 #, python-brace-format
 msgid "Add parentheses around the condition(s) in \"{0}\""
-msgstr ""
+msgstr "Lägg till parenteser runt villkoret/-en i \"{0}\""
 
 #: ../plugins/Name_Dictionary.py:35
 msgid "Probably missing a capital, accent or typo."
@@ -4705,6 +4713,7 @@ msgstr "Misstänksamt värde"
 #: ../plugins/Number.py:53
 msgid "The tag expects a positive, round number without unit."
 msgstr ""
+"Taggen förväntar sig ett värde med en positiv, avrundad siffra utan enhet."
 
 #: ../plugins/Number.py:59
 msgid "Unknown unit"
@@ -4712,17 +4721,19 @@ msgstr "Okänd enhet"
 
 #: ../plugins/Number.py:61 ../plugins/Number.py:69
 msgid "The tag uses an unexpected unit."
-msgstr ""
+msgstr "Taggen har en oväntad enhet."
 
 #: ../plugins/Number.py:63 ../plugins/Number.py:71
 msgid ""
 "Check that you have used the correct unit and a supported abbreviation of "
 "the unit."
 msgstr ""
+"Kontrollera att det är en korrekt enhet för taggen, och att "
+"enhetsförkortningen stöds."
 
 #: ../plugins/Highway_Sides.py:31
 msgid "Conflicting tags for sides of the way"
-msgstr ""
+msgstr "Konflikt mellan taggar för vägens sidor"
 
 #: ../plugins/Highway_Sides.py:33
 msgid ""
@@ -4730,11 +4741,14 @@ msgid ""
 "side specification, or a tag with `:right` or `:left` conflicts with the tag "
 "with `:both`."
 msgstr ""
+"En tagg med `:right`, `:left` eller `:both` står i konflikt med samma tagg "
+"utan angiven sida, eller att en tagg med `:right`/`:left` står i konflikt "
+"med en tagg med`:both`."
 
 #: ../plugins/Highway_Sides.py:66
 #, python-brace-format
 msgid "Conflicting values of \"{0}\" and \"{1}\""
-msgstr ""
+msgstr "Motstridiga värden för \"{0}\" och \"{1}\""
 
 #: ../plugins/Name_Multiple.py:37
 msgid ""
@@ -4743,6 +4757,9 @@ msgid ""
 "two\n"
 "ways and the concatenation of the names of the streets."
 msgstr ""
+"Taggen `name=*` innehåller flera namn, separerade av \";\", \"/\", \"\\\" "
+"eller \"+\". Felet uppstod troligen efter att två vägar slagits ihop och "
+"gatunamnen konkatenerats."
 
 #: ../plugins/Name_Multiple.py:41
 msgid ""
@@ -4815,12 +4832,15 @@ msgid ""
 "conditions of a conditional restriction use the same syntax as the key "
 "`opening_hours`."
 msgstr ""
+"Ett datum/tidsbaserat villkor är ogiltigt eller felaktigt formaterat. "
+"Tidsbaserade villkor i villkorliga restriktioner använder samma format som "
+"taggen `opening_hours`."
 
 #: ../plugins/ConditionalRestrictions.py:133
 #: ../plugins/ConditionalRestrictions.py:157
 #, python-brace-format
 msgid "Unexpected \"{0}\" before or after parentheses in \"{1}\""
-msgstr ""
+msgstr "Oväntat \"{0}\" före eller efter parentes i \"{1}\""
 
 #: ../plugins/ConditionalRestrictions.py:205
 #, python-brace-format
@@ -4835,7 +4855,7 @@ msgstr ""
 #: ../plugins/ConditionalRestrictions.py:213
 #, python-brace-format
 msgid "Unexpected <, = or > in \"{0}\""
-msgstr ""
+msgstr "Oväntat <, = eller > i \"{0}\""
 
 #: ../plugins/Highway_Lanes.py:49
 msgid "[Valid values](https://wiki.openstreetmap.org/wiki/Key:turn#Values)"
@@ -4875,7 +4895,7 @@ msgstr ""
 
 #: ../plugins/Name_ShouldBeHousenumber.py:31
 msgid "Name with only numbers"
-msgstr ""
+msgstr "Namn med endast siffror"
 
 #: ../plugins/Name_ShouldBeHousenumber.py:33
 msgid ""
@@ -4883,6 +4903,10 @@ msgid ""
 "and does not appear to have a main feature key.\n"
 "For the majority of buildings this should be tagged with `addr:housenumber`."
 msgstr ""
+"Byggnaden är taggad med ett namn bestående endast av siffror och verkar inte "
+"ha en tagg för huvudsaklig funktion.\n"
+"För en stor majoritet av byggnader bör detta istället taggas med "
+"`addr:housenumber`."
 
 #: ../plugins/Name_ShouldBeHousenumber.py:37
 msgid ""
@@ -4890,6 +4914,9 @@ msgid ""
 "`addr:housenumber` + `addr:street` (or other `addr:*`), alternatively a\n"
 "relation can be used."
 msgstr ""
+"Om innehållet i `name` faktiskt är husnumret, borde det istället taggas som "
+"`addr:housenumber`, tillsammans med `addr:street` eller annan `addr:*`. \n"
+"Alternativt kan en relation användas."
 
 #: ../plugins/Name_ShouldBeHousenumber.py:41
 msgid ""
@@ -4905,6 +4932,17 @@ msgid ""
 "of house numbers: in some regions, a separate node inside the building is\n"
 "preferred over a tag on the building itself."
 msgstr ""
+"Även om det är ovanligt är det möjligt att ett namn består av bara siffror. "
+"Det kan ibland vara fallet för vissa varumärken och faciliteter.\n"
+"\n"
+"Därutöver kan det vara lokalt numrerade lägenhetsblock eller hus, alltså "
+"inte officiella adresser utan ex. \"camping stuga #3\"). I dessa fall är "
+"oftast `ref` en mer lämplig tagg.\n"
+"\n"
+"Kolla alltid med communityt när det gäller husnummer, om det finns "
+"rekommendationer eller en föredragen stil för taggning. I vissa regioner kan "
+"en separat nod inuti byggnaden vara att föredra framför att tagga själva "
+"byggnadspolygonen."
 
 #: ../analysers/analyser_merge_power_line_FR.py:32
 msgid "Power line not integrated"
@@ -4927,12 +4965,19 @@ msgid ""
 "The tag `name` should have the value `name:right / name:left` or `name:"
 "left / name:right`."
 msgstr ""
+"Det här är en gata med olika namn på vardera sida, utifrån taggarna "
+"`name:left` och `name:right`.\n"
+"Dessa namn stämmer inte med värdet för `name`. Taggen name bör ha det "
+"kombinerade värdet av namnen för respektive sida separerade med \"/\", ex. "
+"`name:right / name:left` eller `name:left / name:right`."
 
 #: ../plugins/Name_Multiple.py:56
 msgid ""
 "The warning also shows up if `name:left` or `name:right` is spelled "
 "incorrectly."
 msgstr ""
+"Den här varningen visas också om något av namnen `name` eller `:left / "
+":right`är felstavade."
 
 #: ../plugins/TagFix_Access.py:54
 msgid "Uncommon access value"
@@ -4942,7 +4987,7 @@ msgstr "Ovanligt värde för tillträde"
 #, python-brace-format
 msgid ""
 "The value of the access tag is not one of the common access values: `{0}`."
-msgstr ""
+msgstr "Värdet för taggen `access` är inte ett av de vanliga värdena : `{0}`."
 
 #: ../plugins/TagFix_Access.py:57
 msgid ""
