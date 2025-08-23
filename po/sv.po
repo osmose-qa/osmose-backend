@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-23 21:01+0000\n"
+"PO-Revision-Date: 2025-08-24 14:51+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -5005,6 +5005,9 @@ msgid ""
 "Consider replacing it with a more specific tag listing the transport mode "
 "first, for example `access=no` + `foot=yes`."
 msgstr ""
+"Värdet i access-taggen är ett transportslag (ex. `access=foot`). Överväg att "
+"ersätta den med mer specifika taggar som specificerar transportslaget först, "
+"exempelvis `access=no` + `foot=yes`."
 
 #: ../plugins/TagFix_Access.py:61
 msgid ""
@@ -5013,6 +5016,10 @@ msgid ""
 "and/or conditional access tags, or when transport modes are mixed with "
 "regular access values."
 msgstr ""
+"Säkerställ att tillträde förblir desamma och inte hamnar i konflikt med "
+"andra taggar. Det kan hända särskilt om tillträdestaggar har kombinerats med "
+"riktningsspecifika och/eller villkorliga restriktioner, eller om "
+"transportslag och vanliga tillträdestaggar har blandats."
 
 #: ../plugins/TagFix_Access.py:112
 #, python-brace-format
@@ -5020,11 +5027,13 @@ msgid ""
 "Access value \"{0}\" for key \"{1}\" is a transport mode. Consider using "
 "\"{2}\" instead"
 msgstr ""
+"Tillträdesvärdet \"{0}\" för nyckel \"{1}\" är ett transportslag. Överväg "
+"att använda \"{2}\" istället."
 
 #: ../plugins/TagFix_Access.py:118
 #, python-brace-format
 msgid "Unknown access value \"{0}\" for key \"{1}\""
-msgstr ""
+msgstr "Okänt tillträdesvärde \"{0}\" för nyckel \"{1}\""
 
 #: ../plugins/TagFix_BadValue.py:43
 msgid "Unspecific value"
@@ -5068,7 +5077,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:442
 msgid "Unconnected drive-through"
-msgstr ""
+msgstr "Ej ansluten drive-through"
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:444
 msgid ""
@@ -5076,10 +5085,14 @@ msgid ""
 "path was drawn, including i.e. turning circles and covered areas.\n"
 "Ensure that `service=drive-through` is the correct tag."
 msgstr ""
+"En drive-through (genomfarts-drive-in) är väldigt sällan återvändsgata. "
+"Kontrollera att hela sträckan för drive-through-gatan har ritats, inkl. "
+"vändplatser eller under tak.\n"
+"Säkerställ att `service=drive-through` är korrekt tagg för denna gata."
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:447
 msgid "Review the type of the service road or draw the local road network."
-msgstr ""
+msgstr "Granska typen av serviceväg eller kartera det lokala vägnätet."
 
 #: ../analysers/analyser_osmosis_roundabout.py:107
 msgid "Roundabout without right of way"
