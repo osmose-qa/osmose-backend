@@ -72,8 +72,8 @@ usable_confusables = confusables.collect{ |g, v|
 
 
 def quote(s)
-  s = s == "'" ? "\\'" : s
-  "u'#{s}'"
+  s = s == '"' ? "\\\"" : s
+  "\"#{s}\""
 end
 
 puts "#! /usr/bin/python"
@@ -81,7 +81,7 @@ puts "# -*- coding: UTF-8"
 
 puts "confusables_fix = {"
 puts usable_confusables.collect{ |k, v|
-  "  #{quote(k)}:{" + v.collect{ |vv, script| "'#{script}':#{quote(vv)}" }.join(',') + "}"
+  "    #{quote(k)}: {" + v.collect{ |vv, script| "\"#{script}\": #{quote(vv)}" }.join(', ') + "}"
 }.join(",\n")
 puts "}"
 
@@ -91,7 +91,7 @@ puts confusables.select{ |g, v|
   usable_confusables_key.include?(g)
 }.collect{ |g, v|
   v.collect{ |vv|
-    "  #{quote(vv)}:#{quote(g)}"
+    "    #{quote(vv)}: #{quote(g)}"
   }
 }.flatten.join(",\n")
 puts "}"
