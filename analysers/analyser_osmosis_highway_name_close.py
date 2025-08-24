@@ -79,7 +79,7 @@ class Analyser_Osmosis_Highway_Name_Close(Analyser_Osmosis):
     def __init__(self, config, logger = None):
         Analyser_Osmosis.__init__(self, config, logger)
 
-        # Check langues for country are writen with alphabets
+        # Check that languages for countries are written with alphabets
         self.alphabet = 'language' in config.options and languages.languages_are_alphabets(config.options['language'])
 
         if self.alphabet:
