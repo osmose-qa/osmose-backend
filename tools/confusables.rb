@@ -91,7 +91,14 @@ puts confusables.select{ |g, v|
   usable_confusables_key.include?(g)
 }.collect{ |g, v|
   v.collect{ |vv|
+  # Generate invalid pyhton code
+  if vv == "\u2028"
+    "    \"\\u2028\": #{quote(g)}"
+  elsif vv == "\u2029"
+    "    \"\\u2029\": #{quote(g)}"
+  else
     "    #{quote(vv)}: #{quote(g)}"
+  end
   }
 }.flatten.join(",\n")
 puts "}"
