@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-24 14:51+0000\n"
+"PO-Revision-Date: 2025-08-25 22:01+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -5128,43 +5128,55 @@ msgid ""
 "a\n"
 "role."
 msgstr ""
+"Ett objekt utan definierande taggar (inga andra taggar än `source`, "
+"`created_by`, `area` eller `name`) och inte heller del av en relation med en "
+"given roll."
 
 #: ../plugins/Name_PoorlyWrittenWayType.py:49
 msgid "Badly written way name"
-msgstr ""
+msgstr "Felformaterat gatunamn"
 
 #: ../plugins/Name_PoorlyWrittenWayType.py:51
 msgid ""
 "An abbreviation is present (e.g. Rd instead of Road) or the first letter of "
 "the name is lower case."
 msgstr ""
+"En förkortning hittades (ex. 'Norrv.' istället för 'Norrvägen') eller så är "
+"första bokstaven inte versal."
 
 #: ../plugins/Name_PoorlyWrittenWayType.py:53
 msgid ""
 "Write the name without any abbreviations and make sure the first letter is "
 "upper case."
 msgstr ""
+"Skriv ut gatunamnet utan några förkortningar och se till att första "
+"bokstaven är en versal."
 
 #: ../analysers/analyser_osmosis_indoor.py:193 ../plugins/indoor.py:23
 #: ../plugins/indoor.py:120 ../plugins/indoor.py:206
 msgid "This indoor room should have a door"
-msgstr ""
+msgstr "Det här rummet inomhus borde ha en dörr"
 
 #: ../analysers/analyser_osmosis_indoor.py:195
 msgid ""
 "Find out where the entrances of the room are and add them (with a `door=*` "
 "tag) so we can actually enter this indoor room."
 msgstr ""
+"Ta reda på var ingångarna till rummet är och lägg till dem (med taggen "
+"`door=*`) så kartan kan visa hur en faktiskt tar sig in i rummet."
 
 #: ../analysers/analyser_osmosis_indoor.py:197
 msgid "This indoor feature is not reachable"
-msgstr ""
+msgstr "Det här inomhusobjektet går inte att nå"
 
 #: ../analysers/analyser_osmosis_indoor.py:199
 msgid ""
 "Each indoor feature should be connected to another indoor feature or to some "
 "footpath so people can actually go to them."
 msgstr ""
+"Alla företeelser, faciliteter etc inomhus bör vara anslutna till andra "
+"inomhusobjekt eller till en gångväg eller liknande, så att människor vet hur "
+"de ska ta sig fram till dem."
 
 #: ../analysers/analyser_osmosis_powerline.py:689
 msgid ""
@@ -5172,25 +5184,29 @@ msgid ""
 "Add a transformer using `power=transformer` (standalone transformers) or "
 "`power=pole + transformer=*` (pole mounted transformers)."
 msgstr ""
+"Kontrollera att spänningen faktiskt är olika.\n"
+"I så fall, lägg till en transformator med `power=transformer` (fristående "
+"transformatorstation) eller `power=pole` + `transformer=*` (transformator "
+"monterad på ledningsstolpe)."
 
 #: ../plugins/indoor.py:20 ../plugins/indoor.py:54 ../plugins/indoor.py:111
 msgid "This indoor feature should be a closed and valid polygon"
-msgstr ""
+msgstr "Det här inomhusobjektet borde vara en sluten och giltig polygon"
 
 #: ../plugins/indoor.py:21 ../plugins/indoor.py:135
 msgid "This indoor feature should have a level"
-msgstr ""
+msgstr "Det här inomhusobjektet borde ha ett angivet våningsplan `level`"
 
 #: ../plugins/indoor.py:22 ../plugins/indoor.py:157
 msgid "This indoor shop should probably be inside a room"
-msgstr ""
+msgstr "Denna inomhusbutik borde troligen vara inuti ett rum"
 
 #: ../analysers/analyser_osmosis_tag_typo.py:162
 #: ../analysers/analyser_osmosis_tag_typo.py:171
 #: ../analysers/analyser_osmosis_tag_typo.py:180
 #, python-brace-format
 msgid "`{0}` is more common than `{1}`, is `{1}` a typo?"
-msgstr ""
+msgstr "`{0}` är mycket vanligare än `{1}`, är `{1}` ett stavfel?"
 
 #: ../plugins/Colour.py:21
 msgid "Bad colour name"
@@ -5199,7 +5215,7 @@ msgstr "Dåligt färgnamn"
 #: ../plugins/Colour.py:233 ../plugins/Colour.py:466 ../plugins/Colour.py:671
 #, python-brace-format
 msgid "Unknown or invalid colour in tag ''{0}''"
-msgstr ""
+msgstr "Okänd eller ogiltig färg i taggen \"{0}\""
 
 #: ../plugins/TagFix_DuplicateValue.py:40
 msgid ""
@@ -5208,11 +5224,14 @@ msgid ""
 "Ensure the interpretation of the tag does not change when you delete one "
 "item."
 msgstr ""
+"I vissa fall kan samtliga värden behövas.\n"
+"\n"
+"Se till att tolkningen av taggen inte förändras när du tar bort ett värde."
 
 #: ../plugins/TagFix_DuplicateValue.py:169
 #, python-brace-format
 msgid "Similar values {v1} and {v2} in {key}={val}"
-msgstr ""
+msgstr "Liknande värden {v1} och {v2}, i {key}={val}"
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:175
 msgid "Inconsistent `motor_vehicle` values."
@@ -5220,7 +5239,7 @@ msgstr "Inkonsekventa värden för `motor_vehicle`."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:179
 msgid "Inconsistent access values between barrier and highway."
-msgstr ""
+msgstr "Inkonsekventa `access`-värden mellan väghinder och själva vägen."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:181
 #: ../analysers/analyser_osmosis_highway_area_access.py:202
@@ -5228,35 +5247,42 @@ msgid ""
 "Sometimes a barrier can exist on an (otherwise uninterrupted) highway to "
 "prevent vehicles from using it for purposes other than destination traffic."
 msgstr ""
+"Ibland kan ett väghinder finnas på en (annars obehindrad) väg för att "
+"förhindra fordon att använda vägen för tex. genomfart eller andra obehöriga "
+"syften."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:183
 msgid "Copy the appropriate access tag to the barrier node."
-msgstr ""
+msgstr "Kopiera lämplig tillträdestagg över till noden för väghindret."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:225
 #: ../analysers/analyser_osmosis_highway_area_access.py:230
 #, python-brace-format
 msgid "Inconsistent {0} access: '{1}' on highway, not set on barrier"
 msgstr ""
+"Inkonsekvent tillträde för {0} : vägen angiven som '{1}', ingenting angivet "
+"på väghindret"
 
 #: ../plugins/notprefix.py:20 ../plugins/notprefix.py:75
 #: ../plugins/notprefix.py:132 ../plugins/notprefix.py:187
 #, python-brace-format
 msgid "`{0}` together with `{1}` and equal values"
-msgstr ""
+msgstr "`{0}` tillsammans med `{1}` och likvärdiga värden"
 
 #: ../analysers/analyser_osmosis_relation_cyclic.py:74
 msgid "Cyclic relation"
-msgstr ""
+msgstr "Cyklisk relation"
 
 #: ../analysers/analyser_osmosis_relation_cyclic.py:76
 msgid ""
 "A relation whose members (eventually) refer back to itself is rarely correct."
 msgstr ""
+"En relation vars medlemmar (förr eller senare) hänvisar tillbaka till sig "
+"själv, är sällan korrekt."
 
 #: ../analysers/analyser_osmosis_building_in_polygon.py:69
 msgid "Building on agricultural land"
-msgstr ""
+msgstr "Byggnad på jordbruksmark"
 
 #: ../analysers/analyser_osmosis_building_in_polygon.py:71
 msgid ""
@@ -5264,6 +5290,9 @@ msgid ""
 "on the farmyard,\n"
 "not on the farmland where the crops grow."
 msgstr ""
+"Byggnader inom lantbruk (boningshus, ladugård, stall, maskinhall etc...) "
+"ligger vanligen inom ett särskilt gårdsområde, inte på själva "
+"jordbruksmarken där odling, bete mm bedrivs."
 
 #: ../analysers/analyser_osmosis_building_in_polygon.py:74
 msgid ""
@@ -5276,6 +5305,14 @@ msgid ""
 "For areas dedicated to greenhouse horticulture, use "
 "`landuse=greenhouse_horticulture`."
 msgstr ""
+"Ändra eller dela upp landanvändningen, så att lantbruksbyggnader och "
+"tillhörande gårdsområde/gårdsplan ligger inom ett område med "
+"`landuse=farmyard`, och att bara själva jordbruksmarken anges som "
+"`landuse=farmland` (eller en mer specifik typ av odlingsmark, så som "
+"`landuse=vineyard` eller `landuse=orchard`).\n"
+"\n"
+"För områden specialiserade på växthusodling, använd "
+"`landuse=greenhouse_horticulture`."
 
 #: ../analysers/analyser_osmosis_building_in_polygon.py:88
 #, python-brace-format
@@ -5288,15 +5325,19 @@ msgid ""
 "Sometimes very small areas of this type may exist. In this case, please mark "
 "this issue as a false positive."
 msgstr ""
+"\n"
+"Ibland kan väldigt små områden av den här typen finnas och vara befogat. Om "
+"det är fallet här, markera felet som en falsk positiv."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:72
 msgid "Natural area very small"
-msgstr ""
+msgstr "Naturområde väldigt litet"
 
 #: ../analysers/analyser_osmosis_polygon_small.py:74
 msgid ""
 "A natural object of this type is typically larger than the current object."
 msgstr ""
+"En naturlig företeelse av den här typen är normalt större än detta objektet."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:76
 #: ../analysers/analyser_osmosis_polygon_small.py:83
@@ -5304,6 +5345,8 @@ msgid ""
 "A single tree should be tagged as `natural=tree` rather than "
 "`landuse=forest` or `natural=wood`."
 msgstr ""
+"Ett enskilt träd bör taggas som `natural=tree`, snarare än som "
+"`landuse=forest` eller `natural=wood`."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:79
 #: ../analysers/analyser_osmosis_polygon_small.py:97
@@ -5315,6 +5358,7 @@ msgstr "Landanvändning väldigt liten"
 #: ../analysers/analyser_osmosis_polygon_small.py:99
 msgid "Landuses of this type are typically larger than the current object."
 msgstr ""
+"Landanvändning av den här typen är normalt större än det aktuella objektet."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:86
 msgid "Small farm"
@@ -5330,6 +5374,13 @@ msgid ""
 "- `{0}`\n"
 "- etcetera."
 msgstr ""
+"Lantbruksmark som används för bete, ladugårdar, växthus etc. bör inte taggas "
+"som`landuse=farmland`.\n"
+"Taggen `landuse=farmland` är menad för åkermark/odlingsmark, där grödor "
+"odlas.\n"
+"Annan landanvändning skulle kunna taggas med:\n"
+"- `{0}`\n"
+"- och så vidare."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:101
 #, python-brace-format
@@ -5342,7 +5393,7 @@ msgstr ""
 #: ../analysers/analyser_osmosis_polygon_small.py:136
 #, python-brace-format
 msgid "{0} with an area of {1} m2"
-msgstr ""
+msgstr "{0} med en yta på {1} m2"
 
 #: ../plugins/Highway_Parking_Lane.py:42 ../plugins/Highway_Parking_Lane.py:49
 #: ../plugins/Highway_Parking_Lane.py:53 ../plugins/Highway_Parking_Lane.py:60
@@ -5352,15 +5403,19 @@ msgid ""
 "Consider switching to the new [street parking tagging scheme](\"https://wiki."
 "openstreetmap.org/wiki/Street_parking)."
 msgstr ""
+"Överväg att byta till det nya [taggnings-schemat för gatuparkering](\"https"
+"://wiki.openstreetmap.org/wiki/Street_parking)."
 
 #: ../plugins/Highway_Parking_Lane.py:91
 msgid "Bad parking:[side]"
-msgstr ""
+msgstr "Felaktig parking:[side]"
 
 #: ../plugins/Highway_Parking_Lane.py:93
 msgid ""
 "The side was not recognized, expected was either `left`, `right` or `both`."
 msgstr ""
+"Angiven sida känns inte igen, förväntade värden är `left`, `right` eller "
+"`both`."
 
 #: ../plugins/Highway_Parking_Lane.py:95
 msgid "Use `parking:left`, `parking:right` or `parking:both`."
