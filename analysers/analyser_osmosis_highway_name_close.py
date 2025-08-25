@@ -27,8 +27,8 @@ from modules import languages
 sql10_regex = """regexp_replace(regexp_replace(regexp_replace(regexp_replace(regexp_replace(regexp_replace(regexp_replace(regexp_replace({0},
 '([0-9]+-[а-я]{{2}})( |$)', '_', 'g'), -- Bulgaria
 '[-\\[\\]\\{{\\}}\\(\\)\"\\\\/]', '', 'g'),
-'(1st|2nd|3rd|[04-9]th)( |$)', '_', 'g'),
-'(1ra|2da|3ra|4ta|5ta|6ta|7ma|8va|9na|0ma|1er|2do|3ro|4to|5to|6to|7mo|8vo|9no|0mo)( |$)', '_', 'g'),
+'[0-9]*(1st|2nd|3rd|[04-9]th)( |$)', '_', 'g'),
+'[0-9]*(1ra|2da|3ra|4ta|5ta|6ta|7ma|8va|9na|0ma|1er|2do|3ro|4to|5to|6to|7mo|8vo|9no|0mo)( |$)', '_', 'g'), -- Spanish
 '[/.0-9\u0660-\u0669\u06F0-\u06F9\u2160-\u2188]', ' ', 'g'), -- Numbers, Arabic numbers (u06**), Roman numbers (u21**)
 '(^| )[a-zA-Z](?= |$)', '\\1', 'g'),
 '(^| )[IVXLDCM]+(?= |$)', '\\1', 'g'),
@@ -79,7 +79,7 @@ class Analyser_Osmosis_Highway_Name_Close(Analyser_Osmosis):
     def __init__(self, config, logger = None):
         Analyser_Osmosis.__init__(self, config, logger)
 
-        # Check langues for country are writen with alphabets
+        # Check that languages for countries are written with alphabets
         self.alphabet = 'language' in config.options and languages.languages_are_alphabets(config.options['language'])
 
         if self.alphabet:
