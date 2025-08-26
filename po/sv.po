@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-25 22:01+0000\n"
+"PO-Revision-Date: 2025-08-26 23:02+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -5428,16 +5428,21 @@ msgid ""
 "you should use `parking:both:maxstay=2 hours`, and not `parking:maxstay=2 "
 "hours`."
 msgstr ""
+"För att ange att det inte går att parkera på gatan mer än 2 timmar (för båda "
+"sidor), använd `parking:both:maxstay=2 hours`, och inte `parking:maxstay=2 "
+"hours`."
 
 #: ../plugins/Highway_Parking_Lane.py:101
 msgid "parking:[side]:* without parking:[side] value"
-msgstr ""
+msgstr "parking:[side]:* utan parking:[side]"
 
 #: ../plugins/Highway_Parking_Lane.py:103
 msgid ""
 "A parking tag adding details, such as `parking:[side]:fee`, is present "
 "without primary `parking:[side]` key."
 msgstr ""
+"En parkeringstagg med fler detaljer, t.ex. `parking:[side]:fee`, finns utan "
+"att den primära taggen `parking:[side]` har angivits."
 
 #: ../plugins/Highway_Parking_Lane.py:107
 msgid ""
@@ -5447,6 +5452,10 @@ msgid ""
 "However, `parking:both` already covers both sides of a street, so the latter "
 "are redundant."
 msgstr ""
+"Taggen `parking:both` (möjligen med suffix, som `:maxstay`) används "
+"tillsammans med `parking:left`och/eller `parking:right` (med samma suffix).\n"
+"Dock så täcker `parking:both` redan båda sidor av gatan, så taggar för "
+"specifika sidor är överflödiga."
 
 #: ../plugins/Highway_Parking_Lane.py:111
 msgid "Bad value for parking:[side]=*"
@@ -5481,6 +5490,8 @@ msgstr ""
 #: ../plugins/TagWatchFrViPofm.py:71
 msgid "Simple and frequent errors, can be updated by anyone on the wiki."
 msgstr ""
+"Enkla och ofta förekommande fel kan läggas till och uppdateras av vem som "
+"helst på wikin."
 
 #: ../plugins/TagFix_MultipleTag2.py:25 ../plugins/TagFix_MultipleTag2.py:60
 #: ../plugins/TagFix_MultipleTag2.py:294 ../plugins/TagFix_MultipleTag2.py:604
@@ -5489,6 +5500,8 @@ msgid ""
 "{0} together with {1}, usually {1} is located underneath the {2}. Tag the "
 "{3} as a separate object."
 msgstr ""
+"{0} tillsammans med {1}, vanligtvis är {1} lokaliserad under {2}. Tagga {3} "
+"som ett separat objekt."
 
 #: ../plugins/indoor.py:24 ../plugins/indoor.py:67 ../plugins/indoor.py:172
 #: ../plugins/indoor.py:218
@@ -5512,13 +5525,15 @@ msgstr ""
 #: ../plugins/Colour.py:387 ../plugins/Colour.py:537 ../plugins/Colour.py:603
 #, python-brace-format
 msgid "{0} colour code should start with '#' followed by 3 or 6 hex digits"
-msgstr ""
+msgstr "{0} färgkod borde starta med '#' följt av 3 eller 6 hexadecimal-tecken"
 
 #: ../plugins/TagFix_MultipleTag2.py:34
 msgid ""
 "Missing `maxheight=*` or `maxheight:physical=*` for a tunnel or a way under "
 "a bridge."
 msgstr ""
+"En tunnel eller väg under bro saknar `maxheight=*` eller "
+"`maxheight:physical=*`."
 
 #: ../plugins/TagFix_MultipleTag2.py:36
 msgid "suspicious tag combination"
@@ -5531,13 +5546,15 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:185
 msgid "Barrier blocking major highway"
-msgstr ""
+msgstr "Hinder blockerar större väg"
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:187
 msgid ""
 "A barrier is blocking a major highway. Typically, major highways (`tertiary` "
 "and above) are meant for passing traffic."
 msgstr ""
+"Ett väghinder blockerar en större väg. Vanligtvis är större vägar (`tertiary`"
+" och uppåt) avsedda för obehindrad trafik."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:189
 msgid ""
@@ -5548,6 +5565,12 @@ msgid ""
 "If there is a barrier, check if it has the appropriate (conditional) access "
 "keys."
 msgstr ""
+"Kontrollera om det faktiskt finns ett hinder på den större vägen (och inte "
+"t.ex. på enbart en anslutande mindre väg).\n"
+"Om det inte finns ett hinder, ta bort det, eller flytta hindret till den "
+"lämpliga anslutande vägen.\n"
+"Om det faktiskt är ett hinder på den större vägen, se till att det har "
+"korrekta (villkorliga) tillträdestaggar."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:196
 msgid "Barrier blocking highway"
@@ -5560,6 +5583,10 @@ msgid ""
 "In the current situation, traffic coming from any direction has to go "
 "through the barrier, to reach any of the destination ways."
 msgstr ""
+"Ett hinder blockerar själva korsningen mellan flera vägar. Antagligen är "
+"hindret menat att bara vara på en av vägarna. I nuvarande läge måste trafik "
+"från samtliga vägar in i korsningen passera hindret oavsett vilken väg ut ur "
+"korsningen trafiken ska ta."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:204
 msgid ""
@@ -5570,6 +5597,12 @@ msgid ""
 "If there is a barrier, check if it has the appropriate (conditional) access "
 "keys."
 msgstr ""
+"Kontrollera om det faktiskt finns ett väghinder i själva korsningen (och "
+"inte t.ex. på enbart en anslutande väg).\n"
+"Om det inte finns ett hinder, ta bort det, eller flytta hindret till den "
+"lämpliga anslutande vägen.\n"
+"Om det faktiskt är ett hinder i korsningen, se till att det har lämpliga "
+"(villkorliga) tillträdestaggar."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:192
 msgid ""
@@ -5597,7 +5630,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_parking_highway.py:120
 msgid "Inconsistent access of parking"
-msgstr ""
+msgstr "Motstridiga tillträden för parkering"
 
 #: ../analysers/analyser_osmosis_parking_highway.py:121
 msgid ""
@@ -5606,21 +5639,27 @@ msgid ""
 "As a result, this public parking space can only be reached via limited-"
 "access roads."
 msgstr ""
+"`access`-taggen för parkeringen stämmer inte med `access`-taggen för vägarna "
+"till eller inom parkeringen.\n"
+"Därmed kan denna allmänna parkering bara nås via vägar med begränsande "
+"restriktioner."
 
 #: ../analysers/analyser_osmosis_parking_highway.py:123
 msgid ""
 "Check which access restrictions are correct and apply them accordingly to "
 "the highways and the parking."
 msgstr ""
+"Undersök vilka tillträdesrestriktioner som är korrekta, och tillämpa dem "
+"likvärdigt på vägen och parkeringen."
 
 #: ../analysers/analyser_osmosis_parking_highway.py:124
 msgid "A parking may be partially publicly accessible and partially private."
-msgstr ""
+msgstr "En parkering kan vara delvis allmänt tillgänglig och delvis privat."
 
 #: ../analysers/analyser_osmosis_parking_highway.py:137
 #, python-brace-format
 msgid "highway: `access={0}` - parking: `access={1}`"
-msgstr ""
+msgstr "väg: `access={0}` - parkering: `access={1}`"
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:229
 #, python-brace-format
@@ -5637,22 +5676,27 @@ msgid ""
 "`tunnel=*` or\n"
 "`bridge=*` where appropriate, together with `layer=*` if needed."
 msgstr ""
+"Om sträckan för transportering (t.ex. en väg) har exvis. en skog på endera "
+"sidan av vägen, klipp bort vägens form från skogspolygonen.\n"
+"Däremot, om sträckan för transportering är en tunnel eller en bro, lägg till "
+"`tunnel=*` eller `bridge=*` där det är lämpligt, tillsammans med `layer=*` "
+"om det behövs."
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:208
 msgid "Bad intersection with major highway"
-msgstr ""
+msgstr "Felaktig överlappning med större väg"
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:212
 msgid "Bad intersection with railway"
-msgstr ""
+msgstr "Felaktig överlappning med järnväg"
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:216
 msgid "Bad intersection with aeroway"
-msgstr ""
+msgstr "Felaktig överlappning med landningsbana"
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:475
 msgid "Commercial object or office and highway too close"
-msgstr ""
+msgstr "Kommersiellt objekt eller kontor för nära väg"
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:193
 msgid ""
@@ -5660,6 +5704,8 @@ msgid ""
 "a\n"
 "land coverage that would pose an obstacle for this transportation mode."
 msgstr ""
+"En väg menad för transport (som en bilväg eller järnväg) överlappar med ett "
+"marktäcke som skulle utgöra ett hinder för det aktuella transportslaget."
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:196
 msgid ""
@@ -5670,6 +5716,11 @@ msgid ""
 "`natural=water`,\n"
 "without bridge or tunnel."
 msgstr ""
+"En stor betydande väg har vanligtvis inga träd som växer på eller väldigt "
+"nära den, så en överlappning mellan `landuse=forest` och `highway=trunk` är "
+"inte trolig.\n"
+"Samma säk gäller för t.ex. en järnväg över ett område med `natural=water`, "
+"utan en bro eller tunnel."
 
 #: ../plugins/Colour.py:21
 msgid ""
