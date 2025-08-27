@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-26 23:02+0000\n"
+"PO-Revision-Date: 2025-08-28 01:02+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -5728,12 +5728,18 @@ msgid ""
 "spelled in lowercase letters and without dashes. Multiple colours can be "
 "separated by a semicolon."
 msgstr ""
+"Namn på färger bör vara en av de som anges i CSS-specifikationen, och "
+"skrivas med små bokstäver och utan bindestreck. Flera färger kan skrivas "
+"separerade med semikolon."
 
 #: ../plugins/TagFix_Tree_Lang_fr.py:70
 msgid ""
 "To characterize the trees `natural=tree`, there are two main tags:\n"
 "`genus` and `species`."
 msgstr ""
+"För att specificera typ av träd `natural=tree`, finns det två huvudsakliga "
+"taggar:\n"
+"`genus` och `species`."
 
 #: ../analysers/analyser_merge_bridge_ES.py:31
 msgid "Bridge not integrated"
@@ -5753,11 +5759,13 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_polygon_small.py:105
 msgid "Leisure very small"
-msgstr ""
+msgstr "`leisure`-objekt väldigt litet"
 
 #: ../analysers/analyser_osmosis_polygon_small.py:107
 msgid "Leisures of this type are typically larger than the current object."
 msgstr ""
+"Fritidsobjekt (`leisure=*`) av den här typen är normalt större än det "
+"aktuella objektet."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:109
 #, python-brace-format
@@ -5770,23 +5778,25 @@ msgstr ""
 
 #: ../plugins/ConditionalRestrictions.py:71
 msgid "Repeated condition in conditional restriction"
-msgstr ""
+msgstr "Upprepat villkor i en villkorlig restriktion"
 
 #: ../plugins/ConditionalRestrictions.py:72
 msgid ""
 "Two different values are set to apply under the same condition or a "
 "condition is repeated. The first value is overruled by the second value."
 msgstr ""
+"Två olika värden är angivna för samma typ av villkor, eller samma villkor "
+"upprepas. Det första värdet åsidosätts av det andra värdet."
 
 #: ../plugins/ConditionalRestrictions.py:175
 #, python-brace-format
 msgid "Repeated condition `{0}` in `{1}`"
-msgstr ""
+msgstr "Upprepat villkor `{0}` i `{1}`"
 
 #: ../plugins/ConditionalRestrictions.py:194
 #, python-brace-format
 msgid "Repeated condition `{0}` in `{1}` (in tag `{2}`)"
-msgstr ""
+msgstr "Upprepat villkor `{0}` i `{1}` (i taggen `{2}`)"
 
 #: ../analysers/analyser_osmosis_highway_long_crossing.py:64
 msgid "Long crossing"
@@ -5794,7 +5804,7 @@ msgstr "Långt övergångsställe"
 
 #: ../analysers/analyser_osmosis_highway_long_crossing.py:66
 msgid "The crossing way is much longer than usual."
-msgstr ""
+msgstr "Sträckan för övergången/passagen är mycket längre än normalt."
 
 #: ../analysers/analyser_osmosis_highway_long_crossing.py:68
 msgid ""
@@ -5802,11 +5812,15 @@ msgid ""
 "Remove crossing-related tags (such as `*=crossing`, `ford=*`) from the "
 "fragment that isn't a crossing."
 msgstr ""
+"Dela sträckan vid de punkter där övergången/passagen inte längre går över "
+"korsande väg eller vattendrag.\n"
+"Från de segment som inte utgör själva övergången; ta bort de taggar som "
+"relaterar till övergångsställe/passage (som ex. `*=crossing`, `ford=*`)."
 
 #: ../analysers/analyser_osmosis_highway_long_crossing.py:73
 #, python-brace-format
 msgid "Highway or waterway crossing of {0}m"
-msgstr ""
+msgstr "Övergång på {0}m över väg eller vattendrag"
 
 #: ../analysers/analyser_osmosis_way_angle.py:90
 msgid "Suspicious angle in way"
