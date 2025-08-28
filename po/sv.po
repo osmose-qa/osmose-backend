@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-28 01:02+0000\n"
+"PO-Revision-Date: 2025-08-29 02:01+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.13.1-dev\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -5824,13 +5824,15 @@ msgstr "Övergång på {0}m över väg eller vattendrag"
 
 #: ../analysers/analyser_osmosis_way_angle.py:90
 msgid "Suspicious angle in way"
-msgstr "Misstänkt vinkel på väg"
+msgstr "Misstänkt vinkel på järnväg"
 
 #: ../analysers/analyser_osmosis_way_angle.py:92
 msgid ""
 "Sharp angles on a railway are suspicious. Maybe a node was accidentally "
 "dragged?"
 msgstr ""
+"Skarpa vinklar på en järnväg/spårväg är misstänkt då det blir för snäva "
+"kurvor. Kanske har en nod flyttats av misstag?"
 
 #: ../analysers/analyser_osmosis_way_angle.py:96
 #: ../analysers/analyser_osmosis_way_approximate.py:174
@@ -5838,11 +5840,13 @@ msgid ""
 "On service ways, train stations and train workshops this could be a false "
 "positive."
 msgstr ""
+"Vid tågstationer, vagnhallar, servicespår och liknande kan detta vara en "
+"falsk positiv."
 
 #: ../analysers/analyser_osmosis_way_angle.py:103
 #, python-brace-format
 msgid "railway={0} with suspicious angle {1}°"
-msgstr ""
+msgstr "railway={0} med misstänkt vinkel {1}°"
 
 #: ../plugins/ConditionalRestrictions.py:73
 msgid ""
@@ -5891,6 +5895,12 @@ msgid ""
 "Warning: information sources can be contradictory in time or with spatial "
 "offset."
 msgstr ""
+"Ett objekt kanske saknar en tagg, exvis. `tunnel=*`, `bridge=*`, `covered=*` "
+"eller `ford=*`.\n"
+"Om en väg eller järnväg korsar en byggnad, kolla om taggen `layer=*` kan "
+"vara relevant. \n"
+"OBS: olika informationskällor kan vara motstridiga över tid eller vara "
+"förskjuta geografiskt."
 
 #: ../plugins/Administrative_INSEE_Name.py:48
 msgid ""
@@ -5911,17 +5921,19 @@ msgid ""
 "You can not simultaneously set a tag and the variants with\n"
 "`forward`, `backward` or `both_ways` suffixes."
 msgstr ""
+"En kan kan inte ange en tagg samtidigt som samma tagg med `forward`, "
+"`backward` eller `both_ways` suffix."
 
 #: ../plugins/TagFix_MultipleTag2.py:141 ../plugins/TagFix_MultipleTag2.py:480
 #: ../plugins/TagFix_MultipleTag2.py:682
 #, python-brace-format
 msgid "Conflict between tags: `{0}` and `{1}`"
-msgstr ""
+msgstr "Konflikt mellan taggar: `{0}` och `{1}`"
 
 #: ../plugins/TagFix_MultipleTag2.py:160
 #, python-brace-format
 msgid "Conflict between tags: `{1}` must be used without `{0}`"
-msgstr ""
+msgstr "Konflikt mellan taggar: `{1}` måste användas utan `{0}`"
 
 #: ../plugins/TagFix_MultipleTag2.py:179 ../plugins/TagFix_MultipleTag2.py:496
 #: ../plugins/TagFix_MultipleTag2.py:698
@@ -5930,6 +5942,8 @@ msgid ""
 "{0} together with {1}. A picnic site rarely consists of only one single "
 "picnic table"
 msgstr ""
+"{0} tillsammans med {1}. En ordnad picnicplats (`picnic_site`) består sällan "
+"av endast ett picnicbord"
 
 #: ../plugins/TagFix_MultipleTag2.py:512
 #, python-brace-format
@@ -6020,6 +6034,8 @@ msgid ""
 "The relation contains the same member (with the same role) more than once. "
 "This is not expected for this type of relations."
 msgstr ""
+"Relationen innehåller samma medlem, i samma roll, mer än en gång. Det är "
+"inte förväntat för denna typ av relation."
 
 #: ../analysers/analyser_osmosis_relation_duplicate_member.py:66
 msgid "Remove the duplicate members until only unique members remain."
@@ -6037,16 +6053,24 @@ msgid ""
 "If you are sure that the route should follow this way, consider adding `{0}"
 "=yes`."
 msgstr ""
+"Kontrollera om leden/rutten faktiskt ska nyttja den här vägen.\n"
+"Om inte, flytta rutten så att den följer den designerade sträckningen. Detta "
+"kan innebära att flytta rutten till en separat karterad parallell väg.\n"
+"\n"
+"Om du är säker på att rutten ska följa den här vägen, överväg att lägga till "
+"`{0}=yes` på vägen."
 
 #: ../plugins/ConditionalRestrictions.py:80
 msgid "Equal conditional and unconditional tag value"
-msgstr ""
+msgstr "Likvärdigt villkorat och ovillkorat tagg-värde"
 
 #: ../plugins/ConditionalRestrictions.py:81
 msgid ""
 "The conditional tag has the same value as the same tag without the "
 "conditional restriction."
 msgstr ""
+"Den villkorade taggen har samma värde som samma tagg utan villkorade "
+"restriktioner."
 
 #: ../plugins/ConditionalRestrictions.py:82
 msgid ""
@@ -6054,26 +6078,31 @@ msgid ""
 "conditional`.\n"
 "Otherwise, remove the tag without `:conditional`."
 msgstr ""
+"Kontrollera om värdet är det som alltid gäller oavsett förhållanden. Om så "
+"är fallet, ta bort taggen med `:conditional`.\n"
+"Om inte, ta bort taggen utan `:conditional`."
 
 #: ../plugins/ConditionalRestrictions.py:84
 msgid ""
 "`bicycle=yes` together with `bicycle:conditional = yes @ (12:00-24:00)` "
 "means the same as just `bicycle=yes`."
 msgstr ""
+"`bicycle=yes` tillsammans med `bicycle:conditional = yes @ (12:00-24:00)` "
+"betyder samma sak som bara `bicycle=yes`."
 
 #: ../plugins/ConditionalRestrictions.py:224
 #, python-brace-format
 msgid "Tag `{0}` has the same value as `{1}`, without restrictions"
-msgstr ""
+msgstr "Taggen `{0}` har samma värde som `{1}`, utan restriktioner"
 
 #: ../plugins/Highway_Lanes.py:258 ../plugins/Highway_Lanes.py:265
 #, python-brace-format
 msgid "{0}={1} is not a positive integer"
-msgstr ""
+msgstr "{0}={1} är inte ett positivt heltal"
 
 #: ../plugins/Structural_Multipolygon.py:39
 msgid "Missing outer way with role `outer` for multipolygon"
-msgstr ""
+msgstr "Saknas sträcka med rollen `outer` att utgöra yttre ring i multipolygon"
 
 #: ../plugins/Structural_Multipolygon.py:43
 msgid ""
@@ -6081,12 +6110,17 @@ msgid ""
 "outer ways are also possible as long as they form one or more closed rings.\n"
 "The previous outer way may have been deleted, check the history."
 msgstr ""
+"Hitta sträckan som utgör yttre ring, och lägg till den i relationen med roll "
+"`outer`. Flera sträckor kan gemensamt utgöra yttre ring så länge som de "
+"bildar en eller flera slutna ringar.\n"
+"En redan angiven yttre ring kan ha blivit borttagen från relationen, kolla "
+"historiken."
 
 #: ../plugins/TagFix_MultipleTag2.py:32 ../plugins/TagFix_MultipleTag2.py:216
 #: ../plugins/TagFix_MultipleTag2.py:545 ../plugins/TagFix_MultipleTag2.py:731
 #, python-brace-format
 msgid "{0} with {1}, likely this is a single pitch instead"
-msgstr ""
+msgstr "{0} med {1}, troligen är detta en enskild ställplats/tältplats istället"
 
 #: ../plugins/TagFix_MultipleTag2.py:32
 msgid ""
@@ -6094,6 +6128,9 @@ msgid ""
 "common for a single pitch (`tourism=camp_pitch`) within a camping site. "
 "Possibly the two were interchanged?"
 msgstr ""
+"Campingplatsen (`tourism=camp_site`) har ett namn med siffror. Nummer är "
+"mycket vanligare som referens till en enskild tältplats/ställplats "
+"(`tourism=camp_pitch`) inom en campingplats. Möjligen har de två förväxlats?"
 
 #: ../plugins/TagFix_MultipleTag2.py:35 ../plugins/TagFix_MultipleTag2.py:193
 #: ../plugins/TagFix_MultipleTag2.py:524 ../plugins/TagFix_MultipleTag2.py:710
