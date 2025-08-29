@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-29 02:01+0000\n"
+"PO-Revision-Date: 2025-08-30 03:01+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -6136,12 +6136,12 @@ msgstr ""
 #: ../plugins/TagFix_MultipleTag2.py:524 ../plugins/TagFix_MultipleTag2.py:710
 #, python-brace-format
 msgid "Fence with {0} tag, also add {1}"
-msgstr ""
+msgstr "Stängsel med {0} tagg, lägg också till {1}"
 
 #: ../plugins/TagFix_Opening_Hours.py:69
 #, python-brace-format
 msgid "The `{0}` value is invalid and could not be parsed"
-msgstr ""
+msgstr "Värdet `{0}` är ogiltigt och kunde inte tolkas"
 
 #: ../analysers/analyser_merge_forest_compartment_FR.py:33
 msgid "Forest compartment not integrated"
