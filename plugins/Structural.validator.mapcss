@@ -1,0 +1,59 @@
+/*#########################################################################
+##                                                                       ##
+## Copyrights Osmose project                                             ##
+##                                                                       ##
+## This program is free software: you can redistribute it and/or modify  ##
+## it under the terms of the GNU General Public License as published by  ##
+## the Free Software Foundation, either version 3 of the License, or     ##
+## (at your option) any later version.                                   ##
+##                                                                       ##
+## This program is distributed in the hope that it will be useful,       ##
+## but WITHOUT ANY WARRANTY; without even the implied warranty of        ##
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         ##
+## GNU General Public License for more details.                          ##
+##                                                                       ##
+## You should have received a copy of the GNU General Public License     ##
+## along with this program.  If not, see <http://www.gnu.org/licenses/>. ##
+##                                                                       ##
+#########################################################################*/
+
+meta {
+    title: "Osmose-QA – geometry validation rules";
+    description: "Validates geometric mistakes";
+    author: "Osmose";
+    min-josm-version: 14481;
+}
+
+way[amenity      ]!:closed[!area][amenity!~/^(bench|bicycle_parking|hitching_post|ticket_validator|weighbridge)$/],
+way[area         ]!:closed[area!=no],
+way[area:highway ]!:closed,
+way[building:part]!:closed[!area],
+way[building     ]!:closed,
+way[club         ]!:closed[!area],
+way[craft        ]!:closed[!area],
+way[emergency    ]!:closed[!area][emergency!~/^(yes|designated|permissive)$/][!highway],
+way[healthcare   ]!:closed[!area],
+way[landcover    ]!:closed,
+way[landuse      ]!:closed,
+way[leisure      ]!:closed[!area][leisure!~/^(barefoot|bathing_place|slipway|track)$/],
+way[military     ]!:closed[!area][military!~/^(obstacle_course|road|trench)$/][!highway],
+way[natural      ]!:closed[!area][natural=~/^(bare_rock|bay|beach|fell|glacier|grassland|heath|hot_spring|moor|mud|rock|sand|scree|scrub|shingle|sinkhole|stone|water|wetland|wood)$/][bay!=fjord],
+way[office       ]!:closed[!area],
+way[place        ]!:closed,
+way[shop         ]!:closed[!area],
+way[tourism      ]!:closed[!area][tourism!~/^(artwork|attraction|yes)$/],
+way[waterway     ]!:closed[!area][waterway=~/^(boatyard|dock|fuel|riverbank)$/] {
+  throwError: tr("Unclosed way with {0}", "{0.tag}");
+  group: tr("Should be polygon, part of multipolygon or not having area tag");
+
+  assertNoMatch: "way tourism=xyz area=no";
+  assertNoMatch: "way emergency=designated";
+  assertNoMatch: "way oneway=no";
+
+  -osmoseItemClassLevel: "1170/4/1";
+  -osmoseTags: list("geom", "fix:imagery", "fix:chair");
+  -osmoseDetail: tr("A way has a tag that suggests it is an area, but the way is not closed.");
+  -osmoseFix: tr("Make sure the first and last node of the way are connected, such that it forms a closed way. If the way is not an area, add `area=no` or correct the tags.");
+  -osmoseTrap: tr("Use a multipolygon relation instead of a way if a closed way cannot be formed to represent the area. In this case, remove the area-related tags from the way.");
+  -osmoseExample: "![](https://wiki.openstreetmap.org/w/images/c/cc/Osmose-eg-error-1100.png)";
+}
