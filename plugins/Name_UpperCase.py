@@ -27,6 +27,7 @@ from plugins.modules.name_suggestion_index import whitelist_from_nsi
 # Whitelist of allowed capitals by country code
 UpperCase_WhiteList = {
     "FR": ["CNFPT", "COSEC", "EHPAD", "MEDEF", "URSSAF"],
+    "AU": ["ANZAC", "CSIRO"],
 }
 
 class Name_UpperCase(Plugin):
