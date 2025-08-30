@@ -161,43 +161,6 @@ HAVING
     COUNT(*) > 1
 """
 
-sql40 = """
-SELECT
-    ways.id,
-    ST_AsText(way_locate(ways.linestring)),
-    ways.tags->'area',
-    ways.tags->'landuse',
-    ways.tags->'natural',
-    ways.tags->'waterway',
-    ways.tags->'leisure',
-    ways.tags->'amenity',
-    ways.tags->'building',
-    COALESCE(ways.tags->'area', ways.tags->'landuse', ways.tags->'natural', ways.tags->'waterway', ways.tags->'leisure', ways.tags->'amenity', ways.tags->'building')
-FROM
-    {0}ways AS ways
-    LEFT JOIN relation_members ON
-        relation_members.member_id = ways.id AND
-        relation_members.member_type = 'W'
-WHERE
-    ways.tags != ''::hstore AND
-    (
-        (ways.tags?'area' AND ways.tags->'area' in ('yes', 'true')) OR
-        ways.tags?'landuse' OR
-        (ways.tags?'natural' AND ways.tags->'natural' in ('bare_rock', 'bay', 'beach', 'fell', 'glacier', 'grassland', 'heath', 'hot_spring', 'moor', 'mud', 'rock', 'sand', 'scree', 'scrub', 'shingle', 'sinkhole', 'stone', 'water', 'wetland', 'wood') AND (NOT ways.tags?'bay' OR ways.tags->'bay' != 'fjord')) OR
-        (ways.tags?'waterway' AND ways.tags->'waterway' in ('boatyard', 'dock', 'fuel', 'riverbank')) OR
-        (ways.tags?'leisure' AND ways.tags->'leisure' in ('adult_gaming_centre', 'amusement_arcade', 'bandstand', 'beach_resort', 'bird_hide', 'common', 'dance', 'dog_park', 'firepit', 'fishing', 'fitness_centre', 'garden', 'golf_course', 'hackerspace', 'horse_riding', 'ice_rink', 'marina', 'miniature_golf', 'nature_reserve', 'park', 'picnic_table', 'pitch', 'playground', 'sports_centre', 'stadium', 'summer_camp', 'swimming_area', 'swimming_pool', 'water_park', 'wildlife_hide')) OR
-        (ways.tags?'amenity' AND ways.tags->'amenity' in ('animal_boarding', 'animal_shelter', 'arts_centre', 'baby_hatch', 'bank', 'bar', 'bicycle_rental', 'bicycle_repair_station', 'biergarten', 'blood_donation', 'boat_sharing', 'brothel', 'bus_station', 'cafe', 'car_rental', 'car_sharing', 'car_wash', 'casino', 'cinema', 'clinic', 'college', 'community_centre', 'courthouse', 'coworking_space', 'crematorium', 'crypt', 'dentist', 'dive_centre', 'doctors', 'dojo', 'driving_school', 'embassy', 'fast_food', 'ferry_terminal', 'fire_station', 'firepit', 'food_court', 'fountain', 'fuel', 'gambling', 'game_feeding', 'grave_yard', 'gym', 'hospital', 'hunting_stand', 'ice_cream', 'internet_cafe', 'kindergarten', 'kneipp_water_cure', 'language_school', 'library', 'marketplace', 'motorcycle_parking', 'music_school', 'nightclub', 'nursing_home', 'parking', 'parking_space', 'pharmacy', 'place_of_worship', 'planetarium', 'police', 'post_office', 'prison', 'pub', 'public_bookcase', 'public_building', 'ranger_station', 'recycling', 'rescue_station', 'restaurant', 'sauna', 'school', 'shelter', 'shower', 'social_centre', 'social_facility', 'studio', 'swingerclub', 'taxi', 'theatre', 'toilets', 'townhall', 'university', 'veterinary', 'waste_transfer_station')) OR
-        ways.tags?'building'
-    ) AND
-    ways.linestring IS NOT NULL AND
-    NOT ways.is_polygon AND
-    relation_members.member_id IS NULL AND
-    -- Avoid confusing warnings for invalid polygons. Any closed way with >3 nodes that doesn't match
-    -- is_polygon (with any of the tags above) must be an invalid polygon (which is checked elsewhere)
-    -- Note: use array_length instead of ST_NPoints as the former includes nodes outside of the extract
-    (NOT ST_IsClosed(ways.linestring) OR array_length(ways.nodes,1) = 3)
-"""
-
 class Analyser_Osmosis_Relation_Multipolygon(Analyser_Osmosis):
 
     def __init__(self, config, logger = None):
@@ -220,13 +183,6 @@ the outers roles.'''))
             detail = T_(
 '''Multipolygon does not define nature, several found on the outer role
 members.'''))
-        self.classs_change[4] = self.def_class(item = 1170, level = 1, tags = ['relation', 'fix:chair', 'geom'],
-            title = T_('Should be polygon, part of multipolygon or not having area tag'),
-            detail = T_(
-'''The nature of the way indicates that it is a surface, the way would be
-a polygon or a part of a multipolygon as outer role.'''),
-            fix = T_(
-'''Close the way to make a polygon or add to a multipolygon.'''))
 
         self.callback10 = lambda res: {"class":1, "data":[self.relation_full, self.way_full, self.way_full, self.positionAsText]}
         self.callback20 = lambda res: {"class":2, "subclass":stablehash64(res[11]), "data":[self.relation_full, self.way_full, self.positionAsText],
@@ -234,9 +190,6 @@ a polygon or a part of a multipolygon as outer role.'''),
         }
         self.callback30 = lambda res: {"class":3, "subclass":1, "data":[self.relation_full, self.positionAsText],
             "text": {"en": u", ".join(map(lambda k: "{0}=({1})".format(*k), filter(lambda k: k[1], (("landuse",res[2]), ("natural",res[3]), ("waterway",res[4]), ("building",res[5])))))}
-        }
-        self.callback40 = lambda res: {"class":4, "subclass":stablehash64(res[9]), "data":[self.way_full, self.positionAsText],
-            "text": {"en": u", ".join(map(lambda k: "{0}={1}".format(*k), filter(lambda k: k[1], (("area",res[2]), ("landuse",res[3]), ("natural",res[4]), ("waterway",res[5]), ("leisure",res[6]), ("amenity",res[7]), ("building",res[8])))))}
         }
 
     def analyser_osmosis_common(self):
@@ -247,7 +200,6 @@ a polygon or a part of a multipolygon as outer role.'''),
         self.run(sql11)
         self.run(sql12.format("", "", ""), self.callback10)
         self.run(sql20.format("", ""), self.callback20)
-        self.run(sql40.format(""), self.callback40)
 
     def analyser_osmosis_diff(self):
         self.run(sql10)
@@ -258,4 +210,3 @@ a polygon or a part of a multipolygon as outer role.'''),
         self.run(sql12.format("not_touched_", "not_touched_", "touched_"), self.callback10)
         self.run(sql20.format("touched_", ""), self.callback20)
         self.run(sql20.format("not_touched_", "touched_"), self.callback20)
-        self.run(sql40.format("touched_"), self.callback40)
