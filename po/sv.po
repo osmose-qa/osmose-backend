@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-24 14:51+0000\n"
+"PO-Revision-Date: 2025-08-30 03:01+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.13.1-dev\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -5128,43 +5128,55 @@ msgid ""
 "a\n"
 "role."
 msgstr ""
+"Ett objekt utan definierande taggar (inga andra taggar än `source`, "
+"`created_by`, `area` eller `name`) och inte heller del av en relation med en "
+"given roll."
 
 #: ../plugins/Name_PoorlyWrittenWayType.py:49
 msgid "Badly written way name"
-msgstr ""
+msgstr "Felformaterat gatunamn"
 
 #: ../plugins/Name_PoorlyWrittenWayType.py:51
 msgid ""
 "An abbreviation is present (e.g. Rd instead of Road) or the first letter of "
 "the name is lower case."
 msgstr ""
+"En förkortning hittades (ex. 'Norrv.' istället för 'Norrvägen') eller så är "
+"första bokstaven inte versal."
 
 #: ../plugins/Name_PoorlyWrittenWayType.py:53
 msgid ""
 "Write the name without any abbreviations and make sure the first letter is "
 "upper case."
 msgstr ""
+"Skriv ut gatunamnet utan några förkortningar och se till att första "
+"bokstaven är en versal."
 
 #: ../analysers/analyser_osmosis_indoor.py:193 ../plugins/indoor.py:23
 #: ../plugins/indoor.py:120 ../plugins/indoor.py:206
 msgid "This indoor room should have a door"
-msgstr ""
+msgstr "Det här rummet inomhus borde ha en dörr"
 
 #: ../analysers/analyser_osmosis_indoor.py:195
 msgid ""
 "Find out where the entrances of the room are and add them (with a `door=*` "
 "tag) so we can actually enter this indoor room."
 msgstr ""
+"Ta reda på var ingångarna till rummet är och lägg till dem (med taggen "
+"`door=*`) så kartan kan visa hur en faktiskt tar sig in i rummet."
 
 #: ../analysers/analyser_osmosis_indoor.py:197
 msgid "This indoor feature is not reachable"
-msgstr ""
+msgstr "Det här inomhusobjektet går inte att nå"
 
 #: ../analysers/analyser_osmosis_indoor.py:199
 msgid ""
 "Each indoor feature should be connected to another indoor feature or to some "
 "footpath so people can actually go to them."
 msgstr ""
+"Alla företeelser, faciliteter etc inomhus bör vara anslutna till andra "
+"inomhusobjekt eller till en gångväg eller liknande, så att människor vet hur "
+"de ska ta sig fram till dem."
 
 #: ../analysers/analyser_osmosis_powerline.py:689
 msgid ""
@@ -5172,25 +5184,29 @@ msgid ""
 "Add a transformer using `power=transformer` (standalone transformers) or "
 "`power=pole + transformer=*` (pole mounted transformers)."
 msgstr ""
+"Kontrollera att spänningen faktiskt är olika.\n"
+"I så fall, lägg till en transformator med `power=transformer` (fristående "
+"transformatorstation) eller `power=pole` + `transformer=*` (transformator "
+"monterad på ledningsstolpe)."
 
 #: ../plugins/indoor.py:20 ../plugins/indoor.py:54 ../plugins/indoor.py:111
 msgid "This indoor feature should be a closed and valid polygon"
-msgstr ""
+msgstr "Det här inomhusobjektet borde vara en sluten och giltig polygon"
 
 #: ../plugins/indoor.py:21 ../plugins/indoor.py:135
 msgid "This indoor feature should have a level"
-msgstr ""
+msgstr "Det här inomhusobjektet borde ha ett angivet våningsplan `level`"
 
 #: ../plugins/indoor.py:22 ../plugins/indoor.py:157
 msgid "This indoor shop should probably be inside a room"
-msgstr ""
+msgstr "Denna inomhusbutik borde troligen vara inuti ett rum"
 
 #: ../analysers/analyser_osmosis_tag_typo.py:162
 #: ../analysers/analyser_osmosis_tag_typo.py:171
 #: ../analysers/analyser_osmosis_tag_typo.py:180
 #, python-brace-format
 msgid "`{0}` is more common than `{1}`, is `{1}` a typo?"
-msgstr ""
+msgstr "`{0}` är mycket vanligare än `{1}`, är `{1}` ett stavfel?"
 
 #: ../plugins/Colour.py:21
 msgid "Bad colour name"
@@ -5199,7 +5215,7 @@ msgstr "Dåligt färgnamn"
 #: ../plugins/Colour.py:233 ../plugins/Colour.py:466 ../plugins/Colour.py:671
 #, python-brace-format
 msgid "Unknown or invalid colour in tag ''{0}''"
-msgstr ""
+msgstr "Okänd eller ogiltig färg i taggen \"{0}\""
 
 #: ../plugins/TagFix_DuplicateValue.py:40
 msgid ""
@@ -5208,11 +5224,14 @@ msgid ""
 "Ensure the interpretation of the tag does not change when you delete one "
 "item."
 msgstr ""
+"I vissa fall kan samtliga värden behövas.\n"
+"\n"
+"Se till att tolkningen av taggen inte förändras när du tar bort ett värde."
 
 #: ../plugins/TagFix_DuplicateValue.py:169
 #, python-brace-format
 msgid "Similar values {v1} and {v2} in {key}={val}"
-msgstr ""
+msgstr "Liknande värden {v1} och {v2}, i {key}={val}"
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:175
 msgid "Inconsistent `motor_vehicle` values."
@@ -5220,7 +5239,7 @@ msgstr "Inkonsekventa värden för `motor_vehicle`."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:179
 msgid "Inconsistent access values between barrier and highway."
-msgstr ""
+msgstr "Inkonsekventa `access`-värden mellan väghinder och själva vägen."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:181
 #: ../analysers/analyser_osmosis_highway_area_access.py:202
@@ -5228,35 +5247,42 @@ msgid ""
 "Sometimes a barrier can exist on an (otherwise uninterrupted) highway to "
 "prevent vehicles from using it for purposes other than destination traffic."
 msgstr ""
+"Ibland kan ett väghinder finnas på en (annars obehindrad) väg för att "
+"förhindra fordon att använda vägen för tex. genomfart eller andra obehöriga "
+"syften."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:183
 msgid "Copy the appropriate access tag to the barrier node."
-msgstr ""
+msgstr "Kopiera lämplig tillträdestagg över till noden för väghindret."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:225
 #: ../analysers/analyser_osmosis_highway_area_access.py:230
 #, python-brace-format
 msgid "Inconsistent {0} access: '{1}' on highway, not set on barrier"
 msgstr ""
+"Inkonsekvent tillträde för {0} : vägen angiven som '{1}', ingenting angivet "
+"på väghindret"
 
 #: ../plugins/notprefix.py:20 ../plugins/notprefix.py:75
 #: ../plugins/notprefix.py:132 ../plugins/notprefix.py:187
 #, python-brace-format
 msgid "`{0}` together with `{1}` and equal values"
-msgstr ""
+msgstr "`{0}` tillsammans med `{1}` och likvärdiga värden"
 
 #: ../analysers/analyser_osmosis_relation_cyclic.py:74
 msgid "Cyclic relation"
-msgstr ""
+msgstr "Cyklisk relation"
 
 #: ../analysers/analyser_osmosis_relation_cyclic.py:76
 msgid ""
 "A relation whose members (eventually) refer back to itself is rarely correct."
 msgstr ""
+"En relation vars medlemmar (förr eller senare) hänvisar tillbaka till sig "
+"själv, är sällan korrekt."
 
 #: ../analysers/analyser_osmosis_building_in_polygon.py:69
 msgid "Building on agricultural land"
-msgstr ""
+msgstr "Byggnad på jordbruksmark"
 
 #: ../analysers/analyser_osmosis_building_in_polygon.py:71
 msgid ""
@@ -5264,6 +5290,9 @@ msgid ""
 "on the farmyard,\n"
 "not on the farmland where the crops grow."
 msgstr ""
+"Byggnader inom lantbruk (boningshus, ladugård, stall, maskinhall etc...) "
+"ligger vanligen inom ett särskilt gårdsområde, inte på själva "
+"jordbruksmarken där odling, bete mm bedrivs."
 
 #: ../analysers/analyser_osmosis_building_in_polygon.py:74
 msgid ""
@@ -5276,6 +5305,14 @@ msgid ""
 "For areas dedicated to greenhouse horticulture, use "
 "`landuse=greenhouse_horticulture`."
 msgstr ""
+"Ändra eller dela upp landanvändningen, så att lantbruksbyggnader och "
+"tillhörande gårdsområde/gårdsplan ligger inom ett område med "
+"`landuse=farmyard`, och att bara själva jordbruksmarken anges som "
+"`landuse=farmland` (eller en mer specifik typ av odlingsmark, så som "
+"`landuse=vineyard` eller `landuse=orchard`).\n"
+"\n"
+"För områden specialiserade på växthusodling, använd "
+"`landuse=greenhouse_horticulture`."
 
 #: ../analysers/analyser_osmosis_building_in_polygon.py:88
 #, python-brace-format
@@ -5288,15 +5325,19 @@ msgid ""
 "Sometimes very small areas of this type may exist. In this case, please mark "
 "this issue as a false positive."
 msgstr ""
+"\n"
+"Ibland kan väldigt små områden av den här typen finnas och vara befogat. Om "
+"det är fallet här, markera felet som en falsk positiv."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:72
 msgid "Natural area very small"
-msgstr ""
+msgstr "Naturområde väldigt litet"
 
 #: ../analysers/analyser_osmosis_polygon_small.py:74
 msgid ""
 "A natural object of this type is typically larger than the current object."
 msgstr ""
+"En naturlig företeelse av den här typen är normalt större än detta objektet."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:76
 #: ../analysers/analyser_osmosis_polygon_small.py:83
@@ -5304,6 +5345,8 @@ msgid ""
 "A single tree should be tagged as `natural=tree` rather than "
 "`landuse=forest` or `natural=wood`."
 msgstr ""
+"Ett enskilt träd bör taggas som `natural=tree`, snarare än som "
+"`landuse=forest` eller `natural=wood`."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:79
 #: ../analysers/analyser_osmosis_polygon_small.py:97
@@ -5315,6 +5358,7 @@ msgstr "Landanvändning väldigt liten"
 #: ../analysers/analyser_osmosis_polygon_small.py:99
 msgid "Landuses of this type are typically larger than the current object."
 msgstr ""
+"Landanvändning av den här typen är normalt större än det aktuella objektet."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:86
 msgid "Small farm"
@@ -5330,6 +5374,13 @@ msgid ""
 "- `{0}`\n"
 "- etcetera."
 msgstr ""
+"Lantbruksmark som används för bete, ladugårdar, växthus etc. bör inte taggas "
+"som`landuse=farmland`.\n"
+"Taggen `landuse=farmland` är menad för åkermark/odlingsmark, där grödor "
+"odlas.\n"
+"Annan landanvändning skulle kunna taggas med:\n"
+"- `{0}`\n"
+"- och så vidare."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:101
 #, python-brace-format
@@ -5342,7 +5393,7 @@ msgstr ""
 #: ../analysers/analyser_osmosis_polygon_small.py:136
 #, python-brace-format
 msgid "{0} with an area of {1} m2"
-msgstr ""
+msgstr "{0} med en yta på {1} m2"
 
 #: ../plugins/Highway_Parking_Lane.py:42 ../plugins/Highway_Parking_Lane.py:49
 #: ../plugins/Highway_Parking_Lane.py:53 ../plugins/Highway_Parking_Lane.py:60
@@ -5352,15 +5403,19 @@ msgid ""
 "Consider switching to the new [street parking tagging scheme](\"https://wiki."
 "openstreetmap.org/wiki/Street_parking)."
 msgstr ""
+"Överväg att byta till det nya [taggnings-schemat för gatuparkering](\"https"
+"://wiki.openstreetmap.org/wiki/Street_parking)."
 
 #: ../plugins/Highway_Parking_Lane.py:91
 msgid "Bad parking:[side]"
-msgstr ""
+msgstr "Felaktig parking:[side]"
 
 #: ../plugins/Highway_Parking_Lane.py:93
 msgid ""
 "The side was not recognized, expected was either `left`, `right` or `both`."
 msgstr ""
+"Angiven sida känns inte igen, förväntade värden är `left`, `right` eller "
+"`both`."
 
 #: ../plugins/Highway_Parking_Lane.py:95
 msgid "Use `parking:left`, `parking:right` or `parking:both`."
@@ -5373,16 +5428,21 @@ msgid ""
 "you should use `parking:both:maxstay=2 hours`, and not `parking:maxstay=2 "
 "hours`."
 msgstr ""
+"För att ange att det inte går att parkera på gatan mer än 2 timmar (för båda "
+"sidor), använd `parking:both:maxstay=2 hours`, och inte `parking:maxstay=2 "
+"hours`."
 
 #: ../plugins/Highway_Parking_Lane.py:101
 msgid "parking:[side]:* without parking:[side] value"
-msgstr ""
+msgstr "parking:[side]:* utan parking:[side]"
 
 #: ../plugins/Highway_Parking_Lane.py:103
 msgid ""
 "A parking tag adding details, such as `parking:[side]:fee`, is present "
 "without primary `parking:[side]` key."
 msgstr ""
+"En parkeringstagg med fler detaljer, t.ex. `parking:[side]:fee`, finns utan "
+"att den primära taggen `parking:[side]` har angivits."
 
 #: ../plugins/Highway_Parking_Lane.py:107
 msgid ""
@@ -5392,6 +5452,10 @@ msgid ""
 "However, `parking:both` already covers both sides of a street, so the latter "
 "are redundant."
 msgstr ""
+"Taggen `parking:both` (möjligen med suffix, som `:maxstay`) används "
+"tillsammans med `parking:left`och/eller `parking:right` (med samma suffix).\n"
+"Dock så täcker `parking:both` redan båda sidor av gatan, så taggar för "
+"specifika sidor är överflödiga."
 
 #: ../plugins/Highway_Parking_Lane.py:111
 msgid "Bad value for parking:[side]=*"
@@ -5426,6 +5490,8 @@ msgstr ""
 #: ../plugins/TagWatchFrViPofm.py:71
 msgid "Simple and frequent errors, can be updated by anyone on the wiki."
 msgstr ""
+"Enkla och ofta förekommande fel kan läggas till och uppdateras av vem som "
+"helst på wikin."
 
 #: ../plugins/TagFix_MultipleTag2.py:25 ../plugins/TagFix_MultipleTag2.py:60
 #: ../plugins/TagFix_MultipleTag2.py:294 ../plugins/TagFix_MultipleTag2.py:604
@@ -5434,6 +5500,8 @@ msgid ""
 "{0} together with {1}, usually {1} is located underneath the {2}. Tag the "
 "{3} as a separate object."
 msgstr ""
+"{0} tillsammans med {1}, vanligtvis är {1} lokaliserad under {2}. Tagga {3} "
+"som ett separat objekt."
 
 #: ../plugins/indoor.py:24 ../plugins/indoor.py:67 ../plugins/indoor.py:172
 #: ../plugins/indoor.py:218
@@ -5457,13 +5525,15 @@ msgstr ""
 #: ../plugins/Colour.py:387 ../plugins/Colour.py:537 ../plugins/Colour.py:603
 #, python-brace-format
 msgid "{0} colour code should start with '#' followed by 3 or 6 hex digits"
-msgstr ""
+msgstr "{0} färgkod borde starta med '#' följt av 3 eller 6 hexadecimal-tecken"
 
 #: ../plugins/TagFix_MultipleTag2.py:34
 msgid ""
 "Missing `maxheight=*` or `maxheight:physical=*` for a tunnel or a way under "
 "a bridge."
 msgstr ""
+"En tunnel eller väg under bro saknar `maxheight=*` eller "
+"`maxheight:physical=*`."
 
 #: ../plugins/TagFix_MultipleTag2.py:36
 msgid "suspicious tag combination"
@@ -5476,13 +5546,15 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:185
 msgid "Barrier blocking major highway"
-msgstr ""
+msgstr "Hinder blockerar större väg"
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:187
 msgid ""
 "A barrier is blocking a major highway. Typically, major highways (`tertiary` "
 "and above) are meant for passing traffic."
 msgstr ""
+"Ett väghinder blockerar en större väg. Vanligtvis är större vägar (`tertiary`"
+" och uppåt) avsedda för obehindrad trafik."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:189
 msgid ""
@@ -5493,6 +5565,12 @@ msgid ""
 "If there is a barrier, check if it has the appropriate (conditional) access "
 "keys."
 msgstr ""
+"Kontrollera om det faktiskt finns ett hinder på den större vägen (och inte "
+"t.ex. på enbart en anslutande mindre väg).\n"
+"Om det inte finns ett hinder, ta bort det, eller flytta hindret till den "
+"lämpliga anslutande vägen.\n"
+"Om det faktiskt är ett hinder på den större vägen, se till att det har "
+"korrekta (villkorliga) tillträdestaggar."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:196
 msgid "Barrier blocking highway"
@@ -5505,6 +5583,10 @@ msgid ""
 "In the current situation, traffic coming from any direction has to go "
 "through the barrier, to reach any of the destination ways."
 msgstr ""
+"Ett hinder blockerar själva korsningen mellan flera vägar. Antagligen är "
+"hindret menat att bara vara på en av vägarna. I nuvarande läge måste trafik "
+"från samtliga vägar in i korsningen passera hindret oavsett vilken väg ut ur "
+"korsningen trafiken ska ta."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:204
 msgid ""
@@ -5515,6 +5597,12 @@ msgid ""
 "If there is a barrier, check if it has the appropriate (conditional) access "
 "keys."
 msgstr ""
+"Kontrollera om det faktiskt finns ett väghinder i själva korsningen (och "
+"inte t.ex. på enbart en anslutande väg).\n"
+"Om det inte finns ett hinder, ta bort det, eller flytta hindret till den "
+"lämpliga anslutande vägen.\n"
+"Om det faktiskt är ett hinder i korsningen, se till att det har lämpliga "
+"(villkorliga) tillträdestaggar."
 
 #: ../analysers/analyser_osmosis_highway_area_access.py:192
 msgid ""
@@ -5542,7 +5630,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_parking_highway.py:120
 msgid "Inconsistent access of parking"
-msgstr ""
+msgstr "Motstridiga tillträden för parkering"
 
 #: ../analysers/analyser_osmosis_parking_highway.py:121
 msgid ""
@@ -5551,21 +5639,27 @@ msgid ""
 "As a result, this public parking space can only be reached via limited-"
 "access roads."
 msgstr ""
+"`access`-taggen för parkeringen stämmer inte med `access`-taggen för vägarna "
+"till eller inom parkeringen.\n"
+"Därmed kan denna allmänna parkering bara nås via vägar med begränsande "
+"restriktioner."
 
 #: ../analysers/analyser_osmosis_parking_highway.py:123
 msgid ""
 "Check which access restrictions are correct and apply them accordingly to "
 "the highways and the parking."
 msgstr ""
+"Undersök vilka tillträdesrestriktioner som är korrekta, och tillämpa dem "
+"likvärdigt på vägen och parkeringen."
 
 #: ../analysers/analyser_osmosis_parking_highway.py:124
 msgid "A parking may be partially publicly accessible and partially private."
-msgstr ""
+msgstr "En parkering kan vara delvis allmänt tillgänglig och delvis privat."
 
 #: ../analysers/analyser_osmosis_parking_highway.py:137
 #, python-brace-format
 msgid "highway: `access={0}` - parking: `access={1}`"
-msgstr ""
+msgstr "väg: `access={0}` - parkering: `access={1}`"
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:229
 #, python-brace-format
@@ -5582,22 +5676,27 @@ msgid ""
 "`tunnel=*` or\n"
 "`bridge=*` where appropriate, together with `layer=*` if needed."
 msgstr ""
+"Om sträckan för transportering (t.ex. en väg) har exvis. en skog på endera "
+"sidan av vägen, klipp bort vägens form från skogspolygonen.\n"
+"Däremot, om sträckan för transportering är en tunnel eller en bro, lägg till "
+"`tunnel=*` eller `bridge=*` där det är lämpligt, tillsammans med `layer=*` "
+"om det behövs."
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:208
 msgid "Bad intersection with major highway"
-msgstr ""
+msgstr "Felaktig överlappning med större väg"
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:212
 msgid "Bad intersection with railway"
-msgstr ""
+msgstr "Felaktig överlappning med järnväg"
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:216
 msgid "Bad intersection with aeroway"
-msgstr ""
+msgstr "Felaktig överlappning med landningsbana"
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:475
 msgid "Commercial object or office and highway too close"
-msgstr ""
+msgstr "Kommersiellt objekt eller kontor för nära väg"
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:193
 msgid ""
@@ -5605,6 +5704,8 @@ msgid ""
 "a\n"
 "land coverage that would pose an obstacle for this transportation mode."
 msgstr ""
+"En väg menad för transport (som en bilväg eller järnväg) överlappar med ett "
+"marktäcke som skulle utgöra ett hinder för det aktuella transportslaget."
 
 #: ../analysers/analyser_osmosis_polygon_intersects.py:196
 msgid ""
@@ -5615,6 +5716,11 @@ msgid ""
 "`natural=water`,\n"
 "without bridge or tunnel."
 msgstr ""
+"En stor betydande väg har vanligtvis inga träd som växer på eller väldigt "
+"nära den, så en överlappning mellan `landuse=forest` och `highway=trunk` är "
+"inte trolig.\n"
+"Samma säk gäller för t.ex. en järnväg över ett område med `natural=water`, "
+"utan en bro eller tunnel."
 
 #: ../plugins/Colour.py:21
 msgid ""
@@ -5622,12 +5728,18 @@ msgid ""
 "spelled in lowercase letters and without dashes. Multiple colours can be "
 "separated by a semicolon."
 msgstr ""
+"Namn på färger bör vara en av de som anges i CSS-specifikationen, och "
+"skrivas med små bokstäver och utan bindestreck. Flera färger kan skrivas "
+"separerade med semikolon."
 
 #: ../plugins/TagFix_Tree_Lang_fr.py:70
 msgid ""
 "To characterize the trees `natural=tree`, there are two main tags:\n"
 "`genus` and `species`."
 msgstr ""
+"För att specificera typ av träd `natural=tree`, finns det två huvudsakliga "
+"taggar:\n"
+"`genus` och `species`."
 
 #: ../analysers/analyser_merge_bridge_ES.py:31
 msgid "Bridge not integrated"
@@ -5647,11 +5759,13 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_polygon_small.py:105
 msgid "Leisure very small"
-msgstr ""
+msgstr "`leisure`-objekt väldigt litet"
 
 #: ../analysers/analyser_osmosis_polygon_small.py:107
 msgid "Leisures of this type are typically larger than the current object."
 msgstr ""
+"Fritidsobjekt (`leisure=*`) av den här typen är normalt större än det "
+"aktuella objektet."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:109
 #, python-brace-format
@@ -5664,23 +5778,25 @@ msgstr ""
 
 #: ../plugins/ConditionalRestrictions.py:71
 msgid "Repeated condition in conditional restriction"
-msgstr ""
+msgstr "Upprepat villkor i en villkorlig restriktion"
 
 #: ../plugins/ConditionalRestrictions.py:72
 msgid ""
 "Two different values are set to apply under the same condition or a "
 "condition is repeated. The first value is overruled by the second value."
 msgstr ""
+"Två olika värden är angivna för samma typ av villkor, eller samma villkor "
+"upprepas. Det första värdet åsidosätts av det andra värdet."
 
 #: ../plugins/ConditionalRestrictions.py:175
 #, python-brace-format
 msgid "Repeated condition `{0}` in `{1}`"
-msgstr ""
+msgstr "Upprepat villkor `{0}` i `{1}`"
 
 #: ../plugins/ConditionalRestrictions.py:194
 #, python-brace-format
 msgid "Repeated condition `{0}` in `{1}` (in tag `{2}`)"
-msgstr ""
+msgstr "Upprepat villkor `{0}` i `{1}` (i taggen `{2}`)"
 
 #: ../analysers/analyser_osmosis_highway_long_crossing.py:64
 msgid "Long crossing"
@@ -5688,7 +5804,7 @@ msgstr "Långt övergångsställe"
 
 #: ../analysers/analyser_osmosis_highway_long_crossing.py:66
 msgid "The crossing way is much longer than usual."
-msgstr ""
+msgstr "Sträckan för övergången/passagen är mycket längre än normalt."
 
 #: ../analysers/analyser_osmosis_highway_long_crossing.py:68
 msgid ""
@@ -5696,21 +5812,27 @@ msgid ""
 "Remove crossing-related tags (such as `*=crossing`, `ford=*`) from the "
 "fragment that isn't a crossing."
 msgstr ""
+"Dela sträckan vid de punkter där övergången/passagen inte längre går över "
+"korsande väg eller vattendrag.\n"
+"Från de segment som inte utgör själva övergången; ta bort de taggar som "
+"relaterar till övergångsställe/passage (som ex. `*=crossing`, `ford=*`)."
 
 #: ../analysers/analyser_osmosis_highway_long_crossing.py:73
 #, python-brace-format
 msgid "Highway or waterway crossing of {0}m"
-msgstr ""
+msgstr "Övergång på {0}m över väg eller vattendrag"
 
 #: ../analysers/analyser_osmosis_way_angle.py:90
 msgid "Suspicious angle in way"
-msgstr "Misstänkt vinkel på väg"
+msgstr "Misstänkt vinkel på järnväg"
 
 #: ../analysers/analyser_osmosis_way_angle.py:92
 msgid ""
 "Sharp angles on a railway are suspicious. Maybe a node was accidentally "
 "dragged?"
 msgstr ""
+"Skarpa vinklar på en järnväg/spårväg är misstänkt då det blir för snäva "
+"kurvor. Kanske har en nod flyttats av misstag?"
 
 #: ../analysers/analyser_osmosis_way_angle.py:96
 #: ../analysers/analyser_osmosis_way_approximate.py:174
@@ -5718,11 +5840,13 @@ msgid ""
 "On service ways, train stations and train workshops this could be a false "
 "positive."
 msgstr ""
+"Vid tågstationer, vagnhallar, servicespår och liknande kan detta vara en "
+"falsk positiv."
 
 #: ../analysers/analyser_osmosis_way_angle.py:103
 #, python-brace-format
 msgid "railway={0} with suspicious angle {1}°"
-msgstr ""
+msgstr "railway={0} med misstänkt vinkel {1}°"
 
 #: ../plugins/ConditionalRestrictions.py:73
 msgid ""
@@ -5771,6 +5895,12 @@ msgid ""
 "Warning: information sources can be contradictory in time or with spatial "
 "offset."
 msgstr ""
+"Ett objekt kanske saknar en tagg, exvis. `tunnel=*`, `bridge=*`, `covered=*` "
+"eller `ford=*`.\n"
+"Om en väg eller järnväg korsar en byggnad, kolla om taggen `layer=*` kan "
+"vara relevant. \n"
+"OBS: olika informationskällor kan vara motstridiga över tid eller vara "
+"förskjuta geografiskt."
 
 #: ../plugins/Administrative_INSEE_Name.py:48
 msgid ""
@@ -5791,17 +5921,19 @@ msgid ""
 "You can not simultaneously set a tag and the variants with\n"
 "`forward`, `backward` or `both_ways` suffixes."
 msgstr ""
+"En kan kan inte ange en tagg samtidigt som samma tagg med `forward`, "
+"`backward` eller `both_ways` suffix."
 
 #: ../plugins/TagFix_MultipleTag2.py:141 ../plugins/TagFix_MultipleTag2.py:480
 #: ../plugins/TagFix_MultipleTag2.py:682
 #, python-brace-format
 msgid "Conflict between tags: `{0}` and `{1}`"
-msgstr ""
+msgstr "Konflikt mellan taggar: `{0}` och `{1}`"
 
 #: ../plugins/TagFix_MultipleTag2.py:160
 #, python-brace-format
 msgid "Conflict between tags: `{1}` must be used without `{0}`"
-msgstr ""
+msgstr "Konflikt mellan taggar: `{1}` måste användas utan `{0}`"
 
 #: ../plugins/TagFix_MultipleTag2.py:179 ../plugins/TagFix_MultipleTag2.py:496
 #: ../plugins/TagFix_MultipleTag2.py:698
@@ -5810,6 +5942,8 @@ msgid ""
 "{0} together with {1}. A picnic site rarely consists of only one single "
 "picnic table"
 msgstr ""
+"{0} tillsammans med {1}. En ordnad picnicplats (`picnic_site`) består sällan "
+"av endast ett picnicbord"
 
 #: ../plugins/TagFix_MultipleTag2.py:512
 #, python-brace-format
@@ -5900,6 +6034,8 @@ msgid ""
 "The relation contains the same member (with the same role) more than once. "
 "This is not expected for this type of relations."
 msgstr ""
+"Relationen innehåller samma medlem, i samma roll, mer än en gång. Det är "
+"inte förväntat för denna typ av relation."
 
 #: ../analysers/analyser_osmosis_relation_duplicate_member.py:66
 msgid "Remove the duplicate members until only unique members remain."
@@ -5917,16 +6053,24 @@ msgid ""
 "If you are sure that the route should follow this way, consider adding `{0}"
 "=yes`."
 msgstr ""
+"Kontrollera om leden/rutten faktiskt ska nyttja den här vägen.\n"
+"Om inte, flytta rutten så att den följer den designerade sträckningen. Detta "
+"kan innebära att flytta rutten till en separat karterad parallell väg.\n"
+"\n"
+"Om du är säker på att rutten ska följa den här vägen, överväg att lägga till "
+"`{0}=yes` på vägen."
 
 #: ../plugins/ConditionalRestrictions.py:80
 msgid "Equal conditional and unconditional tag value"
-msgstr ""
+msgstr "Likvärdigt villkorat och ovillkorat tagg-värde"
 
 #: ../plugins/ConditionalRestrictions.py:81
 msgid ""
 "The conditional tag has the same value as the same tag without the "
 "conditional restriction."
 msgstr ""
+"Den villkorade taggen har samma värde som samma tagg utan villkorade "
+"restriktioner."
 
 #: ../plugins/ConditionalRestrictions.py:82
 msgid ""
@@ -5934,26 +6078,31 @@ msgid ""
 "conditional`.\n"
 "Otherwise, remove the tag without `:conditional`."
 msgstr ""
+"Kontrollera om värdet är det som alltid gäller oavsett förhållanden. Om så "
+"är fallet, ta bort taggen med `:conditional`.\n"
+"Om inte, ta bort taggen utan `:conditional`."
 
 #: ../plugins/ConditionalRestrictions.py:84
 msgid ""
 "`bicycle=yes` together with `bicycle:conditional = yes @ (12:00-24:00)` "
 "means the same as just `bicycle=yes`."
 msgstr ""
+"`bicycle=yes` tillsammans med `bicycle:conditional = yes @ (12:00-24:00)` "
+"betyder samma sak som bara `bicycle=yes`."
 
 #: ../plugins/ConditionalRestrictions.py:224
 #, python-brace-format
 msgid "Tag `{0}` has the same value as `{1}`, without restrictions"
-msgstr ""
+msgstr "Taggen `{0}` har samma värde som `{1}`, utan restriktioner"
 
 #: ../plugins/Highway_Lanes.py:258 ../plugins/Highway_Lanes.py:265
 #, python-brace-format
 msgid "{0}={1} is not a positive integer"
-msgstr ""
+msgstr "{0}={1} är inte ett positivt heltal"
 
 #: ../plugins/Structural_Multipolygon.py:39
 msgid "Missing outer way with role `outer` for multipolygon"
-msgstr ""
+msgstr "Saknas sträcka med rollen `outer` att utgöra yttre ring i multipolygon"
 
 #: ../plugins/Structural_Multipolygon.py:43
 msgid ""
@@ -5961,12 +6110,17 @@ msgid ""
 "outer ways are also possible as long as they form one or more closed rings.\n"
 "The previous outer way may have been deleted, check the history."
 msgstr ""
+"Hitta sträckan som utgör yttre ring, och lägg till den i relationen med roll "
+"`outer`. Flera sträckor kan gemensamt utgöra yttre ring så länge som de "
+"bildar en eller flera slutna ringar.\n"
+"En redan angiven yttre ring kan ha blivit borttagen från relationen, kolla "
+"historiken."
 
 #: ../plugins/TagFix_MultipleTag2.py:32 ../plugins/TagFix_MultipleTag2.py:216
 #: ../plugins/TagFix_MultipleTag2.py:545 ../plugins/TagFix_MultipleTag2.py:731
 #, python-brace-format
 msgid "{0} with {1}, likely this is a single pitch instead"
-msgstr ""
+msgstr "{0} med {1}, troligen är detta en enskild ställplats/tältplats istället"
 
 #: ../plugins/TagFix_MultipleTag2.py:32
 msgid ""
@@ -5974,17 +6128,20 @@ msgid ""
 "common for a single pitch (`tourism=camp_pitch`) within a camping site. "
 "Possibly the two were interchanged?"
 msgstr ""
+"Campingplatsen (`tourism=camp_site`) har ett namn med siffror. Nummer är "
+"mycket vanligare som referens till en enskild tältplats/ställplats "
+"(`tourism=camp_pitch`) inom en campingplats. Möjligen har de två förväxlats?"
 
 #: ../plugins/TagFix_MultipleTag2.py:35 ../plugins/TagFix_MultipleTag2.py:193
 #: ../plugins/TagFix_MultipleTag2.py:524 ../plugins/TagFix_MultipleTag2.py:710
 #, python-brace-format
 msgid "Fence with {0} tag, also add {1}"
-msgstr ""
+msgstr "Stängsel med {0} tagg, lägg också till {1}"
 
 #: ../plugins/TagFix_Opening_Hours.py:69
 #, python-brace-format
 msgid "The `{0}` value is invalid and could not be parsed"
-msgstr ""
+msgstr "Värdet `{0}` är ogiltigt och kunde inte tolkas"
 
 #: ../analysers/analyser_merge_forest_compartment_FR.py:33
 msgid "Forest compartment not integrated"
