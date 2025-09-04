@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.13
 
 RUN apt-get update && \
     apt-get -y dist-upgrade && \
@@ -18,7 +18,7 @@ RUN apt-get update && \
         libprotobuf-dev \
         locales \
         make \
-        openjdk-17-jre-headless \
+        openjdk-21-jre-headless \
         pkg-config \
         postgis \
         postgresql-client \
