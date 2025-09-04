@@ -681,36 +681,42 @@ class Analyser_Osmosis_Powerline(Analyser_Osmosis):
             fix = T_(
 '''This tower should probably be connected to a power line.'''),
             trap = T_(
-'''It's possible that disused power features could be disconnected from the network.
-In which case make use of the `disused:` [lifecycle prefix](https://wiki.openstreetmap.org/wiki/Lifecycle_prefix).'''))
+'''It is possible that power features under construction, or disused power features could be disconnected from the live network.
+In this case, you should use the `construction:` or other recommended [lifecycle prefixes](https://wiki.openstreetmap.org/wiki/Tag:power%3Dline#Lifecycle).'''))
         self.classs[2] = self.def_class(item = 7040, level = 2, tags = ['power', 'fix:imagery'],
             title = T_('Unfinished power transmission line'),
             detail = T_(
-'''The line ends in a vacuum, and should be connected to another line or
-a transformer (`power=transformer`), a generator (`power=generator`)
-or marked as transitioning into ground (`location:transition=yes`).'''),
+'''The line ends in a vacuum, and should be connected to another line or a substation (`power=substation`),
+a transformer (`power=transformer`), a generator (`power=generator`),
+marked as transitioning into ground (`line_management=transition + location:transition=yes`)
+or explicitely terminated (`line_management=termination`).'''),
             trap = T_(
-'''It's possible that disused power features could be disconnected from the network.
-In which case make use of the `disused:` [lifecycle prefix](https://wiki.openstreetmap.org/wiki/Lifecycle_prefix).'''))
+'''It is possible that power features under construction, or disused power features could be disconnected from the live network.
+In this case, you should use the `construction:` or other recommended [lifecycle prefixes](https://wiki.openstreetmap.org/wiki/Tag:power%3Dline#Lifecycle).'''))
         self.classs[6] = self.def_class(item = 7040, level = 3, tags = ['power', 'fix:imagery'],
             title = T_('Unfinished power distribution line'),
             detail = T_(
-'''The line ends in a vacuum, and should be connected to another line or
-a transformer (`power=transformer`), a generator (`power=generator`)
-or marked as transitioning into ground (`location:transition=yes`).'''),
+'''The line ends in a vacuum, and should be connected to another line or a substation (`power=substation`),
+a transformer (`power=transformer`), a generator (`power=generator`),
+marked as transitioning into ground (`line_management=transition + location:transition=yes`)
+or explicitely terminated (`line_management=termination`).'''),
             trap = T_(
-'''It's possible that disused power features could be disconnected from the network.
-In which case make use of the `disused:` [lifecycle prefix](https://wiki.openstreetmap.org/wiki/Lifecycle_prefix).'''))
+'''It's possible that that power features under construction, or disused power features could be disconnected from the live network.
+In which case make use of the `construction:` or `disused:` [lifecycle prefixes](https://wiki.openstreetmap.org/wiki/Lifecycle_prefix).'''))
         self.classs[3] = self.def_class(item = 7040, level = 3, tags = ['power', 'fix:chair'],
             title = T_('Connection between different voltages'),
-            detail = T_('Two power lines meet at this point, but have inconsistent voltages (`voltage=*`).'),
+            detail = T_('Several power lines seem to connect at this point, but have inconsistent voltages (`voltage=*`).'),
             fix = T_(
 '''Check if the voltages are really different.
-Add a transformer using `power=transformer` (standalone transformers) or `power=pole + transformer=*` (pole mounted transformers).'''))
+If yes, add a substation (`power=substation`) or transformer (`power=transformer`) on this node (standalone transformers)
+or `power=pole + transformer=*` (pole mounted transformers).'''),
+            trap = T_(
+'''Some lines may share the same support without connection.
+Have a look to `line_management=termination` or `line_management=cross` for such sitations.'''))
         self.classs[4] = self.def_class(item = 7040, level = 3, tags = ['power', 'fix:imagery'],
             title = T_('Non power node on power way'),
             detail = T_(
-'''Power lines can only form a straight line between supports and therefore shouldn't
+'''Power lines can only form a straight line between their supports and therefore shouldn't
 have additional nodes that aren't tagged as a `power` feature.'''),
             fix = T_(
 '''If this node is a tower or pole, use the tag `power=tower` or
@@ -718,13 +724,27 @@ have additional nodes that aren't tagged as a `power` feature.'''),
         self.classs_change[5] = self.def_class(item = 7040, level = 3, tags = ['power', 'fix:imagery'],
             title = T_('Missing power tower or pole'),
             detail = T_(
-'''Based on the statistical frequency of the poles on this power line,
-there's likely an unmapped pole nearby.'''))
+'''Based on the statistical frequency of the supports on this power line,
+there's likely an unmapped pole nearby.'''),
+            fix = T_(
+'''Seek for a possibly missing support in the surroundings and add it to the line.'''))
         self.classs[7] = self.def_class(item = 7040, level = 3, tags = ['power', 'fix:chair'],
-            title = T_('Unmatched voltage of line on substation'))
+            title = T_('Unmatched voltage of line on substation'),
+            detail = T_(
+'''A line terminates near of a substation with inconsistent voltages between them.'''),
+            fix = T_(
+'''Continue the line towards its actual endpoint, check voltages on the line and the substation and adjust what is necessary to reflect what is seen on the ground.'''))
         self.classs[8] = self.def_class(item = 7040, level = 3, tags = ['power', 'fix:chair'],
-            title = T_('Power support line management suggestion'))
-
+            title = T_('Power support line management suggestion'),
+            detail = T_(
+'''[line_management](https://wiki.openstreetmap.org/wiki/Key:line_management) documents particular topologies occuring on power lines nodes. Have a look at the documented values.
+Suggestions are computed by looking at existing OpenStreetMap power lines and only support some combinations.
+It's encouraged to check and confirm the structure of the power grid on most relevant towers, particularly when proposed `line_management` differs from existing value.'''),
+            trap = T_(
+'''Suggested line management may not be correct according to your knowledge, aerial imagery or survey.
+In case of wrong suggestion, you should modify power lines geometry or add [voltage](https://wiki.openstreetmap.org/wiki/Key:voltage) or [circuits](https://wiki.openstreetmap.org/wiki/Key:circuits) to accurately reflect how the power grid looks there.
+When doing so, you may wait for Osmose to update the suggestion or directly add the correct `line_management` value on the node, if appropriate.
+If you think power grid is right in OpenStreetMap, then mark this suggestion as false positive.'''))
         self.callback50 = lambda res: {"class":5, "subclass": stablehash64(res[1]), "data":[self.way_full, self.positionAsText]}
 
     def way_power(self, res):
