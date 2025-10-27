@@ -57,7 +57,7 @@ class Name_Multilingual(Plugin):
 
                 combined = self.merge_sp_eu(str1, str2)
 
-                if name and (name == str1 or name == str2) and not combined:
+                if name and (name == str1 or name == str2 or name == combined):
                     return []
 
                 value = []
