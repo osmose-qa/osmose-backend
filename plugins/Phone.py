@@ -89,6 +89,12 @@ class Phone(Plugin):
                 # short numbers this also skips special numbers starting with 08
                 # or 09 since these may or may not be callable from abroad.
                 self.MissingInternationalPrefix = re.compile(r"^{0}[- ./]*([1-7](:?[- ./]*[0-9]){{{1},{2}}})$".format(self.local_prefix, min(self.size) - 1, max(self.size) - 1))
+            elif country and country.startswith("BE"):
+                # Local numbers to internationalize. Note that in addition to
+                # short numbers this also skips special numbers starting with 070,
+                # 077, 078, 0800, or 090x since these may or may not be callable from abroad.
+                # not merged into 07x 08x 09x because severals local numbers inside those prefix
+                self.MissingInternationalPrefix = re.compile(r"^(?:-{0}|{0})[- ./]*(?!70|77|78|800|90[0-9])([1-9](:?[- ./]*[0-9]){{{1},{2}}})$".format(self.local_prefix, min(self.size) - 1, max(self.size) - 1))
             elif self.size:
                 self.MissingInternationalPrefix = re.compile(r"^{0}[- ./]*((:?[0-9][- ./]*){{{1},{2}}}[0-9])$".format(self.local_prefix, min(self.size) - len(self.local_prefix) - 1, max(self.size) - len(self.local_prefix) - 1))
             else:
@@ -318,3 +324,38 @@ class Test(TestPluginCommon):
         # Verify we got no error for other correct numbers
         for good in (u"800 123", u"112", u"1515"):
             assert not p.node(None, {"phone": good}), ("phone='{0}'".format(good))
+
+    def test_BE(self):
+        p = Phone(None)
+        class _config:
+            options = {"country": "BE", "phone_code": "32", "phone_len": 8, "phone_len_short": [3, 4], "phone_format": r"^([+]%s([- ./]*[0-9]){7}[0-9])|[0-9]{3,4}$", "phone_international": "00", "phone_local_prefix": "0"}
+        class father:
+            config = _config()
+        p.father = father()
+        p.init(None)
+
+        for (bad, good) in (
+            ("+32021231212", "+32 21231212"),
+            ("0032 21231212", "+32 21231212"),
+            ("12 / 13", "12; 13"),
+            # Preserve formatting
+            ("+32 021231212", "+32 21231212"),
+            ("+32 02 123 12 12", "+32 2 123 12 12"),
+            ("+32 1307", "1307"),
+            ("021231212", "+32 21231212"),
+            ("-021231212", "+32 21231212"),
+            ("02 123 12 12", "+32 2 123 12 12"),
+        ):
+            # Check the bad number's error and fix
+            err = p.node(None, {"phone": bad})
+            self.check_err(err, ("phone='{0}'".format(bad)))
+            self.assertEqual(err[0]["fix"]["phone"], good)
+
+            # The correct number does not need fixing
+            assert not p.node(None, {"phone": good}), ("phone='{0}'".format(good))
+
+        # Verify we got no error for other correct numbers
+        for good in ("1307", "112", "1;2"):
+            assert not p.node(None, {"phone": good}), ("phone='{0}'".format(good))
+
+        assert len(p.node(None, {"phone": "02.123.12.12", "fax": "02.123.12.12"})) == 2
