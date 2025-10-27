@@ -5,7 +5,7 @@ osmose-backend can be run in a Docker container. This avoids setting
 up and configuring Python, Java and PostgreSQL on your system.
 
 Note : A PostgreSQL docker is automatically installed and run by
-docker-compose and doesn't need be installed manually.
+docker compose and doesn't need be installed manually.
 The osmose-frontend docker may also be run but is not mandatory.
 
 
@@ -14,7 +14,7 @@ Setup
 
 To build the docker image run this command from the docker folder:
 ```
-docker-compose build
+docker compose build
 ```
 
 For production setup, you may fill the `SENTRY_DSN` field in
@@ -32,8 +32,8 @@ chmod a+w ./work
 Taking Monaco (a quick and small one) as an example, once the docker
 image is built, you can run Osmose analyzers using:
 ```
-docker-compose --project-name monaco run --rm backend ./osmose_run.py --country=monaco
-docker-compose --project-name monaco down # Destroy the loaded data base
+docker compose --project-name monaco run --rm backend ./osmose_run.py --country=monaco
+docker compose --project-name monaco down # Destroy the loaded data base
 ```
 
 This will run interactively and you will see the output scrolling on your
@@ -67,7 +67,7 @@ requiring extra configuration or upload password.
 
 Build the docker image with develop tools included:
 ```
-docker-compose -f docker-compose.yml -f docker-compose-dev.yml build
+docker compose -f docker-compose.yml -f docker-compose-dev.yml build
 ```
 
 
@@ -80,7 +80,7 @@ chmod a+w ../modules/osm_pbf_parser/
 
 Enter the container with:
 ```
-docker-compose -f docker-compose.yml -f docker-compose-dev.yml run --rm backend
+docker compose -f docker-compose.yml -f docker-compose-dev.yml run --rm backend
 ```
 
 On the first execution only, compile the OSM PBF parser:
@@ -89,7 +89,7 @@ cd modules/osm_pbf_parser/ && make && cd -
 ```
 
 Note: when exiting the backend, the dependency Database container will still be
-running. You can stop it with `docker-compose stop`.
+running. You can stop it with `docker compose stop`.
 
 
 ## Access to the Database
@@ -109,7 +109,7 @@ osmose=> set search_path to monaco,public;
 
 You can Reset the Database and the docker containers with:
 ```
-docker-compose down -v
+docker compose down -v
 ```
 
 
@@ -130,14 +130,14 @@ pytest plugins/TagFix_Housenumber.py
 
 Download and load a country into the Database:
 ```
-docker-compose -f docker-compose.yml -f docker-compose-dev.yml run -p 8888:8888 --rm backend ./osmose_run.py --no-clean --country=monaco --skip-analyser --skip-upload
+docker compose -f docker-compose.yml -f docker-compose-dev.yml run -p 8888:8888 --rm backend ./osmose_run.py --no-clean --country=monaco --skip-analyser --skip-upload
 ```
 You do not need to load the country each time. It remains in the Database.
 
 
 Then run the jupyter-notebook web server:
 ```
-docker-compose -f docker-compose.yml -f docker-compose-dev.yml run -p 8888:8888 --rm backend jupyter-notebook
+docker compose -f docker-compose.yml -f docker-compose-dev.yml run -p 8888:8888 --rm backend jupyter-notebook
 ```
 Note the `8888:8888`, which exposes port `8888` to localhost.
 
@@ -152,7 +152,7 @@ own analyzer code.
 
 From docker container you can test all the analyzers using:
 ```
-docker-compose -f docker-compose.yml -f docker-compose-dev.yml run --rm backend
+docker compose -f docker-compose.yml -f docker-compose-dev.yml run --rm backend
 ```
 
 To test a specific analyzer:
@@ -187,16 +187,16 @@ First time build
 git clone https://github.com/osmose-qa/osmose-frontend.git
 cd osmose-frontend/docker
 curl https://osmose.openstreetmap.fr/export/osmose-menu.sql.bz2 | bzcat > osmose-menu.sql
-docker-compose build
-docker-compose -f docker-compose.yml -f docker-compose-test.yml up -d postgres
+docker compose build
+docker compose -f docker-compose.yml -f docker-compose-test.yml up -d postgres
 # Wait fwe seconds for postgres ready
-docker-compose -f docker-compose.yml -f docker-compose-test.yml run --rm api bash -c "cd web_api/static && npm run build"
-docker-compose -f docker-compose.yml -f docker-compose-test.yml stop postgres
+docker compose -f docker-compose.yml -f docker-compose-test.yml run --rm api bash -c "cd web_api/static && npm run build"
+docker compose -f docker-compose.yml -f docker-compose-test.yml stop postgres
 ```
 
 Run the frontend
 ```
-docker-compose -f docker-compose.yml -f docker-compose-test.yml up
+docker compose -f docker-compose.yml -f docker-compose-test.yml up
 ```
 
 For a detailed description of the procedure see
@@ -205,7 +205,7 @@ https://github.com/osmose-qa/osmose-frontend/tree/master/docker
 
 To upload the results of the analysis to the frontend, use:
 ```
-docker-compose -f docker-compose.yml -f docker-compose-dev.yml -f docker-compose-frontend.yml run --rm backend bash
+docker compose -f docker-compose.yml -f docker-compose-dev.yml -f docker-compose-frontend.yml run --rm backend bash
 ```
 
 The result will be available at: http://127.0.0.1:8080/en/issues/open?item=xxxx&useDevItem=all
