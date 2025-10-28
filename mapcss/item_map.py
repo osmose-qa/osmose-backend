@@ -650,7 +650,7 @@ item_map = \
                        'Unsuitable value for transformer=* tag': 2,
                        'power=circuit relations should have a topology tag with value linear or branched': 209,
                        'wires tag should be on the power line and not on the circuit relation': 210},
-             'item': 9042,
+             'item': 7040,
              'prefix': 'Josm_',
              'tags': ['tag', 'power'],
              'url': 'https://github.com/open-energy-transition/validate-my-grid/blob/gh-pages/powerQA.validator.mapcss'},
