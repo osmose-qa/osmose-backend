@@ -44,10 +44,11 @@ class Analyser_Merge_Public_Transport_FR_stan(Analyser_Merge_Point):
                     types = ["nodes", "ways"],
                     tags = [{"public_transport": "platform"}]),
                 conflationDistance = 2,
-                osmRef = "ref",
+                osmRef = "gtfs:stop_id:FR-GES-STAN",
                 mapping = Mapping(
                     static1 = {
                         "public_transport": "platform",
+                        "highway": "platform",
                         "bus": "yes",
                     },
                     static2 = {"source": self.source},
