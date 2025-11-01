@@ -31,7 +31,7 @@ from pycountry import countries as pycountries
 
 # Downloads and returns the parsed NSI database
 def download_nsi():
-    nsi_url = "https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/nsi.json"
+    nsi_url = "https://cdn.jsdelivr.net/npm/name-suggestion-index@latest/dist/json/nsi.min.json"
     json_str = urlread(nsi_url, 30)
     results = json.loads(json_str)
     return results['nsi']
