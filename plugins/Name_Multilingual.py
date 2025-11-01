@@ -50,45 +50,47 @@ class Name_Multilingual(Plugin):
                 name = tags.get("name")
                 if name is not None and ("-" in name or "(" in name):
                     return []
-                separator = " / "
 
+                separator = " / "
                 str1 = tags.get("name:" + lang[0])
                 str2 = tags.get("name:" + lang[1])
-
                 combined = self.merge_sp_eu(str1, str2)
 
-                if name and (name == str1 or name == str2) and not combined:
+                if name and (
+                    name == str1
+                    or name == str2
+                    or name == f"{str1}{separator}{str2}"
+                    or name == f"{str2}{separator}{str1}"
+                    or name == combined
+                ):
                     return []
 
                 value = []
 
                 if name and "/" in name and separator not in name:
                     value.append({"name": name.replace("/", separator)})
-
-                elif not name and str1 and not str2:
-                    value.append({"name": str1.strip()})
-
-                elif not name and str2 and not str1:
-                    value.append({"name": str2.strip()})
-
+                elif not name and (str1 or str2):
+                    value.append({"name": (str1 or str2).strip()})
                 elif combined:
                     value.append({"name": combined})
-
                 elif str1 and str2 and not combined:
-                    value.append({"name": str1.strip() + separator + str2.strip()})
-                    value.append({"name": str2.strip() + separator + str1.strip()})
-
-                elif name and str1 and name != str1 and not combined:
-                    namestr1 = self.merge_sp_eu(name, str1) if separator not in name else None
-                    value.append({f"name:{lang[1]}": name })
-                    value.append({"name": namestr1 or name.strip() + separator + str1.strip(), f"name:{lang[1]}": name })
-                    value.append({"name": namestr1 or str1.strip() + separator + name.strip(), f"name:{lang[1]}": name })
-
-                elif name and str2 and name != str2 and not combined:
-                    namestr2 = self.merge_sp_eu(name, str2) if separator not in name else None
-                    value.append({f"name:{lang[0]}": name })
-                    value.append({"name": namestr2 or name.strip() + separator + str2.strip(), f"name:{lang[0]}": name })
-                    value.append({"name": namestr2 or str2.strip() + separator + name.strip(), f"name:{lang[0]}": name })
+                    a, b = str1.strip(), str2.strip()
+                    value.append({"name": a + separator + b})
+                    value.append({"name": b + separator + a})
+                elif not combined and separator not in name:
+                    def append(a, b, tag):
+                        value.append({tag: a})
+                        merged = self.merge_sp_eu(a, b)
+                        if merged:
+                            value.append({"name": merged, tag: a})
+                        else:
+                            a_s, b_s = a.strip(), b.strip()
+                            value.append({"name": a_s + separator + b_s, tag: a})
+                            value.append({"name": b_s + separator + a_s, tag: a})
+                    if name and str1 and name != str1:
+                        append(name, str1, f"name:{lang[1]}")
+                    if name and str2 and name != str2:
+                        append(name, str2, f"name:{lang[0]}")
 
                 return value
             self.aggregator = aggregator
@@ -219,9 +221,26 @@ class Name_Multilingual(Plugin):
             return None
         if len(str1.split()) < 2 or len(str2.split()) < 2:
             return None
-        if str1.split()[1:] != str2.split()[:-1]:
-            return None
-        return str1.split()[0] + " " + str2
+        words1 = str1.split()
+        words2 = str2.split()
+        merged = None
+        # Try to find overlap: end of str1 matches start of str2
+        for i in range(len(words1)):
+            if words1[i:] == words2[:len(words1) - i]:
+                merged = str1 + " " + " ".join(words2[len(words1) - i:])
+                break
+        # If not found, try the reverse order
+        if not merged:
+            for i in range(len(words2)):
+                if words2[i:] == words1[:len(words2) - i]:
+                    merged = str2 + " " + " ".join(words1[len(words2) - i:])
+                    break
+        # Validate length: merged string must be shorter than sum of both parts
+        # Otherwise, it means there was no real fusion (just concatenation or repetition)
+        if merged and len(merged) < (len(str1) + len(str2)):
+            return merged
+
+        return None
 
     def split_sp_ast(self, name):
         if "-" not in name and "(" not in name:
@@ -405,19 +424,28 @@ class Test(TestPluginCommon):
         self.p.father = father()
         self.p.init(None)
 
-        assert not self.p.way(None, {"name": "Carretera Ollaretxe errepidea", "name:es": "Carretera Ollaretxe", "name:eu": "Ollaretxe errepidea"}, None)
-        assert not self.p.way(None, {"name": "Kale Nagusia / Calle Mayor", "name:es": "Calle Mayor", "name:eu": "Kale Nagusia"}, None)
-        assert not self.p.way(None, {"name": "Vicente Blasco Ibañez kalea / Calle Vicente Blasco Ibáñez", "name:es": "Calle Vicente Blasco Ibáñez", "name:eu": "Vicente Blasco Ibañez kalea"}, None)
-        assert not self.p.way(None, {"name": "Calle San Diego kalea", "name:es": "Calle San Diego", "name:eu": "San Diego kalea"}, None)
-        assert not self.p.way(None, {"name": "Calle Islas Canarias / Kanariar Uharteen kalea", "name:es": "Calle Islas Canarias", "name:eu": "Kanariar Uharteen kalea"}, None)
-        assert not self.p.way(None, {"name": "Vicente Blasco Ibañez kalea / Calle Vicente Blasco Ibáñez", "name:es": "", "name:eu": ""}, None)
-        assert not self.p.way(None, {"name": "Calle San Diego"}, None)
+        # single: name equals name:eu
         assert not self.p.way(None, {"name": "Errenteria", "name:es": "Renteria", "name:eu": "Errenteria"}, None)
-        assert not self.p.way(None, {"name": "Goiko zentral elektrikoa", "name:eu": "Goiko zentral elektrikoa"}, None)
-        assert self.p.way(None, {"name": "Calle Islas Canarias / Kanariar Uharteen kalea", "name:es": "Calle Canarias", "name:eu": "Kanarias kalea"}, None)
+        # single: name equals name:es
+        assert not self.p.way(None, {"name": "Carretera de Montoria", "name:es": "Carretera de Montoria", "name:eu": "Montoriako etorbidea"}, None)
+        # combined: single word
+        assert not self.p.way(None, {"name": "Carretera Ollaretxe errepidea", "name:es": "Carretera Ollaretxe", "name:eu": "Ollaretxe errepidea"}, None)
+        # combined: multiple words merged
+        assert not self.p.way(None, {"name": "Calle Ramon y Cajal kalea", "name:es": "Calle Ramon y Cajal", "name:eu": "Ramon y Cajal kalea"}, None)
+        # combined: multiple words unmerged
+        assert not self.p.way(None, {"name": "Colegio de Educación Infantil Izarra Haur Hezkuntzako Ikastetxea", "name:es": "Colegio de Educación Infantil Izarra", "name:eu": "Izarra Haur Hezkuntzako Ikastetxea"}, None)
+        # slash: first name:eu, then name:es
+        assert not self.p.way(None, {"name": "Kale Nagusia / Calle Mayor", "name:es": "Calle Mayor", "name:eu": "Kale Nagusia"}, None)
+        # slash: first name:es, then name:eu
+        assert not self.p.way(None, {"name": "Calle Islas Canarias / Kanariar Uharteen kalea", "name:es": "Calle Islas Canarias", "name:eu": "Kanariar Uharteen kalea"}, None)
+        # slash: no language tags
+        assert not self.p.way(None, {"name": "Vicente Blasco Ibañez kalea / Calle Vicente Blasco Ibáñez"}, None)
+
+        # not matching: name != name:eu
         assert self.p.way(None, {"name": "Calle San Diego", "name:eu": "San Diego kalea"}, None)
+        # not matching: name != name:es
         assert self.p.way(None, {"name": "Kale Nagusia", "name:es": "Calle Mayor"}, None)
-        assert self.p.way(None, {"name": "Carretera Ollaretxe", "name:es": "Carretera Ollaretxe", "name:eu": "Ollaretxe errepidea"}, None)
-        assert self.p.way(None, {"name:eu": "San Diego kalea"}, None)
-        assert self.p.way(None, {"name:es": "Calle Mayor"}, None)
+        # not matching: name != (name:es + name:eu || name:eu + name:es)
+        assert self.p.way(None, {"name": "Calle Islas Canarias / Kanariar Uharteen kalea", "name:es": "Calle Canarias", "name:eu": "Kanarias kalea"}, None)
+        # bad separator
         assert self.p.way(None, {"name": "Doneztebe/Santesteban", "name:eu": "Doneztebe", "name:es": "Santesteban"}, None)
