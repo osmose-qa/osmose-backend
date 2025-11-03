@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-08-30 03:01+0000\n"
+"PO-Revision-Date: 2025-11-04 22:51+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13.1-dev\n"
+"X-Generator: Weblate 5.14.1-dev\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -94,7 +94,7 @@ msgstr "Ogiltig roll"
 
 #: ../analysers/analyser_osmosis_highway_broken_level_continuity.py:110
 msgid "Broken highway level continuity"
-msgstr "Trasig nivå-kontinuitet för väg"
+msgstr "Trasig kontinuitet för vägklassificering"
 
 msgid "Merge building (triangle)"
 msgstr "Sammanslå byggnad (triangel)"
@@ -1567,7 +1567,7 @@ msgstr ""
 
 #: ../analysers/analyser_merge_postal_code_FR.py:31
 msgid "admin_level 8 without tag \"postal_code\""
-msgstr ""
+msgstr "`admin_level` 8 utan postnummer (`postal_code`)"
 
 #: ../analysers/analyser_merge_power_plant_FR.py:33
 msgid "Power plant not integrated, geocoded at municipality level"
@@ -1591,7 +1591,7 @@ msgstr ""
 #: ../analysers/analyser_osmosis_highway_cul-de-sac_level.py:82
 #, python-brace-format
 msgid "Sudden highway type change (level {0})"
-msgstr ""
+msgstr "Plötslig förändring av vägtyp (nivå {0})"
 
 #: ../plugins/Phone.py:134
 #, python-brace-format
