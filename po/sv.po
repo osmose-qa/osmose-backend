@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-11-04 22:51+0000\n"
+"PO-Revision-Date: 2025-11-06 20:21+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14.1-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -2069,6 +2069,9 @@ msgid ""
 "\n"
 "Intersection lane / building."
 msgstr ""
+"![](https://wiki.openstreetmap.org/w/images/d/dc/Osmose-eg-error-1070.png)\n"
+"\n"
+"Överlappande väg / byggnad."
 
 #: ../analysers/analyser_osmosis_natural_swimming-pool.py:87
 msgid ""
@@ -2082,6 +2085,9 @@ msgid ""
 "\n"
 "Wrong tag for private swimming pool."
 msgstr ""
+"![](https://wiki.openstreetmap.org/w/images/a/a1/Osmose-eg-error-3080.png)\n"
+"\n"
+"Felaktig tagg för privat pool."
 
 #: ../analysers/analyser_osmosis_node_like_way.py:82
 msgid ""
@@ -2448,7 +2454,7 @@ msgstr "Kontrollera att korrigeringen inte ändrar innebörden av taggen."
 
 #: ../analysers/analyser_osmosis_useless.py:130
 msgid "Add tags, role into a relation or delete."
-msgstr ""
+msgstr "Lägg till taggar, roll i en relation eller radera."
 
 #: ../analysers/analyser_osmosis_useless.py:132
 msgid "The object may be a duplicate."
