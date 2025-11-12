@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-11-06 20:21+0000\n"
+"PO-Revision-Date: 2025-11-12 12:51+0000\n"
 "Last-Translator: Jacob <jacob@carlbacker.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/osmose/backend/"
 "sv/>\n"
@@ -4971,11 +4971,12 @@ msgid ""
 "The tag `name` should have the value `name:right / name:left` or `name:"
 "left / name:right`."
 msgstr ""
-"Det här är en gata med olika namn på vardera sida, utifrån taggarna "
-"`name:left` och `name:right`.\n"
-"Dessa namn stämmer inte med värdet för `name`. Taggen name bör ha det "
-"kombinerade värdet av namnen för respektive sida separerade med \"/\", ex. "
-"`name:right / name:left` eller `name:left / name:right`."
+"Det här är en gata med olika namn på vardera sida, enligt taggarna "
+"`name:left` och `name:right`. Dessa namn stämmer inte med värdet för `name`."
+"\n"
+"Taggen `name` bör ha det kombinerade värdet av de båda namnen för respektive "
+"sida, separerade med \"/\", ex. `name:right / name:left` eller `name:left / "
+"name:right`."
 
 #: ../plugins/Name_Multiple.py:56
 msgid ""
@@ -5000,6 +5001,9 @@ msgid ""
 "If there is no other tag (or combination of tags) that properly describes "
 "the access permissions, custom tags may be used."
 msgstr ""
+"Om det inte finns en etablerad tagg (eller kombination av taggar) som "
+"korrekt beskriver förhållandena för tillträdesvillkoren, är det möjligt att "
+"använda egna anpassade taggar istället."
 
 #: ../plugins/TagFix_Access.py:59
 msgid "Transport mode in access value"
@@ -5043,12 +5047,14 @@ msgstr "Okänt tillträdesvärde \"{0}\" för nyckel \"{1}\""
 
 #: ../plugins/TagFix_BadValue.py:43
 msgid "Unspecific value"
-msgstr ""
+msgstr "Ospecificerat värde"
 
 #: ../plugins/TagFix_BadValue.py:44
 msgid ""
 "The value of the tag is very unspecific. Replace it by a meaningful value."
 msgstr ""
+"Värdet för denna tagg är inte så specifikt eller precist. Ersätt det med ett "
+"mer specifikt eller användbart värde."
 
 #: ../plugins/Highway_Parking_Lane.py:46
 msgid ""
@@ -5064,7 +5070,7 @@ msgstr ""
 #: ../plugins/Highway_Parking_Lane.py:135
 #, python-brace-format
 msgid "Use any of the following values: `{0}`."
-msgstr ""
+msgstr "Använd vilket som av följande värden: `{0}`."
 
 #: ../plugins/Highway_Parking_Lane.py:76
 msgid "Bad parking:condition:[side] value"
@@ -5079,7 +5085,7 @@ msgstr ""
 #: ../plugins/Highway_Parking_Lane.py:234
 #, python-brace-format
 msgid "`{0}` is a value for key `{1}`"
-msgstr ""
+msgstr "`{0}` är ett värde för nyckeln `{1}`"
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:442
 msgid "Unconnected drive-through"
@@ -5111,6 +5117,9 @@ msgid ""
 "Circular highways without right of way should be tagged as "
 "`junction=circular`."
 msgstr ""
+"En väg med `junction=roundabout` måste per definition ha förkörsrätt, alltså "
+"att anslutande vägar in har väjningsplikt.\n"
+"Cirkulära vägar utan förkörsrätt bör taggas `junction=circular` istället."
 
 #: ../analysers/analyser_osmosis_roundabout.py:112
 msgid ""
@@ -5120,12 +5129,21 @@ msgid ""
 "If the node with `highway=traffic_signals`, `give_way` or `stop` is actually "
 "for the road entering the roundabout, tag it on that way only."
 msgstr ""
+"Ersätt `junction=roundabout` för hela den cirkulära vägen med "
+"`junction=circular`.\n"
+"\n"
+"Om noden med `highway=traffic_signals`, `give_way` eller `stop` faktiskt är "
+"avsedd för vägen in till cirkulationen, tagga endast den vägen och inte "
+"cirkulationen."
 
 #: ../analysers/analyser_osmosis_roundabout.py:116
 msgid ""
 "Make sure to tag `oneway=*` when using `junction=circular`. Unlike "
 "`junction=roundabout`, `junction=circular` does not imply `oneway=yes`."
 msgstr ""
+"Kom ihåg att tagga `oneway=*` för `junction=circular`. Till skillnad från "
+"`junction=roundabout`, så innefattar inte `junction=circular` ett "
+"underförstått `oneway=yes`."
 
 #: ../analysers/analyser_osmosis_useless.py:126
 msgid ""
@@ -5394,6 +5412,8 @@ msgid ""
 "Small patches of maintained vegetation should be tagged as any of `{0}`, "
 "(etcetera) rather than `landuse=village_green`."
 msgstr ""
+"Små grönytor som sköts om bör taggas som något av `{0}` (etcetera), snarare "
+"än `landuse=village_green`."
 
 #: ../analysers/analyser_osmosis_polygon_small.py:128
 #: ../analysers/analyser_osmosis_polygon_small.py:136
@@ -5526,6 +5546,9 @@ msgid ""
 "Most street-side glass containers only accept soda-lime glass (e.g. bottles "
 "and jars), but not glasses for high temperatures or window glass."
 msgstr ""
+"De allra flesta återvinningsstationer och -containrar tar endast emot "
+"glasförpackningar (som flaskor och burkar), och inte fönsterglas, dricksglas "
+"mm."
 
 #: ../plugins/Colour.py:95 ../plugins/Colour.py:161 ../plugins/Colour.py:315
 #: ../plugins/Colour.py:387 ../plugins/Colour.py:537 ../plugins/Colour.py:603
@@ -5864,6 +5887,15 @@ msgid ""
 "The first condition can be removed. The simplified rule would be:\n"
 "`maxspeed:conditional = 40 @ (12:00-24:00); 60 @ (00:00-12:00)`."
 msgstr ""
+"I följande exempel; hastighetsgränsen 20 km/h mellan 00-12 (första villkoret)"
+" kommer alltid skrivas över av 60 km/h (tredje villkoret) eftersom de har "
+"samma villkor :\n"
+"`maxspeed:conditional = 20 @ (00:00-12:00); 40 @ (12:00-24:00); 60 @ "
+"(00:00-12:00)`.\n"
+"\n"
+"Första villkoret kan tas bort helt utan att betydelsen förändras. Den "
+"förenklade regeln skulle bli:\n"
+"`maxspeed:conditional = 40 @ (12:00-24:00); 60 @ (00:00-12:00)`."
 
 #: ../analysers/analyser_merge_parking_FR_BNLS.py:44
 msgid ""
@@ -5957,6 +5989,8 @@ msgid ""
 "{0} together with {1}. {0} should be used for the area containing the "
 "attraction, {1} for the actual tracks"
 msgstr ""
+"{0} tillsammans med {1}. {0} bör användas för området som innehåller "
+"attraktionen, {1} för de faktiska spåren"
 
 #: ../plugins/Website.py:51
 msgid "Invalid URL"
@@ -6190,12 +6224,19 @@ msgid ""
 "Alternatively, draw the contour of the bridge using `man_made=bridge`\n"
 "and add information about the bridge architecture to this contour."
 msgstr ""
+"Lägg till en mer detaljerad [brokonstruktion eller typ]"
+"(https://wiki.openstreetmap.org/wiki/Key:bridge).\n"
+"\n"
+"Alternativt, rita ut området som motsvarar bron med `man_made=bridge` och "
+"lägg till information om brons konstruktion på det objektet."
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:182
 msgid ""
 "A bridge or tunnel is usually not connected to regular highways except at "
 "the end points."
 msgstr ""
+"En bro eller tunnel är normalt inte ansluten till vanliga vägar förutom vid "
+"ändpunkterna."
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:184
 msgid ""
@@ -6220,19 +6261,19 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:195
 msgid "Bridge connected to crossing non-bridge highway"
-msgstr ""
+msgstr "Bro ansluten till korsande väg som inte är bro"
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:197
 msgid "Tunnel connected to crossing non-tunnel highway"
-msgstr ""
+msgstr "Tunnel ansluten till korsande väg som inte är tunnel"
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:199
 msgid "Bridge connected to non-bridge highway"
-msgstr ""
+msgstr "Bro ansluten till väg som inte är bro"
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:201
 msgid "Tunnel connected to non-tunnel highway"
-msgstr ""
+msgstr "Tunnel ansluten till väg som inte är tunnel"
 
 #: ../analysers/analyser_osmosis_parking_highway.py:113
 msgid ""
@@ -6245,14 +6286,22 @@ msgid ""
 "See [parking](https://wiki.openstreetmap.org/wiki/Key:parking) tag on the "
 "wiki."
 msgstr ""
+"Det bör finnas en väg (`highway`) som leder till den här parkeringen, för "
+"korrekt ruttnavigering. Lägg till en väg, eller undersök om taggen "
+"`parking=*` är korrekt.\n"
+"Om det tex är en parkering längs en gata (`parking=street_side`) eller "
+"liknande, så ändra till lämpliga taggar.\n"
+"\n"
+"See [wiki om parkeringstaggen]"
+"(https://wiki.openstreetmap.org/wiki/Key:parking)"
 
 #: ../analysers/analyser_osmosis_powerline.py:668
 msgid "Unfinished power transmission line"
-msgstr ""
+msgstr "Ofullständig högspänningsledning"
 
 #: ../analysers/analyser_osmosis_powerline.py:677
 msgid "Unfinished power distribution line"
-msgstr ""
+msgstr "Ofullständig kraftledning"
 
 #: ../analysers/analyser_osmosis_powerline.py:707
 msgid "Power support line management suggestion"
@@ -6265,12 +6314,12 @@ msgstr "Möjligen felstavat namn"
 #: ../analysers/analyser_osmosis_soundex.py:238
 msgid ""
 "A name \"sounds\" similar to that of another but is not spelled the same way."
-msgstr ""
+msgstr "Ett namn \"låter\" liknande som ett annat namn, men stavas olika."
 
 #: ../analysers/analyser_osmosis_soundex.py:274
 #, python-brace-format
 msgid "{0} 'sounds' similar to {1} but is spelled differently"
-msgstr ""
+msgstr "{0} \"låter\" liknande som {1} men stavas olika"
 
 #: ../plugins/Bicycle.py:27 ../plugins/Bicycle.py:225
 #, python-brace-format
@@ -6282,23 +6331,26 @@ msgid ""
 "Capacity tags should be positive integers. For some objects it can also be "
 "used to indicate the effective volume of that object (by default in m³)."
 msgstr ""
+"Tagg för kapacitet bör vara positivt heltal.\n"
+"För vissa objekt kan det även användas för att beskriva volymen av ett "
+"objekt (i m³ som standard)."
 
 #: ../plugins/Capacity.py:71 ../plugins/Capacity.py:92
 #, python-brace-format
 msgid "\"{0}\" value \"{1}\" is not an integer nor a volume"
-msgstr ""
+msgstr "\"{0}\"-värdet \"{1}\" är inte ett heltal eller en volym"
 
 #: ../plugins/Name_Script.py:38
 msgid "Some characters don't match the language charset"
-msgstr ""
+msgstr "Vissa tecken stämmer inte överens med språkets teckenuppsättning"
 
 #: ../plugins/Name_Script.py:49
 msgid "Non-printable character"
-msgstr ""
+msgstr "Icke-utskrivbart tecken"
 
 #: ../plugins/Name_Script.py:51
 msgid "A non-printable character has been used."
-msgstr ""
+msgstr "Ett tecken har använts som inte är utskrivbart eller kan renderas."
 
 #: ../plugins/Number.py:34
 msgid ""
@@ -6306,6 +6358,10 @@ msgid ""
 "and not a comma. For guidelines on numeric values with units see [the\n"
 "wiki](https://wiki.openstreetmap.org/wiki/Map_Features/Units)."
 msgstr ""
+"Taggen förväntar ett numeriskt värde med punkt som decimaltecken, inte komma."
+"\n"
+"För vägledning kring numeriska värden med enheter, se [wiki om enheter]"
+"(https://wiki.openstreetmap.org/wiki/Map_Features/Units)."
 
 #: ../plugins/Number.py:67
 msgid "Discouraged unit alias"
@@ -6320,10 +6376,16 @@ msgid ""
 "[Any_tags_you_like#Syntactic_conventions_for_new_tags](https://wiki."
 "openstreetmap.org/wiki/Any_tags_you_like#Syntactic_conventions_for_new_tags)."
 msgstr ""
+"Nyckeln i taggen innehåller tecken som avråds från att användas för nycklar."
+"\n"
+"Den bör bestå av enbart de alfanumeriska tecknen: 0-9, a-z "
+"(helst små bokstäver), samt skiljetecken '_' och ':'.\n"
+"Läs mer om [riktlinjer för nya taggar](https://wiki.openstreetmap.org/wiki/"
+"Any_tags_you_like#Syntactic_conventions_for_new_tags) på wikin."
 
 #: ../plugins/TagFix_BadKey.py:38
 msgid "Check the key, and correct it."
-msgstr ""
+msgstr "Kontrollera nyckeln, och korrigera den."
 
 #: ../plugins/TagFix_BadKey.py:40
 msgid "There are certainly false positives."
@@ -6383,16 +6445,18 @@ msgstr "Motstridiga trädegenskaper"
 
 #: ../plugins/TagFix_Tree.py:60
 msgid "The leaf type and/or leaf cycle does not match with the species."
-msgstr ""
+msgstr "Bladtypen och/eller lövningscykeln stämmer inte överens med arten."
 
 #: ../plugins/TagFix_Tree.py:62
 msgid "Verify that the species is correct, before adding the leaf properties."
 msgstr ""
+"Säkerställ först att arten är korrekt, innan du lägger till egenskaper om "
+"blad."
 
 #: ../plugins/TagFix_Tree.py:84
 #, python-brace-format
 msgid "Conflict between `{0}` and `{1}`"
-msgstr ""
+msgstr "Konflikt mellan `{0}` och `{1}`"
 
 #: ../plugins/TagFix_ZawgyiBurmese.py:41
 msgid "Value contains Zawgyi-encoded Burmese characters"
@@ -6430,7 +6494,7 @@ msgstr ""
 #: ../plugins/indoor.py:25
 #, python-brace-format
 msgid "For the number of rooms in a facility, use `{0}` instead."
-msgstr ""
+msgstr "För antalet rum i en anläggning, använd `{0}` istället."
 
 #: ../analysers/analyser_merge_advertising_board_FR_brest.py:31
 msgid "Advertising board not integrated"
@@ -6457,16 +6521,22 @@ msgid ""
 "addr:neighbourhood, addr:quarter, addr:suburb, addr:place or addr:hamlet "
 "tag, nor within an associatedStreet relation"
 msgstr ""
+"addr:housenumber eller addr:housename, utan addr:street, addr:district, addr:"
+"neighbourhood, addr:quarter, addr:suburb, addr:place eller addr:hamlet tagg, "
+"inte heller inom en associatedStreet relation"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:51
 msgid "Speed limit type without speed limit"
-msgstr ""
+msgstr "Hastighetsgräns-typ, utan hastighetsgräns"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:53
 msgid ""
 "A speed limit type is given in `maxspeed:type` or `source:maxspeed`, but no "
 "speed limit is set in `maxspeed`."
 msgstr ""
+"Typ av eller källa till en hastighetsgräns är angiven i `maxspeed:type` "
+"eller `source:maxspeed`, men någon faktisk hastighetsgräns i `maxspeed` har "
+"inte angetts."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:55
 msgid ""
@@ -6475,6 +6545,10 @@ msgid ""
 "see [Implicit maxspeed values](https://wiki.openstreetmap.org/wiki/Key:"
 "maxspeed#Implicit_maxspeed_values)."
 msgstr ""
+"Ange `maxspeed` och antingen `maxspeed:type` eller `source:maxspeed` om "
+"lämpligt.\n"
+"För lista med värden, se [Implicita värden för hastighetsgräns]"
+"(https://wiki.openstreetmap.org/wiki/Key:maxspeed#Implicit_maxspeed_values)."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:58
 msgid ""
@@ -6483,6 +6557,10 @@ msgid ""
 "Always check `highway`, all other tags related to speed and verify on the "
 "ground."
 msgstr ""
+"Sätt inte bara ett `maxspeed` värde baserat på angiven typ. Även typen kan "
+"vara fel!\n"
+"Undersök alltid `highway`, andra taggar relaterade till hastighet och "
+"bekräfta i fält."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:63
 msgid "Invalid speed limit value"
@@ -6493,6 +6571,8 @@ msgid ""
 "The speed limit in `maxspeed` must be either numeric or `walk`. Do not "
 "specify a unit, km/h is the default."
 msgstr ""
+"Hastighetsgränsen i `maxspeed` måste vara en siffra eller `walk`. Ange ingen "
+"enhet, km/h är standard."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:67
 msgid ""
@@ -6501,6 +6581,9 @@ msgid ""
 "see [Implicit maxspeed values](https://wiki.openstreetmap.org/wiki/Key:"
 "maxspeed#Implicit_maxspeed_values)."
 msgstr ""
+"Ange `maxspeed`, samt typ i `maxspeed:type` eller `source:maxspeed`.\n"
+"För lista med värden, se [Implicita värden för hastighetsgräns]"
+"(https://wiki.openstreetmap.org/wiki/Key:maxspeed#Implicit_maxspeed_values)."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:70
 msgid ""
@@ -6547,6 +6630,8 @@ msgstr "Ogiltig typ för hastighetsgräns"
 msgid ""
 "The speed limit type in `maxspeed:type` or `source:maxspeed` is not valid."
 msgstr ""
+"Typen av hastighetsgräns angiven i `maxspeed:type` eller `source:maxspeed` "
+"är inte giltig."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:93
 msgid ""
@@ -6574,6 +6659,8 @@ msgid ""
 "and data consumers\n"
 "if the values are different."
 msgstr ""
+"Både `maxspeed:type` och `source:maxspeed` har angivits. Detta kan förvirra "
+"karterare och datakonsumenter om värdena är olika."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:107
 msgid ""
@@ -6584,13 +6671,15 @@ msgstr ""
 
 #: ../plugins/TagFix_Maxspeed_AT.py:115
 msgid "Speed limit and type mismatch"
-msgstr ""
+msgstr "Hastighetsgräns och typ matchar inte"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:117
 msgid ""
 "The speed limit in `maxspeed` is not consistent with the speed limit type in "
 "`maxspeed:type` or `source:maxspeed`."
 msgstr ""
+"Hastighetsgränsen i `maxspeed` stämmer inte överens med typen i "
+"`maxspeed:type` eller `source:maxspeed`."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:119
 msgid ""
@@ -6604,6 +6693,7 @@ msgstr ""
 #, python-brace-format
 msgid "`source:maxspeed` or `maxspeed:type` = `{0}` without maxspeed"
 msgstr ""
+"`source:maxspeed` eller `maxspeed:type` = `{0}` men utan hastighetsgräns"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:149
 #, python-brace-format
@@ -6623,7 +6713,7 @@ msgstr "Ogiltig maxspeed:type: `{0}`"
 #: ../plugins/TagFix_Maxspeed_AT.py:176
 #, python-brace-format
 msgid "Conflicting speed limit types: `{0}`<>`{1}`"
-msgstr ""
+msgstr "Konflikt mellan typer av hastighetsgräns : `{0}`<>`{1}`"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:183
 #, python-brace-format
