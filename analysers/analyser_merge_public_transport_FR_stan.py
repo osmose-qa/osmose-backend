@@ -42,7 +42,7 @@ class Analyser_Merge_Public_Transport_FR_stan(Analyser_Merge_Point):
             Conflate(
                 select = Select(
                     types = ["nodes", "ways"],
-                    tags = [{"public_transport": "platform"}]),
+                    tags = [{"highway": "platform", "public_transport": "platform"}]),
                 conflationDistance = 2,
                 osmRef = "gtfs:stop_id:FR-GES-STAN",
                 mapping = Mapping(
