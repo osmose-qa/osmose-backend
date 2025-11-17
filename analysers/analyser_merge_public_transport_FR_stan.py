@@ -42,13 +42,13 @@ class Analyser_Merge_Public_Transport_FR_stan(Analyser_Merge_Point):
             Conflate(
                 select = Select(
                     types = ["nodes", "ways"],
-                    tags = [{"highway": "platform", "public_transport": "platform"}]),
+                    tags = [{"highway": "bus_stop", "public_transport": "platform"}]),
                 conflationDistance = 2,
                 osmRef = "gtfs:stop_id:FR-GES-STAN",
                 mapping = Mapping(
                     static1 = {
                         "public_transport": "platform",
-                        "highway": "platform",
+                        "highway": "bus_stop",
                         "bus": "yes",
                     },
                     static2 = {"source": self.source},
@@ -57,7 +57,10 @@ class Analyser_Merge_Public_Transport_FR_stan(Analyser_Merge_Point):
                         "gtfs:stop_id:FR-GES-STAN": "stop_id",
                         "gtfs:stop_name:FR-GES-STAN": "stop_name",
                         "wheelchair": lambda fields: self.wheelchair_boarding[fields.get("wheelchair_boarding")]},
-                    mapping2 = {"name": "stop_name", "ref": "stop_code"},
+                    mapping2 = {
+                        "name": "stop_name",
+                        "ref": "stop_code"
+                    },
                     text = lambda tags, fields: T_("{0} stop of {1}", place, fields["stop_name"]) )))
 
     wheelchair_boarding = {
