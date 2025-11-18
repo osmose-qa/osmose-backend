@@ -196,7 +196,7 @@ class Source_Fuel(Source):
         'MAGIC DIESEL':               HGV_DIESEL,
         'METANO':                     CNG,
         'R100':                       OCTANE_100,# repsol
-        'REHVO':                        BIODIESEL,
+        'REHVO':                      BIODIESEL,
         'S-DIESEL':                   GTL_DIESEL,# ?
         'SSP98':                      OCTANE_98,# ?
         'SUPREME DIESEL':             GTL_DIESEL,# esso
