@@ -27,7 +27,7 @@ from .Analyser_Merge import Analyser_Merge_Point, Source, CSV, Load_XY, Conflate
 
 class Analyser_Merge_Charging_station_FR(Analyser_Merge_Point):
     # constant to limit bad formatting in open data (in kW)
-    MAX_POWER_KW = 401
+    MAX_POWER_KW = 501
     WIKIDATA_MAP = {
         "ionity": "Q42717773",
         "bouygues": "Q3046208",
@@ -88,11 +88,11 @@ class Analyser_Merge_Charging_station_FR(Analyser_Merge_Point):
         if raw is None:
             return None
 
-        s = str(raw).strip()
+        s = raw.strip()
         if s == "":
             return None
 
-        max_kw = getattr(self, "MAX_POWER_KW", 500)
+        max_kw = self.MAX_POWER_KW
 
         # enumeration case: we only want the max value and format it.
         if ";" in s:
