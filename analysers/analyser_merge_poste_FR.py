@@ -47,8 +47,7 @@ class Analyser_Merge_Poste_FR(Analyser_Merge_Point):
             CSV(
                 SourceDataFair(
                     attribution="La Poste",
-                    url="https://datanova.laposte.fr/datasets/laposte-poincont", file_name="011PoinCont.csv",
-                    encoding="LATIN1"),
+                    url="https://datanova.laposte.fr/datasets/laposte-poincont", file_name="011PoinCont.csv"),
                 separator = ";"),
             Load_XY("Longitude", "Latitude"),
             Conflate(
@@ -75,8 +74,7 @@ class Analyser_Merge_Poste_FR(Analyser_Merge_Point):
                         "atm": lambda res: self.bool[res["Distributeur_de_billets"]],
                         "stamping_machine": lambda res: self.bool[res["Affranchissement_Libre_Service"]],
                         "wheelchair": lambda res:
-                            "yes" if self.bool[res["Accessibilité_Absence_de_ressaut_de_plus_de_2_cm_de_haut"]] and self.bool[res["Accessibilité_Entrée_autonome_en_fauteuil_roulant_possible"]] else
-                            "limited" if self.bool[res["Accessibilité_Absence_de_ressaut_de_plus_de_2_cm_de_haut"]] or self.bool[res["Accessibilité_Entrée_autonome_en_fauteuil_roulant_possible"]] else
+                            "yes" if self.bool[res["Accessibilité_Accessible_aux_personnes_handicapées_moteur"]]  else
                             "no"},
                     mapping2 = {
                         "operator": lambda res:
@@ -96,4 +94,4 @@ class Analyser_Merge_Poste_FR(Analyser_Merge_Point):
                         "phone": lambda res: ("+33" + res["Numéro_de_téléphone"][1:]) if res["Numéro_de_téléphone"] != "3631" else None},
                 text = lambda tags, fields: {"en": "Post office {0}".format(", ".join(filter(lambda x: x and x != 'None', [fields["Précision_du_géocodage"].lower(), fields["Adresse"], fields["Complement_d_adresse"], fields["Lieu_dit"], fields["Code_postal"], fields["localité"]])))} )))
 
-    bool = {"Non": None, "Oui": "yes"}
+    bool = {"Non": None, "Oui": "yes", None: None}
