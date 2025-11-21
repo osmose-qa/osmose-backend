@@ -74,7 +74,7 @@ class Analyser_Merge_Poste_FR(Analyser_Merge_Point):
                         "atm": lambda res: self.bool[res["Distributeur_de_billets"]],
                         "stamping_machine": lambda res: self.bool[res["Affranchissement_Libre_Service"]],
                         "wheelchair": lambda res:
-                            "yes" if self.bool[res["Accessibilité_Accessible_aux_personnes_handicapées_moteur"]]  else
+                            "yes" if self.bool[res["Accessibilité_Accessible_aux_personnes_handicapées_moteur"]] else
                             "no"},
                     mapping2 = {
                         "operator": lambda res:
