@@ -43,7 +43,7 @@ class Analyser_Merge_Museum_FR(Analyser_Merge_Point):
                     encoding="utf-8-sig",
                     dataset="5d12ee8206e3e762c0c89a4c",
                     resource="5ccd6238-4fb0-4b2c-b14a-581909489320"),
-                separator=';'),
+                separator='|'),
             Load_XY("Coordonnees", "Coordonnees",
                  where = lambda row: row["Coordonnees"],
                  xFunction = lambda x: x and x.split(',')[1],
