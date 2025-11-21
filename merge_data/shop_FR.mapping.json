@@ -469,11 +469,15 @@
         "shop": "underwear"
       },
       {
+        "shop": "clothes",
+        "clothes": "underwear"
+      },
+      {
         "shop": "sewing"
       }
     ],
     "generate": {
-      "shop": "fabric;wool;household_linen;underwear;sewing",
+      "shop": "fabric;wool;household_linen;underwear;clothes;sewing",
       "fixme": "select a shop type"
     }
   },
