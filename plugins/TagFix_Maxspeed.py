@@ -49,7 +49,7 @@ class TagFix_Maxspeed(Plugin):
         'ch:rural': ['80'],
         'ch:trunk': ['100'],
         'ch:motorway': ['120'],
-        'cz:trunk': ['80', '130'],
+        'cz:trunk': ['80', '110'],
         'cz:motorway': ['80', '130'],
         'de:living_street': ['walk'],
         'de:rural': ['100'],
