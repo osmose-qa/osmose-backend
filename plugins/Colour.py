@@ -503,6 +503,7 @@ class Colour(PluginMapCSS):
                 # assertMatch:"way building:colour=red;blueish"
                 # assertMatch:"way building:colour=reddish;blue"
                 # assertNoMatch:"way roof:colour=red building:colour=#FFFFFF"
+                # assertNoMatch:"way surface:colour=rainbow"
                 err.append({'class': 30914, 'subclass': 0, 'text': mapcss.tr('Unknown or invalid colour in tag \'\'{0}\'\'', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
 
         return err
@@ -779,3 +780,4 @@ class Test(TestPluginMapcss):
         self.check_err(n.way(data, {'building:colour': 'red;blueish'}, [0]), expected={'class': 30914, 'subclass': 0})
         self.check_err(n.way(data, {'building:colour': 'reddish;blue'}, [0]), expected={'class': 30914, 'subclass': 0})
         self.check_not_err(n.way(data, {'building:colour': '#FFFFFF', 'roof:colour': 'red'}, [0]), expected={'class': 30914, 'subclass': 0})
+        self.check_not_err(n.way(data, {'surface:colour': 'rainbow'}, [0]), expected={'class': 30914, 'subclass': 0})

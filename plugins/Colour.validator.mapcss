@@ -123,4 +123,5 @@ meta[lang=fr] {
     assertNoMatch: "node light:colour=\"white; 4200 K\"";
     assertNoMatch: "node light:colour=\"560 nm\"";
     assertNoMatch: "node light:colour=\"588.9950 nm\"";
+    assertNoMatch: "way surface:colour=rainbow";
 }
