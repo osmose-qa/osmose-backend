@@ -37,6 +37,7 @@ class Analyser_Merge_Charging_station_FR(Analyser_Merge_Point):
         "TotalEnergies Charging Services": "Q154037",
         "Last Mile Solutions": "Q109733858",
         "Izivia": "Q86671322",
+        "Shell Recharge": "Q105883058",
     }
 
     @staticmethod
