@@ -26,7 +26,8 @@ from .Analyser_Merge import Analyser_Merge_Point, Source, CSV, Load_XY, Conflate
 
 
 class Analyser_Merge_Charging_station_FR(Analyser_Merge_Point):
-
+    # constant to limit bad formatting in open data (in kW)
+    MAX_POWER_KW = 501
     WIKIDATA_MAP = {
         "ionity": "Q42717773",
         "bouygues": "Q3046208",
@@ -37,6 +38,95 @@ class Analyser_Merge_Charging_station_FR(Analyser_Merge_Point):
         "Last Mile Solutions": "Q109733858",
         "Izivia": "Q86671322",
     }
+
+    @staticmethod
+    def keepMaxValueIfEnum(str_val):
+
+        # if the value contains a semicolon, we split it and keep only the highest value
+        if ";" in str_val:
+            boom = str_val.split(";")
+            max_val = 0
+            for p in boom:
+                p_clean = p.lower().replace("kw", "").strip()
+                try:
+                    p_val = int(float(p_clean))
+                    if (
+                        p_val <= Analyser_Merge_Charging_station_FR.MAX_POWER_KW
+                        and p_val > max_val
+                    ):
+                        max_val = p_val
+                except ValueError:
+                    # exclude values we can not convert to number
+                    pass
+
+            if max_val > 0:
+                str_val = str(max_val)
+        else:
+            # case without delimiter, handle unit
+            if "kw" in str_val.lower():
+                p_clean = str_val.lower().replace("kw", "").strip()
+                try:
+                    p_val = int(float(p_clean))
+                    if p_val <= Analyser_Merge_Charging_station_FR.MAX_POWER_KW:
+                        str_val = str(p_val)
+                except ValueError:
+                    pass
+        return str_val
+
+    def _normalize_number(self, v: float) -> str:
+        """Formats in float by removing unwanted zeros."""
+        try:
+            iv = int(v)
+            if abs(v - iv) < 1e-9:
+                return str(iv)
+            return f"{v:.6f}".rstrip("0").rstrip(".")
+        except Exception:
+            return str(v)
+
+    def getPuissanceNominaleInKw(self, raw):
+        """Computes nominal power in kW from a possible enumeration of values."""
+        if raw is None:
+            return None
+
+        s = raw.strip()
+        if s == "":
+            return None
+
+        max_kw = self.MAX_POWER_KW
+
+        # enumeration case: we only want the max value and format it.
+        if ";" in s:
+            max_str = self.keepMaxValueIfEnum(s)
+            if not max_str:
+                return None
+            try:
+                v = float(
+                    str(max_str).replace(",", ".").lower().replace("kw", "").strip()
+                )
+            except Exception:
+                return None
+            return f"{self._normalize_number(v)} kW"
+
+        # case of only one value
+        s_norm = s.lower().replace(",", ".")
+        try:
+            if s_norm.endswith("kw"):
+                v = float(s_norm[:-2].strip())
+                return f"{self._normalize_number(v)} kW"
+
+            if s_norm.endswith("w"):
+                v_w = float(s_norm[:-1].strip())
+                v = v_w / 1000.0
+                return f"{self._normalize_number(v)} kW"
+
+            # case without unit
+            v = float(s_norm)
+            if v > max_kw:
+                # On suppose des watts => conversion en kW
+                v = v / 1000.0
+            return f"{self._normalize_number(v)} kW"
+        except Exception:
+            return None
 
     def __init__(self, config, logger=None):
         Analyser_Merge_Point.__init__(self, config, logger)
@@ -85,6 +175,9 @@ with `capacity=6` can sometimes match to 3 charging station with `capacity=2`'''
                         "ref:EU:EVSE": "id_station_itinerance"
                     },
                     mapping2={
+                        "charging_station:output": lambda fields: self.getPuissanceNominaleInKw(
+                            fields["puissance_nominale"]
+                        ),
                         "operator:phone": "telephone_operateur",
                         "operator:email": "contact_operateur",
                         "start_date": "date_mise_en_service",
