@@ -38,6 +38,7 @@ class Analyser_Merge_Charging_station_FR(Analyser_Merge_Point):
         "Last Mile Solutions": "Q109733858",
         "Izivia": "Q86671322",
         "Shell Recharge": "Q105883058",
+        "Freshmile": "Q111209120",
     }
 
     @staticmethod
