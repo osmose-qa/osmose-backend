@@ -39,6 +39,7 @@ class Analyser_Merge_Charging_station_FR(Analyser_Merge_Point):
         "Izivia": "Q86671322",
         "Shell Recharge": "Q105883058",
         "Freshmile": "Q111209120",
+        "E.Leclerc": "Q1273376",
     }
 
     @staticmethod
