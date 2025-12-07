@@ -274,6 +274,8 @@ from .Analyser_Merge import Conflate, Mapping
                 # Use an external function to compute the value.
                 'mhs:inscription_date': lambda res: parseDate(res['Date']),
             },
+            # delete a discardable tag if another modification is made
+            mapping2 = {'created_by': Mapping.delete_tag},
         )
     )
 ```
