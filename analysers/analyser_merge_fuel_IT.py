@@ -28,16 +28,18 @@ import csv
 import datetime
 
 
-OCTANE_95  = 1 << 0# fuel:octane_95=yes
-OCTANE_98  = 1 << 1# fuel:octane_98=yes
-OCTANE_100 = 1 << 2# fuel:octane_100=yes
-DIESEL     = 1 << 3# fuel:diesel=yes
-DIESEL_CL2 = 1 << 4# fuel:diesel:class2=yes
-GTL_DIESEL = 1 << 5# fuel:GTL_diesel=yes
-HGV_DIESEL = 1 << 6# fuel:HGV_diesel=yes
-LNG        = 1 << 7# fuel:lng=yes
-LPG        = 1 << 8# fuel:lpg=yes
-CNG        = 1 << 9# fuel:cng=yes
+OCTANE_95  = 1 << 0 # fuel:octane_95=yes
+OCTANE_98  = 1 << 1 # fuel:octane_98=yes
+OCTANE_100 = 1 << 2 # fuel:octane_100=yes
+DIESEL     = 1 << 3 # fuel:diesel=yes
+DIESEL_CL2 = 1 << 4 # fuel:diesel:class2=yes
+GTL_DIESEL = 1 << 5 # fuel:GTL_diesel=yes
+HGV_DIESEL = 1 << 6 # fuel:HGV_diesel=yes
+LNG        = 1 << 7 # fuel:lng=yes
+LPG        = 1 << 8 # fuel:lpg=yes
+CNG        = 1 << 9 # fuel:cng=yes
+BIODIESEL  = 1 << 10# fuel:biodiesel=yes
+OCTANE_102 = 1 << 11# fuel:octane_102=yes
 
 
 class Analyser_Merge_Fuel_IT(Analyser_Merge_Point):
@@ -75,6 +77,7 @@ class Analyser_Merge_Fuel_IT(Analyser_Merge_Point):
                         'fuel:octane_95': lambda res: 'yes' if (int(res['Carburanti']) & OCTANE_95) != 0 else Mapping.delete_tag,
                         'fuel:octane_98': lambda res: 'yes' if (int(res['Carburanti']) & OCTANE_98) != 0 else Mapping.delete_tag,
                         'fuel:octane_100': lambda res: 'yes' if (int(res['Carburanti']) & OCTANE_100) != 0 else Mapping.delete_tag,
+                        'fuel:octane_102': lambda res: 'yes' if (int(res['Carburanti']) & OCTANE_102) != 0 else Mapping.delete_tag,
                         'fuel:diesel': lambda res: 'yes' if (int(res['Carburanti']) & DIESEL) != 0 else Mapping.delete_tag,
                         'fuel:diesel:class2': lambda res: 'yes' if (int(res['Carburanti']) & DIESEL_CL2) != 0 else Mapping.delete_tag,
                         'fuel:GTL_diesel': lambda res: 'yes' if (int(res['Carburanti']) & GTL_DIESEL) != 0 else Mapping.delete_tag,
@@ -82,6 +85,7 @@ class Analyser_Merge_Fuel_IT(Analyser_Merge_Point):
                         'fuel:lng': lambda res: 'yes' if (int(res['Carburanti']) & LNG) != 0 else Mapping.delete_tag,
                         'fuel:lpg': lambda res: 'yes' if (int(res['Carburanti']) & LPG) != 0 else Mapping.delete_tag,
                         'fuel:cng': lambda res: 'yes' if (int(res['Carburanti']) & CNG) != 0 else Mapping.delete_tag,
+                        'fuel:biodiesel': lambda res: 'yes' if (int(res['Carburanti']) & BIODIESEL) != 0 else Mapping.delete_tag,
                     },
                     mapping2 = {
                         'operator': lambda res: italian_strings.normalize_common(res['Gestore']).replace(' % ', ' - ') if res['Gestore'] else None,
@@ -141,45 +145,64 @@ class Source_Fuel(Source):
 
 
     FUEL_TYPE_MAP = {
-        'BENZINA':                  OCTANE_95,
-        'BENZINA 100 OTTANI':       OCTANE_100,
-        'BENZINA ENERGY 98 OTTANI': OCTANE_98,
-        'BENZINA PLUS 98':          OCTANE_98,
-        'BENZINA SHELL V POWER':    OCTANE_100,
-        'BENZINA SPECIALE':         OCTANE_100,
-        'BENZINA WR 100':           OCTANE_100,
-        'BLU DIESEL ALPINO':        DIESEL_CL2,
-        'BLUE DIESEL':              GTL_DIESEL,
-        'BLUE SUPER':               OCTANE_100,
-        'DIESEL E+10':              GTL_DIESEL,# repsol
-        'DIESELMAX':                GTL_DIESEL,
-        'DIESEL SHELL V POWER':     GTL_DIESEL,
-        'E-DIESEL':                 HGV_DIESEL,# esso
-        'EXCELLIUM DIESEL':         GTL_DIESEL,
-        'F101':                     OCTANE_100,
-        'GASOLIO':                  DIESEL,
-        'GASOLIO ALPINO':           DIESEL_CL2,
-        'GASOLIO ARTICO':           DIESEL_CL2,
-        'GASOLIO ECOPLUS':          DIESEL,
-        'GASOLIO ENERGY D':         HGV_DIESEL,
-        'GASOLIO GELO':             DIESEL_CL2,
-        'GASOLIO ORO DIESEL':       GTL_DIESEL,
-        'GASOLIO PREMIUM':          GTL_DIESEL,
-        'GASOLIO SPECIALE':         GTL_DIESEL,
-        'GNL':                      LNG,
-        'GP DIESEL':                GTL_DIESEL,
-        'GPL':                      LPG,
-        'HI-Q DIESEL':              GTL_DIESEL,
-        'HIQ PERFORM+':             OCTANE_100,
-        'L-GNC':                    LNG,
-        'MAGIC DIESEL':             HGV_DIESEL,
-        'METANO':                   CNG,
-        'R100':                     OCTANE_100,# repsol
-        'S-DIESEL':                 GTL_DIESEL,# ?
-        'SSP98':                    OCTANE_98,# ?
-        'SUPREME DIESEL':           GTL_DIESEL,# esso
-        'V-POWER':                  OCTANE_100,
-        'V-POWER DIESEL':           GTL_DIESEL,
+        'BCHVO':                      BIODIESEL,
+        'BENZINA':                    OCTANE_95,
+        'BENZINA 100 OTTANI':         OCTANE_100,
+        'BENZINA 102 OTTANI':         OCTANE_102,
+        'BENZINA ENERGY 98 OTTANI':   OCTANE_98,
+        'BENZINA PLUS 98':            OCTANE_98,
+        'BENZINA SHELL V POWER':      OCTANE_100,
+        'BENZINA SPECIALE':           OCTANE_100,
+        'BENZINA SPECIALE 98 OTTANI': OCTANE_98,
+        'BENZINA WR 100':             OCTANE_100,
+        'BLU DIESEL ALPINO':          DIESEL_CL2,
+        'BLUE DIESEL':                GTL_DIESEL,
+        'BLUE SUPER':                 OCTANE_100,
+        'DIESEL E+10':                GTL_DIESEL,# repsol
+        'DIESEL HVO':                 BIODIESEL,
+        'DIESEL HVO ENERGY':          BIODIESEL,
+        'DIESELMAX':                  GTL_DIESEL,
+        'DIESEL SHELL V POWER':       GTL_DIESEL,
+        'E-DIESEL':                   HGV_DIESEL,# esso
+        'EXCELLIUM DIESEL':           GTL_DIESEL,
+        'F101':                       OCTANE_100,
+        'F-101':                      OCTANE_100,
+        'GASOLIO':                    DIESEL,
+        'GASOLIO ALPINO':             DIESEL_CL2,
+        'GASOLIO ARTICO':             DIESEL_CL2,
+        'GASOLIO ARTICO IGLOO':       DIESEL_CL2,
+        'GASOLIO BIO HVO':            BIODIESEL,
+        'GASOLIO ECOPLUS':            DIESEL,
+        'GASOLIO ENERGY D':           HGV_DIESEL,
+        'GASOLIO GELO':               DIESEL_CL2,
+        'GASOLIO HVO':                BIODIESEL,
+        'GASOLIO ORO DIESEL':         GTL_DIESEL,
+        'GASOLIO PLUS':               GTL_DIESEL,
+        'GASOLIO PREMIUM':            GTL_DIESEL,
+        'GASOLIO PRESTAZIONALE':      GTL_DIESEL,
+        'GASOLIO SPECIALE':           GTL_DIESEL,
+        'GNL':                        LNG,
+        'GP DIESEL':                  GTL_DIESEL,
+        'GPL':                        LPG,
+        'HI-Q DIESEL':                GTL_DIESEL,
+        'HIQ PERFORM+':               OCTANE_100,
+        'HVO':                        BIODIESEL,
+        'HVO100':                     BIODIESEL,
+        'HVO ECO DIESEL':             BIODIESEL,
+        'HVO FUTURE':                 BIODIESEL,
+        'HVOLUTION':                  BIODIESEL,
+        'HVOVOLUTION':                BIODIESEL,
+        'L-GNC':                      LNG,
+        'MAGIC DIESEL':               HGV_DIESEL,
+        'METANO':                     CNG,
+        'R100':                       OCTANE_100,# repsol
+        'REHVO':                      BIODIESEL,
+        'S-DIESEL':                   GTL_DIESEL,# ?
+        'SSP98':                      OCTANE_98,# ?
+        'SUPREME DIESEL':             GTL_DIESEL,# esso
+        'VERDE SPECIALE':             OCTANE_100,
+        'V-POWER':                    OCTANE_100,
+        'V-POWER DIESEL':             GTL_DIESEL,
     }
 
 
