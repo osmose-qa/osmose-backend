@@ -28,16 +28,16 @@ import csv
 import datetime
 
 
-OCTANE_95  = 1 <<  0# fuel:octane_95=yes
-OCTANE_98  = 1 <<  1# fuel:octane_98=yes
-OCTANE_100 = 1 <<  2# fuel:octane_100=yes
-DIESEL     = 1 <<  3# fuel:diesel=yes
-DIESEL_CL2 = 1 <<  4# fuel:diesel:class2=yes
-GTL_DIESEL = 1 <<  5# fuel:GTL_diesel=yes
-HGV_DIESEL = 1 <<  6# fuel:HGV_diesel=yes
-LNG        = 1 <<  7# fuel:lng=yes
-LPG        = 1 <<  8# fuel:lpg=yes
-CNG        = 1 <<  9# fuel:cng=yes
+OCTANE_95  = 1 << 0 # fuel:octane_95=yes
+OCTANE_98  = 1 << 1 # fuel:octane_98=yes
+OCTANE_100 = 1 << 2 # fuel:octane_100=yes
+DIESEL     = 1 << 3 # fuel:diesel=yes
+DIESEL_CL2 = 1 << 4 # fuel:diesel:class2=yes
+GTL_DIESEL = 1 << 5 # fuel:GTL_diesel=yes
+HGV_DIESEL = 1 << 6 # fuel:HGV_diesel=yes
+LNG        = 1 << 7 # fuel:lng=yes
+LPG        = 1 << 8 # fuel:lpg=yes
+CNG        = 1 << 9 # fuel:cng=yes
 BIODIESEL  = 1 << 10# fuel:biodiesel=yes
 OCTANE_102 = 1 << 11# fuel:octane_102=yes
 
@@ -153,14 +153,14 @@ class Source_Fuel(Source):
         'BENZINA PLUS 98':            OCTANE_98,
         'BENZINA SHELL V POWER':      OCTANE_100,
         'BENZINA SPECIALE':           OCTANE_100,
-        'BENZINA SPECIALE 98 OTTANI': OCTANE_98,                
+        'BENZINA SPECIALE 98 OTTANI': OCTANE_98,
         'BENZINA WR 100':             OCTANE_100,
         'BLU DIESEL ALPINO':          DIESEL_CL2,
         'BLUE DIESEL':                GTL_DIESEL,
         'BLUE SUPER':                 OCTANE_100,
         'DIESEL E+10':                GTL_DIESEL,# repsol
         'DIESEL HVO':                 BIODIESEL,
-        'DIESEL HVO ENERGY':          BIODIESEL,        
+        'DIESEL HVO ENERGY':          BIODIESEL,
         'DIESELMAX':                  GTL_DIESEL,
         'DIESEL SHELL V POWER':       GTL_DIESEL,
         'E-DIESEL':                   HGV_DIESEL,# esso
