@@ -477,7 +477,7 @@
       }
     ],
     "generate": {
-      "shop": "fabric;wool;household_linen;underwear;clothes;sewing",
+      "shop": "fabric;wool;household_linen;clothes;sewing",
       "fixme": "select a shop type"
     }
   },
