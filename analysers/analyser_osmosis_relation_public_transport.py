@@ -281,7 +281,7 @@ WHERE
     nodes.tags != ''::hstore AND
     nodes.tags?'highway' AND nodes.tags->'highway' = 'bus_stop' AND
     nodes.tags->'public_transport' != 'stop_position' AND
-    highways.highway NOT IN ('footway', 'path', 'pedestrian', 'platform', 'steps')
+    highways.highway NOT IN ('footway', 'cycleway', 'path', 'pedestrian', 'platform', 'steps')
 GROUP BY
     nodes.id,
     nodes.geom
@@ -321,7 +321,7 @@ FROM
 WHERE
     relations.tags->'type' = 'route' AND
     relations.tags->'route' IN ('bus', 'trolleybus', 'coach', 'share_taxi', 'school_bus', 'walking_bus') AND
-    highways.highway NOT IN ('footway', 'path', 'pedestrian', 'platform', 'steps')
+    highways.highway NOT IN ('footway', 'cycleway', 'path', 'pedestrian', 'platform', 'steps')
 GROUP BY
     relations.id,
     nodes.id,
