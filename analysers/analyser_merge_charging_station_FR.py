@@ -45,6 +45,7 @@ class Analyser_Merge_Charging_station_FR(Analyser_Merge_Point):
         "Izivia": "Q86671322",
         "Sorégies": "Q3491321",
         "Bouygues Energies & Services": "Q3046208",
+        "Electra": "Q128592938",
     }
 
     @staticmethod
