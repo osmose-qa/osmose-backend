@@ -49,8 +49,8 @@ class Analyser_merge_defibrillators_FR(Analyser_Merge_Point):
             else:
                 return None
 
-    def normalizeHours(self, jours, heures):
-        if jours == "{7j/7}" and heures == "{24h/24}":
+    def normalizeHours(self, days, hours):
+        if "7j/7" in days and "24h/24" in hours:
             return "24/7"
         else:
             return None
