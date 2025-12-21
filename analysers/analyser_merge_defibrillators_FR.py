@@ -74,7 +74,7 @@ class Analyser_merge_defibrillators_FR(Analyser_Merge_Point):
                     attribution="Ministère de la Santé",
                     dataset="61556e1e9d6adb2df86eb0fc",
                     resource="86ea48a0-dd94-4a23-b71c-80d3041d7db2")),
-            Load_XY("geom_x", "geom_y",
+            Load_XY("c_long_coor1", "c_lat_coor1",
                  select = {"c_etat_fonct": "En fonctionnement", "c_doublon": "false"}),
             Conflate(
                 select = Select(
@@ -87,7 +87,7 @@ class Analyser_merge_defibrillators_FR(Analyser_Merge_Point):
                     mapping1 = {
                         "ref:FR:GeoDAE": "c_gid",
                         "indoor": lambda res: "yes" if res["c_acc"] == "Intérieur" else "no" if res["c_acc"] == "Extérieur" else None,
-                        "access": lambda res: "yes" if res["c_acc_lib"] == "t" else "permissive" if res["c_acc_lib"] == "f" else None,
+                        "access": lambda res: "yes" if res["c_acc_lib"] else "permissive",
                         "level": lambda res: self.normalizeEtage(res["c_acc_etg"]),
                         "opening_hours": lambda res: self.normalizeHours(res["c_disp_j"], res["c_disp_h"])
                     },
@@ -97,8 +97,8 @@ class Analyser_merge_defibrillators_FR(Analyser_Merge_Point):
                         "source": lambda res: ("Direction Générale de la Santé - " + res["c__edit_datemaj"].split(" ")[0]),
                         "defibrillator:location": lambda res: res["c_acc_complt"] if "c_acc_complt" in res else reaccentue.reaccentue(res["c_nom"]) if res["c_nom"] else None,
                         "start_date": "c_date_instal",
-                        "security_desk": lambda res: "yes" if res["c_acc_pcsec"] == "t" else "no" if res["c_acc_pcsec"] == "f" else None,
-                        "reception_desk": lambda res: "yes" if res["c_acc_acc"] == "t" else "no" if res["c_acc_acc"] == "f" else None,
+                        "security_desk": lambda res: "yes" if res["c_acc_pcsec"] else "no",
+                        "reception_desk": lambda res: "yes" if res["c_acc_acc"] else "no",
                         "operator:ref:FR:SIREN": lambda res: res["c_expt_siren"] if "c_expt_siren" in res else None
                     },
                     text = lambda tags, fields: {"en": " - ".join(filter(lambda x: x, [
