@@ -48,14 +48,15 @@ class MapCSSListenerL(MapCSSListener):
     # Enter a parse tree produced by MapCSSParser#link_selector.
     def enterLink_selector(self, ctx:MapCSSParser.Link_selectorContext):
         self.stack.append({
-            'valueExpressions': []})
+            'valueExpressions': [],
+            'regexExpression': []})
 
     # Exit a parse tree produced by MapCSSParser#link_selector.
     def exitLink_selector(self, ctx:MapCSSParser.Link_selectorContext):
         v = self.stack.pop()
         self.link_selectors.append({'type': 'link_selector',
-            'operator': (ctx.valueOperator() or ctx.numericOperator()).getText(),
-            'role': len(v['valueExpressions']) > 0 and v['valueExpressions'][0],
+            'operator': (ctx.valueOperator() or ctx.numericOperator() or ctx.regexOperator()).getText(),
+            'role': (len(v['valueExpressions']) > 0 and v['valueExpressions'][0]) or (len(v['regexExpression']) > 0 and v['regexExpression'][0]),
             'index': ctx.int_() and ctx.int_().getText()})
 
 

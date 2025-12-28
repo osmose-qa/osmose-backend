@@ -172,6 +172,7 @@ simple_selector_operator : OP_INCLUDED_IN | OP_INTERSECTS | OP_SUBSET | OP_SUPER
 
 link_selector
     : LBRACKET cssident /* ROLE */ valueOperator valueExpression RBRACKET
+    | LBRACKET cssident /* ROLE */ regexOperator regexExpression RBRACKET
     | LBRACKET cssident /* INDEX */ numericOperator v=int_ RBRACKET
     ;
 
