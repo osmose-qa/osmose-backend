@@ -488,19 +488,6 @@ class Josm_DutchSpecific(PluginMapCSS):
                 # suggestAlternative:"*:surface=paving_stones + *:paving_stones:shape=square + *:paving_stones:length=[length in meter, e.g. 0.3]"
                 err.append({'class': 90202, 'subclass': 1665978272, 'text': mapcss.tr('{0} is deprecated', '*:surface=paving_stones:NN')})
 
-        # *[winkelnummer]
-        if ('winkelnummer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'winkelnummer')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("NL deprecated features")
-                # throwWarning:tr("{0} is deprecated","{0.key}")
-                # suggestAlternative:"ref=*"
-                err.append({'class': 90202, 'subclass': 340349535, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
-
         # node[opening_hours="24/7"][amenity=atm][/^(brand|name|operator)$/=~/(?i)^(Geldmaat|ABN.?AMRO|ING|Rabobank|SNS)\b/][inside("NL")]
         if ('amenity' in keys and 'opening_hours' in keys):
             match = False
@@ -2453,19 +2440,6 @@ class Josm_DutchSpecific(PluginMapCSS):
                 # suggestAlternative:"*:surface=paving_stones + *:paving_stones:shape=square + *:paving_stones:length=[length in meter, e.g. 0.3]"
                 err.append({'class': 90202, 'subclass': 1665978272, 'text': mapcss.tr('{0} is deprecated', '*:surface=paving_stones:NN')})
 
-        # *[winkelnummer]
-        if ('winkelnummer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'winkelnummer')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("NL deprecated features")
-                # throwWarning:tr("{0} is deprecated","{0.key}")
-                # suggestAlternative:"ref=*"
-                err.append({'class': 90202, 'subclass': 340349535, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
-
         # way[highway=cycleway][vehicle=no][!bicycle][traffic_sign!~/\bNL:(C0?1|C0?9|C14|C15|D103|D104)\b/][!vehicle:conditional][!bicycle:conditional][inside("NL")]
         if ('highway' in keys and 'vehicle' in keys):
             match = False
@@ -3506,19 +3480,6 @@ class Josm_DutchSpecific(PluginMapCSS):
                 # throwWarning:tr("{0} is deprecated","*:surface=paving_stones:NN")
                 # suggestAlternative:"*:surface=paving_stones + *:paving_stones:shape=square + *:paving_stones:length=[length in meter, e.g. 0.3]"
                 err.append({'class': 90202, 'subclass': 1665978272, 'text': mapcss.tr('{0} is deprecated', '*:surface=paving_stones:NN')})
-
-        # *[winkelnummer]
-        if ('winkelnummer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'winkelnummer')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("NL deprecated features")
-                # throwWarning:tr("{0} is deprecated","{0.key}")
-                # suggestAlternative:"ref=*"
-                err.append({'class': 90202, 'subclass': 340349535, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
 
         # *[ref:bag][ref:bag!~/(; ?|^)([0-9]{0,3}[1-9]|[0-9]{0,2}[1-9][0-9]|[0-9]?[1-9][0-9]{2})[0-9]{12}($|;)/][inside("NL")]
         if ('ref:bag' in keys):

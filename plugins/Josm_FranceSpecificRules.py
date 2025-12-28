@@ -29,6 +29,7 @@ class Josm_FranceSpecificRules(PluginMapCSS):
         self.errors[30408] = self.def_class(item = 3040, level = 3, tags = mapcss.list_('ref', 'infrastructure', 'telecom'), title = mapcss.tr('{0} is invalid. Should look like 12345ABC', mapcss._tag_uncapture(capture_tags, '{0.tag}')))
         self.errors[30409] = self.def_class(item = 3040, level = 3, tags = mapcss.list_('ref', 'infrastructure', 'telecom'), title = mapcss.tr('{0} is invalid. Should look like ABC', mapcss._tag_uncapture(capture_tags, '{0.tag}')))
         self.errors[30410] = self.def_class(item = 3040, level = 3, tags = mapcss.list_('ref', 'infrastructure', 'telecom'), title = mapcss.tr('{0} is invalid. Should look like 12345ABC', mapcss._tag_uncapture(capture_tags, '{0.tag}')))
+        self.errors[32602] = self.def_class(item = 3260, level = 3, tags = [], title = mapcss.tr('{0} is not a valid code NAF/APE value', mapcss._tag_uncapture(capture_tags, '{0.tag}')))
         self.errors[40103] = self.def_class(item = 4010, level = 3, tags = mapcss.list_('tag', 'infrastructure', 'power'), title = mapcss.tr('deprecated tagging'))
         self.errors[40104] = self.def_class(item = 4010, level = 3, tags = mapcss.list_('ref', 'infrastructure', 'power'), title = mapcss.tr('deprecated tagging'))
         self.errors[40105] = self.def_class(item = 4010, level = 3, tags = [], title = mapcss.tr('misused tag in this country'))
@@ -40,7 +41,6 @@ class Josm_FranceSpecificRules(PluginMapCSS):
         self.errors[9019005] = self.def_class(item = 9019, level = 3, tags = mapcss.list_('ref', 'highway'), title = mapcss.tr('validation rules Fantoir in France'))
         self.errors[9019006] = self.def_class(item = 9019, level = 3, tags = [], title = mapcss.tr('{0} is not a valid SIREN number', mapcss._tag_uncapture(capture_tags, '{0.tag}')))
         self.errors[9019007] = self.def_class(item = 9019, level = 3, tags = [], title = mapcss.tr('{0} is not a valid SIRET number', mapcss._tag_uncapture(capture_tags, '{0.tag}')))
-        self.errors[9019008] = self.def_class(item = 9019, level = 3, tags = [], title = mapcss.tr('{0} is not a valid code NAF/APE value', mapcss._tag_uncapture(capture_tags, '{0.tag}')))
 
         self.re_045a0f34 = re.compile(r'(?i)co.?voiturage')
         self.re_107d2c86 = re.compile(r'PT[1-9]{1}[0-9]*')
@@ -398,8 +398,9 @@ class Josm_FranceSpecificRules(PluginMapCSS):
                 try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'ref:FR:NAF')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_57169e32, '^([0-9]{2}\\.[0-9]{2}[A-Z];)*[0-9]{2}\\.[0-9]{2}[A-Z]$'), mapcss._tag_capture(capture_tags, 1, tags, 'ref:FR:NAF'))) and (mapcss.inside(self.father.config.options, 'FR')))
                 except mapcss.RuleAbort: pass
             if match:
+                # -osmoseItemClassLevel:"3260/32602/3"
                 # throwWarning:tr("{0} is not a valid code NAF/APE value","{0.tag}")
-                err.append({'class': 9019008, 'subclass': 1955725258, 'text': mapcss.tr('{0} is not a valid code NAF/APE value', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+                err.append({'class': 32602, 'subclass': 0, 'text': mapcss.tr('{0} is not a valid code NAF/APE value', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
 
         return err
 
@@ -852,8 +853,9 @@ class Josm_FranceSpecificRules(PluginMapCSS):
                 try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'ref:FR:NAF')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_57169e32, '^([0-9]{2}\\.[0-9]{2}[A-Z];)*[0-9]{2}\\.[0-9]{2}[A-Z]$'), mapcss._tag_capture(capture_tags, 1, tags, 'ref:FR:NAF'))) and (mapcss.inside(self.father.config.options, 'FR')))
                 except mapcss.RuleAbort: pass
             if match:
+                # -osmoseItemClassLevel:"3260/32602/3"
                 # throwWarning:tr("{0} is not a valid code NAF/APE value","{0.tag}")
-                err.append({'class': 9019008, 'subclass': 1955725258, 'text': mapcss.tr('{0} is not a valid code NAF/APE value', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+                err.append({'class': 32602, 'subclass': 0, 'text': mapcss.tr('{0} is not a valid code NAF/APE value', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
 
         return err
 
@@ -1128,8 +1130,9 @@ class Josm_FranceSpecificRules(PluginMapCSS):
                 try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'ref:FR:NAF')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_57169e32, '^([0-9]{2}\\.[0-9]{2}[A-Z];)*[0-9]{2}\\.[0-9]{2}[A-Z]$'), mapcss._tag_capture(capture_tags, 1, tags, 'ref:FR:NAF'))) and (mapcss.inside(self.father.config.options, 'FR')))
                 except mapcss.RuleAbort: pass
             if match:
+                # -osmoseItemClassLevel:"3260/32602/3"
                 # throwWarning:tr("{0} is not a valid code NAF/APE value","{0.tag}")
-                err.append({'class': 9019008, 'subclass': 1955725258, 'text': mapcss.tr('{0} is not a valid code NAF/APE value', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+                err.append({'class': 32602, 'subclass': 0, 'text': mapcss.tr('{0} is not a valid code NAF/APE value', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
 
         return err
 
