@@ -18,7 +18,7 @@ class TagFix_MultipleTag2(PluginMapCSS):
         super().init(logger)
         tags = capture_tags = {} # noqa
         self.errors[20800] = self.def_class(item = 2080, level = 1, tags = mapcss.list_('tag') + mapcss.list_('highway', 'roundabout', 'fix:chair'), title = mapcss.tr('Tag highway missing on junction'), trap = mapcss.tr('Check if it is really a highway and it is not already mapped.'), detail = mapcss.tr('The way has a tag `junction=*` but without `highway=*`.'))
-        self.errors[20801] = self.def_class(item = 2080, level = 1, tags = mapcss.list_('tag') + mapcss.list_('highway', 'fix:chair'), title = mapcss.tr('Tag highway missing on oneway'), trap = mapcss.tr('Check if it is really a highway and it is not already mapped.'), detail = mapcss.tr('The way has a tag `oneway=*` but without `highway=*`.'))
+        self.errors[20801] = self.def_class(item = 2080, level = 1, tags = mapcss.list_('tag') + mapcss.list_('highway', 'fix:chair'), title = mapcss.tr('Oneway without traversal infrastructure'), trap = mapcss.tr('Check if it really is a way for one-directional traffic. Some features use different tags like `flow_direction`, or have implied directions (like the flow of water in a waterway).'), detail = mapcss.tr('The way has a tag `oneway=*` but without `highway=*` or similar infrastructure for traversal.'))
         self.errors[20802] = self.def_class(item = 2080, level = 2, tags = mapcss.list_('tag') + mapcss.list_('highway'), title = mapcss.tr('Missing tag ref for emergency access point'))
         self.errors[21102] = self.def_class(item = 2110, level = 2, tags = mapcss.list_('tag'), title = mapcss.tr('Missing relation type'), detail = mapcss.tr('The relation is missing a `type` tag to define what it represents.'))
         self.errors[30320] = self.def_class(item = 3032, level = 1, tags = mapcss.list_('tag') + mapcss.list_('fix:chair', 'highway'), title = mapcss.tr('Watch multiple tags'))
@@ -408,13 +408,13 @@ class TagFix_MultipleTag2(PluginMapCSS):
                 except mapcss.RuleAbort: pass
             if match:
                 # -osmoseTags:list("highway","fix:chair")
-                # -osmoseTrap:tr("Check if it is really a highway and it is not already mapped.")
-                # -osmoseDetail:tr("The way has a tag `oneway=*` but without `highway=*`.")
+                # -osmoseTrap:tr("Check if it really is a way for one-directional traffic. Some features use different tags like `flow_direction`, or have implied directions (like the flow of water in a waterway).")
+                # -osmoseDetail:tr("The way has a tag `oneway=*` but without `highway=*` or similar infrastructure for traversal.")
                 # -osmoseItemClassLevel:"2080/20801:0/1"
-                # throwWarning:tr("Tag highway missing on oneway")
+                # throwWarning:tr("Oneway without traversal infrastructure")
                 # assertNoMatch:"way highway=x cycleway=opposite oneway=yes"
                 # assertMatch:"way oneway=yes building=yes"
-                err.append({'class': 20801, 'subclass': 0, 'text': mapcss.tr('Tag highway missing on oneway')})
+                err.append({'class': 20801, 'subclass': 0, 'text': mapcss.tr('Oneway without traversal infrastructure')})
 
         # way[waterway][level]
         if ('level' in keys and 'waterway' in keys):
