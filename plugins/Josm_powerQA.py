@@ -18,216 +18,216 @@ class Josm_powerQA(PluginMapCSS):
     def init(self, logger):
         super().init(logger)
         tags = capture_tags = {} # noqa
-        self.errors[1] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable value for power=* tag'), fix = mapcss.tr('Check the list of possible values on the wiki and correct the tag for this object.'), detail = mapcss.tr('The power=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:power')
-        self.errors[2] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable value for transformer=* tag'), fix = mapcss.tr('Check the list of possible values on the wiki and correct the tag for this object.'), detail = mapcss.tr('The transformer=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:transformer')
-        self.errors[3] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable value for generator:source=* tag'), fix = mapcss.tr('Check the list of possible values on the wiki and correct the tag for this object.'), detail = mapcss.tr('The generator:source=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:source')
-        self.errors[4] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for nuclear generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Nuclear generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[5] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Incompatibility between method and source on a power generator'), fix = mapcss.tr('Check the wiki page and change the `{0}` tag or the `{1}` tag accordingly.', 'generator:method', 'generator:source'), detail = mapcss.tr('It is not possible to use the specified method to generate energy from this source.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[6] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for wind generator'), fix = mapcss.tr('Remove the `{0}` tag or change it to `{1}`.', 'generator:method', 'wind_turbine'), detail = mapcss.tr('Wind generators can only use turbines to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[7] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for hydro generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Hydro generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[8] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for tidal generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Tidal generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[9] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for solar generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Solar generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[10] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for coal generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Coal generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[11] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for gas generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Gas generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[12] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biomass generator'), detail = mapcss.tr('Biomass generator can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[13] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biofuel generator'), detail = mapcss.tr('Biofuel generator can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[14] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biogas generator'), detail = mapcss.tr('Biogas generator can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[15] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for oil generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Oil generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[16] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for diesel generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Diesel generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[17] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for gasoline generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Gasoline generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[18] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for waste generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Waste generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
-        self.errors[19] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable value for plant:source=* tag'), fix = mapcss.tr('Check the list of possible values on the wiki and correct the tag for this object.'), detail = mapcss.tr('The plant:source=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:source')
-        self.errors[20] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for nuclear power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Nuclear power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[21] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Incompatibility between method and source on a power plant'), fix = mapcss.tr('Check the wiki page and change the `{0}` tag or the `{1}` tag accordingly.', 'plant:method', 'plant:source'), detail = mapcss.tr('It is not possible to use the specified method to generate energy from this source.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[22] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for wind power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Wind power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[23] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for hydro power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Hydro power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[24] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for tidal power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Tidal power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[25] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for solar power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Solar power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[26] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for coal power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Coal power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[27] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for gas power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Gas power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[28] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biomass power plant'), detail = mapcss.tr('Biomass power plants can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[29] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biofuel power plant'), detail = mapcss.tr('Biofuel power plants can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[30] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biogas power plant'), detail = mapcss.tr('Biogas power plants can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[31] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for oil power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Oil power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[32] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for diesel power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Diesel power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[33] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for gasoline power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Gasoline power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[34] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for waste power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Waste power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
-        self.errors[35] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Afghanistan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Afghanistan')
-        self.errors[36] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Albania)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Albania')
-        self.errors[37] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Algeria)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Algeria')
-        self.errors[38] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Andorra)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Andorra')
-        self.errors[39] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Angola)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Angola')
-        self.errors[40] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Argentina)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Argentina')
-        self.errors[41] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Armenia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Armenia')
-        self.errors[42] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Australia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Australia')
-        self.errors[43] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Austria)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Austria')
-        self.errors[44] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Azerbaijan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Azerbaijan')
-        self.errors[45] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bahrain)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bahrain')
-        self.errors[46] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bangladesh)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bangladesh')
-        self.errors[47] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Belarus)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Belarus')
-        self.errors[48] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Belgium)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Belgium')
-        self.errors[49] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Belize)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Belize')
-        self.errors[50] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Benin)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Benin')
-        self.errors[51] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bhutan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bhutan')
-        self.errors[52] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bolivia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bolivia')
-        self.errors[53] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bosnia and Herzegovina)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bosnia_and_Herzegovina')
-        self.errors[54] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Botswana)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Botswana')
-        self.errors[55] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Brazil)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Brazil')
-        self.errors[56] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Brunei)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Brunei')
-        self.errors[57] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bulgaria)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bulgaria')
-        self.errors[58] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Burkina Faso)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Burkina_Faso')
-        self.errors[59] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Burundi)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Burundi')
-        self.errors[60] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Cambodia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Cambodia')
-        self.errors[61] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Cameroon)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Cameroon')
-        self.errors[62] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Canada)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Canada')
-        self.errors[63] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Cape Verde)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Cape_Verde')
-        self.errors[64] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Central African Republic)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Central_African_Republic')
-        self.errors[65] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Chad)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Chad')
-        self.errors[66] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Chile)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Chile')
-        self.errors[67] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Colombia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Colombia')
-        self.errors[68] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Costa Rica)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Costa_Rica')
-        self.errors[69] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Croatia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Croatia')
-        self.errors[70] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Cuba)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Cuba')
-        self.errors[71] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Cyprus)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Cyprus')
-        self.errors[72] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Czech Republic)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Czech_Republic')
-        self.errors[73] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Democratic Republic of the Congo)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Democratic_Republic_of_the_Congo')
-        self.errors[74] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Djibouti)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Djibouti')
-        self.errors[75] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Dominican Republic)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Dominican_Republic')
-        self.errors[76] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ecuador)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ecuador')
-        self.errors[77] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Egypt)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Egypt')
-        self.errors[78] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (El Salvador)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/El_Salvador')
-        self.errors[79] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Equatorial Guinea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Equatorial_Guinea')
-        self.errors[80] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Eritrea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Eritrea')
-        self.errors[81] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Estonia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Estonia')
-        self.errors[82] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Eswatini)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Eswatini')
-        self.errors[83] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ethiopia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ethiopia')
-        self.errors[84] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Federated States of Micronesia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Federated_States_of_Micronesia')
-        self.errors[85] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Fiji)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Fiji')
-        self.errors[86] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Finland)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Finland')
-        self.errors[87] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (France)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/France')
-        self.errors[88] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Gabon)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Gabon')
-        self.errors[89] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Georgia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Georgia')
-        self.errors[90] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Germany)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Germany')
-        self.errors[91] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ghana)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ghana')
-        self.errors[92] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Greece)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Greece')
-        self.errors[93] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Guatemala)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Guatemala')
-        self.errors[94] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Guinea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Guinea')
-        self.errors[95] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Guinea-Bissau)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Guinea-Bissau')
-        self.errors[96] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Haiti)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Haiti')
-        self.errors[97] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Honduras)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Honduras')
-        self.errors[98] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Hungary)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Hungary')
-        self.errors[99] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Iceland)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Iceland')
-        self.errors[100] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (India)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/India')
-        self.errors[101] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Indonesia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Indonesia')
-        self.errors[102] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Iran)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Iran')
-        self.errors[103] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Iraq)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Iraq')
-        self.errors[104] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ireland)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ireland')
-        self.errors[105] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Israel)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Israel')
-        self.errors[106] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Italy)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Italy')
-        self.errors[107] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ivory Coast)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ivory_Coast')
-        self.errors[108] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Jamaica)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Jamaica')
-        self.errors[109] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Japan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Japan')
-        self.errors[110] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Jordan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Jordan')
-        self.errors[111] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kazakhstan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Kazakhstan')
-        self.errors[112] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kenya)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Kenya')
-        self.errors[113] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kingdom of Denmark)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Denmark')
-        self.errors[114] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kingdom of the Netherlands)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Netherlands')
-        self.errors[115] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kuwait)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Kuwait')
-        self.errors[116] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kyrgyzstan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Kyrgyzstan')
-        self.errors[117] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Laos)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Laos')
-        self.errors[118] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Latvia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Latvia')
-        self.errors[119] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Lebanon)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Lebanon')
-        self.errors[120] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Lesotho)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Lesotho')
-        self.errors[121] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Liberia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Liberia')
-        self.errors[122] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Libya)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Libya')
-        self.errors[123] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Liechtenstein)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Liechtenstein')
-        self.errors[124] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Lithuania)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Lithuania')
-        self.errors[125] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Luxembourg)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Luxembourg')
-        self.errors[126] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Madagascar)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Madagascar')
-        self.errors[127] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Malawi)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Malawi')
-        self.errors[128] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Malaysia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Malaysia')
-        self.errors[129] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Maldives)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Maldives')
-        self.errors[130] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mali)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mali')
-        self.errors[131] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Malta)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Malta')
-        self.errors[132] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mauritania)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mauritania')
-        self.errors[133] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mauritius)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mauritius')
-        self.errors[134] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mexico)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mexico')
-        self.errors[135] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Moldova)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Moldova')
-        self.errors[136] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mongolia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mongolia')
-        self.errors[137] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Montenegro)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Montenegro')
-        self.errors[138] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Morocco)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Morocco')
-        self.errors[139] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mozambique)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mozambique')
-        self.errors[140] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Myanmar)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Myanmar')
-        self.errors[141] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Namibia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Namibia')
-        self.errors[142] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Nepal)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Nepal')
-        self.errors[143] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (New Zealand)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/New_Zealand')
-        self.errors[144] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Nicaragua)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Nicaragua')
-        self.errors[145] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Niger)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Niger')
-        self.errors[146] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Nigeria)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Nigeria')
-        self.errors[147] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (North Korea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/North_Korea')
-        self.errors[148] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (North Macedonia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/North_Macedonia')
-        self.errors[149] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Norway)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Norway')
-        self.errors[150] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Oman)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Oman')
-        self.errors[151] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Pakistan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Pakistan')
-        self.errors[152] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Panama)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Panama')
-        self.errors[153] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Papua New Guinea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Papua_New_Guinea')
-        self.errors[154] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Paraguay)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Paraguay')
-        self.errors[155] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (People\'s Republic of China)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/China')
-        self.errors[156] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Peru)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Peru')
-        self.errors[157] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Philippines)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Philippines')
-        self.errors[158] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Poland)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Poland')
-        self.errors[159] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Portugal)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Portugal')
-        self.errors[160] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Qatar)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Qatar')
-        self.errors[161] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Republic of the Congo)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Republic_of_the_Congo')
-        self.errors[162] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Romania)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Romania')
-        self.errors[163] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Russia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Russia')
-        self.errors[164] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Rwanda)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Rwanda')
-        self.errors[165] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (San Marino)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/San_Marino')
-        self.errors[166] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Saudi Arabia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Saudi_Arabia')
-        self.errors[167] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Senegal)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Senegal')
-        self.errors[168] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Serbia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Serbia')
-        self.errors[169] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Sierra Leone)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Sierra_Leone')
-        self.errors[170] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Singapore)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Singapore')
-        self.errors[171] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Slovakia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Slovakia')
-        self.errors[172] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Slovenia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Slovenia')
-        self.errors[173] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (South Africa)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/South_Africa')
-        self.errors[174] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (South Korea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/South_Korea')
-        self.errors[175] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (South Sudan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/South_Sudan')
-        self.errors[176] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Spain)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Spain')
-        self.errors[177] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Sri Lanka)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Sri_Lanka')
-        self.errors[178] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (State of Palestine)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/State_of_Palestine')
-        self.errors[179] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Sudan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Sudan')
-        self.errors[180] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Suriname)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Suriname')
-        self.errors[181] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Sweden)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Sweden')
-        self.errors[182] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Switzerland)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Switzerland')
-        self.errors[183] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Syria)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Syria')
-        self.errors[184] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Taiwan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Taiwan')
-        self.errors[185] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Tajikistan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Tajikistan')
-        self.errors[186] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Tanzania)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Tanzania')
-        self.errors[187] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Thailand)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Thailand')
-        self.errors[188] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (The Bahamas)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/The_Bahamas')
-        self.errors[189] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (The Gambia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/The_Gambia')
-        self.errors[190] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Timor-Leste)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Timor-Leste')
-        self.errors[191] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Togo)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Togo')
-        self.errors[192] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Trinidad and Tobago)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Trinidad_and_Tobago')
-        self.errors[193] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Tunisia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Tunisia')
-        self.errors[194] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Turkey)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Turkey')
-        self.errors[195] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Turkmenistan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Turkmenistan')
-        self.errors[196] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Uganda)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Uganda')
-        self.errors[197] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ukraine)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ukraine')
-        self.errors[198] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (United Arab Emirates)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/United_Arab_Emirates')
-        self.errors[199] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (United Kingdom)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Great_Britain')
-        self.errors[200] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (United States)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/United_States')
-        self.errors[201] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Uruguay)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Uruguay')
-        self.errors[202] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Uzbekistan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Uzbekistan')
-        self.errors[203] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Venezuela)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Venezuela')
-        self.errors[204] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Vietnam)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Vietnam')
-        self.errors[205] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Yemen)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Yemen')
-        self.errors[206] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Zambia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Zambia')
-        self.errors[207] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Zimbabwe)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Zimbabwe')
-        self.errors[208] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Is it a power circuit or a power line section? Add the power=* tag accordingly.'), fix = mapcss.tr('Check whether it is a line section or a complete circuit, and add the power tag accordingly.'), detail = mapcss.tr('There are only two possible types of power relation. The power tag must be added to specify which type is involved here.'), resource = 'https://wiki.openstreetmap.org/wiki/Relation:power')
-        self.errors[209] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('power=circuit relations should have a topology tag with value linear or branched'), fix = mapcss.tr('Check the circuit topology and specify a value between `{0}` and `{1}`.', 'linear', 'branched'), detail = mapcss.tr('The topology tag can only take two values on the power circuit context. This is probably a typo or an error.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:topology')
-        self.errors[210] = self.def_class(item = 7040, level = 3, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('wires tag should be on the power line and not on the circuit relation'), detail = mapcss.tr('Bundles arrangement only regard power segments. A given circuit can go through several line segments with different bundles. Use wires only on power segments.'), fix = mapcss.tr('Remove the tag from the circuit relation and add it to its members instead'), resource = 'https://wiki.openstreetmap.org/wiki/Key:wires#A_physical_property')
+        self.errors[7040002] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable value for power=* tag'), fix = mapcss.tr('Check the list of possible values on the wiki and correct the tag for this object.'), detail = mapcss.tr('The power=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:power')
+        self.errors[7040003] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable value for transformer=* tag'), fix = mapcss.tr('Check the list of possible values on the wiki and correct the tag for this object.'), detail = mapcss.tr('The transformer=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:transformer')
+        self.errors[7040004] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable value for generator:source=* tag'), fix = mapcss.tr('Check the list of possible values on the wiki and correct the tag for this object.'), detail = mapcss.tr('The generator:source=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:source')
+        self.errors[7040005] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for nuclear generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Nuclear generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040006] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Incompatibility between method and source on a power generator'), fix = mapcss.tr('Check the wiki page and change the `{0}` tag or the `{1}` tag accordingly.', 'generator:method', 'generator:source'), detail = mapcss.tr('It is not possible to use the specified method to generate energy from this source.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040007] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for wind generator'), fix = mapcss.tr('Remove the `{0}` tag or change it to `{1}`.', 'generator:method', 'wind_turbine'), detail = mapcss.tr('Wind generators can only use turbines to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040008] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for hydro generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Hydro generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040009] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for tidal generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Tidal generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040010] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for solar generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Solar generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040011] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for coal generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Coal generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040012] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for gas generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Gas generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040013] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biomass generator'), detail = mapcss.tr('Biomass generator can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040014] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biofuel generator'), detail = mapcss.tr('Biofuel generator can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040015] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biogas generator'), detail = mapcss.tr('Biogas generator can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040016] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for oil generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Oil generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040017] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for diesel generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Diesel generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040018] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for gasoline generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Gasoline generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040019] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for waste generator'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'generator:method'), detail = mapcss.tr('Waste generator can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:generator:method')
+        self.errors[7040020] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable value for plant:source=* tag'), fix = mapcss.tr('Check the list of possible values on the wiki and correct the tag for this object.'), detail = mapcss.tr('The plant:source=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:source')
+        self.errors[7040021] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for nuclear power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Nuclear power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040022] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Incompatibility between method and source on a power plant'), fix = mapcss.tr('Check the wiki page and change the `{0}` tag or the `{1}` tag accordingly.', 'plant:method', 'plant:source'), detail = mapcss.tr('It is not possible to use the specified method to generate energy from this source.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040023] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for wind power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Wind power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040024] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for hydro power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Hydro power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040025] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for tidal power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Tidal power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040026] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for solar power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Solar power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040027] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for coal power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Coal power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040028] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for gas power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Gas power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040029] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biomass power plant'), detail = mapcss.tr('Biomass power plants can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040030] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biofuel power plant'), detail = mapcss.tr('Biofuel power plants can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040031] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for biogas power plant'), detail = mapcss.tr('Biogas power plants can only use certain well-defined methods to generate energy.'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040032] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for oil power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Oil power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040033] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for diesel power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Diesel power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040034] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for gasoline power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Gasoline power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040035] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Unsuitable method for waste power plant'), fix = mapcss.tr('Check the list of possible values for this source on the wiki and correct the `{0}` tag.', 'plant:method'), detail = mapcss.tr('Waste power plants can only use certain well-defined methods to generate energy.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:plant:method')
+        self.errors[7040036] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Afghanistan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Afghanistan')
+        self.errors[7040037] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Albania)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Albania')
+        self.errors[7040038] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Algeria)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Algeria')
+        self.errors[7040039] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Andorra)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Andorra')
+        self.errors[7040040] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Angola)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Angola')
+        self.errors[7040041] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Argentina)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Argentina')
+        self.errors[7040042] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Armenia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Armenia')
+        self.errors[7040043] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Australia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Australia')
+        self.errors[7040044] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Austria)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Austria')
+        self.errors[7040045] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Azerbaijan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Azerbaijan')
+        self.errors[7040046] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bahrain)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bahrain')
+        self.errors[7040047] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bangladesh)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bangladesh')
+        self.errors[7040048] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Belarus)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Belarus')
+        self.errors[7040049] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Belgium)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Belgium')
+        self.errors[7040050] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Belize)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Belize')
+        self.errors[7040051] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Benin)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Benin')
+        self.errors[7040052] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bhutan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bhutan')
+        self.errors[7040053] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bolivia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bolivia')
+        self.errors[7040054] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bosnia and Herzegovina)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bosnia_and_Herzegovina')
+        self.errors[7040055] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Botswana)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Botswana')
+        self.errors[7040056] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Brazil)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Brazil')
+        self.errors[7040057] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Brunei)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Brunei')
+        self.errors[7040058] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Bulgaria)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Bulgaria')
+        self.errors[7040059] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Burkina Faso)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Burkina_Faso')
+        self.errors[7040060] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Burundi)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Burundi')
+        self.errors[7040061] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Cambodia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Cambodia')
+        self.errors[7040062] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Cameroon)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Cameroon')
+        self.errors[7040063] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Canada)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Canada')
+        self.errors[7040064] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Cape Verde)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Cape_Verde')
+        self.errors[7040065] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Central African Republic)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Central_African_Republic')
+        self.errors[7040066] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Chad)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Chad')
+        self.errors[7040067] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Chile)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Chile')
+        self.errors[7040068] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Colombia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Colombia')
+        self.errors[7040069] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Costa Rica)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Costa_Rica')
+        self.errors[7040070] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Croatia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Croatia')
+        self.errors[7040071] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Cuba)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Cuba')
+        self.errors[7040072] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Cyprus)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Cyprus')
+        self.errors[7040073] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Czech Republic)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Czech_Republic')
+        self.errors[7040074] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Democratic Republic of the Congo)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Democratic_Republic_of_the_Congo')
+        self.errors[7040075] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Djibouti)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Djibouti')
+        self.errors[7040076] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Dominican Republic)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Dominican_Republic')
+        self.errors[7040077] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ecuador)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ecuador')
+        self.errors[7040078] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Egypt)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Egypt')
+        self.errors[7040079] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (El Salvador)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/El_Salvador')
+        self.errors[7040080] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Equatorial Guinea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Equatorial_Guinea')
+        self.errors[7040081] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Eritrea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Eritrea')
+        self.errors[7040082] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Estonia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Estonia')
+        self.errors[7040083] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Eswatini)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Eswatini')
+        self.errors[7040084] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ethiopia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ethiopia')
+        self.errors[7040085] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Federated States of Micronesia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Federated_States_of_Micronesia')
+        self.errors[7040086] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Fiji)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Fiji')
+        self.errors[7040087] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Finland)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Finland')
+        self.errors[7040088] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (France)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/France')
+        self.errors[7040089] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Gabon)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Gabon')
+        self.errors[7040090] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Georgia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Georgia')
+        self.errors[7040091] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Germany)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Germany')
+        self.errors[7040092] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ghana)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ghana')
+        self.errors[7040093] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Greece)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Greece')
+        self.errors[7040094] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Guatemala)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Guatemala')
+        self.errors[7040095] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Guinea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Guinea')
+        self.errors[7040096] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Guinea-Bissau)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Guinea-Bissau')
+        self.errors[7040097] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Haiti)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Haiti')
+        self.errors[7040098] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Honduras)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Honduras')
+        self.errors[7040099] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Hungary)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Hungary')
+        self.errors[7040100] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Iceland)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Iceland')
+        self.errors[7040101] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (India)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/India')
+        self.errors[7040102] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Indonesia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Indonesia')
+        self.errors[7040103] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Iran)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Iran')
+        self.errors[7040104] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Iraq)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Iraq')
+        self.errors[7040105] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ireland)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ireland')
+        self.errors[7040106] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Israel)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Israel')
+        self.errors[7040107] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Italy)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Italy')
+        self.errors[7040108] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ivory Coast)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ivory_Coast')
+        self.errors[7040109] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Jamaica)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Jamaica')
+        self.errors[7040110] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Japan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Japan')
+        self.errors[7040111] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Jordan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Jordan')
+        self.errors[7040112] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kazakhstan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Kazakhstan')
+        self.errors[7040113] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kenya)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Kenya')
+        self.errors[7040114] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kingdom of Denmark)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Denmark')
+        self.errors[7040115] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kingdom of the Netherlands)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Netherlands')
+        self.errors[7040116] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kuwait)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Kuwait')
+        self.errors[7040117] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Kyrgyzstan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Kyrgyzstan')
+        self.errors[7040118] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Laos)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Laos')
+        self.errors[7040119] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Latvia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Latvia')
+        self.errors[7040120] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Lebanon)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Lebanon')
+        self.errors[7040121] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Lesotho)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Lesotho')
+        self.errors[7040122] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Liberia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Liberia')
+        self.errors[7040123] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Libya)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Libya')
+        self.errors[7040124] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Liechtenstein)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Liechtenstein')
+        self.errors[7040125] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Lithuania)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Lithuania')
+        self.errors[7040126] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Luxembourg)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Luxembourg')
+        self.errors[7040127] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Madagascar)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Madagascar')
+        self.errors[7040128] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Malawi)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Malawi')
+        self.errors[7040129] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Malaysia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Malaysia')
+        self.errors[7040130] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Maldives)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Maldives')
+        self.errors[7040131] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mali)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mali')
+        self.errors[7040132] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Malta)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Malta')
+        self.errors[7040133] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mauritania)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mauritania')
+        self.errors[7040134] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mauritius)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mauritius')
+        self.errors[7040135] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mexico)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mexico')
+        self.errors[7040136] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Moldova)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Moldova')
+        self.errors[7040137] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mongolia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mongolia')
+        self.errors[7040138] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Montenegro)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Montenegro')
+        self.errors[7040139] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Morocco)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Morocco')
+        self.errors[7040140] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Mozambique)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Mozambique')
+        self.errors[7040141] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Myanmar)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Myanmar')
+        self.errors[7040142] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Namibia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Namibia')
+        self.errors[7040143] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Nepal)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Nepal')
+        self.errors[7040144] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (New Zealand)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/New_Zealand')
+        self.errors[7040145] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Nicaragua)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Nicaragua')
+        self.errors[7040146] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Niger)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Niger')
+        self.errors[7040147] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Nigeria)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Nigeria')
+        self.errors[7040148] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (North Korea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/North_Korea')
+        self.errors[7040149] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (North Macedonia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/North_Macedonia')
+        self.errors[7040150] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Norway)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Norway')
+        self.errors[7040151] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Oman)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Oman')
+        self.errors[7040152] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Pakistan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Pakistan')
+        self.errors[7040153] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Panama)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Panama')
+        self.errors[7040154] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Papua New Guinea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Papua_New_Guinea')
+        self.errors[7040155] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Paraguay)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Paraguay')
+        self.errors[7040156] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (People\'s Republic of China)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/China')
+        self.errors[7040157] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Peru)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Peru')
+        self.errors[7040158] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Philippines)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Philippines')
+        self.errors[7040159] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Poland)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Poland')
+        self.errors[7040160] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Portugal)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Portugal')
+        self.errors[7040161] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Qatar)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Qatar')
+        self.errors[7040162] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Republic of the Congo)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Republic_of_the_Congo')
+        self.errors[7040163] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Romania)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Romania')
+        self.errors[7040164] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Russia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Russia')
+        self.errors[7040165] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Rwanda)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Rwanda')
+        self.errors[7040166] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (San Marino)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/San_Marino')
+        self.errors[7040167] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Saudi Arabia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Saudi_Arabia')
+        self.errors[7040168] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Senegal)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Senegal')
+        self.errors[7040169] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Serbia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Serbia')
+        self.errors[7040170] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Sierra Leone)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Sierra_Leone')
+        self.errors[7040171] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Singapore)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Singapore')
+        self.errors[7040172] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Slovakia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Slovakia')
+        self.errors[7040173] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Slovenia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Slovenia')
+        self.errors[7040174] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (South Africa)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/South_Africa')
+        self.errors[7040175] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (South Korea)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/South_Korea')
+        self.errors[7040176] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (South Sudan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/South_Sudan')
+        self.errors[7040177] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Spain)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Spain')
+        self.errors[7040178] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Sri Lanka)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Sri_Lanka')
+        self.errors[7040179] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (State of Palestine)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/State_of_Palestine')
+        self.errors[7040180] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Sudan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Sudan')
+        self.errors[7040181] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Suriname)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Suriname')
+        self.errors[7040182] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Sweden)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Sweden')
+        self.errors[7040183] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Switzerland)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Switzerland')
+        self.errors[7040184] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Syria)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Syria')
+        self.errors[7040185] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Taiwan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Taiwan')
+        self.errors[7040186] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Tajikistan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Tajikistan')
+        self.errors[7040187] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Tanzania)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Tanzania')
+        self.errors[7040188] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Thailand)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Thailand')
+        self.errors[7040189] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (The Bahamas)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/The_Bahamas')
+        self.errors[7040190] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (The Gambia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/The_Gambia')
+        self.errors[7040191] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Timor-Leste)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Timor-Leste')
+        self.errors[7040192] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Togo)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Togo')
+        self.errors[7040193] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Trinidad and Tobago)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Trinidad_and_Tobago')
+        self.errors[7040194] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Tunisia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Tunisia')
+        self.errors[7040195] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Turkey)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Turkey')
+        self.errors[7040196] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Turkmenistan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Turkmenistan')
+        self.errors[7040197] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Uganda)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Uganda')
+        self.errors[7040198] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Ukraine)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Ukraine')
+        self.errors[7040199] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (United Arab Emirates)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/United_Arab_Emirates')
+        self.errors[7040200] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (United Kingdom)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Great_Britain')
+        self.errors[7040201] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (United States)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/United_States')
+        self.errors[7040202] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Uruguay)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Uruguay')
+        self.errors[7040203] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Uzbekistan)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Uzbekistan')
+        self.errors[7040204] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Venezuela)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Venezuela')
+        self.errors[7040205] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Vietnam)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Vietnam')
+        self.errors[7040206] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Yemen)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Yemen')
+        self.errors[7040207] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Zambia)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Zambia')
+        self.errors[7040208] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Invalid voltage value for this country (Zimbabwe)'), fix = mapcss.tr('Check the list of possible values for this country on the wiki and correct the `0` tag.', 'voltage'), detail = mapcss.tr('Each country has its own voltage set used for electricity transmission.'), example = mapcss.tr('For example, in Jordan, only 132 kV and 400 kV voltages are used.'), trap = {"en": 'If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check.'}, resource = 'https://wiki.openstreetmap.org/wiki/Power_networks/Zimbabwe')
+        self.errors[7040209] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('Is it a power circuit or a power line section? Add the power=* tag accordingly.'), fix = mapcss.tr('Check whether it is a line section or a complete circuit, and add the power tag accordingly.'), detail = mapcss.tr('There are only two possible types of power relation. The power tag must be added to specify which type is involved here.'), resource = 'https://wiki.openstreetmap.org/wiki/Relation:power')
+        self.errors[7040210] = self.def_class(item = 7040, level = 2, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('power=circuit relations should have a topology tag with value linear or branched'), fix = mapcss.tr('Check the circuit topology and specify a value between `{0}` and `{1}`.', 'linear', 'branched'), detail = mapcss.tr('The topology tag can only take two values on the power circuit context. This is probably a typo or an error.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:topology')
+        self.errors[7040211] = self.def_class(item = 7040, level = 3, tags = mapcss.list_('tag', 'power'), title = mapcss.tr('wires tag should be on the power line and not on the circuit relation'), detail = mapcss.tr('Bundles arrangement only regard power segments. A given circuit can go through several line segments with different bundles. Use wires only on power segments.'), fix = mapcss.tr('Remove the tag from the circuit relation and add it to its members instead'), resource = 'https://wiki.openstreetmap.org/wiki/Key:wires#A_physical_property')
 
         self.re_009ee9c4 = re.compile(r'^(combustion|gasification|anaerobic_digestion)$')
         self.re_03e3112c = re.compile(r'^(35000|110000|154000|220000|330000|350000|380000|400000|500000)$')
@@ -420,7 +420,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("The power=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:power"
                 # throwError:tr("Unsuitable value for power=* tag")
-                err.append({'class': 1, 'subclass': 36378028, 'text': mapcss.tr('Unsuitable value for power=* tag')})
+                err.append({'class': 7040002, 'subclass': 36378028, 'text': mapcss.tr('Unsuitable value for power=* tag')})
 
         # node[power=transformer][transformer][transformer!~/^(main|auxiliary|generator|converter|phase_angle_regulator|converter|distribution|yes|traction|minor_distribution|auto)$/]
         if ('power' in keys and 'transformer' in keys):
@@ -437,7 +437,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=transformer transformer=main"
                 # assertMatch:"node power=transformer transformer=railway"
                 # assertNoMatch:"node power=transformer"
-                err.append({'class': 2, 'subclass': 1524257444, 'text': mapcss.tr('Unsuitable value for transformer=* tag')})
+                err.append({'class': 7040003, 'subclass': 1524257444, 'text': mapcss.tr('Unsuitable value for transformer=* tag')})
 
         # *[power=generator][generator:source][generator:source!~/^(nuclear|wind|hydro|tidal|wave|geothermal|solar|coal|gas|biomass|biofuel|biogas|oil|diesel|gasoline|waste|battery)(;(nuclear|wind|hydro|tidal|wave|geothermal|solar|coal|gas|biomass|biofuel|biogas|oil|diesel|gasoline|waste|battery))*$/]
         if ('generator:source' in keys and 'power' in keys):
@@ -456,7 +456,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertMatch:"node power=generator generator:source=photovoltaic"
                 # assertNoMatch:"node power=generator generator:source=solar"
                 # assertNoMatch:"node power=generator"
-                err.append({'class': 3, 'subclass': 600492584, 'text': mapcss.tr('Unsuitable value for generator:source=* tag')})
+                err.append({'class': 7040004, 'subclass': 600492584, 'text': mapcss.tr('Unsuitable value for generator:source=* tag')})
 
         # *[power=generator][generator:source=nuclear][generator:method][generator:method!~/^(fission|fusion)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -474,7 +474,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"generator:method"
                 # assertNoMatch:"node power=generator generator:source=nuclear generator:method=fission"
                 # assertMatch:"node power=generator generator:source=nuclear generator:method=nuclear"
-                err.append({'class': 4, 'subclass': 1513616022, 'text': mapcss.tr('Unsuitable method for nuclear generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040005, 'subclass': 1513616022, 'text': mapcss.tr('Unsuitable method for nuclear generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -493,7 +493,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Incompatibility between method and source on a power generator")
                 # assertNoMatch:"node power=generator generator:source=nuclear generator:method=fission"
                 # assertMatch:"node power=generator generator:source=solar generator:method=fusion"
-                err.append({'class': 5, 'subclass': 1445012384, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1445012384, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=wind][generator:method][generator:method!=wind_turbine]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -511,7 +511,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertMatch:"node power=generator generator:source=wind generator:method=wind"
                 # assertNoMatch:"node power=generator generator:source=wind generator:method=wind_turbine"
                 # assertNoMatch:"node power=generator generator:source=wind"
-                err.append({'class': 6, 'subclass': 1104182574, 'text': mapcss.tr('Unsuitable method for wind generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040007, 'subclass': 1104182574, 'text': mapcss.tr('Unsuitable method for wind generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -530,7 +530,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Incompatibility between method and source on a power generator")
                 # assertMatch:"node power=generator generator:source=turbine generator:method=wind_turbine"
                 # assertNoMatch:"node power=generator generator:source=wind generator:method=wind_turbine"
-                err.append({'class': 5, 'subclass': 1021686777, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1021686777, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=hydro][generator:method][generator:method!~/^(water-storage|water-pumped-storage|run-of-the-river)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -548,7 +548,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"generator:method"
                 # assertMatch:"node power=generator generator:source=hydro generator:method=pump"
                 # assertNoMatch:"node power=generator generator:source=hydro generator:method=water-storage"
-                err.append({'class': 7, 'subclass': 1379042787, 'text': mapcss.tr('Unsuitable method for hydro generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040008, 'subclass': 1379042787, 'text': mapcss.tr('Unsuitable method for hydro generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -567,7 +567,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Incompatibility between method and source on a power generator")
                 # assertNoMatch:"node power=generator generator:source=hydro generator:method=water-storage"
                 # assertMatch:"node power=generator generator:source=water generator:method=water-pumped-storage"
-                err.append({'class': 5, 'subclass': 1830475878, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1830475878, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=tidal][generator:method][generator:method!~/^(barrage|stream)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -585,7 +585,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"generator:method"
                 # assertNoMatch:"node power=generator generator:source=tidal generator:method=barrage"
                 # assertMatch:"node power=generator generator:source=tidal generator:method=dam"
-                err.append({'class': 8, 'subclass': 503240008, 'text': mapcss.tr('Unsuitable method for tidal generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040009, 'subclass': 503240008, 'text': mapcss.tr('Unsuitable method for tidal generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -604,7 +604,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Incompatibility between method and source on a power generator")
                 # assertMatch:"node power=generator generator:source=solar generator:method=stream"
                 # assertNoMatch:"node power=generator generator:source=tidal generator:method=barrage"
-                err.append({'class': 5, 'subclass': 976314568, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 976314568, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=solar][generator:method][generator:method!~/^(thermal|photovoltaic)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -622,7 +622,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"generator:method"
                 # assertMatch:"node power=generator generator:source=solar generator:method=solar"
                 # assertNoMatch:"node power=generator generator:source=solar generator:method=thermal"
-                err.append({'class': 9, 'subclass': 1095645684, 'text': mapcss.tr('Unsuitable method for solar generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040010, 'subclass': 1095645684, 'text': mapcss.tr('Unsuitable method for solar generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -641,7 +641,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Incompatibility between method and source on a power generator")
                 # assertMatch:"node power=generator generator:source=photovoltaic generator:method=photovoltaic"
                 # assertNoMatch:"node power=generator generator:source=solar generator:method=thermal"
-                err.append({'class': 5, 'subclass': 1457983121, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1457983121, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=coal][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -658,7 +658,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertMatch:"node power=generator generator:source=coal generator:method=burning"
                 # assertNoMatch:"node power=generator generator:source=coal generator:method=combustion"
                 # assertNoMatch:"node power=generator generator:source=coal"
-                err.append({'class': 10, 'subclass': 727067352, 'text': mapcss.tr('Unsuitable method for coal generator')})
+                err.append({'class': 7040011, 'subclass': 727067352, 'text': mapcss.tr('Unsuitable method for coal generator')})
 
         # *[power=generator][generator:source=gas][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -675,7 +675,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=generator generator:source=gas generator:method=combustion"
                 # assertMatch:"node power=generator generator:source=gas generator:method=gasification"
                 # assertNoMatch:"node power=generator generator:source=gas"
-                err.append({'class': 11, 'subclass': 1587058630, 'text': mapcss.tr('Unsuitable method for gas generator')})
+                err.append({'class': 7040012, 'subclass': 1587058630, 'text': mapcss.tr('Unsuitable method for gas generator')})
 
         # *[power=generator][generator:source=biomass][generator:method][generator:method!~/^(combustion|gasification|anaerobic_digestion)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -693,7 +693,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"generator:method"
                 # assertNoMatch:"node power=generator generator:source=biomass generator:method=anaerobic_digestion"
                 # assertMatch:"node power=generator generator:source=biomass generator:method=burn"
-                err.append({'class': 12, 'subclass': 1563205211, 'text': mapcss.tr('Unsuitable method for biomass generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040013, 'subclass': 1563205211, 'text': mapcss.tr('Unsuitable method for biomass generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -713,7 +713,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=generator generator:source=biofuel generator:method=combustion"
                 # assertMatch:"node power=generator generator:source=biofuel generator:method=gasification"
                 # assertNoMatch:"node power=generator generator:source=biofuel"
-                err.append({'class': 13, 'subclass': 2056310355, 'text': mapcss.tr('Unsuitable method for biofuel generator')})
+                err.append({'class': 7040014, 'subclass': 2056310355, 'text': mapcss.tr('Unsuitable method for biofuel generator')})
 
         # *[power=generator][generator:source=biogas][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -730,7 +730,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=generator generator:source=biogas generator:method=combustion"
                 # assertMatch:"node power=generator generator:source=biogas generator:method=gasification"
                 # assertNoMatch:"node power=generator generator:source=biogas"
-                err.append({'class': 14, 'subclass': 1353854094, 'text': mapcss.tr('Unsuitable method for biogas generator')})
+                err.append({'class': 7040015, 'subclass': 1353854094, 'text': mapcss.tr('Unsuitable method for biogas generator')})
 
         # *[power=generator][generator:source=oil][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -747,7 +747,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=generator generator:source=oil generator:method=combustion"
                 # assertMatch:"node power=generator generator:source=oil generator:method=gasification"
                 # assertNoMatch:"node power=generator generator:source=oil"
-                err.append({'class': 15, 'subclass': 2059171544, 'text': mapcss.tr('Unsuitable method for oil generator')})
+                err.append({'class': 7040016, 'subclass': 2059171544, 'text': mapcss.tr('Unsuitable method for oil generator')})
 
         # *[power=generator][generator:source=diesel][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -764,7 +764,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=generator generator:source=diesel generator:method=combustion"
                 # assertMatch:"node power=generator generator:source=diesel generator:method=gasification"
                 # assertNoMatch:"node power=generator generator:source=diesel"
-                err.append({'class': 16, 'subclass': 87750196, 'text': mapcss.tr('Unsuitable method for diesel generator')})
+                err.append({'class': 7040017, 'subclass': 87750196, 'text': mapcss.tr('Unsuitable method for diesel generator')})
 
         # *[power=generator][generator:source=gasoline][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -781,7 +781,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=generator generator:source=gasoline generator:method=combustion"
                 # assertMatch:"node power=generator generator:source=gasoline generator:method=gasification"
                 # assertNoMatch:"node power=generator generator:source=gasoline"
-                err.append({'class': 17, 'subclass': 1418218249, 'text': mapcss.tr('Unsuitable method for gasoline generator')})
+                err.append({'class': 7040018, 'subclass': 1418218249, 'text': mapcss.tr('Unsuitable method for gasoline generator')})
 
         # *[power=generator][generator:source=waste][generator:method][generator:method!~/^(combustion|gasification)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -799,7 +799,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"generator:method"
                 # assertMatch:"node power=generator generator:source=waste generator:method=burning"
                 # assertNoMatch:"node power=generator generator:source=waste generator:method=combustion"
-                err.append({'class': 18, 'subclass': 600470569, 'text': mapcss.tr('Unsuitable method for waste generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040019, 'subclass': 600470569, 'text': mapcss.tr('Unsuitable method for waste generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -821,7 +821,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=generator generator:source=gas;oil;waste generator:method=combustion"
                 # assertMatch:"node power=generator generator:source=waste;solar generator:method=combustion"
                 # assertMatch:"node power=generator generator:source=wave generator:method=combustion"
-                err.append({'class': 5, 'subclass': 1335984003, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1335984003, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:method=gasification][generator:source][generator:source!~/^(waste|biomass)(;(waste|biomass))*$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -838,7 +838,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=generator generator:source=biomass generator:method=gasification"
                 # assertNoMatch:"node power=generator generator:source=biomass;waste generator:method=gasification"
                 # assertMatch:"node power=generator generator:source=coal generator:method=gasification"
-                err.append({'class': 5, 'subclass': 313390332, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 313390332, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=plant][plant:source][plant:source!~/^(nuclear|wind|hydro|tidal|wave|geothermal|solar|coal|gas|biomass|biofuel|biogas|oil|diesel|gasoline|waste|battery)(;(nuclear|wind|hydro|tidal|wave|geothermal|solar|coal|gas|biomass|biofuel|biogas|oil|diesel|gasoline|waste|battery))*$/]
         if ('plant:source' in keys and 'power' in keys):
@@ -856,7 +856,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertMatch:"node power=plant plant:source=photovoltaic"
                 # assertNoMatch:"node power=plant plant:source=solar"
                 # assertNoMatch:"node power=plant"
-                err.append({'class': 19, 'subclass': 966751128, 'text': mapcss.tr('Unsuitable value for plant:source=* tag')})
+                err.append({'class': 7040020, 'subclass': 966751128, 'text': mapcss.tr('Unsuitable value for plant:source=* tag')})
 
         # *[power=plant][plant:source=nuclear][plant:method][plant:method!~/^(fission|fusion)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -874,7 +874,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"plant:method"
                 # assertNoMatch:"node power=plant plant:source=nuclear plant:method=fission"
                 # assertMatch:"node power=plant plant:source=nuclear plant:method=nuclear"
-                err.append({'class': 20, 'subclass': 56152287, 'text': mapcss.tr('Unsuitable method for nuclear power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040021, 'subclass': 56152287, 'text': mapcss.tr('Unsuitable method for nuclear power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -893,7 +893,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Incompatibility between method and source on a power plant")
                 # assertNoMatch:"node power=plant plant:source=nuclear plant:method=fission"
                 # assertMatch:"node power=plant plant:source=solar plant:method=fusion"
-                err.append({'class': 21, 'subclass': 120690153, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 120690153, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=wind][plant:method][plant:method!=wind_turbine]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -911,7 +911,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertMatch:"node power=plant plant:source=wind plant:method=wind"
                 # assertNoMatch:"node power=plant plant:source=wind plant:method=wind_turbine"
                 # assertNoMatch:"node power=plant plant:source=wind"
-                err.append({'class': 22, 'subclass': 515061741, 'text': mapcss.tr('Unsuitable method for wind power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040023, 'subclass': 515061741, 'text': mapcss.tr('Unsuitable method for wind power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -930,7 +930,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Incompatibility between method and source on a power plant")
                 # assertMatch:"node power=plant plant:source=eolien plant:method=wind_turbine"
                 # assertNoMatch:"node power=plant plant:source=wind plant:method=wind_turbine"
-                err.append({'class': 21, 'subclass': 443176990, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 443176990, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=hydro][plant:method][plant:method!~/^(water-storage|water-pumped-storage|run-of-the-river)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -948,7 +948,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"plant:method"
                 # assertMatch:"node power=plant plant:source=hydro plant:method=pump"
                 # assertNoMatch:"node power=plant plant:source=hydro plant:method=water-storage"
-                err.append({'class': 23, 'subclass': 1020856194, 'text': mapcss.tr('Unsuitable method for hydro power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040024, 'subclass': 1020856194, 'text': mapcss.tr('Unsuitable method for hydro power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -967,7 +967,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Incompatibility between method and source on a power plant")
                 # assertNoMatch:"node power=plant plant:source=hydro plant:method=water-storage"
                 # assertMatch:"node power=plant plant:source=water plant:method=water-pumped-storage"
-                err.append({'class': 21, 'subclass': 1372509170, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 1372509170, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=tidal][plant:method][plant:method!~/^(barrage|stream)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -985,7 +985,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"plant:method"
                 # assertNoMatch:"node power=plant plant:source=tidal plant:method=barrage"
                 # assertMatch:"node power=plant plant:source=tidal plant:method=dam"
-                err.append({'class': 24, 'subclass': 75438578, 'text': mapcss.tr('Unsuitable method for tidal power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040025, 'subclass': 75438578, 'text': mapcss.tr('Unsuitable method for tidal power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -1004,7 +1004,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Incompatibility between method and source on a power plant")
                 # assertMatch:"node power=plant plant:source=solar plant:method=stream"
                 # assertNoMatch:"node power=plant plant:source=tidal plant:method=barrage"
-                err.append({'class': 21, 'subclass': 934978595, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 934978595, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=solar][plant:method][plant:method!~/^(thermal|photovoltaic)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -1022,7 +1022,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"plant:method"
                 # assertMatch:"node power=plant plant:source=solar plant:method=solar"
                 # assertNoMatch:"node power=plant plant:source=solar plant:method=thermal"
-                err.append({'class': 25, 'subclass': 1799335667, 'text': mapcss.tr('Unsuitable method for solar power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040026, 'subclass': 1799335667, 'text': mapcss.tr('Unsuitable method for solar power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -1041,7 +1041,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Incompatibility between method and source on a power plant")
                 # assertMatch:"node power=plant plant:source=photovoltaic plant:method=photovoltaic"
                 # assertNoMatch:"node power=plant plant:source=solar plant:method=thermal"
-                err.append({'class': 21, 'subclass': 1085835351, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 1085835351, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=coal][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -1058,7 +1058,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertMatch:"node power=plant plant:source=coal plant:method=burning"
                 # assertNoMatch:"node power=plant plant:source=coal plant:method=combustion"
                 # assertNoMatch:"node power=plant plant:source=coal"
-                err.append({'class': 26, 'subclass': 746471181, 'text': mapcss.tr('Unsuitable method for coal power plant')})
+                err.append({'class': 7040027, 'subclass': 746471181, 'text': mapcss.tr('Unsuitable method for coal power plant')})
 
         # *[power=plant][plant:source=gas][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -1075,7 +1075,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=plant plant:source=gas plant:method=combustion"
                 # assertMatch:"node power=plant plant:source=gas plant:method=gasification"
                 # assertNoMatch:"node power=plant plant:source=gas"
-                err.append({'class': 27, 'subclass': 827336490, 'text': mapcss.tr('Unsuitable method for gas power plant')})
+                err.append({'class': 7040028, 'subclass': 827336490, 'text': mapcss.tr('Unsuitable method for gas power plant')})
 
         # *[power=plant][plant:source=biomass][plant:method][plant:method!~/^(combustion|gasification|anaerobic_digestion)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -1093,7 +1093,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"plant:method"
                 # assertNoMatch:"node power=plant plant:source=biomass plant:method=anaerobic_digestion"
                 # assertMatch:"node power=plant plant:source=biomass plant:method=burn"
-                err.append({'class': 28, 'subclass': 2076402923, 'text': mapcss.tr('Unsuitable method for biomass power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040029, 'subclass': 2076402923, 'text': mapcss.tr('Unsuitable method for biomass power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -1113,7 +1113,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=plant plant:source=biofuel plant:method=combustion"
                 # assertMatch:"node power=plant plant:source=biofuel plant:method=gasification"
                 # assertNoMatch:"node power=plant plant:source=biofuel"
-                err.append({'class': 29, 'subclass': 1882895060, 'text': mapcss.tr('Unsuitable method for biofuel power plant')})
+                err.append({'class': 7040030, 'subclass': 1882895060, 'text': mapcss.tr('Unsuitable method for biofuel power plant')})
 
         # *[power=plant][plant:source=biogas][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -1130,7 +1130,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=plant plant:source=biogas plant:method=combustion"
                 # assertMatch:"node power=plant plant:source=biogas plant:method=gasification"
                 # assertNoMatch:"node power=plant plant:source=biogas"
-                err.append({'class': 30, 'subclass': 887792794, 'text': mapcss.tr('Unsuitable method for biogas power plant')})
+                err.append({'class': 7040031, 'subclass': 887792794, 'text': mapcss.tr('Unsuitable method for biogas power plant')})
 
         # *[power=plant][plant:source=oil][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -1147,7 +1147,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=plant plant:source=oil plant:method=combustion"
                 # assertMatch:"node power=plant plant:source=oil plant:method=gasification"
                 # assertNoMatch:"node power=plant plant:source=oil"
-                err.append({'class': 31, 'subclass': 1678290892, 'text': mapcss.tr('Unsuitable method for oil power plant')})
+                err.append({'class': 7040032, 'subclass': 1678290892, 'text': mapcss.tr('Unsuitable method for oil power plant')})
 
         # *[power=plant][plant:source=diesel][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -1164,7 +1164,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=plant plant:source=diesel plant:method=combustion"
                 # assertMatch:"node power=plant plant:source=diesel plant:method=gasification"
                 # assertNoMatch:"node power=plant plant:source=diesel"
-                err.append({'class': 32, 'subclass': 75543302, 'text': mapcss.tr('Unsuitable method for diesel power plant')})
+                err.append({'class': 7040033, 'subclass': 75543302, 'text': mapcss.tr('Unsuitable method for diesel power plant')})
 
         # *[power=plant][plant:source=gasoline][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -1181,7 +1181,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=plant plant:source=gasoline plant:method=combustion"
                 # assertMatch:"node power=plant plant:source=gasoline plant:method=gasification"
                 # assertNoMatch:"node power=plant plant:source=gasoline"
-                err.append({'class': 33, 'subclass': 599334301, 'text': mapcss.tr('Unsuitable method for gasoline power plant')})
+                err.append({'class': 7040034, 'subclass': 599334301, 'text': mapcss.tr('Unsuitable method for gasoline power plant')})
 
         # *[power=plant][plant:source=waste][plant:method][plant:method!~/^(combustion|gasification)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -1199,7 +1199,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"plant:method"
                 # assertMatch:"node power=plant plant:source=waste plant:method=burning"
                 # assertNoMatch:"node power=plant plant:source=waste plant:method=combustion"
-                err.append({'class': 34, 'subclass': 489417432, 'text': mapcss.tr('Unsuitable method for waste power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040035, 'subclass': 489417432, 'text': mapcss.tr('Unsuitable method for waste power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -1219,7 +1219,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=plant plant:source=biomass plant:method=combustion"
                 # assertNoMatch:"node power=plant plant:source=biomass;waste plant:method=combustion"
                 # assertMatch:"node power=plant plant:source=wave plant:method=combustion"
-                err.append({'class': 21, 'subclass': 46745407, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 46745407, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:method=gasification][plant:source][plant:source!~/^(waste|biomass)(;(waste|biomass))*$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -1236,7 +1236,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertNoMatch:"node power=plant plant:source=biomass plant:method=gasification"
                 # assertNoMatch:"node power=plant plant:source=biomass;waste plant:method=gasification"
                 # assertMatch:"node power=plant plant:source=coal plant:method=gasification"
-                err.append({'class': 21, 'subclass': 1329720574, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 1329720574, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|132000|220000|500000)$/][inside("AF")]
         if ('power' in keys and 'voltage' in keys):
@@ -1253,7 +1253,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Afghanistan"
                 # throwError:tr("Invalid voltage value for this country (Afghanistan)")
                 # suggestAlternative:"110000/132000/220000/500000"
-                err.append({'class': 35, 'subclass': 476050435, 'text': mapcss.tr('Invalid voltage value for this country (Afghanistan)')})
+                err.append({'class': 7040036, 'subclass': 476050435, 'text': mapcss.tr('Invalid voltage value for this country (Afghanistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|35000|110000|150000|220000|400000)$/][inside("AL")]
         if ('power' in keys and 'voltage' in keys):
@@ -1270,7 +1270,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Albania"
                 # throwError:tr("Invalid voltage value for this country (Albania)")
                 # suggestAlternative:"30000/35000/110000/150000/220000/400000"
-                err.append({'class': 36, 'subclass': 1983074643, 'text': mapcss.tr('Invalid voltage value for this country (Albania)')})
+                err.append({'class': 7040037, 'subclass': 1983074643, 'text': mapcss.tr('Invalid voltage value for this country (Albania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|60000|66000|90000|150000|220000|225000|400000)$/][inside("DZ")]
         if ('power' in keys and 'voltage' in keys):
@@ -1287,7 +1287,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Algeria"
                 # throwError:tr("Invalid voltage value for this country (Algeria)")
                 # suggestAlternative:"30000/60000/66000/90000/150000/220000/225000/400000"
-                err.append({'class': 37, 'subclass': 1872289267, 'text': mapcss.tr('Invalid voltage value for this country (Algeria)')})
+                err.append({'class': 7040038, 'subclass': 1872289267, 'text': mapcss.tr('Invalid voltage value for this country (Algeria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|150000|225000)$/][inside("AD")]
         if ('power' in keys and 'voltage' in keys):
@@ -1304,7 +1304,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Andorra"
                 # throwError:tr("Invalid voltage value for this country (Andorra)")
                 # suggestAlternative:"110000/150000/225000"
-                err.append({'class': 38, 'subclass': 58588868, 'text': mapcss.tr('Invalid voltage value for this country (Andorra)')})
+                err.append({'class': 7040039, 'subclass': 58588868, 'text': mapcss.tr('Invalid voltage value for this country (Andorra)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(60000|66000|110000|132000|150000|220000|400000)$/][inside("AO")]
         if ('power' in keys and 'voltage' in keys):
@@ -1321,7 +1321,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Angola"
                 # throwError:tr("Invalid voltage value for this country (Angola)")
                 # suggestAlternative:"60000/66000/110000/132000/150000/220000/400000"
-                err.append({'class': 39, 'subclass': 235679545, 'text': mapcss.tr('Invalid voltage value for this country (Angola)')})
+                err.append({'class': 7040040, 'subclass': 235679545, 'text': mapcss.tr('Invalid voltage value for this country (Angola)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13200|25000|32000|33000|35000|66000|132000|220000|330000|345000|500000)$/][inside("AR")]
         if ('power' in keys and 'voltage' in keys):
@@ -1338,7 +1338,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Argentina"
                 # throwError:tr("Invalid voltage value for this country (Argentina)")
                 # suggestAlternative:"13200/25000/32000/33000/35000/66000/132000/220000/330000/345000/500000"
-                err.append({'class': 40, 'subclass': 1618375374, 'text': mapcss.tr('Invalid voltage value for this country (Argentina)')})
+                err.append({'class': 7040041, 'subclass': 1618375374, 'text': mapcss.tr('Invalid voltage value for this country (Argentina)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|36000|100000|110000|220000|230000|330000|400000|500000)$/][inside("AM")]
         if ('power' in keys and 'voltage' in keys):
@@ -1355,7 +1355,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Armenia"
                 # throwError:tr("Invalid voltage value for this country (Armenia)")
                 # suggestAlternative:"35000/36000/100000/110000/220000/230000/330000/400000/500000"
-                err.append({'class': 41, 'subclass': 1828289630, 'text': mapcss.tr('Invalid voltage value for this country (Armenia)')})
+                err.append({'class': 7040042, 'subclass': 1828289630, 'text': mapcss.tr('Invalid voltage value for this country (Armenia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|12700|19000|19100|22000|33000|35000|44000|50000|66000|80000|110000|132000|150000|220000|275000|330000|400000|500000)$/][inside("AU")]
         if ('power' in keys and 'voltage' in keys):
@@ -1372,7 +1372,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Australia"
                 # throwError:tr("Invalid voltage value for this country (Australia)")
                 # suggestAlternative:"10500/11000/12700/19000/19100/22000/33000/35000/44000/50000/66000/80000/110000/132000/150000/220000/275000/330000/400000/500000"
-                err.append({'class': 42, 'subclass': 327122119, 'text': mapcss.tr('Invalid voltage value for this country (Australia)')})
+                err.append({'class': 7040043, 'subclass': 327122119, 'text': mapcss.tr('Invalid voltage value for this country (Australia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|13800|15000|16000|17500|20000|25000|30000|55000|60000|110000|132000|150000|220000|380000|400000)$/][inside("AT")]
         if ('power' in keys and 'voltage' in keys):
@@ -1389,7 +1389,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Austria"
                 # throwError:tr("Invalid voltage value for this country (Austria)")
                 # suggestAlternative:"10500/13800/15000/16000/17500/20000/25000/30000/55000/60000/110000/132000/150000/220000/380000/400000"
-                err.append({'class': 43, 'subclass': 1273628480, 'text': mapcss.tr('Invalid voltage value for this country (Austria)')})
+                err.append({'class': 7040044, 'subclass': 1273628480, 'text': mapcss.tr('Invalid voltage value for this country (Austria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|132000|154000|220000|330000|500000)$/][inside("AZ")]
         if ('power' in keys and 'voltage' in keys):
@@ -1406,7 +1406,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Azerbaijan"
                 # throwError:tr("Invalid voltage value for this country (Azerbaijan)")
                 # suggestAlternative:"35000/110000/132000/154000/220000/330000/500000"
-                err.append({'class': 44, 'subclass': 398122760, 'text': mapcss.tr('Invalid voltage value for this country (Azerbaijan)')})
+                err.append({'class': 7040045, 'subclass': 398122760, 'text': mapcss.tr('Invalid voltage value for this country (Azerbaijan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(220000|230000|400000)$/][inside("BH")]
         if ('power' in keys and 'voltage' in keys):
@@ -1423,7 +1423,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bahrain"
                 # throwError:tr("Invalid voltage value for this country (Bahrain)")
                 # suggestAlternative:"220000/230000/400000"
-                err.append({'class': 45, 'subclass': 1709065708, 'text': mapcss.tr('Invalid voltage value for this country (Bahrain)')})
+                err.append({'class': 7040046, 'subclass': 1709065708, 'text': mapcss.tr('Invalid voltage value for this country (Bahrain)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(23000|33000|132000|230000|400000)$/][inside("BD")]
         if ('power' in keys and 'voltage' in keys):
@@ -1440,7 +1440,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bangladesh"
                 # throwError:tr("Invalid voltage value for this country (Bangladesh)")
                 # suggestAlternative:"23000/33000/132000/230000/400000"
-                err.append({'class': 46, 'subclass': 1699525539, 'text': mapcss.tr('Invalid voltage value for this country (Bangladesh)')})
+                err.append({'class': 7040047, 'subclass': 1699525539, 'text': mapcss.tr('Invalid voltage value for this country (Bangladesh)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|40000|100000|110000|220000|330000|750000)$/][inside("BY")]
         if ('power' in keys and 'voltage' in keys):
@@ -1457,7 +1457,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Belarus"
                 # throwError:tr("Invalid voltage value for this country (Belarus)")
                 # suggestAlternative:"35000/40000/100000/110000/220000/330000/750000"
-                err.append({'class': 47, 'subclass': 1481420278, 'text': mapcss.tr('Invalid voltage value for this country (Belarus)')})
+                err.append({'class': 7040048, 'subclass': 1481420278, 'text': mapcss.tr('Invalid voltage value for this country (Belarus)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|11500|15000|30000|33000|36000|50000|63000|70000|110000|150000|220000|225000|320000|380000|400000)$/][inside("BE")]
         if ('power' in keys and 'voltage' in keys):
@@ -1474,7 +1474,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Belgium"
                 # throwError:tr("Invalid voltage value for this country (Belgium)")
                 # suggestAlternative:"11000/11500/15000/30000/33000/36000/50000/63000/70000/110000/150000/220000/225000/320000/380000/400000"
-                err.append({'class': 48, 'subclass': 274095264, 'text': mapcss.tr('Invalid voltage value for this country (Belgium)')})
+                err.append({'class': 7040049, 'subclass': 274095264, 'text': mapcss.tr('Invalid voltage value for this country (Belgium)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|34500|69000|115000)$/][inside("BZ")]
         if ('power' in keys and 'voltage' in keys):
@@ -1491,7 +1491,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Belize"
                 # throwError:tr("Invalid voltage value for this country (Belize)")
                 # suggestAlternative:"22000/34500/69000/115000"
-                err.append({'class': 49, 'subclass': 766927721, 'text': mapcss.tr('Invalid voltage value for this country (Belize)')})
+                err.append({'class': 7040050, 'subclass': 766927721, 'text': mapcss.tr('Invalid voltage value for this country (Belize)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000|330000)$/][inside("BJ")]
         if ('power' in keys and 'voltage' in keys):
@@ -1508,7 +1508,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Benin"
                 # throwError:tr("Invalid voltage value for this country (Benin)")
                 # suggestAlternative:"161000/330000"
-                err.append({'class': 50, 'subclass': 1947206292, 'text': mapcss.tr('Invalid voltage value for this country (Benin)')})
+                err.append({'class': 7040051, 'subclass': 1947206292, 'text': mapcss.tr('Invalid voltage value for this country (Benin)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000)$/][inside("BT")]
         if ('power' in keys and 'voltage' in keys):
@@ -1525,7 +1525,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bhutan"
                 # throwError:tr("Invalid voltage value for this country (Bhutan)")
                 # suggestAlternative:"66000/132000/220000/400000"
-                err.append({'class': 51, 'subclass': 1604273791, 'text': mapcss.tr('Invalid voltage value for this country (Bhutan)')})
+                err.append({'class': 7040052, 'subclass': 1604273791, 'text': mapcss.tr('Invalid voltage value for this country (Bhutan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|220000|500000)$/][inside("BO")]
         if ('power' in keys and 'voltage' in keys):
@@ -1542,7 +1542,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bolivia"
                 # throwError:tr("Invalid voltage value for this country (Bolivia)")
                 # suggestAlternative:"115000/220000/500000"
-                err.append({'class': 52, 'subclass': 855964000, 'text': mapcss.tr('Invalid voltage value for this country (Bolivia)')})
+                err.append({'class': 7040053, 'subclass': 855964000, 'text': mapcss.tr('Invalid voltage value for this country (Bolivia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|220000|400000)$/][inside("BA")]
         if ('power' in keys and 'voltage' in keys):
@@ -1559,7 +1559,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bosnia_and_Herzegovina"
                 # throwError:tr("Invalid voltage value for this country (Bosnia and Herzegovina)")
                 # suggestAlternative:"35000/110000/220000/400000"
-                err.append({'class': 53, 'subclass': 316047865, 'text': mapcss.tr('Invalid voltage value for this country (Bosnia and Herzegovina)')})
+                err.append({'class': 7040054, 'subclass': 316047865, 'text': mapcss.tr('Invalid voltage value for this country (Bosnia and Herzegovina)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000)$/][inside("BW")]
         if ('power' in keys and 'voltage' in keys):
@@ -1576,7 +1576,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Botswana"
                 # throwError:tr("Invalid voltage value for this country (Botswana)")
                 # suggestAlternative:"66000/132000/220000/400000"
-                err.append({'class': 54, 'subclass': 1508465306, 'text': mapcss.tr('Invalid voltage value for this country (Botswana)')})
+                err.append({'class': 7040055, 'subclass': 1508465306, 'text': mapcss.tr('Invalid voltage value for this country (Botswana)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|23100|34500|66000|69000|88000|110000|132000|138000|230000|345000|440000|500000|525000|600000|765000|800000)$/][inside("BR")]
         if ('power' in keys and 'voltage' in keys):
@@ -1593,7 +1593,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Brazil"
                 # throwError:tr("Invalid voltage value for this country (Brazil)")
                 # suggestAlternative:"13800/23100/34500/66000/69000/88000/110000/132000/138000/230000/345000/440000/500000/525000/600000/765000/800000"
-                err.append({'class': 55, 'subclass': 110797621, 'text': mapcss.tr('Invalid voltage value for this country (Brazil)')})
+                err.append({'class': 7040056, 'subclass': 110797621, 'text': mapcss.tr('Invalid voltage value for this country (Brazil)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|275000)$/][inside("BN")]
         if ('power' in keys and 'voltage' in keys):
@@ -1610,7 +1610,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Brunei"
                 # throwError:tr("Invalid voltage value for this country (Brunei)")
                 # suggestAlternative:"66000/132000/275000"
-                err.append({'class': 56, 'subclass': 407729200, 'text': mapcss.tr('Invalid voltage value for this country (Brunei)')})
+                err.append({'class': 7040057, 'subclass': 407729200, 'text': mapcss.tr('Invalid voltage value for this country (Brunei)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|22000|25000|35000|110000|220000|400000)$/][inside("BG")]
         if ('power' in keys and 'voltage' in keys):
@@ -1627,7 +1627,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bulgaria"
                 # throwError:tr("Invalid voltage value for this country (Bulgaria)")
                 # suggestAlternative:"20000/22000/25000/35000/110000/220000/400000"
-                err.append({'class': 57, 'subclass': 2011260374, 'text': mapcss.tr('Invalid voltage value for this country (Bulgaria)')})
+                err.append({'class': 7040058, 'subclass': 2011260374, 'text': mapcss.tr('Invalid voltage value for this country (Bulgaria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(90000|132000|225000)$/][inside("BF")]
         if ('power' in keys and 'voltage' in keys):
@@ -1644,7 +1644,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Burkina_Faso"
                 # throwError:tr("Invalid voltage value for this country (Burkina Faso)")
                 # suggestAlternative:"90000/132000/225000"
-                err.append({'class': 58, 'subclass': 1507871769, 'text': mapcss.tr('Invalid voltage value for this country (Burkina Faso)')})
+                err.append({'class': 7040059, 'subclass': 1507871769, 'text': mapcss.tr('Invalid voltage value for this country (Burkina Faso)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(70000|110000|220000)$/][inside("BI")]
         if ('power' in keys and 'voltage' in keys):
@@ -1661,7 +1661,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Burundi"
                 # throwError:tr("Invalid voltage value for this country (Burundi)")
                 # suggestAlternative:"70000/110000/220000"
-                err.append({'class': 59, 'subclass': 1709474748, 'text': mapcss.tr('Invalid voltage value for this country (Burundi)')})
+                err.append({'class': 7040060, 'subclass': 1709474748, 'text': mapcss.tr('Invalid voltage value for this country (Burundi)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("KH")]
         if ('power' in keys and 'voltage' in keys):
@@ -1678,7 +1678,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cambodia"
                 # throwError:tr("Invalid voltage value for this country (Cambodia)")
                 # suggestAlternative:"115000/230000"
-                err.append({'class': 60, 'subclass': 988460776, 'text': mapcss.tr('Invalid voltage value for this country (Cambodia)')})
+                err.append({'class': 7040061, 'subclass': 988460776, 'text': mapcss.tr('Invalid voltage value for this country (Cambodia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|90000|110000|220000|225000)$/][inside("CM")]
         if ('power' in keys and 'voltage' in keys):
@@ -1695,7 +1695,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cameroon"
                 # throwError:tr("Invalid voltage value for this country (Cameroon)")
                 # suggestAlternative:"30000/90000/110000/220000/225000"
-                err.append({'class': 61, 'subclass': 87587000, 'text': mapcss.tr('Invalid voltage value for this country (Cameroon)')})
+                err.append({'class': 7040062, 'subclass': 87587000, 'text': mapcss.tr('Invalid voltage value for this country (Cameroon)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11500|12000|12470|12500|13000|13200|13800|14000|14400|16000|17500|23000|24940|25000|26400|27600|28000|34000|34500|35000|42000|44000|46000|49000|60000|63000|66000|69000|72000|110000|115000|120000|132000|138000|144000|150000|161000|200000|220000|230000|240000|260000|280000|287000|315000|345000|350000|360000|450000|500000|735000|765000)$/][inside("CA")]
         if ('power' in keys and 'voltage' in keys):
@@ -1712,7 +1712,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Canada"
                 # throwError:tr("Invalid voltage value for this country (Canada)")
                 # suggestAlternative:"11500/12000/12470/12500/13000/13200/13800/14000/14400/16000/17500/23000/24940/25000/26400/27600/28000/34000/34500/35000/42000/44000/46000/49000/60000/63000/66000/69000/72000/110000/115000/120000/132000/138000/144000/150000/161000/200000/220000/230000/240000/260000/280000/287000/315000/345000/350000/360000/450000/500000/735000/765000"
-                err.append({'class': 62, 'subclass': 1237272098, 'text': mapcss.tr('Invalid voltage value for this country (Canada)')})
+                err.append({'class': 7040063, 'subclass': 1237272098, 'text': mapcss.tr('Invalid voltage value for this country (Canada)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|60000)$/][inside("CV")]
         if ('power' in keys and 'voltage' in keys):
@@ -1729,7 +1729,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cape_Verde"
                 # throwError:tr("Invalid voltage value for this country (Cape Verde)")
                 # suggestAlternative:"20000/60000"
-                err.append({'class': 63, 'subclass': 1540084049, 'text': mapcss.tr('Invalid voltage value for this country (Cape Verde)')})
+                err.append({'class': 7040064, 'subclass': 1540084049, 'text': mapcss.tr('Invalid voltage value for this country (Cape Verde)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000)$/][inside("CF")]
         if ('power' in keys and 'voltage' in keys):
@@ -1746,7 +1746,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Central_African_Republic"
                 # throwError:tr("Invalid voltage value for this country (Central African Republic)")
                 # suggestAlternative:"110000"
-                err.append({'class': 64, 'subclass': 966893072, 'text': mapcss.tr('Invalid voltage value for this country (Central African Republic)')})
+                err.append({'class': 7040065, 'subclass': 966893072, 'text': mapcss.tr('Invalid voltage value for this country (Central African Republic)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|66000|90000)$/][inside("TD")]
         if ('power' in keys and 'voltage' in keys):
@@ -1763,7 +1763,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Chad"
                 # throwError:tr("Invalid voltage value for this country (Chad)")
                 # suggestAlternative:"20000/66000/90000"
-                err.append({'class': 65, 'subclass': 537318656, 'text': mapcss.tr('Invalid voltage value for this country (Chad)')})
+                err.append({'class': 7040066, 'subclass': 537318656, 'text': mapcss.tr('Invalid voltage value for this country (Chad)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|15000|23000|33000|34500|66000|69000|100000|110000|154000|220000|345000|500000)$/][inside("CL")]
         if ('power' in keys and 'voltage' in keys):
@@ -1780,7 +1780,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Chile"
                 # throwError:tr("Invalid voltage value for this country (Chile)")
                 # suggestAlternative:"13800/15000/23000/33000/34500/66000/69000/100000/110000/154000/220000/345000/500000"
-                err.append({'class': 66, 'subclass': 353014571, 'text': mapcss.tr('Invalid voltage value for this country (Chile)')})
+                err.append({'class': 7040067, 'subclass': 353014571, 'text': mapcss.tr('Invalid voltage value for this country (Chile)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|25000|34500|66000|110000|115000|138000|220000|230000|500000)$/][inside("CO")]
         if ('power' in keys and 'voltage' in keys):
@@ -1797,7 +1797,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Colombia"
                 # throwError:tr("Invalid voltage value for this country (Colombia)")
                 # suggestAlternative:"15000/25000/34500/66000/110000/115000/138000/220000/230000/500000"
-                err.append({'class': 67, 'subclass': 662682689, 'text': mapcss.tr('Invalid voltage value for this country (Colombia)')})
+                err.append({'class': 7040068, 'subclass': 662682689, 'text': mapcss.tr('Invalid voltage value for this country (Colombia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(138000|230000)$/][inside("CR")]
         if ('power' in keys and 'voltage' in keys):
@@ -1814,7 +1814,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Costa_Rica"
                 # throwError:tr("Invalid voltage value for this country (Costa Rica)")
                 # suggestAlternative:"138000/230000"
-                err.append({'class': 68, 'subclass': 316878503, 'text': mapcss.tr('Invalid voltage value for this country (Costa Rica)')})
+                err.append({'class': 7040069, 'subclass': 316878503, 'text': mapcss.tr('Invalid voltage value for this country (Costa Rica)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|35000|110000|220000|400000|500000)$/][inside("HR")]
         if ('power' in keys and 'voltage' in keys):
@@ -1831,7 +1831,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Croatia"
                 # throwError:tr("Invalid voltage value for this country (Croatia)")
                 # suggestAlternative:"20000/25000/35000/110000/220000/400000/500000"
-                err.append({'class': 69, 'subclass': 1920686550, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
+                err.append({'class': 7040070, 'subclass': 1920686550, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|110000|220000)$/][inside("CU")]
         if ('power' in keys and 'voltage' in keys):
@@ -1848,7 +1848,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cuba"
                 # throwError:tr("Invalid voltage value for this country (Cuba)")
                 # suggestAlternative:"11000/110000/220000"
-                err.append({'class': 70, 'subclass': 1900521322, 'text': mapcss.tr('Invalid voltage value for this country (Cuba)')})
+                err.append({'class': 7040071, 'subclass': 1900521322, 'text': mapcss.tr('Invalid voltage value for this country (Cuba)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("CY")]
         if ('power' in keys and 'voltage' in keys):
@@ -1865,7 +1865,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cyprus"
                 # throwError:tr("Invalid voltage value for this country (Cyprus)")
                 # suggestAlternative:"66000/132000"
-                err.append({'class': 71, 'subclass': 540137395, 'text': mapcss.tr('Invalid voltage value for this country (Cyprus)')})
+                err.append({'class': 7040072, 'subclass': 540137395, 'text': mapcss.tr('Invalid voltage value for this country (Cyprus)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|33000|35000|110000|220000|380000|400000)$/][inside("CZ")]
         if ('power' in keys and 'voltage' in keys):
@@ -1882,7 +1882,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Czech_Republic"
                 # throwError:tr("Invalid voltage value for this country (Czech Republic)")
                 # suggestAlternative:"22000/33000/35000/110000/220000/380000/400000"
-                err.append({'class': 72, 'subclass': 938628373, 'text': mapcss.tr('Invalid voltage value for this country (Czech Republic)')})
+                err.append({'class': 7040073, 'subclass': 938628373, 'text': mapcss.tr('Invalid voltage value for this country (Czech Republic)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|30000|33000|50000|70000|110000|120000|132000|220000|400000|500000)$/][inside("CD")]
         if ('power' in keys and 'voltage' in keys):
@@ -1899,7 +1899,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Democratic_Republic_of_the_Congo"
                 # throwError:tr("Invalid voltage value for this country (Democratic Republic of the Congo)")
                 # suggestAlternative:"11000/30000/33000/50000/70000/110000/120000/132000/220000/400000/500000"
-                err.append({'class': 73, 'subclass': 1276063637, 'text': mapcss.tr('Invalid voltage value for this country (Democratic Republic of the Congo)')})
+                err.append({'class': 7040074, 'subclass': 1276063637, 'text': mapcss.tr('Invalid voltage value for this country (Democratic Republic of the Congo)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|230000)$/][inside("DJ")]
         if ('power' in keys and 'voltage' in keys):
@@ -1916,7 +1916,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Djibouti"
                 # throwError:tr("Invalid voltage value for this country (Djibouti)")
                 # suggestAlternative:"63000/230000"
-                err.append({'class': 74, 'subclass': 413176455, 'text': mapcss.tr('Invalid voltage value for this country (Djibouti)')})
+                err.append({'class': 7040075, 'subclass': 413176455, 'text': mapcss.tr('Invalid voltage value for this country (Djibouti)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000|345000)$/][inside("DO")]
         if ('power' in keys and 'voltage' in keys):
@@ -1933,7 +1933,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Dominican_Republic"
                 # throwError:tr("Invalid voltage value for this country (Dominican Republic)")
                 # suggestAlternative:"69000/138000/230000/345000"
-                err.append({'class': 75, 'subclass': 1737719490, 'text': mapcss.tr('Invalid voltage value for this country (Dominican Republic)')})
+                err.append({'class': 7040076, 'subclass': 1737719490, 'text': mapcss.tr('Invalid voltage value for this country (Dominican Republic)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|22000|23000|34500|46000|48000|69000|138000|230000|500000)$/][inside("EC")]
         if ('power' in keys and 'voltage' in keys):
@@ -1950,7 +1950,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ecuador"
                 # throwError:tr("Invalid voltage value for this country (Ecuador)")
                 # suggestAlternative:"11000/22000/23000/34500/46000/48000/69000/138000/230000/500000"
-                err.append({'class': 76, 'subclass': 1289930511, 'text': mapcss.tr('Invalid voltage value for this country (Ecuador)')})
+                err.append({'class': 7040077, 'subclass': 1289930511, 'text': mapcss.tr('Invalid voltage value for this country (Ecuador)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000|500000)$/][inside("EG")]
         if ('power' in keys and 'voltage' in keys):
@@ -1967,7 +1967,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Egypt"
                 # throwError:tr("Invalid voltage value for this country (Egypt)")
                 # suggestAlternative:"66000/132000/220000/400000/500000"
-                err.append({'class': 77, 'subclass': 509025628, 'text': mapcss.tr('Invalid voltage value for this country (Egypt)')})
+                err.append({'class': 7040078, 'subclass': 509025628, 'text': mapcss.tr('Invalid voltage value for this country (Egypt)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("SV")]
         if ('power' in keys and 'voltage' in keys):
@@ -1984,7 +1984,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/El_Salvador"
                 # throwError:tr("Invalid voltage value for this country (El Salvador)")
                 # suggestAlternative:"115000/230000"
-                err.append({'class': 78, 'subclass': 1843563158, 'text': mapcss.tr('Invalid voltage value for this country (El Salvador)')})
+                err.append({'class': 7040079, 'subclass': 1843563158, 'text': mapcss.tr('Invalid voltage value for this country (El Salvador)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000)$/][inside("GQ")]
         if ('power' in keys and 'voltage' in keys):
@@ -2001,7 +2001,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Equatorial_Guinea"
                 # throwError:tr("Invalid voltage value for this country (Equatorial Guinea)")
                 # suggestAlternative:"110000/220000"
-                err.append({'class': 79, 'subclass': 1342735732, 'text': mapcss.tr('Invalid voltage value for this country (Equatorial Guinea)')})
+                err.append({'class': 7040080, 'subclass': 1342735732, 'text': mapcss.tr('Invalid voltage value for this country (Equatorial Guinea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("ER")]
         if ('power' in keys and 'voltage' in keys):
@@ -2018,7 +2018,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Eritrea"
                 # throwError:tr("Invalid voltage value for this country (Eritrea)")
                 # suggestAlternative:"66000/132000"
-                err.append({'class': 80, 'subclass': 1320994045, 'text': mapcss.tr('Invalid voltage value for this country (Eritrea)')})
+                err.append({'class': 7040081, 'subclass': 1320994045, 'text': mapcss.tr('Invalid voltage value for this country (Eritrea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|24000|35000|110000|150000|330000|450000)$/][inside("EE")]
         if ('power' in keys and 'voltage' in keys):
@@ -2035,7 +2035,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Estonia"
                 # throwError:tr("Invalid voltage value for this country (Estonia)")
                 # suggestAlternative:"15000/20000/24000/35000/110000/150000/330000/450000"
-                err.append({'class': 81, 'subclass': 133380231, 'text': mapcss.tr('Invalid voltage value for this country (Estonia)')})
+                err.append({'class': 7040082, 'subclass': 133380231, 'text': mapcss.tr('Invalid voltage value for this country (Estonia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|400000)$/][inside("SZ")]
         if ('power' in keys and 'voltage' in keys):
@@ -2052,7 +2052,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Eswatini"
                 # throwError:tr("Invalid voltage value for this country (Eswatini)")
                 # suggestAlternative:"66000/132000/400000"
-                err.append({'class': 82, 'subclass': 202348354, 'text': mapcss.tr('Invalid voltage value for this country (Eswatini)')})
+                err.append({'class': 7040083, 'subclass': 202348354, 'text': mapcss.tr('Invalid voltage value for this country (Eswatini)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(25000|45000|66000|132000|220000|230000|400000|500000)$/][inside("ET")]
         if ('power' in keys and 'voltage' in keys):
@@ -2069,7 +2069,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ethiopia"
                 # throwError:tr("Invalid voltage value for this country (Ethiopia)")
                 # suggestAlternative:"25000/45000/66000/132000/220000/230000/400000/500000"
-                err.append({'class': 83, 'subclass': 159779468, 'text': mapcss.tr('Invalid voltage value for this country (Ethiopia)')})
+                err.append({'class': 7040084, 'subclass': 159779468, 'text': mapcss.tr('Invalid voltage value for this country (Ethiopia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800)$/][inside("FM")]
         if ('power' in keys and 'voltage' in keys):
@@ -2086,7 +2086,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Federated_States_of_Micronesia"
                 # throwError:tr("Invalid voltage value for this country (Federated States of Micronesia)")
                 # suggestAlternative:"13800"
-                err.append({'class': 84, 'subclass': 317465542, 'text': mapcss.tr('Invalid voltage value for this country (Federated States of Micronesia)')})
+                err.append({'class': 7040085, 'subclass': 317465542, 'text': mapcss.tr('Invalid voltage value for this country (Federated States of Micronesia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|110000|132000)$/][inside("FJ")]
         if ('power' in keys and 'voltage' in keys):
@@ -2103,7 +2103,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Fiji"
                 # throwError:tr("Invalid voltage value for this country (Fiji)")
                 # suggestAlternative:"11000/33000/110000/132000"
-                err.append({'class': 85, 'subclass': 2146313913, 'text': mapcss.tr('Invalid voltage value for this country (Fiji)')})
+                err.append({'class': 7040086, 'subclass': 2146313913, 'text': mapcss.tr('Invalid voltage value for this country (Fiji)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|22000|25000|45000|80000|100000|110000|150000|220000|400000|450000|500000)$/][inside("FI")]
         if ('power' in keys and 'voltage' in keys):
@@ -2120,7 +2120,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Finland"
                 # throwError:tr("Invalid voltage value for this country (Finland)")
                 # suggestAlternative:"20000/22000/25000/45000/80000/100000/110000/150000/220000/400000/450000/500000"
-                err.append({'class': 86, 'subclass': 1198662752, 'text': mapcss.tr('Invalid voltage value for this country (Finland)')})
+                err.append({'class': 7040087, 'subclass': 1198662752, 'text': mapcss.tr('Invalid voltage value for this country (Finland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10300|10500|13000|15000|15500|16000|17000|17200|17500|20000|25000|30000|33000|42000|45000|50000|52000|63000|66000|90000|110000|150000|200000|220000|225000|270000|320000|380000|400000|500000)$/][inside("FR")]
         if ('power' in keys and 'voltage' in keys):
@@ -2137,7 +2137,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/France"
                 # throwError:tr("Invalid voltage value for this country (France)")
                 # suggestAlternative:"10300/10500/13000/15000/15500/16000/17000/17200/17500/20000/25000/30000/33000/42000/45000/50000/52000/63000/66000/90000/110000/150000/200000/220000/225000/270000/320000/380000/400000/500000"
-                err.append({'class': 87, 'subclass': 986837139, 'text': mapcss.tr('Invalid voltage value for this country (France)')})
+                err.append({'class': 7040088, 'subclass': 986837139, 'text': mapcss.tr('Invalid voltage value for this country (France)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|90000|115000|225000)$/][inside("GA")]
         if ('power' in keys and 'voltage' in keys):
@@ -2154,7 +2154,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Gabon"
                 # throwError:tr("Invalid voltage value for this country (Gabon)")
                 # suggestAlternative:"63000/90000/115000/225000"
-                err.append({'class': 88, 'subclass': 869668290, 'text': mapcss.tr('Invalid voltage value for this country (Gabon)')})
+                err.append({'class': 7040089, 'subclass': 869668290, 'text': mapcss.tr('Invalid voltage value for this country (Gabon)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|154000|220000|330000|350000|380000|400000|500000)$/][inside("GE")]
         if ('power' in keys and 'voltage' in keys):
@@ -2171,7 +2171,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Georgia"
                 # throwError:tr("Invalid voltage value for this country (Georgia)")
                 # suggestAlternative:"35000/110000/154000/220000/330000/350000/380000/400000/500000"
-                err.append({'class': 89, 'subclass': 608739745, 'text': mapcss.tr('Invalid voltage value for this country (Georgia)')})
+                err.append({'class': 7040090, 'subclass': 608739745, 'text': mapcss.tr('Invalid voltage value for this country (Georgia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
         if ('power' in keys and 'voltage' in keys):
@@ -2188,7 +2188,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Germany"
                 # throwError:tr("Invalid voltage value for this country (Germany)")
                 # suggestAlternative:"10500/11000/15000/16000/20000/21000/22000/25000/27000/30000/33000/35000/50000/55000/60000/63000/65000/110000/132000/150000/155000/200000/220000/225000/250000/300000/320000/362000/380000/400000/450000/525000/600000"
-                err.append({'class': 90, 'subclass': 1186612248, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
+                err.append({'class': 7040091, 'subclass': 1186612248, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|161000|225000|330000)$/][inside("GH")]
         if ('power' in keys and 'voltage' in keys):
@@ -2205,7 +2205,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ghana"
                 # throwError:tr("Invalid voltage value for this country (Ghana)")
                 # suggestAlternative:"11000/161000/225000/330000"
-                err.append({'class': 91, 'subclass': 1212044535, 'text': mapcss.tr('Invalid voltage value for this country (Ghana)')})
+                err.append({'class': 7040092, 'subclass': 1212044535, 'text': mapcss.tr('Invalid voltage value for this country (Ghana)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|22000|66000|150000|400000|500000)$/][inside("GR")]
         if ('power' in keys and 'voltage' in keys):
@@ -2222,7 +2222,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Greece"
                 # throwError:tr("Invalid voltage value for this country (Greece)")
                 # suggestAlternative:"15000/20000/22000/66000/150000/400000/500000"
-                err.append({'class': 92, 'subclass': 2080985914, 'text': mapcss.tr('Invalid voltage value for this country (Greece)')})
+                err.append({'class': 7040093, 'subclass': 2080985914, 'text': mapcss.tr('Invalid voltage value for this country (Greece)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|115000|132000|138000|230000|400000)$/][inside("GT")]
         if ('power' in keys and 'voltage' in keys):
@@ -2239,7 +2239,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Guatemala"
                 # throwError:tr("Invalid voltage value for this country (Guatemala)")
                 # suggestAlternative:"69000/115000/132000/138000/230000/400000"
-                err.append({'class': 93, 'subclass': 913363101, 'text': mapcss.tr('Invalid voltage value for this country (Guatemala)')})
+                err.append({'class': 7040094, 'subclass': 913363101, 'text': mapcss.tr('Invalid voltage value for this country (Guatemala)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|110000|225000)$/][inside("GN")]
         if ('power' in keys and 'voltage' in keys):
@@ -2256,7 +2256,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Guinea"
                 # throwError:tr("Invalid voltage value for this country (Guinea)")
                 # suggestAlternative:"30000/110000/225000"
-                err.append({'class': 94, 'subclass': 308155262, 'text': mapcss.tr('Invalid voltage value for this country (Guinea)')})
+                err.append({'class': 7040095, 'subclass': 308155262, 'text': mapcss.tr('Invalid voltage value for this country (Guinea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(225000)$/][inside("GW")]
         if ('power' in keys and 'voltage' in keys):
@@ -2273,7 +2273,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Guinea-Bissau"
                 # throwError:tr("Invalid voltage value for this country (Guinea-Bissau)")
                 # suggestAlternative:"225000"
-                err.append({'class': 95, 'subclass': 497173075, 'text': mapcss.tr('Invalid voltage value for this country (Guinea-Bissau)')})
+                err.append({'class': 7040096, 'subclass': 497173075, 'text': mapcss.tr('Invalid voltage value for this country (Guinea-Bissau)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|115000)$/][inside("HT")]
         if ('power' in keys and 'voltage' in keys):
@@ -2290,7 +2290,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Haiti"
                 # throwError:tr("Invalid voltage value for this country (Haiti)")
                 # suggestAlternative:"69000/115000"
-                err.append({'class': 96, 'subclass': 724313217, 'text': mapcss.tr('Invalid voltage value for this country (Haiti)')})
+                err.append({'class': 7040097, 'subclass': 724313217, 'text': mapcss.tr('Invalid voltage value for this country (Haiti)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000)$/][inside("HN")]
         if ('power' in keys and 'voltage' in keys):
@@ -2307,7 +2307,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Honduras"
                 # throwError:tr("Invalid voltage value for this country (Honduras)")
                 # suggestAlternative:"69000/138000/230000"
-                err.append({'class': 97, 'subclass': 234477509, 'text': mapcss.tr('Invalid voltage value for this country (Honduras)')})
+                err.append({'class': 7040098, 'subclass': 234477509, 'text': mapcss.tr('Invalid voltage value for this country (Honduras)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|18000|20000|22000|25000|35000|110000|132000|220000|400000|750000)$/][inside("HU")]
         if ('power' in keys and 'voltage' in keys):
@@ -2324,7 +2324,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Hungary"
                 # throwError:tr("Invalid voltage value for this country (Hungary)")
                 # suggestAlternative:"11000/18000/20000/22000/25000/35000/110000/132000/220000/400000/750000"
-                err.append({'class': 98, 'subclass': 763862877, 'text': mapcss.tr('Invalid voltage value for this country (Hungary)')})
+                err.append({'class': 7040099, 'subclass': 763862877, 'text': mapcss.tr('Invalid voltage value for this country (Hungary)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000)$/][inside("IS")]
         if ('power' in keys and 'voltage' in keys):
@@ -2341,7 +2341,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Iceland"
                 # throwError:tr("Invalid voltage value for this country (Iceland)")
                 # suggestAlternative:"66000/132000/220000"
-                err.append({'class': 99, 'subclass': 1470655330, 'text': mapcss.tr('Invalid voltage value for this country (Iceland)')})
+                err.append({'class': 7040100, 'subclass': 1470655330, 'text': mapcss.tr('Invalid voltage value for this country (Iceland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|13200|22000|25000|31000|33000|66000|100000|110000|132000|200000|220000|220001|230000|320000|400000|500000|660000|765000|800000|1200000)$/][inside("IN")]
         if ('power' in keys and 'voltage' in keys):
@@ -2358,7 +2358,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/India"
                 # throwError:tr("Invalid voltage value for this country (India)")
                 # suggestAlternative:"11000/13200/22000/25000/31000/33000/66000/100000/110000/132000/200000/220000/220001/230000/320000/400000/500000/660000/765000/800000/1200000"
-                err.append({'class': 100, 'subclass': 784655335, 'text': mapcss.tr('Invalid voltage value for this country (India)')})
+                err.append({'class': 7040101, 'subclass': 784655335, 'text': mapcss.tr('Invalid voltage value for this country (India)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|70000|150000|230000|275000|500000)$/][inside("ID")]
         if ('power' in keys and 'voltage' in keys):
@@ -2375,7 +2375,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Indonesia"
                 # throwError:tr("Invalid voltage value for this country (Indonesia)")
                 # suggestAlternative:"20000/70000/150000/230000/275000/500000"
-                err.append({'class': 101, 'subclass': 780357890, 'text': mapcss.tr('Invalid voltage value for this country (Indonesia)')})
+                err.append({'class': 7040102, 'subclass': 780357890, 'text': mapcss.tr('Invalid voltage value for this country (Indonesia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|25000|63000|110000|132000|154000|220000|230000|330000|380000|400000|2300000)$/][inside("IR")]
         if ('power' in keys and 'voltage' in keys):
@@ -2392,7 +2392,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Iran"
                 # throwError:tr("Invalid voltage value for this country (Iran)")
                 # suggestAlternative:"15000/20000/25000/63000/110000/132000/154000/220000/230000/330000/380000/400000/2300000"
-                err.append({'class': 102, 'subclass': 1973736936, 'text': mapcss.tr('Invalid voltage value for this country (Iran)')})
+                err.append({'class': 7040103, 'subclass': 1973736936, 'text': mapcss.tr('Invalid voltage value for this country (Iran)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|23000|25000|33000|66000|132000|154000|400000)$/][inside("IQ")]
         if ('power' in keys and 'voltage' in keys):
@@ -2409,7 +2409,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Iraq"
                 # throwError:tr("Invalid voltage value for this country (Iraq)")
                 # suggestAlternative:"11000/23000/25000/33000/66000/132000/154000/400000"
-                err.append({'class': 103, 'subclass': 1395023746, 'text': mapcss.tr('Invalid voltage value for this country (Iraq)')})
+                err.append({'class': 7040104, 'subclass': 1395023746, 'text': mapcss.tr('Invalid voltage value for this country (Iraq)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|19000|20000|22000|33000|38000|110000|200000|220000|275000|320000|380000|400000)$/][inside("IE")]
         if ('power' in keys and 'voltage' in keys):
@@ -2426,7 +2426,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ireland"
                 # throwError:tr("Invalid voltage value for this country (Ireland)")
                 # suggestAlternative:"10500/19000/20000/22000/33000/38000/110000/200000/220000/275000/320000/380000/400000"
-                err.append({'class': 104, 'subclass': 1615418027, 'text': mapcss.tr('Invalid voltage value for this country (Ireland)')})
+                err.append({'class': 7040105, 'subclass': 1615418027, 'text': mapcss.tr('Invalid voltage value for this country (Ireland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|161000|400000)$/][inside("IL")]
         if ('power' in keys and 'voltage' in keys):
@@ -2443,7 +2443,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Israel"
                 # throwError:tr("Invalid voltage value for this country (Israel)")
                 # suggestAlternative:"115000/161000/400000"
-                err.append({'class': 105, 'subclass': 816036143, 'text': mapcss.tr('Invalid voltage value for this country (Israel)')})
+                err.append({'class': 7040106, 'subclass': 816036143, 'text': mapcss.tr('Invalid voltage value for this country (Israel)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|25000|30000|45000|50000|55000|60000|63000|66000|68000|70000|110000|120000|130000|132000|135000|137000|138000|150000|200000|220000|225000|320000|380000|400000|500000)$/][inside("IT")]
         if ('power' in keys and 'voltage' in keys):
@@ -2460,7 +2460,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Italy"
                 # throwError:tr("Invalid voltage value for this country (Italy)")
                 # suggestAlternative:"15000/20000/25000/30000/45000/50000/55000/60000/63000/66000/68000/70000/110000/120000/130000/132000/135000/137000/138000/150000/200000/220000/225000/320000/380000/400000/500000"
-                err.append({'class': 106, 'subclass': 1691592601, 'text': mapcss.tr('Invalid voltage value for this country (Italy)')})
+                err.append({'class': 7040107, 'subclass': 1691592601, 'text': mapcss.tr('Invalid voltage value for this country (Italy)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|90000|225000|400000)$/][inside("CI")]
         if ('power' in keys and 'voltage' in keys):
@@ -2477,7 +2477,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ivory_Coast"
                 # throwError:tr("Invalid voltage value for this country (Ivory Coast)")
                 # suggestAlternative:"15000/90000/225000/400000"
-                err.append({'class': 107, 'subclass': 1352331895, 'text': mapcss.tr('Invalid voltage value for this country (Ivory Coast)')})
+                err.append({'class': 7040108, 'subclass': 1352331895, 'text': mapcss.tr('Invalid voltage value for this country (Ivory Coast)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000)$/][inside("JM")]
         if ('power' in keys and 'voltage' in keys):
@@ -2494,7 +2494,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Jamaica"
                 # throwError:tr("Invalid voltage value for this country (Jamaica)")
                 # suggestAlternative:"69000/138000"
-                err.append({'class': 108, 'subclass': 546500240, 'text': mapcss.tr('Invalid voltage value for this country (Jamaica)')})
+                err.append({'class': 7040109, 'subclass': 546500240, 'text': mapcss.tr('Invalid voltage value for this country (Jamaica)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15400|20000|22000|25000|30000|33000|44000|60000|66000|77000|100000|110000|132000|154000|187000|200000|220000|250000|275000|500000|660000)$/][inside("JP")]
         if ('power' in keys and 'voltage' in keys):
@@ -2511,7 +2511,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Japan"
                 # throwError:tr("Invalid voltage value for this country (Japan)")
                 # suggestAlternative:"11000/15400/20000/22000/25000/30000/33000/44000/60000/66000/77000/100000/110000/132000/154000/187000/200000/220000/250000/275000/500000/660000"
-                err.append({'class': 109, 'subclass': 1526111529, 'text': mapcss.tr('Invalid voltage value for this country (Japan)')})
+                err.append({'class': 7040110, 'subclass': 1526111529, 'text': mapcss.tr('Invalid voltage value for this country (Japan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000|400000)$/][inside("JO")]
         if ('power' in keys and 'voltage' in keys):
@@ -2528,7 +2528,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Jordan"
                 # throwError:tr("Invalid voltage value for this country (Jordan)")
                 # suggestAlternative:"132000/400000"
-                err.append({'class': 110, 'subclass': 1643851194, 'text': mapcss.tr('Invalid voltage value for this country (Jordan)')})
+                err.append({'class': 7040111, 'subclass': 1643851194, 'text': mapcss.tr('Invalid voltage value for this country (Jordan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|35000|110000|220000|500000)$/][inside("KZ")]
         if ('power' in keys and 'voltage' in keys):
@@ -2545,7 +2545,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kazakhstan"
                 # throwError:tr("Invalid voltage value for this country (Kazakhstan)")
                 # suggestAlternative:"22000/35000/110000/220000/500000"
-                err.append({'class': 111, 'subclass': 1351749481, 'text': mapcss.tr('Invalid voltage value for this country (Kazakhstan)')})
+                err.append({'class': 7040112, 'subclass': 1351749481, 'text': mapcss.tr('Invalid voltage value for this country (Kazakhstan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|132000|220000|400000|500000)$/][inside("KE")]
         if ('power' in keys and 'voltage' in keys):
@@ -2562,7 +2562,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kenya"
                 # throwError:tr("Invalid voltage value for this country (Kenya)")
                 # suggestAlternative:"11000/15000/132000/220000/400000/500000"
-                err.append({'class': 112, 'subclass': 2125326631, 'text': mapcss.tr('Invalid voltage value for this country (Kenya)')})
+                err.append({'class': 7040113, 'subclass': 2125326631, 'text': mapcss.tr('Invalid voltage value for this country (Kenya)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(50000|60000|132000|150000|220000|400000)$/][inside("DK")]
         if ('power' in keys and 'voltage' in keys):
@@ -2579,7 +2579,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Denmark"
                 # throwError:tr("Invalid voltage value for this country (Kingdom of Denmark)")
                 # suggestAlternative:"50000/60000/132000/150000/220000/400000"
-                err.append({'class': 113, 'subclass': 1072204970, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of Denmark)')})
+                err.append({'class': 7040114, 'subclass': 1072204970, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of Denmark)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13000|20000|22000|23000|24000|25000|30000|33000|34000|50000|66000|110000|150000|220000|320000|380000|450000|600000)$/][inside("NL")]
         if ('power' in keys and 'voltage' in keys):
@@ -2596,7 +2596,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Netherlands"
                 # throwError:tr("Invalid voltage value for this country (Kingdom of the Netherlands)")
                 # suggestAlternative:"13000/20000/22000/23000/24000/25000/30000/33000/34000/50000/66000/110000/150000/220000/320000/380000/450000/600000"
-                err.append({'class': 114, 'subclass': 201279952, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of the Netherlands)')})
+                err.append({'class': 7040115, 'subclass': 201279952, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of the Netherlands)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|132000|275000|400000)$/][inside("KW")]
         if ('power' in keys and 'voltage' in keys):
@@ -2613,7 +2613,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kuwait"
                 # throwError:tr("Invalid voltage value for this country (Kuwait)")
                 # suggestAlternative:"33000/66000/132000/275000/400000"
-                err.append({'class': 115, 'subclass': 1150073554, 'text': mapcss.tr('Invalid voltage value for this country (Kuwait)')})
+                err.append({'class': 7040116, 'subclass': 1150073554, 'text': mapcss.tr('Invalid voltage value for this country (Kuwait)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10000|110000|220000|500000)$/][inside("KG")]
         if ('power' in keys and 'voltage' in keys):
@@ -2630,7 +2630,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kyrgyzstan"
                 # throwError:tr("Invalid voltage value for this country (Kyrgyzstan)")
                 # suggestAlternative:"10000/110000/220000/500000"
-                err.append({'class': 116, 'subclass': 123332204, 'text': mapcss.tr('Invalid voltage value for this country (Kyrgyzstan)')})
+                err.append({'class': 7040117, 'subclass': 123332204, 'text': mapcss.tr('Invalid voltage value for this country (Kyrgyzstan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|115000|220000|230000|500000)$/][inside("LA")]
         if ('power' in keys and 'voltage' in keys):
@@ -2647,7 +2647,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Laos"
                 # throwError:tr("Invalid voltage value for this country (Laos)")
                 # suggestAlternative:"110000/115000/220000/230000/500000"
-                err.append({'class': 117, 'subclass': 1094461130, 'text': mapcss.tr('Invalid voltage value for this country (Laos)')})
+                err.append({'class': 7040118, 'subclass': 1094461130, 'text': mapcss.tr('Invalid voltage value for this country (Laos)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|110000|330000)$/][inside("LV")]
         if ('power' in keys and 'voltage' in keys):
@@ -2664,7 +2664,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Latvia"
                 # throwError:tr("Invalid voltage value for this country (Latvia)")
                 # suggestAlternative:"20000/110000/330000"
-                err.append({'class': 118, 'subclass': 990618496, 'text': mapcss.tr('Invalid voltage value for this country (Latvia)')})
+                err.append({'class': 7040119, 'subclass': 990618496, 'text': mapcss.tr('Invalid voltage value for this country (Latvia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|150000|220000|400000)$/][inside("LB")]
         if ('power' in keys and 'voltage' in keys):
@@ -2681,7 +2681,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Lebanon"
                 # throwError:tr("Invalid voltage value for this country (Lebanon)")
                 # suggestAlternative:"33000/66000/150000/220000/400000"
-                err.append({'class': 119, 'subclass': 2096410348, 'text': mapcss.tr('Invalid voltage value for this country (Lebanon)')})
+                err.append({'class': 7040120, 'subclass': 2096410348, 'text': mapcss.tr('Invalid voltage value for this country (Lebanon)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|88000|132000)$/][inside("LS")]
         if ('power' in keys and 'voltage' in keys):
@@ -2698,7 +2698,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Lesotho"
                 # throwError:tr("Invalid voltage value for this country (Lesotho)")
                 # suggestAlternative:"33000/66000/88000/132000"
-                err.append({'class': 120, 'subclass': 703582505, 'text': mapcss.tr('Invalid voltage value for this country (Lesotho)')})
+                err.append({'class': 7040121, 'subclass': 703582505, 'text': mapcss.tr('Invalid voltage value for this country (Lesotho)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|225000)$/][inside("LR")]
         if ('power' in keys and 'voltage' in keys):
@@ -2715,7 +2715,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Liberia"
                 # throwError:tr("Invalid voltage value for this country (Liberia)")
                 # suggestAlternative:"66000/225000"
-                err.append({'class': 121, 'subclass': 1100422698, 'text': mapcss.tr('Invalid voltage value for this country (Liberia)')})
+                err.append({'class': 7040122, 'subclass': 1100422698, 'text': mapcss.tr('Invalid voltage value for this country (Liberia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22500|25000|30000|66000|69000|132000|220000|400000|500000)$/][inside("LY")]
         if ('power' in keys and 'voltage' in keys):
@@ -2732,7 +2732,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Libya"
                 # throwError:tr("Invalid voltage value for this country (Libya)")
                 # suggestAlternative:"22500/25000/30000/66000/69000/132000/220000/400000/500000"
-                err.append({'class': 122, 'subclass': 778094231, 'text': mapcss.tr('Invalid voltage value for this country (Libya)')})
+                err.append({'class': 7040123, 'subclass': 778094231, 'text': mapcss.tr('Invalid voltage value for this country (Libya)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(220000)$/][inside("LI")]
         if ('power' in keys and 'voltage' in keys):
@@ -2749,7 +2749,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Liechtenstein"
                 # throwError:tr("Invalid voltage value for this country (Liechtenstein)")
                 # suggestAlternative:"220000"
-                err.append({'class': 123, 'subclass': 272893646, 'text': mapcss.tr('Invalid voltage value for this country (Liechtenstein)')})
+                err.append({'class': 7040124, 'subclass': 272893646, 'text': mapcss.tr('Invalid voltage value for this country (Liechtenstein)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|35000|110000|300000|330000|400000)$/][inside("LT")]
         if ('power' in keys and 'voltage' in keys):
@@ -2766,7 +2766,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Lithuania"
                 # throwError:tr("Invalid voltage value for this country (Lithuania)")
                 # suggestAlternative:"15000/35000/110000/300000/330000/400000"
-                err.append({'class': 124, 'subclass': 635578850, 'text': mapcss.tr('Invalid voltage value for this country (Lithuania)')})
+                err.append({'class': 7040125, 'subclass': 635578850, 'text': mapcss.tr('Invalid voltage value for this country (Lithuania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|65000|150000|220000|225000)$/][inside("LU")]
         if ('power' in keys and 'voltage' in keys):
@@ -2783,7 +2783,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Luxembourg"
                 # throwError:tr("Invalid voltage value for this country (Luxembourg)")
                 # suggestAlternative:"63000/65000/150000/220000/225000"
-                err.append({'class': 125, 'subclass': 525286859, 'text': mapcss.tr('Invalid voltage value for this country (Luxembourg)')})
+                err.append({'class': 7040126, 'subclass': 525286859, 'text': mapcss.tr('Invalid voltage value for this country (Luxembourg)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|138000)$/][inside("MG")]
         if ('power' in keys and 'voltage' in keys):
@@ -2800,7 +2800,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Madagascar"
                 # throwError:tr("Invalid voltage value for this country (Madagascar)")
                 # suggestAlternative:"63000/138000"
-                err.append({'class': 126, 'subclass': 797364950, 'text': mapcss.tr('Invalid voltage value for this country (Madagascar)')})
+                err.append({'class': 7040127, 'subclass': 797364950, 'text': mapcss.tr('Invalid voltage value for this country (Madagascar)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|110000|132000|400000)$/][inside("MW")]
         if ('power' in keys and 'voltage' in keys):
@@ -2817,7 +2817,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Malawi"
                 # throwError:tr("Invalid voltage value for this country (Malawi)")
                 # suggestAlternative:"11000/33000/66000/110000/132000/400000"
-                err.append({'class': 127, 'subclass': 611164753, 'text': mapcss.tr('Invalid voltage value for this country (Malawi)')})
+                err.append({'class': 7040128, 'subclass': 611164753, 'text': mapcss.tr('Invalid voltage value for this country (Malawi)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|132000|275000|300000|500000)$/][inside("MY")]
         if ('power' in keys and 'voltage' in keys):
@@ -2834,7 +2834,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Malaysia"
                 # throwError:tr("Invalid voltage value for this country (Malaysia)")
                 # suggestAlternative:"11000/33000/66000/132000/275000/300000/500000"
-                err.append({'class': 128, 'subclass': 617502982, 'text': mapcss.tr('Invalid voltage value for this country (Malaysia)')})
+                err.append({'class': 7040129, 'subclass': 617502982, 'text': mapcss.tr('Invalid voltage value for this country (Malaysia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("MV")]
         if ('power' in keys and 'voltage' in keys):
@@ -2851,7 +2851,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Maldives"
                 # throwError:tr("Invalid voltage value for this country (Maldives)")
                 # suggestAlternative:"132000"
-                err.append({'class': 129, 'subclass': 1402166756, 'text': mapcss.tr('Invalid voltage value for this country (Maldives)')})
+                err.append({'class': 7040130, 'subclass': 1402166756, 'text': mapcss.tr('Invalid voltage value for this country (Maldives)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|150000|225000)$/][inside("ML")]
         if ('power' in keys and 'voltage' in keys):
@@ -2868,7 +2868,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mali"
                 # throwError:tr("Invalid voltage value for this country (Mali)")
                 # suggestAlternative:"63000/150000/225000"
-                err.append({'class': 130, 'subclass': 330859131, 'text': mapcss.tr('Invalid voltage value for this country (Mali)')})
+                err.append({'class': 7040131, 'subclass': 330859131, 'text': mapcss.tr('Invalid voltage value for this country (Mali)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|220000)$/][inside("MT")]
         if ('power' in keys and 'voltage' in keys):
@@ -2885,7 +2885,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Malta"
                 # throwError:tr("Invalid voltage value for this country (Malta)")
                 # suggestAlternative:"11000/33000/132000/220000"
-                err.append({'class': 131, 'subclass': 717548617, 'text': mapcss.tr('Invalid voltage value for this country (Malta)')})
+                err.append({'class': 7040132, 'subclass': 717548617, 'text': mapcss.tr('Invalid voltage value for this country (Malta)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(90000|225000)$/][inside("MR")]
         if ('power' in keys and 'voltage' in keys):
@@ -2902,7 +2902,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mauritania"
                 # throwError:tr("Invalid voltage value for this country (Mauritania)")
                 # suggestAlternative:"90000/225000"
-                err.append({'class': 132, 'subclass': 678485733, 'text': mapcss.tr('Invalid voltage value for this country (Mauritania)')})
+                err.append({'class': 7040133, 'subclass': 678485733, 'text': mapcss.tr('Invalid voltage value for this country (Mauritania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000)$/][inside("MU")]
         if ('power' in keys and 'voltage' in keys):
@@ -2919,7 +2919,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mauritius"
                 # throwError:tr("Invalid voltage value for this country (Mauritius)")
                 # suggestAlternative:"66000"
-                err.append({'class': 133, 'subclass': 511732299, 'text': mapcss.tr('Invalid voltage value for this country (Mauritius)')})
+                err.append({'class': 7040134, 'subclass': 511732299, 'text': mapcss.tr('Invalid voltage value for this country (Mauritius)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|15000|25000|34500|65000|69000|85000|113000|115000|138000|161000|230000|400000)$/][inside("MX")]
         if ('power' in keys and 'voltage' in keys):
@@ -2936,7 +2936,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mexico"
                 # throwError:tr("Invalid voltage value for this country (Mexico)")
                 # suggestAlternative:"13800/15000/25000/34500/65000/69000/85000/113000/115000/138000/161000/230000/400000"
-                err.append({'class': 134, 'subclass': 1022433712, 'text': mapcss.tr('Invalid voltage value for this country (Mexico)')})
+                err.append({'class': 7040135, 'subclass': 1022433712, 'text': mapcss.tr('Invalid voltage value for this country (Mexico)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|35000|110000|330000|400000)$/][inside("MD")]
         if ('power' in keys and 'voltage' in keys):
@@ -2953,7 +2953,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Moldova"
                 # throwError:tr("Invalid voltage value for this country (Moldova)")
                 # suggestAlternative:"33000/35000/110000/330000/400000"
-                err.append({'class': 135, 'subclass': 293969861, 'text': mapcss.tr('Invalid voltage value for this country (Moldova)')})
+                err.append({'class': 7040136, 'subclass': 293969861, 'text': mapcss.tr('Invalid voltage value for this country (Moldova)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|22000|35000|110000|220000)$/][inside("MN")]
         if ('power' in keys and 'voltage' in keys):
@@ -2970,7 +2970,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mongolia"
                 # throwError:tr("Invalid voltage value for this country (Mongolia)")
                 # suggestAlternative:"15000/22000/35000/110000/220000"
-                err.append({'class': 136, 'subclass': 1341862702, 'text': mapcss.tr('Invalid voltage value for this country (Mongolia)')})
+                err.append({'class': 7040137, 'subclass': 1341862702, 'text': mapcss.tr('Invalid voltage value for this country (Mongolia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|220000|400000|500000)$/][inside("ME")]
         if ('power' in keys and 'voltage' in keys):
@@ -2987,7 +2987,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Montenegro"
                 # throwError:tr("Invalid voltage value for this country (Montenegro)")
                 # suggestAlternative:"35000/110000/220000/400000/500000"
-                err.append({'class': 137, 'subclass': 708862647, 'text': mapcss.tr('Invalid voltage value for this country (Montenegro)')})
+                err.append({'class': 7040138, 'subclass': 708862647, 'text': mapcss.tr('Invalid voltage value for this country (Montenegro)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|22000|22500|30000|33000|60000|110000|132000|150000|220000|225000|400000)$/][inside("MA")]
         if ('power' in keys and 'voltage' in keys):
@@ -3004,7 +3004,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Morocco"
                 # throwError:tr("Invalid voltage value for this country (Morocco)")
                 # suggestAlternative:"20000/22000/22500/30000/33000/60000/110000/132000/150000/220000/225000/400000"
-                err.append({'class': 138, 'subclass': 727733409, 'text': mapcss.tr('Invalid voltage value for this country (Morocco)')})
+                err.append({'class': 7040139, 'subclass': 727733409, 'text': mapcss.tr('Invalid voltage value for this country (Morocco)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|110000|132000|220000|275000|330000|400000|533000)$/][inside("MZ")]
         if ('power' in keys and 'voltage' in keys):
@@ -3021,7 +3021,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mozambique"
                 # throwError:tr("Invalid voltage value for this country (Mozambique)")
                 # suggestAlternative:"66000/110000/132000/220000/275000/330000/400000/533000"
-                err.append({'class': 139, 'subclass': 1891391646, 'text': mapcss.tr('Invalid voltage value for this country (Mozambique)')})
+                err.append({'class': 7040140, 'subclass': 1891391646, 'text': mapcss.tr('Invalid voltage value for this country (Mozambique)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|20000|33000|66000|110000|132000|230000|500000)$/][inside("MM")]
         if ('power' in keys and 'voltage' in keys):
@@ -3038,7 +3038,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Myanmar"
                 # throwError:tr("Invalid voltage value for this country (Myanmar)")
                 # suggestAlternative:"11000/20000/33000/66000/110000/132000/230000/500000"
-                err.append({'class': 140, 'subclass': 435535645, 'text': mapcss.tr('Invalid voltage value for this country (Myanmar)')})
+                err.append({'class': 7040141, 'subclass': 435535645, 'text': mapcss.tr('Invalid voltage value for this country (Myanmar)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|19000|22000|33000|66000|132000|220000|330000|350000|400000)$/][inside("NA")]
         if ('power' in keys and 'voltage' in keys):
@@ -3055,7 +3055,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Namibia"
                 # throwError:tr("Invalid voltage value for this country (Namibia)")
                 # suggestAlternative:"11000/19000/22000/33000/66000/132000/220000/330000/350000/400000"
-                err.append({'class': 141, 'subclass': 1760657754, 'text': mapcss.tr('Invalid voltage value for this country (Namibia)')})
+                err.append({'class': 7040142, 'subclass': 1760657754, 'text': mapcss.tr('Invalid voltage value for this country (Namibia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|132000|220000|400000)$/][inside("NP")]
         if ('power' in keys and 'voltage' in keys):
@@ -3072,7 +3072,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Nepal"
                 # throwError:tr("Invalid voltage value for this country (Nepal)")
                 # suggestAlternative:"33000/66000/132000/220000/400000"
-                err.append({'class': 142, 'subclass': 1725568019, 'text': mapcss.tr('Invalid voltage value for this country (Nepal)')})
+                err.append({'class': 7040143, 'subclass': 1725568019, 'text': mapcss.tr('Invalid voltage value for this country (Nepal)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(50000|66000|110000|220000)$/][inside("NZ")]
         if ('power' in keys and 'voltage' in keys):
@@ -3089,7 +3089,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/New_Zealand"
                 # throwError:tr("Invalid voltage value for this country (New Zealand)")
                 # suggestAlternative:"50000/66000/110000/220000"
-                err.append({'class': 143, 'subclass': 1294007602, 'text': mapcss.tr('Invalid voltage value for this country (New Zealand)')})
+                err.append({'class': 7040144, 'subclass': 1294007602, 'text': mapcss.tr('Invalid voltage value for this country (New Zealand)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000)$/][inside("NI")]
         if ('power' in keys and 'voltage' in keys):
@@ -3106,7 +3106,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Nicaragua"
                 # throwError:tr("Invalid voltage value for this country (Nicaragua)")
                 # suggestAlternative:"69000/138000/230000"
-                err.append({'class': 144, 'subclass': 466194970, 'text': mapcss.tr('Invalid voltage value for this country (Nicaragua)')})
+                err.append({'class': 7040145, 'subclass': 466194970, 'text': mapcss.tr('Invalid voltage value for this country (Nicaragua)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("NE")]
         if ('power' in keys and 'voltage' in keys):
@@ -3123,7 +3123,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Niger"
                 # throwError:tr("Invalid voltage value for this country (Niger)")
                 # suggestAlternative:"66000/132000"
-                err.append({'class': 145, 'subclass': 1013061006, 'text': mapcss.tr('Invalid voltage value for this country (Niger)')})
+                err.append({'class': 7040146, 'subclass': 1013061006, 'text': mapcss.tr('Invalid voltage value for this country (Niger)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|330000)$/][inside("NG")]
         if ('power' in keys and 'voltage' in keys):
@@ -3140,7 +3140,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Nigeria"
                 # throwError:tr("Invalid voltage value for this country (Nigeria)")
                 # suggestAlternative:"11000/33000/132000/330000"
-                err.append({'class': 146, 'subclass': 1805464507, 'text': mapcss.tr('Invalid voltage value for this country (Nigeria)')})
+                err.append({'class': 7040147, 'subclass': 1805464507, 'text': mapcss.tr('Invalid voltage value for this country (Nigeria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|66000|110000|154000|220000)$/][inside("KP")]
         if ('power' in keys and 'voltage' in keys):
@@ -3157,7 +3157,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/North_Korea"
                 # throwError:tr("Invalid voltage value for this country (North Korea)")
                 # suggestAlternative:"11000/66000/110000/154000/220000"
-                err.append({'class': 147, 'subclass': 499754115, 'text': mapcss.tr('Invalid voltage value for this country (North Korea)')})
+                err.append({'class': 7040148, 'subclass': 499754115, 'text': mapcss.tr('Invalid voltage value for this country (North Korea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000|400000)$/][inside("MK")]
         if ('power' in keys and 'voltage' in keys):
@@ -3174,7 +3174,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/North_Macedonia"
                 # throwError:tr("Invalid voltage value for this country (North Macedonia)")
                 # suggestAlternative:"110000/220000/400000"
-                err.append({'class': 148, 'subclass': 554139457, 'text': mapcss.tr('Invalid voltage value for this country (North Macedonia)')})
+                err.append({'class': 7040149, 'subclass': 554139457, 'text': mapcss.tr('Invalid voltage value for this country (North Macedonia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|12000|13000|15000|16000|17000|20000|22000|24000|25000|33000|45000|47000|50000|55000|60000|66000|80000|90000|100000|110000|132000|150000|220000|250000|300000|350000|400000|420000|450000|500000|515000|525000|825000)$/][inside("NO")]
         if ('power' in keys and 'voltage' in keys):
@@ -3191,7 +3191,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Norway"
                 # throwError:tr("Invalid voltage value for this country (Norway)")
                 # suggestAlternative:"11000/12000/13000/15000/16000/17000/20000/22000/24000/25000/33000/45000/47000/50000/55000/60000/66000/80000/90000/100000/110000/132000/150000/220000/250000/300000/350000/400000/420000/450000/500000/515000/525000/825000"
-                err.append({'class': 149, 'subclass': 600671413, 'text': mapcss.tr('Invalid voltage value for this country (Norway)')})
+                err.append({'class': 7040150, 'subclass': 600671413, 'text': mapcss.tr('Invalid voltage value for this country (Norway)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000|220000|400000)$/][inside("OM")]
         if ('power' in keys and 'voltage' in keys):
@@ -3208,7 +3208,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Oman"
                 # throwError:tr("Invalid voltage value for this country (Oman)")
                 # suggestAlternative:"132000/220000/400000"
-                err.append({'class': 150, 'subclass': 1669833678, 'text': mapcss.tr('Invalid voltage value for this country (Oman)')})
+                err.append({'class': 7040151, 'subclass': 1669833678, 'text': mapcss.tr('Invalid voltage value for this country (Oman)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|110000|132000|220000|230000|500000|660000)$/][inside("PK")]
         if ('power' in keys and 'voltage' in keys):
@@ -3225,7 +3225,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Pakistan"
                 # throwError:tr("Invalid voltage value for this country (Pakistan)")
                 # suggestAlternative:"11000/33000/66000/110000/132000/220000/230000/500000/660000"
-                err.append({'class': 151, 'subclass': 1186221521, 'text': mapcss.tr('Invalid voltage value for this country (Pakistan)')})
+                err.append({'class': 7040152, 'subclass': 1186221521, 'text': mapcss.tr('Invalid voltage value for this country (Pakistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("PA")]
         if ('power' in keys and 'voltage' in keys):
@@ -3242,7 +3242,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Panama"
                 # throwError:tr("Invalid voltage value for this country (Panama)")
                 # suggestAlternative:"115000/230000"
-                err.append({'class': 152, 'subclass': 58595451, 'text': mapcss.tr('Invalid voltage value for this country (Panama)')})
+                err.append({'class': 7040153, 'subclass': 58595451, 'text': mapcss.tr('Invalid voltage value for this country (Panama)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|66000|132000)$/][inside("PG")]
         if ('power' in keys and 'voltage' in keys):
@@ -3259,7 +3259,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Papua_New_Guinea"
                 # throwError:tr("Invalid voltage value for this country (Papua New Guinea)")
                 # suggestAlternative:"11000/66000/132000"
-                err.append({'class': 153, 'subclass': 1154134953, 'text': mapcss.tr('Invalid voltage value for this country (Papua New Guinea)')})
+                err.append({'class': 7040154, 'subclass': 1154134953, 'text': mapcss.tr('Invalid voltage value for this country (Papua New Guinea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(12000|34500|66000|69000|132000|138000|220000|500000)$/][inside("PY")]
         if ('power' in keys and 'voltage' in keys):
@@ -3276,7 +3276,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Paraguay"
                 # throwError:tr("Invalid voltage value for this country (Paraguay)")
                 # suggestAlternative:"12000/34500/66000/69000/132000/138000/220000/500000"
-                err.append({'class': 154, 'subclass': 1942354519, 'text': mapcss.tr('Invalid voltage value for this country (Paraguay)')})
+                err.append({'class': 7040155, 'subclass': 1942354519, 'text': mapcss.tr('Invalid voltage value for this country (Paraguay)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|22000|23000|25000|27000|27500|33000|35000|50000|63000|66000|100000|110000|132000|160000|220000|230000|275000|320000|330000|400000|500000|544000|660000|750000|800000|1000000|1100000|1150000|2200001|2200002|22000011)$/][inside("CN")]
         if ('power' in keys and 'voltage' in keys):
@@ -3293,7 +3293,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/China"
                 # throwError:tr("Invalid voltage value for this country (People's Republic of China)")
                 # suggestAlternative:"10500/11000/22000/23000/25000/27000/27500/33000/35000/50000/63000/66000/100000/110000/132000/160000/220000/230000/275000/320000/330000/400000/500000/544000/660000/750000/800000/1000000/1100000/1150000/2200001/2200002/22000011"
-                err.append({'class': 155, 'subclass': 1037822606, 'text': mapcss.tr('Invalid voltage value for this country (People\'s Republic of China)')})
+                err.append({'class': 7040156, 'subclass': 1037822606, 'text': mapcss.tr('Invalid voltage value for this country (People\'s Republic of China)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|33000|60000|66000|138000|220000|230000|500000)$/][inside("PE")]
         if ('power' in keys and 'voltage' in keys):
@@ -3310,7 +3310,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Peru"
                 # throwError:tr("Invalid voltage value for this country (Peru)")
                 # suggestAlternative:"30000/33000/60000/66000/138000/220000/230000/500000"
-                err.append({'class': 156, 'subclass': 1881850138, 'text': mapcss.tr('Invalid voltage value for this country (Peru)')})
+                err.append({'class': 7040157, 'subclass': 1881850138, 'text': mapcss.tr('Invalid voltage value for this country (Peru)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13200|13800|20000|23000|30000|34500|60000|69000|70000|115000|138000|220000|230000|345000|350000|500000)$/][inside("PH")]
         if ('power' in keys and 'voltage' in keys):
@@ -3327,7 +3327,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Philippines"
                 # throwError:tr("Invalid voltage value for this country (Philippines)")
                 # suggestAlternative:"13200/13800/20000/23000/30000/34500/60000/69000/70000/115000/138000/220000/230000/345000/350000/500000"
-                err.append({'class': 157, 'subclass': 308932368, 'text': mapcss.tr('Invalid voltage value for this country (Philippines)')})
+                err.append({'class': 7040158, 'subclass': 308932368, 'text': mapcss.tr('Invalid voltage value for this country (Philippines)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|20000|21000|22000|25000|27000|30000|100000|110000|200000|220000|400000|450000)$/][inside("PL")]
         if ('power' in keys and 'voltage' in keys):
@@ -3344,7 +3344,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Poland"
                 # throwError:tr("Invalid voltage value for this country (Poland)")
                 # suggestAlternative:"11000/15000/20000/21000/22000/25000/27000/30000/100000/110000/200000/220000/400000/450000"
-                err.append({'class': 158, 'subclass': 517865466, 'text': mapcss.tr('Invalid voltage value for this country (Poland)')})
+                err.append({'class': 7040159, 'subclass': 517865466, 'text': mapcss.tr('Invalid voltage value for this country (Poland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|18000|20000|25000|30000|50000|60000|130000|150000|220000|400000)$/][inside("PT")]
         if ('power' in keys and 'voltage' in keys):
@@ -3361,7 +3361,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Portugal"
                 # throwError:tr("Invalid voltage value for this country (Portugal)")
                 # suggestAlternative:"11000/15000/18000/20000/25000/30000/50000/60000/130000/150000/220000/400000"
-                err.append({'class': 159, 'subclass': 150215451, 'text': mapcss.tr('Invalid voltage value for this country (Portugal)')})
+                err.append({'class': 7040160, 'subclass': 150215451, 'text': mapcss.tr('Invalid voltage value for this country (Portugal)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(21000|66000|110000|132000|220000|400000)$/][inside("QA")]
         if ('power' in keys and 'voltage' in keys):
@@ -3378,7 +3378,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Qatar"
                 # throwError:tr("Invalid voltage value for this country (Qatar)")
                 # suggestAlternative:"21000/66000/110000/132000/220000/400000"
-                err.append({'class': 160, 'subclass': 1152032816, 'text': mapcss.tr('Invalid voltage value for this country (Qatar)')})
+                err.append({'class': 7040161, 'subclass': 1152032816, 'text': mapcss.tr('Invalid voltage value for this country (Qatar)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000)$/][inside("CG")]
         if ('power' in keys and 'voltage' in keys):
@@ -3395,7 +3395,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Republic_of_the_Congo"
                 # throwError:tr("Invalid voltage value for this country (Republic of the Congo)")
                 # suggestAlternative:"110000/220000"
-                err.append({'class': 161, 'subclass': 1185301592, 'text': mapcss.tr('Invalid voltage value for this country (Republic of the Congo)')})
+                err.append({'class': 7040162, 'subclass': 1185301592, 'text': mapcss.tr('Invalid voltage value for this country (Republic of the Congo)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|38000|55000|110000|220000|380000|400000)$/][inside("RO")]
         if ('power' in keys and 'voltage' in keys):
@@ -3412,7 +3412,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Romania"
                 # throwError:tr("Invalid voltage value for this country (Romania)")
                 # suggestAlternative:"20000/25000/38000/55000/110000/220000/380000/400000"
-                err.append({'class': 162, 'subclass': 537046778, 'text': mapcss.tr('Invalid voltage value for this country (Romania)')})
+                err.append({'class': 7040163, 'subclass': 537046778, 'text': mapcss.tr('Invalid voltage value for this country (Romania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|15000|16000|20000|30000|35000|60000|66000|100000|110000|138000|150000|154000|220000|330000|350000|400000|500000|750000|800000|1100000)$/][inside("RU")]
         if ('power' in keys and 'voltage' in keys):
@@ -3429,7 +3429,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Russia"
                 # throwError:tr("Invalid voltage value for this country (Russia)")
                 # suggestAlternative:"10500/15000/16000/20000/30000/35000/60000/66000/100000/110000/138000/150000/154000/220000/330000/350000/400000/500000/750000/800000/1100000"
-                err.append({'class': 163, 'subclass': 1463533967, 'text': mapcss.tr('Invalid voltage value for this country (Russia)')})
+                err.append({'class': 7040164, 'subclass': 1463533967, 'text': mapcss.tr('Invalid voltage value for this country (Russia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(70000|110000|220000)$/][inside("RW")]
         if ('power' in keys and 'voltage' in keys):
@@ -3446,7 +3446,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Rwanda"
                 # throwError:tr("Invalid voltage value for this country (Rwanda)")
                 # suggestAlternative:"70000/110000/220000"
-                err.append({'class': 164, 'subclass': 596543002, 'text': mapcss.tr('Invalid voltage value for this country (Rwanda)')})
+                err.append({'class': 7040165, 'subclass': 596543002, 'text': mapcss.tr('Invalid voltage value for this country (Rwanda)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("SM")]
         if ('power' in keys and 'voltage' in keys):
@@ -3463,7 +3463,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/San_Marino"
                 # throwError:tr("Invalid voltage value for this country (San Marino)")
                 # suggestAlternative:"132000"
-                err.append({'class': 165, 'subclass': 1414179455, 'text': mapcss.tr('Invalid voltage value for this country (San Marino)')})
+                err.append({'class': 7040166, 'subclass': 1414179455, 'text': mapcss.tr('Invalid voltage value for this country (San Marino)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(25000|33000|110000|115000|132000|230000|380000|400000)$/][inside("SA")]
         if ('power' in keys and 'voltage' in keys):
@@ -3480,7 +3480,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Saudi_Arabia"
                 # throwError:tr("Invalid voltage value for this country (Saudi Arabia)")
                 # suggestAlternative:"25000/33000/110000/115000/132000/230000/380000/400000"
-                err.append({'class': 166, 'subclass': 693215238, 'text': mapcss.tr('Invalid voltage value for this country (Saudi Arabia)')})
+                err.append({'class': 7040167, 'subclass': 693215238, 'text': mapcss.tr('Invalid voltage value for this country (Saudi Arabia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(90000|225000)$/][inside("SN")]
         if ('power' in keys and 'voltage' in keys):
@@ -3497,7 +3497,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Senegal"
                 # throwError:tr("Invalid voltage value for this country (Senegal)")
                 # suggestAlternative:"90000/225000"
-                err.append({'class': 167, 'subclass': 378987080, 'text': mapcss.tr('Invalid voltage value for this country (Senegal)')})
+                err.append({'class': 7040168, 'subclass': 378987080, 'text': mapcss.tr('Invalid voltage value for this country (Senegal)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|30000|35000|110000|220000|380000|400000)$/][inside("RS")]
         if ('power' in keys and 'voltage' in keys):
@@ -3514,7 +3514,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Serbia"
                 # throwError:tr("Invalid voltage value for this country (Serbia)")
                 # suggestAlternative:"20000/25000/30000/35000/110000/220000/380000/400000"
-                err.append({'class': 168, 'subclass': 1630472990, 'text': mapcss.tr('Invalid voltage value for this country (Serbia)')})
+                err.append({'class': 7040169, 'subclass': 1630472990, 'text': mapcss.tr('Invalid voltage value for this country (Serbia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000|225000)$/][inside("SL")]
         if ('power' in keys and 'voltage' in keys):
@@ -3531,7 +3531,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sierra_Leone"
                 # throwError:tr("Invalid voltage value for this country (Sierra Leone)")
                 # suggestAlternative:"161000/225000"
-                err.append({'class': 169, 'subclass': 622075609, 'text': mapcss.tr('Invalid voltage value for this country (Sierra Leone)')})
+                err.append({'class': 7040170, 'subclass': 622075609, 'text': mapcss.tr('Invalid voltage value for this country (Sierra Leone)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(230000)$/][inside("SG")]
         if ('power' in keys and 'voltage' in keys):
@@ -3548,7 +3548,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Singapore"
                 # throwError:tr("Invalid voltage value for this country (Singapore)")
                 # suggestAlternative:"230000"
-                err.append({'class': 170, 'subclass': 157185646, 'text': mapcss.tr('Invalid voltage value for this country (Singapore)')})
+                err.append({'class': 7040171, 'subclass': 157185646, 'text': mapcss.tr('Invalid voltage value for this country (Singapore)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|110000|220000|400000)$/][inside("SK")]
         if ('power' in keys and 'voltage' in keys):
@@ -3565,7 +3565,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Slovakia"
                 # throwError:tr("Invalid voltage value for this country (Slovakia)")
                 # suggestAlternative:"22000/110000/220000/400000"
-                err.append({'class': 171, 'subclass': 565395639, 'text': mapcss.tr('Invalid voltage value for this country (Slovakia)')})
+                err.append({'class': 7040172, 'subclass': 565395639, 'text': mapcss.tr('Invalid voltage value for this country (Slovakia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|35000|100000|110000|220000|400000)$/][inside("SI")]
         if ('power' in keys and 'voltage' in keys):
@@ -3582,7 +3582,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Slovenia"
                 # throwError:tr("Invalid voltage value for this country (Slovenia)")
                 # suggestAlternative:"15000/20000/35000/100000/110000/220000/400000"
-                err.append({'class': 172, 'subclass': 834136653, 'text': mapcss.tr('Invalid voltage value for this country (Slovenia)')})
+                err.append({'class': 7040173, 'subclass': 834136653, 'text': mapcss.tr('Invalid voltage value for this country (Slovenia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|20000|22000|33000|44000|66000|88000|110000|132000|220000|275000|380000|400000|533000|765000)$/][inside("ZA")]
         if ('power' in keys and 'voltage' in keys):
@@ -3599,7 +3599,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/South_Africa"
                 # throwError:tr("Invalid voltage value for this country (South Africa)")
                 # suggestAlternative:"11000/20000/22000/33000/44000/66000/88000/110000/132000/220000/275000/380000/400000/533000/765000"
-                err.append({'class': 173, 'subclass': 784514385, 'text': mapcss.tr('Invalid voltage value for this country (South Africa)')})
+                err.append({'class': 7040174, 'subclass': 784514385, 'text': mapcss.tr('Invalid voltage value for this country (South Africa)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|22900|145000|150000|154000|180000|250000|345000|354000|380000|765000)$/][inside("KR")]
         if ('power' in keys and 'voltage' in keys):
@@ -3616,7 +3616,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/South_Korea"
                 # throwError:tr("Invalid voltage value for this country (South Korea)")
                 # suggestAlternative:"15000/22900/145000/150000/154000/180000/250000/345000/354000/380000/765000"
-                err.append({'class': 174, 'subclass': 178837632, 'text': mapcss.tr('Invalid voltage value for this country (South Korea)')})
+                err.append({'class': 7040175, 'subclass': 178837632, 'text': mapcss.tr('Invalid voltage value for this country (South Korea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(220000)$/][inside("SS")]
         if ('power' in keys and 'voltage' in keys):
@@ -3633,7 +3633,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/South_Sudan"
                 # throwError:tr("Invalid voltage value for this country (South Sudan)")
                 # suggestAlternative:"220000"
-                err.append({'class': 175, 'subclass': 2047708575, 'text': mapcss.tr('Invalid voltage value for this country (South Sudan)')})
+                err.append({'class': 7040176, 'subclass': 2047708575, 'text': mapcss.tr('Invalid voltage value for this country (South Sudan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(12000|13000|13200|15000|17000|20000|22000|24000|25000|30000|33000|35000|45000|50000|55000|60000|65000|66000|66600|100000|110000|120000|130000|132000|138000|150000|200000|220000|225000|240000|250000|320000|400000)$/][inside("ES")]
         if ('power' in keys and 'voltage' in keys):
@@ -3650,7 +3650,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Spain"
                 # throwError:tr("Invalid voltage value for this country (Spain)")
                 # suggestAlternative:"12000/13000/13200/15000/17000/20000/22000/24000/25000/30000/33000/35000/45000/50000/55000/60000/65000/66000/66600/100000/110000/120000/130000/132000/138000/150000/200000/220000/225000/240000/250000/320000/400000"
-                err.append({'class': 176, 'subclass': 1913559889, 'text': mapcss.tr('Invalid voltage value for this country (Spain)')})
+                err.append({'class': 7040177, 'subclass': 1913559889, 'text': mapcss.tr('Invalid voltage value for this country (Spain)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|220000)$/][inside("LK")]
         if ('power' in keys and 'voltage' in keys):
@@ -3667,7 +3667,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sri_Lanka"
                 # throwError:tr("Invalid voltage value for this country (Sri Lanka)")
                 # suggestAlternative:"11000/33000/132000/220000"
-                err.append({'class': 177, 'subclass': 474591271, 'text': mapcss.tr('Invalid voltage value for this country (Sri Lanka)')})
+                err.append({'class': 7040178, 'subclass': 474591271, 'text': mapcss.tr('Invalid voltage value for this country (Sri Lanka)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000)$/][inside("PS")]
         if ('power' in keys and 'voltage' in keys):
@@ -3684,7 +3684,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/State_of_Palestine"
                 # throwError:tr("Invalid voltage value for this country (State of Palestine)")
                 # suggestAlternative:"161000"
-                err.append({'class': 178, 'subclass': 1034528303, 'text': mapcss.tr('Invalid voltage value for this country (State of Palestine)')})
+                err.append({'class': 7040179, 'subclass': 1034528303, 'text': mapcss.tr('Invalid voltage value for this country (State of Palestine)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|110000|220000|500000)$/][inside("SD")]
         if ('power' in keys and 'voltage' in keys):
@@ -3701,7 +3701,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sudan"
                 # throwError:tr("Invalid voltage value for this country (Sudan)")
                 # suggestAlternative:"66000/110000/220000/500000"
-                err.append({'class': 179, 'subclass': 810850697, 'text': mapcss.tr('Invalid voltage value for this country (Sudan)')})
+                err.append({'class': 7040180, 'subclass': 810850697, 'text': mapcss.tr('Invalid voltage value for this country (Sudan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000)$/][inside("SR")]
         if ('power' in keys and 'voltage' in keys):
@@ -3718,7 +3718,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Suriname"
                 # throwError:tr("Invalid voltage value for this country (Suriname)")
                 # suggestAlternative:"161000"
-                err.append({'class': 180, 'subclass': 1927028078, 'text': mapcss.tr('Invalid voltage value for this country (Suriname)')})
+                err.append({'class': 7040181, 'subclass': 1927028078, 'text': mapcss.tr('Invalid voltage value for this country (Suriname)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|12000|15000|20000|22000|24000|30000|36000|40000|45000|50000|52000|55000|60000|66000|70000|72500|77000|80000|110000|130000|132000|138000|145000|150000|160000|170000|220000|230000|236000|285000|300000|400000|412000|420000|450000|500000)$/][inside("SE")]
         if ('power' in keys and 'voltage' in keys):
@@ -3735,7 +3735,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sweden"
                 # throwError:tr("Invalid voltage value for this country (Sweden)")
                 # suggestAlternative:"11000/12000/15000/20000/22000/24000/30000/36000/40000/45000/50000/52000/55000/60000/66000/70000/72500/77000/80000/110000/130000/132000/138000/145000/150000/160000/170000/220000/230000/236000/285000/300000/400000/412000/420000/450000/500000"
-                err.append({'class': 181, 'subclass': 1587479274, 'text': mapcss.tr('Invalid voltage value for this country (Sweden)')})
+                err.append({'class': 7040182, 'subclass': 1587479274, 'text': mapcss.tr('Invalid voltage value for this country (Sweden)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|13000|15000|15500|16000|17000|18000|20000|21000|22000|23000|25000|50000|60000|63000|65000|66000|110000|125000|130000|132000|138000|145000|150000|220000|222000|225000|380000|400000)$/][inside("CH")]
         if ('power' in keys and 'voltage' in keys):
@@ -3752,7 +3752,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Switzerland"
                 # throwError:tr("Invalid voltage value for this country (Switzerland)")
                 # suggestAlternative:"11000/13000/15000/15500/16000/17000/18000/20000/21000/22000/23000/25000/50000/60000/63000/65000/66000/110000/125000/130000/132000/138000/145000/150000/220000/222000/225000/380000/400000"
-                err.append({'class': 182, 'subclass': 530518436, 'text': mapcss.tr('Invalid voltage value for this country (Switzerland)')})
+                err.append({'class': 7040183, 'subclass': 530518436, 'text': mapcss.tr('Invalid voltage value for this country (Switzerland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(23000|66000|154000|161000|220000|230000|380000|400000)$/][inside("SY")]
         if ('power' in keys and 'voltage' in keys):
@@ -3769,7 +3769,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Syria"
                 # throwError:tr("Invalid voltage value for this country (Syria)")
                 # suggestAlternative:"23000/66000/154000/161000/220000/230000/380000/400000"
-                err.append({'class': 183, 'subclass': 1924817826, 'text': mapcss.tr('Invalid voltage value for this country (Syria)')})
+                err.append({'class': 7040184, 'subclass': 1924817826, 'text': mapcss.tr('Invalid voltage value for this country (Syria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|161000|345000|690000)$/][inside("TW")]
         if ('power' in keys and 'voltage' in keys):
@@ -3786,7 +3786,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Taiwan"
                 # throwError:tr("Invalid voltage value for this country (Taiwan)")
                 # suggestAlternative:"69000/161000/345000/690000"
-                err.append({'class': 184, 'subclass': 780710383, 'text': mapcss.tr('Invalid voltage value for this country (Taiwan)')})
+                err.append({'class': 7040185, 'subclass': 780710383, 'text': mapcss.tr('Invalid voltage value for this country (Taiwan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|138000|220000|500000)$/][inside("TJ")]
         if ('power' in keys and 'voltage' in keys):
@@ -3803,7 +3803,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Tajikistan"
                 # throwError:tr("Invalid voltage value for this country (Tajikistan)")
                 # suggestAlternative:"35000/110000/138000/220000/500000"
-                err.append({'class': 185, 'subclass': 2020974277, 'text': mapcss.tr('Invalid voltage value for this country (Tajikistan)')})
+                err.append({'class': 7040186, 'subclass': 2020974277, 'text': mapcss.tr('Invalid voltage value for this country (Tajikistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|132000|220000|222000|400000)$/][inside("TZ")]
         if ('power' in keys and 'voltage' in keys):
@@ -3820,7 +3820,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Tanzania"
                 # throwError:tr("Invalid voltage value for this country (Tanzania)")
                 # suggestAlternative:"11000/33000/66000/132000/220000/222000/400000"
-                err.append({'class': 186, 'subclass': 1121001731, 'text': mapcss.tr('Invalid voltage value for this country (Tanzania)')})
+                err.append({'class': 7040187, 'subclass': 1121001731, 'text': mapcss.tr('Invalid voltage value for this country (Tanzania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|50000|69000|115000|132000|230000|300000|500000)$/][inside("TH")]
         if ('power' in keys and 'voltage' in keys):
@@ -3837,7 +3837,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Thailand"
                 # throwError:tr("Invalid voltage value for this country (Thailand)")
                 # suggestAlternative:"22000/50000/69000/115000/132000/230000/300000/500000"
-                err.append({'class': 187, 'subclass': 1199914302, 'text': mapcss.tr('Invalid voltage value for this country (Thailand)')})
+                err.append({'class': 7040188, 'subclass': 1199914302, 'text': mapcss.tr('Invalid voltage value for this country (Thailand)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("BS")]
         if ('power' in keys and 'voltage' in keys):
@@ -3854,7 +3854,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/The_Bahamas"
                 # throwError:tr("Invalid voltage value for this country (The Bahamas)")
                 # suggestAlternative:"132000"
-                err.append({'class': 188, 'subclass': 44101464, 'text': mapcss.tr('Invalid voltage value for this country (The Bahamas)')})
+                err.append({'class': 7040189, 'subclass': 44101464, 'text': mapcss.tr('Invalid voltage value for this country (The Bahamas)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(225000)$/][inside("GM")]
         if ('power' in keys and 'voltage' in keys):
@@ -3871,7 +3871,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/The_Gambia"
                 # throwError:tr("Invalid voltage value for this country (The Gambia)")
                 # suggestAlternative:"225000"
-                err.append({'class': 189, 'subclass': 1294976035, 'text': mapcss.tr('Invalid voltage value for this country (The Gambia)')})
+                err.append({'class': 7040190, 'subclass': 1294976035, 'text': mapcss.tr('Invalid voltage value for this country (The Gambia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(150000)$/][inside("TL")]
         if ('power' in keys and 'voltage' in keys):
@@ -3888,7 +3888,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Timor-Leste"
                 # throwError:tr("Invalid voltage value for this country (Timor-Leste)")
                 # suggestAlternative:"150000"
-                err.append({'class': 190, 'subclass': 1799882419, 'text': mapcss.tr('Invalid voltage value for this country (Timor-Leste)')})
+                err.append({'class': 7040191, 'subclass': 1799882419, 'text': mapcss.tr('Invalid voltage value for this country (Timor-Leste)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000|330000)$/][inside("TG")]
         if ('power' in keys and 'voltage' in keys):
@@ -3905,7 +3905,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Togo"
                 # throwError:tr("Invalid voltage value for this country (Togo)")
                 # suggestAlternative:"161000/330000"
-                err.append({'class': 191, 'subclass': 635965103, 'text': mapcss.tr('Invalid voltage value for this country (Togo)')})
+                err.append({'class': 7040192, 'subclass': 635965103, 'text': mapcss.tr('Invalid voltage value for this country (Togo)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000)$/][inside("TT")]
         if ('power' in keys and 'voltage' in keys):
@@ -3922,7 +3922,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Trinidad_and_Tobago"
                 # throwError:tr("Invalid voltage value for this country (Trinidad and Tobago)")
                 # suggestAlternative:"66000/132000/220000"
-                err.append({'class': 192, 'subclass': 1547001286, 'text': mapcss.tr('Invalid voltage value for this country (Trinidad and Tobago)')})
+                err.append({'class': 7040193, 'subclass': 1547001286, 'text': mapcss.tr('Invalid voltage value for this country (Trinidad and Tobago)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|22500|30000|33000|90000|150000|220000|225000|400000)$/][inside("TN")]
         if ('power' in keys and 'voltage' in keys):
@@ -3939,7 +3939,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Tunisia"
                 # throwError:tr("Invalid voltage value for this country (Tunisia)")
                 # suggestAlternative:"15000/22500/30000/33000/90000/150000/220000/225000/400000"
-                err.append({'class': 193, 'subclass': 1987915471, 'text': mapcss.tr('Invalid voltage value for this country (Tunisia)')})
+                err.append({'class': 7040194, 'subclass': 1987915471, 'text': mapcss.tr('Invalid voltage value for this country (Tunisia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|31500|34000|34500|35000|36000|66000|150000|154000|170000|220000|345005|380000|400000|1000000)$/][inside("TR")]
         if ('power' in keys and 'voltage' in keys):
@@ -3956,7 +3956,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Turkey"
                 # throwError:tr("Invalid voltage value for this country (Turkey)")
                 # suggestAlternative:"20000/25000/31500/34000/34500/35000/36000/66000/150000/154000/170000/220000/345005/380000/400000/1000000"
-                err.append({'class': 194, 'subclass': 976988585, 'text': mapcss.tr('Invalid voltage value for this country (Turkey)')})
+                err.append({'class': 7040195, 'subclass': 976988585, 'text': mapcss.tr('Invalid voltage value for this country (Turkey)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000|230000|500000)$/][inside("TM")]
         if ('power' in keys and 'voltage' in keys):
@@ -3973,7 +3973,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Turkmenistan"
                 # throwError:tr("Invalid voltage value for this country (Turkmenistan)")
                 # suggestAlternative:"110000/220000/230000/500000"
-                err.append({'class': 195, 'subclass': 686569689, 'text': mapcss.tr('Invalid voltage value for this country (Turkmenistan)')})
+                err.append({'class': 7040196, 'subclass': 686569689, 'text': mapcss.tr('Invalid voltage value for this country (Turkmenistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|33000|66000|132000|220000|400000)$/][inside("UG")]
         if ('power' in keys and 'voltage' in keys):
@@ -3990,7 +3990,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Uganda"
                 # throwError:tr("Invalid voltage value for this country (Uganda)")
                 # suggestAlternative:"11000/15000/33000/66000/132000/220000/400000"
-                err.append({'class': 196, 'subclass': 1343285261, 'text': mapcss.tr('Invalid voltage value for this country (Uganda)')})
+                err.append({'class': 7040197, 'subclass': 1343285261, 'text': mapcss.tr('Invalid voltage value for this country (Uganda)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|35000|110000|150000|154000|220000|330000|400000|500000|750000|800000)$/][inside("UA")]
         if ('power' in keys and 'voltage' in keys):
@@ -4007,7 +4007,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ukraine"
                 # throwError:tr("Invalid voltage value for this country (Ukraine)")
                 # suggestAlternative:"15000/35000/110000/150000/154000/220000/330000/400000/500000/750000/800000"
-                err.append({'class': 197, 'subclass': 1545715340, 'text': mapcss.tr('Invalid voltage value for this country (Ukraine)')})
+                err.append({'class': 7040198, 'subclass': 1545715340, 'text': mapcss.tr('Invalid voltage value for this country (Ukraine)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|132000|220000|400000)$/][inside("AE")]
         if ('power' in keys and 'voltage' in keys):
@@ -4024,7 +4024,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/United_Arab_Emirates"
                 # throwError:tr("Invalid voltage value for this country (United Arab Emirates)")
                 # suggestAlternative:"33000/132000/220000/400000"
-                err.append({'class': 198, 'subclass': 1617670352, 'text': mapcss.tr('Invalid voltage value for this country (United Arab Emirates)')})
+                err.append({'class': 7040199, 'subclass': 1617670352, 'text': mapcss.tr('Invalid voltage value for this country (United Arab Emirates)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|12300|13800|15000|16000|20000|22000|24000|25000|27000|32000|33000|33300|35000|36000|66000|90000|110000|132000|145000|150000|170000|200000|220000|250000|254000|270000|275000|320000|400000|450000|515000|525000|600000)$/][inside("GB")]
         if ('power' in keys and 'voltage' in keys):
@@ -4041,7 +4041,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Great_Britain"
                 # throwError:tr("Invalid voltage value for this country (United Kingdom)")
                 # suggestAlternative:"11000/12300/13800/15000/16000/20000/22000/24000/25000/27000/32000/33000/33300/35000/36000/66000/90000/110000/132000/145000/150000/170000/200000/220000/250000/254000/270000/275000/320000/400000/450000/515000/525000/600000"
-                err.append({'class': 199, 'subclass': 511227450, 'text': mapcss.tr('Invalid voltage value for this country (United Kingdom)')})
+                err.append({'class': 7040200, 'subclass': 511227450, 'text': mapcss.tr('Invalid voltage value for this country (United Kingdom)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|11500|12000|12370|12400|12470|12500|13000|13200|13800|13860|14000|14400|14750|15000|16000|17500|18000|19920|19935|20000|20800|21000|21800|22000|23000|23900|24000|24900|24940|25000|26000|26400|27000|27600|32000|33000|34000|34500|34599|35000|35400|37500|38000|40000|41600|43000|43800|44000|46000|49000|50000|55000|57000|57100|60000|66000|69000|70000|71000|87000|88000|92000|100000|110000|111500|115000|120000|125000|130000|132000|138000|150000|160000|161000|200000|220000|230000|235000|250000|260000|276000|287000|320000|345000|400000|450000|460000|500000|690002|765000|1100000|1150003|1333000|1380000)$/][inside("US")]
         if ('power' in keys and 'voltage' in keys):
@@ -4058,7 +4058,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/United_States"
                 # throwError:tr("Invalid voltage value for this country (United States)")
                 # suggestAlternative:"11000/11500/12000/12370/12400/12470/12500/13000/13200/13800/13860/14000/14400/14750/15000/16000/17500/18000/19920/19935/20000/20800/21000/21800/22000/23000/23900/24000/24900/24940/25000/26000/26400/27000/27600/32000/33000/34000/34500/34599/35000/35400/37500/38000/40000/41600/43000/43800/44000/46000/49000/50000/55000/57000/57100/60000/66000/69000/70000/71000/87000/88000/92000/100000/110000/111500/115000/120000/125000/130000/132000/138000/150000/160000/161000/200000/220000/230000/235000/250000/260000/276000/287000/320000/345000/400000/450000/460000/500000/690002/765000/1100000/1150003/1333000/1380000"
-                err.append({'class': 200, 'subclass': 1460296158, 'text': mapcss.tr('Invalid voltage value for this country (United States)')})
+                err.append({'class': 7040201, 'subclass': 1460296158, 'text': mapcss.tr('Invalid voltage value for this country (United States)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|31500|60000|63000|132000|150000|230000|500000)$/][inside("UY")]
         if ('power' in keys and 'voltage' in keys):
@@ -4075,7 +4075,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Uruguay"
                 # throwError:tr("Invalid voltage value for this country (Uruguay)")
                 # suggestAlternative:"30000/31500/60000/63000/132000/150000/230000/500000"
-                err.append({'class': 201, 'subclass': 1295728901, 'text': mapcss.tr('Invalid voltage value for this country (Uruguay)')})
+                err.append({'class': 7040202, 'subclass': 1295728901, 'text': mapcss.tr('Invalid voltage value for this country (Uruguay)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|75000|110000|220000|350000|380000|500000)$/][inside("UZ")]
         if ('power' in keys and 'voltage' in keys):
@@ -4092,7 +4092,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Uzbekistan"
                 # throwError:tr("Invalid voltage value for this country (Uzbekistan)")
                 # suggestAlternative:"35000/75000/110000/220000/350000/380000/500000"
-                err.append({'class': 202, 'subclass': 610780797, 'text': mapcss.tr('Invalid voltage value for this country (Uzbekistan)')})
+                err.append({'class': 7040203, 'subclass': 610780797, 'text': mapcss.tr('Invalid voltage value for this country (Uzbekistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|24000|30000|69000|115000|138000|230000|400000|765000)$/][inside("VE")]
         if ('power' in keys and 'voltage' in keys):
@@ -4109,7 +4109,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Venezuela"
                 # throwError:tr("Invalid voltage value for this country (Venezuela)")
                 # suggestAlternative:"13800/24000/30000/69000/115000/138000/230000/400000/765000"
-                err.append({'class': 203, 'subclass': 2065474114, 'text': mapcss.tr('Invalid voltage value for this country (Venezuela)')})
+                err.append({'class': 7040204, 'subclass': 2065474114, 'text': mapcss.tr('Invalid voltage value for this country (Venezuela)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|50000|110000|115000|220000|230000|500000)$/][inside("VN")]
         if ('power' in keys and 'voltage' in keys):
@@ -4126,7 +4126,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Vietnam"
                 # throwError:tr("Invalid voltage value for this country (Vietnam)")
                 # suggestAlternative:"22000/50000/110000/115000/220000/230000/500000"
-                err.append({'class': 204, 'subclass': 1132764275, 'text': mapcss.tr('Invalid voltage value for this country (Vietnam)')})
+                err.append({'class': 7040205, 'subclass': 1132764275, 'text': mapcss.tr('Invalid voltage value for this country (Vietnam)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000|400000)$/][inside("YE")]
         if ('power' in keys and 'voltage' in keys):
@@ -4143,7 +4143,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Yemen"
                 # throwError:tr("Invalid voltage value for this country (Yemen)")
                 # suggestAlternative:"132000/400000"
-                err.append({'class': 205, 'subclass': 1327576406, 'text': mapcss.tr('Invalid voltage value for this country (Yemen)')})
+                err.append({'class': 7040206, 'subclass': 1327576406, 'text': mapcss.tr('Invalid voltage value for this country (Yemen)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|88000|132000|220000|330000)$/][inside("ZM")]
         if ('power' in keys and 'voltage' in keys):
@@ -4160,7 +4160,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Zambia"
                 # throwError:tr("Invalid voltage value for this country (Zambia)")
                 # suggestAlternative:"11000/33000/66000/88000/132000/220000/330000"
-                err.append({'class': 206, 'subclass': 1569104562, 'text': mapcss.tr('Invalid voltage value for this country (Zambia)')})
+                err.append({'class': 7040207, 'subclass': 1569104562, 'text': mapcss.tr('Invalid voltage value for this country (Zambia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|88000|110000|132000|220000|330000|400000)$/][inside("ZW")]
         if ('power' in keys and 'voltage' in keys):
@@ -4177,7 +4177,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Zimbabwe"
                 # throwError:tr("Invalid voltage value for this country (Zimbabwe)")
                 # suggestAlternative:"33000/66000/88000/110000/132000/220000/330000/400000"
-                err.append({'class': 207, 'subclass': 842844725, 'text': mapcss.tr('Invalid voltage value for this country (Zimbabwe)')})
+                err.append({'class': 7040208, 'subclass': 842844725, 'text': mapcss.tr('Invalid voltage value for this country (Zimbabwe)')})
 
         return err
 
@@ -4200,7 +4200,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:power"
                 # throwError:tr("Unsuitable value for power=* tag")
                 # assertNoMatch:"way power=cable"
-                err.append({'class': 1, 'subclass': 36378028, 'text': mapcss.tr('Unsuitable value for power=* tag')})
+                err.append({'class': 7040002, 'subclass': 36378028, 'text': mapcss.tr('Unsuitable value for power=* tag')})
 
         # *[power=generator][generator:source][generator:source!~/^(nuclear|wind|hydro|tidal|wave|geothermal|solar|coal|gas|biomass|biofuel|biogas|oil|diesel|gasoline|waste|battery)(;(nuclear|wind|hydro|tidal|wave|geothermal|solar|coal|gas|biomass|biofuel|biogas|oil|diesel|gasoline|waste|battery))*$/]
         if ('generator:source' in keys and 'power' in keys):
@@ -4214,7 +4214,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("The generator:source=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:source"
                 # throwError:tr("Unsuitable value for generator:source=* tag")
-                err.append({'class': 3, 'subclass': 600492584, 'text': mapcss.tr('Unsuitable value for generator:source=* tag')})
+                err.append({'class': 7040004, 'subclass': 600492584, 'text': mapcss.tr('Unsuitable value for generator:source=* tag')})
 
         # *[power=generator][generator:source=nuclear][generator:method][generator:method!~/^(fission|fusion)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4230,7 +4230,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for nuclear generator")
                 # suggestAlternative:"fission or fusion"
                 # fixRemove:"generator:method"
-                err.append({'class': 4, 'subclass': 1513616022, 'text': mapcss.tr('Unsuitable method for nuclear generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040005, 'subclass': 1513616022, 'text': mapcss.tr('Unsuitable method for nuclear generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -4247,7 +4247,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 1445012384, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1445012384, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=wind][generator:method][generator:method!=wind_turbine]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4262,7 +4262,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for wind generator")
                 # fixRemove:"generator:method"
-                err.append({'class': 6, 'subclass': 1104182574, 'text': mapcss.tr('Unsuitable method for wind generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040007, 'subclass': 1104182574, 'text': mapcss.tr('Unsuitable method for wind generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -4279,7 +4279,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 1021686777, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1021686777, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=hydro][generator:method][generator:method!~/^(water-storage|water-pumped-storage|run-of-the-river)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4295,7 +4295,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for hydro generator")
                 # suggestAlternative:"water-storage, run-of-the-river or water-pumped-storage"
                 # fixRemove:"generator:method"
-                err.append({'class': 7, 'subclass': 1379042787, 'text': mapcss.tr('Unsuitable method for hydro generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040008, 'subclass': 1379042787, 'text': mapcss.tr('Unsuitable method for hydro generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -4312,7 +4312,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 1830475878, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1830475878, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=tidal][generator:method][generator:method!~/^(barrage|stream)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4328,7 +4328,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for tidal generator")
                 # suggestAlternative:"barrage or stream"
                 # fixRemove:"generator:method"
-                err.append({'class': 8, 'subclass': 503240008, 'text': mapcss.tr('Unsuitable method for tidal generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040009, 'subclass': 503240008, 'text': mapcss.tr('Unsuitable method for tidal generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -4345,7 +4345,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 976314568, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 976314568, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=solar][generator:method][generator:method!~/^(thermal|photovoltaic)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4361,7 +4361,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for solar generator")
                 # suggestAlternative:"thermal or photovoltaic"
                 # fixRemove:"generator:method"
-                err.append({'class': 9, 'subclass': 1095645684, 'text': mapcss.tr('Unsuitable method for solar generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040010, 'subclass': 1095645684, 'text': mapcss.tr('Unsuitable method for solar generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -4378,7 +4378,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 1457983121, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1457983121, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=coal][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4392,7 +4392,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Coal generator can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for coal generator")
-                err.append({'class': 10, 'subclass': 727067352, 'text': mapcss.tr('Unsuitable method for coal generator')})
+                err.append({'class': 7040011, 'subclass': 727067352, 'text': mapcss.tr('Unsuitable method for coal generator')})
 
         # *[power=generator][generator:source=gas][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4406,7 +4406,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Gas generator can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for gas generator")
-                err.append({'class': 11, 'subclass': 1587058630, 'text': mapcss.tr('Unsuitable method for gas generator')})
+                err.append({'class': 7040012, 'subclass': 1587058630, 'text': mapcss.tr('Unsuitable method for gas generator')})
 
         # *[power=generator][generator:source=biomass][generator:method][generator:method!~/^(combustion|gasification|anaerobic_digestion)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4422,7 +4422,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for biomass generator")
                 # suggestAlternative:"combustion, anaerobic_digestion or gasification"
                 # fixRemove:"generator:method"
-                err.append({'class': 12, 'subclass': 1563205211, 'text': mapcss.tr('Unsuitable method for biomass generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040013, 'subclass': 1563205211, 'text': mapcss.tr('Unsuitable method for biomass generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -4439,7 +4439,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseFix:tr("Check the list of possible values for this source on the wiki and correct the `{0}` tag.","generator:method")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for biofuel generator")
-                err.append({'class': 13, 'subclass': 2056310355, 'text': mapcss.tr('Unsuitable method for biofuel generator')})
+                err.append({'class': 7040014, 'subclass': 2056310355, 'text': mapcss.tr('Unsuitable method for biofuel generator')})
 
         # *[power=generator][generator:source=biogas][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4453,7 +4453,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseFix:tr("Check the list of possible values for this source on the wiki and correct the `{0}` tag.","generator:method")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for biogas generator")
-                err.append({'class': 14, 'subclass': 1353854094, 'text': mapcss.tr('Unsuitable method for biogas generator')})
+                err.append({'class': 7040015, 'subclass': 1353854094, 'text': mapcss.tr('Unsuitable method for biogas generator')})
 
         # *[power=generator][generator:source=oil][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4467,7 +4467,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Oil generator can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for oil generator")
-                err.append({'class': 15, 'subclass': 2059171544, 'text': mapcss.tr('Unsuitable method for oil generator')})
+                err.append({'class': 7040016, 'subclass': 2059171544, 'text': mapcss.tr('Unsuitable method for oil generator')})
 
         # *[power=generator][generator:source=diesel][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4481,7 +4481,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Diesel generator can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for diesel generator")
-                err.append({'class': 16, 'subclass': 87750196, 'text': mapcss.tr('Unsuitable method for diesel generator')})
+                err.append({'class': 7040017, 'subclass': 87750196, 'text': mapcss.tr('Unsuitable method for diesel generator')})
 
         # *[power=generator][generator:source=gasoline][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4495,7 +4495,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Gasoline generator can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for gasoline generator")
-                err.append({'class': 17, 'subclass': 1418218249, 'text': mapcss.tr('Unsuitable method for gasoline generator')})
+                err.append({'class': 7040018, 'subclass': 1418218249, 'text': mapcss.tr('Unsuitable method for gasoline generator')})
 
         # *[power=generator][generator:source=waste][generator:method][generator:method!~/^(combustion|gasification)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4511,7 +4511,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for waste generator")
                 # suggestAlternative:"combustion or gasification"
                 # fixRemove:"generator:method"
-                err.append({'class': 18, 'subclass': 600470569, 'text': mapcss.tr('Unsuitable method for waste generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040019, 'subclass': 600470569, 'text': mapcss.tr('Unsuitable method for waste generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -4528,7 +4528,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 1335984003, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1335984003, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:method=gasification][generator:source][generator:source!~/^(waste|biomass)(;(waste|biomass))*$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -4542,7 +4542,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 313390332, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 313390332, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=plant][plant:source][plant:source!~/^(nuclear|wind|hydro|tidal|wave|geothermal|solar|coal|gas|biomass|biofuel|biogas|oil|diesel|gasoline|waste|battery)(;(nuclear|wind|hydro|tidal|wave|geothermal|solar|coal|gas|biomass|biofuel|biogas|oil|diesel|gasoline|waste|battery))*$/]
         if ('plant:source' in keys and 'power' in keys):
@@ -4556,7 +4556,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("The plant:source=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:source"
                 # throwError:tr("Unsuitable value for plant:source=* tag")
-                err.append({'class': 19, 'subclass': 966751128, 'text': mapcss.tr('Unsuitable value for plant:source=* tag')})
+                err.append({'class': 7040020, 'subclass': 966751128, 'text': mapcss.tr('Unsuitable value for plant:source=* tag')})
 
         # *[power=plant][plant:source=nuclear][plant:method][plant:method!~/^(fission|fusion)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4572,7 +4572,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for nuclear power plant")
                 # suggestAlternative:"fission or fusion"
                 # fixRemove:"plant:method"
-                err.append({'class': 20, 'subclass': 56152287, 'text': mapcss.tr('Unsuitable method for nuclear power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040021, 'subclass': 56152287, 'text': mapcss.tr('Unsuitable method for nuclear power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -4589,7 +4589,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 120690153, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 120690153, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=wind][plant:method][plant:method!=wind_turbine]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4604,7 +4604,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for wind power plant")
                 # fixRemove:"plant:method"
-                err.append({'class': 22, 'subclass': 515061741, 'text': mapcss.tr('Unsuitable method for wind power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040023, 'subclass': 515061741, 'text': mapcss.tr('Unsuitable method for wind power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -4621,7 +4621,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 443176990, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 443176990, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=hydro][plant:method][plant:method!~/^(water-storage|water-pumped-storage|run-of-the-river)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4637,7 +4637,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for hydro power plant")
                 # suggestAlternative:"water-storage, run-of-the-river or water-pumped-storage"
                 # fixRemove:"plant:method"
-                err.append({'class': 23, 'subclass': 1020856194, 'text': mapcss.tr('Unsuitable method for hydro power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040024, 'subclass': 1020856194, 'text': mapcss.tr('Unsuitable method for hydro power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -4654,7 +4654,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 1372509170, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 1372509170, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=tidal][plant:method][plant:method!~/^(barrage|stream)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4670,7 +4670,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for tidal power plant")
                 # suggestAlternative:"barrage or stream"
                 # fixRemove:"plant:method"
-                err.append({'class': 24, 'subclass': 75438578, 'text': mapcss.tr('Unsuitable method for tidal power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040025, 'subclass': 75438578, 'text': mapcss.tr('Unsuitable method for tidal power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -4687,7 +4687,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 934978595, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 934978595, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=solar][plant:method][plant:method!~/^(thermal|photovoltaic)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4703,7 +4703,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for solar power plant")
                 # suggestAlternative:"thermal or photovoltaic"
                 # fixRemove:"plant:method"
-                err.append({'class': 25, 'subclass': 1799335667, 'text': mapcss.tr('Unsuitable method for solar power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040026, 'subclass': 1799335667, 'text': mapcss.tr('Unsuitable method for solar power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -4720,7 +4720,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 1085835351, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 1085835351, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=coal][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4734,7 +4734,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Coal power plants can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for coal power plant")
-                err.append({'class': 26, 'subclass': 746471181, 'text': mapcss.tr('Unsuitable method for coal power plant')})
+                err.append({'class': 7040027, 'subclass': 746471181, 'text': mapcss.tr('Unsuitable method for coal power plant')})
 
         # *[power=plant][plant:source=gas][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4748,7 +4748,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Gas power plants can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for gas power plant")
-                err.append({'class': 27, 'subclass': 827336490, 'text': mapcss.tr('Unsuitable method for gas power plant')})
+                err.append({'class': 7040028, 'subclass': 827336490, 'text': mapcss.tr('Unsuitable method for gas power plant')})
 
         # *[power=plant][plant:source=biomass][plant:method][plant:method!~/^(combustion|gasification|anaerobic_digestion)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4764,7 +4764,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for biomass power plant")
                 # suggestAlternative:"combustion, anaerobic_digestion or gasification"
                 # fixRemove:"plant:method"
-                err.append({'class': 28, 'subclass': 2076402923, 'text': mapcss.tr('Unsuitable method for biomass power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040029, 'subclass': 2076402923, 'text': mapcss.tr('Unsuitable method for biomass power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -4781,7 +4781,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseFix:tr("Check the list of possible values for this source on the wiki and correct the `{0}` tag.","plant:method")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for biofuel power plant")
-                err.append({'class': 29, 'subclass': 1882895060, 'text': mapcss.tr('Unsuitable method for biofuel power plant')})
+                err.append({'class': 7040030, 'subclass': 1882895060, 'text': mapcss.tr('Unsuitable method for biofuel power plant')})
 
         # *[power=plant][plant:source=biogas][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4795,7 +4795,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseFix:tr("Check the list of possible values for this source on the wiki and correct the `{0}` tag.","plant:method")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for biogas power plant")
-                err.append({'class': 30, 'subclass': 887792794, 'text': mapcss.tr('Unsuitable method for biogas power plant')})
+                err.append({'class': 7040031, 'subclass': 887792794, 'text': mapcss.tr('Unsuitable method for biogas power plant')})
 
         # *[power=plant][plant:source=oil][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4809,7 +4809,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Oil power plants can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for oil power plant")
-                err.append({'class': 31, 'subclass': 1678290892, 'text': mapcss.tr('Unsuitable method for oil power plant')})
+                err.append({'class': 7040032, 'subclass': 1678290892, 'text': mapcss.tr('Unsuitable method for oil power plant')})
 
         # *[power=plant][plant:source=diesel][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4823,7 +4823,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Diesel power plants can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for diesel power plant")
-                err.append({'class': 32, 'subclass': 75543302, 'text': mapcss.tr('Unsuitable method for diesel power plant')})
+                err.append({'class': 7040033, 'subclass': 75543302, 'text': mapcss.tr('Unsuitable method for diesel power plant')})
 
         # *[power=plant][plant:source=gasoline][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4837,7 +4837,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Gasoline power plants can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for gasoline power plant")
-                err.append({'class': 33, 'subclass': 599334301, 'text': mapcss.tr('Unsuitable method for gasoline power plant')})
+                err.append({'class': 7040034, 'subclass': 599334301, 'text': mapcss.tr('Unsuitable method for gasoline power plant')})
 
         # *[power=plant][plant:source=waste][plant:method][plant:method!~/^(combustion|gasification)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4853,7 +4853,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for waste power plant")
                 # suggestAlternative:"combustion or gasification"
                 # fixRemove:"plant:method"
-                err.append({'class': 34, 'subclass': 489417432, 'text': mapcss.tr('Unsuitable method for waste power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040035, 'subclass': 489417432, 'text': mapcss.tr('Unsuitable method for waste power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -4870,7 +4870,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 46745407, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 46745407, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:method=gasification][plant:source][plant:source!~/^(waste|biomass)(;(waste|biomass))*$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -4884,7 +4884,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 1329720574, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 1329720574, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|132000|220000|500000)$/][inside("AF")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(110000|132000|220000|500000)$/][inside("AF")]
@@ -4906,7 +4906,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Afghanistan"
                 # throwError:tr("Invalid voltage value for this country (Afghanistan)")
                 # suggestAlternative:"110000/132000/220000/500000"
-                err.append({'class': 35, 'subclass': 894410045, 'text': mapcss.tr('Invalid voltage value for this country (Afghanistan)')})
+                err.append({'class': 7040036, 'subclass': 894410045, 'text': mapcss.tr('Invalid voltage value for this country (Afghanistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|35000|110000|150000|220000|400000)$/][inside("AL")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(30000|35000|110000|150000|220000|400000)$/][inside("AL")]
@@ -4928,7 +4928,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Albania"
                 # throwError:tr("Invalid voltage value for this country (Albania)")
                 # suggestAlternative:"30000/35000/110000/150000/220000/400000"
-                err.append({'class': 36, 'subclass': 1354359149, 'text': mapcss.tr('Invalid voltage value for this country (Albania)')})
+                err.append({'class': 7040037, 'subclass': 1354359149, 'text': mapcss.tr('Invalid voltage value for this country (Albania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|60000|66000|90000|150000|220000|225000|400000)$/][inside("DZ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(30000|60000|66000|90000|150000|220000|225000|400000)$/][inside("DZ")]
@@ -4950,7 +4950,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Algeria"
                 # throwError:tr("Invalid voltage value for this country (Algeria)")
                 # suggestAlternative:"30000/60000/66000/90000/150000/220000/225000/400000"
-                err.append({'class': 37, 'subclass': 372319734, 'text': mapcss.tr('Invalid voltage value for this country (Algeria)')})
+                err.append({'class': 7040038, 'subclass': 372319734, 'text': mapcss.tr('Invalid voltage value for this country (Algeria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|150000|225000)$/][inside("AD")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(110000|150000|225000)$/][inside("AD")]
@@ -4972,7 +4972,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Andorra"
                 # throwError:tr("Invalid voltage value for this country (Andorra)")
                 # suggestAlternative:"110000/150000/225000"
-                err.append({'class': 38, 'subclass': 2076885744, 'text': mapcss.tr('Invalid voltage value for this country (Andorra)')})
+                err.append({'class': 7040039, 'subclass': 2076885744, 'text': mapcss.tr('Invalid voltage value for this country (Andorra)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(60000|66000|110000|132000|150000|220000|400000)$/][inside("AO")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(60000|66000|110000|132000|150000|220000|400000)$/][inside("AO")]
@@ -4994,7 +4994,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Angola"
                 # throwError:tr("Invalid voltage value for this country (Angola)")
                 # suggestAlternative:"60000/66000/110000/132000/150000/220000/400000"
-                err.append({'class': 39, 'subclass': 897856585, 'text': mapcss.tr('Invalid voltage value for this country (Angola)')})
+                err.append({'class': 7040040, 'subclass': 897856585, 'text': mapcss.tr('Invalid voltage value for this country (Angola)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13200|25000|32000|33000|35000|66000|132000|220000|330000|345000|500000)$/][inside("AR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(13200|25000|32000|33000|35000|66000|132000|220000|330000|345000|500000)$/][inside("AR")]
@@ -5016,7 +5016,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Argentina"
                 # throwError:tr("Invalid voltage value for this country (Argentina)")
                 # suggestAlternative:"13200/25000/32000/33000/35000/66000/132000/220000/330000/345000/500000"
-                err.append({'class': 40, 'subclass': 1701283263, 'text': mapcss.tr('Invalid voltage value for this country (Argentina)')})
+                err.append({'class': 7040041, 'subclass': 1701283263, 'text': mapcss.tr('Invalid voltage value for this country (Argentina)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|36000|100000|110000|220000|230000|330000|400000|500000)$/][inside("AM")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(35000|36000|100000|110000|220000|230000|330000|400000|500000)$/][inside("AM")]
@@ -5038,7 +5038,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Armenia"
                 # throwError:tr("Invalid voltage value for this country (Armenia)")
                 # suggestAlternative:"35000/36000/100000/110000/220000/230000/330000/400000/500000"
-                err.append({'class': 41, 'subclass': 1653152722, 'text': mapcss.tr('Invalid voltage value for this country (Armenia)')})
+                err.append({'class': 7040042, 'subclass': 1653152722, 'text': mapcss.tr('Invalid voltage value for this country (Armenia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|12700|19000|19100|22000|33000|35000|44000|50000|66000|80000|110000|132000|150000|220000|275000|330000|400000|500000)$/][inside("AU")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(10500|11000|12700|19000|19100|22000|33000|35000|44000|50000|66000|80000|110000|132000|150000|220000|275000|330000|400000|500000)$/][inside("AU")]
@@ -5060,7 +5060,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Australia"
                 # throwError:tr("Invalid voltage value for this country (Australia)")
                 # suggestAlternative:"10500/11000/12700/19000/19100/22000/33000/35000/44000/50000/66000/80000/110000/132000/150000/220000/275000/330000/400000/500000"
-                err.append({'class': 42, 'subclass': 368793225, 'text': mapcss.tr('Invalid voltage value for this country (Australia)')})
+                err.append({'class': 7040043, 'subclass': 368793225, 'text': mapcss.tr('Invalid voltage value for this country (Australia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|13800|15000|16000|17500|20000|25000|30000|55000|60000|110000|132000|150000|220000|380000|400000)$/][inside("AT")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(10500|13800|15000|16000|17500|20000|25000|30000|55000|60000|110000|132000|150000|220000|380000|400000)$/][inside("AT")]
@@ -5082,7 +5082,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Austria"
                 # throwError:tr("Invalid voltage value for this country (Austria)")
                 # suggestAlternative:"10500/13800/15000/16000/17500/20000/25000/30000/55000/60000/110000/132000/150000/220000/380000/400000"
-                err.append({'class': 43, 'subclass': 722031792, 'text': mapcss.tr('Invalid voltage value for this country (Austria)')})
+                err.append({'class': 7040044, 'subclass': 722031792, 'text': mapcss.tr('Invalid voltage value for this country (Austria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|132000|154000|220000|330000|500000)$/][inside("AZ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(35000|110000|132000|154000|220000|330000|500000)$/][inside("AZ")]
@@ -5104,7 +5104,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Azerbaijan"
                 # throwError:tr("Invalid voltage value for this country (Azerbaijan)")
                 # suggestAlternative:"35000/110000/132000/154000/220000/330000/500000"
-                err.append({'class': 44, 'subclass': 1150181715, 'text': mapcss.tr('Invalid voltage value for this country (Azerbaijan)')})
+                err.append({'class': 7040045, 'subclass': 1150181715, 'text': mapcss.tr('Invalid voltage value for this country (Azerbaijan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(220000|230000|400000)$/][inside("BH")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(220000|230000|400000)$/][inside("BH")]
@@ -5126,7 +5126,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bahrain"
                 # throwError:tr("Invalid voltage value for this country (Bahrain)")
                 # suggestAlternative:"220000/230000/400000"
-                err.append({'class': 45, 'subclass': 1908817208, 'text': mapcss.tr('Invalid voltage value for this country (Bahrain)')})
+                err.append({'class': 7040046, 'subclass': 1908817208, 'text': mapcss.tr('Invalid voltage value for this country (Bahrain)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(23000|33000|132000|230000|400000)$/][inside("BD")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(23000|33000|132000|230000|400000)$/][inside("BD")]
@@ -5148,7 +5148,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bangladesh"
                 # throwError:tr("Invalid voltage value for this country (Bangladesh)")
                 # suggestAlternative:"23000/33000/132000/230000/400000"
-                err.append({'class': 46, 'subclass': 454897030, 'text': mapcss.tr('Invalid voltage value for this country (Bangladesh)')})
+                err.append({'class': 7040047, 'subclass': 454897030, 'text': mapcss.tr('Invalid voltage value for this country (Bangladesh)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|40000|100000|110000|220000|330000|750000)$/][inside("BY")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(35000|40000|100000|110000|220000|330000|750000)$/][inside("BY")]
@@ -5170,7 +5170,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Belarus"
                 # throwError:tr("Invalid voltage value for this country (Belarus)")
                 # suggestAlternative:"35000/40000/100000/110000/220000/330000/750000"
-                err.append({'class': 47, 'subclass': 502462111, 'text': mapcss.tr('Invalid voltage value for this country (Belarus)')})
+                err.append({'class': 7040048, 'subclass': 502462111, 'text': mapcss.tr('Invalid voltage value for this country (Belarus)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|11500|15000|30000|33000|36000|50000|63000|70000|110000|150000|220000|225000|320000|380000|400000)$/][inside("BE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|11500|15000|30000|33000|36000|50000|63000|70000|110000|150000|220000|225000|320000|380000|400000)$/][inside("BE")]
@@ -5192,7 +5192,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Belgium"
                 # throwError:tr("Invalid voltage value for this country (Belgium)")
                 # suggestAlternative:"11000/11500/15000/30000/33000/36000/50000/63000/70000/110000/150000/220000/225000/320000/380000/400000"
-                err.append({'class': 48, 'subclass': 76971998, 'text': mapcss.tr('Invalid voltage value for this country (Belgium)')})
+                err.append({'class': 7040049, 'subclass': 76971998, 'text': mapcss.tr('Invalid voltage value for this country (Belgium)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|34500|69000|115000)$/][inside("BZ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(22000|34500|69000|115000)$/][inside("BZ")]
@@ -5214,7 +5214,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Belize"
                 # throwError:tr("Invalid voltage value for this country (Belize)")
                 # suggestAlternative:"22000/34500/69000/115000"
-                err.append({'class': 49, 'subclass': 1995167695, 'text': mapcss.tr('Invalid voltage value for this country (Belize)')})
+                err.append({'class': 7040050, 'subclass': 1995167695, 'text': mapcss.tr('Invalid voltage value for this country (Belize)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000|330000)$/][inside("BJ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(161000|330000)$/][inside("BJ")]
@@ -5236,7 +5236,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Benin"
                 # throwError:tr("Invalid voltage value for this country (Benin)")
                 # suggestAlternative:"161000/330000"
-                err.append({'class': 50, 'subclass': 1721177484, 'text': mapcss.tr('Invalid voltage value for this country (Benin)')})
+                err.append({'class': 7040051, 'subclass': 1721177484, 'text': mapcss.tr('Invalid voltage value for this country (Benin)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000)$/][inside("BT")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000)$/][inside("BT")]
@@ -5258,7 +5258,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bhutan"
                 # throwError:tr("Invalid voltage value for this country (Bhutan)")
                 # suggestAlternative:"66000/132000/220000/400000"
-                err.append({'class': 51, 'subclass': 1049906813, 'text': mapcss.tr('Invalid voltage value for this country (Bhutan)')})
+                err.append({'class': 7040052, 'subclass': 1049906813, 'text': mapcss.tr('Invalid voltage value for this country (Bhutan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|220000|500000)$/][inside("BO")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(115000|220000|500000)$/][inside("BO")]
@@ -5280,7 +5280,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bolivia"
                 # throwError:tr("Invalid voltage value for this country (Bolivia)")
                 # suggestAlternative:"115000/220000/500000"
-                err.append({'class': 52, 'subclass': 1551078077, 'text': mapcss.tr('Invalid voltage value for this country (Bolivia)')})
+                err.append({'class': 7040053, 'subclass': 1551078077, 'text': mapcss.tr('Invalid voltage value for this country (Bolivia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|220000|400000)$/][inside("BA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(35000|110000|220000|400000)$/][inside("BA")]
@@ -5302,7 +5302,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bosnia_and_Herzegovina"
                 # throwError:tr("Invalid voltage value for this country (Bosnia and Herzegovina)")
                 # suggestAlternative:"35000/110000/220000/400000"
-                err.append({'class': 53, 'subclass': 285152791, 'text': mapcss.tr('Invalid voltage value for this country (Bosnia and Herzegovina)')})
+                err.append({'class': 7040054, 'subclass': 285152791, 'text': mapcss.tr('Invalid voltage value for this country (Bosnia and Herzegovina)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000)$/][inside("BW")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000)$/][inside("BW")]
@@ -5324,7 +5324,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Botswana"
                 # throwError:tr("Invalid voltage value for this country (Botswana)")
                 # suggestAlternative:"66000/132000/220000/400000"
-                err.append({'class': 54, 'subclass': 1742378833, 'text': mapcss.tr('Invalid voltage value for this country (Botswana)')})
+                err.append({'class': 7040055, 'subclass': 1742378833, 'text': mapcss.tr('Invalid voltage value for this country (Botswana)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|23100|34500|66000|69000|88000|110000|132000|138000|230000|345000|440000|500000|525000|600000|765000|800000)$/][inside("BR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(13800|23100|34500|66000|69000|88000|110000|132000|138000|230000|345000|440000|500000|525000|600000|765000|800000)$/][inside("BR")]
@@ -5346,7 +5346,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Brazil"
                 # throwError:tr("Invalid voltage value for this country (Brazil)")
                 # suggestAlternative:"13800/23100/34500/66000/69000/88000/110000/132000/138000/230000/345000/440000/500000/525000/600000/765000/800000"
-                err.append({'class': 55, 'subclass': 520735111, 'text': mapcss.tr('Invalid voltage value for this country (Brazil)')})
+                err.append({'class': 7040056, 'subclass': 520735111, 'text': mapcss.tr('Invalid voltage value for this country (Brazil)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|275000)$/][inside("BN")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|132000|275000)$/][inside("BN")]
@@ -5368,7 +5368,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Brunei"
                 # throwError:tr("Invalid voltage value for this country (Brunei)")
                 # suggestAlternative:"66000/132000/275000"
-                err.append({'class': 56, 'subclass': 1641553535, 'text': mapcss.tr('Invalid voltage value for this country (Brunei)')})
+                err.append({'class': 7040057, 'subclass': 1641553535, 'text': mapcss.tr('Invalid voltage value for this country (Brunei)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|22000|25000|35000|110000|220000|400000)$/][inside("BG")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|22000|25000|35000|110000|220000|400000)$/][inside("BG")]
@@ -5390,7 +5390,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bulgaria"
                 # throwError:tr("Invalid voltage value for this country (Bulgaria)")
                 # suggestAlternative:"20000/22000/25000/35000/110000/220000/400000"
-                err.append({'class': 57, 'subclass': 1177149465, 'text': mapcss.tr('Invalid voltage value for this country (Bulgaria)')})
+                err.append({'class': 7040058, 'subclass': 1177149465, 'text': mapcss.tr('Invalid voltage value for this country (Bulgaria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(90000|132000|225000)$/][inside("BF")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(90000|132000|225000)$/][inside("BF")]
@@ -5412,7 +5412,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Burkina_Faso"
                 # throwError:tr("Invalid voltage value for this country (Burkina Faso)")
                 # suggestAlternative:"90000/132000/225000"
-                err.append({'class': 58, 'subclass': 681270478, 'text': mapcss.tr('Invalid voltage value for this country (Burkina Faso)')})
+                err.append({'class': 7040059, 'subclass': 681270478, 'text': mapcss.tr('Invalid voltage value for this country (Burkina Faso)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(70000|110000|220000)$/][inside("BI")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(70000|110000|220000)$/][inside("BI")]
@@ -5434,7 +5434,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Burundi"
                 # throwError:tr("Invalid voltage value for this country (Burundi)")
                 # suggestAlternative:"70000/110000/220000"
-                err.append({'class': 59, 'subclass': 2043854762, 'text': mapcss.tr('Invalid voltage value for this country (Burundi)')})
+                err.append({'class': 7040060, 'subclass': 2043854762, 'text': mapcss.tr('Invalid voltage value for this country (Burundi)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("KH")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("KH")]
@@ -5456,7 +5456,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cambodia"
                 # throwError:tr("Invalid voltage value for this country (Cambodia)")
                 # suggestAlternative:"115000/230000"
-                err.append({'class': 60, 'subclass': 1962688737, 'text': mapcss.tr('Invalid voltage value for this country (Cambodia)')})
+                err.append({'class': 7040061, 'subclass': 1962688737, 'text': mapcss.tr('Invalid voltage value for this country (Cambodia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|90000|110000|220000|225000)$/][inside("CM")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(30000|90000|110000|220000|225000)$/][inside("CM")]
@@ -5478,7 +5478,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cameroon"
                 # throwError:tr("Invalid voltage value for this country (Cameroon)")
                 # suggestAlternative:"30000/90000/110000/220000/225000"
-                err.append({'class': 61, 'subclass': 738433665, 'text': mapcss.tr('Invalid voltage value for this country (Cameroon)')})
+                err.append({'class': 7040062, 'subclass': 738433665, 'text': mapcss.tr('Invalid voltage value for this country (Cameroon)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11500|12000|12470|12500|13000|13200|13800|14000|14400|16000|17500|23000|24940|25000|26400|27600|28000|34000|34500|35000|42000|44000|46000|49000|60000|63000|66000|69000|72000|110000|115000|120000|132000|138000|144000|150000|161000|200000|220000|230000|240000|260000|280000|287000|315000|345000|350000|360000|450000|500000|735000|765000)$/][inside("CA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11500|12000|12470|12500|13000|13200|13800|14000|14400|16000|17500|23000|24940|25000|26400|27600|28000|34000|34500|35000|42000|44000|46000|49000|60000|63000|66000|69000|72000|110000|115000|120000|132000|138000|144000|150000|161000|200000|220000|230000|240000|260000|280000|287000|315000|345000|350000|360000|450000|500000|735000|765000)$/][inside("CA")]
@@ -5500,7 +5500,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Canada"
                 # throwError:tr("Invalid voltage value for this country (Canada)")
                 # suggestAlternative:"11500/12000/12470/12500/13000/13200/13800/14000/14400/16000/17500/23000/24940/25000/26400/27600/28000/34000/34500/35000/42000/44000/46000/49000/60000/63000/66000/69000/72000/110000/115000/120000/132000/138000/144000/150000/161000/200000/220000/230000/240000/260000/280000/287000/315000/345000/350000/360000/450000/500000/735000/765000"
-                err.append({'class': 62, 'subclass': 1120964588, 'text': mapcss.tr('Invalid voltage value for this country (Canada)')})
+                err.append({'class': 7040063, 'subclass': 1120964588, 'text': mapcss.tr('Invalid voltage value for this country (Canada)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|60000)$/][inside("CV")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|60000)$/][inside("CV")]
@@ -5522,7 +5522,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cape_Verde"
                 # throwError:tr("Invalid voltage value for this country (Cape Verde)")
                 # suggestAlternative:"20000/60000"
-                err.append({'class': 63, 'subclass': 1002810182, 'text': mapcss.tr('Invalid voltage value for this country (Cape Verde)')})
+                err.append({'class': 7040064, 'subclass': 1002810182, 'text': mapcss.tr('Invalid voltage value for this country (Cape Verde)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000)$/][inside("CF")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(110000)$/][inside("CF")]
@@ -5544,7 +5544,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Central_African_Republic"
                 # throwError:tr("Invalid voltage value for this country (Central African Republic)")
                 # suggestAlternative:"110000"
-                err.append({'class': 64, 'subclass': 287596509, 'text': mapcss.tr('Invalid voltage value for this country (Central African Republic)')})
+                err.append({'class': 7040065, 'subclass': 287596509, 'text': mapcss.tr('Invalid voltage value for this country (Central African Republic)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|66000|90000)$/][inside("TD")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|66000|90000)$/][inside("TD")]
@@ -5566,7 +5566,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Chad"
                 # throwError:tr("Invalid voltage value for this country (Chad)")
                 # suggestAlternative:"20000/66000/90000"
-                err.append({'class': 65, 'subclass': 783605678, 'text': mapcss.tr('Invalid voltage value for this country (Chad)')})
+                err.append({'class': 7040066, 'subclass': 783605678, 'text': mapcss.tr('Invalid voltage value for this country (Chad)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|15000|23000|33000|34500|66000|69000|100000|110000|154000|220000|345000|500000)$/][inside("CL")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(13800|15000|23000|33000|34500|66000|69000|100000|110000|154000|220000|345000|500000)$/][inside("CL")]
@@ -5588,7 +5588,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Chile"
                 # throwError:tr("Invalid voltage value for this country (Chile)")
                 # suggestAlternative:"13800/15000/23000/33000/34500/66000/69000/100000/110000/154000/220000/345000/500000"
-                err.append({'class': 66, 'subclass': 1014846569, 'text': mapcss.tr('Invalid voltage value for this country (Chile)')})
+                err.append({'class': 7040067, 'subclass': 1014846569, 'text': mapcss.tr('Invalid voltage value for this country (Chile)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|25000|34500|66000|110000|115000|138000|220000|230000|500000)$/][inside("CO")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|25000|34500|66000|110000|115000|138000|220000|230000|500000)$/][inside("CO")]
@@ -5610,7 +5610,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Colombia"
                 # throwError:tr("Invalid voltage value for this country (Colombia)")
                 # suggestAlternative:"15000/25000/34500/66000/110000/115000/138000/220000/230000/500000"
-                err.append({'class': 67, 'subclass': 720082595, 'text': mapcss.tr('Invalid voltage value for this country (Colombia)')})
+                err.append({'class': 7040068, 'subclass': 720082595, 'text': mapcss.tr('Invalid voltage value for this country (Colombia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(138000|230000)$/][inside("CR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(138000|230000)$/][inside("CR")]
@@ -5632,7 +5632,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Costa_Rica"
                 # throwError:tr("Invalid voltage value for this country (Costa Rica)")
                 # suggestAlternative:"138000/230000"
-                err.append({'class': 68, 'subclass': 322410606, 'text': mapcss.tr('Invalid voltage value for this country (Costa Rica)')})
+                err.append({'class': 7040069, 'subclass': 322410606, 'text': mapcss.tr('Invalid voltage value for this country (Costa Rica)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|35000|110000|220000|400000|500000)$/][inside("HR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|25000|35000|110000|220000|400000|500000)$/][inside("HR")]
@@ -5654,7 +5654,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Croatia"
                 # throwError:tr("Invalid voltage value for this country (Croatia)")
                 # suggestAlternative:"20000/25000/35000/110000/220000/400000/500000"
-                err.append({'class': 69, 'subclass': 772212595, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
+                err.append({'class': 7040070, 'subclass': 772212595, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|110000|220000)$/][inside("CU")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|110000|220000)$/][inside("CU")]
@@ -5676,7 +5676,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cuba"
                 # throwError:tr("Invalid voltage value for this country (Cuba)")
                 # suggestAlternative:"11000/110000/220000"
-                err.append({'class': 70, 'subclass': 1211051548, 'text': mapcss.tr('Invalid voltage value for this country (Cuba)')})
+                err.append({'class': 7040071, 'subclass': 1211051548, 'text': mapcss.tr('Invalid voltage value for this country (Cuba)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("CY")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("CY")]
@@ -5698,7 +5698,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cyprus"
                 # throwError:tr("Invalid voltage value for this country (Cyprus)")
                 # suggestAlternative:"66000/132000"
-                err.append({'class': 71, 'subclass': 1666044666, 'text': mapcss.tr('Invalid voltage value for this country (Cyprus)')})
+                err.append({'class': 7040072, 'subclass': 1666044666, 'text': mapcss.tr('Invalid voltage value for this country (Cyprus)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|33000|35000|110000|220000|380000|400000)$/][inside("CZ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(22000|33000|35000|110000|220000|380000|400000)$/][inside("CZ")]
@@ -5720,7 +5720,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Czech_Republic"
                 # throwError:tr("Invalid voltage value for this country (Czech Republic)")
                 # suggestAlternative:"22000/33000/35000/110000/220000/380000/400000"
-                err.append({'class': 72, 'subclass': 1486093289, 'text': mapcss.tr('Invalid voltage value for this country (Czech Republic)')})
+                err.append({'class': 7040073, 'subclass': 1486093289, 'text': mapcss.tr('Invalid voltage value for this country (Czech Republic)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|30000|33000|50000|70000|110000|120000|132000|220000|400000|500000)$/][inside("CD")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|30000|33000|50000|70000|110000|120000|132000|220000|400000|500000)$/][inside("CD")]
@@ -5742,7 +5742,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Democratic_Republic_of_the_Congo"
                 # throwError:tr("Invalid voltage value for this country (Democratic Republic of the Congo)")
                 # suggestAlternative:"11000/30000/33000/50000/70000/110000/120000/132000/220000/400000/500000"
-                err.append({'class': 73, 'subclass': 1208997465, 'text': mapcss.tr('Invalid voltage value for this country (Democratic Republic of the Congo)')})
+                err.append({'class': 7040074, 'subclass': 1208997465, 'text': mapcss.tr('Invalid voltage value for this country (Democratic Republic of the Congo)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|230000)$/][inside("DJ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(63000|230000)$/][inside("DJ")]
@@ -5764,7 +5764,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Djibouti"
                 # throwError:tr("Invalid voltage value for this country (Djibouti)")
                 # suggestAlternative:"63000/230000"
-                err.append({'class': 74, 'subclass': 120329466, 'text': mapcss.tr('Invalid voltage value for this country (Djibouti)')})
+                err.append({'class': 7040075, 'subclass': 120329466, 'text': mapcss.tr('Invalid voltage value for this country (Djibouti)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000|345000)$/][inside("DO")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000|345000)$/][inside("DO")]
@@ -5786,7 +5786,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Dominican_Republic"
                 # throwError:tr("Invalid voltage value for this country (Dominican Republic)")
                 # suggestAlternative:"69000/138000/230000/345000"
-                err.append({'class': 75, 'subclass': 842580562, 'text': mapcss.tr('Invalid voltage value for this country (Dominican Republic)')})
+                err.append({'class': 7040076, 'subclass': 842580562, 'text': mapcss.tr('Invalid voltage value for this country (Dominican Republic)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|22000|23000|34500|46000|48000|69000|138000|230000|500000)$/][inside("EC")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|22000|23000|34500|46000|48000|69000|138000|230000|500000)$/][inside("EC")]
@@ -5808,7 +5808,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ecuador"
                 # throwError:tr("Invalid voltage value for this country (Ecuador)")
                 # suggestAlternative:"11000/22000/23000/34500/46000/48000/69000/138000/230000/500000"
-                err.append({'class': 76, 'subclass': 2076625913, 'text': mapcss.tr('Invalid voltage value for this country (Ecuador)')})
+                err.append({'class': 7040077, 'subclass': 2076625913, 'text': mapcss.tr('Invalid voltage value for this country (Ecuador)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000|500000)$/][inside("EG")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000|500000)$/][inside("EG")]
@@ -5830,7 +5830,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Egypt"
                 # throwError:tr("Invalid voltage value for this country (Egypt)")
                 # suggestAlternative:"66000/132000/220000/400000/500000"
-                err.append({'class': 77, 'subclass': 667037383, 'text': mapcss.tr('Invalid voltage value for this country (Egypt)')})
+                err.append({'class': 7040078, 'subclass': 667037383, 'text': mapcss.tr('Invalid voltage value for this country (Egypt)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("SV")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("SV")]
@@ -5852,7 +5852,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/El_Salvador"
                 # throwError:tr("Invalid voltage value for this country (El Salvador)")
                 # suggestAlternative:"115000/230000"
-                err.append({'class': 78, 'subclass': 1529758756, 'text': mapcss.tr('Invalid voltage value for this country (El Salvador)')})
+                err.append({'class': 7040079, 'subclass': 1529758756, 'text': mapcss.tr('Invalid voltage value for this country (El Salvador)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000)$/][inside("GQ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(110000|220000)$/][inside("GQ")]
@@ -5874,7 +5874,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Equatorial_Guinea"
                 # throwError:tr("Invalid voltage value for this country (Equatorial Guinea)")
                 # suggestAlternative:"110000/220000"
-                err.append({'class': 79, 'subclass': 874039607, 'text': mapcss.tr('Invalid voltage value for this country (Equatorial Guinea)')})
+                err.append({'class': 7040080, 'subclass': 874039607, 'text': mapcss.tr('Invalid voltage value for this country (Equatorial Guinea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("ER")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("ER")]
@@ -5896,7 +5896,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Eritrea"
                 # throwError:tr("Invalid voltage value for this country (Eritrea)")
                 # suggestAlternative:"66000/132000"
-                err.append({'class': 80, 'subclass': 1154111938, 'text': mapcss.tr('Invalid voltage value for this country (Eritrea)')})
+                err.append({'class': 7040081, 'subclass': 1154111938, 'text': mapcss.tr('Invalid voltage value for this country (Eritrea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|24000|35000|110000|150000|330000|450000)$/][inside("EE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|20000|24000|35000|110000|150000|330000|450000)$/][inside("EE")]
@@ -5918,7 +5918,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Estonia"
                 # throwError:tr("Invalid voltage value for this country (Estonia)")
                 # suggestAlternative:"15000/20000/24000/35000/110000/150000/330000/450000"
-                err.append({'class': 81, 'subclass': 1234868595, 'text': mapcss.tr('Invalid voltage value for this country (Estonia)')})
+                err.append({'class': 7040082, 'subclass': 1234868595, 'text': mapcss.tr('Invalid voltage value for this country (Estonia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|400000)$/][inside("SZ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|132000|400000)$/][inside("SZ")]
@@ -5940,7 +5940,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Eswatini"
                 # throwError:tr("Invalid voltage value for this country (Eswatini)")
                 # suggestAlternative:"66000/132000/400000"
-                err.append({'class': 82, 'subclass': 2023007346, 'text': mapcss.tr('Invalid voltage value for this country (Eswatini)')})
+                err.append({'class': 7040083, 'subclass': 2023007346, 'text': mapcss.tr('Invalid voltage value for this country (Eswatini)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(25000|45000|66000|132000|220000|230000|400000|500000)$/][inside("ET")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(25000|45000|66000|132000|220000|230000|400000|500000)$/][inside("ET")]
@@ -5962,7 +5962,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ethiopia"
                 # throwError:tr("Invalid voltage value for this country (Ethiopia)")
                 # suggestAlternative:"25000/45000/66000/132000/220000/230000/400000/500000"
-                err.append({'class': 83, 'subclass': 752405605, 'text': mapcss.tr('Invalid voltage value for this country (Ethiopia)')})
+                err.append({'class': 7040084, 'subclass': 752405605, 'text': mapcss.tr('Invalid voltage value for this country (Ethiopia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800)$/][inside("FM")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(13800)$/][inside("FM")]
@@ -5984,7 +5984,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Federated_States_of_Micronesia"
                 # throwError:tr("Invalid voltage value for this country (Federated States of Micronesia)")
                 # suggestAlternative:"13800"
-                err.append({'class': 84, 'subclass': 320444685, 'text': mapcss.tr('Invalid voltage value for this country (Federated States of Micronesia)')})
+                err.append({'class': 7040085, 'subclass': 320444685, 'text': mapcss.tr('Invalid voltage value for this country (Federated States of Micronesia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|110000|132000)$/][inside("FJ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|33000|110000|132000)$/][inside("FJ")]
@@ -6006,7 +6006,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Fiji"
                 # throwError:tr("Invalid voltage value for this country (Fiji)")
                 # suggestAlternative:"11000/33000/110000/132000"
-                err.append({'class': 85, 'subclass': 1984085302, 'text': mapcss.tr('Invalid voltage value for this country (Fiji)')})
+                err.append({'class': 7040086, 'subclass': 1984085302, 'text': mapcss.tr('Invalid voltage value for this country (Fiji)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|22000|25000|45000|80000|100000|110000|150000|220000|400000|450000|500000)$/][inside("FI")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|22000|25000|45000|80000|100000|110000|150000|220000|400000|450000|500000)$/][inside("FI")]
@@ -6028,7 +6028,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Finland"
                 # throwError:tr("Invalid voltage value for this country (Finland)")
                 # suggestAlternative:"20000/22000/25000/45000/80000/100000/110000/150000/220000/400000/450000/500000"
-                err.append({'class': 86, 'subclass': 741954301, 'text': mapcss.tr('Invalid voltage value for this country (Finland)')})
+                err.append({'class': 7040087, 'subclass': 741954301, 'text': mapcss.tr('Invalid voltage value for this country (Finland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10300|10500|13000|15000|15500|16000|17000|17200|17500|20000|25000|30000|33000|42000|45000|50000|52000|63000|66000|90000|110000|150000|200000|220000|225000|270000|320000|380000|400000|500000)$/][inside("FR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(10300|10500|13000|15000|15500|16000|17000|17200|17500|20000|25000|30000|33000|42000|45000|50000|52000|63000|66000|90000|110000|150000|200000|220000|225000|270000|320000|380000|400000|500000)$/][inside("FR")]
@@ -6050,7 +6050,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/France"
                 # throwError:tr("Invalid voltage value for this country (France)")
                 # suggestAlternative:"10300/10500/13000/15000/15500/16000/17000/17200/17500/20000/25000/30000/33000/42000/45000/50000/52000/63000/66000/90000/110000/150000/200000/220000/225000/270000/320000/380000/400000/500000"
-                err.append({'class': 87, 'subclass': 1742847931, 'text': mapcss.tr('Invalid voltage value for this country (France)')})
+                err.append({'class': 7040088, 'subclass': 1742847931, 'text': mapcss.tr('Invalid voltage value for this country (France)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|90000|115000|225000)$/][inside("GA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(63000|90000|115000|225000)$/][inside("GA")]
@@ -6072,7 +6072,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Gabon"
                 # throwError:tr("Invalid voltage value for this country (Gabon)")
                 # suggestAlternative:"63000/90000/115000/225000"
-                err.append({'class': 88, 'subclass': 926078478, 'text': mapcss.tr('Invalid voltage value for this country (Gabon)')})
+                err.append({'class': 7040089, 'subclass': 926078478, 'text': mapcss.tr('Invalid voltage value for this country (Gabon)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|154000|220000|330000|350000|380000|400000|500000)$/][inside("GE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(35000|110000|154000|220000|330000|350000|380000|400000|500000)$/][inside("GE")]
@@ -6094,7 +6094,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Georgia"
                 # throwError:tr("Invalid voltage value for this country (Georgia)")
                 # suggestAlternative:"35000/110000/154000/220000/330000/350000/380000/400000/500000"
-                err.append({'class': 89, 'subclass': 2062879893, 'text': mapcss.tr('Invalid voltage value for this country (Georgia)')})
+                err.append({'class': 7040090, 'subclass': 2062879893, 'text': mapcss.tr('Invalid voltage value for this country (Georgia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
@@ -6116,7 +6116,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Germany"
                 # throwError:tr("Invalid voltage value for this country (Germany)")
                 # suggestAlternative:"10500/11000/15000/16000/20000/21000/22000/25000/27000/30000/33000/35000/50000/55000/60000/63000/65000/110000/132000/150000/155000/200000/220000/225000/250000/300000/320000/362000/380000/400000/450000/525000/600000"
-                err.append({'class': 90, 'subclass': 731334531, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
+                err.append({'class': 7040091, 'subclass': 731334531, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|161000|225000|330000)$/][inside("GH")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|161000|225000|330000)$/][inside("GH")]
@@ -6138,7 +6138,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ghana"
                 # throwError:tr("Invalid voltage value for this country (Ghana)")
                 # suggestAlternative:"11000/161000/225000/330000"
-                err.append({'class': 91, 'subclass': 1586184540, 'text': mapcss.tr('Invalid voltage value for this country (Ghana)')})
+                err.append({'class': 7040092, 'subclass': 1586184540, 'text': mapcss.tr('Invalid voltage value for this country (Ghana)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|22000|66000|150000|400000|500000)$/][inside("GR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|20000|22000|66000|150000|400000|500000)$/][inside("GR")]
@@ -6160,7 +6160,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Greece"
                 # throwError:tr("Invalid voltage value for this country (Greece)")
                 # suggestAlternative:"15000/20000/22000/66000/150000/400000/500000"
-                err.append({'class': 92, 'subclass': 2084017271, 'text': mapcss.tr('Invalid voltage value for this country (Greece)')})
+                err.append({'class': 7040093, 'subclass': 2084017271, 'text': mapcss.tr('Invalid voltage value for this country (Greece)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|115000|132000|138000|230000|400000)$/][inside("GT")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(69000|115000|132000|138000|230000|400000)$/][inside("GT")]
@@ -6182,7 +6182,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Guatemala"
                 # throwError:tr("Invalid voltage value for this country (Guatemala)")
                 # suggestAlternative:"69000/115000/132000/138000/230000/400000"
-                err.append({'class': 93, 'subclass': 1139211860, 'text': mapcss.tr('Invalid voltage value for this country (Guatemala)')})
+                err.append({'class': 7040094, 'subclass': 1139211860, 'text': mapcss.tr('Invalid voltage value for this country (Guatemala)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|110000|225000)$/][inside("GN")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(30000|110000|225000)$/][inside("GN")]
@@ -6204,7 +6204,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Guinea"
                 # throwError:tr("Invalid voltage value for this country (Guinea)")
                 # suggestAlternative:"30000/110000/225000"
-                err.append({'class': 94, 'subclass': 488889974, 'text': mapcss.tr('Invalid voltage value for this country (Guinea)')})
+                err.append({'class': 7040095, 'subclass': 488889974, 'text': mapcss.tr('Invalid voltage value for this country (Guinea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(225000)$/][inside("GW")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(225000)$/][inside("GW")]
@@ -6226,7 +6226,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Guinea-Bissau"
                 # throwError:tr("Invalid voltage value for this country (Guinea-Bissau)")
                 # suggestAlternative:"225000"
-                err.append({'class': 95, 'subclass': 2018554266, 'text': mapcss.tr('Invalid voltage value for this country (Guinea-Bissau)')})
+                err.append({'class': 7040096, 'subclass': 2018554266, 'text': mapcss.tr('Invalid voltage value for this country (Guinea-Bissau)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|115000)$/][inside("HT")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(69000|115000)$/][inside("HT")]
@@ -6248,7 +6248,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Haiti"
                 # throwError:tr("Invalid voltage value for this country (Haiti)")
                 # suggestAlternative:"69000/115000"
-                err.append({'class': 96, 'subclass': 2020105765, 'text': mapcss.tr('Invalid voltage value for this country (Haiti)')})
+                err.append({'class': 7040097, 'subclass': 2020105765, 'text': mapcss.tr('Invalid voltage value for this country (Haiti)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000)$/][inside("HN")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000)$/][inside("HN")]
@@ -6270,7 +6270,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Honduras"
                 # throwError:tr("Invalid voltage value for this country (Honduras)")
                 # suggestAlternative:"69000/138000/230000"
-                err.append({'class': 97, 'subclass': 105654765, 'text': mapcss.tr('Invalid voltage value for this country (Honduras)')})
+                err.append({'class': 7040098, 'subclass': 105654765, 'text': mapcss.tr('Invalid voltage value for this country (Honduras)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|18000|20000|22000|25000|35000|110000|132000|220000|400000|750000)$/][inside("HU")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|18000|20000|22000|25000|35000|110000|132000|220000|400000|750000)$/][inside("HU")]
@@ -6292,7 +6292,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Hungary"
                 # throwError:tr("Invalid voltage value for this country (Hungary)")
                 # suggestAlternative:"11000/18000/20000/22000/25000/35000/110000/132000/220000/400000/750000"
-                err.append({'class': 98, 'subclass': 985049648, 'text': mapcss.tr('Invalid voltage value for this country (Hungary)')})
+                err.append({'class': 7040099, 'subclass': 985049648, 'text': mapcss.tr('Invalid voltage value for this country (Hungary)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000)$/][inside("IS")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000)$/][inside("IS")]
@@ -6314,7 +6314,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Iceland"
                 # throwError:tr("Invalid voltage value for this country (Iceland)")
                 # suggestAlternative:"66000/132000/220000"
-                err.append({'class': 99, 'subclass': 282994226, 'text': mapcss.tr('Invalid voltage value for this country (Iceland)')})
+                err.append({'class': 7040100, 'subclass': 282994226, 'text': mapcss.tr('Invalid voltage value for this country (Iceland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|13200|22000|25000|31000|33000|66000|100000|110000|132000|200000|220000|220001|230000|320000|400000|500000|660000|765000|800000|1200000)$/][inside("IN")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|13200|22000|25000|31000|33000|66000|100000|110000|132000|200000|220000|220001|230000|320000|400000|500000|660000|765000|800000|1200000)$/][inside("IN")]
@@ -6336,7 +6336,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/India"
                 # throwError:tr("Invalid voltage value for this country (India)")
                 # suggestAlternative:"11000/13200/22000/25000/31000/33000/66000/100000/110000/132000/200000/220000/220001/230000/320000/400000/500000/660000/765000/800000/1200000"
-                err.append({'class': 100, 'subclass': 1654665669, 'text': mapcss.tr('Invalid voltage value for this country (India)')})
+                err.append({'class': 7040101, 'subclass': 1654665669, 'text': mapcss.tr('Invalid voltage value for this country (India)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|70000|150000|230000|275000|500000)$/][inside("ID")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|70000|150000|230000|275000|500000)$/][inside("ID")]
@@ -6358,7 +6358,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Indonesia"
                 # throwError:tr("Invalid voltage value for this country (Indonesia)")
                 # suggestAlternative:"20000/70000/150000/230000/275000/500000"
-                err.append({'class': 101, 'subclass': 1680405695, 'text': mapcss.tr('Invalid voltage value for this country (Indonesia)')})
+                err.append({'class': 7040102, 'subclass': 1680405695, 'text': mapcss.tr('Invalid voltage value for this country (Indonesia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|25000|63000|110000|132000|154000|220000|230000|330000|380000|400000|2300000)$/][inside("IR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|20000|25000|63000|110000|132000|154000|220000|230000|330000|380000|400000|2300000)$/][inside("IR")]
@@ -6380,7 +6380,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Iran"
                 # throwError:tr("Invalid voltage value for this country (Iran)")
                 # suggestAlternative:"15000/20000/25000/63000/110000/132000/154000/220000/230000/330000/380000/400000/2300000"
-                err.append({'class': 102, 'subclass': 232087912, 'text': mapcss.tr('Invalid voltage value for this country (Iran)')})
+                err.append({'class': 7040103, 'subclass': 232087912, 'text': mapcss.tr('Invalid voltage value for this country (Iran)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|23000|25000|33000|66000|132000|154000|400000)$/][inside("IQ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|23000|25000|33000|66000|132000|154000|400000)$/][inside("IQ")]
@@ -6402,7 +6402,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Iraq"
                 # throwError:tr("Invalid voltage value for this country (Iraq)")
                 # suggestAlternative:"11000/23000/25000/33000/66000/132000/154000/400000"
-                err.append({'class': 103, 'subclass': 305515120, 'text': mapcss.tr('Invalid voltage value for this country (Iraq)')})
+                err.append({'class': 7040104, 'subclass': 305515120, 'text': mapcss.tr('Invalid voltage value for this country (Iraq)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|19000|20000|22000|33000|38000|110000|200000|220000|275000|320000|380000|400000)$/][inside("IE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(10500|19000|20000|22000|33000|38000|110000|200000|220000|275000|320000|380000|400000)$/][inside("IE")]
@@ -6424,7 +6424,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ireland"
                 # throwError:tr("Invalid voltage value for this country (Ireland)")
                 # suggestAlternative:"10500/19000/20000/22000/33000/38000/110000/200000/220000/275000/320000/380000/400000"
-                err.append({'class': 104, 'subclass': 169672672, 'text': mapcss.tr('Invalid voltage value for this country (Ireland)')})
+                err.append({'class': 7040105, 'subclass': 169672672, 'text': mapcss.tr('Invalid voltage value for this country (Ireland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|161000|400000)$/][inside("IL")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(115000|161000|400000)$/][inside("IL")]
@@ -6446,7 +6446,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Israel"
                 # throwError:tr("Invalid voltage value for this country (Israel)")
                 # suggestAlternative:"115000/161000/400000"
-                err.append({'class': 105, 'subclass': 625192723, 'text': mapcss.tr('Invalid voltage value for this country (Israel)')})
+                err.append({'class': 7040106, 'subclass': 625192723, 'text': mapcss.tr('Invalid voltage value for this country (Israel)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|25000|30000|45000|50000|55000|60000|63000|66000|68000|70000|110000|120000|130000|132000|135000|137000|138000|150000|200000|220000|225000|320000|380000|400000|500000)$/][inside("IT")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|20000|25000|30000|45000|50000|55000|60000|63000|66000|68000|70000|110000|120000|130000|132000|135000|137000|138000|150000|200000|220000|225000|320000|380000|400000|500000)$/][inside("IT")]
@@ -6468,7 +6468,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Italy"
                 # throwError:tr("Invalid voltage value for this country (Italy)")
                 # suggestAlternative:"15000/20000/25000/30000/45000/50000/55000/60000/63000/66000/68000/70000/110000/120000/130000/132000/135000/137000/138000/150000/200000/220000/225000/320000/380000/400000/500000"
-                err.append({'class': 106, 'subclass': 969356129, 'text': mapcss.tr('Invalid voltage value for this country (Italy)')})
+                err.append({'class': 7040107, 'subclass': 969356129, 'text': mapcss.tr('Invalid voltage value for this country (Italy)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|90000|225000|400000)$/][inside("CI")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|90000|225000|400000)$/][inside("CI")]
@@ -6490,7 +6490,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ivory_Coast"
                 # throwError:tr("Invalid voltage value for this country (Ivory Coast)")
                 # suggestAlternative:"15000/90000/225000/400000"
-                err.append({'class': 107, 'subclass': 1797665278, 'text': mapcss.tr('Invalid voltage value for this country (Ivory Coast)')})
+                err.append({'class': 7040108, 'subclass': 1797665278, 'text': mapcss.tr('Invalid voltage value for this country (Ivory Coast)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000)$/][inside("JM")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(69000|138000)$/][inside("JM")]
@@ -6512,7 +6512,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Jamaica"
                 # throwError:tr("Invalid voltage value for this country (Jamaica)")
                 # suggestAlternative:"69000/138000"
-                err.append({'class': 108, 'subclass': 693697068, 'text': mapcss.tr('Invalid voltage value for this country (Jamaica)')})
+                err.append({'class': 7040109, 'subclass': 693697068, 'text': mapcss.tr('Invalid voltage value for this country (Jamaica)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15400|20000|22000|25000|30000|33000|44000|60000|66000|77000|100000|110000|132000|154000|187000|200000|220000|250000|275000|500000|660000)$/][inside("JP")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|15400|20000|22000|25000|30000|33000|44000|60000|66000|77000|100000|110000|132000|154000|187000|200000|220000|250000|275000|500000|660000)$/][inside("JP")]
@@ -6534,7 +6534,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Japan"
                 # throwError:tr("Invalid voltage value for this country (Japan)")
                 # suggestAlternative:"11000/15400/20000/22000/25000/30000/33000/44000/60000/66000/77000/100000/110000/132000/154000/187000/200000/220000/250000/275000/500000/660000"
-                err.append({'class': 109, 'subclass': 1312284000, 'text': mapcss.tr('Invalid voltage value for this country (Japan)')})
+                err.append({'class': 7040110, 'subclass': 1312284000, 'text': mapcss.tr('Invalid voltage value for this country (Japan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000|400000)$/][inside("JO")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(132000|400000)$/][inside("JO")]
@@ -6556,7 +6556,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Jordan"
                 # throwError:tr("Invalid voltage value for this country (Jordan)")
                 # suggestAlternative:"132000/400000"
-                err.append({'class': 110, 'subclass': 2075808260, 'text': mapcss.tr('Invalid voltage value for this country (Jordan)')})
+                err.append({'class': 7040111, 'subclass': 2075808260, 'text': mapcss.tr('Invalid voltage value for this country (Jordan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|35000|110000|220000|500000)$/][inside("KZ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(22000|35000|110000|220000|500000)$/][inside("KZ")]
@@ -6578,7 +6578,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kazakhstan"
                 # throwError:tr("Invalid voltage value for this country (Kazakhstan)")
                 # suggestAlternative:"22000/35000/110000/220000/500000"
-                err.append({'class': 111, 'subclass': 595219434, 'text': mapcss.tr('Invalid voltage value for this country (Kazakhstan)')})
+                err.append({'class': 7040112, 'subclass': 595219434, 'text': mapcss.tr('Invalid voltage value for this country (Kazakhstan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|132000|220000|400000|500000)$/][inside("KE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|15000|132000|220000|400000|500000)$/][inside("KE")]
@@ -6600,7 +6600,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kenya"
                 # throwError:tr("Invalid voltage value for this country (Kenya)")
                 # suggestAlternative:"11000/15000/132000/220000/400000/500000"
-                err.append({'class': 112, 'subclass': 299331775, 'text': mapcss.tr('Invalid voltage value for this country (Kenya)')})
+                err.append({'class': 7040113, 'subclass': 299331775, 'text': mapcss.tr('Invalid voltage value for this country (Kenya)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(50000|60000|132000|150000|220000|400000)$/][inside("DK")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(50000|60000|132000|150000|220000|400000)$/][inside("DK")]
@@ -6622,7 +6622,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Denmark"
                 # throwError:tr("Invalid voltage value for this country (Kingdom of Denmark)")
                 # suggestAlternative:"50000/60000/132000/150000/220000/400000"
-                err.append({'class': 113, 'subclass': 560037645, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of Denmark)')})
+                err.append({'class': 7040114, 'subclass': 560037645, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of Denmark)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13000|20000|22000|23000|24000|25000|30000|33000|34000|50000|66000|110000|150000|220000|320000|380000|450000|600000)$/][inside("NL")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(13000|20000|22000|23000|24000|25000|30000|33000|34000|50000|66000|110000|150000|220000|320000|380000|450000|600000)$/][inside("NL")]
@@ -6644,7 +6644,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Netherlands"
                 # throwError:tr("Invalid voltage value for this country (Kingdom of the Netherlands)")
                 # suggestAlternative:"13000/20000/22000/23000/24000/25000/30000/33000/34000/50000/66000/110000/150000/220000/320000/380000/450000/600000"
-                err.append({'class': 114, 'subclass': 796289411, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of the Netherlands)')})
+                err.append({'class': 7040115, 'subclass': 796289411, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of the Netherlands)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|132000|275000|400000)$/][inside("KW")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(33000|66000|132000|275000|400000)$/][inside("KW")]
@@ -6666,7 +6666,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kuwait"
                 # throwError:tr("Invalid voltage value for this country (Kuwait)")
                 # suggestAlternative:"33000/66000/132000/275000/400000"
-                err.append({'class': 115, 'subclass': 1279992090, 'text': mapcss.tr('Invalid voltage value for this country (Kuwait)')})
+                err.append({'class': 7040116, 'subclass': 1279992090, 'text': mapcss.tr('Invalid voltage value for this country (Kuwait)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10000|110000|220000|500000)$/][inside("KG")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(10000|110000|220000|500000)$/][inside("KG")]
@@ -6688,7 +6688,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kyrgyzstan"
                 # throwError:tr("Invalid voltage value for this country (Kyrgyzstan)")
                 # suggestAlternative:"10000/110000/220000/500000"
-                err.append({'class': 116, 'subclass': 826750944, 'text': mapcss.tr('Invalid voltage value for this country (Kyrgyzstan)')})
+                err.append({'class': 7040117, 'subclass': 826750944, 'text': mapcss.tr('Invalid voltage value for this country (Kyrgyzstan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|115000|220000|230000|500000)$/][inside("LA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(110000|115000|220000|230000|500000)$/][inside("LA")]
@@ -6710,7 +6710,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Laos"
                 # throwError:tr("Invalid voltage value for this country (Laos)")
                 # suggestAlternative:"110000/115000/220000/230000/500000"
-                err.append({'class': 117, 'subclass': 1955573363, 'text': mapcss.tr('Invalid voltage value for this country (Laos)')})
+                err.append({'class': 7040118, 'subclass': 1955573363, 'text': mapcss.tr('Invalid voltage value for this country (Laos)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|110000|330000)$/][inside("LV")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|110000|330000)$/][inside("LV")]
@@ -6732,7 +6732,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Latvia"
                 # throwError:tr("Invalid voltage value for this country (Latvia)")
                 # suggestAlternative:"20000/110000/330000"
-                err.append({'class': 118, 'subclass': 227150555, 'text': mapcss.tr('Invalid voltage value for this country (Latvia)')})
+                err.append({'class': 7040119, 'subclass': 227150555, 'text': mapcss.tr('Invalid voltage value for this country (Latvia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|150000|220000|400000)$/][inside("LB")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(33000|66000|150000|220000|400000)$/][inside("LB")]
@@ -6754,7 +6754,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Lebanon"
                 # throwError:tr("Invalid voltage value for this country (Lebanon)")
                 # suggestAlternative:"33000/66000/150000/220000/400000"
-                err.append({'class': 119, 'subclass': 1879742037, 'text': mapcss.tr('Invalid voltage value for this country (Lebanon)')})
+                err.append({'class': 7040120, 'subclass': 1879742037, 'text': mapcss.tr('Invalid voltage value for this country (Lebanon)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|88000|132000)$/][inside("LS")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(33000|66000|88000|132000)$/][inside("LS")]
@@ -6776,7 +6776,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Lesotho"
                 # throwError:tr("Invalid voltage value for this country (Lesotho)")
                 # suggestAlternative:"33000/66000/88000/132000"
-                err.append({'class': 120, 'subclass': 488833994, 'text': mapcss.tr('Invalid voltage value for this country (Lesotho)')})
+                err.append({'class': 7040121, 'subclass': 488833994, 'text': mapcss.tr('Invalid voltage value for this country (Lesotho)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|225000)$/][inside("LR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|225000)$/][inside("LR")]
@@ -6798,7 +6798,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Liberia"
                 # throwError:tr("Invalid voltage value for this country (Liberia)")
                 # suggestAlternative:"66000/225000"
-                err.append({'class': 121, 'subclass': 926911881, 'text': mapcss.tr('Invalid voltage value for this country (Liberia)')})
+                err.append({'class': 7040122, 'subclass': 926911881, 'text': mapcss.tr('Invalid voltage value for this country (Liberia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22500|25000|30000|66000|69000|132000|220000|400000|500000)$/][inside("LY")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(22500|25000|30000|66000|69000|132000|220000|400000|500000)$/][inside("LY")]
@@ -6820,7 +6820,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Libya"
                 # throwError:tr("Invalid voltage value for this country (Libya)")
                 # suggestAlternative:"22500/25000/30000/66000/69000/132000/220000/400000/500000"
-                err.append({'class': 122, 'subclass': 768096197, 'text': mapcss.tr('Invalid voltage value for this country (Libya)')})
+                err.append({'class': 7040123, 'subclass': 768096197, 'text': mapcss.tr('Invalid voltage value for this country (Libya)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(220000)$/][inside("LI")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(220000)$/][inside("LI")]
@@ -6842,7 +6842,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Liechtenstein"
                 # throwError:tr("Invalid voltage value for this country (Liechtenstein)")
                 # suggestAlternative:"220000"
-                err.append({'class': 123, 'subclass': 546689387, 'text': mapcss.tr('Invalid voltage value for this country (Liechtenstein)')})
+                err.append({'class': 7040124, 'subclass': 546689387, 'text': mapcss.tr('Invalid voltage value for this country (Liechtenstein)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|35000|110000|300000|330000|400000)$/][inside("LT")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|35000|110000|300000|330000|400000)$/][inside("LT")]
@@ -6864,7 +6864,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Lithuania"
                 # throwError:tr("Invalid voltage value for this country (Lithuania)")
                 # suggestAlternative:"15000/35000/110000/300000/330000/400000"
-                err.append({'class': 124, 'subclass': 717063480, 'text': mapcss.tr('Invalid voltage value for this country (Lithuania)')})
+                err.append({'class': 7040125, 'subclass': 717063480, 'text': mapcss.tr('Invalid voltage value for this country (Lithuania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|65000|150000|220000|225000)$/][inside("LU")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(63000|65000|150000|220000|225000)$/][inside("LU")]
@@ -6886,7 +6886,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Luxembourg"
                 # throwError:tr("Invalid voltage value for this country (Luxembourg)")
                 # suggestAlternative:"63000/65000/150000/220000/225000"
-                err.append({'class': 125, 'subclass': 1676663027, 'text': mapcss.tr('Invalid voltage value for this country (Luxembourg)')})
+                err.append({'class': 7040126, 'subclass': 1676663027, 'text': mapcss.tr('Invalid voltage value for this country (Luxembourg)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|138000)$/][inside("MG")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(63000|138000)$/][inside("MG")]
@@ -6908,7 +6908,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Madagascar"
                 # throwError:tr("Invalid voltage value for this country (Madagascar)")
                 # suggestAlternative:"63000/138000"
-                err.append({'class': 126, 'subclass': 1968801980, 'text': mapcss.tr('Invalid voltage value for this country (Madagascar)')})
+                err.append({'class': 7040127, 'subclass': 1968801980, 'text': mapcss.tr('Invalid voltage value for this country (Madagascar)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|110000|132000|400000)$/][inside("MW")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|110000|132000|400000)$/][inside("MW")]
@@ -6930,7 +6930,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Malawi"
                 # throwError:tr("Invalid voltage value for this country (Malawi)")
                 # suggestAlternative:"11000/33000/66000/110000/132000/400000"
-                err.append({'class': 127, 'subclass': 1809688437, 'text': mapcss.tr('Invalid voltage value for this country (Malawi)')})
+                err.append({'class': 7040128, 'subclass': 1809688437, 'text': mapcss.tr('Invalid voltage value for this country (Malawi)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|132000|275000|300000|500000)$/][inside("MY")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|132000|275000|300000|500000)$/][inside("MY")]
@@ -6952,7 +6952,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Malaysia"
                 # throwError:tr("Invalid voltage value for this country (Malaysia)")
                 # suggestAlternative:"11000/33000/66000/132000/275000/300000/500000"
-                err.append({'class': 128, 'subclass': 1473208741, 'text': mapcss.tr('Invalid voltage value for this country (Malaysia)')})
+                err.append({'class': 7040129, 'subclass': 1473208741, 'text': mapcss.tr('Invalid voltage value for this country (Malaysia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("MV")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("MV")]
@@ -6974,7 +6974,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Maldives"
                 # throwError:tr("Invalid voltage value for this country (Maldives)")
                 # suggestAlternative:"132000"
-                err.append({'class': 129, 'subclass': 1094361238, 'text': mapcss.tr('Invalid voltage value for this country (Maldives)')})
+                err.append({'class': 7040130, 'subclass': 1094361238, 'text': mapcss.tr('Invalid voltage value for this country (Maldives)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|150000|225000)$/][inside("ML")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(63000|150000|225000)$/][inside("ML")]
@@ -6996,7 +6996,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mali"
                 # throwError:tr("Invalid voltage value for this country (Mali)")
                 # suggestAlternative:"63000/150000/225000"
-                err.append({'class': 130, 'subclass': 914972182, 'text': mapcss.tr('Invalid voltage value for this country (Mali)')})
+                err.append({'class': 7040131, 'subclass': 914972182, 'text': mapcss.tr('Invalid voltage value for this country (Mali)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|220000)$/][inside("MT")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|220000)$/][inside("MT")]
@@ -7018,7 +7018,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Malta"
                 # throwError:tr("Invalid voltage value for this country (Malta)")
                 # suggestAlternative:"11000/33000/132000/220000"
-                err.append({'class': 131, 'subclass': 1512688517, 'text': mapcss.tr('Invalid voltage value for this country (Malta)')})
+                err.append({'class': 7040132, 'subclass': 1512688517, 'text': mapcss.tr('Invalid voltage value for this country (Malta)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(90000|225000)$/][inside("MR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(90000|225000)$/][inside("MR")]
@@ -7040,7 +7040,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mauritania"
                 # throwError:tr("Invalid voltage value for this country (Mauritania)")
                 # suggestAlternative:"90000/225000"
-                err.append({'class': 132, 'subclass': 1192989618, 'text': mapcss.tr('Invalid voltage value for this country (Mauritania)')})
+                err.append({'class': 7040133, 'subclass': 1192989618, 'text': mapcss.tr('Invalid voltage value for this country (Mauritania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000)$/][inside("MU")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000)$/][inside("MU")]
@@ -7062,7 +7062,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mauritius"
                 # throwError:tr("Invalid voltage value for this country (Mauritius)")
                 # suggestAlternative:"66000"
-                err.append({'class': 133, 'subclass': 1762670082, 'text': mapcss.tr('Invalid voltage value for this country (Mauritius)')})
+                err.append({'class': 7040134, 'subclass': 1762670082, 'text': mapcss.tr('Invalid voltage value for this country (Mauritius)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|15000|25000|34500|65000|69000|85000|113000|115000|138000|161000|230000|400000)$/][inside("MX")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(13800|15000|25000|34500|65000|69000|85000|113000|115000|138000|161000|230000|400000)$/][inside("MX")]
@@ -7084,7 +7084,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mexico"
                 # throwError:tr("Invalid voltage value for this country (Mexico)")
                 # suggestAlternative:"13800/15000/25000/34500/65000/69000/85000/113000/115000/138000/161000/230000/400000"
-                err.append({'class': 134, 'subclass': 30649551, 'text': mapcss.tr('Invalid voltage value for this country (Mexico)')})
+                err.append({'class': 7040135, 'subclass': 30649551, 'text': mapcss.tr('Invalid voltage value for this country (Mexico)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|35000|110000|330000|400000)$/][inside("MD")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(33000|35000|110000|330000|400000)$/][inside("MD")]
@@ -7106,7 +7106,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Moldova"
                 # throwError:tr("Invalid voltage value for this country (Moldova)")
                 # suggestAlternative:"33000/35000/110000/330000/400000"
-                err.append({'class': 135, 'subclass': 1361739100, 'text': mapcss.tr('Invalid voltage value for this country (Moldova)')})
+                err.append({'class': 7040136, 'subclass': 1361739100, 'text': mapcss.tr('Invalid voltage value for this country (Moldova)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|22000|35000|110000|220000)$/][inside("MN")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|22000|35000|110000|220000)$/][inside("MN")]
@@ -7128,7 +7128,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mongolia"
                 # throwError:tr("Invalid voltage value for this country (Mongolia)")
                 # suggestAlternative:"15000/22000/35000/110000/220000"
-                err.append({'class': 136, 'subclass': 844124236, 'text': mapcss.tr('Invalid voltage value for this country (Mongolia)')})
+                err.append({'class': 7040137, 'subclass': 844124236, 'text': mapcss.tr('Invalid voltage value for this country (Mongolia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|220000|400000|500000)$/][inside("ME")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(35000|110000|220000|400000|500000)$/][inside("ME")]
@@ -7150,7 +7150,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Montenegro"
                 # throwError:tr("Invalid voltage value for this country (Montenegro)")
                 # suggestAlternative:"35000/110000/220000/400000/500000"
-                err.append({'class': 137, 'subclass': 1736541272, 'text': mapcss.tr('Invalid voltage value for this country (Montenegro)')})
+                err.append({'class': 7040138, 'subclass': 1736541272, 'text': mapcss.tr('Invalid voltage value for this country (Montenegro)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|22000|22500|30000|33000|60000|110000|132000|150000|220000|225000|400000)$/][inside("MA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|22000|22500|30000|33000|60000|110000|132000|150000|220000|225000|400000)$/][inside("MA")]
@@ -7172,7 +7172,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Morocco"
                 # throwError:tr("Invalid voltage value for this country (Morocco)")
                 # suggestAlternative:"20000/22000/22500/30000/33000/60000/110000/132000/150000/220000/225000/400000"
-                err.append({'class': 138, 'subclass': 1997753665, 'text': mapcss.tr('Invalid voltage value for this country (Morocco)')})
+                err.append({'class': 7040139, 'subclass': 1997753665, 'text': mapcss.tr('Invalid voltage value for this country (Morocco)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|110000|132000|220000|275000|330000|400000|533000)$/][inside("MZ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|110000|132000|220000|275000|330000|400000|533000)$/][inside("MZ")]
@@ -7194,7 +7194,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mozambique"
                 # throwError:tr("Invalid voltage value for this country (Mozambique)")
                 # suggestAlternative:"66000/110000/132000/220000/275000/330000/400000/533000"
-                err.append({'class': 139, 'subclass': 544582650, 'text': mapcss.tr('Invalid voltage value for this country (Mozambique)')})
+                err.append({'class': 7040140, 'subclass': 544582650, 'text': mapcss.tr('Invalid voltage value for this country (Mozambique)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|20000|33000|66000|110000|132000|230000|500000)$/][inside("MM")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|20000|33000|66000|110000|132000|230000|500000)$/][inside("MM")]
@@ -7216,7 +7216,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Myanmar"
                 # throwError:tr("Invalid voltage value for this country (Myanmar)")
                 # suggestAlternative:"11000/20000/33000/66000/110000/132000/230000/500000"
-                err.append({'class': 140, 'subclass': 1848252895, 'text': mapcss.tr('Invalid voltage value for this country (Myanmar)')})
+                err.append({'class': 7040141, 'subclass': 1848252895, 'text': mapcss.tr('Invalid voltage value for this country (Myanmar)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|19000|22000|33000|66000|132000|220000|330000|350000|400000)$/][inside("NA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|19000|22000|33000|66000|132000|220000|330000|350000|400000)$/][inside("NA")]
@@ -7238,7 +7238,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Namibia"
                 # throwError:tr("Invalid voltage value for this country (Namibia)")
                 # suggestAlternative:"11000/19000/22000/33000/66000/132000/220000/330000/350000/400000"
-                err.append({'class': 141, 'subclass': 1347128652, 'text': mapcss.tr('Invalid voltage value for this country (Namibia)')})
+                err.append({'class': 7040142, 'subclass': 1347128652, 'text': mapcss.tr('Invalid voltage value for this country (Namibia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|132000|220000|400000)$/][inside("NP")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(33000|66000|132000|220000|400000)$/][inside("NP")]
@@ -7260,7 +7260,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Nepal"
                 # throwError:tr("Invalid voltage value for this country (Nepal)")
                 # suggestAlternative:"33000/66000/132000/220000/400000"
-                err.append({'class': 142, 'subclass': 959943805, 'text': mapcss.tr('Invalid voltage value for this country (Nepal)')})
+                err.append({'class': 7040143, 'subclass': 959943805, 'text': mapcss.tr('Invalid voltage value for this country (Nepal)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(50000|66000|110000|220000)$/][inside("NZ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(50000|66000|110000|220000)$/][inside("NZ")]
@@ -7282,7 +7282,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/New_Zealand"
                 # throwError:tr("Invalid voltage value for this country (New Zealand)")
                 # suggestAlternative:"50000/66000/110000/220000"
-                err.append({'class': 143, 'subclass': 1522859127, 'text': mapcss.tr('Invalid voltage value for this country (New Zealand)')})
+                err.append({'class': 7040144, 'subclass': 1522859127, 'text': mapcss.tr('Invalid voltage value for this country (New Zealand)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000)$/][inside("NI")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000)$/][inside("NI")]
@@ -7304,7 +7304,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Nicaragua"
                 # throwError:tr("Invalid voltage value for this country (Nicaragua)")
                 # suggestAlternative:"69000/138000/230000"
-                err.append({'class': 144, 'subclass': 1504855679, 'text': mapcss.tr('Invalid voltage value for this country (Nicaragua)')})
+                err.append({'class': 7040145, 'subclass': 1504855679, 'text': mapcss.tr('Invalid voltage value for this country (Nicaragua)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("NE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("NE")]
@@ -7326,7 +7326,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Niger"
                 # throwError:tr("Invalid voltage value for this country (Niger)")
                 # suggestAlternative:"66000/132000"
-                err.append({'class': 145, 'subclass': 1178537524, 'text': mapcss.tr('Invalid voltage value for this country (Niger)')})
+                err.append({'class': 7040146, 'subclass': 1178537524, 'text': mapcss.tr('Invalid voltage value for this country (Niger)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|330000)$/][inside("NG")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|330000)$/][inside("NG")]
@@ -7348,7 +7348,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Nigeria"
                 # throwError:tr("Invalid voltage value for this country (Nigeria)")
                 # suggestAlternative:"11000/33000/132000/330000"
-                err.append({'class': 146, 'subclass': 2059986833, 'text': mapcss.tr('Invalid voltage value for this country (Nigeria)')})
+                err.append({'class': 7040147, 'subclass': 2059986833, 'text': mapcss.tr('Invalid voltage value for this country (Nigeria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|66000|110000|154000|220000)$/][inside("KP")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|66000|110000|154000|220000)$/][inside("KP")]
@@ -7370,7 +7370,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/North_Korea"
                 # throwError:tr("Invalid voltage value for this country (North Korea)")
                 # suggestAlternative:"11000/66000/110000/154000/220000"
-                err.append({'class': 147, 'subclass': 1497515400, 'text': mapcss.tr('Invalid voltage value for this country (North Korea)')})
+                err.append({'class': 7040148, 'subclass': 1497515400, 'text': mapcss.tr('Invalid voltage value for this country (North Korea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000|400000)$/][inside("MK")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(110000|220000|400000)$/][inside("MK")]
@@ -7392,7 +7392,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/North_Macedonia"
                 # throwError:tr("Invalid voltage value for this country (North Macedonia)")
                 # suggestAlternative:"110000/220000/400000"
-                err.append({'class': 148, 'subclass': 1014401964, 'text': mapcss.tr('Invalid voltage value for this country (North Macedonia)')})
+                err.append({'class': 7040149, 'subclass': 1014401964, 'text': mapcss.tr('Invalid voltage value for this country (North Macedonia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|12000|13000|15000|16000|17000|20000|22000|24000|25000|33000|45000|47000|50000|55000|60000|66000|80000|90000|100000|110000|132000|150000|220000|250000|300000|350000|400000|420000|450000|500000|515000|525000|825000)$/][inside("NO")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|12000|13000|15000|16000|17000|20000|22000|24000|25000|33000|45000|47000|50000|55000|60000|66000|80000|90000|100000|110000|132000|150000|220000|250000|300000|350000|400000|420000|450000|500000|515000|525000|825000)$/][inside("NO")]
@@ -7414,7 +7414,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Norway"
                 # throwError:tr("Invalid voltage value for this country (Norway)")
                 # suggestAlternative:"11000/12000/13000/15000/16000/17000/20000/22000/24000/25000/33000/45000/47000/50000/55000/60000/66000/80000/90000/100000/110000/132000/150000/220000/250000/300000/350000/400000/420000/450000/500000/515000/525000/825000"
-                err.append({'class': 149, 'subclass': 153360454, 'text': mapcss.tr('Invalid voltage value for this country (Norway)')})
+                err.append({'class': 7040150, 'subclass': 153360454, 'text': mapcss.tr('Invalid voltage value for this country (Norway)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000|220000|400000)$/][inside("OM")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(132000|220000|400000)$/][inside("OM")]
@@ -7436,7 +7436,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Oman"
                 # throwError:tr("Invalid voltage value for this country (Oman)")
                 # suggestAlternative:"132000/220000/400000"
-                err.append({'class': 150, 'subclass': 824908458, 'text': mapcss.tr('Invalid voltage value for this country (Oman)')})
+                err.append({'class': 7040151, 'subclass': 824908458, 'text': mapcss.tr('Invalid voltage value for this country (Oman)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|110000|132000|220000|230000|500000|660000)$/][inside("PK")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|110000|132000|220000|230000|500000|660000)$/][inside("PK")]
@@ -7458,7 +7458,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Pakistan"
                 # throwError:tr("Invalid voltage value for this country (Pakistan)")
                 # suggestAlternative:"11000/33000/66000/110000/132000/220000/230000/500000/660000"
-                err.append({'class': 151, 'subclass': 362138330, 'text': mapcss.tr('Invalid voltage value for this country (Pakistan)')})
+                err.append({'class': 7040152, 'subclass': 362138330, 'text': mapcss.tr('Invalid voltage value for this country (Pakistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("PA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("PA")]
@@ -7480,7 +7480,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Panama"
                 # throwError:tr("Invalid voltage value for this country (Panama)")
                 # suggestAlternative:"115000/230000"
-                err.append({'class': 152, 'subclass': 1661047835, 'text': mapcss.tr('Invalid voltage value for this country (Panama)')})
+                err.append({'class': 7040153, 'subclass': 1661047835, 'text': mapcss.tr('Invalid voltage value for this country (Panama)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|66000|132000)$/][inside("PG")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|66000|132000)$/][inside("PG")]
@@ -7502,7 +7502,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Papua_New_Guinea"
                 # throwError:tr("Invalid voltage value for this country (Papua New Guinea)")
                 # suggestAlternative:"11000/66000/132000"
-                err.append({'class': 153, 'subclass': 1863700589, 'text': mapcss.tr('Invalid voltage value for this country (Papua New Guinea)')})
+                err.append({'class': 7040154, 'subclass': 1863700589, 'text': mapcss.tr('Invalid voltage value for this country (Papua New Guinea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(12000|34500|66000|69000|132000|138000|220000|500000)$/][inside("PY")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(12000|34500|66000|69000|132000|138000|220000|500000)$/][inside("PY")]
@@ -7524,7 +7524,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Paraguay"
                 # throwError:tr("Invalid voltage value for this country (Paraguay)")
                 # suggestAlternative:"12000/34500/66000/69000/132000/138000/220000/500000"
-                err.append({'class': 154, 'subclass': 1355313272, 'text': mapcss.tr('Invalid voltage value for this country (Paraguay)')})
+                err.append({'class': 7040155, 'subclass': 1355313272, 'text': mapcss.tr('Invalid voltage value for this country (Paraguay)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|22000|23000|25000|27000|27500|33000|35000|50000|63000|66000|100000|110000|132000|160000|220000|230000|275000|320000|330000|400000|500000|544000|660000|750000|800000|1000000|1100000|1150000|2200001|2200002|22000011)$/][inside("CN")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(10500|11000|22000|23000|25000|27000|27500|33000|35000|50000|63000|66000|100000|110000|132000|160000|220000|230000|275000|320000|330000|400000|500000|544000|660000|750000|800000|1000000|1100000|1150000|2200001|2200002|22000011)$/][inside("CN")]
@@ -7546,7 +7546,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/China"
                 # throwError:tr("Invalid voltage value for this country (People's Republic of China)")
                 # suggestAlternative:"10500/11000/22000/23000/25000/27000/27500/33000/35000/50000/63000/66000/100000/110000/132000/160000/220000/230000/275000/320000/330000/400000/500000/544000/660000/750000/800000/1000000/1100000/1150000/2200001/2200002/22000011"
-                err.append({'class': 155, 'subclass': 164611252, 'text': mapcss.tr('Invalid voltage value for this country (People\'s Republic of China)')})
+                err.append({'class': 7040156, 'subclass': 164611252, 'text': mapcss.tr('Invalid voltage value for this country (People\'s Republic of China)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|33000|60000|66000|138000|220000|230000|500000)$/][inside("PE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(30000|33000|60000|66000|138000|220000|230000|500000)$/][inside("PE")]
@@ -7568,7 +7568,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Peru"
                 # throwError:tr("Invalid voltage value for this country (Peru)")
                 # suggestAlternative:"30000/33000/60000/66000/138000/220000/230000/500000"
-                err.append({'class': 156, 'subclass': 325939259, 'text': mapcss.tr('Invalid voltage value for this country (Peru)')})
+                err.append({'class': 7040157, 'subclass': 325939259, 'text': mapcss.tr('Invalid voltage value for this country (Peru)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13200|13800|20000|23000|30000|34500|60000|69000|70000|115000|138000|220000|230000|345000|350000|500000)$/][inside("PH")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(13200|13800|20000|23000|30000|34500|60000|69000|70000|115000|138000|220000|230000|345000|350000|500000)$/][inside("PH")]
@@ -7590,7 +7590,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Philippines"
                 # throwError:tr("Invalid voltage value for this country (Philippines)")
                 # suggestAlternative:"13200/13800/20000/23000/30000/34500/60000/69000/70000/115000/138000/220000/230000/345000/350000/500000"
-                err.append({'class': 157, 'subclass': 443438914, 'text': mapcss.tr('Invalid voltage value for this country (Philippines)')})
+                err.append({'class': 7040158, 'subclass': 443438914, 'text': mapcss.tr('Invalid voltage value for this country (Philippines)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|20000|21000|22000|25000|27000|30000|100000|110000|200000|220000|400000|450000)$/][inside("PL")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|15000|20000|21000|22000|25000|27000|30000|100000|110000|200000|220000|400000|450000)$/][inside("PL")]
@@ -7612,7 +7612,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Poland"
                 # throwError:tr("Invalid voltage value for this country (Poland)")
                 # suggestAlternative:"11000/15000/20000/21000/22000/25000/27000/30000/100000/110000/200000/220000/400000/450000"
-                err.append({'class': 158, 'subclass': 883578895, 'text': mapcss.tr('Invalid voltage value for this country (Poland)')})
+                err.append({'class': 7040159, 'subclass': 883578895, 'text': mapcss.tr('Invalid voltage value for this country (Poland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|18000|20000|25000|30000|50000|60000|130000|150000|220000|400000)$/][inside("PT")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|15000|18000|20000|25000|30000|50000|60000|130000|150000|220000|400000)$/][inside("PT")]
@@ -7634,7 +7634,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Portugal"
                 # throwError:tr("Invalid voltage value for this country (Portugal)")
                 # suggestAlternative:"11000/15000/18000/20000/25000/30000/50000/60000/130000/150000/220000/400000"
-                err.append({'class': 159, 'subclass': 269912561, 'text': mapcss.tr('Invalid voltage value for this country (Portugal)')})
+                err.append({'class': 7040160, 'subclass': 269912561, 'text': mapcss.tr('Invalid voltage value for this country (Portugal)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(21000|66000|110000|132000|220000|400000)$/][inside("QA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(21000|66000|110000|132000|220000|400000)$/][inside("QA")]
@@ -7656,7 +7656,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Qatar"
                 # throwError:tr("Invalid voltage value for this country (Qatar)")
                 # suggestAlternative:"21000/66000/110000/132000/220000/400000"
-                err.append({'class': 160, 'subclass': 867644688, 'text': mapcss.tr('Invalid voltage value for this country (Qatar)')})
+                err.append({'class': 7040161, 'subclass': 867644688, 'text': mapcss.tr('Invalid voltage value for this country (Qatar)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000)$/][inside("CG")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(110000|220000)$/][inside("CG")]
@@ -7678,7 +7678,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Republic_of_the_Congo"
                 # throwError:tr("Invalid voltage value for this country (Republic of the Congo)")
                 # suggestAlternative:"110000/220000"
-                err.append({'class': 161, 'subclass': 829007104, 'text': mapcss.tr('Invalid voltage value for this country (Republic of the Congo)')})
+                err.append({'class': 7040162, 'subclass': 829007104, 'text': mapcss.tr('Invalid voltage value for this country (Republic of the Congo)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|38000|55000|110000|220000|380000|400000)$/][inside("RO")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|25000|38000|55000|110000|220000|380000|400000)$/][inside("RO")]
@@ -7700,7 +7700,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Romania"
                 # throwError:tr("Invalid voltage value for this country (Romania)")
                 # suggestAlternative:"20000/25000/38000/55000/110000/220000/380000/400000"
-                err.append({'class': 162, 'subclass': 2043848278, 'text': mapcss.tr('Invalid voltage value for this country (Romania)')})
+                err.append({'class': 7040163, 'subclass': 2043848278, 'text': mapcss.tr('Invalid voltage value for this country (Romania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|15000|16000|20000|30000|35000|60000|66000|100000|110000|138000|150000|154000|220000|330000|350000|400000|500000|750000|800000|1100000)$/][inside("RU")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(10500|15000|16000|20000|30000|35000|60000|66000|100000|110000|138000|150000|154000|220000|330000|350000|400000|500000|750000|800000|1100000)$/][inside("RU")]
@@ -7722,7 +7722,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Russia"
                 # throwError:tr("Invalid voltage value for this country (Russia)")
                 # suggestAlternative:"10500/15000/16000/20000/30000/35000/60000/66000/100000/110000/138000/150000/154000/220000/330000/350000/400000/500000/750000/800000/1100000"
-                err.append({'class': 163, 'subclass': 646214500, 'text': mapcss.tr('Invalid voltage value for this country (Russia)')})
+                err.append({'class': 7040164, 'subclass': 646214500, 'text': mapcss.tr('Invalid voltage value for this country (Russia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(70000|110000|220000)$/][inside("RW")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(70000|110000|220000)$/][inside("RW")]
@@ -7744,7 +7744,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Rwanda"
                 # throwError:tr("Invalid voltage value for this country (Rwanda)")
                 # suggestAlternative:"70000/110000/220000"
-                err.append({'class': 164, 'subclass': 1619719956, 'text': mapcss.tr('Invalid voltage value for this country (Rwanda)')})
+                err.append({'class': 7040165, 'subclass': 1619719956, 'text': mapcss.tr('Invalid voltage value for this country (Rwanda)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("SM")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("SM")]
@@ -7766,7 +7766,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/San_Marino"
                 # throwError:tr("Invalid voltage value for this country (San Marino)")
                 # suggestAlternative:"132000"
-                err.append({'class': 165, 'subclass': 338700708, 'text': mapcss.tr('Invalid voltage value for this country (San Marino)')})
+                err.append({'class': 7040166, 'subclass': 338700708, 'text': mapcss.tr('Invalid voltage value for this country (San Marino)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(25000|33000|110000|115000|132000|230000|380000|400000)$/][inside("SA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(25000|33000|110000|115000|132000|230000|380000|400000)$/][inside("SA")]
@@ -7788,7 +7788,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Saudi_Arabia"
                 # throwError:tr("Invalid voltage value for this country (Saudi Arabia)")
                 # suggestAlternative:"25000/33000/110000/115000/132000/230000/380000/400000"
-                err.append({'class': 166, 'subclass': 1238570246, 'text': mapcss.tr('Invalid voltage value for this country (Saudi Arabia)')})
+                err.append({'class': 7040167, 'subclass': 1238570246, 'text': mapcss.tr('Invalid voltage value for this country (Saudi Arabia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(90000|225000)$/][inside("SN")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(90000|225000)$/][inside("SN")]
@@ -7810,7 +7810,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Senegal"
                 # throwError:tr("Invalid voltage value for this country (Senegal)")
                 # suggestAlternative:"90000/225000"
-                err.append({'class': 167, 'subclass': 1315753992, 'text': mapcss.tr('Invalid voltage value for this country (Senegal)')})
+                err.append({'class': 7040168, 'subclass': 1315753992, 'text': mapcss.tr('Invalid voltage value for this country (Senegal)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|30000|35000|110000|220000|380000|400000)$/][inside("RS")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|25000|30000|35000|110000|220000|380000|400000)$/][inside("RS")]
@@ -7832,7 +7832,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Serbia"
                 # throwError:tr("Invalid voltage value for this country (Serbia)")
                 # suggestAlternative:"20000/25000/30000/35000/110000/220000/380000/400000"
-                err.append({'class': 168, 'subclass': 597101799, 'text': mapcss.tr('Invalid voltage value for this country (Serbia)')})
+                err.append({'class': 7040169, 'subclass': 597101799, 'text': mapcss.tr('Invalid voltage value for this country (Serbia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000|225000)$/][inside("SL")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(161000|225000)$/][inside("SL")]
@@ -7854,7 +7854,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sierra_Leone"
                 # throwError:tr("Invalid voltage value for this country (Sierra Leone)")
                 # suggestAlternative:"161000/225000"
-                err.append({'class': 169, 'subclass': 459869721, 'text': mapcss.tr('Invalid voltage value for this country (Sierra Leone)')})
+                err.append({'class': 7040170, 'subclass': 459869721, 'text': mapcss.tr('Invalid voltage value for this country (Sierra Leone)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(230000)$/][inside("SG")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(230000)$/][inside("SG")]
@@ -7876,7 +7876,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Singapore"
                 # throwError:tr("Invalid voltage value for this country (Singapore)")
                 # suggestAlternative:"230000"
-                err.append({'class': 170, 'subclass': 165582531, 'text': mapcss.tr('Invalid voltage value for this country (Singapore)')})
+                err.append({'class': 7040171, 'subclass': 165582531, 'text': mapcss.tr('Invalid voltage value for this country (Singapore)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|110000|220000|400000)$/][inside("SK")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(22000|110000|220000|400000)$/][inside("SK")]
@@ -7898,7 +7898,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Slovakia"
                 # throwError:tr("Invalid voltage value for this country (Slovakia)")
                 # suggestAlternative:"22000/110000/220000/400000"
-                err.append({'class': 171, 'subclass': 311372145, 'text': mapcss.tr('Invalid voltage value for this country (Slovakia)')})
+                err.append({'class': 7040172, 'subclass': 311372145, 'text': mapcss.tr('Invalid voltage value for this country (Slovakia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|35000|100000|110000|220000|400000)$/][inside("SI")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|20000|35000|100000|110000|220000|400000)$/][inside("SI")]
@@ -7920,7 +7920,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Slovenia"
                 # throwError:tr("Invalid voltage value for this country (Slovenia)")
                 # suggestAlternative:"15000/20000/35000/100000/110000/220000/400000"
-                err.append({'class': 172, 'subclass': 2005629847, 'text': mapcss.tr('Invalid voltage value for this country (Slovenia)')})
+                err.append({'class': 7040173, 'subclass': 2005629847, 'text': mapcss.tr('Invalid voltage value for this country (Slovenia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|20000|22000|33000|44000|66000|88000|110000|132000|220000|275000|380000|400000|533000|765000)$/][inside("ZA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|20000|22000|33000|44000|66000|88000|110000|132000|220000|275000|380000|400000|533000|765000)$/][inside("ZA")]
@@ -7942,7 +7942,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/South_Africa"
                 # throwError:tr("Invalid voltage value for this country (South Africa)")
                 # suggestAlternative:"11000/20000/22000/33000/44000/66000/88000/110000/132000/220000/275000/380000/400000/533000/765000"
-                err.append({'class': 173, 'subclass': 119928875, 'text': mapcss.tr('Invalid voltage value for this country (South Africa)')})
+                err.append({'class': 7040174, 'subclass': 119928875, 'text': mapcss.tr('Invalid voltage value for this country (South Africa)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|22900|145000|150000|154000|180000|250000|345000|354000|380000|765000)$/][inside("KR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|22900|145000|150000|154000|180000|250000|345000|354000|380000|765000)$/][inside("KR")]
@@ -7964,7 +7964,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/South_Korea"
                 # throwError:tr("Invalid voltage value for this country (South Korea)")
                 # suggestAlternative:"15000/22900/145000/150000/154000/180000/250000/345000/354000/380000/765000"
-                err.append({'class': 174, 'subclass': 1828861992, 'text': mapcss.tr('Invalid voltage value for this country (South Korea)')})
+                err.append({'class': 7040175, 'subclass': 1828861992, 'text': mapcss.tr('Invalid voltage value for this country (South Korea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(220000)$/][inside("SS")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(220000)$/][inside("SS")]
@@ -7986,7 +7986,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/South_Sudan"
                 # throwError:tr("Invalid voltage value for this country (South Sudan)")
                 # suggestAlternative:"220000"
-                err.append({'class': 175, 'subclass': 1271280855, 'text': mapcss.tr('Invalid voltage value for this country (South Sudan)')})
+                err.append({'class': 7040176, 'subclass': 1271280855, 'text': mapcss.tr('Invalid voltage value for this country (South Sudan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(12000|13000|13200|15000|17000|20000|22000|24000|25000|30000|33000|35000|45000|50000|55000|60000|65000|66000|66600|100000|110000|120000|130000|132000|138000|150000|200000|220000|225000|240000|250000|320000|400000)$/][inside("ES")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(12000|13000|13200|15000|17000|20000|22000|24000|25000|30000|33000|35000|45000|50000|55000|60000|65000|66000|66600|100000|110000|120000|130000|132000|138000|150000|200000|220000|225000|240000|250000|320000|400000)$/][inside("ES")]
@@ -8008,7 +8008,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Spain"
                 # throwError:tr("Invalid voltage value for this country (Spain)")
                 # suggestAlternative:"12000/13000/13200/15000/17000/20000/22000/24000/25000/30000/33000/35000/45000/50000/55000/60000/65000/66000/66600/100000/110000/120000/130000/132000/138000/150000/200000/220000/225000/240000/250000/320000/400000"
-                err.append({'class': 176, 'subclass': 20128858, 'text': mapcss.tr('Invalid voltage value for this country (Spain)')})
+                err.append({'class': 7040177, 'subclass': 20128858, 'text': mapcss.tr('Invalid voltage value for this country (Spain)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|220000)$/][inside("LK")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|220000)$/][inside("LK")]
@@ -8030,7 +8030,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sri_Lanka"
                 # throwError:tr("Invalid voltage value for this country (Sri Lanka)")
                 # suggestAlternative:"11000/33000/132000/220000"
-                err.append({'class': 177, 'subclass': 1808712158, 'text': mapcss.tr('Invalid voltage value for this country (Sri Lanka)')})
+                err.append({'class': 7040178, 'subclass': 1808712158, 'text': mapcss.tr('Invalid voltage value for this country (Sri Lanka)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000)$/][inside("PS")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(161000)$/][inside("PS")]
@@ -8052,7 +8052,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/State_of_Palestine"
                 # throwError:tr("Invalid voltage value for this country (State of Palestine)")
                 # suggestAlternative:"161000"
-                err.append({'class': 178, 'subclass': 1737101747, 'text': mapcss.tr('Invalid voltage value for this country (State of Palestine)')})
+                err.append({'class': 7040179, 'subclass': 1737101747, 'text': mapcss.tr('Invalid voltage value for this country (State of Palestine)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|110000|220000|500000)$/][inside("SD")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|110000|220000|500000)$/][inside("SD")]
@@ -8074,7 +8074,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sudan"
                 # throwError:tr("Invalid voltage value for this country (Sudan)")
                 # suggestAlternative:"66000/110000/220000/500000"
-                err.append({'class': 179, 'subclass': 820201008, 'text': mapcss.tr('Invalid voltage value for this country (Sudan)')})
+                err.append({'class': 7040180, 'subclass': 820201008, 'text': mapcss.tr('Invalid voltage value for this country (Sudan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000)$/][inside("SR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(161000)$/][inside("SR")]
@@ -8096,7 +8096,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Suriname"
                 # throwError:tr("Invalid voltage value for this country (Suriname)")
                 # suggestAlternative:"161000"
-                err.append({'class': 180, 'subclass': 548730987, 'text': mapcss.tr('Invalid voltage value for this country (Suriname)')})
+                err.append({'class': 7040181, 'subclass': 548730987, 'text': mapcss.tr('Invalid voltage value for this country (Suriname)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|12000|15000|20000|22000|24000|30000|36000|40000|45000|50000|52000|55000|60000|66000|70000|72500|77000|80000|110000|130000|132000|138000|145000|150000|160000|170000|220000|230000|236000|285000|300000|400000|412000|420000|450000|500000)$/][inside("SE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|12000|15000|20000|22000|24000|30000|36000|40000|45000|50000|52000|55000|60000|66000|70000|72500|77000|80000|110000|130000|132000|138000|145000|150000|160000|170000|220000|230000|236000|285000|300000|400000|412000|420000|450000|500000)$/][inside("SE")]
@@ -8118,7 +8118,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sweden"
                 # throwError:tr("Invalid voltage value for this country (Sweden)")
                 # suggestAlternative:"11000/12000/15000/20000/22000/24000/30000/36000/40000/45000/50000/52000/55000/60000/66000/70000/72500/77000/80000/110000/130000/132000/138000/145000/150000/160000/170000/220000/230000/236000/285000/300000/400000/412000/420000/450000/500000"
-                err.append({'class': 181, 'subclass': 1981434574, 'text': mapcss.tr('Invalid voltage value for this country (Sweden)')})
+                err.append({'class': 7040182, 'subclass': 1981434574, 'text': mapcss.tr('Invalid voltage value for this country (Sweden)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|13000|15000|15500|16000|17000|18000|20000|21000|22000|23000|25000|50000|60000|63000|65000|66000|110000|125000|130000|132000|138000|145000|150000|220000|222000|225000|380000|400000)$/][inside("CH")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|13000|15000|15500|16000|17000|18000|20000|21000|22000|23000|25000|50000|60000|63000|65000|66000|110000|125000|130000|132000|138000|145000|150000|220000|222000|225000|380000|400000)$/][inside("CH")]
@@ -8140,7 +8140,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Switzerland"
                 # throwError:tr("Invalid voltage value for this country (Switzerland)")
                 # suggestAlternative:"11000/13000/15000/15500/16000/17000/18000/20000/21000/22000/23000/25000/50000/60000/63000/65000/66000/110000/125000/130000/132000/138000/145000/150000/220000/222000/225000/380000/400000"
-                err.append({'class': 182, 'subclass': 1395673404, 'text': mapcss.tr('Invalid voltage value for this country (Switzerland)')})
+                err.append({'class': 7040183, 'subclass': 1395673404, 'text': mapcss.tr('Invalid voltage value for this country (Switzerland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(23000|66000|154000|161000|220000|230000|380000|400000)$/][inside("SY")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(23000|66000|154000|161000|220000|230000|380000|400000)$/][inside("SY")]
@@ -8162,7 +8162,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Syria"
                 # throwError:tr("Invalid voltage value for this country (Syria)")
                 # suggestAlternative:"23000/66000/154000/161000/220000/230000/380000/400000"
-                err.append({'class': 183, 'subclass': 1590477629, 'text': mapcss.tr('Invalid voltage value for this country (Syria)')})
+                err.append({'class': 7040184, 'subclass': 1590477629, 'text': mapcss.tr('Invalid voltage value for this country (Syria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|161000|345000|690000)$/][inside("TW")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(69000|161000|345000|690000)$/][inside("TW")]
@@ -8184,7 +8184,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Taiwan"
                 # throwError:tr("Invalid voltage value for this country (Taiwan)")
                 # suggestAlternative:"69000/161000/345000/690000"
-                err.append({'class': 184, 'subclass': 964174634, 'text': mapcss.tr('Invalid voltage value for this country (Taiwan)')})
+                err.append({'class': 7040185, 'subclass': 964174634, 'text': mapcss.tr('Invalid voltage value for this country (Taiwan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|138000|220000|500000)$/][inside("TJ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(35000|110000|138000|220000|500000)$/][inside("TJ")]
@@ -8206,7 +8206,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Tajikistan"
                 # throwError:tr("Invalid voltage value for this country (Tajikistan)")
                 # suggestAlternative:"35000/110000/138000/220000/500000"
-                err.append({'class': 185, 'subclass': 1073092647, 'text': mapcss.tr('Invalid voltage value for this country (Tajikistan)')})
+                err.append({'class': 7040186, 'subclass': 1073092647, 'text': mapcss.tr('Invalid voltage value for this country (Tajikistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|132000|220000|222000|400000)$/][inside("TZ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|132000|220000|222000|400000)$/][inside("TZ")]
@@ -8228,7 +8228,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Tanzania"
                 # throwError:tr("Invalid voltage value for this country (Tanzania)")
                 # suggestAlternative:"11000/33000/66000/132000/220000/222000/400000"
-                err.append({'class': 186, 'subclass': 1645606820, 'text': mapcss.tr('Invalid voltage value for this country (Tanzania)')})
+                err.append({'class': 7040187, 'subclass': 1645606820, 'text': mapcss.tr('Invalid voltage value for this country (Tanzania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|50000|69000|115000|132000|230000|300000|500000)$/][inside("TH")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(22000|50000|69000|115000|132000|230000|300000|500000)$/][inside("TH")]
@@ -8250,7 +8250,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Thailand"
                 # throwError:tr("Invalid voltage value for this country (Thailand)")
                 # suggestAlternative:"22000/50000/69000/115000/132000/230000/300000/500000"
-                err.append({'class': 187, 'subclass': 1687185169, 'text': mapcss.tr('Invalid voltage value for this country (Thailand)')})
+                err.append({'class': 7040188, 'subclass': 1687185169, 'text': mapcss.tr('Invalid voltage value for this country (Thailand)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("BS")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("BS")]
@@ -8272,7 +8272,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/The_Bahamas"
                 # throwError:tr("Invalid voltage value for this country (The Bahamas)")
                 # suggestAlternative:"132000"
-                err.append({'class': 188, 'subclass': 584949651, 'text': mapcss.tr('Invalid voltage value for this country (The Bahamas)')})
+                err.append({'class': 7040189, 'subclass': 584949651, 'text': mapcss.tr('Invalid voltage value for this country (The Bahamas)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(225000)$/][inside("GM")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(225000)$/][inside("GM")]
@@ -8294,7 +8294,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/The_Gambia"
                 # throwError:tr("Invalid voltage value for this country (The Gambia)")
                 # suggestAlternative:"225000"
-                err.append({'class': 189, 'subclass': 441852858, 'text': mapcss.tr('Invalid voltage value for this country (The Gambia)')})
+                err.append({'class': 7040190, 'subclass': 441852858, 'text': mapcss.tr('Invalid voltage value for this country (The Gambia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(150000)$/][inside("TL")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(150000)$/][inside("TL")]
@@ -8316,7 +8316,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Timor-Leste"
                 # throwError:tr("Invalid voltage value for this country (Timor-Leste)")
                 # suggestAlternative:"150000"
-                err.append({'class': 190, 'subclass': 922035571, 'text': mapcss.tr('Invalid voltage value for this country (Timor-Leste)')})
+                err.append({'class': 7040191, 'subclass': 922035571, 'text': mapcss.tr('Invalid voltage value for this country (Timor-Leste)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000|330000)$/][inside("TG")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(161000|330000)$/][inside("TG")]
@@ -8338,7 +8338,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Togo"
                 # throwError:tr("Invalid voltage value for this country (Togo)")
                 # suggestAlternative:"161000/330000"
-                err.append({'class': 191, 'subclass': 1821174585, 'text': mapcss.tr('Invalid voltage value for this country (Togo)')})
+                err.append({'class': 7040192, 'subclass': 1821174585, 'text': mapcss.tr('Invalid voltage value for this country (Togo)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000)$/][inside("TT")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000)$/][inside("TT")]
@@ -8360,7 +8360,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Trinidad_and_Tobago"
                 # throwError:tr("Invalid voltage value for this country (Trinidad and Tobago)")
                 # suggestAlternative:"66000/132000/220000"
-                err.append({'class': 192, 'subclass': 1883347853, 'text': mapcss.tr('Invalid voltage value for this country (Trinidad and Tobago)')})
+                err.append({'class': 7040193, 'subclass': 1883347853, 'text': mapcss.tr('Invalid voltage value for this country (Trinidad and Tobago)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|22500|30000|33000|90000|150000|220000|225000|400000)$/][inside("TN")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|22500|30000|33000|90000|150000|220000|225000|400000)$/][inside("TN")]
@@ -8382,7 +8382,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Tunisia"
                 # throwError:tr("Invalid voltage value for this country (Tunisia)")
                 # suggestAlternative:"15000/22500/30000/33000/90000/150000/220000/225000/400000"
-                err.append({'class': 193, 'subclass': 337836676, 'text': mapcss.tr('Invalid voltage value for this country (Tunisia)')})
+                err.append({'class': 7040194, 'subclass': 337836676, 'text': mapcss.tr('Invalid voltage value for this country (Tunisia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|31500|34000|34500|35000|36000|66000|150000|154000|170000|220000|345005|380000|400000|1000000)$/][inside("TR")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|25000|31500|34000|34500|35000|36000|66000|150000|154000|170000|220000|345005|380000|400000|1000000)$/][inside("TR")]
@@ -8404,7 +8404,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Turkey"
                 # throwError:tr("Invalid voltage value for this country (Turkey)")
                 # suggestAlternative:"20000/25000/31500/34000/34500/35000/36000/66000/150000/154000/170000/220000/345005/380000/400000/1000000"
-                err.append({'class': 194, 'subclass': 522807230, 'text': mapcss.tr('Invalid voltage value for this country (Turkey)')})
+                err.append({'class': 7040195, 'subclass': 522807230, 'text': mapcss.tr('Invalid voltage value for this country (Turkey)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000|230000|500000)$/][inside("TM")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(110000|220000|230000|500000)$/][inside("TM")]
@@ -8426,7 +8426,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Turkmenistan"
                 # throwError:tr("Invalid voltage value for this country (Turkmenistan)")
                 # suggestAlternative:"110000/220000/230000/500000"
-                err.append({'class': 195, 'subclass': 1969078473, 'text': mapcss.tr('Invalid voltage value for this country (Turkmenistan)')})
+                err.append({'class': 7040196, 'subclass': 1969078473, 'text': mapcss.tr('Invalid voltage value for this country (Turkmenistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|33000|66000|132000|220000|400000)$/][inside("UG")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|15000|33000|66000|132000|220000|400000)$/][inside("UG")]
@@ -8448,7 +8448,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Uganda"
                 # throwError:tr("Invalid voltage value for this country (Uganda)")
                 # suggestAlternative:"11000/15000/33000/66000/132000/220000/400000"
-                err.append({'class': 196, 'subclass': 1496515740, 'text': mapcss.tr('Invalid voltage value for this country (Uganda)')})
+                err.append({'class': 7040197, 'subclass': 1496515740, 'text': mapcss.tr('Invalid voltage value for this country (Uganda)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|35000|110000|150000|154000|220000|330000|400000|500000|750000|800000)$/][inside("UA")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(15000|35000|110000|150000|154000|220000|330000|400000|500000|750000|800000)$/][inside("UA")]
@@ -8470,7 +8470,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ukraine"
                 # throwError:tr("Invalid voltage value for this country (Ukraine)")
                 # suggestAlternative:"15000/35000/110000/150000/154000/220000/330000/400000/500000/750000/800000"
-                err.append({'class': 197, 'subclass': 598128027, 'text': mapcss.tr('Invalid voltage value for this country (Ukraine)')})
+                err.append({'class': 7040198, 'subclass': 598128027, 'text': mapcss.tr('Invalid voltage value for this country (Ukraine)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|132000|220000|400000)$/][inside("AE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(33000|132000|220000|400000)$/][inside("AE")]
@@ -8492,7 +8492,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/United_Arab_Emirates"
                 # throwError:tr("Invalid voltage value for this country (United Arab Emirates)")
                 # suggestAlternative:"33000/132000/220000/400000"
-                err.append({'class': 198, 'subclass': 696294142, 'text': mapcss.tr('Invalid voltage value for this country (United Arab Emirates)')})
+                err.append({'class': 7040199, 'subclass': 696294142, 'text': mapcss.tr('Invalid voltage value for this country (United Arab Emirates)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|12300|13800|15000|16000|20000|22000|24000|25000|27000|32000|33000|33300|35000|36000|66000|90000|110000|132000|145000|150000|170000|200000|220000|250000|254000|270000|275000|320000|400000|450000|515000|525000|600000)$/][inside("GB")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|12300|13800|15000|16000|20000|22000|24000|25000|27000|32000|33000|33300|35000|36000|66000|90000|110000|132000|145000|150000|170000|200000|220000|250000|254000|270000|275000|320000|400000|450000|515000|525000|600000)$/][inside("GB")]
@@ -8514,7 +8514,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Great_Britain"
                 # throwError:tr("Invalid voltage value for this country (United Kingdom)")
                 # suggestAlternative:"11000/12300/13800/15000/16000/20000/22000/24000/25000/27000/32000/33000/33300/35000/36000/66000/90000/110000/132000/145000/150000/170000/200000/220000/250000/254000/270000/275000/320000/400000/450000/515000/525000/600000"
-                err.append({'class': 199, 'subclass': 89496729, 'text': mapcss.tr('Invalid voltage value for this country (United Kingdom)')})
+                err.append({'class': 7040200, 'subclass': 89496729, 'text': mapcss.tr('Invalid voltage value for this country (United Kingdom)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|11500|12000|12370|12400|12470|12500|13000|13200|13800|13860|14000|14400|14750|15000|16000|17500|18000|19920|19935|20000|20800|21000|21800|22000|23000|23900|24000|24900|24940|25000|26000|26400|27000|27600|32000|33000|34000|34500|34599|35000|35400|37500|38000|40000|41600|43000|43800|44000|46000|49000|50000|55000|57000|57100|60000|66000|69000|70000|71000|87000|88000|92000|100000|110000|111500|115000|120000|125000|130000|132000|138000|150000|160000|161000|200000|220000|230000|235000|250000|260000|276000|287000|320000|345000|400000|450000|460000|500000|690002|765000|1100000|1150003|1333000|1380000)$/][inside("US")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|11500|12000|12370|12400|12470|12500|13000|13200|13800|13860|14000|14400|14750|15000|16000|17500|18000|19920|19935|20000|20800|21000|21800|22000|23000|23900|24000|24900|24940|25000|26000|26400|27000|27600|32000|33000|34000|34500|34599|35000|35400|37500|38000|40000|41600|43000|43800|44000|46000|49000|50000|55000|57000|57100|60000|66000|69000|70000|71000|87000|88000|92000|100000|110000|111500|115000|120000|125000|130000|132000|138000|150000|160000|161000|200000|220000|230000|235000|250000|260000|276000|287000|320000|345000|400000|450000|460000|500000|690002|765000|1100000|1150003|1333000|1380000)$/][inside("US")]
@@ -8536,7 +8536,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/United_States"
                 # throwError:tr("Invalid voltage value for this country (United States)")
                 # suggestAlternative:"11000/11500/12000/12370/12400/12470/12500/13000/13200/13800/13860/14000/14400/14750/15000/16000/17500/18000/19920/19935/20000/20800/21000/21800/22000/23000/23900/24000/24900/24940/25000/26000/26400/27000/27600/32000/33000/34000/34500/34599/35000/35400/37500/38000/40000/41600/43000/43800/44000/46000/49000/50000/55000/57000/57100/60000/66000/69000/70000/71000/87000/88000/92000/100000/110000/111500/115000/120000/125000/130000/132000/138000/150000/160000/161000/200000/220000/230000/235000/250000/260000/276000/287000/320000/345000/400000/450000/460000/500000/690002/765000/1100000/1150003/1333000/1380000"
-                err.append({'class': 200, 'subclass': 897496581, 'text': mapcss.tr('Invalid voltage value for this country (United States)')})
+                err.append({'class': 7040201, 'subclass': 897496581, 'text': mapcss.tr('Invalid voltage value for this country (United States)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|31500|60000|63000|132000|150000|230000|500000)$/][inside("UY")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(30000|31500|60000|63000|132000|150000|230000|500000)$/][inside("UY")]
@@ -8558,7 +8558,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Uruguay"
                 # throwError:tr("Invalid voltage value for this country (Uruguay)")
                 # suggestAlternative:"30000/31500/60000/63000/132000/150000/230000/500000"
-                err.append({'class': 201, 'subclass': 1885514091, 'text': mapcss.tr('Invalid voltage value for this country (Uruguay)')})
+                err.append({'class': 7040202, 'subclass': 1885514091, 'text': mapcss.tr('Invalid voltage value for this country (Uruguay)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|75000|110000|220000|350000|380000|500000)$/][inside("UZ")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(35000|75000|110000|220000|350000|380000|500000)$/][inside("UZ")]
@@ -8580,7 +8580,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Uzbekistan"
                 # throwError:tr("Invalid voltage value for this country (Uzbekistan)")
                 # suggestAlternative:"35000/75000/110000/220000/350000/380000/500000"
-                err.append({'class': 202, 'subclass': 2074479605, 'text': mapcss.tr('Invalid voltage value for this country (Uzbekistan)')})
+                err.append({'class': 7040203, 'subclass': 2074479605, 'text': mapcss.tr('Invalid voltage value for this country (Uzbekistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|24000|30000|69000|115000|138000|230000|400000|765000)$/][inside("VE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(13800|24000|30000|69000|115000|138000|230000|400000|765000)$/][inside("VE")]
@@ -8602,7 +8602,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Venezuela"
                 # throwError:tr("Invalid voltage value for this country (Venezuela)")
                 # suggestAlternative:"13800/24000/30000/69000/115000/138000/230000/400000/765000"
-                err.append({'class': 203, 'subclass': 1032924847, 'text': mapcss.tr('Invalid voltage value for this country (Venezuela)')})
+                err.append({'class': 7040204, 'subclass': 1032924847, 'text': mapcss.tr('Invalid voltage value for this country (Venezuela)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|50000|110000|115000|220000|230000|500000)$/][inside("VN")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(22000|50000|110000|115000|220000|230000|500000)$/][inside("VN")]
@@ -8624,7 +8624,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Vietnam"
                 # throwError:tr("Invalid voltage value for this country (Vietnam)")
                 # suggestAlternative:"22000/50000/110000/115000/220000/230000/500000"
-                err.append({'class': 204, 'subclass': 470514553, 'text': mapcss.tr('Invalid voltage value for this country (Vietnam)')})
+                err.append({'class': 7040205, 'subclass': 470514553, 'text': mapcss.tr('Invalid voltage value for this country (Vietnam)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000|400000)$/][inside("YE")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(132000|400000)$/][inside("YE")]
@@ -8646,7 +8646,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Yemen"
                 # throwError:tr("Invalid voltage value for this country (Yemen)")
                 # suggestAlternative:"132000/400000"
-                err.append({'class': 205, 'subclass': 1523755329, 'text': mapcss.tr('Invalid voltage value for this country (Yemen)')})
+                err.append({'class': 7040206, 'subclass': 1523755329, 'text': mapcss.tr('Invalid voltage value for this country (Yemen)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|88000|132000|220000|330000)$/][inside("ZM")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|88000|132000|220000|330000)$/][inside("ZM")]
@@ -8668,7 +8668,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Zambia"
                 # throwError:tr("Invalid voltage value for this country (Zambia)")
                 # suggestAlternative:"11000/33000/66000/88000/132000/220000/330000"
-                err.append({'class': 206, 'subclass': 811195269, 'text': mapcss.tr('Invalid voltage value for this country (Zambia)')})
+                err.append({'class': 7040207, 'subclass': 811195269, 'text': mapcss.tr('Invalid voltage value for this country (Zambia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|88000|110000|132000|220000|330000|400000)$/][inside("ZW")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(33000|66000|88000|110000|132000|220000|330000|400000)$/][inside("ZW")]
@@ -8690,7 +8690,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Zimbabwe"
                 # throwError:tr("Invalid voltage value for this country (Zimbabwe)")
                 # suggestAlternative:"33000/66000/88000/110000/132000/220000/330000/400000"
-                err.append({'class': 207, 'subclass': 1641561189, 'text': mapcss.tr('Invalid voltage value for this country (Zimbabwe)')})
+                err.append({'class': 7040208, 'subclass': 1641561189, 'text': mapcss.tr('Invalid voltage value for this country (Zimbabwe)')})
 
         return err
 
@@ -8715,7 +8715,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertMatch:"relation power=cable_distribution_cabinet"
                 # assertMatch:"relation power=circuits"
                 # assertMatch:"relation power=route"
-                err.append({'class': 1, 'subclass': 36378028, 'text': mapcss.tr('Unsuitable value for power=* tag')})
+                err.append({'class': 7040002, 'subclass': 36378028, 'text': mapcss.tr('Unsuitable value for power=* tag')})
 
         # relation[type=power][!power]
         if ('type' in keys):
@@ -8731,7 +8731,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Is it a power circuit or a power line section? Add the power=* tag accordingly.")
                 # assertNoMatch:"relation type=power power=circuit"
                 # assertMatch:"relation type=power"
-                err.append({'class': 208, 'subclass': 213213626, 'text': mapcss.tr('Is it a power circuit or a power line section? Add the power=* tag accordingly.')})
+                err.append({'class': 7040209, 'subclass': 213213626, 'text': mapcss.tr('Is it a power circuit or a power line section? Add the power=* tag accordingly.')})
 
         # relation[power=circuit][topology][topology!~/^(linear|branched)$/]
         if ('power' in keys and 'topology' in keys):
@@ -8748,7 +8748,7 @@ class Josm_powerQA(PluginMapCSS):
                 # assertMatch:"relation type=power power=circuit topology=branch"
                 # assertNoMatch:"relation type=power power=circuit topology=branched"
                 # assertNoMatch:"relation type=power power=circuit"
-                err.append({'class': 209, 'subclass': 1474691630, 'text': mapcss.tr('power=circuit relations should have a topology tag with value linear or branched')})
+                err.append({'class': 7040210, 'subclass': 1474691630, 'text': mapcss.tr('power=circuit relations should have a topology tag with value linear or branched')})
 
         # relation[power=circuit][wires]
         if ('power' in keys and 'wires' in keys):
@@ -8765,7 +8765,7 @@ class Josm_powerQA(PluginMapCSS):
                 # fixRemove:"wires"
                 # assertMatch:"relation type=power power=circuit wires=4"
                 # assertNoMatch:"relation type=power power=circuit"
-                err.append({'class': 210, 'subclass': 698560024, 'text': mapcss.tr('wires tag should be on the power line and not on the circuit relation'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040211, 'subclass': 698560024, 'text': mapcss.tr('wires tag should be on the power line and not on the circuit relation'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'wires'])
                 }})
@@ -8782,7 +8782,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("The generator:source=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:source"
                 # throwError:tr("Unsuitable value for generator:source=* tag")
-                err.append({'class': 3, 'subclass': 600492584, 'text': mapcss.tr('Unsuitable value for generator:source=* tag')})
+                err.append({'class': 7040004, 'subclass': 600492584, 'text': mapcss.tr('Unsuitable value for generator:source=* tag')})
 
         # *[power=generator][generator:source=nuclear][generator:method][generator:method!~/^(fission|fusion)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -8798,7 +8798,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for nuclear generator")
                 # suggestAlternative:"fission or fusion"
                 # fixRemove:"generator:method"
-                err.append({'class': 4, 'subclass': 1513616022, 'text': mapcss.tr('Unsuitable method for nuclear generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040005, 'subclass': 1513616022, 'text': mapcss.tr('Unsuitable method for nuclear generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -8815,7 +8815,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 1445012384, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1445012384, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=wind][generator:method][generator:method!=wind_turbine]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -8830,7 +8830,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for wind generator")
                 # fixRemove:"generator:method"
-                err.append({'class': 6, 'subclass': 1104182574, 'text': mapcss.tr('Unsuitable method for wind generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040007, 'subclass': 1104182574, 'text': mapcss.tr('Unsuitable method for wind generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -8847,7 +8847,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 1021686777, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1021686777, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=hydro][generator:method][generator:method!~/^(water-storage|water-pumped-storage|run-of-the-river)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -8863,7 +8863,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for hydro generator")
                 # suggestAlternative:"water-storage, run-of-the-river or water-pumped-storage"
                 # fixRemove:"generator:method"
-                err.append({'class': 7, 'subclass': 1379042787, 'text': mapcss.tr('Unsuitable method for hydro generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040008, 'subclass': 1379042787, 'text': mapcss.tr('Unsuitable method for hydro generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -8880,7 +8880,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 1830475878, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1830475878, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=tidal][generator:method][generator:method!~/^(barrage|stream)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -8896,7 +8896,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for tidal generator")
                 # suggestAlternative:"barrage or stream"
                 # fixRemove:"generator:method"
-                err.append({'class': 8, 'subclass': 503240008, 'text': mapcss.tr('Unsuitable method for tidal generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040009, 'subclass': 503240008, 'text': mapcss.tr('Unsuitable method for tidal generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -8913,7 +8913,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 976314568, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 976314568, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=solar][generator:method][generator:method!~/^(thermal|photovoltaic)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -8929,7 +8929,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for solar generator")
                 # suggestAlternative:"thermal or photovoltaic"
                 # fixRemove:"generator:method"
-                err.append({'class': 9, 'subclass': 1095645684, 'text': mapcss.tr('Unsuitable method for solar generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040010, 'subclass': 1095645684, 'text': mapcss.tr('Unsuitable method for solar generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -8946,7 +8946,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 1457983121, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1457983121, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:source=coal][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -8960,7 +8960,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Coal generator can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for coal generator")
-                err.append({'class': 10, 'subclass': 727067352, 'text': mapcss.tr('Unsuitable method for coal generator')})
+                err.append({'class': 7040011, 'subclass': 727067352, 'text': mapcss.tr('Unsuitable method for coal generator')})
 
         # *[power=generator][generator:source=gas][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -8974,7 +8974,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Gas generator can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for gas generator")
-                err.append({'class': 11, 'subclass': 1587058630, 'text': mapcss.tr('Unsuitable method for gas generator')})
+                err.append({'class': 7040012, 'subclass': 1587058630, 'text': mapcss.tr('Unsuitable method for gas generator')})
 
         # *[power=generator][generator:source=biomass][generator:method][generator:method!~/^(combustion|gasification|anaerobic_digestion)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -8990,7 +8990,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for biomass generator")
                 # suggestAlternative:"combustion, anaerobic_digestion or gasification"
                 # fixRemove:"generator:method"
-                err.append({'class': 12, 'subclass': 1563205211, 'text': mapcss.tr('Unsuitable method for biomass generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040013, 'subclass': 1563205211, 'text': mapcss.tr('Unsuitable method for biomass generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -9007,7 +9007,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseFix:tr("Check the list of possible values for this source on the wiki and correct the `{0}` tag.","generator:method")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for biofuel generator")
-                err.append({'class': 13, 'subclass': 2056310355, 'text': mapcss.tr('Unsuitable method for biofuel generator')})
+                err.append({'class': 7040014, 'subclass': 2056310355, 'text': mapcss.tr('Unsuitable method for biofuel generator')})
 
         # *[power=generator][generator:source=biogas][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -9021,7 +9021,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseFix:tr("Check the list of possible values for this source on the wiki and correct the `{0}` tag.","generator:method")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for biogas generator")
-                err.append({'class': 14, 'subclass': 1353854094, 'text': mapcss.tr('Unsuitable method for biogas generator')})
+                err.append({'class': 7040015, 'subclass': 1353854094, 'text': mapcss.tr('Unsuitable method for biogas generator')})
 
         # *[power=generator][generator:source=oil][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -9035,7 +9035,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Oil generator can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for oil generator")
-                err.append({'class': 15, 'subclass': 2059171544, 'text': mapcss.tr('Unsuitable method for oil generator')})
+                err.append({'class': 7040016, 'subclass': 2059171544, 'text': mapcss.tr('Unsuitable method for oil generator')})
 
         # *[power=generator][generator:source=diesel][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -9049,7 +9049,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Diesel generator can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for diesel generator")
-                err.append({'class': 16, 'subclass': 87750196, 'text': mapcss.tr('Unsuitable method for diesel generator')})
+                err.append({'class': 7040017, 'subclass': 87750196, 'text': mapcss.tr('Unsuitable method for diesel generator')})
 
         # *[power=generator][generator:source=gasoline][generator:method][generator:method!=combustion]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -9063,7 +9063,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Gasoline generator can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Unsuitable method for gasoline generator")
-                err.append({'class': 17, 'subclass': 1418218249, 'text': mapcss.tr('Unsuitable method for gasoline generator')})
+                err.append({'class': 7040018, 'subclass': 1418218249, 'text': mapcss.tr('Unsuitable method for gasoline generator')})
 
         # *[power=generator][generator:source=waste][generator:method][generator:method!~/^(combustion|gasification)$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -9079,7 +9079,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for waste generator")
                 # suggestAlternative:"combustion or gasification"
                 # fixRemove:"generator:method"
-                err.append({'class': 18, 'subclass': 600470569, 'text': mapcss.tr('Unsuitable method for waste generator'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040019, 'subclass': 600470569, 'text': mapcss.tr('Unsuitable method for waste generator'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'generator:method'])
                 }})
@@ -9096,7 +9096,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 1335984003, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 1335984003, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=generator][generator:method=gasification][generator:source][generator:source!~/^(waste|biomass)(;(waste|biomass))*$/]
         if ('generator:method' in keys and 'generator:source' in keys and 'power' in keys):
@@ -9110,7 +9110,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:generator:method"
                 # throwError:tr("Incompatibility between method and source on a power generator")
-                err.append({'class': 5, 'subclass': 313390332, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
+                err.append({'class': 7040006, 'subclass': 313390332, 'text': mapcss.tr('Incompatibility between method and source on a power generator')})
 
         # *[power=plant][plant:source][plant:source!~/^(nuclear|wind|hydro|tidal|wave|geothermal|solar|coal|gas|biomass|biofuel|biogas|oil|diesel|gasoline|waste|battery)(;(nuclear|wind|hydro|tidal|wave|geothermal|solar|coal|gas|biomass|biofuel|biogas|oil|diesel|gasoline|waste|battery))*$/]
         if ('plant:source' in keys and 'power' in keys):
@@ -9124,7 +9124,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("The plant:source=* tag can only have certain well-defined values. This is probably a typo or an deprecated way of tagging.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:source"
                 # throwError:tr("Unsuitable value for plant:source=* tag")
-                err.append({'class': 19, 'subclass': 966751128, 'text': mapcss.tr('Unsuitable value for plant:source=* tag')})
+                err.append({'class': 7040020, 'subclass': 966751128, 'text': mapcss.tr('Unsuitable value for plant:source=* tag')})
 
         # *[power=plant][plant:source=nuclear][plant:method][plant:method!~/^(fission|fusion)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9140,7 +9140,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for nuclear power plant")
                 # suggestAlternative:"fission or fusion"
                 # fixRemove:"plant:method"
-                err.append({'class': 20, 'subclass': 56152287, 'text': mapcss.tr('Unsuitable method for nuclear power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040021, 'subclass': 56152287, 'text': mapcss.tr('Unsuitable method for nuclear power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -9157,7 +9157,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 120690153, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 120690153, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=wind][plant:method][plant:method!=wind_turbine]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9172,7 +9172,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for wind power plant")
                 # fixRemove:"plant:method"
-                err.append({'class': 22, 'subclass': 515061741, 'text': mapcss.tr('Unsuitable method for wind power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040023, 'subclass': 515061741, 'text': mapcss.tr('Unsuitable method for wind power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -9189,7 +9189,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 443176990, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 443176990, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=hydro][plant:method][plant:method!~/^(water-storage|water-pumped-storage|run-of-the-river)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9205,7 +9205,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for hydro power plant")
                 # suggestAlternative:"water-storage, run-of-the-river or water-pumped-storage"
                 # fixRemove:"plant:method"
-                err.append({'class': 23, 'subclass': 1020856194, 'text': mapcss.tr('Unsuitable method for hydro power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040024, 'subclass': 1020856194, 'text': mapcss.tr('Unsuitable method for hydro power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -9222,7 +9222,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 1372509170, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 1372509170, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=tidal][plant:method][plant:method!~/^(barrage|stream)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9238,7 +9238,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for tidal power plant")
                 # suggestAlternative:"barrage or stream"
                 # fixRemove:"plant:method"
-                err.append({'class': 24, 'subclass': 75438578, 'text': mapcss.tr('Unsuitable method for tidal power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040025, 'subclass': 75438578, 'text': mapcss.tr('Unsuitable method for tidal power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -9255,7 +9255,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 934978595, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 934978595, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=solar][plant:method][plant:method!~/^(thermal|photovoltaic)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9271,7 +9271,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for solar power plant")
                 # suggestAlternative:"thermal or photovoltaic"
                 # fixRemove:"plant:method"
-                err.append({'class': 25, 'subclass': 1799335667, 'text': mapcss.tr('Unsuitable method for solar power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040026, 'subclass': 1799335667, 'text': mapcss.tr('Unsuitable method for solar power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -9288,7 +9288,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 1085835351, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 1085835351, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:source=coal][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9302,7 +9302,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Coal power plants can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for coal power plant")
-                err.append({'class': 26, 'subclass': 746471181, 'text': mapcss.tr('Unsuitable method for coal power plant')})
+                err.append({'class': 7040027, 'subclass': 746471181, 'text': mapcss.tr('Unsuitable method for coal power plant')})
 
         # *[power=plant][plant:source=gas][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9316,7 +9316,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Gas power plants can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for gas power plant")
-                err.append({'class': 27, 'subclass': 827336490, 'text': mapcss.tr('Unsuitable method for gas power plant')})
+                err.append({'class': 7040028, 'subclass': 827336490, 'text': mapcss.tr('Unsuitable method for gas power plant')})
 
         # *[power=plant][plant:source=biomass][plant:method][plant:method!~/^(combustion|gasification|anaerobic_digestion)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9332,7 +9332,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for biomass power plant")
                 # suggestAlternative:"combustion, anaerobic_digestion or gasification"
                 # fixRemove:"plant:method"
-                err.append({'class': 28, 'subclass': 2076402923, 'text': mapcss.tr('Unsuitable method for biomass power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040029, 'subclass': 2076402923, 'text': mapcss.tr('Unsuitable method for biomass power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -9349,7 +9349,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseFix:tr("Check the list of possible values for this source on the wiki and correct the `{0}` tag.","plant:method")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for biofuel power plant")
-                err.append({'class': 29, 'subclass': 1882895060, 'text': mapcss.tr('Unsuitable method for biofuel power plant')})
+                err.append({'class': 7040030, 'subclass': 1882895060, 'text': mapcss.tr('Unsuitable method for biofuel power plant')})
 
         # *[power=plant][plant:source=biogas][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9363,7 +9363,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseFix:tr("Check the list of possible values for this source on the wiki and correct the `{0}` tag.","plant:method")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for biogas power plant")
-                err.append({'class': 30, 'subclass': 887792794, 'text': mapcss.tr('Unsuitable method for biogas power plant')})
+                err.append({'class': 7040031, 'subclass': 887792794, 'text': mapcss.tr('Unsuitable method for biogas power plant')})
 
         # *[power=plant][plant:source=oil][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9377,7 +9377,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Oil power plants can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for oil power plant")
-                err.append({'class': 31, 'subclass': 1678290892, 'text': mapcss.tr('Unsuitable method for oil power plant')})
+                err.append({'class': 7040032, 'subclass': 1678290892, 'text': mapcss.tr('Unsuitable method for oil power plant')})
 
         # *[power=plant][plant:source=diesel][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9391,7 +9391,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Diesel power plants can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for diesel power plant")
-                err.append({'class': 32, 'subclass': 75543302, 'text': mapcss.tr('Unsuitable method for diesel power plant')})
+                err.append({'class': 7040033, 'subclass': 75543302, 'text': mapcss.tr('Unsuitable method for diesel power plant')})
 
         # *[power=plant][plant:source=gasoline][plant:method][plant:method!=combustion]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9405,7 +9405,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("Gasoline power plants can only use certain well-defined methods to generate energy.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Unsuitable method for gasoline power plant")
-                err.append({'class': 33, 'subclass': 599334301, 'text': mapcss.tr('Unsuitable method for gasoline power plant')})
+                err.append({'class': 7040034, 'subclass': 599334301, 'text': mapcss.tr('Unsuitable method for gasoline power plant')})
 
         # *[power=plant][plant:source=waste][plant:method][plant:method!~/^(combustion|gasification)$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9421,7 +9421,7 @@ class Josm_powerQA(PluginMapCSS):
                 # throwError:tr("Unsuitable method for waste power plant")
                 # suggestAlternative:"combustion or gasification"
                 # fixRemove:"plant:method"
-                err.append({'class': 34, 'subclass': 489417432, 'text': mapcss.tr('Unsuitable method for waste power plant'), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 7040035, 'subclass': 489417432, 'text': mapcss.tr('Unsuitable method for waste power plant'), 'allow_fix_override': True, 'fix': {
                     '-': ([
                     'plant:method'])
                 }})
@@ -9438,7 +9438,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 46745407, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 46745407, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=plant][plant:method=gasification][plant:source][plant:source!~/^(waste|biomass)(;(waste|biomass))*$/]
         if ('plant:method' in keys and 'plant:source' in keys and 'power' in keys):
@@ -9452,7 +9452,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseDetail:tr("It is not possible to use the specified method to generate energy from this source.")
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:plant:method"
                 # throwError:tr("Incompatibility between method and source on a power plant")
-                err.append({'class': 21, 'subclass': 1329720574, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
+                err.append({'class': 7040022, 'subclass': 1329720574, 'text': mapcss.tr('Incompatibility between method and source on a power plant')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|132000|220000|500000)$/][inside("AF")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(110000|132000|220000|500000)$/][inside("AF")]
@@ -9474,7 +9474,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Afghanistan"
                 # throwError:tr("Invalid voltage value for this country (Afghanistan)")
                 # suggestAlternative:"110000/132000/220000/500000"
-                err.append({'class': 35, 'subclass': 877416610, 'text': mapcss.tr('Invalid voltage value for this country (Afghanistan)')})
+                err.append({'class': 7040036, 'subclass': 877416610, 'text': mapcss.tr('Invalid voltage value for this country (Afghanistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|35000|110000|150000|220000|400000)$/][inside("AL")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(30000|35000|110000|150000|220000|400000)$/][inside("AL")]
@@ -9496,7 +9496,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Albania"
                 # throwError:tr("Invalid voltage value for this country (Albania)")
                 # suggestAlternative:"30000/35000/110000/150000/220000/400000"
-                err.append({'class': 36, 'subclass': 847169907, 'text': mapcss.tr('Invalid voltage value for this country (Albania)')})
+                err.append({'class': 7040037, 'subclass': 847169907, 'text': mapcss.tr('Invalid voltage value for this country (Albania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|60000|66000|90000|150000|220000|225000|400000)$/][inside("DZ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(30000|60000|66000|90000|150000|220000|225000|400000)$/][inside("DZ")]
@@ -9518,7 +9518,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Algeria"
                 # throwError:tr("Invalid voltage value for this country (Algeria)")
                 # suggestAlternative:"30000/60000/66000/90000/150000/220000/225000/400000"
-                err.append({'class': 37, 'subclass': 1061795938, 'text': mapcss.tr('Invalid voltage value for this country (Algeria)')})
+                err.append({'class': 7040038, 'subclass': 1061795938, 'text': mapcss.tr('Invalid voltage value for this country (Algeria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|150000|225000)$/][inside("AD")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(110000|150000|225000)$/][inside("AD")]
@@ -9540,7 +9540,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Andorra"
                 # throwError:tr("Invalid voltage value for this country (Andorra)")
                 # suggestAlternative:"110000/150000/225000"
-                err.append({'class': 38, 'subclass': 413825130, 'text': mapcss.tr('Invalid voltage value for this country (Andorra)')})
+                err.append({'class': 7040039, 'subclass': 413825130, 'text': mapcss.tr('Invalid voltage value for this country (Andorra)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(60000|66000|110000|132000|150000|220000|400000)$/][inside("AO")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(60000|66000|110000|132000|150000|220000|400000)$/][inside("AO")]
@@ -9562,7 +9562,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Angola"
                 # throwError:tr("Invalid voltage value for this country (Angola)")
                 # suggestAlternative:"60000/66000/110000/132000/150000/220000/400000"
-                err.append({'class': 39, 'subclass': 1491057401, 'text': mapcss.tr('Invalid voltage value for this country (Angola)')})
+                err.append({'class': 7040040, 'subclass': 1491057401, 'text': mapcss.tr('Invalid voltage value for this country (Angola)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13200|25000|32000|33000|35000|66000|132000|220000|330000|345000|500000)$/][inside("AR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(13200|25000|32000|33000|35000|66000|132000|220000|330000|345000|500000)$/][inside("AR")]
@@ -9584,7 +9584,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Argentina"
                 # throwError:tr("Invalid voltage value for this country (Argentina)")
                 # suggestAlternative:"13200/25000/32000/33000/35000/66000/132000/220000/330000/345000/500000"
-                err.append({'class': 40, 'subclass': 1538178973, 'text': mapcss.tr('Invalid voltage value for this country (Argentina)')})
+                err.append({'class': 7040041, 'subclass': 1538178973, 'text': mapcss.tr('Invalid voltage value for this country (Argentina)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|36000|100000|110000|220000|230000|330000|400000|500000)$/][inside("AM")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(35000|36000|100000|110000|220000|230000|330000|400000|500000)$/][inside("AM")]
@@ -9606,7 +9606,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Armenia"
                 # throwError:tr("Invalid voltage value for this country (Armenia)")
                 # suggestAlternative:"35000/36000/100000/110000/220000/230000/330000/400000/500000"
-                err.append({'class': 41, 'subclass': 1328898356, 'text': mapcss.tr('Invalid voltage value for this country (Armenia)')})
+                err.append({'class': 7040042, 'subclass': 1328898356, 'text': mapcss.tr('Invalid voltage value for this country (Armenia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|12700|19000|19100|22000|33000|35000|44000|50000|66000|80000|110000|132000|150000|220000|275000|330000|400000|500000)$/][inside("AU")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(10500|11000|12700|19000|19100|22000|33000|35000|44000|50000|66000|80000|110000|132000|150000|220000|275000|330000|400000|500000)$/][inside("AU")]
@@ -9628,7 +9628,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Australia"
                 # throwError:tr("Invalid voltage value for this country (Australia)")
                 # suggestAlternative:"10500/11000/12700/19000/19100/22000/33000/35000/44000/50000/66000/80000/110000/132000/150000/220000/275000/330000/400000/500000"
-                err.append({'class': 42, 'subclass': 1851517051, 'text': mapcss.tr('Invalid voltage value for this country (Australia)')})
+                err.append({'class': 7040043, 'subclass': 1851517051, 'text': mapcss.tr('Invalid voltage value for this country (Australia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|13800|15000|16000|17500|20000|25000|30000|55000|60000|110000|132000|150000|220000|380000|400000)$/][inside("AT")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(10500|13800|15000|16000|17500|20000|25000|30000|55000|60000|110000|132000|150000|220000|380000|400000)$/][inside("AT")]
@@ -9650,7 +9650,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Austria"
                 # throwError:tr("Invalid voltage value for this country (Austria)")
                 # suggestAlternative:"10500/13800/15000/16000/17500/20000/25000/30000/55000/60000/110000/132000/150000/220000/380000/400000"
-                err.append({'class': 43, 'subclass': 1246339482, 'text': mapcss.tr('Invalid voltage value for this country (Austria)')})
+                err.append({'class': 7040044, 'subclass': 1246339482, 'text': mapcss.tr('Invalid voltage value for this country (Austria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|132000|154000|220000|330000|500000)$/][inside("AZ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(35000|110000|132000|154000|220000|330000|500000)$/][inside("AZ")]
@@ -9672,7 +9672,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Azerbaijan"
                 # throwError:tr("Invalid voltage value for this country (Azerbaijan)")
                 # suggestAlternative:"35000/110000/132000/154000/220000/330000/500000"
-                err.append({'class': 44, 'subclass': 47081834, 'text': mapcss.tr('Invalid voltage value for this country (Azerbaijan)')})
+                err.append({'class': 7040045, 'subclass': 47081834, 'text': mapcss.tr('Invalid voltage value for this country (Azerbaijan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(220000|230000|400000)$/][inside("BH")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(220000|230000|400000)$/][inside("BH")]
@@ -9694,7 +9694,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bahrain"
                 # throwError:tr("Invalid voltage value for this country (Bahrain)")
                 # suggestAlternative:"220000/230000/400000"
-                err.append({'class': 45, 'subclass': 393003268, 'text': mapcss.tr('Invalid voltage value for this country (Bahrain)')})
+                err.append({'class': 7040046, 'subclass': 393003268, 'text': mapcss.tr('Invalid voltage value for this country (Bahrain)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(23000|33000|132000|230000|400000)$/][inside("BD")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(23000|33000|132000|230000|400000)$/][inside("BD")]
@@ -9716,7 +9716,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bangladesh"
                 # throwError:tr("Invalid voltage value for this country (Bangladesh)")
                 # suggestAlternative:"23000/33000/132000/230000/400000"
-                err.append({'class': 46, 'subclass': 1841817985, 'text': mapcss.tr('Invalid voltage value for this country (Bangladesh)')})
+                err.append({'class': 7040047, 'subclass': 1841817985, 'text': mapcss.tr('Invalid voltage value for this country (Bangladesh)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|40000|100000|110000|220000|330000|750000)$/][inside("BY")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(35000|40000|100000|110000|220000|330000|750000)$/][inside("BY")]
@@ -9738,7 +9738,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Belarus"
                 # throwError:tr("Invalid voltage value for this country (Belarus)")
                 # suggestAlternative:"35000/40000/100000/110000/220000/330000/750000"
-                err.append({'class': 47, 'subclass': 1035573152, 'text': mapcss.tr('Invalid voltage value for this country (Belarus)')})
+                err.append({'class': 7040048, 'subclass': 1035573152, 'text': mapcss.tr('Invalid voltage value for this country (Belarus)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|11500|15000|30000|33000|36000|50000|63000|70000|110000|150000|220000|225000|320000|380000|400000)$/][inside("BE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|11500|15000|30000|33000|36000|50000|63000|70000|110000|150000|220000|225000|320000|380000|400000)$/][inside("BE")]
@@ -9760,7 +9760,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Belgium"
                 # throwError:tr("Invalid voltage value for this country (Belgium)")
                 # suggestAlternative:"11000/11500/15000/30000/33000/36000/50000/63000/70000/110000/150000/220000/225000/320000/380000/400000"
-                err.append({'class': 48, 'subclass': 1497012492, 'text': mapcss.tr('Invalid voltage value for this country (Belgium)')})
+                err.append({'class': 7040049, 'subclass': 1497012492, 'text': mapcss.tr('Invalid voltage value for this country (Belgium)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|34500|69000|115000)$/][inside("BZ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(22000|34500|69000|115000)$/][inside("BZ")]
@@ -9782,7 +9782,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Belize"
                 # throwError:tr("Invalid voltage value for this country (Belize)")
                 # suggestAlternative:"22000/34500/69000/115000"
-                err.append({'class': 49, 'subclass': 871340873, 'text': mapcss.tr('Invalid voltage value for this country (Belize)')})
+                err.append({'class': 7040050, 'subclass': 871340873, 'text': mapcss.tr('Invalid voltage value for this country (Belize)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000|330000)$/][inside("BJ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(161000|330000)$/][inside("BJ")]
@@ -9804,7 +9804,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Benin"
                 # throwError:tr("Invalid voltage value for this country (Benin)")
                 # suggestAlternative:"161000/330000"
-                err.append({'class': 50, 'subclass': 1396854010, 'text': mapcss.tr('Invalid voltage value for this country (Benin)')})
+                err.append({'class': 7040051, 'subclass': 1396854010, 'text': mapcss.tr('Invalid voltage value for this country (Benin)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000)$/][inside("BT")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000)$/][inside("BT")]
@@ -9826,7 +9826,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bhutan"
                 # throwError:tr("Invalid voltage value for this country (Bhutan)")
                 # suggestAlternative:"66000/132000/220000/400000"
-                err.append({'class': 51, 'subclass': 254618304, 'text': mapcss.tr('Invalid voltage value for this country (Bhutan)')})
+                err.append({'class': 7040052, 'subclass': 254618304, 'text': mapcss.tr('Invalid voltage value for this country (Bhutan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|220000|500000)$/][inside("BO")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(115000|220000|500000)$/][inside("BO")]
@@ -9848,7 +9848,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bolivia"
                 # throwError:tr("Invalid voltage value for this country (Bolivia)")
                 # suggestAlternative:"115000/220000/500000"
-                err.append({'class': 52, 'subclass': 1925962756, 'text': mapcss.tr('Invalid voltage value for this country (Bolivia)')})
+                err.append({'class': 7040053, 'subclass': 1925962756, 'text': mapcss.tr('Invalid voltage value for this country (Bolivia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|220000|400000)$/][inside("BA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(35000|110000|220000|400000)$/][inside("BA")]
@@ -9870,7 +9870,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bosnia_and_Herzegovina"
                 # throwError:tr("Invalid voltage value for this country (Bosnia and Herzegovina)")
                 # suggestAlternative:"35000/110000/220000/400000"
-                err.append({'class': 53, 'subclass': 332895728, 'text': mapcss.tr('Invalid voltage value for this country (Bosnia and Herzegovina)')})
+                err.append({'class': 7040054, 'subclass': 332895728, 'text': mapcss.tr('Invalid voltage value for this country (Bosnia and Herzegovina)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000)$/][inside("BW")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000)$/][inside("BW")]
@@ -9892,7 +9892,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Botswana"
                 # throwError:tr("Invalid voltage value for this country (Botswana)")
                 # suggestAlternative:"66000/132000/220000/400000"
-                err.append({'class': 54, 'subclass': 978037435, 'text': mapcss.tr('Invalid voltage value for this country (Botswana)')})
+                err.append({'class': 7040055, 'subclass': 978037435, 'text': mapcss.tr('Invalid voltage value for this country (Botswana)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|23100|34500|66000|69000|88000|110000|132000|138000|230000|345000|440000|500000|525000|600000|765000|800000)$/][inside("BR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(13800|23100|34500|66000|69000|88000|110000|132000|138000|230000|345000|440000|500000|525000|600000|765000|800000)$/][inside("BR")]
@@ -9914,7 +9914,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Brazil"
                 # throwError:tr("Invalid voltage value for this country (Brazil)")
                 # suggestAlternative:"13800/23100/34500/66000/69000/88000/110000/132000/138000/230000/345000/440000/500000/525000/600000/765000/800000"
-                err.append({'class': 55, 'subclass': 2087918271, 'text': mapcss.tr('Invalid voltage value for this country (Brazil)')})
+                err.append({'class': 7040056, 'subclass': 2087918271, 'text': mapcss.tr('Invalid voltage value for this country (Brazil)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|275000)$/][inside("BN")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|132000|275000)$/][inside("BN")]
@@ -9936,7 +9936,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Brunei"
                 # throwError:tr("Invalid voltage value for this country (Brunei)")
                 # suggestAlternative:"66000/132000/275000"
-                err.append({'class': 56, 'subclass': 441417061, 'text': mapcss.tr('Invalid voltage value for this country (Brunei)')})
+                err.append({'class': 7040057, 'subclass': 441417061, 'text': mapcss.tr('Invalid voltage value for this country (Brunei)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|22000|25000|35000|110000|220000|400000)$/][inside("BG")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|22000|25000|35000|110000|220000|400000)$/][inside("BG")]
@@ -9958,7 +9958,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Bulgaria"
                 # throwError:tr("Invalid voltage value for this country (Bulgaria)")
                 # suggestAlternative:"20000/22000/25000/35000/110000/220000/400000"
-                err.append({'class': 57, 'subclass': 573228860, 'text': mapcss.tr('Invalid voltage value for this country (Bulgaria)')})
+                err.append({'class': 7040058, 'subclass': 573228860, 'text': mapcss.tr('Invalid voltage value for this country (Bulgaria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(90000|132000|225000)$/][inside("BF")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(90000|132000|225000)$/][inside("BF")]
@@ -9980,7 +9980,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Burkina_Faso"
                 # throwError:tr("Invalid voltage value for this country (Burkina Faso)")
                 # suggestAlternative:"90000/132000/225000"
-                err.append({'class': 58, 'subclass': 1070461392, 'text': mapcss.tr('Invalid voltage value for this country (Burkina Faso)')})
+                err.append({'class': 7040059, 'subclass': 1070461392, 'text': mapcss.tr('Invalid voltage value for this country (Burkina Faso)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(70000|110000|220000)$/][inside("BI")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(70000|110000|220000)$/][inside("BI")]
@@ -10002,7 +10002,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Burundi"
                 # throwError:tr("Invalid voltage value for this country (Burundi)")
                 # suggestAlternative:"70000/110000/220000"
-                err.append({'class': 59, 'subclass': 100426986, 'text': mapcss.tr('Invalid voltage value for this country (Burundi)')})
+                err.append({'class': 7040060, 'subclass': 100426986, 'text': mapcss.tr('Invalid voltage value for this country (Burundi)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("KH")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("KH")]
@@ -10024,7 +10024,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cambodia"
                 # throwError:tr("Invalid voltage value for this country (Cambodia)")
                 # suggestAlternative:"115000/230000"
-                err.append({'class': 60, 'subclass': 335416431, 'text': mapcss.tr('Invalid voltage value for this country (Cambodia)')})
+                err.append({'class': 7040061, 'subclass': 335416431, 'text': mapcss.tr('Invalid voltage value for this country (Cambodia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|90000|110000|220000|225000)$/][inside("CM")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(30000|90000|110000|220000|225000)$/][inside("CM")]
@@ -10046,7 +10046,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cameroon"
                 # throwError:tr("Invalid voltage value for this country (Cameroon)")
                 # suggestAlternative:"30000/90000/110000/220000/225000"
-                err.append({'class': 61, 'subclass': 218653159, 'text': mapcss.tr('Invalid voltage value for this country (Cameroon)')})
+                err.append({'class': 7040062, 'subclass': 218653159, 'text': mapcss.tr('Invalid voltage value for this country (Cameroon)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11500|12000|12470|12500|13000|13200|13800|14000|14400|16000|17500|23000|24940|25000|26400|27600|28000|34000|34500|35000|42000|44000|46000|49000|60000|63000|66000|69000|72000|110000|115000|120000|132000|138000|144000|150000|161000|200000|220000|230000|240000|260000|280000|287000|315000|345000|350000|360000|450000|500000|735000|765000)$/][inside("CA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11500|12000|12470|12500|13000|13200|13800|14000|14400|16000|17500|23000|24940|25000|26400|27600|28000|34000|34500|35000|42000|44000|46000|49000|60000|63000|66000|69000|72000|110000|115000|120000|132000|138000|144000|150000|161000|200000|220000|230000|240000|260000|280000|287000|315000|345000|350000|360000|450000|500000|735000|765000)$/][inside("CA")]
@@ -10068,7 +10068,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Canada"
                 # throwError:tr("Invalid voltage value for this country (Canada)")
                 # suggestAlternative:"11500/12000/12470/12500/13000/13200/13800/14000/14400/16000/17500/23000/24940/25000/26400/27600/28000/34000/34500/35000/42000/44000/46000/49000/60000/63000/66000/69000/72000/110000/115000/120000/132000/138000/144000/150000/161000/200000/220000/230000/240000/260000/280000/287000/315000/345000/350000/360000/450000/500000/735000/765000"
-                err.append({'class': 62, 'subclass': 245330943, 'text': mapcss.tr('Invalid voltage value for this country (Canada)')})
+                err.append({'class': 7040063, 'subclass': 245330943, 'text': mapcss.tr('Invalid voltage value for this country (Canada)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|60000)$/][inside("CV")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|60000)$/][inside("CV")]
@@ -10090,7 +10090,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cape_Verde"
                 # throwError:tr("Invalid voltage value for this country (Cape Verde)")
                 # suggestAlternative:"20000/60000"
-                err.append({'class': 63, 'subclass': 586982879, 'text': mapcss.tr('Invalid voltage value for this country (Cape Verde)')})
+                err.append({'class': 7040064, 'subclass': 586982879, 'text': mapcss.tr('Invalid voltage value for this country (Cape Verde)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000)$/][inside("CF")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(110000)$/][inside("CF")]
@@ -10112,7 +10112,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Central_African_Republic"
                 # throwError:tr("Invalid voltage value for this country (Central African Republic)")
                 # suggestAlternative:"110000"
-                err.append({'class': 64, 'subclass': 1674238063, 'text': mapcss.tr('Invalid voltage value for this country (Central African Republic)')})
+                err.append({'class': 7040065, 'subclass': 1674238063, 'text': mapcss.tr('Invalid voltage value for this country (Central African Republic)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|66000|90000)$/][inside("TD")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|66000|90000)$/][inside("TD")]
@@ -10134,7 +10134,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Chad"
                 # throwError:tr("Invalid voltage value for this country (Chad)")
                 # suggestAlternative:"20000/66000/90000"
-                err.append({'class': 65, 'subclass': 763362394, 'text': mapcss.tr('Invalid voltage value for this country (Chad)')})
+                err.append({'class': 7040066, 'subclass': 763362394, 'text': mapcss.tr('Invalid voltage value for this country (Chad)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|15000|23000|33000|34500|66000|69000|100000|110000|154000|220000|345000|500000)$/][inside("CL")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(13800|15000|23000|33000|34500|66000|69000|100000|110000|154000|220000|345000|500000)$/][inside("CL")]
@@ -10156,7 +10156,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Chile"
                 # throwError:tr("Invalid voltage value for this country (Chile)")
                 # suggestAlternative:"13800/15000/23000/33000/34500/66000/69000/100000/110000/154000/220000/345000/500000"
-                err.append({'class': 66, 'subclass': 532916660, 'text': mapcss.tr('Invalid voltage value for this country (Chile)')})
+                err.append({'class': 7040067, 'subclass': 532916660, 'text': mapcss.tr('Invalid voltage value for this country (Chile)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|25000|34500|66000|110000|115000|138000|220000|230000|500000)$/][inside("CO")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|25000|34500|66000|110000|115000|138000|220000|230000|500000)$/][inside("CO")]
@@ -10178,7 +10178,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Colombia"
                 # throwError:tr("Invalid voltage value for this country (Colombia)")
                 # suggestAlternative:"15000/25000/34500/66000/110000/115000/138000/220000/230000/500000"
-                err.append({'class': 67, 'subclass': 1839840410, 'text': mapcss.tr('Invalid voltage value for this country (Colombia)')})
+                err.append({'class': 7040068, 'subclass': 1839840410, 'text': mapcss.tr('Invalid voltage value for this country (Colombia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(138000|230000)$/][inside("CR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(138000|230000)$/][inside("CR")]
@@ -10200,7 +10200,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Costa_Rica"
                 # throwError:tr("Invalid voltage value for this country (Costa Rica)")
                 # suggestAlternative:"138000/230000"
-                err.append({'class': 68, 'subclass': 754734875, 'text': mapcss.tr('Invalid voltage value for this country (Costa Rica)')})
+                err.append({'class': 7040069, 'subclass': 754734875, 'text': mapcss.tr('Invalid voltage value for this country (Costa Rica)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|35000|110000|220000|400000|500000)$/][inside("HR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|25000|35000|110000|220000|400000|500000)$/][inside("HR")]
@@ -10222,7 +10222,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Croatia"
                 # throwError:tr("Invalid voltage value for this country (Croatia)")
                 # suggestAlternative:"20000/25000/35000/110000/220000/400000/500000"
-                err.append({'class': 69, 'subclass': 397296757, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
+                err.append({'class': 7040070, 'subclass': 397296757, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|110000|220000)$/][inside("CU")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|110000|220000)$/][inside("CU")]
@@ -10244,7 +10244,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cuba"
                 # throwError:tr("Invalid voltage value for this country (Cuba)")
                 # suggestAlternative:"11000/110000/220000"
-                err.append({'class': 70, 'subclass': 1181623055, 'text': mapcss.tr('Invalid voltage value for this country (Cuba)')})
+                err.append({'class': 7040071, 'subclass': 1181623055, 'text': mapcss.tr('Invalid voltage value for this country (Cuba)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("CY")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("CY")]
@@ -10266,7 +10266,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Cyprus"
                 # throwError:tr("Invalid voltage value for this country (Cyprus)")
                 # suggestAlternative:"66000/132000"
-                err.append({'class': 71, 'subclass': 1293399858, 'text': mapcss.tr('Invalid voltage value for this country (Cyprus)')})
+                err.append({'class': 7040072, 'subclass': 1293399858, 'text': mapcss.tr('Invalid voltage value for this country (Cyprus)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|33000|35000|110000|220000|380000|400000)$/][inside("CZ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(22000|33000|35000|110000|220000|380000|400000)$/][inside("CZ")]
@@ -10288,7 +10288,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Czech_Republic"
                 # throwError:tr("Invalid voltage value for this country (Czech Republic)")
                 # suggestAlternative:"22000/33000/35000/110000/220000/380000/400000"
-                err.append({'class': 72, 'subclass': 169103204, 'text': mapcss.tr('Invalid voltage value for this country (Czech Republic)')})
+                err.append({'class': 7040073, 'subclass': 169103204, 'text': mapcss.tr('Invalid voltage value for this country (Czech Republic)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|30000|33000|50000|70000|110000|120000|132000|220000|400000|500000)$/][inside("CD")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|30000|33000|50000|70000|110000|120000|132000|220000|400000|500000)$/][inside("CD")]
@@ -10310,7 +10310,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Democratic_Republic_of_the_Congo"
                 # throwError:tr("Invalid voltage value for this country (Democratic Republic of the Congo)")
                 # suggestAlternative:"11000/30000/33000/50000/70000/110000/120000/132000/220000/400000/500000"
-                err.append({'class': 73, 'subclass': 1896719814, 'text': mapcss.tr('Invalid voltage value for this country (Democratic Republic of the Congo)')})
+                err.append({'class': 7040074, 'subclass': 1896719814, 'text': mapcss.tr('Invalid voltage value for this country (Democratic Republic of the Congo)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|230000)$/][inside("DJ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(63000|230000)$/][inside("DJ")]
@@ -10332,7 +10332,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Djibouti"
                 # throwError:tr("Invalid voltage value for this country (Djibouti)")
                 # suggestAlternative:"63000/230000"
-                err.append({'class': 74, 'subclass': 154397822, 'text': mapcss.tr('Invalid voltage value for this country (Djibouti)')})
+                err.append({'class': 7040075, 'subclass': 154397822, 'text': mapcss.tr('Invalid voltage value for this country (Djibouti)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000|345000)$/][inside("DO")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000|345000)$/][inside("DO")]
@@ -10354,7 +10354,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Dominican_Republic"
                 # throwError:tr("Invalid voltage value for this country (Dominican Republic)")
                 # suggestAlternative:"69000/138000/230000/345000"
-                err.append({'class': 75, 'subclass': 229107659, 'text': mapcss.tr('Invalid voltage value for this country (Dominican Republic)')})
+                err.append({'class': 7040076, 'subclass': 229107659, 'text': mapcss.tr('Invalid voltage value for this country (Dominican Republic)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|22000|23000|34500|46000|48000|69000|138000|230000|500000)$/][inside("EC")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|22000|23000|34500|46000|48000|69000|138000|230000|500000)$/][inside("EC")]
@@ -10376,7 +10376,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ecuador"
                 # throwError:tr("Invalid voltage value for this country (Ecuador)")
                 # suggestAlternative:"11000/22000/23000/34500/46000/48000/69000/138000/230000/500000"
-                err.append({'class': 76, 'subclass': 1517687933, 'text': mapcss.tr('Invalid voltage value for this country (Ecuador)')})
+                err.append({'class': 7040077, 'subclass': 1517687933, 'text': mapcss.tr('Invalid voltage value for this country (Ecuador)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000|500000)$/][inside("EG")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000|400000|500000)$/][inside("EG")]
@@ -10398,7 +10398,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Egypt"
                 # throwError:tr("Invalid voltage value for this country (Egypt)")
                 # suggestAlternative:"66000/132000/220000/400000/500000"
-                err.append({'class': 77, 'subclass': 249862726, 'text': mapcss.tr('Invalid voltage value for this country (Egypt)')})
+                err.append({'class': 7040078, 'subclass': 249862726, 'text': mapcss.tr('Invalid voltage value for this country (Egypt)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("SV")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("SV")]
@@ -10420,7 +10420,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/El_Salvador"
                 # throwError:tr("Invalid voltage value for this country (El Salvador)")
                 # suggestAlternative:"115000/230000"
-                err.append({'class': 78, 'subclass': 1909980641, 'text': mapcss.tr('Invalid voltage value for this country (El Salvador)')})
+                err.append({'class': 7040079, 'subclass': 1909980641, 'text': mapcss.tr('Invalid voltage value for this country (El Salvador)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000)$/][inside("GQ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(110000|220000)$/][inside("GQ")]
@@ -10442,7 +10442,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Equatorial_Guinea"
                 # throwError:tr("Invalid voltage value for this country (Equatorial Guinea)")
                 # suggestAlternative:"110000/220000"
-                err.append({'class': 79, 'subclass': 866543529, 'text': mapcss.tr('Invalid voltage value for this country (Equatorial Guinea)')})
+                err.append({'class': 7040080, 'subclass': 866543529, 'text': mapcss.tr('Invalid voltage value for this country (Equatorial Guinea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("ER")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("ER")]
@@ -10464,7 +10464,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Eritrea"
                 # throwError:tr("Invalid voltage value for this country (Eritrea)")
                 # suggestAlternative:"66000/132000"
-                err.append({'class': 80, 'subclass': 1572704003, 'text': mapcss.tr('Invalid voltage value for this country (Eritrea)')})
+                err.append({'class': 7040081, 'subclass': 1572704003, 'text': mapcss.tr('Invalid voltage value for this country (Eritrea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|24000|35000|110000|150000|330000|450000)$/][inside("EE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|20000|24000|35000|110000|150000|330000|450000)$/][inside("EE")]
@@ -10486,7 +10486,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Estonia"
                 # throwError:tr("Invalid voltage value for this country (Estonia)")
                 # suggestAlternative:"15000/20000/24000/35000/110000/150000/330000/450000"
-                err.append({'class': 81, 'subclass': 712022399, 'text': mapcss.tr('Invalid voltage value for this country (Estonia)')})
+                err.append({'class': 7040082, 'subclass': 712022399, 'text': mapcss.tr('Invalid voltage value for this country (Estonia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|400000)$/][inside("SZ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|132000|400000)$/][inside("SZ")]
@@ -10508,7 +10508,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Eswatini"
                 # throwError:tr("Invalid voltage value for this country (Eswatini)")
                 # suggestAlternative:"66000/132000/400000"
-                err.append({'class': 82, 'subclass': 236012636, 'text': mapcss.tr('Invalid voltage value for this country (Eswatini)')})
+                err.append({'class': 7040083, 'subclass': 236012636, 'text': mapcss.tr('Invalid voltage value for this country (Eswatini)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(25000|45000|66000|132000|220000|230000|400000|500000)$/][inside("ET")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(25000|45000|66000|132000|220000|230000|400000|500000)$/][inside("ET")]
@@ -10530,7 +10530,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ethiopia"
                 # throwError:tr("Invalid voltage value for this country (Ethiopia)")
                 # suggestAlternative:"25000/45000/66000/132000/220000/230000/400000/500000"
-                err.append({'class': 83, 'subclass': 655974385, 'text': mapcss.tr('Invalid voltage value for this country (Ethiopia)')})
+                err.append({'class': 7040084, 'subclass': 655974385, 'text': mapcss.tr('Invalid voltage value for this country (Ethiopia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800)$/][inside("FM")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(13800)$/][inside("FM")]
@@ -10552,7 +10552,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Federated_States_of_Micronesia"
                 # throwError:tr("Invalid voltage value for this country (Federated States of Micronesia)")
                 # suggestAlternative:"13800"
-                err.append({'class': 84, 'subclass': 327713653, 'text': mapcss.tr('Invalid voltage value for this country (Federated States of Micronesia)')})
+                err.append({'class': 7040085, 'subclass': 327713653, 'text': mapcss.tr('Invalid voltage value for this country (Federated States of Micronesia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|110000|132000)$/][inside("FJ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|33000|110000|132000)$/][inside("FJ")]
@@ -10574,7 +10574,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Fiji"
                 # throwError:tr("Invalid voltage value for this country (Fiji)")
                 # suggestAlternative:"11000/33000/110000/132000"
-                err.append({'class': 85, 'subclass': 1029079535, 'text': mapcss.tr('Invalid voltage value for this country (Fiji)')})
+                err.append({'class': 7040086, 'subclass': 1029079535, 'text': mapcss.tr('Invalid voltage value for this country (Fiji)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|22000|25000|45000|80000|100000|110000|150000|220000|400000|450000|500000)$/][inside("FI")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|22000|25000|45000|80000|100000|110000|150000|220000|400000|450000|500000)$/][inside("FI")]
@@ -10596,7 +10596,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Finland"
                 # throwError:tr("Invalid voltage value for this country (Finland)")
                 # suggestAlternative:"20000/22000/25000/45000/80000/100000/110000/150000/220000/400000/450000/500000"
-                err.append({'class': 86, 'subclass': 2077286989, 'text': mapcss.tr('Invalid voltage value for this country (Finland)')})
+                err.append({'class': 7040087, 'subclass': 2077286989, 'text': mapcss.tr('Invalid voltage value for this country (Finland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10300|10500|13000|15000|15500|16000|17000|17200|17500|20000|25000|30000|33000|42000|45000|50000|52000|63000|66000|90000|110000|150000|200000|220000|225000|270000|320000|380000|400000|500000)$/][inside("FR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(10300|10500|13000|15000|15500|16000|17000|17200|17500|20000|25000|30000|33000|42000|45000|50000|52000|63000|66000|90000|110000|150000|200000|220000|225000|270000|320000|380000|400000|500000)$/][inside("FR")]
@@ -10618,7 +10618,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/France"
                 # throwError:tr("Invalid voltage value for this country (France)")
                 # suggestAlternative:"10300/10500/13000/15000/15500/16000/17000/17200/17500/20000/25000/30000/33000/42000/45000/50000/52000/63000/66000/90000/110000/150000/200000/220000/225000/270000/320000/380000/400000/500000"
-                err.append({'class': 87, 'subclass': 1699859778, 'text': mapcss.tr('Invalid voltage value for this country (France)')})
+                err.append({'class': 7040088, 'subclass': 1699859778, 'text': mapcss.tr('Invalid voltage value for this country (France)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|90000|115000|225000)$/][inside("GA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(63000|90000|115000|225000)$/][inside("GA")]
@@ -10640,7 +10640,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Gabon"
                 # throwError:tr("Invalid voltage value for this country (Gabon)")
                 # suggestAlternative:"63000/90000/115000/225000"
-                err.append({'class': 88, 'subclass': 1880048328, 'text': mapcss.tr('Invalid voltage value for this country (Gabon)')})
+                err.append({'class': 7040089, 'subclass': 1880048328, 'text': mapcss.tr('Invalid voltage value for this country (Gabon)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|154000|220000|330000|350000|380000|400000|500000)$/][inside("GE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(35000|110000|154000|220000|330000|350000|380000|400000|500000)$/][inside("GE")]
@@ -10662,7 +10662,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Georgia"
                 # throwError:tr("Invalid voltage value for this country (Georgia)")
                 # suggestAlternative:"35000/110000/154000/220000/330000/350000/380000/400000/500000"
-                err.append({'class': 89, 'subclass': 553346185, 'text': mapcss.tr('Invalid voltage value for this country (Georgia)')})
+                err.append({'class': 7040090, 'subclass': 553346185, 'text': mapcss.tr('Invalid voltage value for this country (Georgia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
@@ -10684,7 +10684,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Germany"
                 # throwError:tr("Invalid voltage value for this country (Germany)")
                 # suggestAlternative:"10500/11000/15000/16000/20000/21000/22000/25000/27000/30000/33000/35000/50000/55000/60000/63000/65000/110000/132000/150000/155000/200000/220000/225000/250000/300000/320000/362000/380000/400000/450000/525000/600000"
-                err.append({'class': 90, 'subclass': 327437283, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
+                err.append({'class': 7040091, 'subclass': 327437283, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|161000|225000|330000)$/][inside("GH")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|161000|225000|330000)$/][inside("GH")]
@@ -10706,7 +10706,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ghana"
                 # throwError:tr("Invalid voltage value for this country (Ghana)")
                 # suggestAlternative:"11000/161000/225000/330000"
-                err.append({'class': 91, 'subclass': 906657852, 'text': mapcss.tr('Invalid voltage value for this country (Ghana)')})
+                err.append({'class': 7040092, 'subclass': 906657852, 'text': mapcss.tr('Invalid voltage value for this country (Ghana)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|22000|66000|150000|400000|500000)$/][inside("GR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|20000|22000|66000|150000|400000|500000)$/][inside("GR")]
@@ -10728,7 +10728,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Greece"
                 # throwError:tr("Invalid voltage value for this country (Greece)")
                 # suggestAlternative:"15000/20000/22000/66000/150000/400000/500000"
-                err.append({'class': 92, 'subclass': 1127847993, 'text': mapcss.tr('Invalid voltage value for this country (Greece)')})
+                err.append({'class': 7040093, 'subclass': 1127847993, 'text': mapcss.tr('Invalid voltage value for this country (Greece)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|115000|132000|138000|230000|400000)$/][inside("GT")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(69000|115000|132000|138000|230000|400000)$/][inside("GT")]
@@ -10750,7 +10750,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Guatemala"
                 # throwError:tr("Invalid voltage value for this country (Guatemala)")
                 # suggestAlternative:"69000/115000/132000/138000/230000/400000"
-                err.append({'class': 93, 'subclass': 646430031, 'text': mapcss.tr('Invalid voltage value for this country (Guatemala)')})
+                err.append({'class': 7040094, 'subclass': 646430031, 'text': mapcss.tr('Invalid voltage value for this country (Guatemala)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|110000|225000)$/][inside("GN")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(30000|110000|225000)$/][inside("GN")]
@@ -10772,7 +10772,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Guinea"
                 # throwError:tr("Invalid voltage value for this country (Guinea)")
                 # suggestAlternative:"30000/110000/225000"
-                err.append({'class': 94, 'subclass': 408095816, 'text': mapcss.tr('Invalid voltage value for this country (Guinea)')})
+                err.append({'class': 7040095, 'subclass': 408095816, 'text': mapcss.tr('Invalid voltage value for this country (Guinea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(225000)$/][inside("GW")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(225000)$/][inside("GW")]
@@ -10794,7 +10794,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Guinea-Bissau"
                 # throwError:tr("Invalid voltage value for this country (Guinea-Bissau)")
                 # suggestAlternative:"225000"
-                err.append({'class': 95, 'subclass': 1397199785, 'text': mapcss.tr('Invalid voltage value for this country (Guinea-Bissau)')})
+                err.append({'class': 7040096, 'subclass': 1397199785, 'text': mapcss.tr('Invalid voltage value for this country (Guinea-Bissau)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|115000)$/][inside("HT")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(69000|115000)$/][inside("HT")]
@@ -10816,7 +10816,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Haiti"
                 # throwError:tr("Invalid voltage value for this country (Haiti)")
                 # suggestAlternative:"69000/115000"
-                err.append({'class': 96, 'subclass': 1768710173, 'text': mapcss.tr('Invalid voltage value for this country (Haiti)')})
+                err.append({'class': 7040097, 'subclass': 1768710173, 'text': mapcss.tr('Invalid voltage value for this country (Haiti)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000)$/][inside("HN")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000)$/][inside("HN")]
@@ -10838,7 +10838,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Honduras"
                 # throwError:tr("Invalid voltage value for this country (Honduras)")
                 # suggestAlternative:"69000/138000/230000"
-                err.append({'class': 97, 'subclass': 2104804978, 'text': mapcss.tr('Invalid voltage value for this country (Honduras)')})
+                err.append({'class': 7040098, 'subclass': 2104804978, 'text': mapcss.tr('Invalid voltage value for this country (Honduras)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|18000|20000|22000|25000|35000|110000|132000|220000|400000|750000)$/][inside("HU")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|18000|20000|22000|25000|35000|110000|132000|220000|400000|750000)$/][inside("HU")]
@@ -10860,7 +10860,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Hungary"
                 # throwError:tr("Invalid voltage value for this country (Hungary)")
                 # suggestAlternative:"11000/18000/20000/22000/25000/35000/110000/132000/220000/400000/750000"
-                err.append({'class': 98, 'subclass': 939148892, 'text': mapcss.tr('Invalid voltage value for this country (Hungary)')})
+                err.append({'class': 7040099, 'subclass': 939148892, 'text': mapcss.tr('Invalid voltage value for this country (Hungary)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000)$/][inside("IS")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000)$/][inside("IS")]
@@ -10882,7 +10882,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Iceland"
                 # throwError:tr("Invalid voltage value for this country (Iceland)")
                 # suggestAlternative:"66000/132000/220000"
-                err.append({'class': 99, 'subclass': 1080491309, 'text': mapcss.tr('Invalid voltage value for this country (Iceland)')})
+                err.append({'class': 7040100, 'subclass': 1080491309, 'text': mapcss.tr('Invalid voltage value for this country (Iceland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|13200|22000|25000|31000|33000|66000|100000|110000|132000|200000|220000|220001|230000|320000|400000|500000|660000|765000|800000|1200000)$/][inside("IN")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|13200|22000|25000|31000|33000|66000|100000|110000|132000|200000|220000|220001|230000|320000|400000|500000|660000|765000|800000|1200000)$/][inside("IN")]
@@ -10904,7 +10904,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/India"
                 # throwError:tr("Invalid voltage value for this country (India)")
                 # suggestAlternative:"11000/13200/22000/25000/31000/33000/66000/100000/110000/132000/200000/220000/220001/230000/320000/400000/500000/660000/765000/800000/1200000"
-                err.append({'class': 100, 'subclass': 1410466715, 'text': mapcss.tr('Invalid voltage value for this country (India)')})
+                err.append({'class': 7040101, 'subclass': 1410466715, 'text': mapcss.tr('Invalid voltage value for this country (India)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|70000|150000|230000|275000|500000)$/][inside("ID")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|70000|150000|230000|275000|500000)$/][inside("ID")]
@@ -10926,7 +10926,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Indonesia"
                 # throwError:tr("Invalid voltage value for this country (Indonesia)")
                 # suggestAlternative:"20000/70000/150000/230000/275000/500000"
-                err.append({'class': 101, 'subclass': 1037442085, 'text': mapcss.tr('Invalid voltage value for this country (Indonesia)')})
+                err.append({'class': 7040102, 'subclass': 1037442085, 'text': mapcss.tr('Invalid voltage value for this country (Indonesia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|25000|63000|110000|132000|154000|220000|230000|330000|380000|400000|2300000)$/][inside("IR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|20000|25000|63000|110000|132000|154000|220000|230000|330000|380000|400000|2300000)$/][inside("IR")]
@@ -10948,7 +10948,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Iran"
                 # throwError:tr("Invalid voltage value for this country (Iran)")
                 # suggestAlternative:"15000/20000/25000/63000/110000/132000/154000/220000/230000/330000/380000/400000/2300000"
-                err.append({'class': 102, 'subclass': 854564059, 'text': mapcss.tr('Invalid voltage value for this country (Iran)')})
+                err.append({'class': 7040103, 'subclass': 854564059, 'text': mapcss.tr('Invalid voltage value for this country (Iran)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|23000|25000|33000|66000|132000|154000|400000)$/][inside("IQ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|23000|25000|33000|66000|132000|154000|400000)$/][inside("IQ")]
@@ -10970,7 +10970,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Iraq"
                 # throwError:tr("Invalid voltage value for this country (Iraq)")
                 # suggestAlternative:"11000/23000/25000/33000/66000/132000/154000/400000"
-                err.append({'class': 103, 'subclass': 424684809, 'text': mapcss.tr('Invalid voltage value for this country (Iraq)')})
+                err.append({'class': 7040104, 'subclass': 424684809, 'text': mapcss.tr('Invalid voltage value for this country (Iraq)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|19000|20000|22000|33000|38000|110000|200000|220000|275000|320000|380000|400000)$/][inside("IE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(10500|19000|20000|22000|33000|38000|110000|200000|220000|275000|320000|380000|400000)$/][inside("IE")]
@@ -10992,7 +10992,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ireland"
                 # throwError:tr("Invalid voltage value for this country (Ireland)")
                 # suggestAlternative:"10500/19000/20000/22000/33000/38000/110000/200000/220000/275000/320000/380000/400000"
-                err.append({'class': 104, 'subclass': 226797239, 'text': mapcss.tr('Invalid voltage value for this country (Ireland)')})
+                err.append({'class': 7040105, 'subclass': 226797239, 'text': mapcss.tr('Invalid voltage value for this country (Ireland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|161000|400000)$/][inside("IL")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(115000|161000|400000)$/][inside("IL")]
@@ -11014,7 +11014,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Israel"
                 # throwError:tr("Invalid voltage value for this country (Israel)")
                 # suggestAlternative:"115000/161000/400000"
-                err.append({'class': 105, 'subclass': 1664313610, 'text': mapcss.tr('Invalid voltage value for this country (Israel)')})
+                err.append({'class': 7040106, 'subclass': 1664313610, 'text': mapcss.tr('Invalid voltage value for this country (Israel)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|25000|30000|45000|50000|55000|60000|63000|66000|68000|70000|110000|120000|130000|132000|135000|137000|138000|150000|200000|220000|225000|320000|380000|400000|500000)$/][inside("IT")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|20000|25000|30000|45000|50000|55000|60000|63000|66000|68000|70000|110000|120000|130000|132000|135000|137000|138000|150000|200000|220000|225000|320000|380000|400000|500000)$/][inside("IT")]
@@ -11036,7 +11036,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Italy"
                 # throwError:tr("Invalid voltage value for this country (Italy)")
                 # suggestAlternative:"15000/20000/25000/30000/45000/50000/55000/60000/63000/66000/68000/70000/110000/120000/130000/132000/135000/137000/138000/150000/200000/220000/225000/320000/380000/400000/500000"
-                err.append({'class': 106, 'subclass': 107649039, 'text': mapcss.tr('Invalid voltage value for this country (Italy)')})
+                err.append({'class': 7040107, 'subclass': 107649039, 'text': mapcss.tr('Invalid voltage value for this country (Italy)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|90000|225000|400000)$/][inside("CI")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|90000|225000|400000)$/][inside("CI")]
@@ -11058,7 +11058,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ivory_Coast"
                 # throwError:tr("Invalid voltage value for this country (Ivory Coast)")
                 # suggestAlternative:"15000/90000/225000/400000"
-                err.append({'class': 107, 'subclass': 1835089670, 'text': mapcss.tr('Invalid voltage value for this country (Ivory Coast)')})
+                err.append({'class': 7040108, 'subclass': 1835089670, 'text': mapcss.tr('Invalid voltage value for this country (Ivory Coast)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000)$/][inside("JM")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(69000|138000)$/][inside("JM")]
@@ -11080,7 +11080,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Jamaica"
                 # throwError:tr("Invalid voltage value for this country (Jamaica)")
                 # suggestAlternative:"69000/138000"
-                err.append({'class': 108, 'subclass': 905995494, 'text': mapcss.tr('Invalid voltage value for this country (Jamaica)')})
+                err.append({'class': 7040109, 'subclass': 905995494, 'text': mapcss.tr('Invalid voltage value for this country (Jamaica)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15400|20000|22000|25000|30000|33000|44000|60000|66000|77000|100000|110000|132000|154000|187000|200000|220000|250000|275000|500000|660000)$/][inside("JP")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|15400|20000|22000|25000|30000|33000|44000|60000|66000|77000|100000|110000|132000|154000|187000|200000|220000|250000|275000|500000|660000)$/][inside("JP")]
@@ -11102,7 +11102,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Japan"
                 # throwError:tr("Invalid voltage value for this country (Japan)")
                 # suggestAlternative:"11000/15400/20000/22000/25000/30000/33000/44000/60000/66000/77000/100000/110000/132000/154000/187000/200000/220000/250000/275000/500000/660000"
-                err.append({'class': 109, 'subclass': 1893401177, 'text': mapcss.tr('Invalid voltage value for this country (Japan)')})
+                err.append({'class': 7040110, 'subclass': 1893401177, 'text': mapcss.tr('Invalid voltage value for this country (Japan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000|400000)$/][inside("JO")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(132000|400000)$/][inside("JO")]
@@ -11124,7 +11124,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Jordan"
                 # throwError:tr("Invalid voltage value for this country (Jordan)")
                 # suggestAlternative:"132000/400000"
-                err.append({'class': 110, 'subclass': 1115683468, 'text': mapcss.tr('Invalid voltage value for this country (Jordan)')})
+                err.append({'class': 7040111, 'subclass': 1115683468, 'text': mapcss.tr('Invalid voltage value for this country (Jordan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|35000|110000|220000|500000)$/][inside("KZ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(22000|35000|110000|220000|500000)$/][inside("KZ")]
@@ -11146,7 +11146,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kazakhstan"
                 # throwError:tr("Invalid voltage value for this country (Kazakhstan)")
                 # suggestAlternative:"22000/35000/110000/220000/500000"
-                err.append({'class': 111, 'subclass': 920704827, 'text': mapcss.tr('Invalid voltage value for this country (Kazakhstan)')})
+                err.append({'class': 7040112, 'subclass': 920704827, 'text': mapcss.tr('Invalid voltage value for this country (Kazakhstan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|132000|220000|400000|500000)$/][inside("KE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|15000|132000|220000|400000|500000)$/][inside("KE")]
@@ -11168,7 +11168,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kenya"
                 # throwError:tr("Invalid voltage value for this country (Kenya)")
                 # suggestAlternative:"11000/15000/132000/220000/400000/500000"
-                err.append({'class': 112, 'subclass': 147319352, 'text': mapcss.tr('Invalid voltage value for this country (Kenya)')})
+                err.append({'class': 7040113, 'subclass': 147319352, 'text': mapcss.tr('Invalid voltage value for this country (Kenya)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(50000|60000|132000|150000|220000|400000)$/][inside("DK")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(50000|60000|132000|150000|220000|400000)$/][inside("DK")]
@@ -11190,7 +11190,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Denmark"
                 # throwError:tr("Invalid voltage value for this country (Kingdom of Denmark)")
                 # suggestAlternative:"50000/60000/132000/150000/220000/400000"
-                err.append({'class': 113, 'subclass': 1570688250, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of Denmark)')})
+                err.append({'class': 7040114, 'subclass': 1570688250, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of Denmark)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13000|20000|22000|23000|24000|25000|30000|33000|34000|50000|66000|110000|150000|220000|320000|380000|450000|600000)$/][inside("NL")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(13000|20000|22000|23000|24000|25000|30000|33000|34000|50000|66000|110000|150000|220000|320000|380000|450000|600000)$/][inside("NL")]
@@ -11212,7 +11212,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Netherlands"
                 # throwError:tr("Invalid voltage value for this country (Kingdom of the Netherlands)")
                 # suggestAlternative:"13000/20000/22000/23000/24000/25000/30000/33000/34000/50000/66000/110000/150000/220000/320000/380000/450000/600000"
-                err.append({'class': 114, 'subclass': 720799047, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of the Netherlands)')})
+                err.append({'class': 7040115, 'subclass': 720799047, 'text': mapcss.tr('Invalid voltage value for this country (Kingdom of the Netherlands)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|132000|275000|400000)$/][inside("KW")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(33000|66000|132000|275000|400000)$/][inside("KW")]
@@ -11234,7 +11234,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kuwait"
                 # throwError:tr("Invalid voltage value for this country (Kuwait)")
                 # suggestAlternative:"33000/66000/132000/275000/400000"
-                err.append({'class': 115, 'subclass': 2111286150, 'text': mapcss.tr('Invalid voltage value for this country (Kuwait)')})
+                err.append({'class': 7040116, 'subclass': 2111286150, 'text': mapcss.tr('Invalid voltage value for this country (Kuwait)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10000|110000|220000|500000)$/][inside("KG")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(10000|110000|220000|500000)$/][inside("KG")]
@@ -11256,7 +11256,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Kyrgyzstan"
                 # throwError:tr("Invalid voltage value for this country (Kyrgyzstan)")
                 # suggestAlternative:"10000/110000/220000/500000"
-                err.append({'class': 116, 'subclass': 1713439182, 'text': mapcss.tr('Invalid voltage value for this country (Kyrgyzstan)')})
+                err.append({'class': 7040117, 'subclass': 1713439182, 'text': mapcss.tr('Invalid voltage value for this country (Kyrgyzstan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|115000|220000|230000|500000)$/][inside("LA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(110000|115000|220000|230000|500000)$/][inside("LA")]
@@ -11278,7 +11278,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Laos"
                 # throwError:tr("Invalid voltage value for this country (Laos)")
                 # suggestAlternative:"110000/115000/220000/230000/500000"
-                err.append({'class': 117, 'subclass': 674452230, 'text': mapcss.tr('Invalid voltage value for this country (Laos)')})
+                err.append({'class': 7040118, 'subclass': 674452230, 'text': mapcss.tr('Invalid voltage value for this country (Laos)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|110000|330000)$/][inside("LV")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|110000|330000)$/][inside("LV")]
@@ -11300,7 +11300,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Latvia"
                 # throwError:tr("Invalid voltage value for this country (Latvia)")
                 # suggestAlternative:"20000/110000/330000"
-                err.append({'class': 118, 'subclass': 1112400592, 'text': mapcss.tr('Invalid voltage value for this country (Latvia)')})
+                err.append({'class': 7040119, 'subclass': 1112400592, 'text': mapcss.tr('Invalid voltage value for this country (Latvia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|150000|220000|400000)$/][inside("LB")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(33000|66000|150000|220000|400000)$/][inside("LB")]
@@ -11322,7 +11322,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Lebanon"
                 # throwError:tr("Invalid voltage value for this country (Lebanon)")
                 # suggestAlternative:"33000/66000/150000/220000/400000"
-                err.append({'class': 119, 'subclass': 838330814, 'text': mapcss.tr('Invalid voltage value for this country (Lebanon)')})
+                err.append({'class': 7040120, 'subclass': 838330814, 'text': mapcss.tr('Invalid voltage value for this country (Lebanon)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|88000|132000)$/][inside("LS")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(33000|66000|88000|132000)$/][inside("LS")]
@@ -11344,7 +11344,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Lesotho"
                 # throwError:tr("Invalid voltage value for this country (Lesotho)")
                 # suggestAlternative:"33000/66000/88000/132000"
-                err.append({'class': 120, 'subclass': 509691142, 'text': mapcss.tr('Invalid voltage value for this country (Lesotho)')})
+                err.append({'class': 7040121, 'subclass': 509691142, 'text': mapcss.tr('Invalid voltage value for this country (Lesotho)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|225000)$/][inside("LR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|225000)$/][inside("LR")]
@@ -11366,7 +11366,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Liberia"
                 # throwError:tr("Invalid voltage value for this country (Liberia)")
                 # suggestAlternative:"66000/225000"
-                err.append({'class': 121, 'subclass': 2133094653, 'text': mapcss.tr('Invalid voltage value for this country (Liberia)')})
+                err.append({'class': 7040122, 'subclass': 2133094653, 'text': mapcss.tr('Invalid voltage value for this country (Liberia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22500|25000|30000|66000|69000|132000|220000|400000|500000)$/][inside("LY")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(22500|25000|30000|66000|69000|132000|220000|400000|500000)$/][inside("LY")]
@@ -11388,7 +11388,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Libya"
                 # throwError:tr("Invalid voltage value for this country (Libya)")
                 # suggestAlternative:"22500/25000/30000/66000/69000/132000/220000/400000/500000"
-                err.append({'class': 122, 'subclass': 1166847360, 'text': mapcss.tr('Invalid voltage value for this country (Libya)')})
+                err.append({'class': 7040123, 'subclass': 1166847360, 'text': mapcss.tr('Invalid voltage value for this country (Libya)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(220000)$/][inside("LI")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(220000)$/][inside("LI")]
@@ -11410,7 +11410,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Liechtenstein"
                 # throwError:tr("Invalid voltage value for this country (Liechtenstein)")
                 # suggestAlternative:"220000"
-                err.append({'class': 123, 'subclass': 884687161, 'text': mapcss.tr('Invalid voltage value for this country (Liechtenstein)')})
+                err.append({'class': 7040124, 'subclass': 884687161, 'text': mapcss.tr('Invalid voltage value for this country (Liechtenstein)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|35000|110000|300000|330000|400000)$/][inside("LT")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|35000|110000|300000|330000|400000)$/][inside("LT")]
@@ -11432,7 +11432,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Lithuania"
                 # throwError:tr("Invalid voltage value for this country (Lithuania)")
                 # suggestAlternative:"15000/35000/110000/300000/330000/400000"
-                err.append({'class': 124, 'subclass': 1106748526, 'text': mapcss.tr('Invalid voltage value for this country (Lithuania)')})
+                err.append({'class': 7040125, 'subclass': 1106748526, 'text': mapcss.tr('Invalid voltage value for this country (Lithuania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|65000|150000|220000|225000)$/][inside("LU")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(63000|65000|150000|220000|225000)$/][inside("LU")]
@@ -11454,7 +11454,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Luxembourg"
                 # throwError:tr("Invalid voltage value for this country (Luxembourg)")
                 # suggestAlternative:"63000/65000/150000/220000/225000"
-                err.append({'class': 125, 'subclass': 1503286025, 'text': mapcss.tr('Invalid voltage value for this country (Luxembourg)')})
+                err.append({'class': 7040126, 'subclass': 1503286025, 'text': mapcss.tr('Invalid voltage value for this country (Luxembourg)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|138000)$/][inside("MG")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(63000|138000)$/][inside("MG")]
@@ -11476,7 +11476,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Madagascar"
                 # throwError:tr("Invalid voltage value for this country (Madagascar)")
                 # suggestAlternative:"63000/138000"
-                err.append({'class': 126, 'subclass': 1465941615, 'text': mapcss.tr('Invalid voltage value for this country (Madagascar)')})
+                err.append({'class': 7040127, 'subclass': 1465941615, 'text': mapcss.tr('Invalid voltage value for this country (Madagascar)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|110000|132000|400000)$/][inside("MW")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|110000|132000|400000)$/][inside("MW")]
@@ -11498,7 +11498,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Malawi"
                 # throwError:tr("Invalid voltage value for this country (Malawi)")
                 # suggestAlternative:"11000/33000/66000/110000/132000/400000"
-                err.append({'class': 127, 'subclass': 1585068181, 'text': mapcss.tr('Invalid voltage value for this country (Malawi)')})
+                err.append({'class': 7040128, 'subclass': 1585068181, 'text': mapcss.tr('Invalid voltage value for this country (Malawi)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|132000|275000|300000|500000)$/][inside("MY")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|132000|275000|300000|500000)$/][inside("MY")]
@@ -11520,7 +11520,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Malaysia"
                 # throwError:tr("Invalid voltage value for this country (Malaysia)")
                 # suggestAlternative:"11000/33000/66000/132000/275000/300000/500000"
-                err.append({'class': 128, 'subclass': 1395246503, 'text': mapcss.tr('Invalid voltage value for this country (Malaysia)')})
+                err.append({'class': 7040129, 'subclass': 1395246503, 'text': mapcss.tr('Invalid voltage value for this country (Malaysia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("MV")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("MV")]
@@ -11542,7 +11542,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Maldives"
                 # throwError:tr("Invalid voltage value for this country (Maldives)")
                 # suggestAlternative:"132000"
-                err.append({'class': 129, 'subclass': 404911113, 'text': mapcss.tr('Invalid voltage value for this country (Maldives)')})
+                err.append({'class': 7040130, 'subclass': 404911113, 'text': mapcss.tr('Invalid voltage value for this country (Maldives)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(63000|150000|225000)$/][inside("ML")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(63000|150000|225000)$/][inside("ML")]
@@ -11564,7 +11564,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mali"
                 # throwError:tr("Invalid voltage value for this country (Mali)")
                 # suggestAlternative:"63000/150000/225000"
-                err.append({'class': 130, 'subclass': 1284527120, 'text': mapcss.tr('Invalid voltage value for this country (Mali)')})
+                err.append({'class': 7040131, 'subclass': 1284527120, 'text': mapcss.tr('Invalid voltage value for this country (Mali)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|220000)$/][inside("MT")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|220000)$/][inside("MT")]
@@ -11586,7 +11586,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Malta"
                 # throwError:tr("Invalid voltage value for this country (Malta)")
                 # suggestAlternative:"11000/33000/132000/220000"
-                err.append({'class': 131, 'subclass': 2103484090, 'text': mapcss.tr('Invalid voltage value for this country (Malta)')})
+                err.append({'class': 7040132, 'subclass': 2103484090, 'text': mapcss.tr('Invalid voltage value for this country (Malta)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(90000|225000)$/][inside("MR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(90000|225000)$/][inside("MR")]
@@ -11608,7 +11608,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mauritania"
                 # throwError:tr("Invalid voltage value for this country (Mauritania)")
                 # suggestAlternative:"90000/225000"
-                err.append({'class': 132, 'subclass': 301098384, 'text': mapcss.tr('Invalid voltage value for this country (Mauritania)')})
+                err.append({'class': 7040133, 'subclass': 301098384, 'text': mapcss.tr('Invalid voltage value for this country (Mauritania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000)$/][inside("MU")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000)$/][inside("MU")]
@@ -11630,7 +11630,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mauritius"
                 # throwError:tr("Invalid voltage value for this country (Mauritius)")
                 # suggestAlternative:"66000"
-                err.append({'class': 133, 'subclass': 1292093329, 'text': mapcss.tr('Invalid voltage value for this country (Mauritius)')})
+                err.append({'class': 7040134, 'subclass': 1292093329, 'text': mapcss.tr('Invalid voltage value for this country (Mauritius)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|15000|25000|34500|65000|69000|85000|113000|115000|138000|161000|230000|400000)$/][inside("MX")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(13800|15000|25000|34500|65000|69000|85000|113000|115000|138000|161000|230000|400000)$/][inside("MX")]
@@ -11652,7 +11652,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mexico"
                 # throwError:tr("Invalid voltage value for this country (Mexico)")
                 # suggestAlternative:"13800/15000/25000/34500/65000/69000/85000/113000/115000/138000/161000/230000/400000"
-                err.append({'class': 134, 'subclass': 890779687, 'text': mapcss.tr('Invalid voltage value for this country (Mexico)')})
+                err.append({'class': 7040135, 'subclass': 890779687, 'text': mapcss.tr('Invalid voltage value for this country (Mexico)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|35000|110000|330000|400000)$/][inside("MD")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(33000|35000|110000|330000|400000)$/][inside("MD")]
@@ -11674,7 +11674,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Moldova"
                 # throwError:tr("Invalid voltage value for this country (Moldova)")
                 # suggestAlternative:"33000/35000/110000/330000/400000"
-                err.append({'class': 135, 'subclass': 831191348, 'text': mapcss.tr('Invalid voltage value for this country (Moldova)')})
+                err.append({'class': 7040136, 'subclass': 831191348, 'text': mapcss.tr('Invalid voltage value for this country (Moldova)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|22000|35000|110000|220000)$/][inside("MN")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|22000|35000|110000|220000)$/][inside("MN")]
@@ -11696,7 +11696,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mongolia"
                 # throwError:tr("Invalid voltage value for this country (Mongolia)")
                 # suggestAlternative:"15000/22000/35000/110000/220000"
-                err.append({'class': 136, 'subclass': 1432786597, 'text': mapcss.tr('Invalid voltage value for this country (Mongolia)')})
+                err.append({'class': 7040137, 'subclass': 1432786597, 'text': mapcss.tr('Invalid voltage value for this country (Mongolia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|220000|400000|500000)$/][inside("ME")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(35000|110000|220000|400000|500000)$/][inside("ME")]
@@ -11718,7 +11718,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Montenegro"
                 # throwError:tr("Invalid voltage value for this country (Montenegro)")
                 # suggestAlternative:"35000/110000/220000/400000/500000"
-                err.append({'class': 137, 'subclass': 800309675, 'text': mapcss.tr('Invalid voltage value for this country (Montenegro)')})
+                err.append({'class': 7040138, 'subclass': 800309675, 'text': mapcss.tr('Invalid voltage value for this country (Montenegro)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|22000|22500|30000|33000|60000|110000|132000|150000|220000|225000|400000)$/][inside("MA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|22000|22500|30000|33000|60000|110000|132000|150000|220000|225000|400000)$/][inside("MA")]
@@ -11740,7 +11740,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Morocco"
                 # throwError:tr("Invalid voltage value for this country (Morocco)")
                 # suggestAlternative:"20000/22000/22500/30000/33000/60000/110000/132000/150000/220000/225000/400000"
-                err.append({'class': 138, 'subclass': 204417551, 'text': mapcss.tr('Invalid voltage value for this country (Morocco)')})
+                err.append({'class': 7040139, 'subclass': 204417551, 'text': mapcss.tr('Invalid voltage value for this country (Morocco)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|110000|132000|220000|275000|330000|400000|533000)$/][inside("MZ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|110000|132000|220000|275000|330000|400000|533000)$/][inside("MZ")]
@@ -11762,7 +11762,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Mozambique"
                 # throwError:tr("Invalid voltage value for this country (Mozambique)")
                 # suggestAlternative:"66000/110000/132000/220000/275000/330000/400000/533000"
-                err.append({'class': 139, 'subclass': 2043994725, 'text': mapcss.tr('Invalid voltage value for this country (Mozambique)')})
+                err.append({'class': 7040140, 'subclass': 2043994725, 'text': mapcss.tr('Invalid voltage value for this country (Mozambique)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|20000|33000|66000|110000|132000|230000|500000)$/][inside("MM")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|20000|33000|66000|110000|132000|230000|500000)$/][inside("MM")]
@@ -11784,7 +11784,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Myanmar"
                 # throwError:tr("Invalid voltage value for this country (Myanmar)")
                 # suggestAlternative:"11000/20000/33000/66000/110000/132000/230000/500000"
-                err.append({'class': 140, 'subclass': 1698874028, 'text': mapcss.tr('Invalid voltage value for this country (Myanmar)')})
+                err.append({'class': 7040141, 'subclass': 1698874028, 'text': mapcss.tr('Invalid voltage value for this country (Myanmar)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|19000|22000|33000|66000|132000|220000|330000|350000|400000)$/][inside("NA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|19000|22000|33000|66000|132000|220000|330000|350000|400000)$/][inside("NA")]
@@ -11806,7 +11806,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Namibia"
                 # throwError:tr("Invalid voltage value for this country (Namibia)")
                 # suggestAlternative:"11000/19000/22000/33000/66000/132000/220000/330000/350000/400000"
-                err.append({'class': 141, 'subclass': 16124263, 'text': mapcss.tr('Invalid voltage value for this country (Namibia)')})
+                err.append({'class': 7040142, 'subclass': 16124263, 'text': mapcss.tr('Invalid voltage value for this country (Namibia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|132000|220000|400000)$/][inside("NP")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(33000|66000|132000|220000|400000)$/][inside("NP")]
@@ -11828,7 +11828,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Nepal"
                 # throwError:tr("Invalid voltage value for this country (Nepal)")
                 # suggestAlternative:"33000/66000/132000/220000/400000"
-                err.append({'class': 142, 'subclass': 1755521035, 'text': mapcss.tr('Invalid voltage value for this country (Nepal)')})
+                err.append({'class': 7040143, 'subclass': 1755521035, 'text': mapcss.tr('Invalid voltage value for this country (Nepal)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(50000|66000|110000|220000)$/][inside("NZ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(50000|66000|110000|220000)$/][inside("NZ")]
@@ -11850,7 +11850,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/New_Zealand"
                 # throwError:tr("Invalid voltage value for this country (New Zealand)")
                 # suggestAlternative:"50000/66000/110000/220000"
-                err.append({'class': 143, 'subclass': 1449530890, 'text': mapcss.tr('Invalid voltage value for this country (New Zealand)')})
+                err.append({'class': 7040144, 'subclass': 1449530890, 'text': mapcss.tr('Invalid voltage value for this country (New Zealand)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000)$/][inside("NI")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(69000|138000|230000)$/][inside("NI")]
@@ -11872,7 +11872,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Nicaragua"
                 # throwError:tr("Invalid voltage value for this country (Nicaragua)")
                 # suggestAlternative:"69000/138000/230000"
-                err.append({'class': 144, 'subclass': 503597624, 'text': mapcss.tr('Invalid voltage value for this country (Nicaragua)')})
+                err.append({'class': 7040145, 'subclass': 503597624, 'text': mapcss.tr('Invalid voltage value for this country (Nicaragua)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("NE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|132000)$/][inside("NE")]
@@ -11894,7 +11894,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Niger"
                 # throwError:tr("Invalid voltage value for this country (Niger)")
                 # suggestAlternative:"66000/132000"
-                err.append({'class': 145, 'subclass': 1682785163, 'text': mapcss.tr('Invalid voltage value for this country (Niger)')})
+                err.append({'class': 7040146, 'subclass': 1682785163, 'text': mapcss.tr('Invalid voltage value for this country (Niger)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|330000)$/][inside("NG")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|330000)$/][inside("NG")]
@@ -11916,7 +11916,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Nigeria"
                 # throwError:tr("Invalid voltage value for this country (Nigeria)")
                 # suggestAlternative:"11000/33000/132000/330000"
-                err.append({'class': 146, 'subclass': 856307285, 'text': mapcss.tr('Invalid voltage value for this country (Nigeria)')})
+                err.append({'class': 7040147, 'subclass': 856307285, 'text': mapcss.tr('Invalid voltage value for this country (Nigeria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|66000|110000|154000|220000)$/][inside("KP")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|66000|110000|154000|220000)$/][inside("KP")]
@@ -11938,7 +11938,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/North_Korea"
                 # throwError:tr("Invalid voltage value for this country (North Korea)")
                 # suggestAlternative:"11000/66000/110000/154000/220000"
-                err.append({'class': 147, 'subclass': 738942591, 'text': mapcss.tr('Invalid voltage value for this country (North Korea)')})
+                err.append({'class': 7040148, 'subclass': 738942591, 'text': mapcss.tr('Invalid voltage value for this country (North Korea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000|400000)$/][inside("MK")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(110000|220000|400000)$/][inside("MK")]
@@ -11960,7 +11960,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/North_Macedonia"
                 # throwError:tr("Invalid voltage value for this country (North Macedonia)")
                 # suggestAlternative:"110000/220000/400000"
-                err.append({'class': 148, 'subclass': 1824730880, 'text': mapcss.tr('Invalid voltage value for this country (North Macedonia)')})
+                err.append({'class': 7040149, 'subclass': 1824730880, 'text': mapcss.tr('Invalid voltage value for this country (North Macedonia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|12000|13000|15000|16000|17000|20000|22000|24000|25000|33000|45000|47000|50000|55000|60000|66000|80000|90000|100000|110000|132000|150000|220000|250000|300000|350000|400000|420000|450000|500000|515000|525000|825000)$/][inside("NO")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|12000|13000|15000|16000|17000|20000|22000|24000|25000|33000|45000|47000|50000|55000|60000|66000|80000|90000|100000|110000|132000|150000|220000|250000|300000|350000|400000|420000|450000|500000|515000|525000|825000)$/][inside("NO")]
@@ -11982,7 +11982,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Norway"
                 # throwError:tr("Invalid voltage value for this country (Norway)")
                 # suggestAlternative:"11000/12000/13000/15000/16000/17000/20000/22000/24000/25000/33000/45000/47000/50000/55000/60000/66000/80000/90000/100000/110000/132000/150000/220000/250000/300000/350000/400000/420000/450000/500000/515000/525000/825000"
-                err.append({'class': 149, 'subclass': 481781591, 'text': mapcss.tr('Invalid voltage value for this country (Norway)')})
+                err.append({'class': 7040150, 'subclass': 481781591, 'text': mapcss.tr('Invalid voltage value for this country (Norway)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000|220000|400000)$/][inside("OM")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(132000|220000|400000)$/][inside("OM")]
@@ -12004,7 +12004,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Oman"
                 # throwError:tr("Invalid voltage value for this country (Oman)")
                 # suggestAlternative:"132000/220000/400000"
-                err.append({'class': 150, 'subclass': 1281493370, 'text': mapcss.tr('Invalid voltage value for this country (Oman)')})
+                err.append({'class': 7040151, 'subclass': 1281493370, 'text': mapcss.tr('Invalid voltage value for this country (Oman)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|110000|132000|220000|230000|500000|660000)$/][inside("PK")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|110000|132000|220000|230000|500000|660000)$/][inside("PK")]
@@ -12026,7 +12026,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Pakistan"
                 # throwError:tr("Invalid voltage value for this country (Pakistan)")
                 # suggestAlternative:"11000/33000/66000/110000/132000/220000/230000/500000/660000"
-                err.append({'class': 151, 'subclass': 1408221100, 'text': mapcss.tr('Invalid voltage value for this country (Pakistan)')})
+                err.append({'class': 7040152, 'subclass': 1408221100, 'text': mapcss.tr('Invalid voltage value for this country (Pakistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("PA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(115000|230000)$/][inside("PA")]
@@ -12048,7 +12048,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Panama"
                 # throwError:tr("Invalid voltage value for this country (Panama)")
                 # suggestAlternative:"115000/230000"
-                err.append({'class': 152, 'subclass': 121889700, 'text': mapcss.tr('Invalid voltage value for this country (Panama)')})
+                err.append({'class': 7040153, 'subclass': 121889700, 'text': mapcss.tr('Invalid voltage value for this country (Panama)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|66000|132000)$/][inside("PG")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|66000|132000)$/][inside("PG")]
@@ -12070,7 +12070,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Papua_New_Guinea"
                 # throwError:tr("Invalid voltage value for this country (Papua New Guinea)")
                 # suggestAlternative:"11000/66000/132000"
-                err.append({'class': 153, 'subclass': 657514557, 'text': mapcss.tr('Invalid voltage value for this country (Papua New Guinea)')})
+                err.append({'class': 7040154, 'subclass': 657514557, 'text': mapcss.tr('Invalid voltage value for this country (Papua New Guinea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(12000|34500|66000|69000|132000|138000|220000|500000)$/][inside("PY")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(12000|34500|66000|69000|132000|138000|220000|500000)$/][inside("PY")]
@@ -12092,7 +12092,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Paraguay"
                 # throwError:tr("Invalid voltage value for this country (Paraguay)")
                 # suggestAlternative:"12000/34500/66000/69000/132000/138000/220000/500000"
-                err.append({'class': 154, 'subclass': 497106873, 'text': mapcss.tr('Invalid voltage value for this country (Paraguay)')})
+                err.append({'class': 7040155, 'subclass': 497106873, 'text': mapcss.tr('Invalid voltage value for this country (Paraguay)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|22000|23000|25000|27000|27500|33000|35000|50000|63000|66000|100000|110000|132000|160000|220000|230000|275000|320000|330000|400000|500000|544000|660000|750000|800000|1000000|1100000|1150000|2200001|2200002|22000011)$/][inside("CN")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(10500|11000|22000|23000|25000|27000|27500|33000|35000|50000|63000|66000|100000|110000|132000|160000|220000|230000|275000|320000|330000|400000|500000|544000|660000|750000|800000|1000000|1100000|1150000|2200001|2200002|22000011)$/][inside("CN")]
@@ -12114,7 +12114,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/China"
                 # throwError:tr("Invalid voltage value for this country (People's Republic of China)")
                 # suggestAlternative:"10500/11000/22000/23000/25000/27000/27500/33000/35000/50000/63000/66000/100000/110000/132000/160000/220000/230000/275000/320000/330000/400000/500000/544000/660000/750000/800000/1000000/1100000/1150000/2200001/2200002/22000011"
-                err.append({'class': 155, 'subclass': 1666959935, 'text': mapcss.tr('Invalid voltage value for this country (People\'s Republic of China)')})
+                err.append({'class': 7040156, 'subclass': 1666959935, 'text': mapcss.tr('Invalid voltage value for this country (People\'s Republic of China)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|33000|60000|66000|138000|220000|230000|500000)$/][inside("PE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(30000|33000|60000|66000|138000|220000|230000|500000)$/][inside("PE")]
@@ -12136,7 +12136,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Peru"
                 # throwError:tr("Invalid voltage value for this country (Peru)")
                 # suggestAlternative:"30000/33000/60000/66000/138000/220000/230000/500000"
-                err.append({'class': 156, 'subclass': 1528723359, 'text': mapcss.tr('Invalid voltage value for this country (Peru)')})
+                err.append({'class': 7040157, 'subclass': 1528723359, 'text': mapcss.tr('Invalid voltage value for this country (Peru)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13200|13800|20000|23000|30000|34500|60000|69000|70000|115000|138000|220000|230000|345000|350000|500000)$/][inside("PH")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(13200|13800|20000|23000|30000|34500|60000|69000|70000|115000|138000|220000|230000|345000|350000|500000)$/][inside("PH")]
@@ -12158,7 +12158,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Philippines"
                 # throwError:tr("Invalid voltage value for this country (Philippines)")
                 # suggestAlternative:"13200/13800/20000/23000/30000/34500/60000/69000/70000/115000/138000/220000/230000/345000/350000/500000"
-                err.append({'class': 157, 'subclass': 1838893571, 'text': mapcss.tr('Invalid voltage value for this country (Philippines)')})
+                err.append({'class': 7040158, 'subclass': 1838893571, 'text': mapcss.tr('Invalid voltage value for this country (Philippines)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|20000|21000|22000|25000|27000|30000|100000|110000|200000|220000|400000|450000)$/][inside("PL")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|15000|20000|21000|22000|25000|27000|30000|100000|110000|200000|220000|400000|450000)$/][inside("PL")]
@@ -12180,7 +12180,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Poland"
                 # throwError:tr("Invalid voltage value for this country (Poland)")
                 # suggestAlternative:"11000/15000/20000/21000/22000/25000/27000/30000/100000/110000/200000/220000/400000/450000"
-                err.append({'class': 158, 'subclass': 436630100, 'text': mapcss.tr('Invalid voltage value for this country (Poland)')})
+                err.append({'class': 7040159, 'subclass': 436630100, 'text': mapcss.tr('Invalid voltage value for this country (Poland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|18000|20000|25000|30000|50000|60000|130000|150000|220000|400000)$/][inside("PT")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|15000|18000|20000|25000|30000|50000|60000|130000|150000|220000|400000)$/][inside("PT")]
@@ -12202,7 +12202,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Portugal"
                 # throwError:tr("Invalid voltage value for this country (Portugal)")
                 # suggestAlternative:"11000/15000/18000/20000/25000/30000/50000/60000/130000/150000/220000/400000"
-                err.append({'class': 159, 'subclass': 309204733, 'text': mapcss.tr('Invalid voltage value for this country (Portugal)')})
+                err.append({'class': 7040160, 'subclass': 309204733, 'text': mapcss.tr('Invalid voltage value for this country (Portugal)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(21000|66000|110000|132000|220000|400000)$/][inside("QA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(21000|66000|110000|132000|220000|400000)$/][inside("QA")]
@@ -12224,7 +12224,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Qatar"
                 # throwError:tr("Invalid voltage value for this country (Qatar)")
                 # suggestAlternative:"21000/66000/110000/132000/220000/400000"
-                err.append({'class': 160, 'subclass': 574579891, 'text': mapcss.tr('Invalid voltage value for this country (Qatar)')})
+                err.append({'class': 7040161, 'subclass': 574579891, 'text': mapcss.tr('Invalid voltage value for this country (Qatar)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000)$/][inside("CG")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(110000|220000)$/][inside("CG")]
@@ -12246,7 +12246,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Republic_of_the_Congo"
                 # throwError:tr("Invalid voltage value for this country (Republic of the Congo)")
                 # suggestAlternative:"110000/220000"
-                err.append({'class': 161, 'subclass': 1791350038, 'text': mapcss.tr('Invalid voltage value for this country (Republic of the Congo)')})
+                err.append({'class': 7040162, 'subclass': 1791350038, 'text': mapcss.tr('Invalid voltage value for this country (Republic of the Congo)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|38000|55000|110000|220000|380000|400000)$/][inside("RO")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|25000|38000|55000|110000|220000|380000|400000)$/][inside("RO")]
@@ -12268,7 +12268,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Romania"
                 # throwError:tr("Invalid voltage value for this country (Romania)")
                 # suggestAlternative:"20000/25000/38000/55000/110000/220000/380000/400000"
-                err.append({'class': 162, 'subclass': 446129295, 'text': mapcss.tr('Invalid voltage value for this country (Romania)')})
+                err.append({'class': 7040163, 'subclass': 446129295, 'text': mapcss.tr('Invalid voltage value for this country (Romania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|15000|16000|20000|30000|35000|60000|66000|100000|110000|138000|150000|154000|220000|330000|350000|400000|500000|750000|800000|1100000)$/][inside("RU")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(10500|15000|16000|20000|30000|35000|60000|66000|100000|110000|138000|150000|154000|220000|330000|350000|400000|500000|750000|800000|1100000)$/][inside("RU")]
@@ -12290,7 +12290,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Russia"
                 # throwError:tr("Invalid voltage value for this country (Russia)")
                 # suggestAlternative:"10500/15000/16000/20000/30000/35000/60000/66000/100000/110000/138000/150000/154000/220000/330000/350000/400000/500000/750000/800000/1100000"
-                err.append({'class': 163, 'subclass': 374517757, 'text': mapcss.tr('Invalid voltage value for this country (Russia)')})
+                err.append({'class': 7040164, 'subclass': 374517757, 'text': mapcss.tr('Invalid voltage value for this country (Russia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(70000|110000|220000)$/][inside("RW")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(70000|110000|220000)$/][inside("RW")]
@@ -12312,7 +12312,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Rwanda"
                 # throwError:tr("Invalid voltage value for this country (Rwanda)")
                 # suggestAlternative:"70000/110000/220000"
-                err.append({'class': 164, 'subclass': 322781269, 'text': mapcss.tr('Invalid voltage value for this country (Rwanda)')})
+                err.append({'class': 7040165, 'subclass': 322781269, 'text': mapcss.tr('Invalid voltage value for this country (Rwanda)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("SM")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("SM")]
@@ -12334,7 +12334,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/San_Marino"
                 # throwError:tr("Invalid voltage value for this country (San Marino)")
                 # suggestAlternative:"132000"
-                err.append({'class': 165, 'subclass': 1274171573, 'text': mapcss.tr('Invalid voltage value for this country (San Marino)')})
+                err.append({'class': 7040166, 'subclass': 1274171573, 'text': mapcss.tr('Invalid voltage value for this country (San Marino)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(25000|33000|110000|115000|132000|230000|380000|400000)$/][inside("SA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(25000|33000|110000|115000|132000|230000|380000|400000)$/][inside("SA")]
@@ -12356,7 +12356,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Saudi_Arabia"
                 # throwError:tr("Invalid voltage value for this country (Saudi Arabia)")
                 # suggestAlternative:"25000/33000/110000/115000/132000/230000/380000/400000"
-                err.append({'class': 166, 'subclass': 1776608943, 'text': mapcss.tr('Invalid voltage value for this country (Saudi Arabia)')})
+                err.append({'class': 7040167, 'subclass': 1776608943, 'text': mapcss.tr('Invalid voltage value for this country (Saudi Arabia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(90000|225000)$/][inside("SN")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(90000|225000)$/][inside("SN")]
@@ -12378,7 +12378,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Senegal"
                 # throwError:tr("Invalid voltage value for this country (Senegal)")
                 # suggestAlternative:"90000/225000"
-                err.append({'class': 167, 'subclass': 1820537098, 'text': mapcss.tr('Invalid voltage value for this country (Senegal)')})
+                err.append({'class': 7040168, 'subclass': 1820537098, 'text': mapcss.tr('Invalid voltage value for this country (Senegal)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|30000|35000|110000|220000|380000|400000)$/][inside("RS")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|25000|30000|35000|110000|220000|380000|400000)$/][inside("RS")]
@@ -12400,7 +12400,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Serbia"
                 # throwError:tr("Invalid voltage value for this country (Serbia)")
                 # suggestAlternative:"20000/25000/30000/35000/110000/220000/380000/400000"
-                err.append({'class': 168, 'subclass': 437527139, 'text': mapcss.tr('Invalid voltage value for this country (Serbia)')})
+                err.append({'class': 7040169, 'subclass': 437527139, 'text': mapcss.tr('Invalid voltage value for this country (Serbia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000|225000)$/][inside("SL")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(161000|225000)$/][inside("SL")]
@@ -12422,7 +12422,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sierra_Leone"
                 # throwError:tr("Invalid voltage value for this country (Sierra Leone)")
                 # suggestAlternative:"161000/225000"
-                err.append({'class': 169, 'subclass': 993801338, 'text': mapcss.tr('Invalid voltage value for this country (Sierra Leone)')})
+                err.append({'class': 7040170, 'subclass': 993801338, 'text': mapcss.tr('Invalid voltage value for this country (Sierra Leone)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(230000)$/][inside("SG")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(230000)$/][inside("SG")]
@@ -12444,7 +12444,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Singapore"
                 # throwError:tr("Invalid voltage value for this country (Singapore)")
                 # suggestAlternative:"230000"
-                err.append({'class': 170, 'subclass': 2072701816, 'text': mapcss.tr('Invalid voltage value for this country (Singapore)')})
+                err.append({'class': 7040171, 'subclass': 2072701816, 'text': mapcss.tr('Invalid voltage value for this country (Singapore)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|110000|220000|400000)$/][inside("SK")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(22000|110000|220000|400000)$/][inside("SK")]
@@ -12466,7 +12466,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Slovakia"
                 # throwError:tr("Invalid voltage value for this country (Slovakia)")
                 # suggestAlternative:"22000/110000/220000/400000"
-                err.append({'class': 171, 'subclass': 260630324, 'text': mapcss.tr('Invalid voltage value for this country (Slovakia)')})
+                err.append({'class': 7040172, 'subclass': 260630324, 'text': mapcss.tr('Invalid voltage value for this country (Slovakia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|20000|35000|100000|110000|220000|400000)$/][inside("SI")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|20000|35000|100000|110000|220000|400000)$/][inside("SI")]
@@ -12488,7 +12488,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Slovenia"
                 # throwError:tr("Invalid voltage value for this country (Slovenia)")
                 # suggestAlternative:"15000/20000/35000/100000/110000/220000/400000"
-                err.append({'class': 172, 'subclass': 2090583145, 'text': mapcss.tr('Invalid voltage value for this country (Slovenia)')})
+                err.append({'class': 7040173, 'subclass': 2090583145, 'text': mapcss.tr('Invalid voltage value for this country (Slovenia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|20000|22000|33000|44000|66000|88000|110000|132000|220000|275000|380000|400000|533000|765000)$/][inside("ZA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|20000|22000|33000|44000|66000|88000|110000|132000|220000|275000|380000|400000|533000|765000)$/][inside("ZA")]
@@ -12510,7 +12510,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/South_Africa"
                 # throwError:tr("Invalid voltage value for this country (South Africa)")
                 # suggestAlternative:"11000/20000/22000/33000/44000/66000/88000/110000/132000/220000/275000/380000/400000/533000/765000"
-                err.append({'class': 173, 'subclass': 2015942802, 'text': mapcss.tr('Invalid voltage value for this country (South Africa)')})
+                err.append({'class': 7040174, 'subclass': 2015942802, 'text': mapcss.tr('Invalid voltage value for this country (South Africa)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|22900|145000|150000|154000|180000|250000|345000|354000|380000|765000)$/][inside("KR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|22900|145000|150000|154000|180000|250000|345000|354000|380000|765000)$/][inside("KR")]
@@ -12532,7 +12532,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/South_Korea"
                 # throwError:tr("Invalid voltage value for this country (South Korea)")
                 # suggestAlternative:"15000/22900/145000/150000/154000/180000/250000/345000/354000/380000/765000"
-                err.append({'class': 174, 'subclass': 783999454, 'text': mapcss.tr('Invalid voltage value for this country (South Korea)')})
+                err.append({'class': 7040175, 'subclass': 783999454, 'text': mapcss.tr('Invalid voltage value for this country (South Korea)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(220000)$/][inside("SS")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(220000)$/][inside("SS")]
@@ -12554,7 +12554,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/South_Sudan"
                 # throwError:tr("Invalid voltage value for this country (South Sudan)")
                 # suggestAlternative:"220000"
-                err.append({'class': 175, 'subclass': 56001471, 'text': mapcss.tr('Invalid voltage value for this country (South Sudan)')})
+                err.append({'class': 7040176, 'subclass': 56001471, 'text': mapcss.tr('Invalid voltage value for this country (South Sudan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(12000|13000|13200|15000|17000|20000|22000|24000|25000|30000|33000|35000|45000|50000|55000|60000|65000|66000|66600|100000|110000|120000|130000|132000|138000|150000|200000|220000|225000|240000|250000|320000|400000)$/][inside("ES")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(12000|13000|13200|15000|17000|20000|22000|24000|25000|30000|33000|35000|45000|50000|55000|60000|65000|66000|66600|100000|110000|120000|130000|132000|138000|150000|200000|220000|225000|240000|250000|320000|400000)$/][inside("ES")]
@@ -12576,7 +12576,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Spain"
                 # throwError:tr("Invalid voltage value for this country (Spain)")
                 # suggestAlternative:"12000/13000/13200/15000/17000/20000/22000/24000/25000/30000/33000/35000/45000/50000/55000/60000/65000/66000/66600/100000/110000/120000/130000/132000/138000/150000/200000/220000/225000/240000/250000/320000/400000"
-                err.append({'class': 176, 'subclass': 826643044, 'text': mapcss.tr('Invalid voltage value for this country (Spain)')})
+                err.append({'class': 7040177, 'subclass': 826643044, 'text': mapcss.tr('Invalid voltage value for this country (Spain)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|220000)$/][inside("LK")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|33000|132000|220000)$/][inside("LK")]
@@ -12598,7 +12598,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sri_Lanka"
                 # throwError:tr("Invalid voltage value for this country (Sri Lanka)")
                 # suggestAlternative:"11000/33000/132000/220000"
-                err.append({'class': 177, 'subclass': 2050045628, 'text': mapcss.tr('Invalid voltage value for this country (Sri Lanka)')})
+                err.append({'class': 7040178, 'subclass': 2050045628, 'text': mapcss.tr('Invalid voltage value for this country (Sri Lanka)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000)$/][inside("PS")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(161000)$/][inside("PS")]
@@ -12620,7 +12620,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/State_of_Palestine"
                 # throwError:tr("Invalid voltage value for this country (State of Palestine)")
                 # suggestAlternative:"161000"
-                err.append({'class': 178, 'subclass': 53045129, 'text': mapcss.tr('Invalid voltage value for this country (State of Palestine)')})
+                err.append({'class': 7040179, 'subclass': 53045129, 'text': mapcss.tr('Invalid voltage value for this country (State of Palestine)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|110000|220000|500000)$/][inside("SD")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|110000|220000|500000)$/][inside("SD")]
@@ -12642,7 +12642,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sudan"
                 # throwError:tr("Invalid voltage value for this country (Sudan)")
                 # suggestAlternative:"66000/110000/220000/500000"
-                err.append({'class': 179, 'subclass': 220365438, 'text': mapcss.tr('Invalid voltage value for this country (Sudan)')})
+                err.append({'class': 7040180, 'subclass': 220365438, 'text': mapcss.tr('Invalid voltage value for this country (Sudan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000)$/][inside("SR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(161000)$/][inside("SR")]
@@ -12664,7 +12664,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Suriname"
                 # throwError:tr("Invalid voltage value for this country (Suriname)")
                 # suggestAlternative:"161000"
-                err.append({'class': 180, 'subclass': 1042837606, 'text': mapcss.tr('Invalid voltage value for this country (Suriname)')})
+                err.append({'class': 7040181, 'subclass': 1042837606, 'text': mapcss.tr('Invalid voltage value for this country (Suriname)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|12000|15000|20000|22000|24000|30000|36000|40000|45000|50000|52000|55000|60000|66000|70000|72500|77000|80000|110000|130000|132000|138000|145000|150000|160000|170000|220000|230000|236000|285000|300000|400000|412000|420000|450000|500000)$/][inside("SE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|12000|15000|20000|22000|24000|30000|36000|40000|45000|50000|52000|55000|60000|66000|70000|72500|77000|80000|110000|130000|132000|138000|145000|150000|160000|170000|220000|230000|236000|285000|300000|400000|412000|420000|450000|500000)$/][inside("SE")]
@@ -12686,7 +12686,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Sweden"
                 # throwError:tr("Invalid voltage value for this country (Sweden)")
                 # suggestAlternative:"11000/12000/15000/20000/22000/24000/30000/36000/40000/45000/50000/52000/55000/60000/66000/70000/72500/77000/80000/110000/130000/132000/138000/145000/150000/160000/170000/220000/230000/236000/285000/300000/400000/412000/420000/450000/500000"
-                err.append({'class': 181, 'subclass': 1051877026, 'text': mapcss.tr('Invalid voltage value for this country (Sweden)')})
+                err.append({'class': 7040182, 'subclass': 1051877026, 'text': mapcss.tr('Invalid voltage value for this country (Sweden)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|13000|15000|15500|16000|17000|18000|20000|21000|22000|23000|25000|50000|60000|63000|65000|66000|110000|125000|130000|132000|138000|145000|150000|220000|222000|225000|380000|400000)$/][inside("CH")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|13000|15000|15500|16000|17000|18000|20000|21000|22000|23000|25000|50000|60000|63000|65000|66000|110000|125000|130000|132000|138000|145000|150000|220000|222000|225000|380000|400000)$/][inside("CH")]
@@ -12708,7 +12708,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Switzerland"
                 # throwError:tr("Invalid voltage value for this country (Switzerland)")
                 # suggestAlternative:"11000/13000/15000/15500/16000/17000/18000/20000/21000/22000/23000/25000/50000/60000/63000/65000/66000/110000/125000/130000/132000/138000/145000/150000/220000/222000/225000/380000/400000"
-                err.append({'class': 182, 'subclass': 767649845, 'text': mapcss.tr('Invalid voltage value for this country (Switzerland)')})
+                err.append({'class': 7040183, 'subclass': 767649845, 'text': mapcss.tr('Invalid voltage value for this country (Switzerland)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(23000|66000|154000|161000|220000|230000|380000|400000)$/][inside("SY")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(23000|66000|154000|161000|220000|230000|380000|400000)$/][inside("SY")]
@@ -12730,7 +12730,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Syria"
                 # throwError:tr("Invalid voltage value for this country (Syria)")
                 # suggestAlternative:"23000/66000/154000/161000/220000/230000/380000/400000"
-                err.append({'class': 183, 'subclass': 1440424536, 'text': mapcss.tr('Invalid voltage value for this country (Syria)')})
+                err.append({'class': 7040184, 'subclass': 1440424536, 'text': mapcss.tr('Invalid voltage value for this country (Syria)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(69000|161000|345000|690000)$/][inside("TW")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(69000|161000|345000|690000)$/][inside("TW")]
@@ -12752,7 +12752,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Taiwan"
                 # throwError:tr("Invalid voltage value for this country (Taiwan)")
                 # suggestAlternative:"69000/161000/345000/690000"
-                err.append({'class': 184, 'subclass': 243171127, 'text': mapcss.tr('Invalid voltage value for this country (Taiwan)')})
+                err.append({'class': 7040185, 'subclass': 243171127, 'text': mapcss.tr('Invalid voltage value for this country (Taiwan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|110000|138000|220000|500000)$/][inside("TJ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(35000|110000|138000|220000|500000)$/][inside("TJ")]
@@ -12774,7 +12774,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Tajikistan"
                 # throwError:tr("Invalid voltage value for this country (Tajikistan)")
                 # suggestAlternative:"35000/110000/138000/220000/500000"
-                err.append({'class': 185, 'subclass': 938808856, 'text': mapcss.tr('Invalid voltage value for this country (Tajikistan)')})
+                err.append({'class': 7040186, 'subclass': 938808856, 'text': mapcss.tr('Invalid voltage value for this country (Tajikistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|132000|220000|222000|400000)$/][inside("TZ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|132000|220000|222000|400000)$/][inside("TZ")]
@@ -12796,7 +12796,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Tanzania"
                 # throwError:tr("Invalid voltage value for this country (Tanzania)")
                 # suggestAlternative:"11000/33000/66000/132000/220000/222000/400000"
-                err.append({'class': 186, 'subclass': 2065250684, 'text': mapcss.tr('Invalid voltage value for this country (Tanzania)')})
+                err.append({'class': 7040187, 'subclass': 2065250684, 'text': mapcss.tr('Invalid voltage value for this country (Tanzania)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|50000|69000|115000|132000|230000|300000|500000)$/][inside("TH")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(22000|50000|69000|115000|132000|230000|300000|500000)$/][inside("TH")]
@@ -12818,7 +12818,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Thailand"
                 # throwError:tr("Invalid voltage value for this country (Thailand)")
                 # suggestAlternative:"22000/50000/69000/115000/132000/230000/300000/500000"
-                err.append({'class': 187, 'subclass': 566315290, 'text': mapcss.tr('Invalid voltage value for this country (Thailand)')})
+                err.append({'class': 7040188, 'subclass': 566315290, 'text': mapcss.tr('Invalid voltage value for this country (Thailand)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("BS")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(132000)$/][inside("BS")]
@@ -12840,7 +12840,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/The_Bahamas"
                 # throwError:tr("Invalid voltage value for this country (The Bahamas)")
                 # suggestAlternative:"132000"
-                err.append({'class': 188, 'subclass': 970706437, 'text': mapcss.tr('Invalid voltage value for this country (The Bahamas)')})
+                err.append({'class': 7040189, 'subclass': 970706437, 'text': mapcss.tr('Invalid voltage value for this country (The Bahamas)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(225000)$/][inside("GM")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(225000)$/][inside("GM")]
@@ -12862,7 +12862,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/The_Gambia"
                 # throwError:tr("Invalid voltage value for this country (The Gambia)")
                 # suggestAlternative:"225000"
-                err.append({'class': 189, 'subclass': 2084070855, 'text': mapcss.tr('Invalid voltage value for this country (The Gambia)')})
+                err.append({'class': 7040190, 'subclass': 2084070855, 'text': mapcss.tr('Invalid voltage value for this country (The Gambia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(150000)$/][inside("TL")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(150000)$/][inside("TL")]
@@ -12884,7 +12884,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Timor-Leste"
                 # throwError:tr("Invalid voltage value for this country (Timor-Leste)")
                 # suggestAlternative:"150000"
-                err.append({'class': 190, 'subclass': 1045350866, 'text': mapcss.tr('Invalid voltage value for this country (Timor-Leste)')})
+                err.append({'class': 7040191, 'subclass': 1045350866, 'text': mapcss.tr('Invalid voltage value for this country (Timor-Leste)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(161000|330000)$/][inside("TG")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(161000|330000)$/][inside("TG")]
@@ -12906,7 +12906,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Togo"
                 # throwError:tr("Invalid voltage value for this country (Togo)")
                 # suggestAlternative:"161000/330000"
-                err.append({'class': 191, 'subclass': 1750059086, 'text': mapcss.tr('Invalid voltage value for this country (Togo)')})
+                err.append({'class': 7040192, 'subclass': 1750059086, 'text': mapcss.tr('Invalid voltage value for this country (Togo)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000)$/][inside("TT")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(66000|132000|220000)$/][inside("TT")]
@@ -12928,7 +12928,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Trinidad_and_Tobago"
                 # throwError:tr("Invalid voltage value for this country (Trinidad and Tobago)")
                 # suggestAlternative:"66000/132000/220000"
-                err.append({'class': 192, 'subclass': 11695706, 'text': mapcss.tr('Invalid voltage value for this country (Trinidad and Tobago)')})
+                err.append({'class': 7040193, 'subclass': 11695706, 'text': mapcss.tr('Invalid voltage value for this country (Trinidad and Tobago)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|22500|30000|33000|90000|150000|220000|225000|400000)$/][inside("TN")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|22500|30000|33000|90000|150000|220000|225000|400000)$/][inside("TN")]
@@ -12950,7 +12950,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Tunisia"
                 # throwError:tr("Invalid voltage value for this country (Tunisia)")
                 # suggestAlternative:"15000/22500/30000/33000/90000/150000/220000/225000/400000"
-                err.append({'class': 193, 'subclass': 958241695, 'text': mapcss.tr('Invalid voltage value for this country (Tunisia)')})
+                err.append({'class': 7040194, 'subclass': 958241695, 'text': mapcss.tr('Invalid voltage value for this country (Tunisia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|31500|34000|34500|35000|36000|66000|150000|154000|170000|220000|345005|380000|400000|1000000)$/][inside("TR")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|25000|31500|34000|34500|35000|36000|66000|150000|154000|170000|220000|345005|380000|400000|1000000)$/][inside("TR")]
@@ -12972,7 +12972,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Turkey"
                 # throwError:tr("Invalid voltage value for this country (Turkey)")
                 # suggestAlternative:"20000/25000/31500/34000/34500/35000/36000/66000/150000/154000/170000/220000/345005/380000/400000/1000000"
-                err.append({'class': 194, 'subclass': 736906439, 'text': mapcss.tr('Invalid voltage value for this country (Turkey)')})
+                err.append({'class': 7040195, 'subclass': 736906439, 'text': mapcss.tr('Invalid voltage value for this country (Turkey)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(110000|220000|230000|500000)$/][inside("TM")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(110000|220000|230000|500000)$/][inside("TM")]
@@ -12994,7 +12994,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Turkmenistan"
                 # throwError:tr("Invalid voltage value for this country (Turkmenistan)")
                 # suggestAlternative:"110000/220000/230000/500000"
-                err.append({'class': 195, 'subclass': 1207799330, 'text': mapcss.tr('Invalid voltage value for this country (Turkmenistan)')})
+                err.append({'class': 7040196, 'subclass': 1207799330, 'text': mapcss.tr('Invalid voltage value for this country (Turkmenistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|15000|33000|66000|132000|220000|400000)$/][inside("UG")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|15000|33000|66000|132000|220000|400000)$/][inside("UG")]
@@ -13016,7 +13016,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Uganda"
                 # throwError:tr("Invalid voltage value for this country (Uganda)")
                 # suggestAlternative:"11000/15000/33000/66000/132000/220000/400000"
-                err.append({'class': 196, 'subclass': 1043357878, 'text': mapcss.tr('Invalid voltage value for this country (Uganda)')})
+                err.append({'class': 7040197, 'subclass': 1043357878, 'text': mapcss.tr('Invalid voltage value for this country (Uganda)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(15000|35000|110000|150000|154000|220000|330000|400000|500000|750000|800000)$/][inside("UA")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(15000|35000|110000|150000|154000|220000|330000|400000|500000|750000|800000)$/][inside("UA")]
@@ -13038,7 +13038,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Ukraine"
                 # throwError:tr("Invalid voltage value for this country (Ukraine)")
                 # suggestAlternative:"15000/35000/110000/150000/154000/220000/330000/400000/500000/750000/800000"
-                err.append({'class': 197, 'subclass': 48695058, 'text': mapcss.tr('Invalid voltage value for this country (Ukraine)')})
+                err.append({'class': 7040198, 'subclass': 48695058, 'text': mapcss.tr('Invalid voltage value for this country (Ukraine)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|132000|220000|400000)$/][inside("AE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(33000|132000|220000|400000)$/][inside("AE")]
@@ -13060,7 +13060,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/United_Arab_Emirates"
                 # throwError:tr("Invalid voltage value for this country (United Arab Emirates)")
                 # suggestAlternative:"33000/132000/220000/400000"
-                err.append({'class': 198, 'subclass': 471988649, 'text': mapcss.tr('Invalid voltage value for this country (United Arab Emirates)')})
+                err.append({'class': 7040199, 'subclass': 471988649, 'text': mapcss.tr('Invalid voltage value for this country (United Arab Emirates)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|12300|13800|15000|16000|20000|22000|24000|25000|27000|32000|33000|33300|35000|36000|66000|90000|110000|132000|145000|150000|170000|200000|220000|250000|254000|270000|275000|320000|400000|450000|515000|525000|600000)$/][inside("GB")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|12300|13800|15000|16000|20000|22000|24000|25000|27000|32000|33000|33300|35000|36000|66000|90000|110000|132000|145000|150000|170000|200000|220000|250000|254000|270000|275000|320000|400000|450000|515000|525000|600000)$/][inside("GB")]
@@ -13082,7 +13082,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Great_Britain"
                 # throwError:tr("Invalid voltage value for this country (United Kingdom)")
                 # suggestAlternative:"11000/12300/13800/15000/16000/20000/22000/24000/25000/27000/32000/33000/33300/35000/36000/66000/90000/110000/132000/145000/150000/170000/200000/220000/250000/254000/270000/275000/320000/400000/450000/515000/525000/600000"
-                err.append({'class': 199, 'subclass': 1784608368, 'text': mapcss.tr('Invalid voltage value for this country (United Kingdom)')})
+                err.append({'class': 7040200, 'subclass': 1784608368, 'text': mapcss.tr('Invalid voltage value for this country (United Kingdom)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|11500|12000|12370|12400|12470|12500|13000|13200|13800|13860|14000|14400|14750|15000|16000|17500|18000|19920|19935|20000|20800|21000|21800|22000|23000|23900|24000|24900|24940|25000|26000|26400|27000|27600|32000|33000|34000|34500|34599|35000|35400|37500|38000|40000|41600|43000|43800|44000|46000|49000|50000|55000|57000|57100|60000|66000|69000|70000|71000|87000|88000|92000|100000|110000|111500|115000|120000|125000|130000|132000|138000|150000|160000|161000|200000|220000|230000|235000|250000|260000|276000|287000|320000|345000|400000|450000|460000|500000|690002|765000|1100000|1150003|1333000|1380000)$/][inside("US")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|11500|12000|12370|12400|12470|12500|13000|13200|13800|13860|14000|14400|14750|15000|16000|17500|18000|19920|19935|20000|20800|21000|21800|22000|23000|23900|24000|24900|24940|25000|26000|26400|27000|27600|32000|33000|34000|34500|34599|35000|35400|37500|38000|40000|41600|43000|43800|44000|46000|49000|50000|55000|57000|57100|60000|66000|69000|70000|71000|87000|88000|92000|100000|110000|111500|115000|120000|125000|130000|132000|138000|150000|160000|161000|200000|220000|230000|235000|250000|260000|276000|287000|320000|345000|400000|450000|460000|500000|690002|765000|1100000|1150003|1333000|1380000)$/][inside("US")]
@@ -13104,7 +13104,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/United_States"
                 # throwError:tr("Invalid voltage value for this country (United States)")
                 # suggestAlternative:"11000/11500/12000/12370/12400/12470/12500/13000/13200/13800/13860/14000/14400/14750/15000/16000/17500/18000/19920/19935/20000/20800/21000/21800/22000/23000/23900/24000/24900/24940/25000/26000/26400/27000/27600/32000/33000/34000/34500/34599/35000/35400/37500/38000/40000/41600/43000/43800/44000/46000/49000/50000/55000/57000/57100/60000/66000/69000/70000/71000/87000/88000/92000/100000/110000/111500/115000/120000/125000/130000/132000/138000/150000/160000/161000/200000/220000/230000/235000/250000/260000/276000/287000/320000/345000/400000/450000/460000/500000/690002/765000/1100000/1150003/1333000/1380000"
-                err.append({'class': 200, 'subclass': 1574553599, 'text': mapcss.tr('Invalid voltage value for this country (United States)')})
+                err.append({'class': 7040201, 'subclass': 1574553599, 'text': mapcss.tr('Invalid voltage value for this country (United States)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(30000|31500|60000|63000|132000|150000|230000|500000)$/][inside("UY")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(30000|31500|60000|63000|132000|150000|230000|500000)$/][inside("UY")]
@@ -13126,7 +13126,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Uruguay"
                 # throwError:tr("Invalid voltage value for this country (Uruguay)")
                 # suggestAlternative:"30000/31500/60000/63000/132000/150000/230000/500000"
-                err.append({'class': 201, 'subclass': 703313495, 'text': mapcss.tr('Invalid voltage value for this country (Uruguay)')})
+                err.append({'class': 7040202, 'subclass': 703313495, 'text': mapcss.tr('Invalid voltage value for this country (Uruguay)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(35000|75000|110000|220000|350000|380000|500000)$/][inside("UZ")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(35000|75000|110000|220000|350000|380000|500000)$/][inside("UZ")]
@@ -13148,7 +13148,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Uzbekistan"
                 # throwError:tr("Invalid voltage value for this country (Uzbekistan)")
                 # suggestAlternative:"35000/75000/110000/220000/350000/380000/500000"
-                err.append({'class': 202, 'subclass': 2104055668, 'text': mapcss.tr('Invalid voltage value for this country (Uzbekistan)')})
+                err.append({'class': 7040203, 'subclass': 2104055668, 'text': mapcss.tr('Invalid voltage value for this country (Uzbekistan)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(13800|24000|30000|69000|115000|138000|230000|400000|765000)$/][inside("VE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(13800|24000|30000|69000|115000|138000|230000|400000|765000)$/][inside("VE")]
@@ -13170,7 +13170,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Venezuela"
                 # throwError:tr("Invalid voltage value for this country (Venezuela)")
                 # suggestAlternative:"13800/24000/30000/69000/115000/138000/230000/400000/765000"
-                err.append({'class': 203, 'subclass': 2007044896, 'text': mapcss.tr('Invalid voltage value for this country (Venezuela)')})
+                err.append({'class': 7040204, 'subclass': 2007044896, 'text': mapcss.tr('Invalid voltage value for this country (Venezuela)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(22000|50000|110000|115000|220000|230000|500000)$/][inside("VN")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(22000|50000|110000|115000|220000|230000|500000)$/][inside("VN")]
@@ -13192,7 +13192,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Vietnam"
                 # throwError:tr("Invalid voltage value for this country (Vietnam)")
                 # suggestAlternative:"22000/50000/110000/115000/220000/230000/500000"
-                err.append({'class': 204, 'subclass': 93891595, 'text': mapcss.tr('Invalid voltage value for this country (Vietnam)')})
+                err.append({'class': 7040205, 'subclass': 93891595, 'text': mapcss.tr('Invalid voltage value for this country (Vietnam)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(132000|400000)$/][inside("YE")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(132000|400000)$/][inside("YE")]
@@ -13214,7 +13214,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Yemen"
                 # throwError:tr("Invalid voltage value for this country (Yemen)")
                 # suggestAlternative:"132000/400000"
-                err.append({'class': 205, 'subclass': 1989748749, 'text': mapcss.tr('Invalid voltage value for this country (Yemen)')})
+                err.append({'class': 7040206, 'subclass': 1989748749, 'text': mapcss.tr('Invalid voltage value for this country (Yemen)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|88000|132000|220000|330000)$/][inside("ZM")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|33000|66000|88000|132000|220000|330000)$/][inside("ZM")]
@@ -13236,7 +13236,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Zambia"
                 # throwError:tr("Invalid voltage value for this country (Zambia)")
                 # suggestAlternative:"11000/33000/66000/88000/132000/220000/330000"
-                err.append({'class': 206, 'subclass': 1827162406, 'text': mapcss.tr('Invalid voltage value for this country (Zambia)')})
+                err.append({'class': 7040207, 'subclass': 1827162406, 'text': mapcss.tr('Invalid voltage value for this country (Zambia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(33000|66000|88000|110000|132000|220000|330000|400000)$/][inside("ZW")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(33000|66000|88000|110000|132000|220000|330000|400000)$/][inside("ZW")]
@@ -13258,7 +13258,7 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Zimbabwe"
                 # throwError:tr("Invalid voltage value for this country (Zimbabwe)")
                 # suggestAlternative:"33000/66000/88000/110000/132000/220000/330000/400000"
-                err.append({'class': 207, 'subclass': 793904123, 'text': mapcss.tr('Invalid voltage value for this country (Zimbabwe)')})
+                err.append({'class': 7040208, 'subclass': 793904123, 'text': mapcss.tr('Invalid voltage value for this country (Zimbabwe)')})
 
         return err
 
@@ -13277,132 +13277,132 @@ class Test(TestPluginMapcss):
         n.init(None)
         data = {'id': 0, 'lat': 0, 'lon': 0}
 
-        self.check_not_err(n.node(data, {'power': 'transformer', 'transformer': 'main'}), expected={'class': 2, 'subclass': 1524257444})
-        self.check_err(n.node(data, {'power': 'transformer', 'transformer': 'railway'}), expected={'class': 2, 'subclass': 1524257444})
-        self.check_not_err(n.node(data, {'power': 'transformer'}), expected={'class': 2, 'subclass': 1524257444})
-        self.check_err(n.node(data, {'generator:source': 'geothermals', 'power': 'generator'}), expected={'class': 3, 'subclass': 600492584})
-        self.check_not_err(n.node(data, {'generator:source': 'oil;gas', 'power': 'generator'}), expected={'class': 3, 'subclass': 600492584})
-        self.check_err(n.node(data, {'generator:source': 'photovoltaic', 'power': 'generator'}), expected={'class': 3, 'subclass': 600492584})
-        self.check_not_err(n.node(data, {'generator:source': 'solar', 'power': 'generator'}), expected={'class': 3, 'subclass': 600492584})
-        self.check_not_err(n.node(data, {'power': 'generator'}), expected={'class': 3, 'subclass': 600492584})
-        self.check_not_err(n.node(data, {'generator:method': 'fission', 'generator:source': 'nuclear', 'power': 'generator'}), expected={'class': 4, 'subclass': 1513616022})
-        self.check_err(n.node(data, {'generator:method': 'nuclear', 'generator:source': 'nuclear', 'power': 'generator'}), expected={'class': 4, 'subclass': 1513616022})
-        self.check_not_err(n.node(data, {'generator:method': 'fission', 'generator:source': 'nuclear', 'power': 'generator'}), expected={'class': 5, 'subclass': 1445012384})
-        self.check_err(n.node(data, {'generator:method': 'fusion', 'generator:source': 'solar', 'power': 'generator'}), expected={'class': 5, 'subclass': 1445012384})
-        self.check_err(n.node(data, {'generator:method': 'wind', 'generator:source': 'wind', 'power': 'generator'}), expected={'class': 6, 'subclass': 1104182574})
-        self.check_not_err(n.node(data, {'generator:method': 'wind_turbine', 'generator:source': 'wind', 'power': 'generator'}), expected={'class': 6, 'subclass': 1104182574})
-        self.check_not_err(n.node(data, {'generator:source': 'wind', 'power': 'generator'}), expected={'class': 6, 'subclass': 1104182574})
-        self.check_err(n.node(data, {'generator:method': 'wind_turbine', 'generator:source': 'turbine', 'power': 'generator'}), expected={'class': 5, 'subclass': 1021686777})
-        self.check_not_err(n.node(data, {'generator:method': 'wind_turbine', 'generator:source': 'wind', 'power': 'generator'}), expected={'class': 5, 'subclass': 1021686777})
-        self.check_err(n.node(data, {'generator:method': 'pump', 'generator:source': 'hydro', 'power': 'generator'}), expected={'class': 7, 'subclass': 1379042787})
-        self.check_not_err(n.node(data, {'generator:method': 'water-storage', 'generator:source': 'hydro', 'power': 'generator'}), expected={'class': 7, 'subclass': 1379042787})
-        self.check_not_err(n.node(data, {'generator:method': 'water-storage', 'generator:source': 'hydro', 'power': 'generator'}), expected={'class': 5, 'subclass': 1830475878})
-        self.check_err(n.node(data, {'generator:method': 'water-pumped-storage', 'generator:source': 'water', 'power': 'generator'}), expected={'class': 5, 'subclass': 1830475878})
-        self.check_not_err(n.node(data, {'generator:method': 'barrage', 'generator:source': 'tidal', 'power': 'generator'}), expected={'class': 8, 'subclass': 503240008})
-        self.check_err(n.node(data, {'generator:method': 'dam', 'generator:source': 'tidal', 'power': 'generator'}), expected={'class': 8, 'subclass': 503240008})
-        self.check_err(n.node(data, {'generator:method': 'stream', 'generator:source': 'solar', 'power': 'generator'}), expected={'class': 5, 'subclass': 976314568})
-        self.check_not_err(n.node(data, {'generator:method': 'barrage', 'generator:source': 'tidal', 'power': 'generator'}), expected={'class': 5, 'subclass': 976314568})
-        self.check_err(n.node(data, {'generator:method': 'solar', 'generator:source': 'solar', 'power': 'generator'}), expected={'class': 9, 'subclass': 1095645684})
-        self.check_not_err(n.node(data, {'generator:method': 'thermal', 'generator:source': 'solar', 'power': 'generator'}), expected={'class': 9, 'subclass': 1095645684})
-        self.check_err(n.node(data, {'generator:method': 'photovoltaic', 'generator:source': 'photovoltaic', 'power': 'generator'}), expected={'class': 5, 'subclass': 1457983121})
-        self.check_not_err(n.node(data, {'generator:method': 'thermal', 'generator:source': 'solar', 'power': 'generator'}), expected={'class': 5, 'subclass': 1457983121})
-        self.check_err(n.node(data, {'generator:method': 'burning', 'generator:source': 'coal', 'power': 'generator'}), expected={'class': 10, 'subclass': 727067352})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'coal', 'power': 'generator'}), expected={'class': 10, 'subclass': 727067352})
-        self.check_not_err(n.node(data, {'generator:source': 'coal', 'power': 'generator'}), expected={'class': 10, 'subclass': 727067352})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'gas', 'power': 'generator'}), expected={'class': 11, 'subclass': 1587058630})
-        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'gas', 'power': 'generator'}), expected={'class': 11, 'subclass': 1587058630})
-        self.check_not_err(n.node(data, {'generator:source': 'gas', 'power': 'generator'}), expected={'class': 11, 'subclass': 1587058630})
-        self.check_not_err(n.node(data, {'generator:method': 'anaerobic_digestion', 'generator:source': 'biomass', 'power': 'generator'}), expected={'class': 12, 'subclass': 1563205211})
-        self.check_err(n.node(data, {'generator:method': 'burn', 'generator:source': 'biomass', 'power': 'generator'}), expected={'class': 12, 'subclass': 1563205211})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'biofuel', 'power': 'generator'}), expected={'class': 13, 'subclass': 2056310355})
-        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'biofuel', 'power': 'generator'}), expected={'class': 13, 'subclass': 2056310355})
-        self.check_not_err(n.node(data, {'generator:source': 'biofuel', 'power': 'generator'}), expected={'class': 13, 'subclass': 2056310355})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'biogas', 'power': 'generator'}), expected={'class': 14, 'subclass': 1353854094})
-        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'biogas', 'power': 'generator'}), expected={'class': 14, 'subclass': 1353854094})
-        self.check_not_err(n.node(data, {'generator:source': 'biogas', 'power': 'generator'}), expected={'class': 14, 'subclass': 1353854094})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'oil', 'power': 'generator'}), expected={'class': 15, 'subclass': 2059171544})
-        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'oil', 'power': 'generator'}), expected={'class': 15, 'subclass': 2059171544})
-        self.check_not_err(n.node(data, {'generator:source': 'oil', 'power': 'generator'}), expected={'class': 15, 'subclass': 2059171544})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'diesel', 'power': 'generator'}), expected={'class': 16, 'subclass': 87750196})
-        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'diesel', 'power': 'generator'}), expected={'class': 16, 'subclass': 87750196})
-        self.check_not_err(n.node(data, {'generator:source': 'diesel', 'power': 'generator'}), expected={'class': 16, 'subclass': 87750196})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'gasoline', 'power': 'generator'}), expected={'class': 17, 'subclass': 1418218249})
-        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'gasoline', 'power': 'generator'}), expected={'class': 17, 'subclass': 1418218249})
-        self.check_not_err(n.node(data, {'generator:source': 'gasoline', 'power': 'generator'}), expected={'class': 17, 'subclass': 1418218249})
-        self.check_err(n.node(data, {'generator:method': 'burning', 'generator:source': 'waste', 'power': 'generator'}), expected={'class': 18, 'subclass': 600470569})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'waste', 'power': 'generator'}), expected={'class': 18, 'subclass': 600470569})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'biomass', 'power': 'generator'}), expected={'class': 5, 'subclass': 1335984003})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'gas;oil', 'power': 'generator'}), expected={'class': 5, 'subclass': 1335984003})
-        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'gas;oil;waste', 'power': 'generator'}), expected={'class': 5, 'subclass': 1335984003})
-        self.check_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'waste;solar', 'power': 'generator'}), expected={'class': 5, 'subclass': 1335984003})
-        self.check_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'wave', 'power': 'generator'}), expected={'class': 5, 'subclass': 1335984003})
-        self.check_not_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'biomass', 'power': 'generator'}), expected={'class': 5, 'subclass': 313390332})
-        self.check_not_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'biomass;waste', 'power': 'generator'}), expected={'class': 5, 'subclass': 313390332})
-        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'coal', 'power': 'generator'}), expected={'class': 5, 'subclass': 313390332})
-        self.check_not_err(n.node(data, {'plant:source': 'gas;oil', 'power': 'plant'}), expected={'class': 19, 'subclass': 966751128})
-        self.check_err(n.node(data, {'plant:source': 'photovoltaic', 'power': 'plant'}), expected={'class': 19, 'subclass': 966751128})
-        self.check_not_err(n.node(data, {'plant:source': 'solar', 'power': 'plant'}), expected={'class': 19, 'subclass': 966751128})
-        self.check_not_err(n.node(data, {'power': 'plant'}), expected={'class': 19, 'subclass': 966751128})
-        self.check_not_err(n.node(data, {'plant:method': 'fission', 'plant:source': 'nuclear', 'power': 'plant'}), expected={'class': 20, 'subclass': 56152287})
-        self.check_err(n.node(data, {'plant:method': 'nuclear', 'plant:source': 'nuclear', 'power': 'plant'}), expected={'class': 20, 'subclass': 56152287})
-        self.check_not_err(n.node(data, {'plant:method': 'fission', 'plant:source': 'nuclear', 'power': 'plant'}), expected={'class': 21, 'subclass': 120690153})
-        self.check_err(n.node(data, {'plant:method': 'fusion', 'plant:source': 'solar', 'power': 'plant'}), expected={'class': 21, 'subclass': 120690153})
-        self.check_err(n.node(data, {'plant:method': 'wind', 'plant:source': 'wind', 'power': 'plant'}), expected={'class': 22, 'subclass': 515061741})
-        self.check_not_err(n.node(data, {'plant:method': 'wind_turbine', 'plant:source': 'wind', 'power': 'plant'}), expected={'class': 22, 'subclass': 515061741})
-        self.check_not_err(n.node(data, {'plant:source': 'wind', 'power': 'plant'}), expected={'class': 22, 'subclass': 515061741})
-        self.check_err(n.node(data, {'plant:method': 'wind_turbine', 'plant:source': 'eolien', 'power': 'plant'}), expected={'class': 21, 'subclass': 443176990})
-        self.check_not_err(n.node(data, {'plant:method': 'wind_turbine', 'plant:source': 'wind', 'power': 'plant'}), expected={'class': 21, 'subclass': 443176990})
-        self.check_err(n.node(data, {'plant:method': 'pump', 'plant:source': 'hydro', 'power': 'plant'}), expected={'class': 23, 'subclass': 1020856194})
-        self.check_not_err(n.node(data, {'plant:method': 'water-storage', 'plant:source': 'hydro', 'power': 'plant'}), expected={'class': 23, 'subclass': 1020856194})
-        self.check_not_err(n.node(data, {'plant:method': 'water-storage', 'plant:source': 'hydro', 'power': 'plant'}), expected={'class': 21, 'subclass': 1372509170})
-        self.check_err(n.node(data, {'plant:method': 'water-pumped-storage', 'plant:source': 'water', 'power': 'plant'}), expected={'class': 21, 'subclass': 1372509170})
-        self.check_not_err(n.node(data, {'plant:method': 'barrage', 'plant:source': 'tidal', 'power': 'plant'}), expected={'class': 24, 'subclass': 75438578})
-        self.check_err(n.node(data, {'plant:method': 'dam', 'plant:source': 'tidal', 'power': 'plant'}), expected={'class': 24, 'subclass': 75438578})
-        self.check_err(n.node(data, {'plant:method': 'stream', 'plant:source': 'solar', 'power': 'plant'}), expected={'class': 21, 'subclass': 934978595})
-        self.check_not_err(n.node(data, {'plant:method': 'barrage', 'plant:source': 'tidal', 'power': 'plant'}), expected={'class': 21, 'subclass': 934978595})
-        self.check_err(n.node(data, {'plant:method': 'solar', 'plant:source': 'solar', 'power': 'plant'}), expected={'class': 25, 'subclass': 1799335667})
-        self.check_not_err(n.node(data, {'plant:method': 'thermal', 'plant:source': 'solar', 'power': 'plant'}), expected={'class': 25, 'subclass': 1799335667})
-        self.check_err(n.node(data, {'plant:method': 'photovoltaic', 'plant:source': 'photovoltaic', 'power': 'plant'}), expected={'class': 21, 'subclass': 1085835351})
-        self.check_not_err(n.node(data, {'plant:method': 'thermal', 'plant:source': 'solar', 'power': 'plant'}), expected={'class': 21, 'subclass': 1085835351})
-        self.check_err(n.node(data, {'plant:method': 'burning', 'plant:source': 'coal', 'power': 'plant'}), expected={'class': 26, 'subclass': 746471181})
-        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'coal', 'power': 'plant'}), expected={'class': 26, 'subclass': 746471181})
-        self.check_not_err(n.node(data, {'plant:source': 'coal', 'power': 'plant'}), expected={'class': 26, 'subclass': 746471181})
-        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'gas', 'power': 'plant'}), expected={'class': 27, 'subclass': 827336490})
-        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'gas', 'power': 'plant'}), expected={'class': 27, 'subclass': 827336490})
-        self.check_not_err(n.node(data, {'plant:source': 'gas', 'power': 'plant'}), expected={'class': 27, 'subclass': 827336490})
-        self.check_not_err(n.node(data, {'plant:method': 'anaerobic_digestion', 'plant:source': 'biomass', 'power': 'plant'}), expected={'class': 28, 'subclass': 2076402923})
-        self.check_err(n.node(data, {'plant:method': 'burn', 'plant:source': 'biomass', 'power': 'plant'}), expected={'class': 28, 'subclass': 2076402923})
-        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'biofuel', 'power': 'plant'}), expected={'class': 29, 'subclass': 1882895060})
-        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'biofuel', 'power': 'plant'}), expected={'class': 29, 'subclass': 1882895060})
-        self.check_not_err(n.node(data, {'plant:source': 'biofuel', 'power': 'plant'}), expected={'class': 29, 'subclass': 1882895060})
-        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'biogas', 'power': 'plant'}), expected={'class': 30, 'subclass': 887792794})
-        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'biogas', 'power': 'plant'}), expected={'class': 30, 'subclass': 887792794})
-        self.check_not_err(n.node(data, {'plant:source': 'biogas', 'power': 'plant'}), expected={'class': 30, 'subclass': 887792794})
-        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'oil', 'power': 'plant'}), expected={'class': 31, 'subclass': 1678290892})
-        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'oil', 'power': 'plant'}), expected={'class': 31, 'subclass': 1678290892})
-        self.check_not_err(n.node(data, {'plant:source': 'oil', 'power': 'plant'}), expected={'class': 31, 'subclass': 1678290892})
-        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'diesel', 'power': 'plant'}), expected={'class': 32, 'subclass': 75543302})
-        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'diesel', 'power': 'plant'}), expected={'class': 32, 'subclass': 75543302})
-        self.check_not_err(n.node(data, {'plant:source': 'diesel', 'power': 'plant'}), expected={'class': 32, 'subclass': 75543302})
-        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'gasoline', 'power': 'plant'}), expected={'class': 33, 'subclass': 599334301})
-        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'gasoline', 'power': 'plant'}), expected={'class': 33, 'subclass': 599334301})
-        self.check_not_err(n.node(data, {'plant:source': 'gasoline', 'power': 'plant'}), expected={'class': 33, 'subclass': 599334301})
-        self.check_err(n.node(data, {'plant:method': 'burning', 'plant:source': 'waste', 'power': 'plant'}), expected={'class': 34, 'subclass': 489417432})
-        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'waste', 'power': 'plant'}), expected={'class': 34, 'subclass': 489417432})
-        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'biomass', 'power': 'plant'}), expected={'class': 21, 'subclass': 46745407})
-        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'biomass;waste', 'power': 'plant'}), expected={'class': 21, 'subclass': 46745407})
-        self.check_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'wave', 'power': 'plant'}), expected={'class': 21, 'subclass': 46745407})
-        self.check_not_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'biomass', 'power': 'plant'}), expected={'class': 21, 'subclass': 1329720574})
-        self.check_not_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'biomass;waste', 'power': 'plant'}), expected={'class': 21, 'subclass': 1329720574})
-        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'coal', 'power': 'plant'}), expected={'class': 21, 'subclass': 1329720574})
-        self.check_not_err(n.way(data, {'power': 'cable'}, [0]), expected={'class': 1, 'subclass': 36378028})
-        self.check_err(n.relation(data, {'power': 'cable_distribution_cabinet'}, []), expected={'class': 1, 'subclass': 36378028})
-        self.check_err(n.relation(data, {'power': 'circuits'}, []), expected={'class': 1, 'subclass': 36378028})
-        self.check_err(n.relation(data, {'power': 'route'}, []), expected={'class': 1, 'subclass': 36378028})
-        self.check_not_err(n.relation(data, {'power': 'circuit', 'type': 'power'}, []), expected={'class': 208, 'subclass': 213213626})
-        self.check_err(n.relation(data, {'type': 'power'}, []), expected={'class': 208, 'subclass': 213213626})
-        self.check_err(n.relation(data, {'power': 'circuit', 'topology': 'branch', 'type': 'power'}, []), expected={'class': 209, 'subclass': 1474691630})
-        self.check_not_err(n.relation(data, {'power': 'circuit', 'topology': 'branched', 'type': 'power'}, []), expected={'class': 209, 'subclass': 1474691630})
-        self.check_not_err(n.relation(data, {'power': 'circuit', 'type': 'power'}, []), expected={'class': 209, 'subclass': 1474691630})
-        self.check_err(n.relation(data, {'power': 'circuit', 'type': 'power', 'wires': '4'}, []), expected={'class': 210, 'subclass': 698560024})
-        self.check_not_err(n.relation(data, {'power': 'circuit', 'type': 'power'}, []), expected={'class': 210, 'subclass': 698560024})
+        self.check_not_err(n.node(data, {'power': 'transformer', 'transformer': 'main'}), expected={'class': 7040003, 'subclass': 1524257444})
+        self.check_err(n.node(data, {'power': 'transformer', 'transformer': 'railway'}), expected={'class': 7040003, 'subclass': 1524257444})
+        self.check_not_err(n.node(data, {'power': 'transformer'}), expected={'class': 7040003, 'subclass': 1524257444})
+        self.check_err(n.node(data, {'generator:source': 'geothermals', 'power': 'generator'}), expected={'class': 7040004, 'subclass': 600492584})
+        self.check_not_err(n.node(data, {'generator:source': 'oil;gas', 'power': 'generator'}), expected={'class': 7040004, 'subclass': 600492584})
+        self.check_err(n.node(data, {'generator:source': 'photovoltaic', 'power': 'generator'}), expected={'class': 7040004, 'subclass': 600492584})
+        self.check_not_err(n.node(data, {'generator:source': 'solar', 'power': 'generator'}), expected={'class': 7040004, 'subclass': 600492584})
+        self.check_not_err(n.node(data, {'power': 'generator'}), expected={'class': 7040004, 'subclass': 600492584})
+        self.check_not_err(n.node(data, {'generator:method': 'fission', 'generator:source': 'nuclear', 'power': 'generator'}), expected={'class': 7040005, 'subclass': 1513616022})
+        self.check_err(n.node(data, {'generator:method': 'nuclear', 'generator:source': 'nuclear', 'power': 'generator'}), expected={'class': 7040005, 'subclass': 1513616022})
+        self.check_not_err(n.node(data, {'generator:method': 'fission', 'generator:source': 'nuclear', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1445012384})
+        self.check_err(n.node(data, {'generator:method': 'fusion', 'generator:source': 'solar', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1445012384})
+        self.check_err(n.node(data, {'generator:method': 'wind', 'generator:source': 'wind', 'power': 'generator'}), expected={'class': 7040007, 'subclass': 1104182574})
+        self.check_not_err(n.node(data, {'generator:method': 'wind_turbine', 'generator:source': 'wind', 'power': 'generator'}), expected={'class': 7040007, 'subclass': 1104182574})
+        self.check_not_err(n.node(data, {'generator:source': 'wind', 'power': 'generator'}), expected={'class': 7040007, 'subclass': 1104182574})
+        self.check_err(n.node(data, {'generator:method': 'wind_turbine', 'generator:source': 'turbine', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1021686777})
+        self.check_not_err(n.node(data, {'generator:method': 'wind_turbine', 'generator:source': 'wind', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1021686777})
+        self.check_err(n.node(data, {'generator:method': 'pump', 'generator:source': 'hydro', 'power': 'generator'}), expected={'class': 7040008, 'subclass': 1379042787})
+        self.check_not_err(n.node(data, {'generator:method': 'water-storage', 'generator:source': 'hydro', 'power': 'generator'}), expected={'class': 7040008, 'subclass': 1379042787})
+        self.check_not_err(n.node(data, {'generator:method': 'water-storage', 'generator:source': 'hydro', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1830475878})
+        self.check_err(n.node(data, {'generator:method': 'water-pumped-storage', 'generator:source': 'water', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1830475878})
+        self.check_not_err(n.node(data, {'generator:method': 'barrage', 'generator:source': 'tidal', 'power': 'generator'}), expected={'class': 7040009, 'subclass': 503240008})
+        self.check_err(n.node(data, {'generator:method': 'dam', 'generator:source': 'tidal', 'power': 'generator'}), expected={'class': 7040009, 'subclass': 503240008})
+        self.check_err(n.node(data, {'generator:method': 'stream', 'generator:source': 'solar', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 976314568})
+        self.check_not_err(n.node(data, {'generator:method': 'barrage', 'generator:source': 'tidal', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 976314568})
+        self.check_err(n.node(data, {'generator:method': 'solar', 'generator:source': 'solar', 'power': 'generator'}), expected={'class': 7040010, 'subclass': 1095645684})
+        self.check_not_err(n.node(data, {'generator:method': 'thermal', 'generator:source': 'solar', 'power': 'generator'}), expected={'class': 7040010, 'subclass': 1095645684})
+        self.check_err(n.node(data, {'generator:method': 'photovoltaic', 'generator:source': 'photovoltaic', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1457983121})
+        self.check_not_err(n.node(data, {'generator:method': 'thermal', 'generator:source': 'solar', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1457983121})
+        self.check_err(n.node(data, {'generator:method': 'burning', 'generator:source': 'coal', 'power': 'generator'}), expected={'class': 7040011, 'subclass': 727067352})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'coal', 'power': 'generator'}), expected={'class': 7040011, 'subclass': 727067352})
+        self.check_not_err(n.node(data, {'generator:source': 'coal', 'power': 'generator'}), expected={'class': 7040011, 'subclass': 727067352})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'gas', 'power': 'generator'}), expected={'class': 7040012, 'subclass': 1587058630})
+        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'gas', 'power': 'generator'}), expected={'class': 7040012, 'subclass': 1587058630})
+        self.check_not_err(n.node(data, {'generator:source': 'gas', 'power': 'generator'}), expected={'class': 7040012, 'subclass': 1587058630})
+        self.check_not_err(n.node(data, {'generator:method': 'anaerobic_digestion', 'generator:source': 'biomass', 'power': 'generator'}), expected={'class': 7040013, 'subclass': 1563205211})
+        self.check_err(n.node(data, {'generator:method': 'burn', 'generator:source': 'biomass', 'power': 'generator'}), expected={'class': 7040013, 'subclass': 1563205211})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'biofuel', 'power': 'generator'}), expected={'class': 7040014, 'subclass': 2056310355})
+        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'biofuel', 'power': 'generator'}), expected={'class': 7040014, 'subclass': 2056310355})
+        self.check_not_err(n.node(data, {'generator:source': 'biofuel', 'power': 'generator'}), expected={'class': 7040014, 'subclass': 2056310355})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'biogas', 'power': 'generator'}), expected={'class': 7040015, 'subclass': 1353854094})
+        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'biogas', 'power': 'generator'}), expected={'class': 7040015, 'subclass': 1353854094})
+        self.check_not_err(n.node(data, {'generator:source': 'biogas', 'power': 'generator'}), expected={'class': 7040015, 'subclass': 1353854094})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'oil', 'power': 'generator'}), expected={'class': 7040016, 'subclass': 2059171544})
+        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'oil', 'power': 'generator'}), expected={'class': 7040016, 'subclass': 2059171544})
+        self.check_not_err(n.node(data, {'generator:source': 'oil', 'power': 'generator'}), expected={'class': 7040016, 'subclass': 2059171544})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'diesel', 'power': 'generator'}), expected={'class': 7040017, 'subclass': 87750196})
+        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'diesel', 'power': 'generator'}), expected={'class': 7040017, 'subclass': 87750196})
+        self.check_not_err(n.node(data, {'generator:source': 'diesel', 'power': 'generator'}), expected={'class': 7040017, 'subclass': 87750196})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'gasoline', 'power': 'generator'}), expected={'class': 7040018, 'subclass': 1418218249})
+        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'gasoline', 'power': 'generator'}), expected={'class': 7040018, 'subclass': 1418218249})
+        self.check_not_err(n.node(data, {'generator:source': 'gasoline', 'power': 'generator'}), expected={'class': 7040018, 'subclass': 1418218249})
+        self.check_err(n.node(data, {'generator:method': 'burning', 'generator:source': 'waste', 'power': 'generator'}), expected={'class': 7040019, 'subclass': 600470569})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'waste', 'power': 'generator'}), expected={'class': 7040019, 'subclass': 600470569})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'biomass', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1335984003})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'gas;oil', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1335984003})
+        self.check_not_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'gas;oil;waste', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1335984003})
+        self.check_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'waste;solar', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1335984003})
+        self.check_err(n.node(data, {'generator:method': 'combustion', 'generator:source': 'wave', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 1335984003})
+        self.check_not_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'biomass', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 313390332})
+        self.check_not_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'biomass;waste', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 313390332})
+        self.check_err(n.node(data, {'generator:method': 'gasification', 'generator:source': 'coal', 'power': 'generator'}), expected={'class': 7040006, 'subclass': 313390332})
+        self.check_not_err(n.node(data, {'plant:source': 'gas;oil', 'power': 'plant'}), expected={'class': 7040020, 'subclass': 966751128})
+        self.check_err(n.node(data, {'plant:source': 'photovoltaic', 'power': 'plant'}), expected={'class': 7040020, 'subclass': 966751128})
+        self.check_not_err(n.node(data, {'plant:source': 'solar', 'power': 'plant'}), expected={'class': 7040020, 'subclass': 966751128})
+        self.check_not_err(n.node(data, {'power': 'plant'}), expected={'class': 7040020, 'subclass': 966751128})
+        self.check_not_err(n.node(data, {'plant:method': 'fission', 'plant:source': 'nuclear', 'power': 'plant'}), expected={'class': 7040021, 'subclass': 56152287})
+        self.check_err(n.node(data, {'plant:method': 'nuclear', 'plant:source': 'nuclear', 'power': 'plant'}), expected={'class': 7040021, 'subclass': 56152287})
+        self.check_not_err(n.node(data, {'plant:method': 'fission', 'plant:source': 'nuclear', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 120690153})
+        self.check_err(n.node(data, {'plant:method': 'fusion', 'plant:source': 'solar', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 120690153})
+        self.check_err(n.node(data, {'plant:method': 'wind', 'plant:source': 'wind', 'power': 'plant'}), expected={'class': 7040023, 'subclass': 515061741})
+        self.check_not_err(n.node(data, {'plant:method': 'wind_turbine', 'plant:source': 'wind', 'power': 'plant'}), expected={'class': 7040023, 'subclass': 515061741})
+        self.check_not_err(n.node(data, {'plant:source': 'wind', 'power': 'plant'}), expected={'class': 7040023, 'subclass': 515061741})
+        self.check_err(n.node(data, {'plant:method': 'wind_turbine', 'plant:source': 'eolien', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 443176990})
+        self.check_not_err(n.node(data, {'plant:method': 'wind_turbine', 'plant:source': 'wind', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 443176990})
+        self.check_err(n.node(data, {'plant:method': 'pump', 'plant:source': 'hydro', 'power': 'plant'}), expected={'class': 7040024, 'subclass': 1020856194})
+        self.check_not_err(n.node(data, {'plant:method': 'water-storage', 'plant:source': 'hydro', 'power': 'plant'}), expected={'class': 7040024, 'subclass': 1020856194})
+        self.check_not_err(n.node(data, {'plant:method': 'water-storage', 'plant:source': 'hydro', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 1372509170})
+        self.check_err(n.node(data, {'plant:method': 'water-pumped-storage', 'plant:source': 'water', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 1372509170})
+        self.check_not_err(n.node(data, {'plant:method': 'barrage', 'plant:source': 'tidal', 'power': 'plant'}), expected={'class': 7040025, 'subclass': 75438578})
+        self.check_err(n.node(data, {'plant:method': 'dam', 'plant:source': 'tidal', 'power': 'plant'}), expected={'class': 7040025, 'subclass': 75438578})
+        self.check_err(n.node(data, {'plant:method': 'stream', 'plant:source': 'solar', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 934978595})
+        self.check_not_err(n.node(data, {'plant:method': 'barrage', 'plant:source': 'tidal', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 934978595})
+        self.check_err(n.node(data, {'plant:method': 'solar', 'plant:source': 'solar', 'power': 'plant'}), expected={'class': 7040026, 'subclass': 1799335667})
+        self.check_not_err(n.node(data, {'plant:method': 'thermal', 'plant:source': 'solar', 'power': 'plant'}), expected={'class': 7040026, 'subclass': 1799335667})
+        self.check_err(n.node(data, {'plant:method': 'photovoltaic', 'plant:source': 'photovoltaic', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 1085835351})
+        self.check_not_err(n.node(data, {'plant:method': 'thermal', 'plant:source': 'solar', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 1085835351})
+        self.check_err(n.node(data, {'plant:method': 'burning', 'plant:source': 'coal', 'power': 'plant'}), expected={'class': 7040027, 'subclass': 746471181})
+        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'coal', 'power': 'plant'}), expected={'class': 7040027, 'subclass': 746471181})
+        self.check_not_err(n.node(data, {'plant:source': 'coal', 'power': 'plant'}), expected={'class': 7040027, 'subclass': 746471181})
+        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'gas', 'power': 'plant'}), expected={'class': 7040028, 'subclass': 827336490})
+        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'gas', 'power': 'plant'}), expected={'class': 7040028, 'subclass': 827336490})
+        self.check_not_err(n.node(data, {'plant:source': 'gas', 'power': 'plant'}), expected={'class': 7040028, 'subclass': 827336490})
+        self.check_not_err(n.node(data, {'plant:method': 'anaerobic_digestion', 'plant:source': 'biomass', 'power': 'plant'}), expected={'class': 7040029, 'subclass': 2076402923})
+        self.check_err(n.node(data, {'plant:method': 'burn', 'plant:source': 'biomass', 'power': 'plant'}), expected={'class': 7040029, 'subclass': 2076402923})
+        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'biofuel', 'power': 'plant'}), expected={'class': 7040030, 'subclass': 1882895060})
+        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'biofuel', 'power': 'plant'}), expected={'class': 7040030, 'subclass': 1882895060})
+        self.check_not_err(n.node(data, {'plant:source': 'biofuel', 'power': 'plant'}), expected={'class': 7040030, 'subclass': 1882895060})
+        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'biogas', 'power': 'plant'}), expected={'class': 7040031, 'subclass': 887792794})
+        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'biogas', 'power': 'plant'}), expected={'class': 7040031, 'subclass': 887792794})
+        self.check_not_err(n.node(data, {'plant:source': 'biogas', 'power': 'plant'}), expected={'class': 7040031, 'subclass': 887792794})
+        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'oil', 'power': 'plant'}), expected={'class': 7040032, 'subclass': 1678290892})
+        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'oil', 'power': 'plant'}), expected={'class': 7040032, 'subclass': 1678290892})
+        self.check_not_err(n.node(data, {'plant:source': 'oil', 'power': 'plant'}), expected={'class': 7040032, 'subclass': 1678290892})
+        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'diesel', 'power': 'plant'}), expected={'class': 7040033, 'subclass': 75543302})
+        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'diesel', 'power': 'plant'}), expected={'class': 7040033, 'subclass': 75543302})
+        self.check_not_err(n.node(data, {'plant:source': 'diesel', 'power': 'plant'}), expected={'class': 7040033, 'subclass': 75543302})
+        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'gasoline', 'power': 'plant'}), expected={'class': 7040034, 'subclass': 599334301})
+        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'gasoline', 'power': 'plant'}), expected={'class': 7040034, 'subclass': 599334301})
+        self.check_not_err(n.node(data, {'plant:source': 'gasoline', 'power': 'plant'}), expected={'class': 7040034, 'subclass': 599334301})
+        self.check_err(n.node(data, {'plant:method': 'burning', 'plant:source': 'waste', 'power': 'plant'}), expected={'class': 7040035, 'subclass': 489417432})
+        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'waste', 'power': 'plant'}), expected={'class': 7040035, 'subclass': 489417432})
+        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'biomass', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 46745407})
+        self.check_not_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'biomass;waste', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 46745407})
+        self.check_err(n.node(data, {'plant:method': 'combustion', 'plant:source': 'wave', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 46745407})
+        self.check_not_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'biomass', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 1329720574})
+        self.check_not_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'biomass;waste', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 1329720574})
+        self.check_err(n.node(data, {'plant:method': 'gasification', 'plant:source': 'coal', 'power': 'plant'}), expected={'class': 7040022, 'subclass': 1329720574})
+        self.check_not_err(n.way(data, {'power': 'cable'}, [0]), expected={'class': 7040002, 'subclass': 36378028})
+        self.check_err(n.relation(data, {'power': 'cable_distribution_cabinet'}, []), expected={'class': 7040002, 'subclass': 36378028})
+        self.check_err(n.relation(data, {'power': 'circuits'}, []), expected={'class': 7040002, 'subclass': 36378028})
+        self.check_err(n.relation(data, {'power': 'route'}, []), expected={'class': 7040002, 'subclass': 36378028})
+        self.check_not_err(n.relation(data, {'power': 'circuit', 'type': 'power'}, []), expected={'class': 7040209, 'subclass': 213213626})
+        self.check_err(n.relation(data, {'type': 'power'}, []), expected={'class': 7040209, 'subclass': 213213626})
+        self.check_err(n.relation(data, {'power': 'circuit', 'topology': 'branch', 'type': 'power'}, []), expected={'class': 7040210, 'subclass': 1474691630})
+        self.check_not_err(n.relation(data, {'power': 'circuit', 'topology': 'branched', 'type': 'power'}, []), expected={'class': 7040210, 'subclass': 1474691630})
+        self.check_not_err(n.relation(data, {'power': 'circuit', 'type': 'power'}, []), expected={'class': 7040210, 'subclass': 1474691630})
+        self.check_err(n.relation(data, {'power': 'circuit', 'type': 'power', 'wires': '4'}, []), expected={'class': 7040211, 'subclass': 698560024})
+        self.check_not_err(n.relation(data, {'power': 'circuit', 'type': 'power'}, []), expected={'class': 7040211, 'subclass': 698560024})
