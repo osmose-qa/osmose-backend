@@ -34,10 +34,12 @@ class TagFix_MultipleTag2(PluginMapCSS):
         self.errors[71301] = self.def_class(item = 7130, level = 3, tags = mapcss.list_('tag') + mapcss.list_('highway', 'maxheight', 'fix:survey'), title = mapcss.tr('Missing maxheight tag'), detail = mapcss.tr('Missing `maxheight=*` or `maxheight:physical=*` for a tunnel or a way under a bridge.'))
         self.errors[303210] = self.def_class(item = 3032, level = 3, tags = mapcss.list_('tag'), title = mapcss.tr('Fence with {0} tag, also add {1}', mapcss._tag_uncapture(capture_tags, '{1.key}'), mapcss._tag_uncapture(capture_tags, '{2.key}')))
         self.errors[303211] = self.def_class(item = 3032, level = 3, tags = mapcss.list_('tag'), title = mapcss.tr('suspicious tag combination'))
+        self.errors[309120] = self.def_class(item = 3091, level = 3, tags = mapcss.list_('tag'), title = mapcss.tr('suspicious tag combination'))
         self.errors[316150] = self.def_class(item = 3161, level = 3, tags = mapcss.list_('tag') + mapcss.list_('highway', 'fix:chair', 'parking'), title = mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.key}=*')), detail = mapcss.tr('Indicate the type of parking, for example `parking=street_side`, `parking=surface` or `parking=underground`, to distinguish between major parking lots and roadside parking. Add access tags and/or service ways through the parking lot as desired.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:parking')
 
         self.re_066203d3 = re.compile(r'^[0-9]+$')
         self.re_2ae49e65 = re.compile(r'^(motorway_link|trunk_link|primary|primary_link|secondary|secondary_link)$')
+        self.re_43e7f95e = re.compile(r'mph')
         self.re_5955bda1 = re.compile(r'^(no|informal)$')
 
 
@@ -583,6 +585,35 @@ class TagFix_MultipleTag2(PluginMapCSS):
                 # throwWarning:tr("{0} without {1}","{0.tag}","{1.key}=*")
                 err.append({'class': 316150, 'subclass': 0, 'text': mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.key}=*'))})
 
+        # way[highway=living_street][maxspeed][maxspeed=~/mph/][get(split(" ",tag(maxspeed)),0)>15]
+        # way[highway=living_street][maxspeed][maxspeed!~/mph/][get(split(" ",tag(maxspeed)),0)>20][outside("AT,CL,DK,IL,UZ")]
+        # way[highway=living_street][maxspeed][maxspeed!~/mph/][get(split(" ",tag(maxspeed)),0)>30][inside("AT,CL,DK,IL,UZ")]
+        if ('highway' in keys and 'maxspeed' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'highway') == mapcss._value_capture(capture_tags, 0, 'living_street')) and (mapcss._tag_capture(capture_tags, 1, tags, 'maxspeed')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 2, self.re_43e7f95e), mapcss._tag_capture(capture_tags, 2, tags, 'maxspeed'))) and (mapcss.get(mapcss.split(' ', mapcss.tag(tags, 'maxspeed')), 0) > 15))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'highway') == mapcss._value_capture(capture_tags, 0, 'living_street')) and (mapcss._tag_capture(capture_tags, 1, tags, 'maxspeed')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_43e7f95e, 'mph'), mapcss._tag_capture(capture_tags, 2, tags, 'maxspeed'))) and (mapcss.get(mapcss.split(' ', mapcss.tag(tags, 'maxspeed')), 0) > 20) and (mapcss.outside(self.father.config.options, 'AT,CL,DK,IL,UZ')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'highway') == mapcss._value_capture(capture_tags, 0, 'living_street')) and (mapcss._tag_capture(capture_tags, 1, tags, 'maxspeed')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_43e7f95e, 'mph'), mapcss._tag_capture(capture_tags, 2, tags, 'maxspeed'))) and (mapcss.get(mapcss.split(' ', mapcss.tag(tags, 'maxspeed')), 0) > 30) and (mapcss.inside(self.father.config.options, 'AT,CL,DK,IL,UZ')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("suspicious tag combination")
+                # -osmoseItemClassLevel:"3091/309120/3"
+                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
+                # -osmoseAssertMatchWithContext:list("way highway=living_street maxspeed=50","inside=FR")
+                # assertNoMatch:"way highway=living_street maxspeed=\"15 mph\""
+                # assertMatch:"way highway=living_street maxspeed=\"20 mph\""
+                # assertNoMatch:"way highway=living_street maxspeed=20"
+                # assertNoMatch:"way highway=living_street maxspeed=walk"
+                # assertNoMatch:"way highway=living_street"
+                err.append({'class': 309120, 'subclass': 0, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
         return err
 
     def relation(self, data, tags, members):
@@ -820,6 +851,13 @@ class Test(TestPluginMapcss):
         self.check_err(n.way(data, {'highway': 'primary', 'tunnel': 'yes'}, [0]), expected={'class': 71301, 'subclass': 0})
         self.check_not_err(n.way(data, {'bridge': 'yes', 'tunnel': 'no'}, [0]), expected={'class': 40303, 'subclass': 0})
         self.check_err(n.way(data, {'bridge': 'yes', 'tunnel': 'yes'}, [0]), expected={'class': 40303, 'subclass': 0})
+        with with_options(n, {'country': 'FR'}):
+            self.check_err(n.way(data, {'highway': 'living_street', 'maxspeed': '50'}, [0]), expected={'class': 309120, 'subclass': 0})
+        self.check_not_err(n.way(data, {'highway': 'living_street', 'maxspeed': '15 mph'}, [0]), expected={'class': 309120, 'subclass': 0})
+        self.check_err(n.way(data, {'highway': 'living_street', 'maxspeed': '20 mph'}, [0]), expected={'class': 309120, 'subclass': 0})
+        self.check_not_err(n.way(data, {'highway': 'living_street', 'maxspeed': '20'}, [0]), expected={'class': 309120, 'subclass': 0})
+        self.check_not_err(n.way(data, {'highway': 'living_street', 'maxspeed': 'walk'}, [0]), expected={'class': 309120, 'subclass': 0})
+        self.check_not_err(n.way(data, {'highway': 'living_street'}, [0]), expected={'class': 309120, 'subclass': 0})
         self.check_err(n.relation(data, {}, []), expected={'class': 21102, 'subclass': 0})
         self.check_not_err(n.relation(data, {'amenity': 'parking', 'parking': 'street_side', 'type': 'multipolygon'}, []), expected={'class': 316150, 'subclass': 0})
         self.check_err(n.relation(data, {'amenity': 'parking', 'type': 'multipolygon'}, []), expected={'class': 316150, 'subclass': 0})

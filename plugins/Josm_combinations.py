@@ -62,7 +62,6 @@ class Josm_combinations(PluginMapCSS):
         self.re_4129caf1 = re.compile(r'^cycleway(:right|:both|):buffer')
         self.re_41650b2e = re.compile(r'^(bar|dojo|pub|restaurant|swimming_pool)$')
         self.re_43925078 = re.compile(r'^cycleway(?!:right|:left|:both|:lanes):')
-        self.re_43e7f95e = re.compile(r'mph')
         self.re_49fc2c26 = re.compile(r'^(bowling_alley|slipway|swimming_pool|track)$')
         self.re_4f156c8f = re.compile(r'^(parking|parking_space|parking_entrance|motorcycle_parking|bicycle_parking)$')
         self.re_4fbfe59b = re.compile(r'^(water|spring)$')
@@ -3376,27 +3375,9 @@ class Josm_combinations(PluginMapCSS):
                 err.append({'class': 9001002, 'subclass': 340613033, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
 
         # way[highway=living_street][maxspeed][maxspeed=~/mph/][get(split(" ",tag(maxspeed)),0)>15]
-        # way[highway=living_street][maxspeed][maxspeed!~/mph/][get(split(" ",tag(maxspeed)),0)>20]
-        if ('highway' in keys and 'maxspeed' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'highway') == mapcss._value_capture(capture_tags, 0, 'living_street')) and (mapcss._tag_capture(capture_tags, 1, tags, 'maxspeed')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 2, self.re_43e7f95e), mapcss._tag_capture(capture_tags, 2, tags, 'maxspeed'))) and (mapcss.get(mapcss.split(' ', mapcss.tag(tags, 'maxspeed')), 0) > 15))
-                except mapcss.RuleAbort: pass
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'highway') == mapcss._value_capture(capture_tags, 0, 'living_street')) and (mapcss._tag_capture(capture_tags, 1, tags, 'maxspeed')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_43e7f95e, 'mph'), mapcss._tag_capture(capture_tags, 2, tags, 'maxspeed'))) and (mapcss.get(mapcss.split(' ', mapcss.tag(tags, 'maxspeed')), 0) > 20))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("suspicious tag combination")
-                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
-                # assertNoMatch:"way highway=living_street maxspeed=\"15 mph\""
-                # assertMatch:"way highway=living_street maxspeed=\"20 mph\""
-                # assertNoMatch:"way highway=living_street maxspeed=20"
-                # assertMatch:"way highway=living_street maxspeed=30"
-                # assertNoMatch:"way highway=living_street maxspeed=walk"
-                # assertNoMatch:"way highway=living_street"
-                err.append({'class': 9001002, 'subclass': 1040857321, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+        # way[highway=living_street][maxspeed][maxspeed!~/mph/][get(split(" ",tag(maxspeed)),0)>20][outside("AT,CL,DK,IL,UZ")]
+        # way[highway=living_street][maxspeed][maxspeed!~/mph/][get(split(" ",tag(maxspeed)),0)>30][inside("AT,CL,DK,IL,UZ")]
+        # Rule Blacklisted (id: 110705769)
 
         # way[piste:type=nordic][!piste:grooming]
         if ('piste:type' in keys):
@@ -4750,12 +4731,6 @@ class Test(TestPluginMapcss):
         self.check_not_err(n.way(data, {'bicycle': 'use_sidepath', 'cycleway': 'no'}, [0]), expected={'class': 9001002, 'subclass': 340613033})
         self.check_not_err(n.way(data, {'cycleway': 'separate', 'highway': 'cycleway'}, [0]), expected={'class': 9001002, 'subclass': 340613033})
         self.check_not_err(n.way(data, {'bicycle': 'use_sidepath', 'highway': 'residential'}, [0]), expected={'class': 9001002, 'subclass': 340613033})
-        self.check_not_err(n.way(data, {'highway': 'living_street', 'maxspeed': '15 mph'}, [0]), expected={'class': 9001002, 'subclass': 1040857321})
-        self.check_err(n.way(data, {'highway': 'living_street', 'maxspeed': '20 mph'}, [0]), expected={'class': 9001002, 'subclass': 1040857321})
-        self.check_not_err(n.way(data, {'highway': 'living_street', 'maxspeed': '20'}, [0]), expected={'class': 9001002, 'subclass': 1040857321})
-        self.check_err(n.way(data, {'highway': 'living_street', 'maxspeed': '30'}, [0]), expected={'class': 9001002, 'subclass': 1040857321})
-        self.check_not_err(n.way(data, {'highway': 'living_street', 'maxspeed': 'walk'}, [0]), expected={'class': 9001002, 'subclass': 1040857321})
-        self.check_not_err(n.way(data, {'highway': 'living_street'}, [0]), expected={'class': 9001002, 'subclass': 1040857321})
         self.check_not_err(n.way(data, {'piste:grooming': 'classic', 'piste:type': 'nordic'}, [0]), expected={'class': 9001001, 'subclass': 716854348})
         self.check_err(n.way(data, {'piste:type': 'nordic'}, [0]), expected={'class': 9001001, 'subclass': 716854348})
         self.check_not_err(n.way(data, {'cycleway:both': 'lane', 'cycleway:both:buffer': 'no'}, [0]), expected={'class': 9001002, 'subclass': 89219844})
