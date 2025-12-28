@@ -254,3 +254,19 @@ node[tunnel][!highway][!area:highway][!railway][!waterway][!piste:type][type!=tu
     group: tr("suspicious tag combination");
     -osmoseItemClassLevel: "3032/303211/3"; /* Not using 9001/9001002 as we don't know how JOSM will change its rules */
 }
+
+/* Workaround for https://github.com/osmose-qa/osmose-backend/issues/2569#issuecomment-3192865970 */
+/* Copy of rule from JOSM -> combinations.mapcss with modified assert (and item number) */
+way[highway=living_street][maxspeed][maxspeed=~/mph/][get(split(" ", tag(maxspeed)), 0) > 15],
+way[highway=living_street][maxspeed][maxspeed!~/mph/][get(split(" ", tag(maxspeed)), 0) > 20][outside("AT,CL,DK,IL,UZ")],
+way[highway=living_street][maxspeed][maxspeed!~/mph/][get(split(" ", tag(maxspeed)), 0) > 30][inside("AT,CL,DK,IL,UZ")] { /*Austria, Chile, Denmark, Israel, Uzbekistan*/
+    throwWarning: tr("{0} together with {1}", "{0.tag}", "{1.tag}");
+    group: tr("suspicious tag combination");
+    assertNoMatch: "way highway=living_street";
+    assertNoMatch: "way highway=living_street maxspeed=20";
+    assertNoMatch: "way highway=living_street maxspeed=\"15 mph\"";
+    assertNoMatch: "way highway=living_street maxspeed=walk";
+    -osmoseAssertMatchWithContext: list("way highway=living_street maxspeed=50", "inside=FR");
+    assertMatch: "way highway=living_street maxspeed=\"20 mph\"";
+    -osmoseItemClassLevel: "3091/309120/3";
+}

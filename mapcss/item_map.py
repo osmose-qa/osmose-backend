@@ -167,7 +167,7 @@ item_map = \
                             '{0} on a relation without {1}': 9001003},
                   'item': 9001,
                   'prefix': 'Josm_',
-                  'subclass_blacklist': [643796350, 317760248],
+                  'subclass_blacklist': [643796350, 317760248, 110705769],
                   'tags': ['tag'],
                   'url': 'https://josm.openstreetmap.de/browser/josm/trunk/resources/data/validator/combinations.mapcss?format=txt',
                   'url_display': 'https://josm.openstreetmap.de/browser/josm/trunk/resources/data/validator/combinations.mapcss'},
