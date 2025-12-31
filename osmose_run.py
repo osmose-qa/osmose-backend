@@ -170,7 +170,7 @@ def execc(conf, logger, analysers, options, osmosis_manager):
                     logger.log("Update with diff fails. Fallback to download.")
 
             if not newer:
-                logger.log(logger.log_av_r+u"downloading"+logger.log_ap)
+                logger.log(logger.log_av_r+u"downloading "+conf.download["url"]+logger.log_ap)
                 newer = download.dl(conf.download["url"], conf.download["dst"], logger.sub(),
                                     min_file_size=8*1024)
 
