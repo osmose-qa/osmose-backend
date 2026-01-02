@@ -40,7 +40,7 @@ class Analyser_Merge_Post_box_FR(Analyser_Merge_Point):
             CSV(
                 SourceDataFair(
                     attribution = "La Poste",
-                    url="https://datanova.laposte.fr/datasets/laposte-boiterue", file_name="BAL_de_rues_janv2025.csv"),
+                    url="https://datanova.laposte.fr/datasets/laposte-boiterue", file_name="DATANOVA_20251002.csv"),
                 separator = ","),
             Load_XY("VA_COORD_ADR_X", "VA_COORD_ADR_Y"),
             Conflate(
