@@ -49,7 +49,7 @@ display it correctly. Please change the text to be encoded in Unicode.'''),
         self.converter = icu.Transliterator.createInstance('Zawgyi-my')
 
     def node(self, data, tags):
-        errs = []
+        fixes = {}
         for key, value in tags.items():
             if not any(0x1000 <= ord(c) <= 0x109F for c in value):
                 continue
@@ -59,8 +59,10 @@ display it correctly. Please change the text to be encoded in Unicode.'''),
             fixed_value = self.converter.transliterate(value)
             if value == fixed_value:
                 continue
-            errs.append({'class': 50706, 'subclass': 0, 'fix': {key: fixed_value}})
-        return errs
+            fixes[key] = fixed_value
+
+        if fixes:
+            return [{'class': 50706, 'fix': fixes}]
 
     def way(self, data, tags, nodes):
         return self.node(data, tags)
@@ -99,4 +101,8 @@ class Test(TestPluginCommon):
             self.check_err(
                 a.relation(None, {'fixme': zawgyi}, members=None),
                 {'class': 50706, 'subclass': 0, 'fix': {'fixme': uni}},
+            )
+            self.check_err(
+                a.way(None, {'name': zawgyi, 'name:my': zawgyi}, nodes=None),
+                {'class': 50706, 'subclass': 0, 'fix': {'name': uni, 'name:my': uni}},
             )
