@@ -648,3 +648,74 @@ node[x][join_list("-", trim_list(split(";", tag("x")))) = "a-b-c"] {
   assertMatch: "node x=\"a;  b; ; c\"";
   assertNoMatch: "node x=a;b;0;c";
 }
+
+
+node[abc*=00] {
+	throwWarning: tr("{0} contains 0", "{0.key}");
+	assertMatch: "node abc=00";
+	assertMatch: "node abc=0012";
+	assertMatch: "node abc=a00c";
+	assertMatch: "node abc=0";
+	assertMatch: "node abc=0.0";
+	assertNoMatch: "node abc=2-2";
+}
+node[abc*="00"] {
+	throwWarning: tr("{0} contains quoted 00", "{0.key}");
+	assertMatch: "node abc=00";
+	assertMatch: "node abc=0012";
+	assertMatch: "node abc=a00c";
+	assertNoMatch: "node abc=0";
+	assertNoMatch: "node abc=2-2";
+}
+node[abc*=0.0] {
+	throwWarning: tr("{0} contains 0.0", "{0.key}");
+	assertMatch: "node abc=0.0";
+	assertNoMatch: "node abc=00";
+	assertNoMatch: "node abc=0012";
+	assertNoMatch: "node abc=a00c";
+	assertNoMatch: "node abc=0";
+	assertNoMatch: "node abc=2-2";
+}
+node[abc*=*def] {
+	throwWarning: tr("{0} contains 00 via key def", "{0.key}");
+	assertMatch: "node abc=00 def=00";
+	assertMatch: "node abc=0012 def=00";
+	assertMatch: "node abc=a00c def=00";
+	assertNoMatch: "node abc=0 def=00";
+	assertNoMatch: "node abc=2-2 def=00";
+}
+node[abc^=00] {
+	throwWarning: tr("{0} starts with 0", "{0.key}");
+	assertMatch: "node abc=00";
+	assertMatch: "node abc=0012";
+	assertMatch: "node abc=00ab";
+	assertMatch: "node abc=0";
+	assertMatch: "node abc=0.0";
+	assertNoMatch: "node abc=2-2";
+}
+node[abc^=*def] {
+	throwWarning: tr("{0} starts with 01 via key def", "{0.key}");
+	assertMatch: "node abc=011 def=01";
+	assertMatch: "node abc=01c def=01";
+	assertNoMatch: "node abc=01c def=1";
+}
+node[abc$=00] {
+	throwWarning: tr("{0} ends with 0", "{0.key}");
+	assertMatch: "node abc=00";
+	assertMatch: "node abc=2100";
+	assertMatch: "node abc=ab00";
+	assertMatch: "node abc=0";
+	assertMatch: "node abc=0.0";
+	assertNoMatch: "node abc=2-2";
+}
+node[abc~=00] {
+	throwWarning: tr("{0} has a literal 0 in the list", "{0.key}");
+	assertMatch: "node abc=0";
+	assertMatch: "node abc=2;1;0";
+	assertMatch: "node abc=a;b;0";
+	assertNoMatch: "node abc=00";
+	assertNoMatch: "node abc=a;b;000";
+	assertNoMatch: "node abc=a;b;00";
+	assertNoMatch: "node abc=0.0";
+	assertNoMatch: "node abc=2-2";
+}

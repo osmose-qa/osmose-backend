@@ -198,19 +198,19 @@ class RuleAbort(Exception):
 
 def startswith(subject, string):
     if subject is not None and string is not None:
-        return subject.startswith(string)
+        return subject.startswith(str(string))
 
 def endswith(subject, string):
     if subject is not None and string is not None:
-        return subject.endswith(string)
+        return subject.endswith(str(string))
 
 def string_contains(subject, string):
     if subject is not None and string is not None:
-        return string in subject
+        return str(string) in subject
 
 def list_contains(subject, string):
     if subject is not None and string is not None:
-        return string in subject and any(map(lambda s: s.strip() == string, subject.split(";")))
+        return str(string) in subject and any(map(lambda s: s.strip() == str(string), subject.split(";")))
 
 def at(asset_lat, asset_lon, lat, lon):
     return asset_lat == lat and asset_lon == lon
