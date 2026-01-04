@@ -35,24 +35,19 @@ WHERE
   tags != ''::hstore AND
   (
     tags?'waterway' AND
-    tags->'waterway' IN ('river', 'riverbank', 'canal', 'dock')
+    tags->'waterway' IN ('canal', 'dock', 'river', 'riverbank', 'tidal_channel')
   ) OR (
     tags?'water' AND
-    tags->'water' IN ('lake', 'reservoir', 'river', 'canal', 'lagoon', 'pond')
+    tags->'water' NOT IN ('fish_pass', 'wastewater')
   ) OR (
     tags?'natural' AND
-    tags->'natural' = 'water' AND
-    (
-      NOT tags?'water' OR
-      tags->'water' IN ('lake', 'reservoir', 'river', 'canal', 'lagoon', 'pond', 'fjord', 'harbour')
-    )
-  ) OR (
-    tags?'natural' AND
-    tags->'natural' IN ('coastline', 'beach', 'wetland')
+    tags->'natural' IN ('beach', 'coastline', 'water', 'wetland') AND
+    NOT tags?'water'
   ) OR (
     tags?'landuse' AND
     tags->'landuse' IN ('basin', 'reservoir')
   ) OR (
+    -- To catch piers in the water body connected to other piers
     tags?'man_made' AND
     tags->'man_made' IN ('quay', 'pier')
   )
@@ -62,6 +57,7 @@ SELECT
   ways.id,
   ways.linestring
 FROM
+  -- Cannot use table polygons due to negative search in sql11: water polygons crossing extract borders are missing
   relations
   JOIN relation_members ON
     relation_members.relation_id = relations.id AND
@@ -72,20 +68,14 @@ FROM
 WHERE
   (
     relations.tags?'waterway' AND
-    relations.tags->'waterway' IN ('river', 'riverbank', 'canal', 'dock')
+    relations.tags->'waterway' IN ('canal', 'dock', 'river', 'riverbank', 'tidal_channel')
   ) OR (
     relations.tags?'water' AND
-    relations.tags->'water' IN ('lake', 'reservoir', 'river', 'canal', 'lagoon', 'pond')
+    relations.tags->'water' NOT IN ('fish_pass', 'wastewater')
   ) OR (
     relations.tags?'natural' AND
-    relations.tags->'natural' = 'water' AND
-    (
-      NOT relations.tags?'water' OR
-      relations.tags->'water' IN ('lake', 'reservoir', 'river', 'canal', 'lagoon', 'pond', 'fjord', 'harbour')
-    )
-  ) OR (
-    relations.tags?'natural' AND
-    relations.tags->'natural' IN ('beach', 'wetland')
+    relations.tags->'natural' IN ('beach', 'coastline', 'water', 'wetland') AND
+    NOT relations.tags?'water'
   ) OR (
     relations.tags?'landuse' AND
     relations.tags->'landuse' IN ('basin', 'reservoir')
@@ -114,7 +104,9 @@ WHERE
     tags->'leisure' = 'slipway'
   ) OR (
     tags?'man_made' AND
-    tags->'man_made' IN ('quay', 'pier')
+    tags->'man_made' IN ('quay', 'pier') AND
+    -- Exclude floating=yes: could be in the middle of a lake, far from the water linestring
+    (NOT tags?'floating' OR tags->'floating' = 'no')
   )
 )
 UNION ALL
@@ -166,3 +158,27 @@ class Analyser_Osmosis_Water(Analyser_Osmosis):
         self.run(sql01)
         self.run(sql10.format("touched_", self.config.options.get("proj")))
         self.run(sql11.format("touched_"), self.callback10)
+
+
+###########################################################################
+
+from .Analyser_Osmosis import TestAnalyserOsmosis
+
+class Test(TestAnalyserOsmosis):
+    @classmethod
+    def setup_class(cls):
+        from modules import config
+        TestAnalyserOsmosis.setup_class()
+        cls.analyser_conf = cls.load_osm("tests/osmosis_water.osm",
+                                         config.dir_tmp + "/tests/osmosis_water.test.xml",
+                                         {"proj": 23032})
+
+    def test_classes(self):
+        with Analyser_Osmosis_Water(self.analyser_conf, self.logger) as a:
+            a.analyser()
+
+        self.root_err = self.load_errors()
+        self.check_err(cl="1", elems=[("node", "17")])
+        self.check_err(cl="1", elems=[("node", "26")])
+        self.check_err(cl="1", elems=[("way", "107")])
+        self.check_num_err(3)

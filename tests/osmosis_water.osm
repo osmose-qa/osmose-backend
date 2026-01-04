@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='1' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.83356435292' lon='5.81820034816' />
+  <node id='2' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.82240521804' lon='5.8173918644' />
+  <node id='3' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.83155973384' lon='5.81809192069'>
+    <tag k='leisure' v='slipway' />
+  </node>
+  <node id='4' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.83154845762' lon='5.8183150959' />
+  <node id='5' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.85605465561' lon='5.85072726581' />
+  <node id='6' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.83962854851' lon='5.83455759069' />
+  <node id='7' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.82974780034' lon='5.85809345114' />
+  <node id='8' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.84950712875' lon='5.8782157135' />
+  <node id='9' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.83692256317' lon='5.84037433936' />
+  <node id='10' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.83826858943' lon='5.84187901746' />
+  <node id='11' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.84386388065' lon='5.84320964698' />
+  <node id='12' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.84406853094' lon='5.8430917431' />
+  <node id='13' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.84407199958' lon='5.84341738239' />
+  <node id='14' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.84537271417' lon='5.83998133766' />
+  <node id='15' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.84846068983' lon='5.84309246175' />
+  <node id='16' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.84841732086' lon='5.84320842535' />
+  <node id='17' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.86293408107' lon='5.78928250037'>
+    <tag k='leisure' v='slipway' />
+  </node>
+  <node id='18' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.86110336895' lon='5.77886204308' />
+  <node id='19' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.85866230357' lon='5.77886204308' />
+  <node id='20' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.85943902056' lon='5.78227564116' />
+  <node id='21' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.90602559933' lon='5.84230530326' />
+  <node id='22' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.89893249975' lon='5.88512818466' />
+  <node id='23' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.90411930588' lon='5.84582619195'>
+    <tag k='leisure' v='slipway' />
+  </node>
+  <node id='24' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.88429931146' lon='5.8570348656' />
+  <node id='25' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.89808998677' lon='5.87945221291' />
+  <node id='26' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.89600618121' lon='5.86055546689'>
+    <tag k='leisure' v='slipway' />
+  </node>
+  <node id='27' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.88090640068' lon='5.85552604161'>
+    <tag k='leisure' v='slipway' />
+  </node>
+  <node id='28' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.87699128134' lon='5.86686316824' />
+  <node id='29' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.87697340237' lon='5.86688246824' />
+  <node id='30' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.87693159582' lon='5.86689806824' />
+  <node id='31' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.87690161963' lon='5.86689046824' />
+  <node id='32' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.8768362413' lon='5.86669866824' />
+  <node id='33' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.87694653944' lon='5.86663356824' />
+  <node id='34' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.87692278976' lon='5.86677346824' />
+  <node id='35' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.87690357654' lon='5.86678676824' />
+  <node id='36' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.87692510246' lon='5.86689616824' />
+  <node id='37' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.87693880078' lon='5.86696566824' />
+  <node id='38' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.8769991979' lon='5.86693806824' />
+  <way id='100' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='1' />
+    <nd ref='2' />
+    <tag k='waterway' v='river' />
+  </way>
+  <way id='101' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='3' />
+    <nd ref='4' />
+    <tag k='highway' v='service' />
+  </way>
+  <way id='102' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='5' />
+    <nd ref='16' />
+    <nd ref='6' />
+    <nd ref='7' />
+    <nd ref='8' />
+    <nd ref='5' />
+    <tag k='natural' v='water' />
+  </way>
+  <way id='103' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='9' />
+    <nd ref='10' />
+    <tag k='man_made' v='pier' />
+  </way>
+  <way id='104' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='11' />
+    <nd ref='12' />
+    <nd ref='13' />
+    <nd ref='11' />
+    <tag k='floating' v='yes' />
+    <tag k='man_made' v='pier' />
+  </way>
+  <way id='105' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='12' />
+    <nd ref='14' />
+    <tag k='bridge' v='yes' />
+    <tag k='highway' v='path' />
+    <tag k='layer' v='1' />
+  </way>
+  <way id='106' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='15' />
+    <nd ref='16' />
+    <tag k='leisure' v='slipway' />
+  </way>
+  <way id='107' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='18' />
+    <nd ref='19' />
+    <nd ref='20' />
+    <nd ref='18' />
+    <tag k='man_made' v='pier' />
+  </way>
+  <way id='108' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='21' />
+    <nd ref='27' />
+    <nd ref='22' />
+    <nd ref='21' />
+  </way>
+  <way id='109' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='23' />
+    <nd ref='24' />
+    <nd ref='25' />
+    <nd ref='23' />
+    <tag k='landuse' v='grass' />
+  </way>
+  <way id='110' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='28' />
+    <nd ref='29' />
+    <nd ref='30' />
+    <nd ref='31' />
+    <nd ref='32' />
+    <nd ref='33' />
+    <nd ref='28' />
+    <tag k='natural' v='water' />
+    <tag k='water' v='pond' />
+  </way>
+  <way id='111' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <nd ref='34' />
+    <nd ref='35' />
+    <nd ref='36' />
+    <nd ref='37' />
+    <nd ref='38' />
+    <nd ref='29' />
+    <nd ref='34' />
+    <tag k='area' v='yes' />
+    <tag k='man_made' v='pier' />
+  </way>
+  <relation id='1000' timestamp='2014-03-31T22:00:00Z' version='1'>
+    <member type='way' ref='108' role='outer' />
+    <member type='way' ref='109' role='inner' />
+    <tag k='landuse' v='basin' />
+    <tag k='type' v='multipolygon' />
+  </relation>
+</osm>
