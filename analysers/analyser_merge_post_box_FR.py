@@ -24,6 +24,18 @@ from modules.OsmoseTranslation import T_
 from .Analyser_Merge import Analyser_Merge_Point, SourceDataFair, CSV, Load_XY, Conflate, Select, Mapping
 
 
+def normalize_csv(content):
+    """Add the missing commas at the end of the line to have 11 columns"""
+    lines = content.split('\n')
+    normalized = []
+    for line in lines:
+        if line.strip():  # Ignore blank lines
+            cols = line.count(',') + 1
+            if cols < 11:  # If fewer than 11 columns
+                line += ',' * (11 - cols)  # Add the missing commas
+        normalized.append(line)
+    return '\n'.join(normalized)
+
 class Analyser_Merge_Post_box_FR(Analyser_Merge_Point):
     def __init__(self, config, logger = None):
         Analyser_Merge_Point.__init__(self, config, logger)
@@ -40,7 +52,9 @@ class Analyser_Merge_Post_box_FR(Analyser_Merge_Point):
             CSV(
                 SourceDataFair(
                     attribution = "La Poste",
-                    url="https://datanova.laposte.fr/datasets/laposte-boiterue", file_name="DATANOVA_20251002.csv"),
+                    url="https://datanova.laposte.fr/datasets/laposte-boiterue",
+                    file_name="DATANOVA_20251002.csv",
+                    filter=normalize_csv),
                 separator = ","),
             Load_XY("VA_COORD_ADR_X", "VA_COORD_ADR_Y"),
             Conflate(
