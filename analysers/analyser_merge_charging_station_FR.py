@@ -205,6 +205,6 @@ with `capacity=6` can sometimes match to 3 charging station with `capacity=2`'''
                         "socket:type2": lambda fields: fields["nb_T2_grouped"] if fields["nb_T2_grouped"] != "0" else None,
                         "socket:type2_combo": lambda fields: fields["nb_combo_ccs_grouped"] if fields["nb_combo_ccs_grouped"] != "0" else None,
                         "socket:chademo": lambda fields: fields["nb_chademo_grouped"] if fields["nb_chademo_grouped"] != "0" else None,
-                        "wikimedia:network": lambda fields: self.WIKIDATA_MAP.get(fields["nom_enseigne"].lower(), None) if fields["nom_enseigne"] != "0" else None,
+                        "network:wikidata": lambda fields: self.WIKIDATA_MAP.get(fields["nom_enseigne"].lower(), None) if fields["nom_enseigne"] != "0" else None,
                     },
                     text=lambda tags, fields: {"en": "{0}, {1}, {2}".format(fields["nom_station"], fields["adresse_station"], fields["observations"] if fields["observations"] != "null" else "-")})))
