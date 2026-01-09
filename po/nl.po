@@ -20,15 +20,16 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2014-04-30 17:25+0000\n"
-"Last-Translator: Famlam, 2022-2025\n"
-"Language-Team: Dutch (http://app.transifex.com/openstreetmap-france/osmose/"
-"language/nl/)\n"
+"PO-Revision-Date: 2026-01-09 01:01+0000\n"
+"Last-Translator: Famlam <famlam@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/osmose/backend/nl/>"
+"\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -1200,7 +1201,7 @@ msgstr ""
 
 #: ../plugins/TagFix_Wikidata.py:51
 msgid "Please also check the wikipedia tag."
-msgstr " check ook de wikipedia tag."
+msgstr "Controleer ook de wikipedia tag."
 
 #: ../analysers/analyser_osmosis_highway_motorway.py:53
 msgid "Direct or too permissive access to motorway"
@@ -1874,7 +1875,7 @@ msgstr "Een gebied is gemarkeerd als behorend tot meerdere steden."
 
 #: ../analysers/analyser_osmosis_boundary_administrative.py:142
 msgid "Check what city this area belongs to."
-msgstr ""
+msgstr "Controleer bij welke stad dit gebied hoort."
 
 #: ../analysers/analyser_osmosis_boundary_administrative.py:146
 msgid ""
