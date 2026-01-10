@@ -25,8 +25,8 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-07-17 08:36+0000\n"
-"Last-Translator: Franco <francobenedetti.59+weblate1@gmail.com>\n"
+"PO-Revision-Date: 2026-01-11 11:01+0000\n"
+"Last-Translator: Hugoren Martinako <aumpfbahn@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/osmose/backend/"
 "es/>\n"
 "Language: es\n"
@@ -35,7 +35,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == "
 "0) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -1539,7 +1539,7 @@ msgstr "Discordes {0} y {1}"
 #: ../plugins/TagFix_Tree_Lang_fr.py:62
 #, python-brace-format
 msgid "Bad tag {0}=\"{1}\""
-msgstr "Mala etiqueta {0}=«{1}»"
+msgstr "Mala etiqueta {0}=\"{1}\""
 
 #: ../plugins/TagFix_Tree_Lang_fr.py:89
 #, python-brace-format
@@ -1776,7 +1776,7 @@ msgid ""
 msgstr ""
 "[WikiProject_France/Repères_Géodésiques](https://wiki.openstreetmap.org/wiki/"
 "WikiProject_France/Rep%C3%A8res_G%C3%A9od%C3%A9siques)\n"
-"Punto de encuesta francés importado en OSM pero no encontrado."
+"Vértice geodésico francés importado en OSM pero no encontrado."
 
 #: ../analysers/analyser_merge_geodesie.py:31
 msgid "Restore node or relation."
@@ -1790,8 +1790,8 @@ msgid ""
 msgstr ""
 "Ofreció arreglar reimportar los sitios que faltaban como punto, pero si era "
 "una\n"
-"relación. Debe convertirse manualmente, mantener las etiquetas y poner "
-"puntos de encuesta\n"
+"relación. Debe convertirse manualmente, mantener las etiquetas y poner los "
+"vértices geodésicos\n"
 "en relación."
 
 #: ../analysers/analyser_merge_geodesie.py:44
@@ -2107,8 +2107,7 @@ msgstr "El final de la vía no está conectado a otra vía."
 msgid ""
 "Connect the `cycleway` to the road, even with a little virtual\n"
 "path."
-msgstr ""
-"Conecte la `cycleway` a la carretera, incluso con una pequeña ruta virtual."
+msgstr "Conecte la `cycleway` a la carretera, incluso con un pequeño camino."
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:435
 msgid ""
@@ -2336,7 +2335,7 @@ msgid ""
 "Relations_are_not_Categories)."
 msgstr ""
 "[Las relaciones no son \n"
-"clases](https://wiki.openstreetmap.org/wiki/Relations/"
+"categorías](https://wiki.openstreetmap.org/wiki/Relations/"
 "Relations_are_not_Categories)."
 
 #: ../analysers/analyser_osmosis_relation_multipolygon.py:208
@@ -6308,9 +6307,9 @@ msgid ""
 "offset."
 msgstr ""
 "Es posible que a un elemento le falte una etiqueta, como `túnel=*`, "
-"`puente=*`, `cubierta=*` o `ford=*`. Si una carretera o vía férrea se cruza "
-"con un edificio, considere la posibilidad de añadirle la etiqueta "
-"`layer=*`.\n"
+"`puente=*`, `cubierta=*` o `ford=*`.\n"
+"Si una carretera o vía férrea se cruza con un edificio, considere la "
+"posibilidad de añadirle la etiqueta `layer=*`.\n"
 "Atención: las fuentes de información pueden ser contradictorias en el tiempo "
 "o con desfase espacial."
 
@@ -6582,11 +6581,13 @@ msgid ""
 "Do not import the POI created by Osmose to OSM. It is just there to help you "
 "locate the missing forest compartment."
 msgstr ""
+"No importe el PDI creado por Osmose a OSM. Su función es simplemente "
+"ayudarle a localizar el compartimento forestal que falta."
 
 #: ../analysers/analyser_merge_recycling_FR_bm.py:31
 #, python-brace-format
 msgid "{0} glass or food waste recycling not integrated"
-msgstr ""
+msgstr "{0} Reciclaje de vidrio o residuos alimentarios no integrado"
 
 #: ../analysers/analyser_merge_recycling_FR_bm.py:33
 #, python-brace-format
@@ -6597,7 +6598,7 @@ msgstr ""
 #: ../analysers/analyser_merge_recycling_FR_bm.py:35
 #, python-brace-format
 msgid "{0} glass or food waste recycling update"
-msgstr ""
+msgstr "{0} Actualización sobre reciclaje de vidrio o residuos alimentarios"
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:172
 msgid ""
@@ -6652,22 +6653,24 @@ msgid ""
 "There might be bad detections with connections at the bridge heads or tunnel "
 "entrances."
 msgstr ""
+"Podría haber detecciones incorrectas en las conexiones en las cabeceras de "
+"los puentes o en las entradas de los túneles."
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:195
 msgid "Bridge connected to crossing non-bridge highway"
-msgstr ""
+msgstr "Puente conectado a un cruce de carretera sin puente"
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:197
 msgid "Tunnel connected to crossing non-tunnel highway"
-msgstr ""
+msgstr "Túnel conectado a un cruce de carretera sin túnel"
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:199
 msgid "Bridge connected to non-bridge highway"
-msgstr ""
+msgstr "Puente conectado a una carretera sin puente"
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:201
 msgid "Tunnel connected to non-tunnel highway"
-msgstr ""
+msgstr "Túnel conectado a una carretera sin túnel"
 
 #: ../analysers/analyser_osmosis_parking_highway.py:113
 msgid ""
@@ -6680,60 +6683,72 @@ msgid ""
 "See [parking](https://wiki.openstreetmap.org/wiki/Key:parking) tag on the "
 "wiki."
 msgstr ""
+"Debería haber una función de \"carretera\" que conduzca a este aparcamiento "
+"para permitir una ruta correcta. Añada una carretera o compruebe si la "
+"opción \"parking=*\" es correcta. Si se trata de un aparcamiento en la calle "
+"(`parking=street_side`), un área de descanso (`parking=layby`) o un carril, "
+"añada las etiquetas correspondientes.\n"
+"\n"
+"Consulte la etiqueta [parking](https://wiki.openstreetmap.org/wiki/"
+"Key:parking) en la wiki."
 
 #: ../analysers/analyser_osmosis_powerline.py:668
 msgid "Unfinished power transmission line"
-msgstr ""
+msgstr "Línea de transmisión eléctrica inacabada"
 
 #: ../analysers/analyser_osmosis_powerline.py:677
 msgid "Unfinished power distribution line"
-msgstr ""
+msgstr "Línea de distribución eléctrica inacabada"
 
 #: ../analysers/analyser_osmosis_powerline.py:707
 msgid "Power support line management suggestion"
-msgstr ""
+msgstr "Sugerencia para la gestión de la línea de soporte eléctrico"
 
 #: ../analysers/analyser_osmosis_soundex.py:236
 msgid "Possibly misspelled name"
-msgstr ""
+msgstr "Posible error ortográfico"
 
 #: ../analysers/analyser_osmosis_soundex.py:238
 msgid ""
 "A name \"sounds\" similar to that of another but is not spelled the same way."
-msgstr ""
+msgstr "Un nombre suena parecido a otro, pero no se escribe igual."
 
 #: ../analysers/analyser_osmosis_soundex.py:274
 #, python-brace-format
 msgid "{0} 'sounds' similar to {1} but is spelled differently"
-msgstr ""
+msgstr "{0} suena parecido a {1}, pero se escribe diferente"
 
 #: ../plugins/Bicycle.py:27 ../plugins/Bicycle.py:225
 #, python-brace-format
 msgid "Uncommon value of {0}"
-msgstr ""
+msgstr "Valor poco común de {0}"
 
 #: ../plugins/Capacity.py:36
 msgid ""
 "Capacity tags should be positive integers. For some objects it can also be "
 "used to indicate the effective volume of that object (by default in m³)."
 msgstr ""
+"Las etiquetas de capacidad deben ser números enteros positivos. Para algunos "
+"objetos, también se puede usar para indicar el volumen efectivo de ese "
+"objeto (por defecto en m³)."
 
 #: ../plugins/Capacity.py:71 ../plugins/Capacity.py:92
 #, python-brace-format
 msgid "\"{0}\" value \"{1}\" is not an integer nor a volume"
-msgstr ""
+msgstr "El valor \"{0}\" \"{1}\" no es un número entero ni un volumen"
 
 #: ../plugins/Name_Script.py:38
 msgid "Some characters don't match the language charset"
 msgstr ""
+"Algunos caracteres no coinciden con el conjunto de caracteres del idioma"
 
 #: ../plugins/Name_Script.py:49
 msgid "Non-printable character"
-msgstr ""
+msgstr "Carácter no imprimible"
 
 #: ../plugins/Name_Script.py:51
 msgid "A non-printable character has been used."
-msgstr ""
+msgstr "Se ha usado un carácter no imprimible."
 
 #: ../plugins/Number.py:34
 msgid ""
@@ -6741,10 +6756,14 @@ msgid ""
 "and not a comma. For guidelines on numeric values with units see [the\n"
 "wiki](https://wiki.openstreetmap.org/wiki/Map_Features/Units)."
 msgstr ""
+"La etiqueta espera un valor numérico con decimales usando un punto en lugar "
+"de una coma. Para obtener instrucciones sobre valores numéricos con "
+"unidades, consulte [la wiki](https://wiki.openstreetmap.org/wiki/"
+"Map_Features/Units)."
 
 #: ../plugins/Number.py:67
 msgid "Discouraged unit alias"
-msgstr ""
+msgstr "Alias de unidad no recomendado"
 
 #: ../plugins/TagFix_BadKey.py:33
 msgid ""
@@ -6755,22 +6774,28 @@ msgid ""
 "[Any_tags_you_like#Syntactic_conventions_for_new_tags](https://wiki."
 "openstreetmap.org/wiki/Any_tags_you_like#Syntactic_conventions_for_new_tags)."
 msgstr ""
+"La clave de la etiqueta contiene caracteres cuyo uso no se recomienda.\n"
+"Debe estar compuesta por caracteres alfanuméricos: 0-9, a-z (preferiblemente "
+"en minúsculas), el separador '_' o ':'.\n"
+"Consulte [Any_tags_you_like#Syntactic_conventions_for_new_tags](https://"
+"wiki.openstreetmap.org/wiki/"
+"Any_tags_you_like#Syntactic_conventions_for_new_tags)."
 
 #: ../plugins/TagFix_BadKey.py:38
 msgid "Check the key, and correct it."
-msgstr ""
+msgstr "Revise la clave y corríjala."
 
 #: ../plugins/TagFix_BadKey.py:40
 msgid "There are certainly false positives."
-msgstr ""
+msgstr "Seguramente existen falsos positivos."
 
 #: ../plugins/TagFix_BadKey.py:42 ../plugins/TagFix_BadKey.py:45
 msgid "Key with uncommon character"
-msgstr ""
+msgstr "Clave con un carácter poco común"
 
 #: ../plugins/TagFix_BadKey.py:48
 msgid "Key suffix with uncommon character"
-msgstr ""
+msgstr "Sufijo de clave con un carácter poco común"
 
 #: ../plugins/TagFix_Housenumber.py:43
 msgid ""
@@ -6779,22 +6804,29 @@ msgid ""
 "* Tag `addr:inclusion=*` is only valid with values: `actual`, `estimate`\n"
 "and `potential`."
 msgstr ""
+"* La etiqueta `addr:interpolation=*` solo es válida con los valores `even`, "
+"`odd`, `all`, `alphabetic` o un número. * La etiqueta `addr:inclusion=*` "
+"solo es válida con los valores `actual`, `estimate` y `potential`."
 
 #: ../plugins/TagFix_Maxspeed.py:90
 msgid "Advisory or practical maxspeed exceeds legal speed limit"
 msgstr ""
+"La velocidad máxima recomendada o práctica supera el límite de velocidad "
+"legal"
 
 #: ../plugins/TagFix_MultipleTag2.py:33 ../plugins/TagFix_MultipleTag2.py:241
 #: ../plugins/TagFix_MultipleTag2.py:566 ../plugins/TagFix_MultipleTag2.py:752
 #, python-brace-format
 msgid "{0} contains the value of {1}"
-msgstr ""
+msgstr "{0} contiene el valor {1}"
 
 #: ../plugins/TagFix_MultipleTag2.py:33
 msgid ""
 "Possibly a different `alt_name` that is very similar to `name` was meant. "
 "Alternative names are often similar (but never equal) to the name."
 msgstr ""
+"Es posible que se haya usado un `alt_name` diferente, muy similar a `name`. "
+"Los nombres alternativos suelen ser similares (pero nunca iguales) al nombre."
 
 #: ../plugins/TagFix_MultipleTag2.py:37
 msgid ""
@@ -6803,27 +6835,34 @@ msgid ""
 "parking lots and roadside parking. Add access tags and/or service ways "
 "through the parking lot as desired."
 msgstr ""
+"Indique el tipo de estacionamiento, por ejemplo, `parking=street_side`, "
+"`parking=surface` o `parking=underground`, para distinguir entre "
+"estacionamientos principales y estacionamientos en carretera. Añada "
+"etiquetas de acceso o vías de servicio a través del estacionamiento, según "
+"se desee."
 
 #: ../plugins/TagFix_Tree.py:58
 msgid "Conflicting tree properties"
-msgstr ""
+msgstr "Propiedades de árboles en conflicto"
 
 #: ../plugins/TagFix_Tree.py:60
 msgid "The leaf type and/or leaf cycle does not match with the species."
-msgstr ""
+msgstr "El tipo o ciclo de hoja no coincide con la especie."
 
 #: ../plugins/TagFix_Tree.py:62
 msgid "Verify that the species is correct, before adding the leaf properties."
 msgstr ""
+"Verifique que la especie sea correcta antes de agregar las propiedades de la "
+"hoja."
 
 #: ../plugins/TagFix_Tree.py:84
 #, python-brace-format
 msgid "Conflict between `{0}` and `{1}`"
-msgstr ""
+msgstr "Conflicto entre `{0}` y `{1}`"
 
 #: ../plugins/TagFix_ZawgyiBurmese.py:41
 msgid "Value contains Zawgyi-encoded Burmese characters"
-msgstr ""
+msgstr "El valor contiene caracteres birmanos codificados en Zawgyi"
 
 #: ../plugins/TagFix_ZawgyiBurmese.py:43
 msgid ""
@@ -6833,6 +6872,12 @@ msgid ""
 "cannot\n"
 "display it correctly. Please change the text to be encoded in Unicode."
 msgstr ""
+"Los valores de las etiquetas deben almacenarse en Unicode. Sin embargo, este "
+"valor contiene caracteres birmanos en la codificación de fuente obsoleta "
+"\"Zawgyi\".\n"
+"Mientras este valor se almacene de forma no estándar, los dispositivos "
+"modernos no podrán mostrarlo correctamente. Cambie el texto para que se "
+"codifique en Unicode."
 
 #: ../plugins/TagRemove_Incompatibles.py:33
 msgid ""
@@ -6842,66 +6887,69 @@ msgid ""
 "One_feature,_one_OSM_element),\n"
 "these should be mapped as two separate objects."
 msgstr ""
+"Este objeto tiene dos etiquetas que representan características diferentes. "
+"Según el principio de [una característica, un elemento OSM](https://"
+"wiki.openstreetmap.org/wiki/One_feature,_one_OSM_element), estas deben "
+"asignarse como dos objetos separados."
 
 #: ../plugins/TagWatchFrViPofm.py:98 ../plugins/TagWatchFrViPofm.py:109
 #, python-brace-format
 msgid "tag key: {0} => {1}"
-msgstr ""
+msgstr "Clave de etiqueta: {0} => {1}"
 
 #: ../plugins/TagWatchFrViPofm.py:100 ../plugins/TagWatchFrViPofm.py:104
 #: ../plugins/TagWatchFrViPofm.py:113 ../plugins/TagWatchFrViPofm.py:118
 #, python-brace-format
 msgid "tag value: {0}={1} => {2}"
-msgstr ""
+msgstr "Valor de etiqueta: {0}={1} => {2}"
 
 #: ../plugins/indoor.py:25
 #, python-brace-format
 msgid "For the number of rooms in a facility, use `{0}` instead."
 msgstr ""
+"Para el número de habitaciones de una instalación, utilice `{0}` en su lugar."
 
 #: ../analysers/analyser_merge_advertising_board_FR_brest.py:31
 msgid "Advertising board not integrated"
-msgstr ""
+msgstr "Panel publicitario no integrado"
 
 #: ../analysers/analyser_merge_advertising_board_FR_brest.py:33
 msgid "Advertising board integration suggestion"
-msgstr ""
+msgstr "Sugerencia de integración del panel publicitario"
 
 #: ../analysers/analyser_merge_advertising_board_FR_brest.py:35
 msgid "Advertising board update"
-msgstr ""
+msgstr "Actualización del panel publicitario"
 
 #: ../analysers/analyser_merge_public_transport_FR_rla.py:64
 #: ../analysers/analyser_merge_public_transport_FR_sillages.py:62
 #: ../analysers/analyser_merge_public_transport_FR_zestbus.py:62
 #: ../analysers/analyser_merge_public_transport_FR_zou_06.py:69
 msgid "{place} stop of {fields['stop_name']}"
-msgstr ""
+msgstr "Parada {place} de {fields['stop_name']}"
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:617
-#, fuzzy
-#| msgid ""
-#| "addr:housenumber or addr:housename without addr:street, addr:district, "
-#| "addr:neighbourhood, addr:quarter, addr:suburb, addr:place or addr:hamlet "
-#| "must be in a associatedStreet relation"
 msgid ""
 "addr:housenumber or addr:housename without an addr:street, addr:district, "
 "addr:neighbourhood, addr:quarter, addr:suburb, addr:place or addr:hamlet "
 "tag, nor within an associatedStreet relation"
 msgstr ""
-"addr:housenumber o addr:housename sin addr:street, addr:district, addr:"
-"neighbourhood, addr:quarter, addr:suburb, addr:place o addr:hamlet debe "
-"estar en una relación associatedStreet"
+"addr:housenumber o addr:housename sin las etiquetas addr:street, "
+"addr:district, addr:neighbourhood, addr:quarter, addr:suburb, addr:place o "
+"addr:hamlet, ni dentro de una relación de calle asociada"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:51
 msgid "Speed limit type without speed limit"
-msgstr ""
+msgstr "Tipo de límite de velocidad sin límite de velocidad"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:53
 msgid ""
 "A speed limit type is given in `maxspeed:type` or `source:maxspeed`, but no "
 "speed limit is set in `maxspeed`."
 msgstr ""
+"Se especifica un tipo de límite de velocidad en `maxspeed:type` o "
+"`source:maxspeed`, pero no se establece ningún límite de velocidad en "
+"`maxspeed`."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:55
 msgid ""
@@ -6910,6 +6958,10 @@ msgid ""
 "see [Implicit maxspeed values](https://wiki.openstreetmap.org/wiki/Key:"
 "maxspeed#Implicit_maxspeed_values)."
 msgstr ""
+"Establezca `maxspeed` y `maxspeed:type` o `source:maxspeed` según "
+"corresponda. Para obtener una lista de valores, consulte [Valores implícitos "
+"de velocidad máxima](https://wiki.openstreetmap.org/wiki/"
+"Key:maxspeed#Implicit_maxspeed_values)."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:58
 msgid ""
@@ -6918,18 +6970,22 @@ msgid ""
 "Always check `highway`, all other tags related to speed and verify on the "
 "ground."
 msgstr ""
+"No añada simplemente un valor de `maxspeed` adecuado para el tipo. ¡El tipo "
+"también puede ser incorrecto!\n"
+"Compruebe siempre `highway` y todas las demás etiquetas relacionadas con la "
+"velocidad, y verifique sobre el terreno."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:63
-#, fuzzy
-#| msgid "Invalid capacity value"
 msgid "Invalid speed limit value"
-msgstr "Valor de capacidad no válido"
+msgstr "Valor de límite de velocidad no válido"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:65
 msgid ""
 "The speed limit in `maxspeed` must be either numeric or `walk`. Do not "
 "specify a unit, km/h is the default."
 msgstr ""
+"El límite de velocidad en `maxspeed` debe ser numérico o `walk`. No "
+"especifique una unidad; km/h es la predeterminada."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:67
 msgid ""
@@ -6938,6 +6994,10 @@ msgid ""
 "see [Implicit maxspeed values](https://wiki.openstreetmap.org/wiki/Key:"
 "maxspeed#Implicit_maxspeed_values)."
 msgstr ""
+"Establezca `maxspeed` según corresponda y establezca el tipo de límite de "
+"velocidad en `maxspeed:type` o `source:maxspeed`. Para obtener una lista de "
+"valores, consulte [Valores implícitos de velocidad máxima](https://"
+"wiki.openstreetmap.org/wiki/Key:maxspeed#Implicit_maxspeed_values)."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:70
 msgid ""
@@ -6946,18 +7006,22 @@ msgid ""
 "Always check `highway`, all other tags related to speed and verify on the "
 "ground."
 msgstr ""
+"Si se establece un tipo de límite de velocidad (p. ej., `AT:*`) en "
+"`maxspeed`, ¡no dé por sentado que es correcto!\n"
+"Compruebe siempre `highway`, todas las demás etiquetas relacionadas con la "
+"velocidad y verifique sobre el terreno."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:75
-#, fuzzy
-#| msgid "max speed limit 5"
 msgid "Low speed limit value"
-msgstr "límite de velocidad máxima 5"
+msgstr "Valor de límite de velocidad bajo"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:77
 msgid ""
 "The speed limit in `maxspeed` is very low and no type is given in `maxspeed:"
 "type` or `source:maxspeed`."
 msgstr ""
+"El límite de velocidad en `maxspeed` es muy bajo y no se especifica ningún "
+"tipo en `maxspeed:type` ni `source:maxspeed`."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:79
 msgid ""
@@ -6969,6 +7033,12 @@ msgid ""
 "speed is signposted,\n"
 "set `maxspeed` to the speed, `maxspeed:type=sign`."
 msgstr ""
+"Para zonas peatonales y calles residenciales (excepto zonas compartidas), la "
+"velocidad a pie es la predeterminada y no se debe establecer ningún límite "
+"de velocidad ni tipo. Si la velocidad a pie está señalizada, establezca "
+"`maxspeed=walk`, `maxspeed:type=sign` y `traffic_sign=AT:54[text]` o "
+"`traffic_sign=AT:..,54[text]`. Si se indica una velocidad baja, establezca "
+"`maxspeed` con la velocidad `maxspeed:type=sign`."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:84 ../plugins/TagFix_Maxspeed_AT.py:110
 #: ../plugins/TagFix_Maxspeed_AT.py:122
@@ -6977,17 +7047,20 @@ msgid ""
 "Always check `highway`, all other tags related to speed and verify on the "
 "ground."
 msgstr ""
+"¡No asuma que los datos presentes son correctos!\n"
+"Siempre verifique `highway`, todas las demás etiquetas relacionadas con la "
+"velocidad y verifique sobre el terreno."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:89
-#, fuzzy
-#| msgid "max speed limit 5"
 msgid "Invalid speed limit type"
-msgstr "límite de velocidad máxima 5"
+msgstr "Tipo de límite de velocidad no válido"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:91
 msgid ""
 "The speed limit type in `maxspeed:type` or `source:maxspeed` is not valid."
 msgstr ""
+"El tipo de límite de velocidad en `maxspeed:type` o `source:maxspeed` no es "
+"válido."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:93
 msgid ""
@@ -6995,6 +7068,9 @@ msgid ""
 "see [Implicit maxspeed values](https://wiki.openstreetmap.org/wiki/Key:"
 "maxspeed#Implicit_maxspeed_values)."
 msgstr ""
+"Establezca el tipo de límite de velocidad apropiado. Para obtener una lista "
+"de valores, consulte [Valores implícitos de velocidad máxima](https://"
+"wiki.openstreetmap.org/wiki/Key:maxspeed#Implicit_maxspeed_values)."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:96
 msgid ""
@@ -7004,12 +7080,15 @@ msgid ""
 "Always check `highway`, all other tags related to speed and verify on the "
 "ground."
 msgstr ""
+"Si el tipo de límite de velocidad es `zone`, no lo cambie simplemente a "
+"`AT:zone`, sino a un valor más específico.\n"
+"¡No asuma que los datos presentes son correctos!\n"
+"Siempre verifique `highway`, todas las demás etiquetas relacionadas con la "
+"velocidad y verifique sobre el terreno."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:102
-#, fuzzy
-#| msgid "max speed limit 5"
 msgid "Multiple speed limit types"
-msgstr "límite de velocidad máxima 5"
+msgstr "Múltiples tipos de límite de velocidad"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:104
 msgid ""
@@ -7017,6 +7096,8 @@ msgid ""
 "and data consumers\n"
 "if the values are different."
 msgstr ""
+"`maxspeed:type` y `source:maxspeed` están configurados. Esto puede confundir "
+"a los mapeadores y consumidores de datos si los valores son diferentes."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:107
 msgid ""
@@ -7024,16 +7105,21 @@ msgid ""
 "see [Implicit maxspeed values](https://wiki.openstreetmap.org/wiki/Key:"
 "maxspeed#Implicit_maxspeed_values)."
 msgstr ""
+"Establezca `maxspeed:type` o `source:maxspeed`. Para ver la lista de "
+"valores, consulte [Valores implícitos de velocidad máxima](https://"
+"wiki.openstreetmap.org/wiki/Key:maxspeed#Implicit_maxspeed_values)."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:115
 msgid "Speed limit and type mismatch"
-msgstr ""
+msgstr "Límite de velocidad y tipo de error"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:117
 msgid ""
 "The speed limit in `maxspeed` is not consistent with the speed limit type in "
 "`maxspeed:type` or `source:maxspeed`."
 msgstr ""
+"El límite de velocidad en `maxspeed` no coincide con el tipo de límite de "
+"velocidad en `maxspeed:type` o `source:maxspeed`."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:119
 msgid ""
@@ -7042,39 +7128,42 @@ msgid ""
 "see [Implicit maxspeed values](https://wiki.openstreetmap.org/wiki/Key:"
 "maxspeed#Implicit_maxspeed_values)."
 msgstr ""
+"Ajuste `maxspeed`, `maxspeed:type` o `source:maxspeed` según corresponda. "
+"Para ver la lista de valores, consulte [Valores implícitos de velocidad "
+"máxima](https://wiki.openstreetmap.org/wiki/"
+"Key:maxspeed#Implicit_maxspeed_values)."
 
 #: ../plugins/TagFix_Maxspeed_AT.py:141
 #, python-brace-format
 msgid "`source:maxspeed` or `maxspeed:type` = `{0}` without maxspeed"
-msgstr ""
+msgstr "`source:maxspeed` o `maxspeed:type` = `{0}` sin maxspeed"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:149
 #, python-brace-format
 msgid "Invalid maxspeed: `{0}`"
-msgstr ""
+msgstr "Maxspeed no válido: `{0}`"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:156
 #, python-brace-format
 msgid "Low maxspeed: `{0}`"
-msgstr ""
+msgstr "Maxspeed bajo: `{0}`"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:165
 #, python-brace-format
 msgid "Invalid maxspeed:type: `{0}`"
-msgstr ""
+msgstr "Maxspeed:type no válido: `{0}`"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:176
-#, fuzzy, python-brace-format
-#| msgid "Conflict between tags: `{0}` and `{1}`"
+#, python-brace-format
 msgid "Conflicting speed limit types: `{0}`<>`{1}`"
-msgstr "Conflicto entre etiquetas: `{0}` y `{1}`"
+msgstr "Tipos de límite de velocidad en conflicto: `{0}`<>`{1}`"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:183
 #, python-brace-format
 msgid "Invalid source:maxspeed: `{0}`"
-msgstr ""
+msgstr "Source:maxspeed no válido: `{0}`"
 
 #: ../plugins/TagFix_Maxspeed_AT.py:190
 #, python-brace-format
 msgid "maxspeed and type mismatch: `{0}`<>`{1}`"
-msgstr ""
+msgstr "Maxspeed y tipo no coincidentes: `{0}`<>`{1}`"
