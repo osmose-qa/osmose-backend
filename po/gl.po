@@ -14,15 +14,16 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2014-04-30 17:25+0000\n"
-"Last-Translator: Navhy, 2019\n"
-"Language-Team: Galician (http://app.transifex.com/openstreetmap-france/"
-"osmose/language/gl/)\n"
+"PO-Revision-Date: 2026-01-11 11:01+0000\n"
+"Last-Translator: Hugoren Martinako <aumpfbahn@gmail.com>\n"
+"Language-Team: Galician <https://hosted.weblate.org/projects/osmose/backend/"
+"gl/>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -1453,7 +1454,7 @@ msgstr "Desbalanzado {0} con {1}"
 #: ../plugins/Name_Quotation.py:59
 #, python-brace-format
 msgid "Unbalanced {0}"
-msgstr "Desbalanzado {0}"
+msgstr "{0} desbalanzado"
 
 #: ../plugins/Name_Script.py:130 ../plugins/Name_Script.py:153
 #, python-brace-format
@@ -1530,7 +1531,7 @@ msgstr "Difire {0} e {1}"
 #: ../plugins/TagFix_Tree_Lang_fr.py:62
 #, python-brace-format
 msgid "Bad tag {0}=\"{1}\""
-msgstr "Etiqueta errónea {0}=«{1}»"
+msgstr "Etiqueta errónea {0}=\"{1}\""
 
 #: ../plugins/TagFix_Tree_Lang_fr.py:89
 #, python-brace-format
@@ -1738,7 +1739,7 @@ msgstr "Aparcadoiro de transporte compartido non integrado"
 
 #: ../analysers/analyser_merge_carpool_FR.py:33
 msgid "Carpool parking integration suggestion"
-msgstr "Aparcadoiro de transporte compaartido, suxestión de integración"
+msgstr "Aparcadoiro de transporte compartido, suxestión de integración"
 
 #: ../analysers/analyser_merge_carpool_FR.py:35
 msgid "Carpool parking update"
