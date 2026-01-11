@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2026-01-11 11:02+0000\n"
+"PO-Revision-Date: 2026-01-12 14:01+0000\n"
 "Last-Translator: Famlam <famlam@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/osmose/backend/nl/>"
 "\n"
@@ -90,7 +90,7 @@ msgstr "Kruising van grens"
 
 #: ../analysers/analyser_osmosis_boundary_administrative.py:144
 msgid "Lone boundary fragment"
-msgstr "Geïsoleerde grens fragment "
+msgstr "Geïsoleerd grensfragment"
 
 #: ../analysers/analyser_osmosis_boundary_relation.py:131
 msgid "Missing wikipedia tag"
@@ -178,7 +178,7 @@ msgstr "Kruising tussen boom en een gebouw"
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:466
 msgid "Tree and highway too close"
-msgstr "Boom en weg te dichtbij "
+msgstr "Boom en weg te dichtbij"
 
 #: ../analysers/analyser_osmosis_natural_swimming-pool.py:85
 msgid "Swimming-pool, reservoir, pond as natural=water"
@@ -544,7 +544,7 @@ msgstr "Tag \"addr:city\" komt met geen enkele stad overeen"
 
 #: ../plugins/TagFix_MultipleTag_FR.py:47
 msgid "FANTOIR object type not match OSM feature"
-msgstr "FANTOIR Objecttype komt niet overeen met OSM functie "
+msgstr "FANTOIR objecttype komt niet overeen met OSM functie"
 
 #: ../analysers/analyser_merge_police_FR_pn.py:31
 msgid "Police not integrated"
@@ -579,7 +579,7 @@ msgstr "Conflict tussen tags: {0}"
 #: ../plugins/TagFix_MultipleTag.py:112
 #, python-format, python-brace-format
 msgid "mini roundabout direction in this country is usually \"{0}\""
-msgstr "mini rotonde is in dit land gewoonlijk \"{0}\" "
+msgstr "mini rotonde is in dit land gewoonlijk \"{0}\""
 
 #: ../plugins/TagFix_MultipleTag2.py:359
 msgid "Use tag \"toll\" instead of \"fee\""
@@ -1135,7 +1135,7 @@ msgstr "{0}, integratie suggestie"
 msgid ""
 "Small highway group apart from the main network or with insufficient access "
 "upstream"
-msgstr "Kleine weggroep, los van het hoofdnetwerk of met onvoldoende toegang "
+msgstr "Kleine weggroep, los van het hoofdnetwerk of met onvoldoende toegang"
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:469
 msgid "Power object intersecting building"
@@ -1196,7 +1196,7 @@ msgid ""
 "This wikidata value matches a chain store, it should be in a brand:wikidata "
 "tag."
 msgstr ""
-"Deze wikidata waarde vertegenwoordigt een winkelketen, het moet in een  "
+"Deze wikidata waarde vertegenwoordigt een winkelketen, het moet in een "
 "brand:wikidata tag."
 
 #: ../plugins/TagFix_Wikidata.py:51
@@ -1304,7 +1304,7 @@ msgstr "Kleur code moet starten met '#' gevolgd door 3 of 6 nummers"
 
 #: ../plugins/Website.py:47
 msgid "The URL contains a space"
-msgstr "De  URL bevat spaties"
+msgstr "De URL bevat spaties"
 
 #: ../plugins/Website.py:49
 msgid "The URL does not have a valid scheme"
@@ -1322,7 +1322,7 @@ msgstr "De URL heeft geen geldige schema"
 #: ../analysers/analyser_merge_public_transport_FR_zou_06.py:36
 #, python-brace-format
 msgid "{0} stop not integrated"
-msgstr "{0} halte niet geïntegreerd "
+msgstr "{0} halte niet geïntegreerd"
 
 #: ../analysers/analyser_merge_public_transport_FR_bibus.py:34
 #: ../analysers/analyser_merge_public_transport_FR_rla.py:34
@@ -1336,7 +1336,7 @@ msgstr "{0} halte niet geïntegreerd "
 #: ../analysers/analyser_merge_public_transport_FR_zou_06.py:38
 #, python-brace-format
 msgid "{0} stop, integration suggestion"
-msgstr "{0} halte, integratie suggestie "
+msgstr "{0} halte, integratie suggestie"
 
 #: ../analysers/analyser_merge_public_transport_FR_idfm.py:55
 #: ../analysers/analyser_merge_public_transport_FR_sibra.py:59
@@ -1369,7 +1369,7 @@ msgid ""
 "Population on admin_centre role ({0}) greater than population on the "
 "relation ({1})"
 msgstr ""
-"Bevolkingsaantal op admin_centre role ({0})  is groter dan bevolkingsaantal "
+"Bevolkingsaantal op admin_centre role ({0}) is groter dan bevolkingsaantal "
 "op de relatie ({1})"
 
 #: ../analysers/analyser_osmosis_fantoir.py:113
@@ -1385,7 +1385,7 @@ msgstr "Inconsistente waarden van motor_vehicle ('{0}'!='{1}')"
 #: ../analysers/analyser_osmosis_highway_turn_lanes.py:149
 #, python-brace-format
 msgid "lanes in {0}(-{1}+{2}), lanes out {3}(-{4}+{5})"
-msgstr "lanes in {0}(-{1}+{2}), lanes out {3}(-{4}+{5})"
+msgstr "lanes in {0}(-{1}+{2}), lanes uit {3}(-{4}+{5})"
 
 #: ../analysers/analyser_osmosis_way_approximate.py:180
 #, python-brace-format
@@ -1513,7 +1513,7 @@ msgstr "Verkeerde internationaal prefix"
 
 #: ../plugins/Phone.py:63
 msgid "Prohibited char in phone number"
-msgstr "Niet toegestane karakter in telefoonnummer "
+msgstr "Niet-toegestaan teken in telefoonnummer"
 
 #: ../plugins/Phone.py:65
 msgid "Bad separator for multiple values"
@@ -1541,12 +1541,12 @@ msgstr "Verkeerde tag denotation=\"{0}\""
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:433
 msgid "Unconnected highway"
-msgstr "Niet verbonden weg "
+msgstr "Niet verbonden weg"
 
 #: ../plugins/Phone.py:54
 #, python-brace-format
 msgid "Extra \"{0}\" after international code"
-msgstr "Extra \"{0}\" na international code "
+msgstr "Extra \"{0}\" na internationale code"
 
 #: ../analysers/analyser_merge_college_FR.py:33
 msgid "College without tag \"ref:UAI\" or invalid"
@@ -1686,7 +1686,7 @@ msgstr "voorwaardelijke intervals passen niet bij openingsuren"
 #: ../analysers/analyser_merge_defibrillators_FR_saintmalo.py:31
 #: ../analysers/analyser_merge_defibrillators_FR_toulouse.py:31
 msgid "Defibrillator not integrated"
-msgstr "Defibrillator niet geintegreerd "
+msgstr "Defibrillator niet geintegreerd"
 
 #: ../analysers/analyser_merge_museum_FR.py:31
 msgid "Museum not integrated"
@@ -1702,7 +1702,7 @@ msgstr "Afvalzuiveringstation niet geintegreerd"
 
 #: ../analysers/analyser_merge_wastewater_plant_FR.py:32
 msgid "Wastewater plant, integration suggestion"
-msgstr "Afvalzuiveringstation,  suggestie om toe te voegen"
+msgstr "Afvalzuiveringstation, suggestie om toe te voegen"
 
 #: ../analysers/analyser_merge_wastewater_plant_FR.py:34
 msgid "Wastewater plant update"
@@ -1726,11 +1726,11 @@ msgstr "Waarde is niet in hoofdletteters"
 
 #: ../analysers/analyser_merge_carpool_FR.py:31
 msgid "Carpool parking not integrated"
-msgstr "Carpool parking niet geïntegreerd "
+msgstr "Carpool parking niet geïntegreerd"
 
 #: ../analysers/analyser_merge_carpool_FR.py:33
 msgid "Carpool parking integration suggestion"
-msgstr "Carpool parking integratie suggestie "
+msgstr "Carpool parking integratie suggestie"
 
 #: ../analysers/analyser_merge_carpool_FR.py:35
 msgid "Carpool parking update"
@@ -1826,7 +1826,7 @@ msgstr "Pitch niet geïntegreerd {0}"
 #: ../analysers/analyser_merge_public_equipment_FR_toulouse_toilets.py:31
 #, python-brace-format
 msgid "{0} toilets not integrated"
-msgstr "{0}  toiletten niet geïntegreerd"
+msgstr "{0} toiletten niet geïntegreerd"
 
 #: ../analysers/analyser_merge_radio_support_FR.py:31
 #, python-brace-format
@@ -1953,8 +1953,7 @@ msgstr ""
 #: ../analysers/analyser_osmosis_cycleway_track.py:65
 msgid ""
 "Duplicated cycle tracks, `highway=*`+`cycleway=track` and `highway=cycleway`"
-msgstr ""
-"Dubbele fietspaden,  `highway=*`+`cycleway=track` en `highway=cycleway`"
+msgstr "Dubbele fietspaden, `highway=*`+`cycleway=track` en `highway=cycleway`"
 
 #: ../analysers/analyser_osmosis_cycleway_track.py:67
 msgid ""
@@ -1981,7 +1980,7 @@ msgid ""
 msgstr ""
 "![](https://wiki.openstreetmap.org/w/images/1/16/Osmose-eg-error-1180.png)\n"
 "\n"
-"Dubbele mapping van het fietspad.  "
+"Dubbele mapping van het fietspad. "
 
 #: ../analysers/analyser_osmosis_double_tagging.py:124
 msgid ""
@@ -2077,7 +2076,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_features.py:84
 msgid "The node must be common to rail and road."
-msgstr "Het knooppunt moet bekend zijn voor spoor en weg. "
+msgstr "Het knooppunt moet onderdeel zijn van spoor en/of weg."
 
 #: ../analysers/analyser_osmosis_highway_link.py:134
 msgid ""
@@ -2565,7 +2564,7 @@ msgstr ""
 "[`place`](https://wiki.openstreetmap.org/wiki/Key:place). Het zou niet\n"
 "geassocieerd moeten worden met tags als `amenity`, `highway`. Wanneer dit "
 "het geval is, de\n"
-"tag `place=*`  moet verwijderd worden."
+"tag `place=*` moet verwijderd worden."
 
 #: ../plugins/Administrative_INSEE_Name.py:51
 msgid "Correct INSEE the value or the name as appropriate."
@@ -2656,7 +2655,7 @@ msgstr ""
 
 #: ../plugins/Name_Saint_FR.py:38
 msgid "Add a hyphen."
-msgstr "Voeg een  koppelteken toe."
+msgstr "Voeg een koppelteken toe."
 
 #: ../plugins/Name_Saint_FR.py:40
 msgid "This rule does not apply in particular to the Belgium."
@@ -2857,12 +2856,13 @@ msgid "Delete one value."
 msgstr "Verwijder een waarde."
 
 #: ../plugins/TagFix_Housenumber.py:38
+#, fuzzy
 msgid ""
 "Interpolation way only valid with addr:interpolation=* and optional\n"
 "addr:inclusion=*."
 msgstr ""
-"Invoegmethode alleen geldig met addr: interpolation = * en optioneel addr: "
-"inclusion = *. "
+"Invoegmethode alleen geldig met addr:interpolation = * en optioneel "
+"addr:inclusion = *."
 
 #: ../plugins/TagFix_MultipleTag_FR.py:38
 msgid ""
@@ -3167,7 +3167,7 @@ msgstr "laadstation niet geïntegreerd"
 
 #: ../analysers/analyser_merge_charging_station_FR.py:60
 msgid "Car charging station, integration suggestion"
-msgstr "laadstation, integratie suggestie "
+msgstr "Laadstation, integratie suggestie"
 
 #: ../analysers/analyser_osmosis_boundary_intersect.py:98
 msgid "Borders crossing each other."
@@ -3212,8 +3212,8 @@ msgid ""
 msgstr ""
 "Het is mogelijk dat niet-gebruikte stroomvoorzieningen worden losgekoppeld "
 "van het netwerk.\n"
-"Maak in dat geval gebruik van de  `disused:` [lifecycle prefix](https://wiki."
-"openstreetmap.org/wiki/Lifecycle_prefix)."
+"Maak in dat geval gebruik van de `disused:` [lifecycle prefix](https://"
+"wiki.openstreetmap.org/wiki/Lifecycle_prefix)."
 
 #: ../analysers/analyser_osmosis_powerline.py:670
 #: ../analysers/analyser_osmosis_powerline.py:679
@@ -3345,7 +3345,7 @@ msgstr "{0} glas recycling niet geïntegreerd"
 #: ../analysers/analyser_merge_recycling_FR_nm_glass.py:33
 #, python-brace-format
 msgid "{0} glass recycling, integration suggestion"
-msgstr "{0} glas recycling,  integratie suggestie"
+msgstr "{0} glas recycling, integratie suggestie"
 
 #: ../analysers/analyser_merge_recycling_FR_nm_glass.py:35
 #, python-brace-format
@@ -3454,7 +3454,7 @@ msgstr "{0} parking integratie suggestie"
 #: ../analysers/analyser_merge_parking_FR_bm.py:35
 #, python-brace-format
 msgid "{0} parking update"
-msgstr "{0} parking  bijwerken"
+msgstr "{0} parking bijwerken"
 
 #: ../analysers/analyser_merge_parking_FR_bm.py:71
 #, python-brace-format
@@ -3623,7 +3623,7 @@ msgstr ""
 
 #: ../plugins/Historic_Wayside_cross_without_material.py:38
 msgid "Fill the tag `material=*` as specific as possible."
-msgstr "Vul zo mogelijk de tag `material = *`  in."
+msgstr "Vul zo mogelijk de tag `material = *` in."
 
 #: ../plugins/Historic_Wayside_cross_without_material.py:40
 msgid ""
@@ -3743,7 +3743,7 @@ msgid ""
 "(mountain_pass=yes), has an elevation. This is shown in OSM with tag\n"
 "ele=* in meters."
 msgstr ""
-"Enkele elementen, waaronder top (natural=peak) en  bergpassen\n"
+"Enkele elementen, waaronder top (natural=peak) en bergpassen\n"
 "(mountain_pass=yes), hebben een hoogte.. Dit wordt getoond in OSM met tag "
 "ele=* in meters."
 
