@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2026-01-09 01:01+0000\n"
+"PO-Revision-Date: 2026-01-11 11:02+0000\n"
 "Last-Translator: Famlam <famlam@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/osmose/backend/nl/>"
 "\n"
@@ -1296,7 +1296,7 @@ msgstr "Arabische letter gedetecteerd in Farsi naam"
 #: ../plugins/Name_MisspelledWordByRegex_Lang_fa.py:253
 #, python-brace-format
 msgid "In Farsi, the Arabic letter `{0}` should be replaced by `{1}`."
-msgstr "In Farsi, de Arabische letter '{0}' moet veranderd worden door '{1}'"
+msgstr "In Farsi, de Arabische letter '{0}' moet veranderd worden door '{1}'."
 
 #: ../plugins/Colour.py:20
 msgid "Colour code should start with '#' followed by 3 or 6 digits"
@@ -1457,8 +1457,8 @@ msgstr "onevenwichtig {0}"
 msgid ""
 "\"{0}\" unexpected non printable char ({1}, 0x{2:04x}) in key at position {3}"
 msgstr ""
-"\"{0}\" onverwachte niet afdrukbare karakter ({1}, 0x{2:04x})  in key op "
-"positie  {3}"
+"\"{0}\" onverwacht niet-afdrukbaar teken ({1}, 0x{2:04x}) in key op positie "
+"{3}"
 
 #: ../plugins/Name_Script.py:135 ../plugins/Name_Script.py:158
 #, python-brace-format
@@ -1466,8 +1466,8 @@ msgid ""
 "\"{0}\"=\"{1}\" unexpected non printable char ({2}, 0x{3:04x}) in value at "
 "position {4}"
 msgstr ""
-"\"{0}\"=\"{1}\" onverwachte niet afdrukbare karakter ({2}, 0x{3:04x})  in "
-"waarde op positie {4}"
+"\"{0}\"=\"{1}\" onverwacht niet-afdrukbaar teken ({2}, 0x{3:04x}) in waarde "
+"op positie {4}"
 
 #: ../plugins/Name_Script.py:140
 #, python-brace-format
@@ -1760,7 +1760,7 @@ msgid ""
 msgstr ""
 "[WikiProject_France/Repères_Géodésiques](https://wiki.openstreetmap.org/wiki/"
 "WikiProject_France/Rep%C3%A8res_G%C3%A9od%C3%A9siques)\n"
-"Frans meetpunt geïmporteerd in OSM maar niet gevonden. "
+"Frans meetpunt geïmporteerd in OSM maar niet gevonden."
 
 #: ../analysers/analyser_merge_geodesie.py:31
 msgid "Restore node or relation."
@@ -1791,7 +1791,7 @@ msgstr ""
 "Een historisch monument is hier maar is niet in kaart gebracht. De lijst met "
 "monumenten\n"
 "komt uit de database \"Merimee Inventory of monuments\" in Frankrijk door "
-"het Ministerie van Cultuur. "
+"het Ministerie van Cultuur."
 
 #: ../analysers/analyser_merge_heritage_FR_merimee.py:38
 msgid ""
@@ -1855,7 +1855,7 @@ msgid ""
 "reported at each end of open part."
 msgstr ""
 "Een relatie die een gesloten polygoon zou moeten zijn is het niet. Een "
-"melding is gerapporteerd aan elk uiteinde van het open gedeelte. "
+"melding is gerapporteerd aan elk uiteinde van het open gedeelte."
 
 #: ../analysers/analyser_osmosis_relation_open.py:87
 #, python-brace-format
@@ -1883,12 +1883,12 @@ msgid ""
 "`boundary` relation."
 msgstr ""
 "Onverbonden grens fragment, een weg met een grens tag die geen deel uitmaakt "
-"van een grensrelatie. "
+"van een grensrelatie."
 
 #: ../analysers/analyser_osmosis_boundary_administrative.py:149
 msgid "Delete the way, remove the `boundary` tag or add the way to a relation."
 msgstr ""
-"Verwijder de weg, verwijder de grens tag of voeg het toe aan een relatie. "
+"Verwijder de weg, verwijder de grens tag of voeg het toe aan een relatie."
 
 #: ../analysers/analyser_osmosis_boundary_hole.py:68
 msgid "An area is marked as not belonging to any city."
@@ -1896,7 +1896,7 @@ msgstr "Een gebied is gemarkeerd als niet behorend tot een stad."
 
 #: ../analysers/analyser_osmosis_boundary_intersect.py:100
 msgid "Check the type of border and keep the best one or merge them."
-msgstr "Controleer de grens type en bewaar de beste of voeg samen. "
+msgstr "Controleer de grens type en bewaar de beste of voeg samen."
 
 #: ../analysers/analyser_osmosis_boundary_intersect.py:104
 msgid ""
@@ -1920,7 +1920,7 @@ msgstr "Naam `ontbreekt`"
 msgid ""
 "The admin_centre `population` is greater than the relation\n"
 "`population`."
-msgstr "De admin_centre `population` is groter dan de relatie `population`. "
+msgstr "De admin_centre `population` is groter dan de relatie `population`."
 
 #: ../analysers/analyser_osmosis_building_geodesie_FR.py:107
 msgid ""
@@ -2016,7 +2016,7 @@ msgstr ""
 "classificatie van een snelweg moet normaal gesproken consistent zijn over "
 "het hele pad. Bijvoorbeeld\n"
 "een `highway=tertiary` moet `highway=tertiary` blijven totdat deze elkaar "
-"kruist met een weg van hogere classificatie. "
+"kruist met een weg van hogere classificatie."
 
 #: ../analysers/analyser_osmosis_highway_broken_level_continuity.py:117
 msgid ""
@@ -2063,9 +2063,9 @@ msgid ""
 "Highway from `motorway` to `tertiary` are important ways. They should\n"
 "lead to somewhere and in particular to a network of minor roads."
 msgstr ""
-"Wegen van  `motorway` tot `tertiary` zijn belangrijke wegen. Zij zouden\n"
+"Wegen van `motorway` tot `tertiary` zijn belangrijke wegen. Zij zouden\n"
 "ergens naartoe moeten leiden en in het bijzonder naar een netwerk van "
-"secundaire wegen. "
+"secundaire wegen."
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:438
 msgid "Review the classification of road or draw the local road network."
@@ -2093,7 +2093,7 @@ msgid ""
 "connected."
 msgstr ""
 "Verander de classificatie van `*_link` zodat deze overeenkomt met de "
-"verbonden weg. "
+"verbonden weg."
 
 #: ../analysers/analyser_osmosis_highway_link.py:140
 msgid ""
@@ -2111,7 +2111,7 @@ msgid ""
 "both ends of the way."
 msgstr ""
 "Controleer of de snelweg een `* _link` is, of anders verwijder` * _link`. "
-"Zorg ervoor dat u de beide uiteinden van de weg controleert. "
+"Zorg ervoor dat u de beide uiteinden van de weg controleert."
 
 #: ../analysers/analyser_osmosis_highway_noexit.py:89
 msgid "Noexit on node with exit"
@@ -2287,7 +2287,7 @@ msgid ""
 "as `inner` role."
 msgstr ""
 "Verwijder de ring zonder tag. Voeg in de relatie degene met de tags toe als "
-"'inner' rol. "
+"'inner' rol."
 
 #: ../analysers/analyser_osmosis_relation_multipolygon.py:216
 msgid ""
@@ -2309,7 +2309,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_multipolygon.py:229
 msgid "Close the way to make a polygon or add to a multipolygon."
-msgstr "Sluit de weg om een polygoon te maken of voeg een multipolygoon toe. "
+msgstr "Sluit de weg om een polygoon te maken of voeg een multipolygoon toe."
 
 #: ../analysers/analyser_osmosis_relation_restriction.py:368
 msgid ""
@@ -2343,7 +2343,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_roundabout_level.py:273
 msgid "Adjust the tag `highway=*` of the roundabout."
-msgstr "Pas de `highway=*` tag van de rotonde aan. "
+msgstr "Pas de `highway=*` tag van de rotonde aan."
 
 #: ../analysers/analyser_osmosis_roundabout_level.py:275
 msgid ""
@@ -2396,7 +2396,7 @@ msgstr "Weg dwars door rotonde."
 
 #: ../analysers/analyser_osmosis_roundabout_level.py:306
 msgid "Check if it is really a roundabout and cut the way."
-msgstr "Controleer of het echt een rotonde is en knip de weg uit. "
+msgstr "Controleer of het echt een rotonde is en knip de weg uit."
 
 #: ../analysers/analyser_osmosis_roundabout.py:92
 msgid "Missing `junction=roundabout`"
@@ -2408,9 +2408,9 @@ msgid ""
 "present. See [Roundabout](https://wiki.openstreetmap.org/wiki/Roundabout)\n"
 "for more info."
 msgstr ""
-"Dit lijkt op een rotonde, maar de tag  `junction=roundabout` is niet\n"
+"Dit lijkt op een rotonde, maar de tag `junction=roundabout` is niet\n"
 "aanwezig. Zie [Roundabout](https://wiki.openstreetmap.org/wiki/Roundabout)\n"
-"voor meer info. "
+"voor meer info."
 
 #: ../analysers/analyser_osmosis_roundabout.py:98
 msgid ""
@@ -2521,8 +2521,8 @@ msgid ""
 "water must flow into another waterway or meet a `natural=coastline`."
 msgstr ""
 "Een `waterway = river` of een` waterway = stream` is een georiënteerde weg.\n"
-"Het water moet  in een andere waterweg stromen of een `natural = coastline` "
-"ontmoeten. "
+"Het water moet in een andere waterweg stromen of een `natural = coastline` "
+"ontmoeten."
 
 #: ../analysers/analyser_osmosis_waterway.py:167
 msgid "Link the waterway or invert its flow direction."
@@ -2595,8 +2595,8 @@ msgstr "Niet-numerieke waarde, `lanes = *` moet een geheel getal hebben."
 #: ../plugins/Highway_Lanes.py:45
 msgid "You can not set opposite lanes data on a one way."
 msgstr ""
-"Je kan gegevens van tegenoverliggende rijstroken niet op een enkelweg "
-"zetten. "
+"Je kan gegevens van tegenoverliggende rijstroken niet op een eenrichtingsweg "
+"zetten."
 
 #: ../plugins/Highway_Lanes.py:53
 msgid "Right must be on the right and left on the left."
@@ -2660,7 +2660,7 @@ msgstr "Voeg een  koppelteken toe."
 
 #: ../plugins/Name_Saint_FR.py:40
 msgid "This rule does not apply in particular to the Belgium."
-msgstr "Deze regel is in het bijzonder niet van toepassing op België. "
+msgstr "Deze regel is in het bijzonder niet van toepassing op België."
 
 #: ../plugins/Name_Saint_FR.py:42
 msgid ""
@@ -2703,7 +2703,7 @@ msgid ""
 "alphabet."
 msgstr ""
 "Er wordt een symbool gebruikt in plaats van een letter van het juiste\n"
-"alfabet. "
+"alfabet."
 
 #: ../plugins/Name_Script.py:60
 msgid ""
@@ -2725,7 +2725,7 @@ msgid ""
 "Google."
 msgstr ""
 "De 'source'-tag is onjuist. Bijvoorbeeld een illegale bron zoals\n"
-"Google"
+"Google."
 
 #: ../plugins/Source.py:41
 msgid ""
@@ -2790,7 +2790,7 @@ msgstr "Mogelijke rollen zijn \"outer\", \"inner\" of niets (niet aanbevolen)."
 
 #: ../plugins/Structural_Multipolygon.py:37
 msgid "Members must be ways."
-msgstr "Leden moeten wegen zijn. "
+msgstr "Leden moeten wegen zijn."
 
 #: ../plugins/Structural_Multipolygon.py:41
 msgid "At least one outer ring must be present."
@@ -2802,7 +2802,7 @@ msgstr ""
 
 #: ../plugins/Structural_UnclosedArea.py:32
 msgid "A way has the tag area=yes, but is not closed."
-msgstr "Een weg heeft de area=yes tag, maar is niet gesloten. "
+msgstr "Een weg heeft de area=yes tag, maar is niet gesloten."
 
 #: ../plugins/Structural_UnclosedArea.py:34
 msgid ""
@@ -2814,7 +2814,7 @@ msgstr ""
 
 #: ../plugins/Structural_Useless_Relation.py:33
 msgid "The relation only contains one member."
-msgstr "De relatie bevat slechts één lid. "
+msgstr "De relatie bevat slechts één lid."
 
 #: ../plugins/Structural_Useless_Relation.py:35
 msgid ""
@@ -2825,7 +2825,7 @@ msgstr ""
 
 #: ../plugins/Structural_Useless_Relation.py:39
 msgid "Do not remove a relation without understanding why it is there."
-msgstr "Verwijder een relatie niet zonder te begrijpen waarom deze er is. "
+msgstr "Verwijder een relatie niet zonder te begrijpen waarom deze er is."
 
 #: ../plugins/Structural_Waterway.py:32
 msgid "A waterway cannot flow in closed loop."
@@ -2850,7 +2850,7 @@ msgid ""
 "The tag contains two values (separated by ';') which are very\n"
 "similar."
 msgstr ""
-"De tag bevat twee waarden (gescheiden door ';') die zeer vergelijkbaar zijn. "
+"De tag bevat twee waarden (gescheiden door ';') die zeer vergelijkbaar zijn."
 
 #: ../plugins/TagFix_DuplicateValue.py:38
 msgid "Delete one value."
@@ -3114,8 +3114,8 @@ msgid ""
 "Speed camera should be mapped as a node on the highway or use an "
 "`enforcement` relation."
 msgstr ""
-"Snelheidscameras moeten als knooppunt op de snelweg in kaart worden gebracht "
-"of een enforcement relatie gebruiken. "
+"Snelheidscameras moeten als knooppunt op de weg in kaart worden gebracht of "
+"een `enforcement` relatie gebruiken."
 
 #: ../plugins/Name_Script.py:55
 msgid "Unexpected symbol in name"
@@ -3159,7 +3159,7 @@ msgstr ""
 "Zie [de\n"
 "mapping](https://wiki.openstreetmap.org/wiki/France/data.gouv.fr/"
 "Bornes_de_Recharge_pour_V%C3%A9hicules_%C3%89lectriques)\n"
-"op de wiki. Voeg een knooppunt toe of voeg tags toe als deze al bestaat. "
+"op de wiki. Voeg een knooppunt toe of voeg tags toe als deze al bestaat."
 
 #: ../analysers/analyser_merge_charging_station_FR.py:58
 msgid "Car charging station not integrated"
@@ -3171,12 +3171,12 @@ msgstr "laadstation, integratie suggestie "
 
 #: ../analysers/analyser_osmosis_boundary_intersect.py:98
 msgid "Borders crossing each other."
-msgstr "Grenzen kruisen elkaar"
+msgstr "Grenzen kruisen elkaar."
 
 #: ../analysers/analyser_osmosis_boundary_intersect.py:102
 msgid "The borders are part of relations which normally form a loop."
 msgstr ""
-"De grenzen maken deel uit van relaties, ze zijn normaal gesproken gesloten. "
+"De grenzen maken deel uit van relaties, ze zijn normaal gesproken gesloten."
 
 #: ../analysers/analyser_osmosis_boundary_relation.py:140
 msgid ""
@@ -3776,7 +3776,7 @@ msgid ""
 msgstr ""
 "Er is geen tag met `opening_date`, `check_date`, `open_date`,\n"
 "`construction:date`, `temporary:date_on`, `date_on` en het object is\n"
-"al meer dan twee jaar in aanbouw of openingsdata is overschreden. "
+"al meer dan twee jaar in aanbouw, of de openingsdatum is overschreden."
 
 #: ../plugins/Covid19.py:23 ../plugins/Covid19.py:100 ../plugins/Covid19.py:191
 #: ../plugins/Covid19.py:269
@@ -3819,7 +3819,7 @@ msgid ""
 "The list of milestone comes from the CEREMA's database \"RIU\" in France."
 msgstr ""
 "De lijst met mijlpalen is afkomstig uit de CEREMA-database \"RIU\" in "
-"Frankrijk. "
+"Frankrijk."
 
 #: ../analysers/analyser_merge_milestone_FR.py:47
 msgid "Milestone not integrated"
@@ -4641,7 +4641,7 @@ msgstr ""
 
 #: ../plugins/Name_Dictionary.py:35
 msgid "Probably missing a capital, accent or typo."
-msgstr "Waarschijnlijk ontbreekt er een hoofdletter,accent of typefout"
+msgstr "Waarschijnlijk ontbreekt er een hoofdletter, accent of typefout."
 
 #: ../plugins/Number.py:51
 msgid "Suspicious value"
