@@ -689,7 +689,7 @@ france_local_db.analyser["merge_defibrillators_FR_aedmap"] = "xxx"
 #########################################################################
 
 default_country("europe", "albania", 53292, {"country": "AL", "language": "sq", "proj": 32634})
-default_country("europe", "andorra", 9407, {"country": "AD", "language": "ca", "proj": 2154})
+default_country("europe", "andorra", 9407, {"country": "AD", "language": "ca", "proj": 2154}, download_repo=OSMFR)
 default_country("europe", "belarus", 59065, {"country": "BY", "language": ["be", "ru"], "proj": 32635}, download_repo=GEOFABRIK)
 default_country("europe", "bosnia-herzegovina", 2528142, {"country": "BA", "language": ["bs", "hr", "sr"], "proj": 32633}, download_repo=GEOFABRIK)
 default_country("europe", "bulgaria", 186382, {"country": "BG", "language": "bg", "proj": 32635}, download_repo=GEOFABRIK)
