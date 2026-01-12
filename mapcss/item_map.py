@@ -9,6 +9,7 @@ item_map = \
                              'NL German style tagging': 90206,
                              'NL addresses and contacts': 90201,
                              'NL deprecated features': 90202,
+                             'NL education': 90210,
                              'NL heritage': 90204,
                              'NL mofa tagging': 90208,
                              'NL nomenclature': 90203,

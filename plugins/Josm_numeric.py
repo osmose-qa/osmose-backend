@@ -77,6 +77,7 @@ class Josm_numeric(PluginMapCSS):
         self.re_5a9b9c26 = re.compile(r'^(broad|standard|narrow)$')
         self.re_5dbcb7bc = re.compile(r'^(?i)[0-9]+([.,][0-9]+)?( *(metres?|meters?)|m| {2,}m)$')
         self.re_5f1f731d = re.compile(r'^([0-9][0-9]?[0-9]?|[0-9]+[0-9]:[0-5][0-9](:[0-5][0-9])?)$')
+        self.re_65b93c93 = re.compile(r'^((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5)(?:(;((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5))*|(-((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5)))$')
         self.re_6a0eca39 = re.compile(r'^[0-9]+,[0-9][0-9]?( m|\')?$')
         self.re_6aa93c30 = re.compile(r'^[A-Z]{3}$')
         self.re_6ae26377 = re.compile(r'([0-9.,]+) *.+')
@@ -87,7 +88,6 @@ class Josm_numeric(PluginMapCSS):
         self.re_7b1365b7 = re.compile(r'^(AG|AN|AY|BG|BI|BK|C|DA|DB|DF|DG|DI|DN|DR|DT|DX|EB|ED|EE|EF|EG|EH|EI|EK|EL|EN|EP|ES|ET|EV|EY|FA|FB|FC|FD|FE|FG|FH|FI|FJ|FK|FL|FM|FN|FO|FP|FQ|FS|FT|FV|FW|FX|FY|FZ|GA|GB|GC|GE|GF|GG|GL|GM|GO|GQ|GS|GU|GV|HA|HB|HC|HD|HE|HH|HK|HL|HR|HS|HT|HU|K|LA|LB|LC|LD|LE|LF|LG|LH|LI|LJ|LK|LL|LM|LN|LO|LP|LQ|LR|LS|LT|LU|LV|LW|LX|LY|LZ|MB|MD|MG|MH|MK|MM|MN|MP|MR|MS|MT|MU|MW|MY|MZ|NC|NF|NG|NI|NL|NS|NT|NV|NW|NZ|OA|OB|OE|OI|OJ|OK|OL|OM|OO|OP|OR|OS|OT|OY|PA|PB|PC|PF|PG|PH|PJ|PK|PL|PM|PO|PP|PT|PW|RC|RJ|RK|RO|RP|SA|SB|SC|SD|SE|SF|SG|SH|SI|SJ|SK|SL|SM|SN|SO|SP|SS|SU|SV|SW|SY|TA|TB|TD|TF|TG|TI|TJ|TK|TL|TN|TQ|TR|TT|TU|TV|TX|U|UA|UB|UC|UD|UG|UK|UM|UT|VA|VC|VD|VE|VG|VH|VI|VL|VM|VN|VO|VQ|VR|VT|VV|VY|WA|WB|WI|WM|WP|WQ|WR|WS|Y|Z|ZK|ZM)')
         self.re_7e626945 = re.compile(r'railway$')
         self.re_7f163374 = re.compile(r'^(1|2|3|4|5|6|7|8|9|10|11|12)$')
-        self.re_7f19b94b = re.compile(r'^((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\.5)?)|-0\.5)(;((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\.5)?)|-0\.5))*$')
 
 
     def node(self, data, tags):
@@ -166,16 +166,11 @@ class Josm_numeric(PluginMapCSS):
                 err.append({'class': 9006023, 'subclass': 29188290, 'text': mapcss.tr('negative {0} value', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
 
         # *[building:levels][building:levels!~/^(([0-9]|[1-9][0-9]*)(\.5)?)$/]!.negative_value
-        # *[level][level!~/^((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\.5)?)|-0\.5)(;((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\.5)?)|-0\.5))*$/]
-        if ('building:levels' in keys) or ('level' in keys):
+        if ('building:levels' in keys):
             match = False
             if not match:
                 capture_tags = {}
                 try: match = ((not set_negative_value) and (mapcss._tag_capture(capture_tags, 0, tags, 'building:levels')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_2a784076, '^(([0-9]|[1-9][0-9]*)(\\.5)?)$'), mapcss._tag_capture(capture_tags, 1, tags, 'building:levels'))))
-                except mapcss.RuleAbort: pass
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'level')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_7f19b94b, '^((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\\.5)?)|-0\\.5)(;((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\\.5)?)|-0\\.5))*$'), mapcss._tag_capture(capture_tags, 1, tags, 'level'))))
                 except mapcss.RuleAbort: pass
             if match:
                 # throwWarning:tr("{0} should have numbers only with optional .5 increments","{0.key}")
@@ -183,25 +178,41 @@ class Josm_numeric(PluginMapCSS):
                 # assertNoMatch:"node building:levels=0"
                 # assertNoMatch:"node building:levels=1.5"
                 # assertMatch:"node building:levels=1A"
+                err.append({'class': 9006004, 'subclass': 22245486, 'text': mapcss.tr('{0} should have numbers only with optional .5 increments', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
+
+        # *[level][level!~/^((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5)(?:(;((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5))*|(-((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5)))$/]
+        if ('level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'level')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_65b93c93, '^((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\\.5)?)|-0\\.5)(?:(;((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\\.5)?)|-0\\.5))*|(-((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\\.5)?)|-0\\.5)))$'), mapcss._tag_capture(capture_tags, 1, tags, 'level'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # throwWarning:tr("{0} should have numbers only with optional .5 increments","{0.key}")
                 # assertMatch:"node level=-0"
                 # assertNoMatch:"node level=-0.5"
                 # assertNoMatch:"node level=-0.5;0"
                 # assertMatch:"node level=-01.5"
                 # assertMatch:"node level=-03"
                 # assertNoMatch:"node level=-1"
+                # assertNoMatch:"node level=-1-100"
+                # assertNoMatch:"node level=-10--5"
                 # assertNoMatch:"node level=-1;-0.5"
                 # assertNoMatch:"node level=0"
+                # assertNoMatch:"node level=0--1"
+                # assertNoMatch:"node level=0-3"
                 # assertMatch:"node level=01"
                 # assertNoMatch:"node level=0;-0.5"
                 # assertNoMatch:"node level=0;1"
                 # assertNoMatch:"node level=1"
+                # assertMatch:"node level=1-2-3"
                 # assertNoMatch:"node level=1.5"
                 # assertNoMatch:"node level=12"
                 # assertNoMatch:"node level=1;0.5"
                 # assertNoMatch:"node level=1;1.5"
                 # assertMatch:"node level=2.3"
                 # assertMatch:"node level=one"
-                err.append({'class': 9006004, 'subclass': 1292315112, 'text': mapcss.tr('{0} should have numbers only with optional .5 increments', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
+                err.append({'class': 9006004, 'subclass': 864735472, 'text': mapcss.tr('{0} should have numbers only with optional .5 increments', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
 
         # *[roof:height][siunit_length(tag("roof:height"))==0][roof:shape=flat]
         if ('roof:height' in keys and 'roof:shape' in keys):
@@ -1104,20 +1115,29 @@ class Josm_numeric(PluginMapCSS):
                 err.append({'class': 9006023, 'subclass': 29188290, 'text': mapcss.tr('negative {0} value', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
 
         # *[building:levels][building:levels!~/^(([0-9]|[1-9][0-9]*)(\.5)?)$/]!.negative_value
-        # *[level][level!~/^((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\.5)?)|-0\.5)(;((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\.5)?)|-0\.5))*$/]
-        if ('building:levels' in keys) or ('level' in keys):
+        if ('building:levels' in keys):
             match = False
             if not match:
                 capture_tags = {}
                 try: match = ((not set_negative_value) and (mapcss._tag_capture(capture_tags, 0, tags, 'building:levels')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_2a784076, '^(([0-9]|[1-9][0-9]*)(\\.5)?)$'), mapcss._tag_capture(capture_tags, 1, tags, 'building:levels'))))
                 except mapcss.RuleAbort: pass
+            if match:
+                # throwWarning:tr("{0} should have numbers only with optional .5 increments","{0.key}")
+                err.append({'class': 9006004, 'subclass': 22245486, 'text': mapcss.tr('{0} should have numbers only with optional .5 increments', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
+
+        # *[level][level!~/^((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5)(?:(;((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5))*|(-((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5)))$/]
+        if ('level' in keys):
+            match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'level')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_7f19b94b, '^((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\\.5)?)|-0\\.5)(;((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\\.5)?)|-0\\.5))*$'), mapcss._tag_capture(capture_tags, 1, tags, 'level'))))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'level')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_65b93c93, '^((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\\.5)?)|-0\\.5)(?:(;((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\\.5)?)|-0\\.5))*|(-((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\\.5)?)|-0\\.5)))$'), mapcss._tag_capture(capture_tags, 1, tags, 'level'))))
                 except mapcss.RuleAbort: pass
             if match:
                 # throwWarning:tr("{0} should have numbers only with optional .5 increments","{0.key}")
-                err.append({'class': 9006004, 'subclass': 1292315112, 'text': mapcss.tr('{0} should have numbers only with optional .5 increments', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
+                # assertMatch:"way level=--5"
+                # assertMatch:"way level=--5-4"
+                # assertMatch:"way level=-5---4"
+                err.append({'class': 9006004, 'subclass': 864735472, 'text': mapcss.tr('{0} should have numbers only with optional .5 increments', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
 
         # *[roof:height][siunit_length(tag("roof:height"))==0][roof:shape=flat]
         if ('roof:height' in keys and 'roof:shape' in keys):
@@ -1931,20 +1951,26 @@ class Josm_numeric(PluginMapCSS):
                 err.append({'class': 9006023, 'subclass': 29188290, 'text': mapcss.tr('negative {0} value', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
 
         # *[building:levels][building:levels!~/^(([0-9]|[1-9][0-9]*)(\.5)?)$/]!.negative_value
-        # *[level][level!~/^((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\.5)?)|-0\.5)(;((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\.5)?)|-0\.5))*$/]
-        if ('building:levels' in keys) or ('level' in keys):
+        if ('building:levels' in keys):
             match = False
             if not match:
                 capture_tags = {}
                 try: match = ((not set_negative_value) and (mapcss._tag_capture(capture_tags, 0, tags, 'building:levels')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_2a784076, '^(([0-9]|[1-9][0-9]*)(\\.5)?)$'), mapcss._tag_capture(capture_tags, 1, tags, 'building:levels'))))
                 except mapcss.RuleAbort: pass
+            if match:
+                # throwWarning:tr("{0} should have numbers only with optional .5 increments","{0.key}")
+                err.append({'class': 9006004, 'subclass': 22245486, 'text': mapcss.tr('{0} should have numbers only with optional .5 increments', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
+
+        # *[level][level!~/^((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5)(?:(;((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5))*|(-((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\.5)?)|-0\.5)))$/]
+        if ('level' in keys):
+            match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'level')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_7f19b94b, '^((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\\.5)?)|-0\\.5)(;((((-*[1-9]|[0-9])|-*[1-9][0-9]*)(\\.5)?)|-0\\.5))*$'), mapcss._tag_capture(capture_tags, 1, tags, 'level'))))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'level')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_65b93c93, '^((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\\.5)?)|-0\\.5)(?:(;((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\\.5)?)|-0\\.5))*|(-((((-?[1-9]|[0-9])|-?[1-9][0-9]*)(\\.5)?)|-0\\.5)))$'), mapcss._tag_capture(capture_tags, 1, tags, 'level'))))
                 except mapcss.RuleAbort: pass
             if match:
                 # throwWarning:tr("{0} should have numbers only with optional .5 increments","{0.key}")
-                err.append({'class': 9006004, 'subclass': 1292315112, 'text': mapcss.tr('{0} should have numbers only with optional .5 increments', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
+                err.append({'class': 9006004, 'subclass': 864735472, 'text': mapcss.tr('{0} should have numbers only with optional .5 increments', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
 
         # *[roof:height][siunit_length(tag("roof:height"))==0][roof:shape=flat]
         if ('roof:height' in keys and 'roof:shape' in keys):
@@ -2565,28 +2591,33 @@ class Test(TestPluginMapcss):
         self.check_not_err(n.node(data, {'building:levels': '1'}), expected={'class': 9006023, 'subclass': 29188290})
         self.check_not_err(n.node(data, {'building:levels': 'foo'}), expected={'class': 9006023, 'subclass': 29188290})
         self.check_not_err(n.node(data, {'level': '-1'}), expected={'class': 9006023, 'subclass': 29188290})
-        self.check_not_err(n.node(data, {'building:levels': '-1'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'building:levels': '0'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'building:levels': '1.5'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_err(n.node(data, {'building:levels': '1A'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_err(n.node(data, {'level': '-0'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '-0.5'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '-0.5;0'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_err(n.node(data, {'level': '-01.5'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_err(n.node(data, {'level': '-03'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '-1'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '-1;-0.5'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '0'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_err(n.node(data, {'level': '01'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '0;-0.5'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '0;1'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '1'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '1.5'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '12'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '1;0.5'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_not_err(n.node(data, {'level': '1;1.5'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_err(n.node(data, {'level': '2.3'}), expected={'class': 9006004, 'subclass': 1292315112})
-        self.check_err(n.node(data, {'level': 'one'}), expected={'class': 9006004, 'subclass': 1292315112})
+        self.check_not_err(n.node(data, {'building:levels': '-1'}), expected={'class': 9006004, 'subclass': 22245486})
+        self.check_not_err(n.node(data, {'building:levels': '0'}), expected={'class': 9006004, 'subclass': 22245486})
+        self.check_not_err(n.node(data, {'building:levels': '1.5'}), expected={'class': 9006004, 'subclass': 22245486})
+        self.check_err(n.node(data, {'building:levels': '1A'}), expected={'class': 9006004, 'subclass': 22245486})
+        self.check_err(n.node(data, {'level': '-0'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '-0.5'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '-0.5;0'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_err(n.node(data, {'level': '-01.5'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_err(n.node(data, {'level': '-03'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '-1'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '-1-100'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '-10--5'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '-1;-0.5'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '0'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '0--1'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '0-3'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_err(n.node(data, {'level': '01'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '0;-0.5'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '0;1'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '1'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_err(n.node(data, {'level': '1-2-3'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '1.5'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '12'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '1;0.5'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_not_err(n.node(data, {'level': '1;1.5'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_err(n.node(data, {'level': '2.3'}), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_err(n.node(data, {'level': 'one'}), expected={'class': 9006004, 'subclass': 864735472})
         self.check_err(n.node(data, {'roof:height': '0', 'roof:shape': 'flat'}), expected={'class': 9006025, 'subclass': 301901487})
         self.check_not_err(n.node(data, {'roof:height': '0', 'roof:shape': 'gabled'}), expected={'class': 9006025, 'subclass': 301901487})
         self.check_err(n.node(data, {'roof:height': '00.00000 ft', 'roof:shape': 'flat'}), expected={'class': 9006025, 'subclass': 301901487})
@@ -2860,6 +2891,9 @@ class Test(TestPluginMapcss):
         self.check_err(n.node(data, {'circumference': '82.4', 'natural': 'tree'}), expected={'class': 9006033, 'subclass': 556959007})
         self.check_err(n.way(data, {'123': 'foo'}, [0]), expected={'class': 9006001, 'subclass': 750700308})
         self.check_not_err(n.way(data, {'ref.1': 'foo'}, [0]), expected={'class': 9006001, 'subclass': 750700308})
+        self.check_err(n.way(data, {'level': '--5'}, [0]), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_err(n.way(data, {'level': '--5-4'}, [0]), expected={'class': 9006004, 'subclass': 864735472})
+        self.check_err(n.way(data, {'level': '-5---4'}, [0]), expected={'class': 9006004, 'subclass': 864735472})
         self.check_err(n.way(data, {'maxspeed': '-50'}, [0]), expected={'class': 9006026, 'subclass': 683878293})
         self.check_err(n.way(data, {'maxspeed': '0'}, [0]), expected={'class': 9006026, 'subclass': 683878293})
         self.check_not_err(n.way(data, {'maxspeed': '30 mph'}, [0]), expected={'class': 9006026, 'subclass': 683878293})

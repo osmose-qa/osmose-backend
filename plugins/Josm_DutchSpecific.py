@@ -29,6 +29,7 @@ class Josm_DutchSpecific(PluginMapCSS):
         self.errors[90207] = self.def_class(item = 9020, level = 3, tags = [], title = mapcss.tr('NL speed limits'))
         self.errors[90208] = self.def_class(item = 9020, level = 3, tags = [], title = mapcss.tr('NL mofa tagging'))
         self.errors[90209] = self.def_class(item = 9020, level = 3, tags = [], title = mapcss.tr('NL unusual values'))
+        self.errors[90210] = self.def_class(item = 9020, level = 3, tags = [], title = mapcss.tr('NL education'))
 
         self.re_011bedaa = re.compile(r'^hgv(:forward|:backward|:both_ways)?(:conditional)?$')
         self.re_033b234a = re.compile(r'^bicycle(:forward|:both_ways)?(:conditional)?$')
@@ -76,6 +77,7 @@ class Josm_DutchSpecific(PluginMapCSS):
         self.re_2f938f56 = re.compile(r'^(Adr|Anth?|Chr?|Corn|Fred|Hub|Jacq?|Joh|Jos|Mac|Nic|Ph|Th)\.')
         self.re_30fdb33a = re.compile(r'(?i)^(lift)$')
         self.re_31154585 = re.compile(r'^motorcycle(:forward|:both_ways)?(:conditional)?$')
+        self.re_32432bcf = re.compile(r'^[0-8]( ?- ?[1-8])?(; ?[0-8]( ?- ?[1-8])?)*$')
         self.re_3254c1c6 = re.compile(r'(?i)(parkeren$|parkeerplaats$|^toegang(sweg)?\s|^richting\s|drive.thro?u(gh)?)')
         self.re_32d334cf = re.compile(r'(^|.+:)addr:street($|:.+)')
         self.re_33480e64 = re.compile(r'^maxheight(:forward|:backward|:both_ways)?(:conditional)?$')
@@ -102,10 +104,12 @@ class Josm_DutchSpecific(PluginMapCSS):
         self.re_49026388 = re.compile(r'(^|.+:)addr:housenumber($|:.+)')
         self.re_4cfe628c = re.compile(r'^access(:forward|:both_ways)?(:conditional)?$')
         self.re_4d17a717 = re.compile(r'^(no|-1|0)*$')
+        self.re_4d22025f = re.compile(r'(^|; ?)school(;|$)')
         self.re_4d87e9ab = re.compile(r'^access(:backward|:both_ways)?(:conditional)?$')
         self.re_4e099629 = re.compile(r'^trailer(:forward|:both_ways)?(:conditional)?$')
         self.re_4e4468f8 = re.compile(r'^foot(:backward|:both_ways)?(:conditional)?$')
         self.re_5012755c = re.compile(r'^priority:.')
+        self.re_51dab210 = re.compile(r'(^|; ?)primary(;|$)')
         self.re_51f98600 = re.compile(r'^yes$')
         self.re_53816e1a = re.compile(r'^maxwidth(:forward|:backward|:both_ways)?(:conditional)?$')
         self.re_543ffeee = re.compile(r'(?i)(rolstoel|invaliden)')
@@ -113,9 +117,11 @@ class Josm_DutchSpecific(PluginMapCSS):
         self.re_54e14d8c = re.compile(r'(?i)^wadi$')
         self.re_550ffc74 = re.compile(r'^building(:part)?$')
         self.re_556f4d08 = re.compile(r'^maxweight(:forward|:both_ways)?(:conditional)?$')
+        self.re_55749962 = re.compile(r'(^|; ?)university(;|$)')
         self.re_5577fcc2 = re.compile(r'^hgv(:backward|:both_ways)?(:conditional)?$')
         self.re_5578cc63 = re.compile(r'100.+19:00')
         self.re_561be3ff = re.compile(r'^addr:(city|postcode)$')
+        self.re_58d766ea = re.compile(r'(^|; ?)kindergarten(;|$)')
         self.re_594405dc = re.compile(r'^(00|\+)31 ?0( ?[0-9]){7,}')
         self.re_59aca94c = re.compile(r'(^|; ?)NL:C20\b')
         self.re_5a895116 = re.compile(r'(^|; ?)NL:A0?4\b')
@@ -129,10 +135,12 @@ class Josm_DutchSpecific(PluginMapCSS):
         self.re_619cd3d8 = re.compile(r'(^|; ?)NL:C22(\[[A-E]\])?(;|$)')
         self.re_6211f625 = re.compile(r'(?i)(voormalige?)')
         self.re_62e192cf = re.compile(r'^(motorway(_link)?|construction|proposed)$')
+        self.re_63c090e2 = re.compile(r'(^|; ?)secondary(;|$)')
         self.re_63f5f8f1 = re.compile(r'^maxheight(:forward|:both_ways)?(:conditional)?$')
         self.re_640dd184 = re.compile(r'^trailer(:backward|:both_ways)?(:conditional)?$')
         self.re_6454d3f5 = re.compile(r'stenen$|^hout$|\bbestraa?t(ing)?$|grond$|^puin$|^grind$|zand$')
         self.re_6460cbf8 = re.compile(r'^(trunk|motorway|busway|path|busway|bridleway|footway|pedestrian)(_link)?$')
+        self.re_669a8f49 = re.compile(r'(^|; ?)college(;|$)')
         self.re_6708cc9b = re.compile(r'(; ?|^)([0-9]{0,3}[1-9]|[0-9]{0,2}[1-9][0-9]|[0-9]?[1-9][0-9]{2})[0-9]{12}($|;)')
         self.re_682234cc = re.compile(r'^foot(:forward|:backward|:both_ways)?(:conditional)?$')
         self.re_68a71d57 = re.compile(r'backward')
@@ -167,7 +175,7 @@ class Josm_DutchSpecific(PluginMapCSS):
         capture_tags = {}
         keys = tags.keys()
         err = []
-        set_abbrname = set_addrOnBuilding = set_altLivingStreet = set_badPhoneNumber = set_completedSurfacePavingStonesNumber = set_hasAddMofaPositive = set_housenameWithFix = set_markedSteps = set_multipleGsigns = set_stepsWithBicycleRamp = False
+        set_abbrname = set_addrOnBuilding = set_altLivingStreet = set_badPhoneNumber = set_completedSurfacePavingStonesNumber = set_hasAddMofaPositive = set_housenameWithFix = set_isWrongSchoolTag = set_iscedCollege = set_iscedInvalid = set_iscedKindergarten = set_iscedSchool = set_iscedSchoolPrimary = set_iscedSchoolSecondary = set_iscedUniversity = set_markedSteps = set_multipleGsigns = set_stepsWithBicycleRamp = False
 
         # node[traffic_sign~="NL:L2"][crossing!=uncontrolled][crossing!=marked][crossing:markings!=zebra][highway=crossing][crossing!=traffic_signals][crossing_ref!=zebra]
         # node[traffic_sign~="NL:L02"][crossing!=uncontrolled][crossing!=marked][crossing:markings!=zebra][highway=crossing][crossing!=traffic_signals][crossing_ref!=zebra]
@@ -766,13 +774,371 @@ class Josm_DutchSpecific(PluginMapCSS):
                     ['heritage','2']])
                 }})
 
+        # *[isced:level][isced:level!~/^[0-8]( ?- ?[1-8])?(; ?[0-8]( ?- ?[1-8])?)*$/][inside("NL")]
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_32432bcf, '^[0-8]( ?- ?[1-8])?(; ?[0-8]( ?- ?[1-8])?)*$'), mapcss._tag_capture(capture_tags, 1, tags, 'isced:level'))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedInvalid
+                # group:tr("NL education")
+                # throwWarning:tr("unusual value of {0}","{0.key}")
+                # assertNoMatch:"node isced:level=0"
+                # assertNoMatch:"node isced:level=0-3"
+                # assertNoMatch:"node isced:level=0;1;2-4;5-7;8"
+                # assertNoMatch:"node isced:level=0;1;2;3"
+                # assertNoMatch:"node isced:level=0;1;2;3;4;5;6;7;8"
+                set_iscedInvalid = True
+                err.append({'class': 90210, 'subclass': 1162550894, 'text': mapcss.tr('unusual value of {0}', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
+
+        # *[isced:level*=0][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 0))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedKindergarten
+                # set .iscedSchool
+                # set .iscedSchoolPrimary
+                set_iscedKindergarten = True
+                set_iscedSchool = True
+                set_iscedSchoolPrimary = True
+
+        # *[isced:level*=1][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 1))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedSchool
+                # set .iscedSchoolPrimary
+                set_iscedSchool = True
+                set_iscedSchoolPrimary = True
+
+        # *[isced:level*=2][inside("NL")]!.iscedInvalid
+        # *[isced:level*=3][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 2))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 3))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedSchool
+                # set .iscedSchoolSecondary
+                set_iscedSchool = True
+                set_iscedSchoolSecondary = True
+
+        # *[isced:level*=4][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 4))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedCollege
+                set_iscedCollege = True
+
+        # *[isced:level*=5][inside("NL")]!.iscedInvalid
+        # *[isced:level*=6][inside("NL")]!.iscedInvalid
+        # *[isced:level*=7][inside("NL")]!.iscedInvalid
+        # *[isced:level*=8][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 5))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 6))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 7))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 8))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedUniversity
+                set_iscedUniversity = True
+
+        # *[isced:level][amenity][amenity!=school][amenity!=construction][amenity!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=college][amenity!=construction][amenity!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=university][amenity!=construction][amenity!~/(^|; ?)university(;|$)/]!.iscedKindergarten!.iscedSchool!.iscedCollege.iscedUniversity
+        # *[isced:level][education][education!=school][!amenity][education!=construction][education!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=college][!amenity][education!=construction][education!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=university][!amenity][education!=construction][education!~/(^|; ?)university(;|$)/]!.iscedKindergarten!.iscedSchool!.iscedCollege.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys) or ('education' in keys and 'isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 4, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 4, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 4, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 4, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (not set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'university', 'university')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 4, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 4, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 4, tags, 'education') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 4, tags, 'education') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (not set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 4, tags, 'education') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                # assertNoMatch:"node isced:level=0"
+                # assertNoMatch:"node isced:level=0-8 amenity=university"
+                # assertNoMatch:"node isced:level=0;1"
+                # assertNoMatch:"node isced:level=0;1;2;3;4;5;6;7;8 amenity=university"
+                # assertNoMatch:"node isced:level=3 building=school"
+                # assertNoMatch:"node isced:level=4;5 amenity=university"
+                # assertNoMatch:"node isced:level=4;5 education=university"
+                # assertNoMatch:"node isced:level=5 amenity=university"
+                # assertNoMatch:"node isced:level=5 amenity=university;driving_school"
+                # assertNoMatch:"node isced:level=5-8 amenity=university"
+                # assertNoMatch:"node isced:level=5;6;7;8 amenity=university"
+                err.append({'class': 90210, 'subclass': 1629814202, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
+        # *[isced:level][amenity!=school][!amenity][!education][!building][!construction]!.iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=college][!amenity][!education][!building][!construction]!.iscedKindergarten!.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=university][!amenity][!education][!building][!construction]!.iscedKindergarten!.iscedSchool!.iscedCollege.iscedUniversity
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'school', 'school')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (not set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # throwWarning:tr("{0} without {1} or {2}","{0.tag}","{1.tag}","education={1.value}")
+                # assertNoMatch:"node isced:level=0"
+                # assertNoMatch:"node isced:level=1-3 education=school"
+                # assertNoMatch:"node isced:level=3-5"
+                # assertNoMatch:"node isced:level=3;4;5"
+                # assertNoMatch:"node isced:level=5;6;7;8 amenity=university"
+                err.append({'class': 90210, 'subclass': 55507015, 'text': mapcss.tr('{0} without {1} or {2}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'), mapcss._tag_uncapture(capture_tags, 'education={1.value}'))})
+
+        # *[isced:level][amenity][amenity!=kindergarten][amenity!=school][amenity!=construction][amenity!~/(^|; ?)school(;|$)/][amenity!~/(^|; ?)kindergarten(;|$)/].iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=school][amenity!=college][amenity!=construction][amenity!~/(^|; ?)college(;|$)/][amenity!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=college][amenity!=university][amenity!=construction][amenity!~/(^|; ?)university(;|$)/][amenity!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege.iscedUniversity
+        # *[isced:level][education][education!=kindergarten][education!=school][!amenity][education!=construction][education!~/(^|; ?)school(;|$)/][education!~/(^|; ?)kindergarten(;|$)/].iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=school][education!=college][!amenity][education!=construction][education!~/(^|; ?)college(;|$)/][education!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=college][education!=university][!amenity][education!=construction][education!~/(^|; ?)university(;|$)/][education!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys) or ('education' in keys and 'isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'kindergarten', 'kindergarten')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'amenity'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_58d766ea, '(^|; ?)kindergarten(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'amenity'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'university', 'university')) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'amenity'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'kindergarten', 'kindergarten')) and (mapcss._tag_capture(capture_tags, 3, tags, 'education') != mapcss._value_const_capture(capture_tags, 3, 'school', 'school')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 5, tags, 'education') != mapcss._value_const_capture(capture_tags, 5, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'education'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 7, self.re_58d766ea, '(^|; ?)kindergarten(;|$)'), mapcss._tag_capture(capture_tags, 7, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 3, tags, 'education') != mapcss._value_const_capture(capture_tags, 3, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 5, tags, 'education') != mapcss._value_const_capture(capture_tags, 5, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'education'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 7, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 7, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 3, tags, 'education') != mapcss._value_const_capture(capture_tags, 3, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 5, tags, 'education') != mapcss._value_const_capture(capture_tags, 5, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'education'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 7, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 7, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                # suggestAlternative:tr("{0}","{3.tag}")
+                # assertNoMatch:"node isced:level=0"
+                # assertNoMatch:"node isced:level=0-8 amenity=university"
+                # assertNoMatch:"node isced:level=0;1"
+                # assertNoMatch:"node isced:level=0;1;2;3;4;5;6;7;8 amenity=university"
+                # assertNoMatch:"node isced:level=1;2 amenity=school"
+                # assertNoMatch:"node isced:level=2 amenity=school"
+                # assertNoMatch:"node isced:level=2 amenity=school;driving_school"
+                # assertNoMatch:"node isced:level=4;5 amenity=college"
+                # assertNoMatch:"node isced:level=4;5 amenity=university"
+                # assertNoMatch:"node isced:level=5-8 amenity=university"
+                # assertNoMatch:"node isced:level=5-8 education=university"
+                # assertNoMatch:"node isced:level=5;6;7;8 amenity=university"
+                err.append({'class': 90210, 'subclass': 358015210, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
+        # *[isced:level][amenity!=school][amenity!=kindergarten][!amenity][!education][!building][!construction].iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=school][amenity!=college][!amenity][!education][!building][!construction]!.iscedKindergarten.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=college][amenity!=university][!amenity][!education][!building][!construction]!.iscedKindergarten!.iscedSchool.iscedCollege.iscedUniversity
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'kindergarten', 'kindergarten')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 6, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 6, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 6, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # throwWarning:tr("{0} without {1}, {2}, {3} or {4}","{0.tag}","{1.tag}","{2.tag}","education={1.value}","education={2.value}")
+                # assertNoMatch:"node isced:level=0;1 amenity=school"
+                # assertNoMatch:"node isced:level=0;1 amenity=university"
+                # assertNoMatch:"node isced:level=0;1 education=school"
+                # assertNoMatch:"node isced:level=3"
+                err.append({'class': 90210, 'subclass': 1941252443, 'text': mapcss.tr('{0} without {1}, {2}, {3} or {4}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'), mapcss._tag_uncapture(capture_tags, '{2.tag}'), mapcss._tag_uncapture(capture_tags, 'education={1.value}'), mapcss._tag_uncapture(capture_tags, 'education={2.value}'))})
+
+        # *[isced:level][school][school!=secondary][school=~/(^|; ?)primary(;|$)/]!.iscedSchoolPrimary.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        # *[isced:level][school][school!=primary][school=~/(^|; ?)secondary(;|$)/].iscedSchoolPrimary!.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        # *[isced:level][school][school!=primary][school=~/(^|; ?)secondary(;|$)/][amenity=school].iscedSchoolPrimary!.iscedSchoolSecondary.iscedKindergarten!.iscedCollege!.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys and 'school' in keys) or ('isced:level' in keys and 'school' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedSchoolPrimary) and (set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'secondary', 'secondary')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 3, self.re_51dab210), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 3, self.re_63c090e2), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 3, self.re_63c090e2), mapcss._tag_capture(capture_tags, 3, tags, 'school'))) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') == mapcss._value_capture(capture_tags, 4, 'school')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .isWrongSchoolTag
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                # assertNoMatch:"node isced:level=0;1 amenity=school school=primary"
+                # assertNoMatch:"node isced:level=1 amenity=school school=primary"
+                # assertNoMatch:"node isced:level=1 amenity=school school=primary;special_education_needs"
+                # assertNoMatch:"node isced:level=1 amenity=school"
+                # assertNoMatch:"node isced:level=1;2;3 amenity=school school=primary;secondary"
+                # assertNoMatch:"node isced:level=3 amenity=school school=secondary"
+                set_isWrongSchoolTag = True
+                err.append({'class': 90210, 'subclass': 603118930, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
+        # *[isced:level][school][school!="primary;secondary"][school!~/(^|; ?)secondary(;|$)/][school=~/(^|; ?)primary(;|$)/].iscedSchoolPrimary.iscedSchoolSecondary!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        # *[isced:level][school][school!=secondary][school!~/(^|; ?)secondary(;|$)/].iscedSchoolSecondary!.iscedSchoolPrimary!.iscedKindergarten!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        # *[isced:level][school][school!=primary][school!~/(^|; ?)primary(;|$)/].iscedSchoolPrimary!.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        # *[isced:level][school][school!=primary][school!~/(^|; ?)primary(;|$)/][amenity=school].iscedSchoolPrimary!.iscedSchoolSecondary.iscedKindergarten!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        if ('amenity' in keys and 'isced:level' in keys and 'school' in keys) or ('isced:level' in keys and 'school' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (set_iscedSchoolSecondary) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary;secondary', 'primary;secondary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_63c090e2, '(^|; ?)secondary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 4, self.re_51dab210), mapcss._tag_capture(capture_tags, 4, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolSecondary) and (not set_iscedSchoolPrimary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'secondary', 'secondary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_63c090e2, '(^|; ?)secondary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_51dab210, '(^|; ?)primary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_51dab210, '(^|; ?)primary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') == mapcss._value_capture(capture_tags, 4, 'school')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} without {1}","{0.tag}","{2.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                # suggestAlternative:tr("{0};{1}","{2.tag}","{1.value}")
+                # assertNoMatch:"node isced:level=0;1 amenity=school school=primary"
+                # assertNoMatch:"node isced:level=1 amenity=school school=primary"
+                # assertNoMatch:"node isced:level=1 amenity=school school=primary;special_education_needs"
+                # assertNoMatch:"node isced:level=1 amenity=school"
+                # assertNoMatch:"node isced:level=1;2;3 amenity=school school=primary;secondary"
+                # assertNoMatch:"node isced:level=1;2;3 amenity=school school=primary;secondary;special_education_needs"
+                # assertNoMatch:"node isced:level=3 amenity=school school=secondary"
+                err.append({'class': 90210, 'subclass': 858900978, 'text': mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{2.tag}'))})
+
+        # *[isced:level][school!="primary;secondary"][!school][!building].iscedSchoolPrimary.iscedSchoolSecondary!.iscedCollege!.iscedUniversity
+        # *[isced:level][school!=secondary][!school][!building].iscedSchoolSecondary!.iscedSchoolPrimary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        # *[isced:level][school!=primary][!school][!building].iscedSchoolPrimary!.iscedSchoolSecondary.iscedKindergarten!.iscedCollege!.iscedUniversity[amenity=school]
+        # *[isced:level][school!=primary][!school][!building].iscedSchoolPrimary!.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys) or ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (set_iscedSchoolSecondary) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'primary;secondary', 'primary;secondary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolSecondary) and (not set_iscedSchoolPrimary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'secondary', 'secondary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'primary', 'primary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')) and (mapcss._tag_capture(capture_tags, 9, tags, 'amenity') == mapcss._value_capture(capture_tags, 9, 'school')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'primary', 'primary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # throwWarning:tr("{0} without {1}","{0.tag}","{1.tag}")
+                # assertNoMatch:"node isced:level=0 amenity=kindergarten"
+                # assertNoMatch:"node isced:level=0;1 amenity=school school=primary"
+                # assertNoMatch:"node isced:level=1 amenity=school school=primary"
+                # assertNoMatch:"node isced:level=3 amenity=school school=secondary"
+                # assertNoMatch:"node isced:level=3 building=school"
+                err.append({'class': 90210, 'subclass': 1502806380, 'text': mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
         return err
 
     def way(self, data, tags, nds):
         capture_tags = {}
         keys = tags.keys()
         err = []
-        set_abbrname = set_addrOnBuilding = set_altLivingStreet = set_badPhoneNumber = set_completedSurfacePavingStonesNumber = set_hasAddMofaPositive = set_housenameWithFix = set_markedSteps = set_multipleGsigns = set_stepsWithBicycleRamp = False
+        set_abbrname = set_addrOnBuilding = set_altLivingStreet = set_badPhoneNumber = set_completedSurfacePavingStonesNumber = set_hasAddMofaPositive = set_housenameWithFix = set_isWrongSchoolTag = set_iscedCollege = set_iscedInvalid = set_iscedKindergarten = set_iscedSchool = set_iscedSchoolPrimary = set_iscedSchoolSecondary = set_iscedUniversity = set_markedSteps = set_multipleGsigns = set_stepsWithBicycleRamp = False
 
         # way[highway=cycleway][traffic_sign~="NL:G11"][moped][moped=~/^(yes|designated)$/]
         # way[highway=cycleway][traffic_sign~="NL:G12a"][moped][moped=~/^(no|use_sidepath)$/]
@@ -3120,13 +3486,316 @@ class Josm_DutchSpecific(PluginMapCSS):
                     (mapcss._tag_uncapture(capture_tags, '{3.key}={0.value}')).split('=', 1)])
                 }})
 
+        # *[isced:level][isced:level!~/^[0-8]( ?- ?[1-8])?(; ?[0-8]( ?- ?[1-8])?)*$/][inside("NL")]
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_32432bcf, '^[0-8]( ?- ?[1-8])?(; ?[0-8]( ?- ?[1-8])?)*$'), mapcss._tag_capture(capture_tags, 1, tags, 'isced:level'))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedInvalid
+                # group:tr("NL education")
+                # throwWarning:tr("unusual value of {0}","{0.key}")
+                set_iscedInvalid = True
+                err.append({'class': 90210, 'subclass': 1162550894, 'text': mapcss.tr('unusual value of {0}', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
+
+        # *[isced:level*=0][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 0))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedKindergarten
+                # set .iscedSchool
+                # set .iscedSchoolPrimary
+                set_iscedKindergarten = True
+                set_iscedSchool = True
+                set_iscedSchoolPrimary = True
+
+        # *[isced:level*=1][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 1))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedSchool
+                # set .iscedSchoolPrimary
+                set_iscedSchool = True
+                set_iscedSchoolPrimary = True
+
+        # *[isced:level*=2][inside("NL")]!.iscedInvalid
+        # *[isced:level*=3][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 2))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 3))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedSchool
+                # set .iscedSchoolSecondary
+                set_iscedSchool = True
+                set_iscedSchoolSecondary = True
+
+        # *[isced:level*=4][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 4))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedCollege
+                set_iscedCollege = True
+
+        # *[isced:level*=5][inside("NL")]!.iscedInvalid
+        # *[isced:level*=6][inside("NL")]!.iscedInvalid
+        # *[isced:level*=7][inside("NL")]!.iscedInvalid
+        # *[isced:level*=8][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 5))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 6))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 7))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 8))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedUniversity
+                set_iscedUniversity = True
+
+        # *[isced:level][amenity][amenity!=school][amenity!=construction][amenity!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=college][amenity!=construction][amenity!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=university][amenity!=construction][amenity!~/(^|; ?)university(;|$)/]!.iscedKindergarten!.iscedSchool!.iscedCollege.iscedUniversity
+        # *[isced:level][education][education!=school][!amenity][education!=construction][education!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=college][!amenity][education!=construction][education!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=university][!amenity][education!=construction][education!~/(^|; ?)university(;|$)/]!.iscedKindergarten!.iscedSchool!.iscedCollege.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys) or ('education' in keys and 'isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 4, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 4, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 4, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 4, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (not set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'university', 'university')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 4, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 4, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 4, tags, 'education') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 4, tags, 'education') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (not set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 4, tags, 'education') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                err.append({'class': 90210, 'subclass': 1629814202, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
+        # *[isced:level][amenity!=school][!amenity][!education][!building][!construction]!.iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=college][!amenity][!education][!building][!construction]!.iscedKindergarten!.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=university][!amenity][!education][!building][!construction]!.iscedKindergarten!.iscedSchool!.iscedCollege.iscedUniversity
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'school', 'school')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (not set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # throwWarning:tr("{0} without {1} or {2}","{0.tag}","{1.tag}","education={1.value}")
+                err.append({'class': 90210, 'subclass': 55507015, 'text': mapcss.tr('{0} without {1} or {2}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'), mapcss._tag_uncapture(capture_tags, 'education={1.value}'))})
+
+        # *[isced:level][amenity][amenity!=kindergarten][amenity!=school][amenity!=construction][amenity!~/(^|; ?)school(;|$)/][amenity!~/(^|; ?)kindergarten(;|$)/].iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=school][amenity!=college][amenity!=construction][amenity!~/(^|; ?)college(;|$)/][amenity!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=college][amenity!=university][amenity!=construction][amenity!~/(^|; ?)university(;|$)/][amenity!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege.iscedUniversity
+        # *[isced:level][education][education!=kindergarten][education!=school][!amenity][education!=construction][education!~/(^|; ?)school(;|$)/][education!~/(^|; ?)kindergarten(;|$)/].iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=school][education!=college][!amenity][education!=construction][education!~/(^|; ?)college(;|$)/][education!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=college][education!=university][!amenity][education!=construction][education!~/(^|; ?)university(;|$)/][education!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys) or ('education' in keys and 'isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'kindergarten', 'kindergarten')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'amenity'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_58d766ea, '(^|; ?)kindergarten(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'amenity'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'university', 'university')) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'amenity'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'kindergarten', 'kindergarten')) and (mapcss._tag_capture(capture_tags, 3, tags, 'education') != mapcss._value_const_capture(capture_tags, 3, 'school', 'school')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 5, tags, 'education') != mapcss._value_const_capture(capture_tags, 5, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'education'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 7, self.re_58d766ea, '(^|; ?)kindergarten(;|$)'), mapcss._tag_capture(capture_tags, 7, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 3, tags, 'education') != mapcss._value_const_capture(capture_tags, 3, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 5, tags, 'education') != mapcss._value_const_capture(capture_tags, 5, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'education'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 7, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 7, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 3, tags, 'education') != mapcss._value_const_capture(capture_tags, 3, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 5, tags, 'education') != mapcss._value_const_capture(capture_tags, 5, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'education'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 7, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 7, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                # suggestAlternative:tr("{0}","{3.tag}")
+                err.append({'class': 90210, 'subclass': 358015210, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
+        # *[isced:level][amenity!=school][amenity!=kindergarten][!amenity][!education][!building][!construction].iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=school][amenity!=college][!amenity][!education][!building][!construction]!.iscedKindergarten.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=college][amenity!=university][!amenity][!education][!building][!construction]!.iscedKindergarten!.iscedSchool.iscedCollege.iscedUniversity
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'kindergarten', 'kindergarten')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 6, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 6, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 6, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # throwWarning:tr("{0} without {1}, {2}, {3} or {4}","{0.tag}","{1.tag}","{2.tag}","education={1.value}","education={2.value}")
+                err.append({'class': 90210, 'subclass': 1941252443, 'text': mapcss.tr('{0} without {1}, {2}, {3} or {4}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'), mapcss._tag_uncapture(capture_tags, '{2.tag}'), mapcss._tag_uncapture(capture_tags, 'education={1.value}'), mapcss._tag_uncapture(capture_tags, 'education={2.value}'))})
+
+        # *[isced:level][school][school!=secondary][school=~/(^|; ?)primary(;|$)/]!.iscedSchoolPrimary.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        # *[isced:level][school][school!=primary][school=~/(^|; ?)secondary(;|$)/].iscedSchoolPrimary!.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        # *[isced:level][school][school!=primary][school=~/(^|; ?)secondary(;|$)/][amenity=school].iscedSchoolPrimary!.iscedSchoolSecondary.iscedKindergarten!.iscedCollege!.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys and 'school' in keys) or ('isced:level' in keys and 'school' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedSchoolPrimary) and (set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'secondary', 'secondary')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 3, self.re_51dab210), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 3, self.re_63c090e2), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 3, self.re_63c090e2), mapcss._tag_capture(capture_tags, 3, tags, 'school'))) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') == mapcss._value_capture(capture_tags, 4, 'school')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .isWrongSchoolTag
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                set_isWrongSchoolTag = True
+                err.append({'class': 90210, 'subclass': 603118930, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
+        # *[isced:level][school][school!="primary;secondary"][school!~/(^|; ?)secondary(;|$)/][school=~/(^|; ?)primary(;|$)/].iscedSchoolPrimary.iscedSchoolSecondary!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        # *[isced:level][school][school!=secondary][school!~/(^|; ?)secondary(;|$)/].iscedSchoolSecondary!.iscedSchoolPrimary!.iscedKindergarten!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        # *[isced:level][school][school!=primary][school!~/(^|; ?)primary(;|$)/].iscedSchoolPrimary!.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        # *[isced:level][school][school!=primary][school!~/(^|; ?)primary(;|$)/][amenity=school].iscedSchoolPrimary!.iscedSchoolSecondary.iscedKindergarten!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        if ('amenity' in keys and 'isced:level' in keys and 'school' in keys) or ('isced:level' in keys and 'school' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (set_iscedSchoolSecondary) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary;secondary', 'primary;secondary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_63c090e2, '(^|; ?)secondary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 4, self.re_51dab210), mapcss._tag_capture(capture_tags, 4, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolSecondary) and (not set_iscedSchoolPrimary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'secondary', 'secondary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_63c090e2, '(^|; ?)secondary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_51dab210, '(^|; ?)primary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_51dab210, '(^|; ?)primary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') == mapcss._value_capture(capture_tags, 4, 'school')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} without {1}","{0.tag}","{2.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                # suggestAlternative:tr("{0};{1}","{2.tag}","{1.value}")
+                err.append({'class': 90210, 'subclass': 858900978, 'text': mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{2.tag}'))})
+
+        # *[isced:level][school!="primary;secondary"][!school][!building].iscedSchoolPrimary.iscedSchoolSecondary!.iscedCollege!.iscedUniversity
+        # *[isced:level][school!=secondary][!school][!building].iscedSchoolSecondary!.iscedSchoolPrimary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        # *[isced:level][school!=primary][!school][!building].iscedSchoolPrimary!.iscedSchoolSecondary.iscedKindergarten!.iscedCollege!.iscedUniversity[amenity=school]
+        # *[isced:level][school!=primary][!school][!building].iscedSchoolPrimary!.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys) or ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (set_iscedSchoolSecondary) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'primary;secondary', 'primary;secondary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolSecondary) and (not set_iscedSchoolPrimary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'secondary', 'secondary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'primary', 'primary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')) and (mapcss._tag_capture(capture_tags, 9, tags, 'amenity') == mapcss._value_capture(capture_tags, 9, 'school')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'primary', 'primary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # throwWarning:tr("{0} without {1}","{0.tag}","{1.tag}")
+                err.append({'class': 90210, 'subclass': 1502806380, 'text': mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
         return err
 
     def relation(self, data, tags, members):
         capture_tags = {}
         keys = tags.keys()
         err = []
-        set_abbrname = set_addrOnBuilding = set_altLivingStreet = set_badPhoneNumber = set_completedSurfacePavingStonesNumber = set_hasAddMofaPositive = set_housenameWithFix = set_markedSteps = set_multipleGsigns = set_stepsWithBicycleRamp = False
+        set_abbrname = set_addrOnBuilding = set_altLivingStreet = set_badPhoneNumber = set_completedSurfacePavingStonesNumber = set_hasAddMofaPositive = set_housenameWithFix = set_isWrongSchoolTag = set_iscedCollege = set_iscedInvalid = set_iscedKindergarten = set_iscedSchool = set_iscedSchoolPrimary = set_iscedSchoolSecondary = set_iscedUniversity = set_markedSteps = set_multipleGsigns = set_stepsWithBicycleRamp = False
 
         # *[contact:phone=~/^(00|\+)31 ?0( ?[0-9]){7,}/]
         # *[contact:mobile=~/^(00|\+)31 ?0( ?[0-9]){7,}/]
@@ -3704,6 +4373,309 @@ class Josm_DutchSpecific(PluginMapCSS):
                     (mapcss._tag_uncapture(capture_tags, '{0.key}={0.value};mofa')).split('=', 1)])
                 }})
 
+        # *[isced:level][isced:level!~/^[0-8]( ?- ?[1-8])?(; ?[0-8]( ?- ?[1-8])?)*$/][inside("NL")]
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 1, self.re_32432bcf, '^[0-8]( ?- ?[1-8])?(; ?[0-8]( ?- ?[1-8])?)*$'), mapcss._tag_capture(capture_tags, 1, tags, 'isced:level'))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedInvalid
+                # group:tr("NL education")
+                # throwWarning:tr("unusual value of {0}","{0.key}")
+                set_iscedInvalid = True
+                err.append({'class': 90210, 'subclass': 1162550894, 'text': mapcss.tr('unusual value of {0}', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
+
+        # *[isced:level*=0][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 0))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedKindergarten
+                # set .iscedSchool
+                # set .iscedSchoolPrimary
+                set_iscedKindergarten = True
+                set_iscedSchool = True
+                set_iscedSchoolPrimary = True
+
+        # *[isced:level*=1][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 1))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedSchool
+                # set .iscedSchoolPrimary
+                set_iscedSchool = True
+                set_iscedSchoolPrimary = True
+
+        # *[isced:level*=2][inside("NL")]!.iscedInvalid
+        # *[isced:level*=3][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 2))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 3))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedSchool
+                # set .iscedSchoolSecondary
+                set_iscedSchool = True
+                set_iscedSchoolSecondary = True
+
+        # *[isced:level*=4][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 4))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedCollege
+                set_iscedCollege = True
+
+        # *[isced:level*=5][inside("NL")]!.iscedInvalid
+        # *[isced:level*=6][inside("NL")]!.iscedInvalid
+        # *[isced:level*=7][inside("NL")]!.iscedInvalid
+        # *[isced:level*=8][inside("NL")]!.iscedInvalid
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 5))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 6))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 7))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedInvalid) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 0, tags, 'isced:level'), mapcss._value_capture(capture_tags, 0, 8))) and (mapcss.inside(self.father.config.options, 'NL')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .iscedUniversity
+                set_iscedUniversity = True
+
+        # *[isced:level][amenity][amenity!=school][amenity!=construction][amenity!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=college][amenity!=construction][amenity!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=university][amenity!=construction][amenity!~/(^|; ?)university(;|$)/]!.iscedKindergarten!.iscedSchool!.iscedCollege.iscedUniversity
+        # *[isced:level][education][education!=school][!amenity][education!=construction][education!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=college][!amenity][education!=construction][education!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=university][!amenity][education!=construction][education!~/(^|; ?)university(;|$)/]!.iscedKindergarten!.iscedSchool!.iscedCollege.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys) or ('education' in keys and 'isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 4, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 4, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 4, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 4, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (not set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'university', 'university')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 4, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 4, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 4, tags, 'education') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 4, tags, 'education') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (not set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 4, tags, 'education') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                err.append({'class': 90210, 'subclass': 1629814202, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
+        # *[isced:level][amenity!=school][!amenity][!education][!building][!construction]!.iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=college][!amenity][!education][!building][!construction]!.iscedKindergarten!.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=university][!amenity][!education][!building][!construction]!.iscedKindergarten!.iscedSchool!.iscedCollege.iscedUniversity
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'school', 'school')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (not set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # throwWarning:tr("{0} without {1} or {2}","{0.tag}","{1.tag}","education={1.value}")
+                err.append({'class': 90210, 'subclass': 55507015, 'text': mapcss.tr('{0} without {1} or {2}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'), mapcss._tag_uncapture(capture_tags, 'education={1.value}'))})
+
+        # *[isced:level][amenity][amenity!=kindergarten][amenity!=school][amenity!=construction][amenity!~/(^|; ?)school(;|$)/][amenity!~/(^|; ?)kindergarten(;|$)/].iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=school][amenity!=college][amenity!=construction][amenity!~/(^|; ?)college(;|$)/][amenity!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity][amenity!=college][amenity!=university][amenity!=construction][amenity!~/(^|; ?)university(;|$)/][amenity!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege.iscedUniversity
+        # *[isced:level][education][education!=kindergarten][education!=school][!amenity][education!=construction][education!~/(^|; ?)school(;|$)/][education!~/(^|; ?)kindergarten(;|$)/].iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=school][education!=college][!amenity][education!=construction][education!~/(^|; ?)college(;|$)/][education!~/(^|; ?)school(;|$)/]!.iscedKindergarten.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][education][education!=college][education!=university][!amenity][education!=construction][education!~/(^|; ?)university(;|$)/][education!~/(^|; ?)college(;|$)/]!.iscedKindergarten!.iscedSchool.iscedCollege.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys) or ('education' in keys and 'isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'kindergarten', 'kindergarten')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'amenity'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_58d766ea, '(^|; ?)kindergarten(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'amenity'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 3, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 3, 'university', 'university')) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 4, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 5, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 5, tags, 'amenity'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'amenity'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'kindergarten', 'kindergarten')) and (mapcss._tag_capture(capture_tags, 3, tags, 'education') != mapcss._value_const_capture(capture_tags, 3, 'school', 'school')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 5, tags, 'education') != mapcss._value_const_capture(capture_tags, 5, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'education'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 7, self.re_58d766ea, '(^|; ?)kindergarten(;|$)'), mapcss._tag_capture(capture_tags, 7, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 3, tags, 'education') != mapcss._value_const_capture(capture_tags, 3, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 5, tags, 'education') != mapcss._value_const_capture(capture_tags, 5, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'education'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 7, self.re_4d22025f, '(^|; ?)school(;|$)'), mapcss._tag_capture(capture_tags, 7, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'education')) and (mapcss._tag_capture(capture_tags, 2, tags, 'education') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 3, tags, 'education') != mapcss._value_const_capture(capture_tags, 3, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 5, tags, 'education') != mapcss._value_const_capture(capture_tags, 5, 'construction', 'construction')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 6, self.re_55749962, '(^|; ?)university(;|$)'), mapcss._tag_capture(capture_tags, 6, tags, 'education'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 7, self.re_669a8f49, '(^|; ?)college(;|$)'), mapcss._tag_capture(capture_tags, 7, tags, 'education'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                # suggestAlternative:tr("{0}","{3.tag}")
+                err.append({'class': 90210, 'subclass': 358015210, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
+        # *[isced:level][amenity!=school][amenity!=kindergarten][!amenity][!education][!building][!construction].iscedKindergarten.iscedSchool!.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=school][amenity!=college][!amenity][!education][!building][!construction]!.iscedKindergarten.iscedSchool.iscedCollege!.iscedUniversity
+        # *[isced:level][amenity!=college][amenity!=university][!amenity][!education][!building][!construction]!.iscedKindergarten!.iscedSchool.iscedCollege.iscedUniversity
+        if ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedKindergarten) and (set_iscedSchool) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'kindergarten', 'kindergarten')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 6, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (set_iscedSchool) and (set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'school', 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'college', 'college')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 6, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedKindergarten) and (not set_iscedSchool) and (set_iscedCollege) and (set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 1, 'college', 'college')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'university', 'university')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'amenity')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'education')) and (not mapcss._tag_capture(capture_tags, 5, tags, 'building')) and (not mapcss._tag_capture(capture_tags, 6, tags, 'construction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # throwWarning:tr("{0} without {1}, {2}, {3} or {4}","{0.tag}","{1.tag}","{2.tag}","education={1.value}","education={2.value}")
+                err.append({'class': 90210, 'subclass': 1941252443, 'text': mapcss.tr('{0} without {1}, {2}, {3} or {4}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'), mapcss._tag_uncapture(capture_tags, '{2.tag}'), mapcss._tag_uncapture(capture_tags, 'education={1.value}'), mapcss._tag_uncapture(capture_tags, 'education={2.value}'))})
+
+        # *[isced:level][school][school!=secondary][school=~/(^|; ?)primary(;|$)/]!.iscedSchoolPrimary.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        # *[isced:level][school][school!=primary][school=~/(^|; ?)secondary(;|$)/].iscedSchoolPrimary!.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        # *[isced:level][school][school!=primary][school=~/(^|; ?)secondary(;|$)/][amenity=school].iscedSchoolPrimary!.iscedSchoolSecondary.iscedKindergarten!.iscedCollege!.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys and 'school' in keys) or ('isced:level' in keys and 'school' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((not set_iscedSchoolPrimary) and (set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'secondary', 'secondary')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 3, self.re_51dab210), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 3, self.re_63c090e2), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 3, self.re_63c090e2), mapcss._tag_capture(capture_tags, 3, tags, 'school'))) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') == mapcss._value_capture(capture_tags, 4, 'school')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # set .isWrongSchoolTag
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} together with {1}","{0.tag}","{1.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                set_isWrongSchoolTag = True
+                err.append({'class': 90210, 'subclass': 603118930, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
+        # *[isced:level][school][school!="primary;secondary"][school!~/(^|; ?)secondary(;|$)/][school=~/(^|; ?)primary(;|$)/].iscedSchoolPrimary.iscedSchoolSecondary!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        # *[isced:level][school][school!=secondary][school!~/(^|; ?)secondary(;|$)/].iscedSchoolSecondary!.iscedSchoolPrimary!.iscedKindergarten!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        # *[isced:level][school][school!=primary][school!~/(^|; ?)primary(;|$)/].iscedSchoolPrimary!.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        # *[isced:level][school][school!=primary][school!~/(^|; ?)primary(;|$)/][amenity=school].iscedSchoolPrimary!.iscedSchoolSecondary.iscedKindergarten!.iscedCollege!.iscedUniversity!.isWrongSchoolTag
+        if ('amenity' in keys and 'isced:level' in keys and 'school' in keys) or ('isced:level' in keys and 'school' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (set_iscedSchoolSecondary) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary;secondary', 'primary;secondary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_63c090e2, '(^|; ?)secondary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 4, self.re_51dab210), mapcss._tag_capture(capture_tags, 4, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolSecondary) and (not set_iscedSchoolPrimary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'secondary', 'secondary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_63c090e2, '(^|; ?)secondary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_51dab210, '(^|; ?)primary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (not set_isWrongSchoolTag) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school')) and (mapcss._tag_capture(capture_tags, 2, tags, 'school') != mapcss._value_const_capture(capture_tags, 2, 'primary', 'primary')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_51dab210, '(^|; ?)primary(;|$)'), mapcss._tag_capture(capture_tags, 3, tags, 'school'))) and (mapcss._tag_capture(capture_tags, 4, tags, 'amenity') == mapcss._value_capture(capture_tags, 4, 'school')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # suggestAlternative:tr("a different {0}","{0.key}")
+                # throwWarning:tr("{0} without {1}","{0.tag}","{2.tag}")
+                # suggestAlternative:tr("{0}","{2.tag}")
+                # suggestAlternative:tr("{0};{1}","{2.tag}","{1.value}")
+                err.append({'class': 90210, 'subclass': 858900978, 'text': mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{2.tag}'))})
+
+        # *[isced:level][school!="primary;secondary"][!school][!building].iscedSchoolPrimary.iscedSchoolSecondary!.iscedCollege!.iscedUniversity
+        # *[isced:level][school!=secondary][!school][!building].iscedSchoolSecondary!.iscedSchoolPrimary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        # *[isced:level][school!=primary][!school][!building].iscedSchoolPrimary!.iscedSchoolSecondary.iscedKindergarten!.iscedCollege!.iscedUniversity[amenity=school]
+        # *[isced:level][school!=primary][!school][!building].iscedSchoolPrimary!.iscedSchoolSecondary!.iscedKindergarten!.iscedCollege!.iscedUniversity
+        if ('amenity' in keys and 'isced:level' in keys) or ('isced:level' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (set_iscedSchoolSecondary) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'primary;secondary', 'primary;secondary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolSecondary) and (not set_iscedSchoolPrimary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'secondary', 'secondary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'primary', 'primary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')) and (mapcss._tag_capture(capture_tags, 9, tags, 'amenity') == mapcss._value_capture(capture_tags, 9, 'school')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((set_iscedSchoolPrimary) and (not set_iscedSchoolSecondary) and (not set_iscedKindergarten) and (not set_iscedCollege) and (not set_iscedUniversity) and (mapcss._tag_capture(capture_tags, 0, tags, 'isced:level')) and (mapcss._tag_capture(capture_tags, 1, tags, 'school') != mapcss._value_const_capture(capture_tags, 1, 'primary', 'primary')) and (not mapcss._tag_capture(capture_tags, 2, tags, 'school')) and (not mapcss._tag_capture(capture_tags, 3, tags, 'building')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL education")
+                # throwWarning:tr("{0} without {1}","{0.tag}","{1.tag}")
+                err.append({'class': 90210, 'subclass': 1502806380, 'text': mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+
         return err
 
 
@@ -3781,6 +4753,61 @@ class Test(TestPluginMapcss):
         self.check_not_err(n.node(data, {'amenity': 'post_box', 'operator': 'PostNL'}), expected={'class': 90203, 'subclass': 1831362989})
         self.check_err(n.node(data, {'amenity': 'post_box', 'operator': 'postnl'}), expected={'class': 90203, 'subclass': 1831362989})
         self.check_not_err(n.node(data, {'heritage': '2', 'heritage:operator': 'rce; Stichting ABCDE'}), expected={'class': 90204, 'subclass': 675628887})
+        self.check_not_err(n.node(data, {'isced:level': '0'}), expected={'class': 90210, 'subclass': 1162550894})
+        self.check_not_err(n.node(data, {'isced:level': '0-3'}), expected={'class': 90210, 'subclass': 1162550894})
+        self.check_not_err(n.node(data, {'isced:level': '0;1;2-4;5-7;8'}), expected={'class': 90210, 'subclass': 1162550894})
+        self.check_not_err(n.node(data, {'isced:level': '0;1;2;3'}), expected={'class': 90210, 'subclass': 1162550894})
+        self.check_not_err(n.node(data, {'isced:level': '0;1;2;3;4;5;6;7;8'}), expected={'class': 90210, 'subclass': 1162550894})
+        self.check_not_err(n.node(data, {'isced:level': '0'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '0-8'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'isced:level': '0;1'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '0;1;2;3;4;5;6;7;8'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'building': 'school', 'isced:level': '3'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '4;5'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'education': 'university', 'isced:level': '4;5'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '5'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'amenity': 'university;driving_school', 'isced:level': '5'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '5-8'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '5;6;7;8'}), expected={'class': 90210, 'subclass': 1629814202})
+        self.check_not_err(n.node(data, {'isced:level': '0'}), expected={'class': 90210, 'subclass': 55507015})
+        self.check_not_err(n.node(data, {'education': 'school', 'isced:level': '1-3'}), expected={'class': 90210, 'subclass': 55507015})
+        self.check_not_err(n.node(data, {'isced:level': '3-5'}), expected={'class': 90210, 'subclass': 55507015})
+        self.check_not_err(n.node(data, {'isced:level': '3;4;5'}), expected={'class': 90210, 'subclass': 55507015})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '5;6;7;8'}), expected={'class': 90210, 'subclass': 55507015})
+        self.check_not_err(n.node(data, {'isced:level': '0'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '0-8'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'isced:level': '0;1'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '0;1;2;3;4;5;6;7;8'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1;2'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '2'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'amenity': 'school;driving_school', 'isced:level': '2'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'amenity': 'college', 'isced:level': '4;5'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '4;5'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '5-8'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'education': 'university', 'isced:level': '5-8'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '5;6;7;8'}), expected={'class': 90210, 'subclass': 358015210})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '0;1'}), expected={'class': 90210, 'subclass': 1941252443})
+        self.check_not_err(n.node(data, {'amenity': 'university', 'isced:level': '0;1'}), expected={'class': 90210, 'subclass': 1941252443})
+        self.check_not_err(n.node(data, {'education': 'school', 'isced:level': '0;1'}), expected={'class': 90210, 'subclass': 1941252443})
+        self.check_not_err(n.node(data, {'isced:level': '3'}), expected={'class': 90210, 'subclass': 1941252443})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '0;1', 'school': 'primary'}), expected={'class': 90210, 'subclass': 603118930})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1', 'school': 'primary'}), expected={'class': 90210, 'subclass': 603118930})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1', 'school': 'primary;special_education_needs'}), expected={'class': 90210, 'subclass': 603118930})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1'}), expected={'class': 90210, 'subclass': 603118930})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1;2;3', 'school': 'primary;secondary'}), expected={'class': 90210, 'subclass': 603118930})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '3', 'school': 'secondary'}), expected={'class': 90210, 'subclass': 603118930})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '0;1', 'school': 'primary'}), expected={'class': 90210, 'subclass': 858900978})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1', 'school': 'primary'}), expected={'class': 90210, 'subclass': 858900978})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1', 'school': 'primary;special_education_needs'}), expected={'class': 90210, 'subclass': 858900978})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1'}), expected={'class': 90210, 'subclass': 858900978})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1;2;3', 'school': 'primary;secondary'}), expected={'class': 90210, 'subclass': 858900978})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1;2;3', 'school': 'primary;secondary;special_education_needs'}), expected={'class': 90210, 'subclass': 858900978})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '3', 'school': 'secondary'}), expected={'class': 90210, 'subclass': 858900978})
+        self.check_not_err(n.node(data, {'amenity': 'kindergarten', 'isced:level': '0'}), expected={'class': 90210, 'subclass': 1502806380})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '0;1', 'school': 'primary'}), expected={'class': 90210, 'subclass': 1502806380})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '1', 'school': 'primary'}), expected={'class': 90210, 'subclass': 1502806380})
+        self.check_not_err(n.node(data, {'amenity': 'school', 'isced:level': '3', 'school': 'secondary'}), expected={'class': 90210, 'subclass': 1502806380})
+        self.check_not_err(n.node(data, {'building': 'school', 'isced:level': '3'}), expected={'class': 90210, 'subclass': 1502806380})
         self.check_err(n.way(data, {'highway': 'cycleway', 'traffic_sign': 'NL:G13; NL:L301-A'}, [0]), expected={'class': 90205, 'subclass': 932689435})
         self.check_not_err(n.way(data, {'highway': 'cycleway', 'traffic_sign': 'NL:J1; NL:G11; NL:G07; OB109'}, [0]), expected={'class': 90205, 'subclass': 932689435})
         self.check_not_err(n.way(data, {'highway': 'cycleway', 'traffic_sign': 'NL:G11;NL:G07'}, [0]), expected={'class': 90205, 'subclass': 932689435})
