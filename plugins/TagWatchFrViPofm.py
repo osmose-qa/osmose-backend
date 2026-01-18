@@ -53,8 +53,8 @@ class TagWatchFrViPofm(Plugin):
         self._update_ks_vr = defaultdict(dict)
         self._update_kr_vr = defaultdict(dict)
 
-        # Obtain the info from https://wiki.openstreetmap.org/index.php?title=Tagging_mistakes
-        data = urlread(u"https://wiki.openstreetmap.org/index.php?title=Tagging_mistakes&action=raw", 1)
+        # Obtain the info from https://wiki.openstreetmap.org/wiki/Dubious_tags
+        data = urlread(u"https://wiki.openstreetmap.org/w/index.php?title=Dubious_tags&action=raw", 1)
         data = read_wiki_table(data, skip_headers = False)[1:] # Headers in the middle of the table, not supported yet in read_wiki_table
 
         for row in data:
@@ -69,7 +69,7 @@ class TagWatchFrViPofm(Plugin):
                     title = {'en': c0},
                     detail = T_(
 '''Simple and frequent errors, can be updated by anyone on the wiki.'''),
-                    resource = 'https://wiki.openstreetmap.org/wiki/Tagging_mistakes')
+                    resource = 'https://wiki.openstreetmap.org/wiki/Dubious_tags')
 
                 if "=" in f:
                     k = f.split("=")[0].strip()
