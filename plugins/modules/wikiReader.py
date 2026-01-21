@@ -24,7 +24,34 @@
 
 import wikitextparser
 import re
+from modules.downloader import urlread
+from modules import OsmoseLog
 from typing import Union, Optional
+
+def _follow_redirects(wikitext: str) -> str:
+    """
+    Internal function to follow wiki redirects in wikitext content.
+    Args:
+        wikitext: The wiki text content that might contain a redirect
+    Returns:
+        The final content after following any redirects
+    """
+
+    redirect_pattern = re.compile(r'^\s*#REDIRECT\s*\[\[([^\]]+)\]\]', re.IGNORECASE | re.MULTILINE)
+    max_redirects = 5
+
+    for i in range(max_redirects):
+        match = redirect_pattern.match(wikitext.strip())
+        if match:
+            redirect_target = match.group(1)
+            OsmoseLog.logger().warn(f"Wiki redirect detected: following to '{redirect_target}'")
+            page_name = redirect_target.replace(' ', '_')
+            url = f"https://wiki.openstreetmap.org/index.php?title={page_name}&action=raw"
+            wikitext = urlread(url, 1)
+        else:
+            return wikitext
+
+    raise Exception(f"Maximum wiki redirects ({max_redirects}) exceeded")
 
 # Get a list of lists containing all cells of a table.
 # Parameters:
@@ -38,6 +65,9 @@ from typing import Union, Optional
 # Throws:
 #   If the table at the specified index isn't found
 def read_wiki_table(wikitext: str, tab_index: int = 0, keep_markup: bool = False, skip_headers: bool = True) -> list[list[Optional[str]]]:
+    # Follow any redirects first
+    wikitext = _follow_redirects(wikitext)
+
     # Drops all markup, such as italics, hyperlinks, ...
     if not keep_markup:
         wikitext = wikitextparser.remove_markup(wikitext, replace_tables=False, replace_templates=False)
@@ -72,6 +102,9 @@ def read_wiki_table(wikitext: str, tab_index: int = 0, keep_markup: bool = False
 #   Example: ["{{Tag | key | value}}", "Tag", "key", "value"]
 #   (Note that the template_string is affected by the markup removal, so for string replace purposes, use keep_markup=True)
 def read_wiki_templates(wikitext: str, template_name: Union[str, list[str]], keep_markup: bool = False) -> list[list[str]]:
+    # Follow any redirects first
+    wikitext = _follow_redirects(wikitext)
+
     if isinstance(template_name, str):
         template_name = [template_name]
     template_name = list(map(str.lower, template_name))
@@ -98,6 +131,9 @@ def read_wiki_templates(wikitext: str, template_name: Union[str, list[str]], kee
 # Throws:
 #   If the list at index list_index doesn't exist
 def read_wiki_list(wikitext: str, list_index: int = 0, keep_markup: bool = False, include_sublists: bool = False) -> list[str]:
+    # Follow any redirects first
+    wikitext = _follow_redirects(wikitext)
+
     if not keep_markup:
         wikitext = wikitextparser.remove_markup(wikitext, replace_templates=False)
 
@@ -111,6 +147,9 @@ def read_wiki_list(wikitext: str, list_index: int = 0, keep_markup: bool = False
 # Get all list entries within wikitext
 # See read_wiki_list for details (excluding list_index)
 def read_all_wiki_lists(wikitext: str, keep_markup: bool = False, include_sublists: bool = False) -> list[str]:
+    # Follow any redirects first
+    wikitext = _follow_redirects(wikitext)
+
     res = []
     if not keep_markup:
         wikitext = wikitextparser.remove_markup(wikitext, replace_templates=False)
