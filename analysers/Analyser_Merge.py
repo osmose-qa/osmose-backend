@@ -1351,8 +1351,24 @@ verification of this data.'''))
 
     def mergeTags(self, osm, official, ref, keep_multiple):
         fix = {"+": {}, "~": {}, "-": []}
+        tag_aliases = {
+            "phone": ["phone", "contact:phone"],
+            "email": ["email", "contact:email"],
+            "website": ["website", "contact:website"],
+            "contact:phone": ["phone", "contact:phone"],
+            "contact:email": ["email", "contact:email"],
+            "contact:website": ["website", "contact:website"],
+        }
+
         for o in official:
-            if o in osm:
+            if o in tag_aliases:
+                aliases = tag_aliases[o]
+                is_same = (lambda a, b: a.replace(" ", "") == b.replace(" ", "")) if o in ["phone","contact:phone"] else (lambda a, b: a == b)
+                if any(alias in osm and is_same(osm[alias], official[o]) for alias in aliases):
+                    pass
+                else:
+                    fix["+"][o] = official[o]
+            elif o in osm:
                 if official[o] == Mapping.delete_tag:
                     fix["-"].append(o)
                 elif osm[o] == official[o]:
