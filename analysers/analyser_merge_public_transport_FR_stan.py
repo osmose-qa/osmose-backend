@@ -34,25 +34,27 @@ class Analyser_Merge_Public_Transport_FR_stan(Analyser_Merge_Point):
             title = T_('{0} stop, integration suggestion', place))
 
         self.init(
-            "https://www.data.gouv.fr/fr/datasets/arrets-horaires-et-parcours-theoriques-du-reseau-stan-gtfs/",
-            "Arrêts, horaires et parcours théoriques du réseau STAN | GTFS",
-            GTFS(SourceDataGouv(attribution = "Métropole du Grand Nancy",
-                    dataset = "5aa94714c751df666fefc80f", resource = "22ff00b8-aa07-4f01-af47-8f198964bb1a")),
+            "https://www.data.gouv.fr/datasets/fr-200052264-t0034-0000-1/",
+            "Offre de transport du réseau STAN (Métropole du Grand Nancy)",
+            GTFS(SourceDataGouv(attribution = "Fluo Grand Est",
+                    dataset = "63b4c3d2d7857ab0c49dde9a", resource = "6fa33c41-dc16-4328-a010-8ce2fcac10f0")),
             Load_XY("stop_lon", "stop_lat"),
             Conflate(
                 select = Select(
                     types = ["nodes", "ways"],
-                    tags = [{"highway": "bus_stop"}, {"public_transport": "stop_position"}]),
+                    tags = [{"highway": "bus_stop"}, {"public_transport": "platform"}]),
                 conflationDistance = 2,
-                osmRef = "ref:FR:STAN",
+                osmRef = "ref",
                 mapping = Mapping(
                     static1 = {
                         "highway": "bus_stop",
-                        "public_transport": "stop_position",
+                        "public_transport": "platform",
                         "bus": "yes"},
                     static2 = {"source": self.source},
                     mapping1 = {
-                        "ref:FR:STAN": "stop_code",
+                        "ref": "stop_code",
+                        "gtfs:FR-GES-STAN:stop_code": "stop_code",
+                        "gtfs:FR-GES-STAN:stop_id": "stop_id",
                         "wheelchair": lambda fields: self.wheelchair_boarding[fields.get("wheelchair_boarding")]},
                     mapping2 = {"name": "stop_name"},
                     text = lambda tags, fields: T_("{0} stop of {1}", place, fields["stop_name"]) )))
