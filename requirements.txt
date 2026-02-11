@@ -19,7 +19,6 @@ wikitextparser
 pycountry
 myanmartools
 PyICU
-setuptools < 81 # https://github.com/osmose-qa/osmose-backend/issues/2697
 
 # Tests
 pytest == 7.4.4 # In v8 it skips the plugins folder, see our issue #2266 and https://github.com/pytest-dev/pytest/issues/12605
@@ -33,3 +32,4 @@ types-python-dateutil
 types-requests
 types-termcolor
 types-toml
+setuptools < 81 # https://github.com/osmose-qa/osmose-backend/issues/2697
