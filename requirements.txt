@@ -24,7 +24,7 @@ PyICU
 pytest == 7.4.4 # In v8 it skips the plugins folder, see our issue #2266 and https://github.com/pytest-dev/pytest/issues/12605
 xmltodict
 termcolor
-pylama
+git+https://github.com/Marc-marc-marc/pylama.git@develop # https://github.com/osmose-qa/osmose-backend/issues/2697
 mypy
 types-certifi
 types-setuptools
@@ -32,4 +32,3 @@ types-python-dateutil
 types-requests
 types-termcolor
 types-toml
-setuptools < 81 # https://github.com/osmose-qa/osmose-backend/issues/2697
