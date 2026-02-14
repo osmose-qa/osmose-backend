@@ -24,7 +24,7 @@ PyICU
 pytest == 7.4.4 # In v8 it skips the plugins folder, see our issue #2266 and https://github.com/pytest-dev/pytest/issues/12605
 xmltodict
 termcolor
-pylama
+git+https://github.com/ccxcz/pylama.git@14200a96c46acde592ee3effc24bc82a4217026d
 mypy
 types-certifi
 types-setuptools
