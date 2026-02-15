@@ -96,9 +96,10 @@ FROM
         member_id = relations.id AND
         member_type = 'R'
 WHERE
-    (member_role IS NULL OR member_role = '') AND
-    relations.tags - ARRAY['created_by', 'source', 'note:qadastre', 'name'] = ''::hstore AND
-    relation_locate(relations.id) IS NOT NULL -- We can't locate pure relation or relations
+    member_role = '' AND
+    relations.tags - ARRAY['created_by', 'source', 'note:qadastre', 'name', 'type'] = ''::hstore AND
+    relation_locate(relations.id) IS NOT NULL AND -- We can't locate pure relation or relations
+    relations.tags?'type' -- relations without type have their own warning (item 2110, class 21102)
 """
 
 sql31 = """
@@ -114,7 +115,8 @@ FROM
         relation_members.member_role = ''
     JOIN not_touched_relations AS r ON
         r.id = relation_members.member_id AND
-        r.tags - ARRAY['created_by', 'source', 'note:qadastre', 'name'] = ''::hstore
+        r.tags - ARRAY['created_by', 'source', 'note:qadastre', 'name', 'type'] = ''::hstore AND
+        r.tags?'type' -- relations without type have their own warning
 """
 
 class Analyser_Osmosis_Useless(Analyser_Osmosis):
