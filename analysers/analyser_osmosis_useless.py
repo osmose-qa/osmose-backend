@@ -102,7 +102,7 @@ WHERE
 """
 
 sql31 = """
-SELECT
+SELECT DISTINCT
     r.id,
     relation_members.relation_id,
     ST_AsText(relation_locate(r.id))
