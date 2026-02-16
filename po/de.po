@@ -34,15 +34,16 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2014-04-30 17:25+0000\n"
-"Last-Translator: mcliquid <info@mcliquid.de>, 2024-2025\n"
-"Language-Team: German (http://app.transifex.com/openstreetmap-france/osmose/"
-"language/de/)\n"
+"PO-Revision-Date: 2026-02-17 13:09+0000\n"
+"Last-Translator: mcliquid <info@mcliquid.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/osmose/backend/"
+"de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -6423,17 +6424,17 @@ msgstr ""
 #: ../analysers/analyser_merge_recycling_FR_bm.py:31
 #, python-brace-format
 msgid "{0} glass or food waste recycling not integrated"
-msgstr ""
+msgstr "{0} Glas- oder Lebensmittelabfälle werden nicht recycelt"
 
 #: ../analysers/analyser_merge_recycling_FR_bm.py:33
 #, python-brace-format
 msgid "{0} glass or food waste recycling, integration suggestion"
-msgstr ""
+msgstr "{0} Glas- oder Lebensmittelabfallrecycling, Vorschlag zur Integration"
 
 #: ../analysers/analyser_merge_recycling_FR_bm.py:35
 #, python-brace-format
 msgid "{0} glass or food waste recycling update"
-msgstr ""
+msgstr "{0} Update zum Recycling von Glas oder Lebensmittelabfällen"
 
 #: ../analysers/analyser_osmosis_highway_tunnel_bridge.py:172
 msgid ""
@@ -6628,7 +6629,7 @@ msgstr ""
 
 #: ../plugins/TagFix_Tree.py:60
 msgid "The leaf type and/or leaf cycle does not match with the species."
-msgstr ""
+msgstr "Der Blatttyp und/oder der Blattzyklus passen nicht zur Art."
 
 #: ../plugins/TagFix_Tree.py:62
 msgid "Verify that the species is correct, before adding the leaf properties."
