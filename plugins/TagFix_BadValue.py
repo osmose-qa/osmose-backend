@@ -50,7 +50,7 @@ However, this should probably still conform to the typical format used for value
             'barrier', 'bench', 'bicycle_parking', 'bin', 'border_type', 'boundary', 'bridge', 'building', 'bus_bay',
             'cemetery', 'club', 'construction', 'covered', 'craft', 'crossing_ref', 'cuisine', 'cutting', 'cycleway',
             'disused', 'drive_in', 'drive_through',
-            'electrified', 'embankment', 'emergency', 'entrance',
+            'education', 'electrified', 'embankment', 'emergency', 'entrance',
             'fenced', 'footway', 'ford',
             'geological', 'golf',
             'handrail', 'hazard', 'healthcare', 'highway', 'historic',
@@ -63,8 +63,8 @@ However, this should probably still conform to the typical format used for value
             'office',
             'parking', 'place', 'power', 'public_transport',
             'railway', 'ramp', 'religion', 'route', 'route_master',
-            'sac_scale', 'seasonal', 'service', 'shelter', 'shop', 'shoulder', 'sidewalk', 'smoothness', 'sport', 'surface',
-            'tactile_paving', 'toll', 'tourism', 'traffic_calming', 'trail_visibility', 'traffic_signals', 'tunnel',
+            'sac_scale', 'school', 'seasonal', 'service', 'shelter', 'shop', 'shoulder', 'sidewalk', 'smoothness', 'sport', 'surface',
+            'tactile_paving', 'toll', 'tourism', 'traffic_calming', 'trail_visibility', 'training', 'traffic_signals', 'tunnel',
             'usage', 'utility',
             'wall', 'water', 'waterway', 'wetland', 'wheelchair', 'wood'
         ))
