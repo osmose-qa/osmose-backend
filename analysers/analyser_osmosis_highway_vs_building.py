@@ -130,7 +130,8 @@ sql04 = """
 CREATE TEMP TABLE power AS
 SELECT
     id,
-    geom
+    geom,
+    tags
 FROM
     nodes
 WHERE
@@ -246,7 +247,11 @@ FROM
         power.geom && building.poly AND
         ST_Intersects(power.geom, building.poly) AND
         building.wall AND
-        NOT building.layer
+        NOT building.layer AND
+        (NOT building.tags?'location' OR building.tags->'location' != 'underground')
+WHERE
+    NOT power.tags?'location' OR
+    power.tags->'location' NOT IN ('roof', 'rooftop')
 """
 
 sql30 = """

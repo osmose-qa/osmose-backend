@@ -184,6 +184,11 @@
   <node id='149152' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.84975332681' lon='5.84752606208' />
   <node id='149153' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.84973384001' lon='5.85000557995' />
   <node id='149154' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.8514211776' lon='5.8500403329' />
+  <node id='149155' timestamp='2014-03-31T22:00:00Z' version='1' lat='51.85134849839' lon='5.84770200757'>
+    <tag k='location' v='roof' />
+    <tag k='power' v='pole' />
+  </node>
+  
   <way id='105973' timestamp='2014-03-31T22:00:00Z' version='1'>
     <nd ref='139650' />
     <nd ref='139651' />
