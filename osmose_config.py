@@ -748,7 +748,7 @@ tr_part('central_anatolia', 2094194, 'TR-3')
 #########################################################################
 
 be_part = gen_country('europe', 'belgium', download_repo=OSMFR, proj=32631, municipality_ref='ref:INS',
-    phone_code='32', phone_len=[8, 9], phone_len_short=4, phone_international='00', phone_local_prefix='0')
+    phone_code='32', phone_len=[8, 9], phone_len_short=[3, 4], phone_format="r^([+]%s([- ./]*[0-9]){7,8}[0-9])|[0-9]{3,4}$", phone_international='00', phone_local_prefix='0')
 
 be_part('brussels_capital_region', 54094, 'BE-BRU', language=['fr', 'nl'], multilingual_style='be')
 

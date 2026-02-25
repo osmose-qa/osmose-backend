@@ -361,7 +361,7 @@ class Test(TestPluginCommon):
     def test_BE(self):
         p = Phone(None)
         class _config:
-            options = {"country": "BE", "phone_code": "32", "phone_len": 8, "phone_len_short": [3, 4], "phone_format": r"^([+]%s([- ./]*[0-9]){7}[0-9])|[0-9]{3,4}$", "phone_international": "00", "phone_local_prefix": "0"}
+            options = {"country": "BE", "phone_code": "32", "phone_len": [8, 9], "phone_len_short": [3, 4], "phone_format": r"^([+]%s([- ./]*[0-9]){7,8}[0-9])|[0-9]{3,4}$", "phone_international": "00", "phone_local_prefix": "0"}
         class father:
             config = _config()
         p.father = father()
@@ -380,6 +380,7 @@ class Test(TestPluginCommon):
             ("-32 2 123 12 12", "+32 2 123 12 12"),
             ("-+32 2 123 12 12", "+32 2 123 12 12"),
             ("02 123 12 12", "+32 2 123 12 12"),
+            ("0474 56 78 90", "+32 474 56 78 90"),
         ):
             # Check the bad number's error and fix
             err = p.node(None, {"phone": bad})
