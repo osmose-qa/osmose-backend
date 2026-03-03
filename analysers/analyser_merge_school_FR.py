@@ -3,7 +3,7 @@
 
 ###########################################################################
 ##                                                                       ##
-## Copyrights Frédéric Rodrigo 2012-2020, Noémie Lehuby 2025             ##
+## Copyrights Frédéric Rodrigo 2012-2020, Noémie Lehuby 2025-2026        ##
 ##                                                                       ##
 ## This program is free software: you can redistribute it and/or modify  ##
 ## it under the terms of the GNU General Public License as published by  ##
@@ -198,4 +198,52 @@ class Analyser_Merge_School_FR(_Generic_Analyser_Merge_School_FR):
             ["Ecole", "Collège", "Lycée", "EREA", "Autre"],
             {"amenity": "school"},
             {"amenity": "school"}
+        )
+
+class Analyser_Merge_School_Guidance_FR(_Generic_Analyser_Merge_School_FR):
+    def __init__(self, config, logger=None):
+        _Generic_Analyser_Merge_School_FR.__init__(
+            self,
+            config,
+            logger,
+            5,
+            "Guidance couselling not integrated",
+            "Guidance couselling without tag \"ref:UAI\" or invalid",
+            "Guidance couselling, integration suggestion",
+            "Guidance couselling update",
+            ["Information et orientation"],
+            {"education": "guidance_counselling"},
+            {"education": "guidance_counselling", "office": "educational_institution"}
+        )
+
+class Analyser_Merge_School_Medical_FR(_Generic_Analyser_Merge_School_FR):
+    def __init__(self, config, logger=None):
+        _Generic_Analyser_Merge_School_FR.__init__(
+            self,
+            config,
+            logger,
+            10,
+            "School with medical facility not integrated",
+            "School with medical facility without tag \"ref:UAI\" or invalid",
+            "School with medical facility, integration suggestion",
+            "School with medical facility update",
+            ["Médico-social"],
+            {"amenity": "social_facility"},
+            {"amenity": "social_facility", "social_facility": "group_home"}
+        )
+
+class Analyser_Merge_School_Administrative_FR(_Generic_Analyser_Merge_School_FR):
+    def __init__(self, config, logger=None):
+        _Generic_Analyser_Merge_School_FR.__init__(
+            self,
+            config,
+            logger,
+            15,
+            "Education governement office not integrated",
+            "Education governement office without tag \"ref:UAI\" or invalid",
+            "Education governement office, integration suggestion",
+            "Education governement office facility update",
+            ["Service Administratif"],
+            {"office": "government", "government": "education"},
+            {"office": "government", "government": "education"}
         )
