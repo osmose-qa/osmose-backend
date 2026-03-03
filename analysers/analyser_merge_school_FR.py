@@ -23,8 +23,8 @@
 from modules.OsmoseTranslation import T_
 from .Analyser_Merge import Analyser_Merge_Point, SourceOpenDataSoft, CSV, Load_XY, Conflate, Select, Mapping
 
-class Analyser_Merge_School_FR(Analyser_Merge_Point):
-    def __init__(self, config, logger = None):
+class _Generic_Analyser_Merge_School_FR(Analyser_Merge_Point):
+    def __init__(self, config, logger, osmose_base_class, title_missing_official, title_missing_osm, title_possible_merge, title_update_official, school_category, osm_select_tags, osm_default_tags):
         Analyser_Merge_Point.__init__(self, config, logger)
 
         if config.db_schema == 'france_guadeloupe':
@@ -45,23 +45,24 @@ class Analyser_Merge_School_FR(Analyser_Merge_Point):
             self.is_in = lambda departement: departement == "Martinique"
         else:
             classs = 0
-            region_name = "Métropole"
+            region_name = "France hexagonale"
             self.is_in = lambda departement: departement not in ["Guadeloupe", "Guyane", "Martinique", "Réunion", "Mayotte", "St-Pierre-et-Miquelon", "Saint-Martin", "Saint-Barthélemy", "Nouvelle-Calédonie", "Polynésie Française"]
 
         trap = T_(
 '''Check the location. Warning data from the Ministry may have several
 administrative schools for a single physical school.''')
-        self.def_class_missing_official(item = 8030, id = classs+1, level = 3, tags = ['merge', 'fix:survey', 'fix:picture'],
-            title = T_('School not integrated'),
+        self.def_class_missing_official(item = 8030, id = classs+1+osmose_base_class, level = 3, tags = ['merge', 'fix:survey', 'fix:picture'],
+            title = T_(title_missing_official),
             trap = trap)
-        self.def_class_missing_osm(item = 7070, id = classs+2, level = 3, tags = ['merge', 'fix:chair'],
-            title = T_('School without tag \"ref:UAI\" or invalid'),
+        self.def_class_missing_osm(item = 7070, id = classs+2+osmose_base_class, level = 3, tags = ['merge', 'fix:chair'],
+            title = T_(title_missing_osm),
+            detail = T_('This element in OSM has a \"ref:UAI\" tag. However, this reference does not appear to exist, or no longer exists, in the dataset of the Ministry. This may be due to a copying error in OSM, a school that no longer exists, or an establishment not recognized by the Osmose analysis (administrative building, etc.). '),
             trap = trap)
-        self.def_class_possible_merge(item = 8031, id = classs+3, level = 3, tags = ['merge', 'fix:chair'],
-            title = T_('School, integration suggestion'),
+        self.def_class_possible_merge(item = 8031, id = classs+3+osmose_base_class, level = 3, tags = ['merge', 'fix:chair'],
+            title = T_(title_possible_merge),
             trap = trap)
-        self.def_class_update_official(item = 8032, id = classs+4, level = 3, tags = ['merge', 'fix:chair'],
-            title = T_('School update'),
+        self.def_class_update_official(item = 8032, id = classs+4+osmose_base_class, level = 3, tags = ['merge', 'fix:chair'],
+            title = T_(title_update_official),
             trap = trap)
 
 
@@ -73,18 +74,17 @@ administrative schools for a single physical school.''')
                 attribution="Ministère de l'Éducation nationale, de l'Enseignement supérieur et de la Recherche",
                 url="https://data.education.gouv.fr/explore/dataset/fr-en-annuaire-education/")),
             Load_XY("longitude", "latitude",
-                select = {"etat": ["OUVERT"], "Type_etablissement": ["Ecole", "Collège", "Lycée"]},
+                select = {"etat": ["OUVERT"], "Type_etablissement": school_category},
                 where = lambda res: res["Libelle_departement"] and self.is_in(res["Libelle_departement"])),
             Conflate(
                 select = Select(
                     types = ["nodes", "ways", "relations"],
-                    tags = {"amenity": "school"}),
+                    tags = osm_select_tags),
                 osmRef = "ref:UAI",
                 conflationDistance = 50,
                 mapping = Mapping(
-                    static2 = {
-                        "source": self.source,
-                        "amenity": "school"},
+                    static1 = osm_default_tags,
+                    static2 = {"source": self.source},
                     mapping1 = {
                         "ref:UAI": "Identifiant_de_l_etablissement",
                         "school:FR": lambda res: self.School_FR(res),
@@ -94,7 +94,9 @@ administrative schools for a single physical school.''')
                         "ref:FR:SIRET": "SIREN_SIRET",
                         "start_date": lambda res: res["date_ouverture"] if res["date_ouverture"] != "1965-05-01" else None,
                         "operator:type": lambda res: "private" if res["Statut_public_prive"] == "Privé" else "public" if res["Statut_public_prive"] == "Public" else None},
-                    mapping2 = {"name": lambda res: res["Nom_etablissement"].replace("Ecole", "École").replace("Saint ", "Saint-").replace("Sainte ", "Sainte-").replace("élementaire", "élémentaire").replace("elementaire", "élémentaire").replace("Elémentaire", "Élémentaire").replace("elémentaire", "élémentaire").replace("College", "Collège") if res["Nom_etablissement"] else None,},
+                    mapping2 = dict({
+                        "name": lambda res: res["Nom_etablissement"].replace("Ecole", "École").replace("Saint ", "Saint-").replace("Sainte ", "Sainte-").replace("élementaire", "élémentaire").replace("elementaire", "élémentaire").replace("Elémentaire", "Élémentaire").replace("elémentaire", "élémentaire").replace("College", "Collège") if res["Nom_etablissement"] else None,
+                    }),
                     text = self.text)))
 
     def text(self, tags, fields):
@@ -118,6 +120,8 @@ administrative schools for a single physical school.''')
             return "collège"
         elif fields["Type_etablissement"] == "Lycée":
             return "lycée"
+        elif fields["Type_etablissement"] == "EREA":
+            return "EREA"
         else:
             return None
 
@@ -179,3 +183,19 @@ administrative schools for a single physical school.''')
         "Moyenne": {"en": "medium", "fr": "moyenne"},
         "CENTROIDE (D'EMPRISE)": {"en": "Centroid", "fr": "centroïde d'emprise"},
     }
+
+class Analyser_Merge_School_FR(_Generic_Analyser_Merge_School_FR):
+    def __init__(self, config, logger=None):
+        _Generic_Analyser_Merge_School_FR.__init__(
+            self,
+            config,
+            logger,
+            0,
+            "School not integrated",
+            "School without tag \"ref:UAI\" or invalid",
+            "School, integration suggestion",
+            "School update",
+            ["Ecole", "Collège", "Lycée", "EREA", "Autre"],
+            {"amenity": "school"},
+            {"amenity": "school"}
+        )
