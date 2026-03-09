@@ -216,21 +216,22 @@ class Analyser_Merge_School_Guidance_FR(_Generic_Analyser_Merge_School_FR):
             {"education": "guidance_counselling", "office": "educational_institution"}
         )
 
-class Analyser_Merge_School_Medical_FR(_Generic_Analyser_Merge_School_FR):
-    def __init__(self, config, logger=None):
-        _Generic_Analyser_Merge_School_FR.__init__(
-            self,
-            config,
-            logger,
-            10,
-            "School with medical facility not integrated",
-            "School with medical facility without tag \"ref:UAI\" or invalid",
-            "School with medical facility, integration suggestion",
-            "School with medical facility update",
-            ["Médico-social"],
-            {"amenity": "social_facility"},
-            {"amenity": "social_facility", "social_facility": "group_home"}
-        )
+# Not all social facilities are educational, so we cannot proceed in the same way for this kind of object. Ignore for now.
+# class Analyser_Merge_School_Medical_FR(_Generic_Analyser_Merge_School_FR):
+#     def __init__(self, config, logger=None):
+#         _Generic_Analyser_Merge_School_FR.__init__(
+#             self,
+#             config,
+#             logger,
+#             10,
+#             "School with medical facility not integrated",
+#             "School with medical facility without tag \"ref:UAI\" or invalid",
+#             "School with medical facility, integration suggestion",
+#             "School with medical facility update",
+#             ["Médico-social"],
+#             {"amenity": "social_facility"},
+#             {"amenity": "social_facility", "social_facility": "group_home"}
+#         )
 
 class Analyser_Merge_School_Administrative_FR(_Generic_Analyser_Merge_School_FR):
     def __init__(self, config, logger=None):
