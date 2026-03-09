@@ -54,10 +54,11 @@ administrative schools for a single physical school.''')
         self.def_class_missing_official(item = 8030, id = classs+1+osmose_base_class, level = 3, tags = ['merge', 'fix:survey', 'fix:picture'],
             title = T_(title_missing_official),
             trap = trap)
-        self.def_class_missing_osm(item = 7070, id = classs+2+osmose_base_class, level = 3, tags = ['merge', 'fix:chair'],
-            title = T_(title_missing_osm),
-            detail = T_('This element in OSM has a \"ref:UAI\" tag. However, this reference does not appear to exist, or no longer exists, in the dataset of the Ministry. This may be due to a copying error in OSM, a school that no longer exists, or an establishment not recognized by the Osmose analysis (administrative building, etc.). '),
-            trap = trap)
+        if title_missing_osm:
+            self.def_class_missing_osm(item = 7070, id = classs+2+osmose_base_class, level = 3, tags = ['merge', 'fix:chair'],
+                title = T_(title_missing_osm),
+                detail = T_('This element in OSM has a \"ref:UAI\" tag. However, this reference does not appear to exist, or no longer exists, in the dataset of the Ministry. This may be due to a copying error in OSM, a school that no longer exists, or an establishment not recognized by the Osmose analysis (administrative building, etc.). '),
+                trap = trap)
         self.def_class_possible_merge(item = 8031, id = classs+3+osmose_base_class, level = 3, tags = ['merge', 'fix:chair'],
             title = T_(title_possible_merge),
             trap = trap)
@@ -216,22 +217,21 @@ class Analyser_Merge_School_Guidance_FR(_Generic_Analyser_Merge_School_FR):
             {"education": "guidance_counselling", "office": "educational_institution"}
         )
 
-# Not all social facilities are educational, so we cannot proceed in the same way for this kind of object. Ignore for now.
-# class Analyser_Merge_School_Medical_FR(_Generic_Analyser_Merge_School_FR):
-#     def __init__(self, config, logger=None):
-#         _Generic_Analyser_Merge_School_FR.__init__(
-#             self,
-#             config,
-#             logger,
-#             10,
-#             "School with medical facility not integrated",
-#             "School with medical facility without tag \"ref:UAI\" or invalid",
-#             "School with medical facility, integration suggestion",
-#             "School with medical facility update",
-#             ["Médico-social"],
-#             {"amenity": "social_facility"},
-#             {"amenity": "social_facility", "social_facility": "group_home"}
-#         )
+class Analyser_Merge_School_Medical_FR(_Generic_Analyser_Merge_School_FR):
+    def __init__(self, config, logger=None):
+        _Generic_Analyser_Merge_School_FR.__init__(
+            self,
+            config,
+            logger,
+            10,
+            "School with medical facility not integrated",
+            "", #Not all social facilities are educational
+            "School with medical facility, integration suggestion",
+            "School with medical facility update",
+            ["Médico-social"],
+            {"amenity": "social_facility"},
+            {"amenity": "social_facility", "social_facility": "group_home"}
+        )
 
 class Analyser_Merge_School_Administrative_FR(_Generic_Analyser_Merge_School_FR):
     def __init__(self, config, logger=None):
