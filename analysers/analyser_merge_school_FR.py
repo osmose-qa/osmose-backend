@@ -225,7 +225,7 @@ class Analyser_Merge_School_Medical_FR(_Generic_Analyser_Merge_School_FR):
             logger,
             10,
             "School with medical facility not integrated",
-            None, #  Not all social facilities are educational
+            None,  # Not all social facilities are educational
             "School with medical facility, integration suggestion",
             "School with medical facility update",
             ["Médico-social"],
