@@ -25,7 +25,7 @@ language2scripts = {
     'ar': ['Arabic', '[\u064B-\u0655\u0670]'], # 'Arabic', 'Script_Extensions=Arabic,Syriac' Arabic,Syriac frequent at least in Iraq,
     'ast': ['Latin'],
     'az': ['Arabic', 'Cyrillic', 'Latin'],
-    'be': ['Cyrillic'],
+    'be': ['Cyrillic', '[\u0301]'],
     'ber': ['Tifinagh'],
     'bg': ['Cyrillic'],
     'bn': ['Bengali'],
