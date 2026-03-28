@@ -23,6 +23,7 @@ class Josm_combinations(PluginMapCSS):
         self.errors[9001003] = self.def_class(item = 9001, level = 3, tags = ["tag"], title = mapcss.tr('{0} on a relation without {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), mapcss._tag_uncapture(capture_tags, '{1.tag}')))
         self.errors[9001004] = self.def_class(item = 9001, level = 3, tags = ["tag"], title = mapcss.tr('incomplete usage of {0} on a way without {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), mapcss._tag_uncapture(capture_tags, '{1.key}')))
         self.errors[9001005] = self.def_class(item = 9001, level = 3, tags = ["tag"], title = mapcss.tr('Use {0} only as value of {1}', 'transition', 'placement'))
+        self.errors[9001006] = self.def_class(item = 9001, level = 2, tags = ["tag"], title = mapcss.tr('power=circuit relations should have a topology tag with value linear or branched'))
 
         self.re_01d4d495 = re.compile(r'^(paved|asphalt|cobblestone|cobblestone:flattened|sett|concrete|concrete:plates|paving_stones|metal|wood|unhewn_cobblestone)$')
         self.re_050395e0 = re.compile(r'^maxspeed:?')
@@ -84,6 +85,7 @@ class Josm_combinations(PluginMapCSS):
         self.re_7346b495 = re.compile(r':backward')
         self.re_73498f6f = re.compile(r'^cycleway(:right|:both):.')
         self.re_734e4397 = re.compile(r'^(yes|stepping_stones)$')
+        self.re_754b6662 = re.compile(r'^(linear|branched)$')
         self.re_78efbab0 = re.compile(r'(^|;)manual(;|$)')
         self.re_79b2aeac = re.compile(r'^cycleway:both:')
         self.re_7e9ae763 = re.compile(r'^cycleway(:left|:both):.')
@@ -4025,13 +4027,15 @@ class Josm_combinations(PluginMapCSS):
         # *[power=plant][voltage]
         # *[power=plant][frequency]
         # *[internet_access=no][internet_access:fee]
+        # relation[power=circuit][wires]
+        # relation[power=line_section][wires]
         # *[amenity=vending_machine][shop]
         # *[noname?][name]
         # *[noref?][ref]
         # *[nohousenumber?][addr:housenumber]
         # *[actuator][handle][actuator!~/(^|;)manual(;|$)/]
         # *[mechanical_driver][handle][mechanical_driver!~/(^|;)manual(;|$)/]
-        if ('actuator' in keys and 'handle' in keys) or ('addr:housenumber' in keys and 'nohousenumber' in keys) or ('amenity' in keys and 'highway' in keys) or ('amenity' in keys and 'shop' in keys) or ('frequency' in keys and 'power' in keys) or ('handle' in keys and 'mechanical_driver' in keys) or ('internet_access' in keys and 'internet_access:fee' in keys) or ('name' in keys and 'noname' in keys) or ('noref' in keys and 'ref' in keys) or ('power' in keys) or ('power' in keys and 'voltage' in keys):
+        if ('actuator' in keys and 'handle' in keys) or ('addr:housenumber' in keys and 'nohousenumber' in keys) or ('amenity' in keys and 'highway' in keys) or ('amenity' in keys and 'shop' in keys) or ('frequency' in keys and 'power' in keys) or ('handle' in keys and 'mechanical_driver' in keys) or ('internet_access' in keys and 'internet_access:fee' in keys) or ('name' in keys and 'noname' in keys) or ('noref' in keys and 'ref' in keys) or ('power' in keys) or ('power' in keys and 'voltage' in keys) or ('power' in keys and 'wires' in keys):
             match = False
             if not match:
                 capture_tags = {}
@@ -4056,6 +4060,14 @@ class Josm_combinations(PluginMapCSS):
             if not match:
                 capture_tags = {}
                 try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'internet_access') == mapcss._value_capture(capture_tags, 0, 'no')) and (mapcss._tag_capture(capture_tags, 1, tags, 'internet_access:fee')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'circuit')) and (mapcss._tag_capture(capture_tags, 1, tags, 'wires')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'line_section')) and (mapcss._tag_capture(capture_tags, 1, tags, 'wires')))
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
@@ -4084,7 +4096,7 @@ class Josm_combinations(PluginMapCSS):
             if match:
                 # group:tr("suspicious tag combination")
                 # throwWarning:tr("{0} together with {1}","{0.tag}","{1.key}")
-                err.append({'class': 9001002, 'subclass': 1052450987, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.key}'))})
+                err.append({'class': 9001002, 'subclass': 213670061, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.key}'))})
 
         # *[barrier=kerb][kerb=no]
         # *[man_made=bridge][bridge=yes]
@@ -4629,6 +4641,19 @@ class Josm_combinations(PluginMapCSS):
                 # throwWarning:tr("{0} is lower or equal to {1} on {2}","{1.key}","{2.key}","{0.key}")
                 err.append({'class': 9001002, 'subclass': 1399744513, 'text': mapcss.tr('{0} is lower or equal to {1} on {2}', mapcss._tag_uncapture(capture_tags, '{1.key}'), mapcss._tag_uncapture(capture_tags, '{2.key}'), mapcss._tag_uncapture(capture_tags, '{0.key}'))})
 
+        # relation[power=circuit][topology][topology!~/^(linear|branched)$/]
+        if ('power' in keys and 'topology' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'circuit')) and (mapcss._tag_capture(capture_tags, 1, tags, 'topology')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_754b6662, '^(linear|branched)$'), mapcss._tag_capture(capture_tags, 2, tags, 'topology'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # throwError:tr("power=circuit relations should have a topology tag with value linear or branched")
+                # assertMatch:"relation type=power power=circuit topology=branch"
+                # assertNoMatch:"relation type=power power=circuit topology=branched"
+                err.append({'class': 9001006, 'subclass': 1474691630, 'text': mapcss.tr('power=circuit relations should have a topology tag with value linear or branched')})
+
         return err
 
 
@@ -4778,3 +4803,5 @@ class Test(TestPluginMapcss):
         self.check_not_err(n.way(data, {'cycleway': 'lane', 'cycleway:surface': 'asphalt'}, [0]), expected={'class': 9001001, 'subclass': 1754047217})
         self.check_not_err(n.way(data, {'cycleway:surface': 'needles', 'footway:surface': 'paving_stones', 'highway': 'path', 'segregated': 'yes'}, [0]), expected={'class': 9001001, 'subclass': 1754047217})
         self.check_not_err(n.way(data, {'bicycle:lanes': 'no|designated|yes', 'cycleway:lanes': '|lane|no', 'highway': 'primary', 'oneway': 'yes'}, [0]), expected={'class': 9001001, 'subclass': 1754047217})
+        self.check_err(n.relation(data, {'power': 'circuit', 'topology': 'branch', 'type': 'power'}, []), expected={'class': 9001006, 'subclass': 1474691630})
+        self.check_not_err(n.relation(data, {'power': 'circuit', 'topology': 'branched', 'type': 'power'}, []), expected={'class': 9001006, 'subclass': 1474691630})

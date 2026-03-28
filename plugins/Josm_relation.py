@@ -19,7 +19,9 @@ class Josm_relation(PluginMapCSS):
         super().init(logger)
         tags = capture_tags = {} # noqa
         self.errors[9007001] = self.def_class(item = 9007, level = 3, tags = ["tag", "relation"], title = mapcss.tr('missing tag'))
+        self.errors[9007002] = self.def_class(item = 9007, level = 2, tags = ["tag", "relation"], title = mapcss.tr('Power relation misses or combined to wrong power=* value'))
 
+        self.re_073f8ca6 = re.compile(r'^(circuit|line_section)$')
         self.re_67b11051 = re.compile(r'^restriction')
 
 
@@ -102,6 +104,25 @@ class Josm_relation(PluginMapCSS):
                 # assertMatch:"relation type=restriction"
                 err.append({'class': 9007001, 'subclass': 1097316614, 'text': mapcss.tr('{0} relation without {0} tag', 'restriction')})
 
+        # relation[type=power][!power]
+        # relation[type=power][power][power!~/^(circuit|line_section)$/]
+        if ('power' in keys and 'type' in keys) or ('type' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'type') == mapcss._value_capture(capture_tags, 0, 'power')) and (not mapcss._tag_capture(capture_tags, 1, tags, 'power')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'type') == mapcss._value_capture(capture_tags, 0, 'power')) and (mapcss._tag_capture(capture_tags, 1, tags, 'power')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_073f8ca6, '^(circuit|line_section)$'), mapcss._tag_capture(capture_tags, 2, tags, 'power'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # throwError:tr("Power relation misses or combined to wrong power=* value")
+                # assertNoMatch:"relation type=power power=circuit"
+                # assertMatch:"relation type=power power=line"
+                # assertMatch:"relation type=power"
+                err.append({'class': 9007002, 'subclass': 813798740, 'text': mapcss.tr('Power relation misses or combined to wrong power=* value')})
+
         return err
 
 
@@ -135,3 +156,6 @@ class Test(TestPluginMapcss):
         self.check_not_err(n.relation(data, {'restriction:hgv': 'no_left_turn', 'type': 'restriction'}, []), expected={'class': 9007001, 'subclass': 1097316614})
         self.check_not_err(n.relation(data, {'restriction': 'no_left_turn', 'type': 'restriction'}, []), expected={'class': 9007001, 'subclass': 1097316614})
         self.check_err(n.relation(data, {'type': 'restriction'}, []), expected={'class': 9007001, 'subclass': 1097316614})
+        self.check_not_err(n.relation(data, {'power': 'circuit', 'type': 'power'}, []), expected={'class': 9007002, 'subclass': 813798740})
+        self.check_err(n.relation(data, {'power': 'line', 'type': 'power'}, []), expected={'class': 9007002, 'subclass': 813798740})
+        self.check_err(n.relation(data, {'type': 'power'}, []), expected={'class': 9007002, 'subclass': 813798740})

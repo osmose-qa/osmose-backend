@@ -12810,6 +12810,32 @@ class Josm_deprecated(PluginMapCSS):
         # *[residential=condominium]
         # Rule Blacklisted (id: 1861188094)
 
+        # relation[route=power]
+        if ('route' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'route') == mapcss._value_capture(capture_tags, 0, 'power')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"type=power + power=circuit"
+                err.append({'class': 9002001, 'subclass': 1455858912, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+
+        # relation[power=branch]
+        if ('power' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'branch')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"type=power + power=line_section"
+                err.append({'class': 9002001, 'subclass': 203354287, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+
         return err
 
 

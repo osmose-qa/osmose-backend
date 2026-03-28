@@ -426,7 +426,9 @@ class Josm_geometry(PluginMapCSS):
         # node[interval]
         # node[route]
         # node[restriction]
-        if ('interval' in keys) or ('restriction' in keys) or ('route' in keys) or ('type' in keys):
+        # node[power=circuit]
+        # node[power=line_section]
+        if ('interval' in keys) or ('power' in keys) or ('restriction' in keys) or ('route' in keys) or ('type' in keys):
             match = False
             if not match:
                 capture_tags = {}
@@ -444,9 +446,17 @@ class Josm_geometry(PluginMapCSS):
                 capture_tags = {}
                 try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'restriction')))
                 except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'circuit')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'line_section')))
+                except mapcss.RuleAbort: pass
             if match:
                 # throwError:tr("{0} on a node. Should be used in a relation","{0.tag}")
-                err.append({'class': 9003004, 'subclass': 104835602, 'text': mapcss.tr('{0} on a node. Should be used in a relation', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+                err.append({'class': 9003004, 'subclass': 931783384, 'text': mapcss.tr('{0} on a node. Should be used in a relation', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
 
         # node[man_made!=monitoring_station][at(0.0,0.0)]
         if True:
@@ -675,7 +685,9 @@ class Josm_geometry(PluginMapCSS):
         # way[type=multipolygon]
         # way[interval][route!=ferry]
         # way[route=bus]
-        if ('interval' in keys) or ('restriction' in keys) or ('route' in keys) or ('type' in keys):
+        # way[power=circuit]
+        # way[power=line_section]
+        if ('interval' in keys) or ('power' in keys) or ('restriction' in keys) or ('route' in keys) or ('type' in keys):
             match = False
             if not match:
                 capture_tags = {}
@@ -693,20 +705,38 @@ class Josm_geometry(PluginMapCSS):
                 capture_tags = {}
                 try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'route') == mapcss._value_capture(capture_tags, 0, 'bus')))
                 except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'circuit')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'line_section')))
+                except mapcss.RuleAbort: pass
             if match:
                 # throwError:tr("{0} on a way. Should be used in a relation","{0.tag}")
-                err.append({'class': 9003008, 'subclass': 665916193, 'text': mapcss.tr('{0} on a way. Should be used in a relation', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+                err.append({'class': 9003008, 'subclass': 1459736735, 'text': mapcss.tr('{0} on a way. Should be used in a relation', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
 
         # way:closed[power=line]
+        # way:closed[power=cable]
+        # way:closed[power=minor_line]
         if ('power' in keys):
             match = False
             if not match:
                 capture_tags = {}
                 try: match = ((mapcss._tag_capture(capture_tags, 1, tags, 'power') == mapcss._value_capture(capture_tags, 1, 'line')) and (nds[0] == nds[-1]))
                 except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 1, tags, 'power') == mapcss._value_capture(capture_tags, 1, 'cable')) and (nds[0] == nds[-1]))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 1, tags, 'power') == mapcss._value_capture(capture_tags, 1, 'minor_line')) and (nds[0] == nds[-1]))
+                except mapcss.RuleAbort: pass
             if match:
                 # throwWarning:tr("{0} on a closed way. Should be used on an unclosed way.","{1.tag}")
-                err.append({'class': 9003011, 'subclass': 2100265426, 'text': mapcss.tr('{0} on a closed way. Should be used on an unclosed way.', mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
+                err.append({'class': 9003011, 'subclass': 255669472, 'text': mapcss.tr('{0} on a closed way. Should be used on an unclosed way.', mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
 
         # area[natural=~/^(water|wetland)$/]
         # area[waterway=riverbank]
