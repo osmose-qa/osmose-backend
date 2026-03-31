@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2025-07-15 19:22+0000\n"
+"PO-Revision-Date: 2026-04-01 13:09+0000\n"
 "Last-Translator: Steve Lee <stevel2520@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/osmose/backend/zh_Hant/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -2759,7 +2759,7 @@ msgstr ""
 
 #: ../plugins/TagRemove_FR.py:35
 msgid "`designation=*` is a United Kingdom-specific tag."
-msgstr ""
+msgstr "`designation=*`是英國特有標籤。"
 
 #: ../plugins/TagRemove_FR.py:37
 msgid "Translate it to another tag or remove."
