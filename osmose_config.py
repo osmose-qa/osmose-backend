@@ -1512,7 +1512,7 @@ default_country("central-america", "usa_virgin_islands", 286898, {"country": "VI
 
 #########################################################################
 
-default_country("australia-oceania", "new-zealand", 556706, {"country": "NZ", "language": "en", "proj": 32759, "driving_side": "left", "addr:street_distance": 2000})
+default_country("australia-oceania", "new-zealand", 556706, {"country": "NZ", "language": ["mi", "en"], "proj": 32759, "driving_side": "left", "addr:street_distance": 2000})
 
 default_country("oceania", "cook_islands", 2184233, {"country": "CK", "language": "en", "driving_side": "left", "proj": 32603}, download_repo=OSMFR)
 default_country("oceania", "marshall_islands", 571771, {"country": "MH", "language": "en", "proj": 32660}, download_repo=OSMFR)
