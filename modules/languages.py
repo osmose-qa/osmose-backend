@@ -73,6 +73,7 @@ language2scripts = {
     'lt': ['Latin'],
     'lv': ['Latin'],
     'mg': ['Latin'],
+    'mi': [u'[A-Za-zĀĒĪŌŪāēīōū]'],
     'mn': ['Cyrillic'],
     'ms': ['Latin'],
     'my': None, # Birman
