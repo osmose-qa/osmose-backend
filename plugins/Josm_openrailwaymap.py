@@ -61,8 +61,10 @@ class Josm_openrailwaymap(PluginMapCSS):
         self.errors[9015045] = self.def_class(item = 9015, level = 2, tags = ["tag", "railway"], title = {'en': 'track numbers inside a station should be railway:track_ref, not ref'})
         self.errors[9015046] = self.def_class(item = 9015, level = 3, tags = ["tag", "railway"], title = {'en': 'Wrong tag for railway station building'})
         self.errors[9015047] = self.def_class(item = 9015, level = 2, tags = ["tag", "railway"], title = {'en': 'workrules should be used on ways and not on nodes.'})
+        self.errors[9015048] = self.def_class(item = 9015, level = 2, tags = ["tag", "railway"], title = {'en': 'Italian (distant) speed signal 1R/2R/3R has wrong number of speeds.'})
 
         self.re_066203d3 = re.compile(r'^[0-9]+$')
+        self.re_0bc9ce47 = re.compile(r'^[^;]+$')
         self.re_0e3375d5 = re.compile(r'[Vv]iadu[ck]t')
         self.re_14388f34 = re.compile(r'^[0-9]+[a-z]*.*')
         self.re_18e8cc14 = re.compile(r'[Bb]rücke')
@@ -71,10 +73,13 @@ class Josm_openrailwaymap(PluginMapCSS):
         self.re_3d75a7eb = re.compile(r'^[Vv]oie [0-9]+[a-z]*.*')
         self.re_4399527a = re.compile(r';')
         self.re_473b08ca = re.compile(r'^railway:signal:')
+        self.re_48c507db = re.compile(r';[^;]*;')
         self.re_4b2a9052 = re.compile(r'^[Tt]rack [0-9]+[a-z]*.*')
+        self.re_582fbfb7 = re.compile(r'IT:[23]R')
         self.re_5bca804b = re.compile(r'[Tt]unnel')
         self.re_61639c68 = re.compile(r'^(passenger|mixed)$')
         self.re_63c39ff3 = re.compile(r'^[0-9]+ mph$')
+        self.re_7299ad75 = re.compile(r'^[^;]*(;[^;]*)?$')
         self.re_7cf15856 = re.compile(r'^[Gg]leis [0-9]+[a-z]*.*')
 
 
@@ -140,8 +145,8 @@ class Josm_openrailwaymap(PluginMapCSS):
         # node[railway=signal]["railway:signal:crossing:form"=sign]["railway:signal:crossing:states"]
         # node[railway=signal]["railway:signal:crossing_distant:form"=sign]["railway:signal:crossing_distant:states"]
         # node[railway=signal]["railway:signal:humping:form"=sign]["railway:signal:humping:states"]
-        # node[railway=signal]["railway:signal:speed_limit:form"=sign]["railway:signal:speed_limit:speed"=~/;/]
-        # node[railway=signal]["railway:signal:speed_limit_distant:form"=sign]["railway:signal:speed_limit_distant:speed"=~/;/]
+        # node[railway=signal]["railway:signal:speed_limit:form"=sign]["railway:signal:speed_limit:speed"=~/;/]["railway:signal:speed_limit"!~/IT:[23]R/]
+        # node[railway=signal]["railway:signal:speed_limit_distant:form"=sign]["railway:signal:speed_limit_distant:speed"=~/;/]["railway:signal:speed_limit_distant"!~/IT:[23]R/]
         # node[railway=signal]["railway:signal:route:form"=sign]["railway:signal:route:states"]
         # node[railway=signal]["railway:signal:route_distant:form"=sign]["railway:signal:route_distant:states"]
         # node[railway=signal]["railway:signal:wrong_road:form"=sign]["railway:signal:wrong_road:states"]
@@ -194,11 +199,11 @@ class Josm_openrailwaymap(PluginMapCSS):
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway') == mapcss._value_capture(capture_tags, 0, 'signal')) and (mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit:form') == mapcss._value_capture(capture_tags, 1, 'sign')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 2, self.re_4399527a), mapcss._tag_capture(capture_tags, 2, tags, 'railway:signal:speed_limit:speed'))))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway') == mapcss._value_capture(capture_tags, 0, 'signal')) and (mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit:form') == mapcss._value_capture(capture_tags, 1, 'sign')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 2, self.re_4399527a), mapcss._tag_capture(capture_tags, 2, tags, 'railway:signal:speed_limit:speed'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_582fbfb7, 'IT:[23]R'), mapcss._tag_capture(capture_tags, 3, tags, 'railway:signal:speed_limit'))))
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway') == mapcss._value_capture(capture_tags, 0, 'signal')) and (mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit_distant:form') == mapcss._value_capture(capture_tags, 1, 'sign')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 2, self.re_4399527a), mapcss._tag_capture(capture_tags, 2, tags, 'railway:signal:speed_limit_distant:speed'))))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway') == mapcss._value_capture(capture_tags, 0, 'signal')) and (mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit_distant:form') == mapcss._value_capture(capture_tags, 1, 'sign')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 2, self.re_4399527a), mapcss._tag_capture(capture_tags, 2, tags, 'railway:signal:speed_limit_distant:speed'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_582fbfb7, 'IT:[23]R'), mapcss._tag_capture(capture_tags, 3, tags, 'railway:signal:speed_limit_distant'))))
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
@@ -238,8 +243,10 @@ class Josm_openrailwaymap(PluginMapCSS):
                 # assertNoMatch:"node railway=signal railway:signal:main:states=hp0;hp1 railway:signal:main:form=semaphore"
                 # assertMatch:"node railway=signal railway:signal:main:states=hp0;hp1 railway:signal:main:form=sign"
                 # assertNoMatch:"node railway=signal railway:signal:speed_limit:form=sign railway:signal:speed_limit:speed=80"
+                # assertNoMatch:"node railway=signal railway:signal:speed_limit:form=sign railway:signal:speed_limit:speed=80;100 railway:signal:speed_limit=IT:2R"
                 # assertMatch:"node railway=signal railway:signal:speed_limit:form=sign railway:signal:speed_limit:speed=80;90"
-                err.append({'class': 9015031, 'subclass': 285269206, 'text': {'en': 'A sign cannot have different states.'}})
+                # assertNoMatch:"node railway=signal railway:signal:speed_limit_distant:form=sign railway:signal:speed_limit_distant:speed=80;100 railway:signal:speed_limit_distant=IT:2R"
+                err.append({'class': 9015031, 'subclass': 633462174, 'text': {'en': 'A sign cannot have different states.'}})
 
         # node[railway][priority]
         if ('priority' in keys and 'railway' in keys):
@@ -338,6 +345,73 @@ class Josm_openrailwaymap(PluginMapCSS):
                 # assertNoMatch:"node railway=signal railway:signal:combined=DE-ESO:ks railway:signal:minor=DE-ESO:sh1"
                 # assertNoMatch:"node railway=signal railway:signal:distant=DE-ESO:vr railway:signal:main=DE-ESO:hp"
                 err.append({'class': 9015035, 'subclass': 570327409, 'text': {'en': 'main and combined signal at the same place'}})
+
+        # node["railway:signal:speed_limit"="IT:1R"]["railway:signal:speed_limit:speed"=~/;/]
+        # node["railway:signal:speed_limit_distant"="IT:1R"]["railway:signal:speed_limit_distant:speed"=~/;/]
+        # node["railway:signal:speed_limit"="IT:2R"]["railway:signal:speed_limit:speed"=~/;[^;]*;/]
+        # node["railway:signal:speed_limit"="IT:2R"]["railway:signal:speed_limit:speed"=~/^[^;]+$/]
+        # node["railway:signal:speed_limit_distant"="IT:2R"]["railway:signal:speed_limit_distant:speed"=~/;[^;]*;/]
+        # node["railway:signal:speed_limit_distant"="IT:2R"]["railway:signal:speed_limit_distant:speed"=~/^[^;]+$/]
+        # node["railway:signal:speed_limit"="IT:3R"]["railway:signal:speed_limit:speed"=~/^[^;]*(;[^;]*)?$/]
+        # node["railway:signal:speed_limit_distant"="IT:3R"]["railway:signal:speed_limit_distant:speed"=~/^[^;]*(;[^;]*)?$/]
+        if ('railway:signal:speed_limit' in keys and 'railway:signal:speed_limit:speed' in keys) or ('railway:signal:speed_limit_distant' in keys and 'railway:signal:speed_limit_distant:speed' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway:signal:speed_limit') == mapcss._value_capture(capture_tags, 0, 'IT:1R')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 1, self.re_4399527a), mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit:speed'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway:signal:speed_limit_distant') == mapcss._value_capture(capture_tags, 0, 'IT:1R')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 1, self.re_4399527a), mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit_distant:speed'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway:signal:speed_limit') == mapcss._value_capture(capture_tags, 0, 'IT:2R')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 1, self.re_48c507db), mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit:speed'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway:signal:speed_limit') == mapcss._value_capture(capture_tags, 0, 'IT:2R')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 1, self.re_0bc9ce47), mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit:speed'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway:signal:speed_limit_distant') == mapcss._value_capture(capture_tags, 0, 'IT:2R')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 1, self.re_48c507db), mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit_distant:speed'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway:signal:speed_limit_distant') == mapcss._value_capture(capture_tags, 0, 'IT:2R')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 1, self.re_0bc9ce47), mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit_distant:speed'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway:signal:speed_limit') == mapcss._value_capture(capture_tags, 0, 'IT:3R')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 1, self.re_7299ad75), mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit:speed'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'railway:signal:speed_limit_distant') == mapcss._value_capture(capture_tags, 0, 'IT:3R')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 1, self.re_7299ad75), mapcss._tag_capture(capture_tags, 1, tags, 'railway:signal:speed_limit_distant:speed'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # throwError:"Italian (distant) speed signal 1R/2R/3R has wrong number of speeds."
+                # assertNoMatch:"node railway:signal:speed_limit=IT:1R railway:signal:speed_limit:speed=50"
+                # assertMatch:"node railway:signal:speed_limit=IT:1R railway:signal:speed_limit:speed=50;"
+                # assertMatch:"node railway:signal:speed_limit=IT:1R railway:signal:speed_limit:speed=50;70"
+                # assertMatch:"node railway:signal:speed_limit=IT:1R railway:signal:speed_limit:speed=;50"
+                # assertMatch:"node railway:signal:speed_limit=IT:2R railway:signal:speed_limit:speed=50"
+                # assertNoMatch:"node railway:signal:speed_limit=IT:2R railway:signal:speed_limit:speed=50;"
+                # assertNoMatch:"node railway:signal:speed_limit=IT:2R railway:signal:speed_limit:speed=50;60"
+                # assertMatch:"node railway:signal:speed_limit=IT:2R railway:signal:speed_limit:speed=50;60;"
+                # assertMatch:"node railway:signal:speed_limit=IT:2R railway:signal:speed_limit:speed=50;60;70"
+                # assertMatch:"node railway:signal:speed_limit=IT:2R railway:signal:speed_limit:speed=;60;70"
+                # assertMatch:"node railway:signal:speed_limit=IT:3R railway:signal:speed_limit:speed=50;60"
+                # assertNoMatch:"node railway:signal:speed_limit=IT:3R railway:signal:speed_limit:speed=50;60;"
+                # assertNoMatch:"node railway:signal:speed_limit=IT:3R railway:signal:speed_limit:speed=50;60;70"
+                # assertNoMatch:"node railway:signal:speed_limit=IT:3R railway:signal:speed_limit:speed=;60;70"
+                # assertNoMatch:"node railway:signal:speed_limit_distant=IT:1R railway:signal:speed_limit_distant:speed=50"
+                # assertMatch:"node railway:signal:speed_limit_distant=IT:1R railway:signal:speed_limit_distant:speed=50;70"
+                # assertMatch:"node railway:signal:speed_limit_distant=IT:2R railway:signal:speed_limit_distant:speed=50"
+                # assertNoMatch:"node railway:signal:speed_limit_distant=IT:2R railway:signal:speed_limit_distant:speed=50;60"
+                # assertMatch:"node railway:signal:speed_limit_distant=IT:2R railway:signal:speed_limit_distant:speed=50;60;70"
+                # assertMatch:"node railway:signal:speed_limit_distant=IT:3R railway:signal:speed_limit_distant:speed=50;60"
+                # assertNoMatch:"node railway:signal:speed_limit_distant=IT:3R railway:signal:speed_limit_distant:speed=50;60;70"
+                err.append({'class': 9015048, 'subclass': 687587197, 'text': {'en': 'Italian (distant) speed signal 1R/2R/3R has wrong number of speeds.'}})
 
         # node[railway=signal]["railway:ref"][!ref]
         if ('railway' in keys and 'railway:ref' in keys):
@@ -1822,11 +1896,13 @@ class Test(TestPluginMapcss):
         self.check_not_err(n.node(data, {'railway': 'buffer_stop', 'railway:signal:minor': 'sh2'}), expected={'class': 9015030, 'subclass': 908641862})
         self.check_not_err(n.node(data, {'railway': 'derail', 'railway:signal:minor': 'sh'}), expected={'class': 9015030, 'subclass': 908641862})
         self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:direction': 'forward'}), expected={'class': 9015030, 'subclass': 908641862})
-        self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:main:form': 'light', 'railway:signal:main:states': 'hp0;hp1'}), expected={'class': 9015031, 'subclass': 285269206})
-        self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:main:form': 'semaphore', 'railway:signal:main:states': 'hp0;hp1'}), expected={'class': 9015031, 'subclass': 285269206})
-        self.check_err(n.node(data, {'railway': 'signal', 'railway:signal:main:form': 'sign', 'railway:signal:main:states': 'hp0;hp1'}), expected={'class': 9015031, 'subclass': 285269206})
-        self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:speed_limit:form': 'sign', 'railway:signal:speed_limit:speed': '80'}), expected={'class': 9015031, 'subclass': 285269206})
-        self.check_err(n.node(data, {'railway': 'signal', 'railway:signal:speed_limit:form': 'sign', 'railway:signal:speed_limit:speed': '80;90'}), expected={'class': 9015031, 'subclass': 285269206})
+        self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:main:form': 'light', 'railway:signal:main:states': 'hp0;hp1'}), expected={'class': 9015031, 'subclass': 633462174})
+        self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:main:form': 'semaphore', 'railway:signal:main:states': 'hp0;hp1'}), expected={'class': 9015031, 'subclass': 633462174})
+        self.check_err(n.node(data, {'railway': 'signal', 'railway:signal:main:form': 'sign', 'railway:signal:main:states': 'hp0;hp1'}), expected={'class': 9015031, 'subclass': 633462174})
+        self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:speed_limit:form': 'sign', 'railway:signal:speed_limit:speed': '80'}), expected={'class': 9015031, 'subclass': 633462174})
+        self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:speed_limit': 'IT:2R', 'railway:signal:speed_limit:form': 'sign', 'railway:signal:speed_limit:speed': '80;100'}), expected={'class': 9015031, 'subclass': 633462174})
+        self.check_err(n.node(data, {'railway': 'signal', 'railway:signal:speed_limit:form': 'sign', 'railway:signal:speed_limit:speed': '80;90'}), expected={'class': 9015031, 'subclass': 633462174})
+        self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:speed_limit_distant': 'IT:2R', 'railway:signal:speed_limit_distant:form': 'sign', 'railway:signal:speed_limit_distant:speed': '80;100'}), expected={'class': 9015031, 'subclass': 633462174})
         self.check_err(n.node(data, {'priority': 'yard', 'railway': 'buffer_stop'}), expected={'class': 9015014, 'subclass': 1264446053})
         self.check_not_err(n.node(data, {'railway': 'crossing'}), expected={'class': 9015032, 'subclass': 719449462})
         self.check_err(n.node(data, {'railway': 'flat_crossing'}), expected={'class': 9015032, 'subclass': 719449462})
@@ -1843,6 +1919,27 @@ class Test(TestPluginMapcss):
         self.check_err(n.node(data, {'railway': 'signal', 'railway:signal:combined': 'DE-ESO:ks', 'railway:signal:distant': 'DE-ESO:vr'}), expected={'class': 9015035, 'subclass': 570327409})
         self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:combined': 'DE-ESO:ks', 'railway:signal:minor': 'DE-ESO:sh1'}), expected={'class': 9015035, 'subclass': 570327409})
         self.check_not_err(n.node(data, {'railway': 'signal', 'railway:signal:distant': 'DE-ESO:vr', 'railway:signal:main': 'DE-ESO:hp'}), expected={'class': 9015035, 'subclass': 570327409})
+        self.check_not_err(n.node(data, {'railway:signal:speed_limit': 'IT:1R', 'railway:signal:speed_limit:speed': '50'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit': 'IT:1R', 'railway:signal:speed_limit:speed': '50;'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit': 'IT:1R', 'railway:signal:speed_limit:speed': '50;70'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit': 'IT:1R', 'railway:signal:speed_limit:speed': ';50'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit': 'IT:2R', 'railway:signal:speed_limit:speed': '50'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_not_err(n.node(data, {'railway:signal:speed_limit': 'IT:2R', 'railway:signal:speed_limit:speed': '50;'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_not_err(n.node(data, {'railway:signal:speed_limit': 'IT:2R', 'railway:signal:speed_limit:speed': '50;60'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit': 'IT:2R', 'railway:signal:speed_limit:speed': '50;60;'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit': 'IT:2R', 'railway:signal:speed_limit:speed': '50;60;70'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit': 'IT:2R', 'railway:signal:speed_limit:speed': ';60;70'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit': 'IT:3R', 'railway:signal:speed_limit:speed': '50;60'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_not_err(n.node(data, {'railway:signal:speed_limit': 'IT:3R', 'railway:signal:speed_limit:speed': '50;60;'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_not_err(n.node(data, {'railway:signal:speed_limit': 'IT:3R', 'railway:signal:speed_limit:speed': '50;60;70'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_not_err(n.node(data, {'railway:signal:speed_limit': 'IT:3R', 'railway:signal:speed_limit:speed': ';60;70'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_not_err(n.node(data, {'railway:signal:speed_limit_distant': 'IT:1R', 'railway:signal:speed_limit_distant:speed': '50'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit_distant': 'IT:1R', 'railway:signal:speed_limit_distant:speed': '50;70'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit_distant': 'IT:2R', 'railway:signal:speed_limit_distant:speed': '50'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_not_err(n.node(data, {'railway:signal:speed_limit_distant': 'IT:2R', 'railway:signal:speed_limit_distant:speed': '50;60'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit_distant': 'IT:2R', 'railway:signal:speed_limit_distant:speed': '50;60;70'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_err(n.node(data, {'railway:signal:speed_limit_distant': 'IT:3R', 'railway:signal:speed_limit_distant:speed': '50;60'}), expected={'class': 9015048, 'subclass': 687587197})
+        self.check_not_err(n.node(data, {'railway:signal:speed_limit_distant': 'IT:3R', 'railway:signal:speed_limit_distant:speed': '50;60;70'}), expected={'class': 9015048, 'subclass': 687587197})
         self.check_not_err(n.node(data, {'railway': 'signal', 'railway:ref': 'N1', 'ref': 'N1'}), expected={'class': 9015036, 'subclass': 257553969})
         self.check_err(n.node(data, {'railway': 'signal', 'railway:ref': 'N1'}), expected={'class': 9015036, 'subclass': 257553969})
         self.check_not_err(n.node(data, {'railway': 'signal', 'ref': 'N1'}), expected={'class': 9015036, 'subclass': 257553969})

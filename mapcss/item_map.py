@@ -395,6 +395,7 @@ item_map = \
  'openrailwaymap': {'class': {'A sign cannot have different states.': 9015031,
                               'Crossings and level crossings should be mapped as nodes': 9015017,
                               'If tracks are tagged with service=*, they should be mapped as one way per track.': 9015016,
+                              'Italian (distant) speed signal 1R/2R/3R has wrong number of speeds.': 9015048,
                               'Key traffic_mode is deprecated': 9015004,
                               'Milestone without position, add railway:position=*': 9015028,
                               'Station mapped as a way, but should be mapped as a node': 9015002,
