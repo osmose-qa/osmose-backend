@@ -191,7 +191,10 @@ WHERE
     (NOT b1.tags?'level' AND NOT b2.tags?'level' OR b1.tags->'level' = b2.tags->'level') AND
     (NOT b1.tags?'addr:floor' AND NOT b2.tags?'addr:floor' OR b1.tags->'addr:floor' = b2.tags->'addr:floor') AND
     (NOT b1.tags?'min_height' AND NOT b2.tags?'min_height' OR b1.tags->'min_height' = b2.tags->'min_height') AND
-    (NOT b1.tags?'ele' AND NOT b2.tags?'ele' OR b1.tags->'ele' = b2.tags->'ele')
+    (NOT b1.tags?'ele' AND NOT b2.tags?'ele' OR b1.tags->'ele' = b2.tags->'ele') AND
+    (b1.tags?'natural' AND  b1.tags->'natural' = 'cliff' AND b2.tags?'natural' AND  b2.tags->'natural' = 'cliff' ) OR
+    (b1.tags?'man_made' AND b1.tags->'man_made' = 'embankment' AND b2.tags?'man_made' AND b2.tags->'man_made' = 'embankment') OR
+    (b1.tags?'barrier' AND b1.tags->'barrier' = 'guard_rail' AND b2.tags?'barrier' AND b2.tags->'barrier' = 'guard_rail')))    
 """
 
 sql30 = """
