@@ -262,10 +262,10 @@ FROM
         line_ends.nid = nodes.id
     WHERE
         NOT (nodes.tags?'location:transition' AND nodes.tags->'location:transition' = 'yes') AND
-        NOT (nodes.tags?'transformer' AND nodes.tags->'transformer' in ('distribution', 'main')) AND
+        NOT (nodes.tags?'transformer' AND nodes.tags->'transformer' IN ('distribution', 'main')) AND
         NOT (nodes.tags?'substation' AND nodes.tags->'substation' = 'minor_distribution') AND
         NOT (nodes.tags?'line_management' AND nodes.tags->'line_management' IN ('transition','termination')) AND
-        NOT (nodes.tags?'power' AND nodes.tags->'power' = 'terminal')
+        NOT (nodes.tags?'power' AND nodes.tags->'power' IN ('transformer', 'terminal'))
 """
 
 sql23 = """
@@ -686,8 +686,8 @@ In this case, you should use the `construction:` or other recommended [lifecycle
         self.classs[2] = self.def_class(item = 7040, level = 2, tags = ['power', 'fix:imagery'],
             title = T_('Unfinished power transmission line'),
             detail = T_(
-'''The line ends in a vacuum, and should be connected to another line or a substation (`power=substation`),
-a transformer (`power=transformer`), a generator (`power=generator`),
+'''The line ends in a vacuum and should end inside a substation (`power=substation`) or be connected to another line,
+a transformer (`power=transformer`, `transformer=main` or less likely `transformer=distribution`), a generator (`power=generator`),
 marked as transitioning into ground (`line_management=transition + location:transition=yes`)
 or explicitely terminated (`line_management=termination`).'''),
             trap = T_(
@@ -696,8 +696,8 @@ In this case, you should use the `construction:` or other recommended [lifecycle
         self.classs[6] = self.def_class(item = 7040, level = 3, tags = ['power', 'fix:imagery'],
             title = T_('Unfinished power distribution line'),
             detail = T_(
-'''The line ends in a vacuum, and should be connected to another line or a substation (`power=substation`),
-a transformer (`power=transformer`), a generator (`power=generator`),
+'''The line ends in a vacuum and should end inside a substation (`power=substation`) or be connected to another line,
+a transformer (`power=transformer`, `transformer=main` or `transformer=distribution`), a generator (`power=generator`),
 marked as transitioning into ground (`line_management=transition + location:transition=yes`)
 or explicitely terminated (`line_management=termination`).'''),
             trap = T_(
