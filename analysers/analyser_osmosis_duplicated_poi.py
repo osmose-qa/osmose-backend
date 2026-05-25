@@ -203,7 +203,7 @@ a AS (
             WHEN 'post_office' THEN 200
             WHEN 'fire_station' THEN 200
             WHEN 'hospital' THEN 100
-            WHEN 'fuel' THEN 50
+            WHEN 'fuel' THEN 25
             WHEN 'clinic' THEN 100
             WHEN 'community_centre' THEN 100
             WHEN 'townhall' THEN 200
@@ -212,7 +212,7 @@ a AS (
             WHEN 'marketplace' THEN 200
             WHEN 'stadium' THEN 200
             WHEN 'mall' THEN 100
-            WHEN 'supermarket' THEN 50
+            WHEN 'supermarket' THEN 25
         END AS distance_m
     FROM
         poi_raw
