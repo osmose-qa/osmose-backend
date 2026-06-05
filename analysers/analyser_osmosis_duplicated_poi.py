@@ -263,7 +263,7 @@ class Analyser_Osmosis_Duplicated_Poi(Analyser_Osmosis):
             fix = T_('Keep one object and merge tags of the other one into it.'))
 
         self.callback10 = lambda res: {
-            "classs": 5,
+            "class": 5,
             "data": [self.any_full, self.any_full, self.positionAsText],
             "text": {"en": f"{res[3]}={res[4]}{' level=' + res[5] if res[5] else ''} (distance={res[6]:.1f}m)"}
         }
