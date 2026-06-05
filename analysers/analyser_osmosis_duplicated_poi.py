@@ -293,7 +293,7 @@ class Test(TestAnalyserOsmosis):
             a.analyser()
 
         self.root_err = self.load_errors()
-        self.check_err(cl="1", elems=[("node", "1"), ("node", "2")])
+        self.check_err(cl="1", elems=[("node", "12821206478"), ("node", "6582004207")])
         self.check_err(cl="1", elems=[("node", "5"), ("node", "6")])
         self.check_err(cl="1", elems=[("node", "20"), ("way", "20")])
         self.check_num_err(3)
