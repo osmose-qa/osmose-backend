@@ -18,4 +18,5 @@ When report an issue on existing analyser, in addition on the name of the issue,
 
 Please, report your issue in English.
 
-If you use an generative IA, an IA agent or similar to fill the issue, reformulate, or make an answer. Please tell it, and as en IA identify ourself.
+If you used generative AI, an AI agent, or a similar tool to create, complete, reformulate, or reply to this issue, disclose it. If you are an AI system responding directly, identify yourself as an AI.
+
