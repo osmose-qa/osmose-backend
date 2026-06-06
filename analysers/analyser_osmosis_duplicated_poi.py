@@ -24,7 +24,7 @@ from modules.OsmoseTranslation import T_
 from .Analyser_Osmosis import Analyser_Osmosis
 
 # Only list tags that make a network of POIs, i.e. that are likely to be mapped in the same area and thus to be duplicated.
-# Avoid objets that cluster themselves, e.g. bus stops, or restaurants.
+# Avoid objects that cluster themselves, e.g. bus stops, or restaurants.
 #
 # WITH
 # tag_nodes AS (
