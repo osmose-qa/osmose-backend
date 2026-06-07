@@ -257,13 +257,13 @@ class Analyser_Osmosis_Duplicated_Poi(Analyser_Osmosis):
 
     def __init__(self, config, logger = None):
         Analyser_Osmosis.__init__(self, config, logger)
-        self.classs_change[1] = self.def_class(item = 1230, level = 2, tags = ['geom', 'fix:chair', 'poi'],
+        self.classs_change[6] = self.def_class(item = 1230, level = 2, tags = ['geom', 'fix:chair', 'poi'],
             title = T_('Duplicated POI within a short distance'),
             detail = T_('Two POI with the same type are mapped very close to each other. This often indicates a duplicate object.'),
             fix = T_('Keep one object and merge tags of the other one into it.'))
 
         self.callback10 = lambda res: {
-            "class": 1,
+            "class": 6,
             "data": [self.any_full, self.any_full, self.positionAsText],
             "text": {"en": f"{res[3]}={res[4]}{' level=' + res[5] if res[5] else ''} (distance={res[6]:.1f}m)"}
         }
@@ -293,7 +293,7 @@ class Test(TestAnalyserOsmosis):
             a.analyser()
 
         self.root_err = self.load_errors()
-        self.check_err(cl="1", elems=[("node", "1"), ("node", "2")])
-        self.check_err(cl="1", elems=[("node", "5"), ("node", "6")])
-        self.check_err(cl="1", elems=[("node", "20"), ("way", "20")])
+        self.check_err(cl="6", elems=[("node", "1"), ("node", "2")])
+        self.check_err(cl="6", elems=[("node", "5"), ("node", "6")])
+        self.check_err(cl="6", elems=[("node", "20"), ("way", "20")])
         self.check_num_err(3)
