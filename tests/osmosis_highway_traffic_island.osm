@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='manual-test'>
+  <node id='1' lat='0.0000' lon='0.0000' />
+  <node id='2' lat='0.0001' lon='0.0000' />
+  <node id='3' lat='0.0003' lon='0.0000' />
+
+  <node id='11' lat='0.0010' lon='0.0000' />
+  <node id='12' lat='0.0011' lon='0.0000' />
+  <node id='13' lat='0.0013' lon='0.0000' />
+
+  <node id='21' lat='0.0020' lon='0.0000' />
+  <node id='22' lat='0.0021' lon='0.0000' />
+  <node id='23' lat='0.0023' lon='0.0000' />
+
+  <node id='31' lat='0.0030' lon='0.0000' />
+  <node id='32' lat='0.0031' lon='0.0000' />
+  <node id='33' lat='0.0033' lon='0.0000' />
+  <node id='34' lat='0.0034' lon='0.0000' />
+
+  <node id='41' lat='0.0040' lon='0.0000' />
+  <node id='42' lat='0.0041' lon='0.0000' />
+  <node id='43' lat='0.0043' lon='0.0000' />
+
+  <!-- Positive: footway=crossing with crossing:island=yes shares node 2 with footway=traffic_island. -->
+  <way id='100'>
+    <nd ref='1' />
+    <nd ref='2' />
+    <tag k='footway' v='crossing' />
+    <tag k='crossing:island' v='yes' />
+  </way>
+  <way id='200'>
+    <nd ref='2' />
+    <nd ref='3' />
+    <tag k='footway' v='traffic_island' />
+  </way>
+
+  <!-- Positive: cycleway=crossing variant. -->
+  <way id='110'>
+    <nd ref='11' />
+    <nd ref='12' />
+    <tag k='cycleway' v='crossing' />
+    <tag k='crossing:island' v='yes' />
+  </way>
+  <way id='210'>
+    <nd ref='12' />
+    <nd ref='13' />
+    <tag k='footway' v='traffic_island' />
+  </way>
+
+  <!-- Positive: path=crossing variant. -->
+  <way id='120'>
+    <nd ref='21' />
+    <nd ref='22' />
+    <tag k='path' v='crossing' />
+    <tag k='crossing:island' v='yes' />
+  </way>
+  <way id='220'>
+    <nd ref='22' />
+    <nd ref='23' />
+    <tag k='footway' v='traffic_island' />
+  </way>
+
+  <!-- Negative: crossing island, but no shared traffic island node. -->
+  <way id='130'>
+    <nd ref='31' />
+    <nd ref='32' />
+    <tag k='footway' v='crossing' />
+    <tag k='crossing:island' v='yes' />
+  </way>
+  <way id='230'>
+    <nd ref='33' />
+    <nd ref='34' />
+    <tag k='footway' v='traffic_island' />
+  </way>
+
+  <!-- Negative: shared traffic island, but crossing:island is not yes. -->
+  <way id='140'>
+    <nd ref='41' />
+    <nd ref='42' />
+    <tag k='footway' v='crossing' />
+  </way>
+  <way id='240'>
+    <nd ref='42' />
+    <nd ref='43' />
+    <tag k='footway' v='traffic_island' />
+  </way>
+</osm>
