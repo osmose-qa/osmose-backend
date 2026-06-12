@@ -48,7 +48,7 @@ class Analyser_Osmosis_Highway_Traffic_Calming(Analyser_Osmosis):
 
     def __init__(self, config, logger = None):
         Analyser_Osmosis.__init__(self, config, logger)
-        self.classs_change[1] = self.def_class(item = 2090, level = 3, tags = ['tag', 'highway', 'fix:survey'],
+        self.classs_change[12] = self.def_class(item = 2090, level = 3, tags = ['tag', 'highway', 'fix:survey'],
             title = T_('Traffic calming tag on crossing way'),
             detail = T_(
 '''A crossing way is tagged with `traffic_calming=*`.
@@ -68,7 +68,7 @@ way.'''),
 needs to be mapped on a node or road.'''))
 
         self.callback10 = lambda res: {
-            "class": 1, "data": [self.way_full, self.positionAsText],
+            "class": 12, "data": [self.way_full, self.positionAsText],
             "text": T_("traffic_calming={0} on crossing way", res[2])
         }
 
@@ -98,7 +98,7 @@ class Test(TestAnalyserOsmosis):
             a.analyser()
 
         self.root_err = self.load_errors()
-        self.check_err(cl="1", elems=[("way", "100")])
-        self.check_err(cl="1", elems=[("way", "110")])
-        self.check_err(cl="1", elems=[("way", "120")])
+        self.check_err(cl="12", elems=[("way", "100")])
+        self.check_err(cl="12", elems=[("way", "110")])
+        self.check_err(cl="12", elems=[("way", "120")])
         self.check_num_err(3)
