@@ -20,8 +20,9 @@
 ##                                                                       ##
 ###########################################################################
 
+import json
 from modules.OsmoseTranslation import T_
-from .Analyser_Merge import Analyser_Merge_Point, SourceOpenDataSoft, CSV, Load_XY, Conflate, Select, Mapping
+from .Analyser_Merge import Analyser_Merge_Point, SourceDataFairCompatOds, CSV, Load_XY, Conflate, Select, Mapping
 
 
 class Analyser_Merge_Power_Substation_minor_FR(Analyser_Merge_Point):
@@ -37,13 +38,17 @@ class Analyser_Merge_Power_Substation_minor_FR(Analyser_Merge_Point):
         self.init(
             "https://opendata.agenceore.fr/explore/dataset/postes-de-distribution-publique-postes-htabt/",
             "Postes HTA/BT",
-            CSV(SourceOpenDataSoft(
-                attribution="Exploitants contributeurs de l'Agence ORE",
-                url="https://opendata.agenceore.fr/explore/dataset/postes-de-distribution-publique-postes-htabt/"),
-                fields=["Geo Point", "GRD", "Nom poste"]),
-            Load_XY("Geo Point", "Geo Point",
-                xFunction = lambda x: x and x.split(',')[1],
-                yFunction = lambda y: y and y.split(',')[0]),
+            CSV(
+                SourceDataFairCompatOds(
+                    attribution = "Exploitants contributeurs de l'Agence ORE",
+                    url="https://opendata.agenceore.fr/datasets/postes-de-distribution-publique-postes-htabt",
+                    select="nom_grd,nom_poste,geometry"
+                ),
+                fields=["nom_grd", "nom_poste", "geometry"],
+                separator=';'),
+            Load_XY("geometry", "geometry",
+                xFunction = lambda x: x and json.loads(x)["coordinates"][0],
+                yFunction = lambda y: y and json.loads(y)["coordinates"][1]),
             Conflate(
                 select = Select(
                     types = ["nodes", "ways"],
@@ -59,10 +64,10 @@ class Analyser_Merge_Power_Substation_minor_FR(Analyser_Merge_Point):
                         "substation": "minor_distribution", # Currently default value, we're unable to destinguish distribution and minor_distribution in opendata
                         "voltage": "20000"}, # Currently lawful default value as there is no opendata to define it. Mappers may be knowledgeable
                     mapping2 = {
-                        "name": lambda fields: fields["Nom poste"] if fields["Nom poste"] != "" else None,
-                        "operator": lambda res: self.extract_operator.get(res['GRD'])[0] if res['GRD'] in self.extract_operator else res['GRD'],
-                        "operator:wikidata": lambda res: self.extract_operator.get(res['GRD'])[1] if res['GRD'] in self.extract_operator else None,
-                        "source": lambda fields: self.source() + " - " + fields["GRD"]},
+                        "name": lambda fields: fields["nom_poste"] if fields["nom_poste"] != "" else None,
+                        "operator": lambda fields: self.extract_operator.get(fields['nom_grd'])[0] if fields['nom_grd'] in self.extract_operator else fields['nom_grd'],
+                        "operator:wikidata": lambda fields: self.extract_operator.get(fields['nom_grd'])[1] if fields['nom_grd'] in self.extract_operator else None,
+                        "source": lambda fields: self.source() + " - " + fields["nom_grd"]},
                 )))
 
     # Main source: https://wiki.openstreetmap.org/wiki/Power_networks/France/Exploitants#Entreprises_de_distribution
@@ -78,7 +83,7 @@ class Analyser_Merge_Power_Substation_minor_FR(Analyser_Merge_Point):
         'GreenAlp': ['GreenAlp', 'Q115580260'],
         #'Gignac Energie': [None, None],
         "Régie d'Electricité de Thônes": ['REThones', 'Q115579327'],
-        #'Régie Services Energie': [None, None],
+        'Régie Services Energie': ['RSE01', 'Q115579140'],
         'réséda': ['réséda', 'Q112115721'],
         'SOREA': ['Sorea', 'Q115470007'],
         'SRD': ['SRD', 'Q110319893'],

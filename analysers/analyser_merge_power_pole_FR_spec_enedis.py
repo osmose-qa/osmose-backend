@@ -20,8 +20,9 @@
 ##                                                                       ##
 ###########################################################################
 
+import json
 from modules.OsmoseTranslation import T_
-from .Analyser_Merge import Analyser_Merge_Point, SourceDataGouv, CSV, Load_XY, Conflate, Select, Mapping
+from .Analyser_Merge import Analyser_Merge_Point, SourceDataFairCompatOds, CSV, Load_XY, Conflate, Select, Mapping
 
 
 class Analyser_Merge_power_pole_FR_spec_enedis (Analyser_Merge_Point):
@@ -40,18 +41,18 @@ class Analyser_Merge_power_pole_FR_spec_enedis (Analyser_Merge_Point):
         self.init(
             "https://www.data.gouv.fr/fr/datasets/position-geographique-des-poteaux-hta-et-bt/",
             "Position géographique des poteaux électriques HTA et BT Enedis",
-            CSV(SourceDataGouv(
-                attribution="Enedis",
-                dataset="60b9a555532a9939f42fcb3b",
-                resource="93186d05-f283-421c-8534-a92149a01a36"
-            ), fields=['Code Département', 'Geo Point', 'PREC'], separator=';'),
-            Load_XY("Geo Point", "Geo Point",
-                xFunction = lambda x: x and x.split(',')[1],
-                yFunction = lambda y: y and y.split(',')[0],
-                select = {
-                    "Code Département": dep_code,
-                    "PREC": ["A : 0 - 50cm", "B : 50cm - 1m 50"]
-                }),
+            CSV(
+                SourceDataFairCompatOds(
+                    attribution = "Enedis",
+                    url="https://opendata.enedis.fr/datasets/position-geographique-des-poteaux-hta-et-bt",
+                    select="code_departement,prec,geometry",
+                    where="code_departement=" + dep_code + " AND prec IN ('A : 0 - 50cm','B : 50cm - 1m 50')"
+                ),
+                fields=["code_departement", "prec", "geometry"],
+                separator=';'),
+            Load_XY("geometry", "geometry",
+                xFunction = lambda x: x and json.loads(x)["coordinates"][0],
+                yFunction = lambda y: y and json.loads(y)["coordinates"][1]),
             Conflate(
                 select = Select(
                     types = ['nodes'],

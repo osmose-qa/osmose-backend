@@ -534,6 +534,28 @@ class SourceDataFair(Source):
 
         return datetime.datetime.fromisoformat(matching_file["updatedAt"][0:10])
 
+class SourceDataFairCompatOds(Source):
+    def __init__(self,
+                 url: str,
+                 select: str,
+                 format: str = "csv",
+                 where: Optional[str] = None,
+                 **kwargs):
+        self.url_base = url.replace("/datasets/", "/data-fair/api/v1/datasets/")
+        kwargs.update({
+            "encoding": "utf-8-sig",
+            "fileUrl": self.url_base + "/compat-ods/exports/" + format + "?select=" + select + ("&where=" + where if where else ""),
+            "millesime": None,
+        })
+        super().__init__(**kwargs)
+
+    def get_millesime(self) -> datetime.datetime:
+        response = downloader.request_get(self.url_base)
+        response.raise_for_status()
+        metadata = response.json()
+
+        return datetime.datetime.fromisoformat(metadata["dataUpdatedAt"][0:10])
+
 class SourceHttpLastModified(Source):
     """Get URL from Last-Modified HTTP headers"""
     def get_millesime(self):
