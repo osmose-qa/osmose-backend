@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
 ###########################################################################
@@ -21,34 +20,21 @@
 ###########################################################################
 
 from modules.OsmoseTranslation import T_
-from .Analyser_Osmosis import Analyser_Osmosis
+from modules.Stablehash import stablehash
+from plugins.Plugin import Plugin
 
 
-sql10 = """
-SELECT
-    id,
-    ST_AsText(way_locate(linestring)),
-    tags->'traffic_calming'
-FROM
-    {0}ways
-WHERE
-    tags?'traffic_calming' AND
-    (
-        tags->'footway' = 'crossing' OR
-        tags->'cycleway' = 'crossing' OR
-        tags->'path' = 'crossing'
+class Highway_Traffic_Calming(Plugin):
+
+    crossing_tags = (
+        ("footway", "crossing"),
+        ("cycleway", "crossing"),
+        ("path", "crossing"),
     )
-"""
 
-
-class Analyser_Osmosis_Highway_Traffic_Calming(Analyser_Osmosis):
-
-    requires_tables_full = ['ways']
-    requires_tables_diff = ['touched_ways']
-
-    def __init__(self, config, logger = None):
-        Analyser_Osmosis.__init__(self, config, logger)
-        self.classs_change[12] = self.def_class(item = 2090, level = 3, tags = ['tag', 'highway', 'fix:survey'],
+    def init(self, logger):
+        Plugin.init(self, logger)
+        self.errors[20901] = self.def_class(item = 2090, level = 3, tags = ['tag', 'highway', 'fix:survey'],
             title = T_('Traffic calming tag on crossing way'),
             detail = T_(
 '''A crossing way is tagged with `traffic_calming=*`.
@@ -67,38 +53,36 @@ way.'''),
 '''Do not remove the tag without checking whether a traffic calming feature still
 needs to be mapped on a node or road.'''))
 
-        self.callback10 = lambda res: {
-            "class": 12, "data": [self.way_full, self.positionAsText],
-            "text": T_("traffic_calming={0} on crossing way", res[2])
-        }
+    def way(self, data, tags, nds):
+        if 'traffic_calming' not in tags:
+            return []
 
-    def analyser_osmosis_full(self):
-        self.run(sql10.format(""), self.callback10)
+        if not any(tags.get(k) == v for k, v in self.crossing_tags):
+            return []
 
-    def analyser_osmosis_diff(self):
-        self.run(sql10.format("touched_"), self.callback10)
+        return [{
+            'class': 20901,
+            'subclass': stablehash(tags['traffic_calming']),
+            'text': T_("traffic_calming={0} on crossing way", tags['traffic_calming'])
+        }]
 
 
 ###########################################################################
+from plugins.Plugin import TestPluginCommon
 
-from .Analyser_Osmosis import TestAnalyserOsmosis
 
+class Test(TestPluginCommon):
+    def test(self):
+        a = Highway_Traffic_Calming(None)
+        self.set_default_config(a)
+        a.init(None)
 
-class Test(TestAnalyserOsmosis):
-    @classmethod
-    def setup_class(cls):
-        from modules import config
-        TestAnalyserOsmosis.setup_class()
-        cls.analyser_conf = cls.load_osm("tests/osmosis_highway_traffic_calming.osm",
-                                         config.dir_tmp + "/tests/osmosis_highway_traffic_calming.test.xml",
-                                         {"proj": 2154})
+        for crossing_key in ("footway", "cycleway", "path"):
+            tags = {crossing_key: "crossing", "traffic_calming": "table"}
+            self.check_err(a.way(None, tags, None), tags, expected={"class": 20901})
 
-    def test_classes(self):
-        with Analyser_Osmosis_Highway_Traffic_Calming(self.analyser_conf, self.logger) as a:
-            a.analyser()
-
-        self.root_err = self.load_errors()
-        self.check_err(cl="12", elems=[("way", "100")])
-        self.check_err(cl="12", elems=[("way", "110")])
-        self.check_err(cl="12", elems=[("way", "120")])
-        self.check_num_err(3)
+        self.check_not_err(a.way(None, {"highway": "residential", "traffic_calming": "hump"}, None))
+        self.check_not_err(a.way(None, {"highway": "service", "traffic_calming": "chicane"}, None))
+        self.check_not_err(a.way(None, {"highway": "footway", "footway": "traffic_island", "traffic_calming": "island"}, None))
+        self.check_not_err(a.way(None, {"highway": "footway", "footway": "crossing", "crossing": "uncontrolled"}, None))
+        self.check_not_err(a.way(None, {"highway": "cycleway", "cycleway": "crossing", "crossing": "uncontrolled"}, None))

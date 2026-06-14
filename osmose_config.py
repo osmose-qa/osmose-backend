@@ -178,7 +178,6 @@ class default_simple(template_config):
         self.analyser["osmosis_highway_noexit"] = "xxx"
         self.analyser["osmosis_parking_highway"] = "xxx"
         self.analyser["osmosis_highway_bad_intersection"] = "xxx"
-        self.analyser["osmosis_highway_traffic_calming"] = "xxx"
         self.analyser["osmosis_water"] = "xxx"
         self.analyser["osmosis_relation_public_transport"] = "xxx"
         self.analyser["osmosis_highway_turn_lanes"] = "xxx"
