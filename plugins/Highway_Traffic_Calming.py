@@ -26,44 +26,64 @@ from plugins.Plugin import Plugin
 
 class Highway_Traffic_Calming(Plugin):
 
-    crossing_tags = (
-        ("footway", "crossing"),
-        ("cycleway", "crossing"),
-        ("path", "crossing"),
+    traffic_flow_highways = (
+        "motorway",
+        "trunk",
+        "primary",
+        "secondary",
+        "tertiary",
+        "unclassified",
+        "residential",
+        "living_street",
+        "service",
+        "pedestrian",
+        "track",
+        "busway",
+        "road",
+        "cycleway",
+        "path",
+        "bridleway",
+        "motorway_link",
+        "trunk_link",
+        "primary_link",
+        "secondary_link",
+        "tertiary_link",
     )
 
     def init(self, logger):
         Plugin.init(self, logger)
         self.errors[20901] = self.def_class(item = 2090, level = 3, tags = ['tag', 'highway', 'fix:survey'],
-            title = T_('Traffic calming tag on crossing way'),
+            title = T_('Misplaced traffic calming tag'),
             detail = T_(
-'''A crossing way is tagged with `traffic_calming=*`.
+'''A sidewalk, crossing, traffic island, or mapped area is tagged with
+`traffic_calming=*`.
 
-Traffic calming describes a feature affecting vehicle traffic. A separately
-mapped crossing way describes the pedestrian, bicycle, or path crossing
-geometry.'''),
+Traffic calming features, such as speed humps, tables, chicanes, or islands,
+physically slow traffic on a road, cycleway, path, or other trafficked highway.
+The tag should be placed on that highway or on a node along it, not on nearby
+sidewalks, crossing geometry, traffic islands, or decorative areas.'''),
             fix = T_(
-'''If this is a raised crossing, move `traffic_calming=*` to the node or road
-where the traffic calming physically applies.
+'''Move `traffic_calming=*` to the road, cycleway, path, or other highway where
+traffic is slowed, or to a node on that highway.
 
-If the tag was added to the crossing way by mistake and there is no traffic
-calming feature to map elsewhere, remove `traffic_calming=*` from the crossing
-way.'''),
+If the tag was added here by mistake and there is no traffic
+calming feature to map elsewhere, remove `traffic_calming=*` from this way.'''),
             trap = T_(
 '''Do not remove the tag without checking whether a traffic calming feature still
-needs to be mapped on a node or road.'''))
+needs to be moved to the highway whose traffic is calmed.'''))
 
     def way(self, data, tags, nds):
         if 'traffic_calming' not in tags:
             return []
 
-        if not any(tags.get(k) == v for k, v in self.crossing_tags):
+        highway = tags.get('highway')
+        if highway in self.traffic_flow_highways and tags.get('area') != 'yes' and tags.get(highway) != 'crossing':
             return []
 
         return [{
             'class': 20901,
             'subclass': stablehash(tags['traffic_calming']),
-            'text': T_("traffic_calming={0} on crossing way", tags['traffic_calming'])
+            'text': T_("misplaced traffic_calming={0}", tags['traffic_calming'])
         }]
 
 
@@ -81,8 +101,17 @@ class Test(TestPluginCommon):
             tags = {crossing_key: "crossing", "traffic_calming": "table"}
             self.check_err(a.way(None, tags, None), tags, expected={"class": 20901})
 
+        self.check_err(a.way(None, {"highway": "footway", "footway": "traffic_island", "traffic_calming": "island"}, None), expected={"class": 20901})
+        self.check_err(a.way(None, {"area:highway": "traffic_island", "traffic_calming": "island"}, None), expected={"class": 20901})
+        self.check_err(a.way(None, {"area": "yes", "traffic_calming": "island"}, None), expected={"class": 20901})
+        self.check_err(a.way(None, {"highway": "footway", "footway": "sidewalk", "traffic_calming": "table"}, None), expected={"class": 20901})
+        self.check_err(a.way(None, {"highway": "footway", "traffic_calming": "table"}, None), expected={"class": 20901})
+        self.check_err(a.way(None, {"traffic_calming": "table"}, None), expected={"class": 20901})
+
         self.check_not_err(a.way(None, {"highway": "residential", "traffic_calming": "hump"}, None))
         self.check_not_err(a.way(None, {"highway": "service", "traffic_calming": "chicane"}, None))
-        self.check_not_err(a.way(None, {"highway": "footway", "footway": "traffic_island", "traffic_calming": "island"}, None))
+        self.check_not_err(a.way(None, {"highway": "pedestrian", "traffic_calming": "table"}, None))
+        self.check_not_err(a.way(None, {"highway": "cycleway", "traffic_calming": "table"}, None))
+        self.check_not_err(a.way(None, {"highway": "path", "traffic_calming": "bump"}, None))
         self.check_not_err(a.way(None, {"highway": "footway", "footway": "crossing", "crossing": "uncontrolled"}, None))
         self.check_not_err(a.way(None, {"highway": "cycleway", "cycleway": "crossing", "crossing": "uncontrolled"}, None))
