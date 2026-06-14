@@ -52,7 +52,7 @@ class Highway_Traffic_Calming(Plugin):
 
     def init(self, logger):
         Plugin.init(self, logger)
-        self.errors[20901] = self.def_class(item = 2090, level = 3, tags = ['tag', 'highway', 'fix:survey'],
+        self.errors[30411] = self.def_class(item = 3040, level = 3, tags = ['tag', 'highway', 'fix:survey'],
             title = T_('Misplaced traffic calming tag'),
             detail = T_(
 '''A sidewalk, crossing, traffic island, or mapped area is tagged with
@@ -81,7 +81,7 @@ needs to be moved to the highway whose traffic is calmed.'''))
             return []
 
         return [{
-            'class': 20901,
+            'class': 30411,
             'subclass': stablehash(tags['traffic_calming']),
             'text': T_("misplaced traffic_calming={0}", tags['traffic_calming'])
         }]
@@ -99,14 +99,14 @@ class Test(TestPluginCommon):
 
         for crossing_key in ("footway", "cycleway", "path"):
             tags = {crossing_key: "crossing", "traffic_calming": "table"}
-            self.check_err(a.way(None, tags, None), tags, expected={"class": 20901})
+            self.check_err(a.way(None, tags, None), tags, expected={"class": 30411})
 
-        self.check_err(a.way(None, {"highway": "footway", "footway": "traffic_island", "traffic_calming": "island"}, None), expected={"class": 20901})
-        self.check_err(a.way(None, {"area:highway": "traffic_island", "traffic_calming": "island"}, None), expected={"class": 20901})
-        self.check_err(a.way(None, {"area": "yes", "traffic_calming": "island"}, None), expected={"class": 20901})
-        self.check_err(a.way(None, {"highway": "footway", "footway": "sidewalk", "traffic_calming": "table"}, None), expected={"class": 20901})
-        self.check_err(a.way(None, {"highway": "footway", "traffic_calming": "table"}, None), expected={"class": 20901})
-        self.check_err(a.way(None, {"traffic_calming": "table"}, None), expected={"class": 20901})
+        self.check_err(a.way(None, {"highway": "footway", "footway": "traffic_island", "traffic_calming": "island"}, None), expected={"class": 30411})
+        self.check_err(a.way(None, {"area:highway": "traffic_island", "traffic_calming": "island"}, None), expected={"class": 30411})
+        self.check_err(a.way(None, {"area": "yes", "traffic_calming": "island"}, None), expected={"class": 30411})
+        self.check_err(a.way(None, {"highway": "footway", "footway": "sidewalk", "traffic_calming": "table"}, None), expected={"class": 30411})
+        self.check_err(a.way(None, {"highway": "footway", "traffic_calming": "table"}, None), expected={"class": 30411})
+        self.check_err(a.way(None, {"traffic_calming": "table"}, None), expected={"class": 30411})
 
         self.check_not_err(a.way(None, {"highway": "residential", "traffic_calming": "hump"}, None))
         self.check_not_err(a.way(None, {"highway": "service", "traffic_calming": "chicane"}, None))
