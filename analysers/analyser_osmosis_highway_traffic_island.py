@@ -52,7 +52,7 @@ class Analyser_Osmosis_Highway_Traffic_Island(Analyser_Osmosis):
 
     def __init__(self, config, logger = None):
         Analyser_Osmosis.__init__(self, config, logger)
-        self.classs_change[11] = self.def_class(item = 2090, level = 3, tags = ['tag', 'highway', 'footway', 'fix:survey'],
+        self.classs_change[11] = self.def_class(item = 3040, level = 3, tags = ['tag', 'highway', 'footway', 'fix:survey'],
             title = T_('Crossing island tag on a split crossing'),
             detail = T_(
 '''A crossing way is tagged with `crossing:island=yes` and connects to a
