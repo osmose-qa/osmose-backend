@@ -25,23 +25,32 @@ from .Analyser_Osmosis import Analyser_Osmosis
 
 
 sql10 = """
-SELECT DISTINCT
+SELECT DISTINCT ON (crossing.id)
     crossing.id,
     traffic_island.id,
     ST_AsText(way_locate(crossing.linestring))
 FROM
     {0}ways AS crossing
     JOIN {1}ways AS traffic_island ON
+        traffic_island.linestring && crossing.linestring AND
         traffic_island.id != crossing.id AND
         traffic_island.nodes && crossing.nodes AND
+        traffic_island.tags != ''::hstore AND
+        traffic_island.tags?'footway' AND
         traffic_island.tags->'footway' = 'traffic_island'
 WHERE
+    crossing.tags != ''::hstore AND
+    crossing.tags?'crossing:island' AND
     crossing.tags->'crossing:island' = 'yes' AND
+    crossing.tags?|ARRAY['footway', 'cycleway', 'path'] AND
     (
         crossing.tags->'footway' = 'crossing' OR
         crossing.tags->'cycleway' = 'crossing' OR
         crossing.tags->'path' = 'crossing'
     )
+ORDER BY
+    crossing.id,
+    traffic_island.id
 """
 
 
