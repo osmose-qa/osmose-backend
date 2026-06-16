@@ -77,6 +77,9 @@ needs to be moved to the highway whose traffic is calmed.'''))
             return []
 
         highway = tags.get('highway')
+        if highway in ("construction", "proposed"):
+            highway = tags.get(highway)
+
         if highway in self.traffic_flow_highways and tags.get('area') != 'yes' and tags.get(highway) != 'crossing':
             return []
 
@@ -113,5 +116,7 @@ class Test(TestPluginCommon):
         self.check_not_err(a.way(None, {"highway": "pedestrian", "traffic_calming": "table"}, None))
         self.check_not_err(a.way(None, {"highway": "cycleway", "traffic_calming": "table"}, None))
         self.check_not_err(a.way(None, {"highway": "path", "traffic_calming": "bump"}, None))
+        self.check_not_err(a.way(None, {"highway": "construction", "construction": "residential", "traffic_calming": "table"}, None))
+        self.check_not_err(a.way(None, {"highway": "proposed", "proposed": "cycleway", "traffic_calming": "hump"}, None))
         self.check_not_err(a.way(None, {"highway": "footway", "footway": "crossing", "crossing": "uncontrolled"}, None))
         self.check_not_err(a.way(None, {"highway": "cycleway", "cycleway": "crossing", "crossing": "uncontrolled"}, None))
