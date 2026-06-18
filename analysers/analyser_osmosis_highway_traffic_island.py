@@ -49,8 +49,7 @@ WHERE
         crossing.tags->'path' = 'crossing'
     )
 ORDER BY
-    crossing.id,
-    traffic_island.id
+    crossing.id
 """
 
 
@@ -67,10 +66,10 @@ class Analyser_Osmosis_Highway_Traffic_Island(Analyser_Osmosis):
 '''A crossing way is tagged with `crossing:island=yes` and connects to a
 separately mapped `footway=traffic_island`.
 
-When a traffic island is mapped as its own way, the short crossing ways leading
+When a traffic island is mapped as its own way, the crossing ways leading
 to it usually should not also be tagged as having a crossing island.'''),
             fix = T_(
-'''Check the highlighted crossing way. If it is only a short segment leading to
+'''Check the highlighted crossing way. If it is a segment leading to
 the separately mapped traffic island, remove `crossing:island=yes`. You may add
 `crossing:island=no` for clarity.
 
