@@ -55,13 +55,10 @@ class Highway_Traffic_Calming(Plugin):
         self.errors[30411] = self.def_class(item = 3040, level = 3, tags = ['tag', 'highway', 'fix:survey'],
             title = T_('Misplaced traffic calming tag'),
             detail = T_(
-'''A sidewalk, crossing, traffic island, or mapped area is tagged with
-`traffic_calming=*`.
-
-Traffic calming features, such as speed humps, tables, chicanes, or islands,
-physically slow traffic on a road, cycleway, path, or other trafficked highway.
-The tag should be placed on that highway or on a node along it, not on nearby
-sidewalks, crossing geometry, traffic islands, or decorative areas.'''),
+'''A way that does not carry through traffic (such as a crossing, footway,
+or area) has the `traffic_calming=*` tag. This tag should only appear on
+highways that carry the traffic being calmed, such as roads and
+cycleways.'''),
             fix = T_(
 '''Move `traffic_calming=*` to the road, cycleway, path, or other highway where
 traffic is slowed, or to a node on that highway.
