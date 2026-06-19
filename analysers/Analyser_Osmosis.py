@@ -410,6 +410,12 @@ ANALYZE {0}.buildings;
                 elif table == 'not_touched_buildings':
                     self.requires_tables_build(["buildings"])
                     self.create_view_not_touched('buildings', ['W', 'R'])
+                elif table == 'touched_ways':
+                    self.requires_tables_build(["ways"])
+                    self.create_view_touched('ways', 'W')
+                elif table == 'not_touched_ways':
+                    self.requires_tables_build(["ways"])
+                    self.create_view_not_touched('ways', 'W')
                 else:
                     raise Exception('Unknown table name {0}'.format(table))
                 self.giscurs.execute('COMMIT')
