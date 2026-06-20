@@ -55,9 +55,6 @@ ORDER BY
 
 class Analyser_Osmosis_Highway_Traffic_Island(Analyser_Osmosis):
 
-    requires_tables_full = ['ways']
-    requires_tables_diff = ['ways']
-
     def __init__(self, config, logger = None):
         Analyser_Osmosis.__init__(self, config, logger)
         self.classs_change[11] = self.def_class(item = 3040, level = 3, tags = ['tag', 'highway', 'footway', 'fix:survey'],
