@@ -56,7 +56,7 @@ ORDER BY
 class Analyser_Osmosis_Highway_Traffic_Island(Analyser_Osmosis):
 
     requires_tables_full = ['ways']
-    requires_tables_diff = ['ways', 'touched_ways', 'not_touched_ways']
+    requires_tables_diff = ['ways']
 
     def __init__(self, config, logger = None):
         Analyser_Osmosis.__init__(self, config, logger)
@@ -86,6 +86,8 @@ over it, do not change the tag.'''))
 
     def analyser_osmosis_diff(self):
         # Match issues when either the crossing way or the traffic island way is touched.
+        self.create_view_touched('ways', 'W')
+        self.create_view_not_touched('ways', 'W')
         self.run(sql10.format("touched_", ""), self.callback10)
         self.run(sql10.format("not_touched_", "touched_"), self.callback10)
 
