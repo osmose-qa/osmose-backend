@@ -34,6 +34,7 @@ class TagFix_MultipleTag2(PluginMapCSS):
         self.errors[71301] = self.def_class(item = 7130, level = 3, tags = mapcss.list_('tag') + mapcss.list_('highway', 'maxheight', 'fix:survey'), title = mapcss.tr('Missing maxheight tag'), detail = mapcss.tr('Missing `maxheight=*` or `maxheight:physical=*` for a tunnel or a way under a bridge.'))
         self.errors[303210] = self.def_class(item = 3032, level = 3, tags = mapcss.list_('tag'), title = mapcss.tr('Fence with {0} tag, also add {1}', mapcss._tag_uncapture(capture_tags, '{1.key}'), mapcss._tag_uncapture(capture_tags, '{2.key}')))
         self.errors[303211] = self.def_class(item = 3032, level = 3, tags = mapcss.list_('tag'), title = mapcss.tr('suspicious tag combination'))
+        self.errors[303212] = self.def_class(item = 3032, level = 2, tags = mapcss.list_('tag'), title = mapcss.tr('Customer-facing facility tagged as having no customer access'), detail = mapcss.tr('This object is a POI where customers are typically expected to enter, sit or obtain takeaways. The tagging however disallows customer interaction at this location. Is this a main office (`office=*`), drive-through / takeaway location (`drive_through=yes/only` or `takeaway=yes/only`), storage location (`amenity=warehouse`), a dark store (`dark_store=*`) or dark kitchen (`craft=caterer + caterer=dark_kitchen=*`) instead, or are customers welcome and did you mean `delivery=yes`?'))
         self.errors[309120] = self.def_class(item = 3091, level = 3, tags = mapcss.list_('tag'), title = mapcss.tr('suspicious tag combination'))
         self.errors[316150] = self.def_class(item = 3161, level = 3, tags = mapcss.list_('tag') + mapcss.list_('highway', 'fix:chair', 'parking'), title = mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.key}=*')), detail = mapcss.tr('Indicate the type of parking, for example `parking=street_side`, `parking=surface` or `parking=underground`, to distinguish between major parking lots and roadside parking. Add access tags and/or service ways through the parking lot as desired.'), resource = 'https://wiki.openstreetmap.org/wiki/Key:parking')
 
@@ -41,6 +42,7 @@ class TagFix_MultipleTag2(PluginMapCSS):
         self.re_2ae49e65 = re.compile(r'^(motorway_link|trunk_link|primary|primary_link|secondary|secondary_link)$')
         self.re_43e7f95e = re.compile(r'mph')
         self.re_5955bda1 = re.compile(r'^(no|informal)$')
+        self.re_7b9a29ab = re.compile(r'parking')
 
 
     def node(self, data, tags):
@@ -259,6 +261,34 @@ class TagFix_MultipleTag2(PluginMapCSS):
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Key:parking"
                 # throwWarning:tr("{0} without {1}","{0.tag}","{1.key}=*")
                 err.append({'class': 316150, 'subclass': 0, 'text': mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.key}=*'))})
+
+        # node[delivery=only][shop]
+        # node[delivery=only][amenity][amenity!=warehouse][amenity!~/parking/][!shop]
+        if ('amenity' in keys and 'delivery' in keys) or ('delivery' in keys and 'shop' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'delivery') == mapcss._value_capture(capture_tags, 0, 'only')) and (mapcss._tag_capture(capture_tags, 1, tags, 'shop')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'delivery') == mapcss._value_capture(capture_tags, 0, 'only')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'warehouse', 'warehouse')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_7b9a29ab, 'parking'), mapcss._tag_capture(capture_tags, 3, tags, 'amenity'))) and (not mapcss._tag_capture(capture_tags, 4, tags, 'shop')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("Customer-facing facility tagged as having no customer access")
+                # -osmoseDetail:tr("This object is a POI where customers are typically expected to enter, sit or obtain takeaways. The tagging however disallows customer interaction at this location. Is this a main office (`office=*`), drive-through / takeaway location (`drive_through=yes/only` or `takeaway=yes/only`), storage location (`amenity=warehouse`), a dark store (`dark_store=*`) or dark kitchen (`craft=caterer + caterer=dark_kitchen=*`) instead, or are customers welcome and did you mean `delivery=yes`?")
+                # -osmoseItemClassLevel:"3032/303212/2"
+                # throwWarning:tr("{0} together with {1}","{1.tag}","{0.tag}")
+                # suggestAlternative:"amenity=warehouse"
+                # suggestAlternative:"craft=caterer + caterer=dark_kitchen"
+                # suggestAlternative:"delivery=yes"
+                # suggestAlternative:"drive_through=only"
+                # suggestAlternative:"office=*"
+                # suggestAlternative:"takeaway=only"
+                # assertNoMatch:"node amenity=warehouse delivery=only"
+                # assertNoMatch:"node craft=caterer caterer=dark_kitchen"
+                # assertNoMatch:"node dark_store=yes delivery=only"
+                err.append({'class': 303212, 'subclass': 0, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{1.tag}'), mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
 
         # node[tunnel][!highway][!area:highway][!railway][!waterway][!piste:type][type!=tunnel][public_transport!=platform][route!=ferry][man_made!=pipeline][man_made!=goods_conveyor][man_made!=wildlife_crossing][man_made!=tunnel][power!=cable]
         if ('tunnel' in keys):
@@ -585,6 +615,32 @@ class TagFix_MultipleTag2(PluginMapCSS):
                 # throwWarning:tr("{0} without {1}","{0.tag}","{1.key}=*")
                 err.append({'class': 316150, 'subclass': 0, 'text': mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.key}=*'))})
 
+        # area[delivery=only][shop]
+        # area[delivery=only][amenity][amenity!=warehouse][amenity!~/parking/][!shop]
+        if ('amenity' in keys and 'delivery' in keys) or ('delivery' in keys and 'shop' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'delivery') == mapcss._value_capture(capture_tags, 0, 'only')) and (mapcss._tag_capture(capture_tags, 1, tags, 'shop')) and (mapcss._tag_capture(capture_tags, -1, tags, 'area') != mapcss._value_const_capture(capture_tags, -1, 'no', 'no')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'delivery') == mapcss._value_capture(capture_tags, 0, 'only')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'warehouse', 'warehouse')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_7b9a29ab, 'parking'), mapcss._tag_capture(capture_tags, 3, tags, 'amenity'))) and (not mapcss._tag_capture(capture_tags, 4, tags, 'shop')) and (mapcss._tag_capture(capture_tags, -1, tags, 'area') != mapcss._value_const_capture(capture_tags, -1, 'no', 'no')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("Customer-facing facility tagged as having no customer access")
+                # -osmoseDetail:tr("This object is a POI where customers are typically expected to enter, sit or obtain takeaways. The tagging however disallows customer interaction at this location. Is this a main office (`office=*`), drive-through / takeaway location (`drive_through=yes/only` or `takeaway=yes/only`), storage location (`amenity=warehouse`), a dark store (`dark_store=*`) or dark kitchen (`craft=caterer + caterer=dark_kitchen=*`) instead, or are customers welcome and did you mean `delivery=yes`?")
+                # -osmoseItemClassLevel:"3032/303212/2"
+                # throwWarning:tr("{0} together with {1}","{1.tag}","{0.tag}")
+                # suggestAlternative:"amenity=warehouse"
+                # suggestAlternative:"craft=caterer + caterer=dark_kitchen"
+                # suggestAlternative:"delivery=yes"
+                # suggestAlternative:"drive_through=only"
+                # suggestAlternative:"office=*"
+                # suggestAlternative:"takeaway=only"
+                # assertNoMatch:"way amenity=parking access=delivery delivery=only"
+                err.append({'class': 303212, 'subclass': 0, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{1.tag}'), mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+
         # way[highway=living_street][maxspeed][maxspeed=~/mph/][get(split(" ",tag(maxspeed)),0)>15]
         # way[highway=living_street][maxspeed][maxspeed!~/mph/][get(split(" ",tag(maxspeed)),0)>20][outside("AT,CL,DK,IL,UZ")]
         # way[highway=living_street][maxspeed][maxspeed!~/mph/][get(split(" ",tag(maxspeed)),0)>30][inside("AT,CL,DK,IL,UZ")]
@@ -802,6 +858,31 @@ class TagFix_MultipleTag2(PluginMapCSS):
                 # assertMatch:"relation type=multipolygon amenity=parking"
                 err.append({'class': 316150, 'subclass': 0, 'text': mapcss.tr('{0} without {1}', mapcss._tag_uncapture(capture_tags, '{0.tag}'), mapcss._tag_uncapture(capture_tags, '{1.key}=*'))})
 
+        # area[delivery=only][shop]
+        # area[delivery=only][amenity][amenity!=warehouse][amenity!~/parking/][!shop]
+        if ('amenity' in keys and 'delivery' in keys and 'type' in keys) or ('delivery' in keys and 'shop' in keys and 'type' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'delivery') == mapcss._value_capture(capture_tags, 0, 'only')) and (mapcss._tag_capture(capture_tags, 1, tags, 'shop')) and (mapcss._tag_capture(capture_tags, -1, tags, 'type') == mapcss._value_capture(capture_tags, -1, 'multipolygon')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'delivery') == mapcss._value_capture(capture_tags, 0, 'only')) and (mapcss._tag_capture(capture_tags, 1, tags, 'amenity')) and (mapcss._tag_capture(capture_tags, 2, tags, 'amenity') != mapcss._value_const_capture(capture_tags, 2, 'warehouse', 'warehouse')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_7b9a29ab, 'parking'), mapcss._tag_capture(capture_tags, 3, tags, 'amenity'))) and (not mapcss._tag_capture(capture_tags, 4, tags, 'shop')) and (mapcss._tag_capture(capture_tags, -1, tags, 'type') == mapcss._value_capture(capture_tags, -1, 'multipolygon')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("Customer-facing facility tagged as having no customer access")
+                # -osmoseDetail:tr("This object is a POI where customers are typically expected to enter, sit or obtain takeaways. The tagging however disallows customer interaction at this location. Is this a main office (`office=*`), drive-through / takeaway location (`drive_through=yes/only` or `takeaway=yes/only`), storage location (`amenity=warehouse`), a dark store (`dark_store=*`) or dark kitchen (`craft=caterer + caterer=dark_kitchen=*`) instead, or are customers welcome and did you mean `delivery=yes`?")
+                # -osmoseItemClassLevel:"3032/303212/2"
+                # throwWarning:tr("{0} together with {1}","{1.tag}","{0.tag}")
+                # suggestAlternative:"amenity=warehouse"
+                # suggestAlternative:"craft=caterer + caterer=dark_kitchen"
+                # suggestAlternative:"delivery=yes"
+                # suggestAlternative:"drive_through=only"
+                # suggestAlternative:"office=*"
+                # suggestAlternative:"takeaway=only"
+                err.append({'class': 303212, 'subclass': 0, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{1.tag}'), mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+
         return err
 
 
@@ -834,6 +915,9 @@ class Test(TestPluginMapcss):
         self.check_err(n.node(data, {'alt_name': 'x;y;z', 'name': 'y'}), expected={'class': 50802, 'subclass': 0})
         self.check_not_err(n.node(data, {'alt_name': 'xyz', 'name': 'y'}), expected={'class': 50802, 'subclass': 0})
         self.check_not_err(n.node(data, {'alt_name': 'y', 'name': 'y'}), expected={'class': 50802, 'subclass': 0})
+        self.check_not_err(n.node(data, {'amenity': 'warehouse', 'delivery': 'only'}), expected={'class': 303212, 'subclass': 0})
+        self.check_not_err(n.node(data, {'caterer': 'dark_kitchen', 'craft': 'caterer'}), expected={'class': 303212, 'subclass': 0})
+        self.check_not_err(n.node(data, {'dark_store': 'yes', 'delivery': 'only'}), expected={'class': 303212, 'subclass': 0})
         self.check_err(n.way(data, {'amenity': 'fuel', 'building': 'roof'}, [0]), expected={'class': 30322, 'subclass': 0})
         self.check_not_err(n.way(data, {'amenity': 'parking', 'building': 'roof', 'parking': 'rooftop'}, [0]), expected={'class': 30322, 'subclass': 0})
         self.check_err(n.way(data, {'fee': 'yes', 'highway': 'primary'}, [0]), expected={'class': 30320, 'subclass': 1000})
@@ -851,6 +935,7 @@ class Test(TestPluginMapcss):
         self.check_err(n.way(data, {'highway': 'primary', 'tunnel': 'yes'}, [0]), expected={'class': 71301, 'subclass': 0})
         self.check_not_err(n.way(data, {'bridge': 'yes', 'tunnel': 'no'}, [0]), expected={'class': 40303, 'subclass': 0})
         self.check_err(n.way(data, {'bridge': 'yes', 'tunnel': 'yes'}, [0]), expected={'class': 40303, 'subclass': 0})
+        self.check_not_err(n.way(data, {'access': 'delivery', 'amenity': 'parking', 'delivery': 'only'}, [0]), expected={'class': 303212, 'subclass': 0})
         with with_options(n, {'country': 'FR'}):
             self.check_err(n.way(data, {'highway': 'living_street', 'maxspeed': '50'}, [0]), expected={'class': 309120, 'subclass': 0})
         self.check_not_err(n.way(data, {'highway': 'living_street', 'maxspeed': '15 mph'}, [0]), expected={'class': 309120, 'subclass': 0})

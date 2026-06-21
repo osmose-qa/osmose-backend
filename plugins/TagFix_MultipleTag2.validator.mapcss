@@ -247,6 +247,27 @@ area[amenity=parking][!parking] {
 }
 
 
+node[delivery=only][shop],
+area[delivery=only][shop],
+node[delivery=only][amenity][amenity!=warehouse][amenity!~/parking/][!shop],
+area[delivery=only][amenity][amenity!=warehouse][amenity!~/parking/][!shop] {
+  throwWarning: tr("{0} together with {1}", "{1.tag}", "{0.tag}");
+  group: tr("Customer-facing facility tagged as having no customer access");
+  suggestAlternative: "delivery=yes";
+  suggestAlternative: "drive_through=only";
+  suggestAlternative: "takeaway=only";
+  suggestAlternative: "craft=caterer + caterer=dark_kitchen";
+  suggestAlternative: "amenity=warehouse";
+  suggestAlternative: "office=*";
+  assertNoMatch: "node amenity=warehouse delivery=only";
+  assertNoMatch: "node dark_store=yes delivery=only";
+  assertNoMatch: "node craft=caterer caterer=dark_kitchen";
+  assertNoMatch: "way amenity=parking access=delivery delivery=only"; /* Also wrong, but would be an odd message */
+  -osmoseItemClassLevel: "3032/303212/2";
+  -osmoseDetail: tr("This object is a POI where customers are typically expected to enter, sit or obtain takeaways. The tagging however disallows customer interaction at this location. Is this a main office (`office=*`), drive-through / takeaway location (`drive_through=yes/only` or `takeaway=yes/only`), storage location (`amenity=warehouse`), a dark store (`dark_store=*`) or dark kitchen (`craft=caterer + caterer=dark_kitchen=*`) instead, or are customers welcome and did you mean `delivery=yes`?");
+}
+
+
 
 /* Workaround for issue #1766 */
 node[tunnel][!highway][!area:highway][!railway][!waterway][!piste:type][type!=tunnel][public_transport!=platform][route!=ferry][man_made!=pipeline][man_made!=goods_conveyor][man_made!=wildlife_crossing][man_made!=tunnel][power!=cable] {
