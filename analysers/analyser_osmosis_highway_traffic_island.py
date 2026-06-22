@@ -58,7 +58,7 @@ class Analyser_Osmosis_Highway_Traffic_Island(Analyser_Osmosis):
 
     def __init__(self, config, logger = None):
         Analyser_Osmosis.__init__(self, config, logger)
-        self.classs_change[11] = self.def_class(item = 3040, level = 3, tags = ['tag', 'highway', 'footway', 'fix:survey'],
+        self.classs_change[1] = self.def_class(item = 3040, level = 3, tags = ['tag', 'highway', 'footway', 'fix:survey'],
             title = T_('Crossing island tag on a split crossing'),
             detail = T_(
 '''A crossing way is tagged with `crossing:island=yes` and connects to a
@@ -77,7 +77,7 @@ as one continuous crossing, keep `crossing:island=yes`.'''),
 '''If you are not sure whether the crossing way ends at the island or continues
 over it, do not change the tag.'''))
 
-        self.callback10 = lambda res: {"class": 11, "data": [self.way_full, self.way_full, self.positionAsText]}
+        self.callback10 = lambda res: {"class": 1, "data": [self.way_full, self.way_full, self.positionAsText]}
 
     def analyser_osmosis_full(self):
         self.run(sql10.format("", ""), self.callback10)
@@ -108,7 +108,7 @@ class Test(TestAnalyserOsmosis):
             a.analyser()
 
         self.root_err = self.load_errors()
-        self.check_err(cl="11", elems=[("way", "100"), ("way", "200")])
-        self.check_err(cl="11", elems=[("way", "110"), ("way", "210")])
-        self.check_err(cl="11", elems=[("way", "120"), ("way", "220")])
+        self.check_err(cl="1", elems=[("way", "100"), ("way", "200")])
+        self.check_err(cl="1", elems=[("way", "110"), ("way", "210")])
+        self.check_err(cl="1", elems=[("way", "120"), ("way", "220")])
         self.check_num_err(3)
