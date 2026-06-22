@@ -49,7 +49,8 @@ WHERE
         crossing.tags->'path' = 'crossing'
     )
 ORDER BY
-    crossing.id
+    crossing.id,
+    traffic_island.id
 """
 
 
@@ -83,8 +84,7 @@ over it, do not change the tag.'''))
 
     def analyser_osmosis_diff(self):
         # Match issues when either the crossing way or the traffic island way is touched.
-        self.create_view_touched('ways', 'W')
-        self.create_view_not_touched('ways', 'W')
+        # touched_ways and not_touched_ways views are created by the osmosis CreateTouched.sql script.
         self.run(sql10.format("touched_", ""), self.callback10)
         self.run(sql10.format("not_touched_", "touched_"), self.callback10)
 

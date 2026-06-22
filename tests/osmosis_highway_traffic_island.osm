@@ -31,6 +31,7 @@
   <way id='200' version='1' timestamp='2014-03-31T22:00:00Z'>
     <nd ref='2' />
     <nd ref='3' />
+    <tag k='highway' v='footway' />
     <tag k='footway' v='traffic_island' />
   </way>
 
@@ -44,6 +45,7 @@
   <way id='210' version='1' timestamp='2014-03-31T22:00:00Z'>
     <nd ref='12' />
     <nd ref='13' />
+    <tag k='highway' v='footway' />
     <tag k='footway' v='traffic_island' />
   </way>
 
@@ -57,6 +59,7 @@
   <way id='220' version='1' timestamp='2014-03-31T22:00:00Z'>
     <nd ref='22' />
     <nd ref='23' />
+    <tag k='highway' v='footway' />
     <tag k='footway' v='traffic_island' />
   </way>
 
@@ -70,6 +73,7 @@
   <way id='230' version='1' timestamp='2014-03-31T22:00:00Z'>
     <nd ref='33' />
     <nd ref='34' />
+    <tag k='highway' v='footway' />
     <tag k='footway' v='traffic_island' />
   </way>
 
@@ -82,6 +86,7 @@
   <way id='240' version='1' timestamp='2014-03-31T22:00:00Z'>
     <nd ref='42' />
     <nd ref='43' />
+    <tag k='highway' v='footway' />
     <tag k='footway' v='traffic_island' />
   </way>
 </osm>
