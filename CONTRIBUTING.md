@@ -1,7 +1,7 @@
 # Contributing
 
 When contributing to this repository, please first discuss the change you
-wish to make via an issue on github if you want to change the core.
+wish to make via an issue on GitHub if you want to change the core.
 
 Feel free to submit pull requests directly for fixes.
 
