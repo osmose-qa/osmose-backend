@@ -3,7 +3,7 @@
 When contributing to this repository, please first discuss the change you
 wish to make via an issue on github if you want to change the core.
 
-Feel free to make direct pull request for fix.
+Feel free to submit pull requests directly for fixes.
 
 For new analyzers, please open an issue first to discuss the aim before
 submitting a PR. PRs introducing new analyzers without a prior issue will not
