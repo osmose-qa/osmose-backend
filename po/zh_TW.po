@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2026-06-24 07:01+0000\n"
+"PO-Revision-Date: 2026-06-27 07:01+0000\n"
 "Last-Translator: Supaplex <bejokeup@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/osmose/backend/zh_Hant/>\n"
@@ -461,7 +461,7 @@ msgstr ""
 
 #: ../plugins/TagFix_Note_Lang_fr.py:38
 msgid "Possible improvement for note or comment tag"
-msgstr ""
+msgstr "注釋或是補充標籤可能會有所改進"
 
 #: ../plugins/TagFix_Postcode.py:86
 msgid "Invalid postcode"
@@ -469,11 +469,11 @@ msgstr "無效的郵遞區號"
 
 #: ../plugins/TagFix_Role.py:32
 msgid "Inadequate role"
-msgstr ""
+msgstr "不足的角色"
 
 #: ../plugins/TagFix_Tree_Lang_fr.py:68
 msgid "Tree tagging"
-msgstr ""
+msgstr "加樹木的標籤"
 
 #: ../plugins/TagFix_Wikipedia.py:46
 msgid "Not a Wikipedia URL"
@@ -485,66 +485,66 @@ msgstr "使用維基百科 URL 而非條目名稱"
 
 #: ../plugins/TagFix_Wikipedia.py:55
 msgid "Missing Wikipedia language before article title"
-msgstr ""
+msgstr "在文章標題之前缺漏維基百科語言"
 
 #: ../plugins/TagFix_Wikipedia.py:63
 msgid "Use human Wikipedia page title"
-msgstr ""
+msgstr "使用人類可讀的維基百科頁面標題"
 
 #: ../plugins/TagFix_Wikipedia.py:73
 msgid "Missing primary Wikipedia tag"
-msgstr ""
+msgstr "缺漏主要維基百科標籤"
 
 #: ../plugins/TagFix_Wikipedia.py:79
 msgid "Invalid wikipedia suffix"
-msgstr ""
+msgstr "無效的維基百科後綴"
 
 #: ../plugins/TagFix_Wikipedia.py:82
 msgid "Duplicate wikipedia tag as suffix and prefix"
-msgstr ""
+msgstr "重覆的維基百科標籤前綴與後綴"
 
 #: ../plugins/TagRemove_FR.py:33
 msgid "Misused tag in this country"
-msgstr ""
+msgstr "這一國家誤用標籤"
 
 #: ../plugins/TagFix_MultipleTag2.py:31
 #: ../plugins/TagRemove_Incompatibles.py:31
 msgid "Tag conflict"
-msgstr ""
+msgstr "標籤衝突"
 
 #: ../plugins/TagRemove_NameIsRef_FR.py:34
 msgid "Highway reference in name tag"
-msgstr ""
+msgstr "道路編號在名稱標籤當中"
 
 #: ../plugins/TagRemove_OpenSeaMap.py:33
 msgid "OpenSeaMap import, very approximative position."
-msgstr ""
+msgstr "開放海洋地圖匯入，非常概略的位置。"
 
 #: ../plugins/TagRemove_Roundabout.py:31
 #: ../plugins/TagRemove_Roundabout_Ref.py:33
 msgid "Unneeded tag on junction=roundabout"
-msgstr ""
+msgstr "在圓環 junction=roundabout 上的非必要標籤"
 
 #: ../analysers/analyser_osmosis_fantoir.py:109
 msgid "Multiple name for the same ref FANTOIR"
-msgstr ""
+msgstr "相同 ref FANTOIR 有多個名稱"
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:647
 msgid "Tag \"addr:city\" not matching a city"
-msgstr ""
+msgstr "\"addr:city\" 標籤並不吻合所在城市"
 
 #: ../plugins/TagFix_MultipleTag_FR.py:47
 msgid "FANTOIR object type not match OSM feature"
-msgstr ""
+msgstr "FANTOIR 物件類別並不吻合 OSM 圖徵"
 
 #: ../analysers/analyser_merge_police_FR_pn.py:31
 msgid "Police not integrated"
-msgstr ""
+msgstr "未整合的警政單位"
 
 #: ../analysers/analyser_merge_fuel_FR.py:31
 #: ../analysers/analyser_merge_fuel_IT.py:47
 msgid "Gas station not integrated"
-msgstr ""
+msgstr "未整合的加油站"
 
 #: ../plugins/TagFix_Wikipedia.py:85
 msgid "Same wikipedia topic on other language"
