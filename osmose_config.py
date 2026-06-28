@@ -732,7 +732,16 @@ default_country("europe", "united_kingdom_scotland", 58446, {"country": "GB-SCT"
 
 iceland = default_country("europe","iceland", 299133, {"country": "IS", "language": "is", "proj": 32627}, download_repo=GEOFABRIK) # 299133
 
-default_country("europe", "denmark",  50046, {"country": "DK", "language": "da","proj": 32632, "phone_code": '45', "phone_len": 8, "phone_international": '00'}, download_repo=GEOFABRIK)
+#########################################################################
+
+dk_part = gen_country('europe', 'denmark', download_repo=OSMFR, language='da', proj=32632,
+                      phone_code='45', phone_len=8, phone_international='00')
+
+dk_part('nordjylland', 1319936, 'DK-81')
+dk_part('midtjylland', 1319935, 'DK-82')
+dk_part('syddanmark',  1319978, 'DK-83')
+dk_part('hovedstaden', 1320608, 'DK-84')
+dk_part('sjaelland',   1320370, 'DK-85')
 
 #########################################################################
 
