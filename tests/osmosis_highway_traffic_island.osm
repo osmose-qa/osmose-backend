@@ -25,6 +25,7 @@
   <way id='100' version='1' timestamp='2014-03-31T22:00:00Z'>
     <nd ref='1' />
     <nd ref='2' />
+    <tag k='highway' v='footway' />
     <tag k='footway' v='crossing' />
     <tag k='crossing:island' v='yes' />
   </way>
@@ -39,6 +40,7 @@
   <way id='110' version='1' timestamp='2014-03-31T22:00:00Z'>
     <nd ref='11' />
     <nd ref='12' />
+    <tag k='highway' v='cycleway' />
     <tag k='cycleway' v='crossing' />
     <tag k='crossing:island' v='yes' />
   </way>
@@ -53,6 +55,7 @@
   <way id='120' version='1' timestamp='2014-03-31T22:00:00Z'>
     <nd ref='21' />
     <nd ref='22' />
+    <tag k='highway' v='path' />
     <tag k='path' v='crossing' />
     <tag k='crossing:island' v='yes' />
   </way>
@@ -67,6 +70,7 @@
   <way id='130' version='1' timestamp='2014-03-31T22:00:00Z'>
     <nd ref='31' />
     <nd ref='32' />
+    <tag k='highway' v='footway' />
     <tag k='footway' v='crossing' />
     <tag k='crossing:island' v='yes' />
   </way>
@@ -81,6 +85,7 @@
   <way id='140' version='1' timestamp='2014-03-31T22:00:00Z'>
     <nd ref='41' />
     <nd ref='42' />
+    <tag k='highway' v='footway' />
     <tag k='footway' v='crossing' />
   </way>
   <way id='240' version='1' timestamp='2014-03-31T22:00:00Z'>

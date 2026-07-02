@@ -30,7 +30,7 @@ SELECT DISTINCT ON (crossing.id)
     traffic_island.id,
     ST_AsText(way_locate(crossing.linestring))
 FROM
-    {0}ways AS crossing
+    {0}highways AS crossing
     JOIN {1}ways AS traffic_island ON
         traffic_island.linestring && crossing.linestring AND
         traffic_island.id != crossing.id AND
@@ -55,6 +55,9 @@ ORDER BY
 
 
 class Analyser_Osmosis_Highway_Traffic_Island(Analyser_Osmosis):
+
+    requires_tables_common = ['highways']
+    requires_tables_diff = ['touched_highways', 'not_touched_highways']
 
     def __init__(self, config, logger = None):
         Analyser_Osmosis.__init__(self, config, logger)
@@ -84,7 +87,8 @@ over it, do not change the tag.'''))
 
     def analyser_osmosis_diff(self):
         # Match issues when either the crossing way or the traffic island way is touched.
-        # touched_ways and not_touched_ways views are created by the osmosis CreateTouched.sql script.
+        # touched_highways and not_touched_highways views are created by requires_tables_build.
+        # touched_ways view is created by the osmosis CreateTouched.sql script.
         self.run(sql10.format("touched_", ""), self.callback10)
         self.run(sql10.format("not_touched_", "touched_"), self.callback10)
 
