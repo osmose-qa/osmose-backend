@@ -111,7 +111,7 @@ def nsi_rule_applies(locationSet, country):
             return False
         if c in incl:
             return True
-    return len(incl) == 0 or "001" in locationSet["include"]
+    return len(locationSet.get("include", [])) == 0 or "001" in locationSet["include"]
 
 
 # Gets all valid (shop, amenity, ...) names that exist within a certain country
