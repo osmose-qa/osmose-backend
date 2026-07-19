@@ -135,6 +135,7 @@ class Test(TestPluginCommon):
         assert not a.node(None, {"brand": "Kiabi", "shop": "clothes", "name": "Kiabi","not:brand:wikidata": "Q3196299"})
         assert not a.node(None, {"shop": "clothes", "name": "Kiabi","not:brand:wikidata": "Q3196299"})
         assert not a.node(None, {"shop": "clothes", "name": "Kiabi","not:brand:wikidata": "Q3196299", "brand:wikidata": "Q1234567"})
+        assert not a.node(None, {"name": "Sparkasse", "amenity": "bank"}) # (Non-French) coordinates as include
         assert not a.node(None, {"name": "National Bank", "amenity": "bank", "atm": "yes"})
         assert a.node(None, {"name": "La Place", "amenity": "restaurant"}) # as 'fra' rather than 'FR' in NSI
 
