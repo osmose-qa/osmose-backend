@@ -116,12 +116,12 @@ class Analyser_Osmosis_Boundary_Relation(Analyser_Osmosis):
     def __init__(self, config, logger = None):
         Analyser_Osmosis.__init__(self, config, logger)
         self.admin_level = self.config.options and self.config.options.get("boundary_detail_level", 8) or 8
-        self.require_admmin_centre = not self.config.options or (self.config.options and self.config.options.get("boundary_require_admin_centre", True))
+        self.require_admin_centre = not self.config.options or (self.config.options and self.config.options.get("boundary_require_admin_centre", True))
         self.municipality_ref = self.config.options and self.config.options.get("municipality_ref")
         if self.municipality_ref and not isinstance(self.municipality_ref, list):
             self.municipality_ref = [self.municipality_ref]
 
-        if self.require_admmin_centre:
+        if self.require_admin_centre:
             self.classs_change[1] = self.def_class(item = 7120, level = 2, tags = ['boundary', 'fix:chair'],
                 title = T_('Missing `admin_centre` role'))
         self.classs_change[2] = self.def_class(item = 7120, level = 1, tags = ['boundary', 'name', 'fix:chair'],
@@ -143,7 +143,7 @@ class Analyser_Osmosis_Boundary_Relation(Analyser_Osmosis):
 roles](https://wiki.openstreetmap.org/wiki/Relation:boundary) on boundary
 relations.'''))
 
-        if self.require_admmin_centre:
+        if self.require_admin_centre:
             self.callback10 = lambda res: {"class":1, "data":[self.relation_full, self.positionAsText]}
         self.callback20 = lambda res: {"class":2, "data":[self.relation_full, self.positionAsText], "fix":{"name": res[2]} if res[2] else None}
         if self.municipality_ref:
@@ -168,7 +168,7 @@ relations.'''))
 
     def analyser_osmosis_full(self):
         self.run(sql00.format("", "", self.admin_level))
-        if self.require_admmin_centre:
+        if self.require_admin_centre:
             self.run(sql10.format("", ""), self.callback10)
         self.run(sql20.format("", "", self.municipality_col("name"), self.municipality_not("name")), self.callback20)
         if self.municipality_ref:
@@ -179,7 +179,7 @@ relations.'''))
 
     def analyser_osmosis_diff(self):
         self.run(sql00.format("touched_", "", self.admin_level))
-        if self.require_admmin_centre:
+        if self.require_admin_centre:
             self.run(sql10.format("touched_", ""), self.callback10)
         self.run(sql20.format("touched_", "", self.municipality_col("name"), self.municipality_not("name")), self.callback20)
         if self.municipality_ref:
@@ -188,7 +188,7 @@ relations.'''))
         self.run(sql50.format("touched_", ""), self.callback50)
 
         self.run(sql00.format("not_touched_", "touched_", self.admin_level))
-        if self.require_admmin_centre:
+        if self.require_admin_centre:
             self.run(sql10.format("not_touched_", "touched_"), self.callback10)
         self.run(sql20.format("not_touched_", "touched_", self.municipality_col("name"), self.municipality_not("name")), self.callback20)
         if self.municipality_ref:
