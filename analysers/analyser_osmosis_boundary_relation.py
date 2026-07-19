@@ -149,7 +149,7 @@ relations.'''))
         if self.municipality_ref:
             self.callback30 = lambda res: {"class":3, "data":[self.relation_full, self.positionAsText], "text":T_("Missing municipality ref tag {0}", ", ".join(self.municipality_ref)),
                 "fix":{self.municipality_ref: res[2]} if res[2] else None}
-        self.callback40 = lambda res: {"class":4, "data":[self.relation_full, self.positionAsText], "fix":{"wikipedia": res[2]} if res[2] else None}
+        self.callback40 = lambda res: {"class":4, "data":[self.relation_full, self.positionAsText]}
         self.callback50 = lambda res: {"class":5, "data":[self.relation_full, self.positionAsText],
             "text": T_("Population on admin_centre role ({0}) greater than population on the relation ({1})", res[2], res[3]) }
         self.callback60 = lambda res: {"class":6, "data":[self.relation_full, self.positionAsText], "text":{"en": res[2]}}
@@ -173,7 +173,7 @@ relations.'''))
         self.run(sql20.format("", "", self.municipality_col("name"), self.municipality_not("name")), self.callback20)
         if self.municipality_ref:
             self.run(sql20.format("", "", self.municipality_col(self.municipality_ref), self.municipality_not(self.municipality_ref)), self.callback30)
-        self.run(sql20.format("", "", self.municipality_col("wikipedia"), self.municipality_not("wikipedia")), self.callback40)
+        self.run(sql20.format("", "", "NULL::text", self.municipality_not("wikipedia")), self.callback40)
         self.run(sql50.format("", ""), self.callback50)
         self.run(sql60.format(""), self.callback60)
 
@@ -184,7 +184,7 @@ relations.'''))
         self.run(sql20.format("touched_", "", self.municipality_col("name"), self.municipality_not("name")), self.callback20)
         if self.municipality_ref:
             self.run(sql20.format("touched_", "", self.municipality_col(self.municipality_ref), self.municipality_not(self.municipality_ref)), self.callback30)
-        self.run(sql20.format("touched_", "", self.municipality_col("wikipedia"), self.municipality_not("wikipedia")), self.callback40)
+        self.run(sql20.format("touched_", "", "NULL::text", self.municipality_not("wikipedia")), self.callback40)
         self.run(sql50.format("touched_", ""), self.callback50)
 
         self.run(sql00.format("not_touched_", "touched_", self.admin_level))
@@ -193,7 +193,7 @@ relations.'''))
         self.run(sql20.format("not_touched_", "touched_", self.municipality_col("name"), self.municipality_not("name")), self.callback20)
         if self.municipality_ref:
             self.run(sql20.format("not_touched_", "touched_", self.municipality_col(self.municipality_ref), self.municipality_not(self.municipality_ref)), self.callback30)
-        self.run(sql20.format("not_touched_", "touched_", self.municipality_col("wikipedia"), self.municipality_not("wikipedia")), self.callback40)
+        self.run(sql20.format("not_touched_", "touched_", "NULL::text", self.municipality_not("wikipedia")), self.callback40)
         self.run(sql50.format("not_touched_", "touched_"), self.callback50)
 
         self.run(sql60.format("touched_"), self.callback60)
