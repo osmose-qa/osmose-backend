@@ -45,6 +45,7 @@ class Josm_DutchSpecific(PluginMapCSS):
         self.re_0cbcfeaf = re.compile(r'^maxspeed(:forward|:both_ways)?(:conditional)?$')
         self.re_0e042431 = re.compile(r'^hazmat(:[A-E])?(:forward|:both_ways)?(:conditional)?$')
         self.re_0e900094 = re.compile(r'(^|; ?)NL:C17\b')
+        self.re_0ebf9747 = re.compile(r'(?i)^woonwagen[kp]a[mr][pk]$')
         self.re_0ec6b360 = re.compile(r'(?i)^speeltuin(tje)?$')
         self.re_0f9e3c59 = re.compile(r'^foot(:forward|:both_ways)?(:conditional)?$')
         self.re_110c89a2 = re.compile(r'(^|; ?)mofa(;|$)')
@@ -435,6 +436,30 @@ class Josm_DutchSpecific(PluginMapCSS):
                 # assertMatch:"node tourism=artwork material=brons"
                 # assertMatch:"node tourism=artwork material=hout,metaal"
                 err.append({'class': 90202, 'subclass': 1686750599, 'text': mapcss.tr('unusual value of {0}', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
+
+        # node[gate:type][gate:type*=hek]
+        # node[bollard][bollard*=aal]
+        if ('bollard' in keys) or ('gate:type' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'gate:type')) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 1, tags, 'gate:type'), mapcss._value_capture(capture_tags, 1, 'hek'))))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'bollard')) and (mapcss.string_contains(mapcss._tag_capture(capture_tags, 1, tags, 'bollard'), mapcss._value_capture(capture_tags, 1, 'aal'))))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("NL deprecated features")
+                # throwWarning:tr("unusual value of {0}","{0.key}")
+                # assertMatch:"node barrier=bollard bollard=Paal"
+                # assertMatch:"node barrier=bollard bollard=pollerinzinkbaar_paaltje"
+                # assertNoMatch:"node barrier=bollard bollard=rising"
+                # assertNoMatch:"node barrier=bollard"
+                # assertMatch:"node barrier=gate gate:type=klaphekje"
+                # assertNoMatch:"node barrier=gate gate:type=turning"
+                # assertNoMatch:"node barrier=gate"
+                err.append({'class': 90202, 'subclass': 1526228815, 'text': mapcss.tr('unusual value of {0}', mapcss._tag_uncapture(capture_tags, '{0.key}'))})
 
         # *[surface][surface=~/^paving_stones:([1-9])0$/][inside("NL")]
         if ('surface' in keys):
@@ -3013,6 +3038,7 @@ class Josm_DutchSpecific(PluginMapCSS):
         # way[name][highway][name=~/\bbouwweg/]
         # area[name][name=~/(?i)^wadi$/][tag("natural")||tag("landuse")]
         # area[name][natural=water][name=visvijver]
+        # area[name][name=~/(?i)^woonwagen[kp]a[mr][pk]$/]
         # *[name][name="ijsbaan"]
         # *[name][name=~/\b(([Aa]f)?gesloten|[Gg]eopend)\b/]
         # *[name][amenity^=parking][name=~/(?i)(parkeren|parkeerplaats|parkeergarage|^garage)$/]
@@ -3061,6 +3087,10 @@ class Josm_DutchSpecific(PluginMapCSS):
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'name')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 1, self.re_0ebf9747), mapcss._tag_capture(capture_tags, 1, tags, 'name'))) and (mapcss._tag_capture(capture_tags, -1, tags, 'area') != mapcss._value_const_capture(capture_tags, -1, 'no', 'no')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
                 try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'name')) and (mapcss._tag_capture(capture_tags, 1, tags, 'name') == mapcss._value_capture(capture_tags, 1, 'ijsbaan')))
                 except mapcss.RuleAbort: pass
             if not match:
@@ -3101,7 +3131,8 @@ class Josm_DutchSpecific(PluginMapCSS):
                 # assertMatch:"way highway=service name=rolstoelpad"
                 # assertNoMatch:"way highway=unclassified name=\"Gesloten Stad\""
                 # assertNoMatch:"way highway=unclassified name=Landbouwweg"
-                err.append({'class': 90203, 'subclass': 2144375058, 'text': mapcss.tr('descriptive name')})
+                # assertMatch:"way landuse=residential residential=trailer_park name=Woonwagenkamp"
+                err.append({'class': 90203, 'subclass': 813727183, 'text': mapcss.tr('descriptive name')})
 
         # *[name][name=~/(?i)(voormalige?)/][!historic][tourism!=information][!landuse][!highway][!boundary][!waterway][!place]
         if ('name' in keys):
@@ -4418,6 +4449,7 @@ class Josm_DutchSpecific(PluginMapCSS):
         # *[name][leisure=pitch][name=~/(?i)ball?(veld(je)?)?$/][!sport]
         # area[name][name=~/(?i)^wadi$/][tag("natural")||tag("landuse")]
         # area[name][natural=water][name=visvijver]
+        # area[name][name=~/(?i)^woonwagen[kp]a[mr][pk]$/]
         if ('amenity' in keys and 'name' in keys) or ('leisure' in keys and 'name' in keys) or ('name' in keys) or ('name' in keys and 'natural' in keys and 'type' in keys) or ('name' in keys and 'type' in keys):
             match = False
             if not match:
@@ -4460,10 +4492,14 @@ class Josm_DutchSpecific(PluginMapCSS):
                 capture_tags = {}
                 try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'name')) and (mapcss._tag_capture(capture_tags, 1, tags, 'natural') == mapcss._value_capture(capture_tags, 1, 'water')) and (mapcss._tag_capture(capture_tags, 2, tags, 'name') == mapcss._value_capture(capture_tags, 2, 'visvijver')) and (mapcss._tag_capture(capture_tags, -1, tags, 'type') == mapcss._value_capture(capture_tags, -1, 'multipolygon')))
                 except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'name')) and (mapcss.regexp_test(mapcss._value_capture(capture_tags, 1, self.re_0ebf9747), mapcss._tag_capture(capture_tags, 1, tags, 'name'))) and (mapcss._tag_capture(capture_tags, -1, tags, 'type') == mapcss._value_capture(capture_tags, -1, 'multipolygon')))
+                except mapcss.RuleAbort: pass
             if match:
                 # group:tr("NL nomenclature")
                 # throwWarning:tr("descriptive name")
-                err.append({'class': 90203, 'subclass': 147135230, 'text': mapcss.tr('descriptive name')})
+                err.append({'class': 90203, 'subclass': 1922775973, 'text': mapcss.tr('descriptive name')})
 
         # *[name][name=~/(?i)(voormalige?)/][!historic][tourism!=information][!landuse][!highway][!boundary][!waterway][!place]
         if ('name' in keys):
@@ -4999,6 +5035,13 @@ class Test(TestPluginMapcss):
         self.check_not_err(n.node(data, {'addr:city': 'XXX', 'addr:postcode': '1234AB', 'addr:street': 'XXX', 'proposed:addr:housenumber': '123'}), expected={'class': 90201, 'subclass': 509151640})
         self.check_err(n.node(data, {'material': 'brons', 'tourism': 'artwork'}), expected={'class': 90202, 'subclass': 1686750599})
         self.check_err(n.node(data, {'material': 'hout,metaal', 'tourism': 'artwork'}), expected={'class': 90202, 'subclass': 1686750599})
+        self.check_err(n.node(data, {'barrier': 'bollard', 'bollard': 'Paal'}), expected={'class': 90202, 'subclass': 1526228815})
+        self.check_err(n.node(data, {'barrier': 'bollard', 'bollard': 'pollerinzinkbaar_paaltje'}), expected={'class': 90202, 'subclass': 1526228815})
+        self.check_not_err(n.node(data, {'barrier': 'bollard', 'bollard': 'rising'}), expected={'class': 90202, 'subclass': 1526228815})
+        self.check_not_err(n.node(data, {'barrier': 'bollard'}), expected={'class': 90202, 'subclass': 1526228815})
+        self.check_err(n.node(data, {'barrier': 'gate', 'gate:type': 'klaphekje'}), expected={'class': 90202, 'subclass': 1526228815})
+        self.check_not_err(n.node(data, {'barrier': 'gate', 'gate:type': 'turning'}), expected={'class': 90202, 'subclass': 1526228815})
+        self.check_not_err(n.node(data, {'barrier': 'gate'}), expected={'class': 90202, 'subclass': 1526228815})
         self.check_not_err(n.node(data, {'crossing': 'uncontrolled', 'crossing:markings': 'zebra', 'crossing_ref': 'zebra', 'highway': 'crossing'}), expected={'class': 90202, 'subclass': 107786253})
         self.check_not_err(n.node(data, {'amenity': 'charging_station', 'motor_vehicle': 'designated'}), expected={'class': 90209, 'subclass': 1720314934})
         self.check_not_err(n.node(data, {'amenity': 'parking_entrance', 'motor_vehicle': 'designated'}), expected={'class': 90209, 'subclass': 1720314934})
@@ -5186,13 +5229,14 @@ class Test(TestPluginMapcss):
         self.check_not_err(n.way(data, {'highway': 'cycleway', 'traffic_sign': 'NL:C01', 'vehicle': 'no'}, [0]), expected={'class': 90209, 'subclass': 48304768})
         self.check_not_err(n.way(data, {'highway': 'cycleway', 'moped': 'designated', 'traffic_sign': 'NL:D104', 'vehicle': 'no'}, [0]), expected={'class': 90209, 'subclass': 48304768})
         self.check_not_err(n.way(data, {'leisure': 'pitch', 'sport': 'boules', 'surface': 'gravel'}, [0]), expected={'class': 90209, 'subclass': 1521090750})
-        self.check_err(n.way(data, {'highway': 'service', 'name': 'McDonalds drive through'}, [0]), expected={'class': 90203, 'subclass': 2144375058})
-        self.check_err(n.way(data, {'highway': 'service', 'name': 'fiets- en bromfietspad'}, [0]), expected={'class': 90203, 'subclass': 2144375058})
-        self.check_err(n.way(data, {'highway': 'service', 'name': 'onverplicht fietspad'}, [0]), expected={'class': 90203, 'subclass': 2144375058})
-        self.check_err(n.way(data, {'highway': 'service', 'name': 'parkeerplaats voor bezoekers'}, [0]), expected={'class': 90203, 'subclass': 2144375058})
-        self.check_err(n.way(data, {'highway': 'service', 'name': 'rolstoelpad'}, [0]), expected={'class': 90203, 'subclass': 2144375058})
-        self.check_not_err(n.way(data, {'highway': 'unclassified', 'name': 'Gesloten Stad'}, [0]), expected={'class': 90203, 'subclass': 2144375058})
-        self.check_not_err(n.way(data, {'highway': 'unclassified', 'name': 'Landbouwweg'}, [0]), expected={'class': 90203, 'subclass': 2144375058})
+        self.check_err(n.way(data, {'highway': 'service', 'name': 'McDonalds drive through'}, [0]), expected={'class': 90203, 'subclass': 813727183})
+        self.check_err(n.way(data, {'highway': 'service', 'name': 'fiets- en bromfietspad'}, [0]), expected={'class': 90203, 'subclass': 813727183})
+        self.check_err(n.way(data, {'highway': 'service', 'name': 'onverplicht fietspad'}, [0]), expected={'class': 90203, 'subclass': 813727183})
+        self.check_err(n.way(data, {'highway': 'service', 'name': 'parkeerplaats voor bezoekers'}, [0]), expected={'class': 90203, 'subclass': 813727183})
+        self.check_err(n.way(data, {'highway': 'service', 'name': 'rolstoelpad'}, [0]), expected={'class': 90203, 'subclass': 813727183})
+        self.check_not_err(n.way(data, {'highway': 'unclassified', 'name': 'Gesloten Stad'}, [0]), expected={'class': 90203, 'subclass': 813727183})
+        self.check_not_err(n.way(data, {'highway': 'unclassified', 'name': 'Landbouwweg'}, [0]), expected={'class': 90203, 'subclass': 813727183})
+        self.check_err(n.way(data, {'landuse': 'residential', 'name': 'Woonwagenkamp', 'residential': 'trailer_park'}, [0]), expected={'class': 90203, 'subclass': 813727183})
         self.check_not_err(n.way(data, {'highway': 'residential', 'name': 'De Visserstraat'}, [0]), expected={'class': 90203, 'subclass': 1873267871})
         self.check_not_err(n.way(data, {'highway': 'residential', 'name': 'J.T. de Visserstraat'}, [0]), expected={'class': 90203, 'subclass': 1873267871})
         self.check_not_err(n.way(data, {'highway': 'residential', 'name': 'Jac. P. Thijsseplein'}, [0]), expected={'class': 90203, 'subclass': 1873267871})
