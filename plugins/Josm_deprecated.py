@@ -1569,13 +1569,14 @@ class Josm_deprecated(PluginMapCSS):
             if match:
                 # group:tr("deprecated tagging")
                 # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"man_made=street_cabinet + utility=power"
                 # fixRemove:"location"
                 # fixAdd:"man_made=street_cabinet"
-                # fixAdd:"street_cabinet=power"
+                # fixAdd:"utility=power"
                 err.append({'class': 9002001, 'subclass': 182905067, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
                     '+': dict([
                     ['man_made','street_cabinet'],
-                    ['street_cabinet','power']]),
+                    ['utility','power']]),
                     '-': ([
                     'location'])
                 }})
@@ -4020,6 +4021,114 @@ class Josm_deprecated(PluginMapCSS):
                     'service:bicycle:chaintool'])
                 }})
 
+        # *[transformer=minor_distribution]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'minor_distribution')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"transformer=distribution"
+                # fixAdd:"transformer=distribution"
+                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','distribution']])
+                }})
+
+        # *[transformer=traction]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'traction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=main"
+                # fixAdd:"transformer=main"
+                err.append({'class': 9002001, 'subclass': 553247335, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','main']])
+                }})
+
+        # *[transformer=auto]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'auto')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=* + windings:auto=yes"
+                # fixRemove:"transformer"
+                # fixAdd:"windings:auto=yes"
+                err.append({'class': 9002001, 'subclass': 65678967, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['windings:auto','yes']]),
+                    '-': ([
+                    'transformer'])
+                }})
+
+        # *[transformer=minor_distribution]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'minor_distribution')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"transformer=distribution"
+                # fixAdd:"transformer=distribution"
+                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','distribution']])
+                }})
+
+        # *[transformer=traction]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'traction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=main"
+                # fixAdd:"transformer=main"
+                err.append({'class': 9002001, 'subclass': 553247335, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','main']])
+                }})
+
+        # *[transformer=auto]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'auto')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=* + windings:auto=yes"
+                # fixRemove:"transformer"
+                # fixAdd:"windings:auto=yes"
+                err.append({'class': 9002001, 'subclass': 65678967, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['windings:auto','yes']]),
+                    '-': ([
+                    'transformer'])
+                }})
+
         # *[building:roof:shape]
         if ('building:roof:shape' in keys):
             match = False
@@ -4316,6 +4425,146 @@ class Josm_deprecated(PluginMapCSS):
         # *[historic=archaeological_site][site_type]
         # Rule Blacklisted (id: 595008939)
 
+        # *[street_cabinet=power]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'power')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=power"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=power"
+                err.append({'class': 9002001, 'subclass': 1707708530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','power']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=telecom]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'telecom')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=telecom"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=telecom"
+                err.append({'class': 9002001, 'subclass': 925170021, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','telecom']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=gas]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'gas')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=gas"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=gas"
+                err.append({'class': 9002001, 'subclass': 1850136632, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','gas']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=street_lighting]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'street_lighting')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=street_lighting"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=street_lighting"
+                err.append({'class': 9002001, 'subclass': 591957542, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','street_lighting']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=water]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'water')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=water"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=water"
+                err.append({'class': 9002001, 'subclass': 674634771, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','water']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=water_management]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'water_management')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=water"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=water"
+                err.append({'class': 9002001, 'subclass': 451527916, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','water']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[industrial=gas]
+        if ('industrial' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'industrial') == mapcss._value_capture(capture_tags, 0, 'gas')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=gas"
+                # fixRemove:"industrial"
+                # fixAdd:"utility=gas"
+                err.append({'class': 9002001, 'subclass': 1776965710, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','gas']]),
+                    '-': ([
+                    'industrial'])
+                }})
+
         # *[gnis:id][!gnis:feature_id]
         # *[tiger:PLACENS][!gnis:feature_id]
         # *[NHD:GNIS_ID][!gnis:feature_id]
@@ -4442,6 +4691,25 @@ class Josm_deprecated(PluginMapCSS):
 
         # *[residential=condominium]
         # Rule Blacklisted (id: 1861188094)
+
+        # *[marker][utility=hydrant]
+        if ('marker' in keys and 'utility' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'marker')) and (mapcss._tag_capture(capture_tags, 1, tags, 'utility') == mapcss._value_capture(capture_tags, 1, 'hydrant')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"utility=water + indication:emergency=fire_hydrant"
+                # fixAdd:"indication:emergency=fire_hydrant"
+                # fixAdd:"utility=water"
+                err.append({'class': 9002001, 'subclass': 1097472161, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['indication:emergency','fire_hydrant'],
+                    ['utility','water']])
+                }})
 
         return err
 
@@ -6107,13 +6375,14 @@ class Josm_deprecated(PluginMapCSS):
             if match:
                 # group:tr("deprecated tagging")
                 # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"man_made=street_cabinet + utility=power"
                 # fixRemove:"location"
                 # fixAdd:"man_made=street_cabinet"
-                # fixAdd:"street_cabinet=power"
+                # fixAdd:"utility=power"
                 err.append({'class': 9002001, 'subclass': 182905067, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
                     '+': dict([
                     ['man_made','street_cabinet'],
-                    ['street_cabinet','power']]),
+                    ['utility','power']]),
                     '-': ([
                     'location'])
                 }})
@@ -8478,6 +8747,114 @@ class Josm_deprecated(PluginMapCSS):
                     'service:bicycle:chaintool'])
                 }})
 
+        # *[transformer=minor_distribution]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'minor_distribution')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"transformer=distribution"
+                # fixAdd:"transformer=distribution"
+                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','distribution']])
+                }})
+
+        # *[transformer=traction]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'traction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=main"
+                # fixAdd:"transformer=main"
+                err.append({'class': 9002001, 'subclass': 553247335, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','main']])
+                }})
+
+        # *[transformer=auto]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'auto')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=* + windings:auto=yes"
+                # fixRemove:"transformer"
+                # fixAdd:"windings:auto=yes"
+                err.append({'class': 9002001, 'subclass': 65678967, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['windings:auto','yes']]),
+                    '-': ([
+                    'transformer'])
+                }})
+
+        # *[transformer=minor_distribution]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'minor_distribution')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"transformer=distribution"
+                # fixAdd:"transformer=distribution"
+                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','distribution']])
+                }})
+
+        # *[transformer=traction]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'traction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=main"
+                # fixAdd:"transformer=main"
+                err.append({'class': 9002001, 'subclass': 553247335, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','main']])
+                }})
+
+        # *[transformer=auto]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'auto')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=* + windings:auto=yes"
+                # fixRemove:"transformer"
+                # fixAdd:"windings:auto=yes"
+                err.append({'class': 9002001, 'subclass': 65678967, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['windings:auto','yes']]),
+                    '-': ([
+                    'transformer'])
+                }})
+
         # *[building:roof:shape]
         if ('building:roof:shape' in keys):
             match = False
@@ -8768,6 +9145,146 @@ class Josm_deprecated(PluginMapCSS):
         # *[historic=archaeological_site][site_type]
         # Rule Blacklisted (id: 595008939)
 
+        # *[street_cabinet=power]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'power')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=power"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=power"
+                err.append({'class': 9002001, 'subclass': 1707708530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','power']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=telecom]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'telecom')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=telecom"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=telecom"
+                err.append({'class': 9002001, 'subclass': 925170021, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','telecom']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=gas]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'gas')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=gas"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=gas"
+                err.append({'class': 9002001, 'subclass': 1850136632, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','gas']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=street_lighting]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'street_lighting')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=street_lighting"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=street_lighting"
+                err.append({'class': 9002001, 'subclass': 591957542, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','street_lighting']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=water]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'water')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=water"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=water"
+                err.append({'class': 9002001, 'subclass': 674634771, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','water']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=water_management]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'water_management')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=water"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=water"
+                err.append({'class': 9002001, 'subclass': 451527916, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','water']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[industrial=gas]
+        if ('industrial' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'industrial') == mapcss._value_capture(capture_tags, 0, 'gas')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=gas"
+                # fixRemove:"industrial"
+                # fixAdd:"utility=gas"
+                err.append({'class': 9002001, 'subclass': 1776965710, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','gas']]),
+                    '-': ([
+                    'industrial'])
+                }})
+
         # area[parking:orientation][!orientation]
         # Rule Blacklisted (id: 1600840641)
 
@@ -8960,6 +9477,25 @@ class Josm_deprecated(PluginMapCSS):
 
         # *[residential=condominium]
         # Rule Blacklisted (id: 1861188094)
+
+        # *[marker][utility=hydrant]
+        if ('marker' in keys and 'utility' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'marker')) and (mapcss._tag_capture(capture_tags, 1, tags, 'utility') == mapcss._value_capture(capture_tags, 1, 'hydrant')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"utility=water + indication:emergency=fire_hydrant"
+                # fixAdd:"indication:emergency=fire_hydrant"
+                # fixAdd:"utility=water"
+                err.append({'class': 9002001, 'subclass': 1097472161, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['indication:emergency','fire_hydrant'],
+                    ['utility','water']])
+                }})
 
         return err
 
@@ -10519,13 +11055,14 @@ class Josm_deprecated(PluginMapCSS):
             if match:
                 # group:tr("deprecated tagging")
                 # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"man_made=street_cabinet + utility=power"
                 # fixRemove:"location"
                 # fixAdd:"man_made=street_cabinet"
-                # fixAdd:"street_cabinet=power"
+                # fixAdd:"utility=power"
                 err.append({'class': 9002001, 'subclass': 182905067, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
                     '+': dict([
                     ['man_made','street_cabinet'],
-                    ['street_cabinet','power']]),
+                    ['utility','power']]),
                     '-': ([
                     'location'])
                 }})
@@ -12384,6 +12921,114 @@ class Josm_deprecated(PluginMapCSS):
                     'service:bicycle:chaintool'])
                 }})
 
+        # *[transformer=minor_distribution]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'minor_distribution')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"transformer=distribution"
+                # fixAdd:"transformer=distribution"
+                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','distribution']])
+                }})
+
+        # *[transformer=traction]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'traction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=main"
+                # fixAdd:"transformer=main"
+                err.append({'class': 9002001, 'subclass': 553247335, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','main']])
+                }})
+
+        # *[transformer=auto]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'auto')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=* + windings:auto=yes"
+                # fixRemove:"transformer"
+                # fixAdd:"windings:auto=yes"
+                err.append({'class': 9002001, 'subclass': 65678967, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['windings:auto','yes']]),
+                    '-': ([
+                    'transformer'])
+                }})
+
+        # *[transformer=minor_distribution]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'minor_distribution')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"transformer=distribution"
+                # fixAdd:"transformer=distribution"
+                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','distribution']])
+                }})
+
+        # *[transformer=traction]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'traction')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=main"
+                # fixAdd:"transformer=main"
+                err.append({'class': 9002001, 'subclass': 553247335, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['transformer','main']])
+                }})
+
+        # *[transformer=auto]
+        if ('transformer' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'auto')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"transformer=* + windings:auto=yes"
+                # fixRemove:"transformer"
+                # fixAdd:"windings:auto=yes"
+                err.append({'class': 9002001, 'subclass': 65678967, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['windings:auto','yes']]),
+                    '-': ([
+                    'transformer'])
+                }})
+
         # *[building:roof:shape]
         if ('building:roof:shape' in keys):
             match = False
@@ -12674,6 +13319,146 @@ class Josm_deprecated(PluginMapCSS):
         # *[historic=archaeological_site][site_type]
         # Rule Blacklisted (id: 595008939)
 
+        # *[street_cabinet=power]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'power')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=power"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=power"
+                err.append({'class': 9002001, 'subclass': 1707708530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','power']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=telecom]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'telecom')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=telecom"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=telecom"
+                err.append({'class': 9002001, 'subclass': 925170021, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','telecom']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=gas]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'gas')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=gas"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=gas"
+                err.append({'class': 9002001, 'subclass': 1850136632, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','gas']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=street_lighting]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'street_lighting')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=street_lighting"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=street_lighting"
+                err.append({'class': 9002001, 'subclass': 591957542, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','street_lighting']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=water]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'water')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=water"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=water"
+                err.append({'class': 9002001, 'subclass': 674634771, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','water']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[street_cabinet=water_management]
+        if ('street_cabinet' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'street_cabinet') == mapcss._value_capture(capture_tags, 0, 'water_management')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=water"
+                # fixRemove:"street_cabinet"
+                # fixAdd:"utility=water"
+                err.append({'class': 9002001, 'subclass': 451527916, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','water']]),
+                    '-': ([
+                    'street_cabinet'])
+                }})
+
+        # *[industrial=gas]
+        if ('industrial' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'industrial') == mapcss._value_capture(capture_tags, 0, 'gas')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
+                # suggestAlternative:"utility=gas"
+                # fixRemove:"industrial"
+                # fixAdd:"utility=gas"
+                err.append({'class': 9002001, 'subclass': 1776965710, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['utility','gas']]),
+                    '-': ([
+                    'industrial'])
+                }})
+
         # area[parking:orientation][!orientation]
         # Rule Blacklisted (id: 1600840641)
 
@@ -12835,6 +13620,25 @@ class Josm_deprecated(PluginMapCSS):
                 # throwWarning:tr("{0} is deprecated","{0.tag}")
                 # suggestAlternative:"type=power + power=line_section"
                 err.append({'class': 9002001, 'subclass': 203354287, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+
+        # *[marker][utility=hydrant]
+        if ('marker' in keys and 'utility' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'marker')) and (mapcss._tag_capture(capture_tags, 1, tags, 'utility') == mapcss._value_capture(capture_tags, 1, 'hydrant')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # group:tr("deprecated tagging")
+                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # suggestAlternative:"utility=water + indication:emergency=fire_hydrant"
+                # fixAdd:"indication:emergency=fire_hydrant"
+                # fixAdd:"utility=water"
+                err.append({'class': 9002001, 'subclass': 1097472161, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                    '+': dict([
+                    ['indication:emergency','fire_hydrant'],
+                    ['utility','water']])
+                }})
 
         return err
 
