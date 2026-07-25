@@ -70,12 +70,15 @@ class TagFix_Deprecated(Plugin):
 '''The tag or combination key/value is no longer used. List of deprecated
 features comes from [Deprecated
 features](https://wiki.openstreetmap.org/wiki/Deprecated_features)''')
+        fixText = T_('''Add the new tag(s) and remove the older, deprecated tags that are no longer used.''')
         self.errors[4010] = self.def_class(item = 4010, level = 2, tags = ['deprecated', 'tag', 'fix:chair'],
             title = T_('Deprecated tag'),
-            detail = detail)
+            detail = detail,
+            fix = fixText)
         self.errors[40102] = self.def_class(item = 4010, level = 2, tags = ['deprecated', 'value', 'fix:chair'],
             title = T_('Deprecated value'),
-            detail = detail)
+            detail = detail,
+            fix = fixText)
 
         self.Deprecated = self.deprecated_list()
         self.DeprecatedSet = set(self.Deprecated)
