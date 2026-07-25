@@ -100,7 +100,7 @@ Wrong tag for private swimming pool.'''))
         self.run(sql10, lambda res: {"class":1, "data":[self.way_full, self.positionAsText], "fix":[
             {"-":["natural"], "+":{"leisure":"swimming_pool"}},
             {"-":["natural"], "+":{"leisure":"swimming_pool", "access":"private"}},
-            {"-":["natural"], "+":{"landuse":"reservoir"}},
+            {"+":{"water":"reservoir"}},
             {"-":["natural"], "+":{"landuse":"basin"}},
             {"-":["natural"], "+":{"landuse":"pond"}},
             {"+":{"water":"pond"}},
