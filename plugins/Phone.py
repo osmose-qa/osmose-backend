@@ -95,6 +95,10 @@ class Phone(Plugin):
                 # 077, 078, 0800, or 090x since these may or may not be callable from abroad.
                 # not merged into 07x 08x 09x because severals local numbers inside those prefix
                 self.MissingInternationalPrefix = re.compile(r"^(?:-{0}|{0})[- ./]*(?!70|77|78|800|90[0-9])([1-9](:?[- ./]*[0-9]){{{1},{2}}})$".format(self.local_prefix, min(self.size) - 1, max(self.size) - 1))
+            elif country and country.startswith("DE"):
+                # Local numbers to internationalize. Note that 0800 toll-free numbers
+                # are not callable from abroad and should not be internationalized.
+                self.MissingInternationalPrefix = re.compile(r"^{0}[- ./]*(?!800)((:?[0-9][- ./]*){{{1},{2}}}[0-9])$".format(self.local_prefix, min(self.size) - len(self.local_prefix) - 1, max(self.size) - len(self.local_prefix) - 1))
             elif self.size:
                 self.MissingInternationalPrefix = re.compile(r"^{0}[- ./]*((:?[0-9][- ./]*){{{1},{2}}}[0-9])$".format(self.local_prefix, min(self.size) - len(self.local_prefix) - 1, max(self.size) - len(self.local_prefix) - 1))
             else:
@@ -396,3 +400,27 @@ class Test(TestPluginCommon):
             assert not p.node(None, {"phone": good}), ("phone='{0}'".format(good))
 
         assert len(p.node(None, {"phone": "02.123.12.12", "fax": "02.123.12.12"})) == 2
+
+    def test_DE(self):
+        p = Phone(None)
+        class _config:
+            options = {"country": "DE", "phone_code": "49", "phone_len": [10, 11], "phone_international": "00", "phone_local_prefix": "0", "phone_values_separators": [","]}
+        class father:
+            config = _config()
+        p.father = father()
+        p.init(None)
+
+        for (bad, good) in (
+            ("030 12345678", "+49 30 12345678"),
+            ("0049 30 12345678", "+49 30 12345678"),
+            ("0711 1234567", "+49 711 1234567"),
+        ):
+            err = p.node(None, {"phone": bad})
+            self.check_err(err, ("phone='{0}'".format(bad)))
+            self.assertEqual(err[0]["fix"]["phone"], good)
+
+            assert not p.node(None, {"phone": good}), ("phone='{0}'".format(good))
+
+        # 0800 toll-free numbers must not be internationalized
+        for good in ("0800 1234567", "08001234567", "+49 800 1234567"):
+            assert not p.node(None, {"phone": good}), ("phone='{0}'".format(good))
