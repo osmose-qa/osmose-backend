@@ -1775,7 +1775,7 @@ pl_province("zachodniopomorskie", 104401, "PL-ZP")
 #########################################################################
 
 de_state = gen_country('europe', 'germany', language='de', proj=32632, municipality_ref='de:regionalschluessel',
-    phone_code='49', phone_international='00', phone_local_prefix='0', phone_values_separators=[','],
+    phone_code='49', phone_len=[10, 11], phone_international='00', phone_local_prefix='0', phone_values_separators=[','],
     include=[
         'osmosis_highway_zone',
         'osmosis_indoor',
