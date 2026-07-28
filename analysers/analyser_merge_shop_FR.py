@@ -21,9 +21,10 @@
 ###########################################################################
 
 import json
+import re
 from modules.OsmoseTranslation import T_
 from .Analyser_Merge_Dynamic import Analyser_Merge_Dynamic, SubAnalyser_Merge_Dynamic
-from .Analyser_Merge import SourceHttpLastModified, CSV, Load_XY, Conflate, Select, Mapping
+from .Analyser_Merge import SourceDataGouv, Parquet, Load_XY, Conflate, Select, Mapping
 from modules import reaccentue
 
 
@@ -41,7 +42,7 @@ class Analyser_Merge_Shop_FR(Analyser_Merge_Dynamic):
 class SubAnalyser_Merge_Shop_FR(SubAnalyser_Merge_Dynamic):
     def __init__(self, config, error_file, logger, missing_official, missing_osm, classs, level, title, trancheEffectifs, selectTags, generateTags):
         SubAnalyser_Merge_Dynamic.__init__(self, config, error_file, logger)
-        classss = int(classs.replace('.', '0')[:-1]) * 100 + ord(classs[-1]) - 65
+        classss = int(re.sub("[^0-9]", "", classs)) * 100 + ord(classs[-1]) - 65
         self.def_class_missing_official(item = missing_official, id = classss+1, level = level, tags = ['merge', 'fix:survey', 'fix:picture'],
             title = T_('{0} not integrated', classs + ', ' + title))
         #self.def_class_missing_osm(item = missing_osm, id = classss+2, level = level, tags = ['merge'],
@@ -54,16 +55,25 @@ class SubAnalyser_Merge_Shop_FR(SubAnalyser_Merge_Dynamic):
         dep_code = config.options.get('dep_code') or config.options.get('country').split('-')[1]
 
         self.init(
-            "http://www.sirene.fr/sirene/public/static/open-data",
+            "https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret",
             "Sirene",
-            CSV(SourceHttpLastModified(
+            Parquet(SourceDataGouv(
                 attribution="INSEE",
-                gzip=True,
-                fileUrl="http://data.cquest.org/geo_sirene/v2019/last/dep/geo_siret_{0}.csv.gz".format(dep_code))),
-            Load_XY("longitude", "latitude",
-                select = {"activitePrincipaleEtablissement": classs, "geo_type": "housenumber", "etatAdministratifEtablissement": "A"},
+                dataset="5b7ffc618b4c4169d30727e0",
+                resource="a29c1297-1f92-4e2a-8f6b-8c902ce96c5f",
+            ), srid=2154, filters=(
+                (
+                    ('codeCommuneEtablissement', '>=', dep_code),
+                    ('codeCommuneEtablissement', '<', str(int(dep_code) + 1)),
+                    ('coordonneeLambertAbscisseEtablissement', '!=', '[ND]'),
+                    ('coordonneeLambertOrdonneeEtablissement', '!=', '[ND]'),
+                    ('activitePrincipaleEtablissement', '=', classs),
+                    ('etatAdministratifEtablissement', '=', 'A'),
+                ),
+            )),
+            Load_XY("coordonneeLambertAbscisseEtablissement", "coordonneeLambertOrdonneeEtablissement",
+                select = {"codeCommuneEtablissement": {"like": f"{dep_code}%"}},
                 where = lambda res: (
-                    float(res["geo_score"]) > 0.9 and
                     (not res["complementAdresseEtablissement"] or (" APP" not in res["complementAdresseEtablissement"] and " CHEZ " not in res["complementAdresseEtablissement"])) and
                     (not trancheEffectifs or (res["trancheEffectifsEtablissement"] and res["trancheEffectifsEtablissement"] != "NN" and int(res["trancheEffectifsEtablissement"]) > trancheEffectifs)) ),
                 unique = ["siren", "nic"]),
@@ -84,4 +94,7 @@ class SubAnalyser_Merge_Shop_FR(SubAnalyser_Merge_Dynamic):
                         #    "-".join([fields["DCRET"][0:4], fields["DCRET"][4:6], fields["DCRET"][6:8]]) if fields["DCRET"] != "19000101" else
                         #    None,
                         "name": lambda fields: reaccentue.reaccentue(fields["enseigne1Etablissement"]) if fields["enseigne1Etablissement"] else (reaccentue.reaccentue(fields["denominationUsuelleEtablissement"]) if fields["denominationUsuelleEtablissement"] else None)},
-                text = lambda tags, fields: {"en": ', '.join(filter(lambda f: f and f != 'None', [fields["enseigne1Etablissement"] or fields["denominationUsuelleEtablissement"]] + list(map(lambda k: fields[k], ["numeroVoieEtablissement", "indiceRepetitionEtablissement", "typeVoieEtablissement", "libelleVoieEtablissement", "complementAdresseEtablissement", "codePostalEtablissement", "libelleCommuneEtablissement"]))))} )))
+                text = lambda tags, fields: {"en": ', '.join(filter(lambda f: f and f != 'None', [
+                    fields["enseigne1Etablissement"] or fields["denominationUsuelleEtablissement"],
+                    ' '.join(filter(lambda f: f and f != 'None', map(lambda k: fields[k], ["numeroVoieEtablissement", "indiceRepetitionEtablissement", "typeVoieEtablissement", "libelleVoieEtablissement", "complementAdresseEtablissement", "codePostalEtablissement", "libelleCommuneEtablissement"])))
+                ]))} )))
