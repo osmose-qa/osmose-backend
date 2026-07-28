@@ -1,5 +1,4 @@
-Docker
-======
+# Docker
 
 osmose-backend can be run in a Docker container. This avoids setting
 up and configuring Python, Java and PostgreSQL on your system.
@@ -9,29 +8,27 @@ docker compose and doesn't need be installed manually.
 The osmose-frontend docker may also be run but is not mandatory.
 
 
-Setup
------
+## Setup
 
 To build the docker image run this command from the docker folder:
-```
+```sh
 docker compose build
 ```
 
 For production setup, you may fill the `SENTRY_DSN` field in
 `docker-compose.yml` to enable error report centralization.
 
-Running on a single country
-===========================
+## Running on a single country
 
 The `./work` directory on your host must be writable by anyone, as the
 `osmose` user in the container will have some random UID (probably 1000).
-```
+```sh
 chmod a+w ./work
 ```
 
 Taking Monaco (a quick and small one) as an example, once the docker
 image is built, you can run Osmose analyzers using:
-```
+```sh
 docker compose --project-name monaco run --rm backend ./osmose_run.py --country=monaco
 docker compose --project-name monaco down # Destroy the loaded data base
 ```
@@ -44,16 +41,14 @@ To enable results to be uploaded to the frontend you must configure
 the frontend passwords in `osmose_config_password.py`.
 
 
-Tuning
-======
+## Tuning
 
 The database configuration can be tuned by setting the `POSTGRESQL_POSTCREATION`
 environment variable to a SQL statement. The SQL statement will be executed at
 startup using the postgres user account.
 
 
-Develop on Osmose using docker
-==============================
+## Develop on Osmose using docker
 
 * A Backend alone with the **Jupyter** web editor and visualizer can be
 used.
@@ -66,7 +61,7 @@ requiring extra configuration or upload password.
 ## Build the develop tools
 
 Build the docker image with develop tools included:
-```
+```sh
 docker compose -f docker-compose.yml -f docker-compose-dev.yml build
 ```
 
@@ -74,17 +69,17 @@ docker compose -f docker-compose.yml -f docker-compose-dev.yml build
 ## Start Docker Backend container
 
 On the first execution only:
-```
+```sh
 chmod a+w ../modules/osm_pbf_parser/
 ```
 
 Enter the container with:
-```
+```sh
 docker compose -f docker-compose.yml -f docker-compose-dev.yml run --rm backend
 ```
 
 On the first execution only, compile the OSM PBF parser:
-```
+```sh
 cd modules/osm_pbf_parser/ && make && cd -
 ```
 
@@ -103,12 +98,12 @@ psql -h postgis
 Password: `-osmose-`.
 
 Then on Postgres shell:
-```
+```sh
 osmose=> set search_path to monaco,public;
 ```
 
 You can Reset the Database and the docker containers with:
-```
+```sh
 docker compose down -v
 ```
 
@@ -116,7 +111,7 @@ docker compose down -v
 ## Run the tests
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for details. But, for short:
-```
+```sh
 pytest plugins/TagFix_Housenumber.py
 ./tools/pytest.sh lint
 ./tools/pytest.sh mypy
@@ -129,14 +124,14 @@ pytest plugins/TagFix_Housenumber.py
 ## Alternative 1: Develop with Jupyter
 
 Download and load a country into the Database:
-```
+```sh
 docker compose -f docker-compose.yml -f docker-compose-dev.yml run -p 8888:8888 --rm backend ./osmose_run.py --no-clean --country=monaco --skip-analyser --skip-upload
 ```
 You do not need to load the country each time. It remains in the Database.
 
 
 Then run the jupyter-notebook web server:
-```
+```sh
 docker compose -f docker-compose.yml -f docker-compose-dev.yml run -p 8888:8888 --rm backend jupyter-notebook
 ```
 Note the `8888:8888`, which exposes port `8888` to localhost.
@@ -151,22 +146,22 @@ own analyzer code.
 ## Alternative 2: Develop with Full environment
 
 From docker container you can test all the analyzers using:
-```
+```sh
 docker compose -f docker-compose.yml -f docker-compose-dev.yml run --rm backend
 ```
 
 To test a specific analyzer:
-```
+```sh
 ./osmose_run.py --no-clean --country=monaco --analyser=osmosis_highway_floating_islands
 ```
 
 To run one plugin only use:
-```
+```sh
 ./osmose_run.py --no-clean --country=monaco --analyser=sax --plugin=Name_Multiple
 ```
 
 The execution time of the process may be pretty long, depending on the area:
-```
+```sh
 [...]
 2018-01-25 20:19:04   DROP SCHEMA monaco
 2018-01-25 20:19:04   DROP SCHEMA IF EXISTS monaco CASCADE;
@@ -183,7 +178,7 @@ then run `osmose-run` again. You can add the `--skip-init` parameter to speed up
 Quick Osmose Frontend setup.
 
 First time build
-```
+```sh
 git clone https://github.com/osmose-qa/osmose-frontend.git
 cd osmose-frontend/docker
 curl https://osmose.openstreetmap.fr/export/osmose-menu.sql.bz2 | bzcat > osmose-menu.sql
@@ -195,7 +190,7 @@ docker compose -f docker-compose.yml -f docker-compose-test.yml stop postgres
 ```
 
 Run the frontend
-```
+```sh
 docker compose -f docker-compose.yml -f docker-compose-test.yml up
 ```
 
@@ -204,7 +199,7 @@ https://github.com/osmose-qa/osmose-frontend/tree/master/docker
 
 
 To upload the results of the analysis to the frontend, use:
-```
+```sh
 docker compose -f docker-compose.yml -f docker-compose-dev.yml -f docker-compose-frontend.yml run --rm backend bash
 ```
 
