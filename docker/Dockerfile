@@ -1,8 +1,8 @@
-FROM python:3.13
+FROM python:3.13-trixie
 
-RUN apt-get update && \
-    apt-get -y dist-upgrade && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+RUN apt update && \
+    apt -y dist-upgrade && \
+    DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
         bison \
         cmake \
         extra-cmake-modules \
@@ -29,7 +29,7 @@ RUN apt-get update && \
         python3-setuptools \
         python3-wheel \
         qtbase5-dev \
-        && apt-get clean
+        && apt clean
 
 RUN mkdir -p /data/work/osmose && \
     useradd -s /bin/bash -d /data/work/osmose osmose && \
