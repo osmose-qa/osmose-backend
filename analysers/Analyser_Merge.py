@@ -413,14 +413,17 @@ class Source:
             f = self._zip_archive.open(info)
         elif self.extract:
             import libarchive.public # type: ignore
-            with libarchive.public.memory_reader(f.read()) as archive:
-                f = io.BytesIO()
+            _path = f.name
+            with libarchive.public.file_reader(_path) as archive:
+                out = io.BytesIO()
                 for entry in archive:
                     if pathlib.Path(entry.pathname).match(self.extract):
                         for block in entry.get_blocks():
-                            f.write(block)
+                            out.write(block)
                         break
-            f.seek(0)
+            out.seek(0)
+            f.close()
+            f = out
         elif self.bz2:
             f = bz2.open(f)
         elif self.gzip:
