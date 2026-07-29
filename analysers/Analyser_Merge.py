@@ -368,6 +368,9 @@ class Source:
             self.attribution_re = re.compile(self.attribution.replace("{0}", ".*"))
 
     def zipFile(self):
+        if self.zipFile:
+            return self.zipFile
+
         if not self.zip:
             return None
         if self.file:
@@ -376,9 +379,10 @@ class Source:
             f = downloader.urlopen(self.fileUrl, self.fileUrlCache, mode='rb', post=self.post)
 
         z = zipfile.ZipFile(f, 'r')
-        print(z.namelist())
-        filename = next(filter(lambda zipinfo: fnmatch.fnmatch(zipinfo.filename, self.zip), z.infolist()))
-        return filename
+        zipinfo = next(filter(lambda zipinfo: fnmatch.fnmatch(zipinfo.filename, self.zip), z.infolist()))
+
+        self.zipFile = zipinfo
+        return zipinfo
 
     def time(self):
         if self.file:
