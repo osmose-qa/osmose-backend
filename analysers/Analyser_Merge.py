@@ -428,11 +428,9 @@ class Source:
             f = gzip.GzipFile(fileobj=f)
 
         if not binary:
-            f = io.StringIO(f.read().decode(self.encoding, 'ignore'))
-            f.seek(0)
+            f = io.TextIOWrapper(f, encoding=self.encoding, errors='ignore')
             if self.filter:
-                f = io.StringIO(self.filter(f.read()))
-                f.seek(0)
+                f = self.filter(f)
         return f
 
     def _get_millesime(self) -> Optional[str]:
