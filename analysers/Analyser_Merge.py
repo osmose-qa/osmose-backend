@@ -407,10 +407,10 @@ class Source:
         elif self.fileUrl:
             f = downloader.urlopen(self.fileUrl, self.fileUrlCache, mode='rb', post=self.post)
 
-        if self.zipFile():
-            z = zipfile.ZipFile(f, 'r').open(self.zipFile().filename)
-            f = io.BytesIO(z.read())
-            f.seek(0)
+        info = self.zipFile()
+        if info:
+            self._zip_archive = zipfile.ZipFile(f, 'r')
+            f = self._zip_archive.open(info)
         elif self.extract:
             import libarchive.public # type: ignore
             with libarchive.public.memory_reader(f.read()) as archive:
