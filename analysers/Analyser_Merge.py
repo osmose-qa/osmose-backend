@@ -356,6 +356,7 @@ class Source:
         self.bz2 = bz2
         self.gzip = gzip
         self.filter = filter
+        self.zipFileInfo = None
 
         if self.file and self.fileUrl:
             raise ValueError("file and fileUrl should not be both set")
@@ -368,6 +369,9 @@ class Source:
             self.attribution_re = re.compile(self.attribution.replace("{0}", ".*"))
 
     def zipFile(self):
+        if self.zipFileInfo is not None:
+            return self.zipFileInfo
+
         if not self.zip:
             return None
         if self.file:
@@ -376,9 +380,10 @@ class Source:
             f = downloader.urlopen(self.fileUrl, self.fileUrlCache, mode='rb', post=self.post)
 
         z = zipfile.ZipFile(f, 'r')
-        print(z.namelist())
-        filename = next(filter(lambda zipinfo: fnmatch.fnmatch(zipinfo.filename, self.zip), z.infolist()))
-        return filename
+        zipinfo = next(filter(lambda zipinfo: fnmatch.fnmatch(zipinfo.filename, self.zip), z.infolist()))
+
+        self.zipFileInfo = zipinfo
+        return zipinfo
 
     def time(self):
         if self.file:
@@ -403,10 +408,10 @@ class Source:
         elif self.fileUrl:
             f = downloader.urlopen(self.fileUrl, self.fileUrlCache, mode='rb', post=self.post)
 
-        if self.zipFile():
-            z = zipfile.ZipFile(f, 'r').open(self.zipFile().filename)
-            f = io.BytesIO(z.read())
-            f.seek(0)
+        info = self.zipFile()
+        if info:
+            self._zip_archive = zipfile.ZipFile(f, 'r')
+            f = self._zip_archive.open(info)
         elif self.extract:
             import libarchive.public # type: ignore
             with libarchive.public.memory_reader(f.read()) as archive:
