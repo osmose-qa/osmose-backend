@@ -422,8 +422,7 @@ class Source:
                         break
             f.seek(0)
         elif self.bz2:
-            f = io.BytesIO(bz2.decompress(f.read()))
-            f.seek(0)
+            f = bz2.open(f)
         elif self.gzip:
             f = gzip.GzipFile(fileobj=f)
 
