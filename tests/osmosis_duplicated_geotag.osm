@@ -33,6 +33,11 @@
     <nd ref='14' />
     <tag k='highway' v='residential' />
   </way>
+  <way id='1003' timestamp='2026-08-23T12:00:00Z'>
+    <nd ref='14' />
+    <nd ref='15' />
+    <tag k='highway' v='residential' />
+  </way>
   <relation id='2001' timestamp='2026-08-23T12:00:00Z'>
     <member type='way' ref='1001' role='street' />
     <member type='node' ref='6' role='house' />
@@ -49,6 +54,4 @@
     <tag k='name' v='Avenue Diderot' />
     <tag k='type' v='associatedStreet' />
   </relation>
-
-
 </osm>
