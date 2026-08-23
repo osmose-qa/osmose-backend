@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='1' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.8500' lon='2.3522'>
+    <tag k='amenity' v='pharmacy' />
+    <tag k='source' v='osm' />
+  </node>
+  <node id='2' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.8500' lon='2.3522'>
+    <tag k='amenity' v='pharmacy' />
+  </node>
+  <node id='3' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.8500' lon='2.3522'>
+    <tag k='amenity' v='pharmacy' />
+    <tag k='entrance' v='yes' />
+  </node>
+  <node id='4' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.800' lon='2.488' />
+  <node id='5' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.802' lon='2.487' />
+  <node id='6' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.802' lon='2.488'>
+    <tag k='addr:housenumber' v='73' />
+    <tag k='source' v='cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012' />
+  </node>
+  <node id='14' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.800' lon='2.488' />
+  <node id='15' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.802' lon='2.487' />
+  <node id='16' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.802' lon='2.488'>
+    <tag k='addr:housenumber' v='73' />
+    <tag k='source' v='cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012' />
+  </node>
+  <way id='1001' timestamp='2026-08-23T12:00:00Z'>
+    <nd ref='5' />
+    <nd ref='4' />
+    <tag k='highway' v='residential' />
+  </way>
+  <way id='1001' timestamp='2026-08-23T12:00:00Z'>
+    <nd ref='15' />
+    <nd ref='14' />
+    <tag k='highway' v='residential' />
+  </way>
+  <relation id='2001' timestamp='2026-08-23T12:00:00Z'>
+    <member type='way' ref='1001' role='street' />
+    <member type='node' ref='6' role='house' />
+    <tag k='addr:city' v='Saint-Maur-des-Fossés' />
+    <tag k='addr:postcode' v='94100' />
+    <tag k='name' v='Avenue Diderot' />
+    <tag k='type' v='associatedStreet' />
+  </relation>
+  <relation id='3001' timestamp='2026-08-23T12:00:00Z'>
+    <member type='way' ref='1001' role='street' />
+    <member type='node' ref='6' role='house' />
+    <tag k='addr:city' v='Saint-Maur-des-Fossés' />
+    <tag k='addr:postcode' v='94100' />
+    <tag k='name' v='Avenue Diderot' />
+    <tag k='type' v='associatedStreet' />
+  </relation>
+
+
+</osm>
