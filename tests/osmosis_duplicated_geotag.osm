@@ -47,7 +47,7 @@
     <tag k='type' v='associatedStreet' />
   </relation>
   <relation id='2002' timestamp='2026-08-23T12:00:00Z' version='1'>
-    <member type='way' ref='1001' role='street' />
+    <member type='way' ref='1002' role='street' />
     <member type='node' ref='6' role='house' />
     <tag k='addr:city' v='Saint-Maur-des-Fossés' />
     <tag k='addr:postcode' v='94100' />
