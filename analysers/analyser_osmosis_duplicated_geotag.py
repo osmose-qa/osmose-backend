@@ -320,7 +320,6 @@ class Analyser_Osmosis_Duplicated_Geotag(Analyser_Osmosis):
         self.run(sql40, lambda res: {"class":5, "data":[self.array_full, self.positionAsText]})
 from .Analyser_Osmosis import TestAnalyserOsmosis
 
-
 class Test(TestAnalyserOsmosis):
     @classmethod
     def setup_class(cls):
