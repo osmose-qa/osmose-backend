@@ -28,7 +28,7 @@
     <nd ref='4' />
     <tag k='highway' v='residential' />
   </way>
-  <way id='1001' timestamp='2026-08-23T12:00:00Z'>
+  <way id='1002' timestamp='2026-08-23T12:00:00Z'>
     <nd ref='15' />
     <nd ref='14' />
     <tag k='highway' v='residential' />
@@ -41,7 +41,7 @@
     <tag k='name' v='Avenue Diderot' />
     <tag k='type' v='associatedStreet' />
   </relation>
-  <relation id='3001' timestamp='2026-08-23T12:00:00Z'>
+  <relation id='2002' timestamp='2026-08-23T12:00:00Z'>
     <member type='way' ref='1001' role='street' />
     <member type='node' ref='6' role='house' />
     <tag k='addr:city' v='Saint-Maur-des-Fossés' />
