@@ -343,3 +343,4 @@ class Test(TestAnalyserOsmosis):
         self.check_err(cl="1", elems=[("way", "1001"), ("way", "1002")])
         self.check_err(cl="1", elems=[("way", "1001"), ("way", "1003")])
         self.check_err(cl="1", elems=[("way", "1002"), ("way", "1003")])
+        self.check_num_err(9)
