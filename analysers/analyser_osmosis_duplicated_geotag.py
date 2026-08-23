@@ -331,7 +331,7 @@ class Test(TestAnalyserOsmosis):
                                          {"proj": 2154})
 
     def test_classes(self):
-        with Analyser_Osmosis_Duplicated_Poi(self.analyser_conf, self.logger) as a:
+        with Analyser_Osmosis_Duplicated_Geotag(self.analyser_conf, self.logger) as a:
             a.analyser()
 
         self.root_err = self.load_errors()
@@ -342,4 +342,6 @@ class Test(TestAnalyserOsmosis):
         self.check_err(cl="5", elems=[("node", "5"), ("node", "15")])
         self.check_err(cl="3", elems=[("node", "6"), ("node", "16")])
         self.check_err(cl="1", elems=[("way", "1001"), ("way", "1002")])
-        self.check_num_err(7)
+        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1003")])
+        self.check_err(cl="1", elems=[("way", "1002"), ("way", "1003")])
+        self.check_num_err(9)
