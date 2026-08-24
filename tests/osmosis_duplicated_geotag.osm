@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='1' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.8500' lon='2.3522'>
+    <tag k='amenity' v='pharmacy' />
+    <tag k='source' v='osm' />
+  </node>
+  <node id='2' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.8500' lon='2.3522'>
+    <tag k='amenity' v='pharmacy' />
+  </node>
+  <node id='3' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.8500' lon='2.3522'>
+    <tag k='amenity' v='pharmacy' />
+    <tag k='entrance' v='yes' />
+  </node>
+  <node id='4' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.800' lon='2.488' />
+  <node id='5' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.802' lon='2.487' />
+  <node id='6' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.802' lon='2.488'>
+    <tag k='addr:housenumber' v='73' />
+    <tag k='source' v='cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012' />
+  </node>
+  <node id='14' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.800' lon='2.488' />
+  <node id='15' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.802' lon='2.487' />
+  <node id='16' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.802' lon='2.488'>
+    <tag k='addr:housenumber' v='73' />
+    <tag k='source' v='cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012' />
+  </node>
+  <node id='30' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.685014' lon='2.5986099' />
+  <node id='31' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.684747' lon='2.5988996' />  
+  <node id='40' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.685024' lon='2.598607' />
+  <node id='41' timestamp='2026-08-23T12:00:00Z' version='1' lat='48.684757' lon='2.5989' />  
+  <way id='1001' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='5' />
+    <nd ref='4' />
+    <tag k='highway' v='residential' />
+  </way>
+  <way id='1002' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='15' />
+    <nd ref='14' />
+    <tag k='highway' v='residential' />
+  </way>
+  <way id='1003' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='14' />
+    <nd ref='15' />
+    <tag k='highway' v='residential' />
+  </way>
+  <way id='1004' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='15' />
+    <nd ref='14' />
+    <tag k='highway' v='residential' />
+  </way>
+  <way id='2020' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='30' />
+    <nd ref='31' />
+    <tag k='barrier' v='guard_rail' />
+  </way>
+  <way id='2021' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='31' />
+    <nd ref='30' />
+    <tag k='barrier' v='guard_rail' />
+  </way>  
+  <way id='2022' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='31' />
+    <nd ref='30' />
+    <tag k='barrier' v='guard_rail' />
+  </way>  
+  <way id='2030' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='40' />
+    <nd ref='41' />
+  </way>  
+  <way id='2031' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='41' />
+    <nd ref='40' />
+  </way>  
+  <way id='2032' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='41' />
+    <nd ref='40' />
+    <tag k='source' v='cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012' />   
+  <way id='2040' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='14' />
+    <nd ref='40' />
+    <tag k='highway' v='primary' />   
+  </way>  
+  <way id='2041' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='14' />
+    <nd ref='40' />
+    <tag k='highway' v='secondary' />   
+  </way>  
+  <way id='2042' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <nd ref='40' />
+    <nd ref='10' />
+    <tag k='highway' v='tertiary' />   
+  </way>  
+  <relation id='3001' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <member type='way' ref='1001' role='street' />
+    <member type='node' ref='6' role='house' />
+    <tag k='addr:city' v='Saint-Maur-des-Fossés' />
+    <tag k='addr:postcode' v='94100' />
+    <tag k='name' v='Avenue Diderot' />
+    <tag k='type' v='associatedStreet' />
+  </relation>
+  <relation id='3002' timestamp='2026-08-23T12:00:00Z' version='1'>
+    <member type='way' ref='1002' role='street' />
+    <member type='node' ref='6' role='house' />
+    <tag k='addr:city' v='Saint-Maur-des-Fossés' />
+    <tag k='addr:postcode' v='94100' />
+    <tag k='name' v='Avenue Diderot' />
+    <tag k='type' v='associatedStreet' />
+  </relation>
+</osm>
