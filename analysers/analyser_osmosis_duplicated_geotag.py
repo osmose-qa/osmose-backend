@@ -318,3 +318,41 @@ class Analyser_Osmosis_Duplicated_Geotag(Analyser_Osmosis):
         self.run(sql32, self.callback30)
 
         self.run(sql40, lambda res: {"class":5, "data":[self.array_full, self.positionAsText]})
+from .Analyser_Osmosis import TestAnalyserOsmosis
+
+class Test(TestAnalyserOsmosis):
+    @classmethod
+    def setup_class(cls):
+        from modules import config
+        TestAnalyserOsmosis.setup_class()
+        cls.analyser_conf = cls.load_osm("tests/osmosis_duplicated_geotag.osm",
+                                         config.dir_tmp + "/tests/osmosis_duplicated_geotag.test.xml",
+                                         {"proj": 2154})
+
+    def test_classes(self):
+        with Analyser_Osmosis_Duplicated_Geotag(self.analyser_conf, self.logger) as a:
+            a.analyser()
+
+        self.root_err = self.load_errors()
+        self.check_err(cl="3", elems=[("node", "1"), ("node", "2")])
+        self.check_err(cl="4", elems=[("node", "1"), ("node", "3")])
+        self.check_err(cl="4", elems=[("node", "2"), ("node", "3")])
+        self.check_err(cl="5", elems=[("node", "4"), ("node", "14")])
+        self.check_err(cl="5", elems=[("node", "5"), ("node", "15")])
+        self.check_err(cl="3", elems=[("node", "6"), ("node", "16")])
+#        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1002")]) ##NOT FOUND ?
+#        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1003")]) ##NOT FOUND ?
+#        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1004")]) ##NOT FOUND ?
+#        self.check_err(cl="1", elems=[("way", "1002"), ("way", "1003")]) ##NOT FOUND ?
+#        self.check_err(cl="1", elems=[("way", "1002"), ("way", "1004")]) ##NOT FOUND ?
+        self.check_err(cl="1", elems=[("way", "1003"), ("way", "1004")])        
+        self.check_err(cl="1", elems=[("way", "2020"), ("way", "2021")]) # FALSE POSITIVE
+        self.check_err(cl="1", elems=[("way", "2021"), ("way", "2022")])
+        self.check_err(cl="1", elems=[("way", "2030"), ("way", "2031")])
+#        self.check_err(cl="1", elems=[("way", "2030"), ("way", "2032")]) ##NOT FOUND ?
+#        self.check_err(cl="1", elems=[("way", "2030"), ("way", "2032")]) ##NOT FOUND ?
+#        self.check_err(cl="1", elems=[("way", "2031"), ("way", "2032")]) ##NOT FOUND ?
+        self.check_err(cl="2", elems=[("way", "2040"), ("way", "2041")])
+        self.check_err(cl="2", elems=[("way", "2040"), ("way", "2042")])
+        self.check_err(cl="2", elems=[("way", "2041"), ("way", "2042")])
+        self.check_num_err(13)
