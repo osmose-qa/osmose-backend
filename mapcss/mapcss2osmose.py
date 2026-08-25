@@ -613,6 +613,22 @@ def segregate_selectors_type(rules):
 
     return dict(filter(lambda kv: next(filter(lambda rule: not rule.get('_meta'), kv[1]), False), out_rules.items()))
 
+def flag_duplicate_rules(rules):
+    """
+    Flags rules with identical selectors as an existing rule. These rules
+    will certainly produce duplicate errors (although it might be with a
+    different message)
+    """
+    for t in ('node', 'way', 'relation'):
+        if t in rules:
+            texts = []
+            for rule in rules[t]:
+                text = ', '.join(map(lambda s: s["text"], rule['selectors']))
+                if text in texts:
+                    rule["_flag"].append("duplicate")
+                    print(f"Warning! Duplicate rule encountered: {text}")
+                else:
+                    texts.append(text)
 
 def filter_non_productive_rules(rules):
     return list(filter(lambda rule:
@@ -947,6 +963,7 @@ def compile(inputfile, class_name, mapcss_url = None, only_for = [], not_for = [
     tree = filter_typeselector_rules(tree)
     tree = filter_support_rules(tree)
     selectors_type = segregate_selectors_type(tree)
+    flag_duplicate_rules(selectors_type)
 
     rules = dict(map(lambda t: [t, to_p({'type': 'stylesheet', 'rules': selectors_type[t]})], sorted(selectors_type.keys(), key = lambda a: {'node': 0, 'way': 1, 'relation':2}[a])))
     items = build_items(class_)
