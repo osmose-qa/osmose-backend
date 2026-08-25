@@ -151,7 +151,7 @@ way[inside(FR)][x] {
 
 
 
-way[x] {
+way[xxx] {
   -osmoseItemClassLevel: "4/97:2/1";
   -osmoseTags: list("osmose_rules");
   -osmoseTrap: tr("Don't do this!");
@@ -160,19 +160,19 @@ way[x] {
   -osmoseFix: "This may fix it.";
   -osmoseResource: "https://wiki.openstreetmap.org/wiki/Useful_Page";
   fixAdd: "y=z";
-  fixRemove: "x";
+  fixRemove: "xxx";
   throwOther: tr("test");
   group: tr("test");
-  assertMatch: "way x=yes";
+  assertMatch: "way xxx=yes";
   assertNoMatch: "way y=yes";
 }
 /* same as above (except class) but inverted sequence */
-way[x] {
+way[xx] {
   assertNoMatch: "way y=yes";
-  assertMatch: "way x=yes";
+  assertMatch: "way xx=yes";
   group: tr("test");
   throwOther: tr("test");
-  fixRemove: "x";
+  fixRemove: "xx";
   fixAdd: "y=z";
   -osmoseResource: "https://wiki.openstreetmap.org/wiki/Useful_Page";
   -osmoseFix: "This may fix it.";
@@ -367,11 +367,11 @@ area[building]!:closed {
 
 way[y],
 area[building=yes],
-node[x] {
+node[xyz] {
   throwWarning: tr("test area rule {0}", "{0.tag}");
   assertMatch: "way y=z";
-  assertMatch: "node x=z";
-  assertNoMatch: "relation x=z y=z";
+  assertMatch: "node xyz=z";
+  assertNoMatch: "relation xyz=z y=z";
   assertNoMatch: "node building=yes";
   assertMatch: "way building=yes";
   assertNoMatch: "way area=no building=yes";
@@ -438,10 +438,10 @@ node[a][concat(tag("a"), "bc", tag("d")) == "1bc"] {
   }
 }
 @supports not ((min-josm-version: 12345) and ((random-key) or (user-agent: josm))) {
-  node[x] {
+  node[z] {
     throwWarning: tr("I support supports {0}", "{0.tag}");
     -osmoseItemClassLevel: "4/96:1/3";
-    assertMatch: "node x=2";
+    assertMatch: "node z=2";
     set .supportsSet;
   }
   node[y] {
