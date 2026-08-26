@@ -125,11 +125,11 @@ class Test(TestPluginCommon):
         a = TagFix_Deprecated(None)
         a.init(None)
         #                erroneous tag/value           proposed suggestion
-        for (d, f) in [({"amenity":"ev_charging"},   {"~": {"amenity": "charging_station"}}),
-                       ({"highway":"incline_steep"}, None),
+        for (d, f) in [({"man_made":"cut_line"},     {"~": {"man_made": "cutline"}}),
+                       ({"amenity":"shop"},          None), # Not supported, key=* suggestion without explicit value
                        ({"power_source":"pedalier"}, None),
                        ({"highway":"ford"},          None),
-                       ({"access":"public"},         {"~": {"access": "yes"}}),
+                       ({"surface":"trail"},         {"~": {"surface": "unpaved"}}),
                        ({"noexit":"no"},             {"-": ["noexit"],  "+": {"fixme": "Continue"}}),
                        ({"amenity":"car_repair"},    {"-": ["amenity"], "+": {"shop": "car_repair"}}),
                        ({"amenity":"nursery"},       None), # not supported, as 2 k=v are possible
