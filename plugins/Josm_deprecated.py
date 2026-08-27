@@ -4076,58 +4076,13 @@ class Josm_deprecated(PluginMapCSS):
                 }})
 
         # *[transformer=minor_distribution]
-        if ('transformer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'minor_distribution')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{1.tag}")
-                # suggestAlternative:"transformer=distribution"
-                # fixAdd:"transformer=distribution"
-                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
-                    '+': dict([
-                    ['transformer','distribution']])
-                }})
+        # Part of rule not implemented
 
         # *[transformer=traction]
-        if ('transformer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'traction')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{0.tag}")
-                # suggestAlternative:"transformer=main"
-                # fixAdd:"transformer=main"
-                err.append({'class': 9002001, 'subclass': 553247335, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
-                    '+': dict([
-                    ['transformer','main']])
-                }})
+        # Part of rule not implemented
 
         # *[transformer=auto]
-        if ('transformer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'auto')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{0.tag}")
-                # suggestAlternative:"transformer=* + windings:auto=yes"
-                # fixRemove:"transformer"
-                # fixAdd:"windings:auto=yes"
-                err.append({'class': 9002001, 'subclass': 65678967, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
-                    '+': dict([
-                    ['windings:auto','yes']]),
-                    '-': ([
-                    'transformer'])
-                }})
+        # Part of rule not implemented
 
         # *[building:roof:shape]
         if ('building:roof:shape' in keys):
@@ -8802,58 +8757,13 @@ class Josm_deprecated(PluginMapCSS):
                 }})
 
         # *[transformer=minor_distribution]
-        if ('transformer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'minor_distribution')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{1.tag}")
-                # suggestAlternative:"transformer=distribution"
-                # fixAdd:"transformer=distribution"
-                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
-                    '+': dict([
-                    ['transformer','distribution']])
-                }})
+        # Part of rule not implemented
 
         # *[transformer=traction]
-        if ('transformer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'traction')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{0.tag}")
-                # suggestAlternative:"transformer=main"
-                # fixAdd:"transformer=main"
-                err.append({'class': 9002001, 'subclass': 553247335, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
-                    '+': dict([
-                    ['transformer','main']])
-                }})
+        # Part of rule not implemented
 
         # *[transformer=auto]
-        if ('transformer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'auto')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{0.tag}")
-                # suggestAlternative:"transformer=* + windings:auto=yes"
-                # fixRemove:"transformer"
-                # fixAdd:"windings:auto=yes"
-                err.append({'class': 9002001, 'subclass': 65678967, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
-                    '+': dict([
-                    ['windings:auto','yes']]),
-                    '-': ([
-                    'transformer'])
-                }})
+        # Part of rule not implemented
 
         # *[building:roof:shape]
         if ('building:roof:shape' in keys):
@@ -12976,58 +12886,13 @@ class Josm_deprecated(PluginMapCSS):
                 }})
 
         # *[transformer=minor_distribution]
-        if ('transformer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'minor_distribution')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{1.tag}")
-                # suggestAlternative:"transformer=distribution"
-                # fixAdd:"transformer=distribution"
-                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
-                    '+': dict([
-                    ['transformer','distribution']])
-                }})
+        # Part of rule not implemented
 
         # *[transformer=traction]
-        if ('transformer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'traction')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{0.tag}")
-                # suggestAlternative:"transformer=main"
-                # fixAdd:"transformer=main"
-                err.append({'class': 9002001, 'subclass': 553247335, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
-                    '+': dict([
-                    ['transformer','main']])
-                }})
+        # Part of rule not implemented
 
         # *[transformer=auto]
-        if ('transformer' in keys):
-            match = False
-            if not match:
-                capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'transformer') == mapcss._value_capture(capture_tags, 0, 'auto')))
-                except mapcss.RuleAbort: pass
-            if match:
-                # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{0.tag}")
-                # suggestAlternative:"transformer=* + windings:auto=yes"
-                # fixRemove:"transformer"
-                # fixAdd:"windings:auto=yes"
-                err.append({'class': 9002001, 'subclass': 65678967, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
-                    '+': dict([
-                    ['windings:auto','yes']]),
-                    '-': ([
-                    'transformer'])
-                }})
+        # Part of rule not implemented
 
         # *[building:roof:shape]
         if ('building:roof:shape' in keys):
