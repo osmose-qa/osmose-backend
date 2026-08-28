@@ -142,7 +142,7 @@ c AS (
         tags,
         linestring_hash,
         linestring_rv,
-        linestring,        
+        linestring,
         COUNT(*) OVER (PARTITION BY linestring_hash) as count
     FROM
         cvqn
@@ -198,8 +198,7 @@ WHERE
     (NOT b1.tags?'min_height' AND NOT b2.tags?'min_height' OR b1.tags->'min_height' = b2.tags->'min_height') AND
     (NOT b1.tags?'ele' AND NOT b2.tags?'ele' OR b1.tags->'ele' = b2.tags->'ele')
     )
-    OR (ST_OrderingEquals(b1.linestring, b2.linestring) and ((b1.tags->'natural' = 'cliff' AND b2.tags->'natural' = 'cliff') OR (b1.tags->'man_made' = 'embankment' AND b2.tags->'man_made' = 'embankment') OR (b1.tags->'barrier' = 'retaining_wall' AND b2.tags->'barrier' = 'retaining_wall')))
-    
+    OR (ST_OrderingEquals(b1.linestring, b2.linestring) and ((b1.tags->'natural' = 'cliff' AND b2.tags->'natural' = 'cliff') OR (b1.tags->'man_made' = 'embankment' AND b2.tags->'man_made' = 'embankment') OR (b1.tags->'barrier' = 'retaining_wall' AND b2.tags->'barrier' = 'retaining_wall'))) 
 """
 
 sql30 = """
