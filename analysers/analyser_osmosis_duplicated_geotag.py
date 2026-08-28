@@ -182,7 +182,7 @@ WHERE
         (b1.tags->'amenity' = b2.tags->'amenity') OR
         (b1.tags->'highway' = b2.tags->'highway') OR
         (b1.tags->'leisure' = b2.tags->'leisure') OR
-        ((b1.tags->'barrier' = b2.tags->'barrier') AND NOT 
+        ((b1.tags->'barrier' = b2.tags->'barrier') AND NOT
            ((b1.tags->'barrier' = 'retaining_wall' AND b2.tags->'barrier' = 'retaining_wall') or
            (b1.tags->'barrier' = 'guard_rail' AND b2.tags->'barrier' = 'guard_rail'))
         ) OR
@@ -197,8 +197,7 @@ WHERE
     (NOT b1.tags?'addr:floor' AND NOT b2.tags?'addr:floor' OR b1.tags->'addr:floor' = b2.tags->'addr:floor') AND
     (NOT b1.tags?'min_height' AND NOT b2.tags?'min_height' OR b1.tags->'min_height' = b2.tags->'min_height') AND
     (NOT b1.tags?'ele' AND NOT b2.tags?'ele' OR b1.tags->'ele' = b2.tags->'ele')
-    )
-    OR (ST_OrderingEquals(b1.linestring, b2.linestring) and ((b1.tags->'natural' = 'cliff' AND b2.tags->'natural' = 'cliff') OR (b1.tags->'man_made' = 'embankment' AND b2.tags->'man_made' = 'embankment') OR (b1.tags->'barrier' = 'retaining_wall' AND b2.tags->'barrier' = 'retaining_wall'))) 
+    ) OR (ST_OrderingEquals(b1.linestring, b2.linestring) and ((b1.tags->'natural' = 'cliff' AND b2.tags->'natural' = 'cliff') OR (b1.tags->'man_made' = 'embankment' AND b2.tags->'man_made' = 'embankment') OR (b1.tags->'barrier' = 'retaining_wall' AND b2.tags->'barrier' = 'retaining_wall'))) 
 """
 
 sql30 = """
