@@ -351,7 +351,7 @@ class Test(TestAnalyserOsmosis):
 #        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1004")]) ##NOT FOUND ?
 #        self.check_err(cl="1", elems=[("way", "1002"), ("way", "1003")]) ##NOT FOUND ?
 #        self.check_err(cl="1", elems=[("way", "1002"), ("way", "1004")]) ##NOT FOUND ?
-        self.check_err(cl="1", elems=[("way", "1003"), ("way", "1004")])        
+        self.check_err(cl="1", elems=[("way", "1003"), ("way", "1004")])
 #        self.check_err(cl="1", elems=[("way", "2020"), ("way", "2021")]) # FALSE POSITIVE fixed
         self.check_err(cl="1", elems=[("way", "2021"), ("way", "2022")])
         self.check_err(cl="1", elems=[("way", "2030"), ("way", "2031")])
