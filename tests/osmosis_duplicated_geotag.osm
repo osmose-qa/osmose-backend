@@ -74,6 +74,7 @@
     <nd ref='41' />
     <nd ref='40' />
     <tag k='source' v='cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012' />   
+  </way>      
   <way id='2040' timestamp='2026-08-23T12:00:00Z' version='1' uid='10' user='toto' >
     <nd ref='14' />
     <nd ref='40' />
