@@ -103,6 +103,7 @@ cvqn AS (
     SELECT
         ways.id,
         tags - ARRAY['source', 'created_by'] AS tags,
+        linestring,
         CASE
             WHEN ST_X(ST_StartPoint(linestring)) = ST_X(ST_EndPoint(linestring)) THEN
                 CASE
@@ -111,7 +112,7 @@ cvqn AS (
                 END
             WHEN ST_X(ST_StartPoint(linestring)) < ST_X(ST_EndPoint(linestring)) THEN linestring
             ELSE ST_Reverse(linestring)
-        END as linestring,
+        END as linestring_rv,
         sha224(ST_AsBinary(
             CASE
                 WHEN ST_X(ST_StartPoint(linestring)) = ST_X(ST_EndPoint(linestring)) THEN
@@ -140,6 +141,7 @@ c AS (
         id,
         tags,
         linestring_hash,
+        linestring_rv,
         linestring,
         COUNT(*) OVER (PARTITION BY linestring_hash) as count
     FROM
@@ -161,7 +163,7 @@ sql22 = """
 SELECT
     b1.id AS id1,
     b2.id AS id2,
-    ST_AsText(ST_Centroid(b1.linestring)),
+    ST_AsText(ST_Centroid(b1.linestring_rv)),
 --    ((b1.tags @> b2.tags ) AND (b2.tags @> b1.tags ))
     b1.tags = b2.tags
 FROM
@@ -170,20 +172,20 @@ FROM
         b1.id > b2.id AND
         b1.linestring_hash = b2.linestring_hash
 WHERE
-    ST_Equals(b1.linestring, b2.linestring) AND
+    (ST_Equals(b1.linestring_rv, b2.linestring_rv) AND
     (
         (b1.tags->'area' = b2.tags->'area') OR
         (b1.tags->'name' = b2.tags->'name') OR
-        (b1.tags->'natural' = b2.tags->'natural') OR
+        ((b1.tags->'natural' = b2.tags->'natural') AND NOT (b1.tags->'natural' = 'cliff' AND b2.tags->'natural' = 'cliff')) OR
         (b1.tags->'landuse' = b2.tags->'landuse') OR
         (b1.tags->'waterway' = b2.tags->'waterway') OR
         (b1.tags->'amenity' = b2.tags->'amenity') OR
         (b1.tags->'highway' = b2.tags->'highway') OR
         (b1.tags->'leisure' = b2.tags->'leisure') OR
-        (b1.tags->'barrier' = b2.tags->'barrier') OR
+        ((b1.tags->'barrier' = b2.tags->'barrier') AND NOT ((b1.tags->'barrier' = 'retaining_wall' AND b2.tags->'barrier' = 'retaining_wall') or (b1.tags->'barrier' = 'guard_rail' AND b2.tags->'barrier' = 'guard_rail'))) OR
         (b1.tags->'railway' = b2.tags->'railway') OR
         (b1.tags->'addr:interpolation' = b2.tags->'addr:interpolation') OR
-        (b1.tags->'man_made' = b2.tags->'man_made') OR
+        ((b1.tags->'man_made' = b2.tags->'man_made') AND NOT (b1.tags->'man_made' = 'embankment' AND b2.tags->'man_made' = 'embankment')) OR
         (b1.tags->'aeroway' = b2.tags->'aeroway') OR
         (b1.tags->'power' = b2.tags->'power')
     ) AND
@@ -191,10 +193,11 @@ WHERE
     (NOT b1.tags?'level' AND NOT b2.tags?'level' OR b1.tags->'level' = b2.tags->'level') AND
     (NOT b1.tags?'addr:floor' AND NOT b2.tags?'addr:floor' OR b1.tags->'addr:floor' = b2.tags->'addr:floor') AND
     (NOT b1.tags?'min_height' AND NOT b2.tags?'min_height' OR b1.tags->'min_height' = b2.tags->'min_height') AND
-    (NOT b1.tags?'ele' AND NOT b2.tags?'ele' OR b1.tags->'ele' = b2.tags->'ele') AND
-    NOT (b1.tags->'natural' = 'cliff' AND b2.tags->'natural' = 'cliff' AND ST_OrderingEquals(b1.linestring, b2.linestring)) AND
-    NOT (b1.tags->'man_made' = 'embankment' AND b2.tags->'man_made' = 'embankment' AND  ST_OrderingEquals(b1.linestring, b2.linestring)) AND
-    NOT (b1.tags->'barrier' = 'guard_rail' AND b2.tags->'barrier' = 'guard_rail' AND ST_OrderingEquals(b1.linestring, b2.linestring))
+    (NOT b1.tags?'ele' AND NOT b2.tags?'ele' OR b1.tags->'ele' = b2.tags->'ele')
+    ) OR (ST_OrderingEquals(b1.linestring, b2.linestring) and
+    ((b1.tags->'natural' = 'cliff' AND b2.tags->'natural' = 'cliff') OR
+     (b1.tags->'man_made' = 'embankment' AND b2.tags->'man_made' = 'embankment') OR
+     (b1.tags->'barrier' = 'retaining_wall' AND b2.tags->'barrier' = 'retaining_wall')))
 """
 
 sql30 = """
@@ -318,3 +321,41 @@ class Analyser_Osmosis_Duplicated_Geotag(Analyser_Osmosis):
         self.run(sql32, self.callback30)
 
         self.run(sql40, lambda res: {"class":5, "data":[self.array_full, self.positionAsText]})
+
+###########################################################################
+from .Analyser_Osmosis import TestAnalyserOsmosis
+
+class Test(TestAnalyserOsmosis):
+    @classmethod
+    def setup_class(cls):
+        from modules import config
+        TestAnalyserOsmosis.setup_class()
+        cls.analyser_conf = cls.load_osm("tests/osmosis_duplicated_geotag.osm",
+                                         config.dir_tmp + "tests/osmosis_duplicated_geotag.xml",
+                                         {"proj": 2154}) # Random proj to satisfy highway table generation
+
+    def test_class1(self):
+        with Analyser_Osmosis_Duplicated_Geotag(self.analyser_conf, self.logger) as a:
+            a.analyser()
+        self.root_err = self.load_errors()
+        self.check_err(cl="3", elems=[("node", "1"), ("node", "2")])
+        self.check_err(cl="4", elems=[("node", "1"), ("node", "3")])
+        self.check_err(cl="4", elems=[("node", "2"), ("node", "3")])
+        self.check_err(cl="5", elems=[("node", "4"), ("node", "14")])
+        self.check_err(cl="5", elems=[("node", "5"), ("node", "15")])
+        self.check_err(cl="3", elems=[("node", "6"), ("node", "16")])
+#        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1002")]) #not found
+#        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1003")]) #not found
+#        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1004")]) #not found
+#        self.check_err(cl="1", elems=[("way", "1002"), ("way", "1003")]) #not found
+#        self.check_err(cl="1", elems=[("way", "1002"), ("way", "1004")]) #not found
+        self.check_err(cl="1", elems=[("way", "1003"), ("way", "1004")])
+#        self.check_err(cl="1", elems=[("way", "2020"), ("way", "2021")]) # FALSE POSITIVE fixed
+#        self.check_err(cl="1", elems=[("way", "2021"), ("way", "2022")]) #not found
+        self.check_err(cl="1", elems=[("way", "2030"), ("way", "2031")])
+#        self.check_err(cl="1", elems=[("way", "2030"), ("way", "2032")]) #not found
+#        self.check_err(cl="1", elems=[("way", "2031"), ("way", "2032")]) #not found
+#        self.check_err(cl="2", elems=[("way", "2040"), ("way", "2041")]) #not found
+#        self.check_err(cl="2", elems=[("way", "2040"), ("way", "2042")]) #not found
+#        self.check_err(cl="2", elems=[("way", "2041"), ("way", "2042")]) #not found
+        self.check_num_err(8)
