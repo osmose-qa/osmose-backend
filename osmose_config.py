@@ -456,7 +456,9 @@ france_departement("lorraine/vosges", 7384, "FR-88")
 france_departement("midi_pyrenees/ariege", 7439, "FR-09", include=[
     'merge_power_pole_FR_spec_enedis'
 ])
-france_departement("midi_pyrenees/aveyron", 7451, "FR-12")
+france_departement("midi_pyrenees/aveyron", 7451, "FR-12", include=[
+    'merge_power_pole_FR_spec_enedis'
+])
 france_departement("midi_pyrenees/haute_garonne", 7413, "FR-31", include=[
     'merge_power_pole_FR_spec_enedis',
     # Toulouse
