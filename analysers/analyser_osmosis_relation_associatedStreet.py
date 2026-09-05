@@ -607,6 +607,16 @@ FROM
         )
 """
 
+# associatedStreet without tag "name" or empty "name"
+sql200 = """
+SELECT id, ST_AsText(relation_locate(id))
+FROM relations
+WHERE tags?'type'
+  AND tags->'type' = 'associatedStreet'
+  AND (tags->'name' IS NULL OR tags->'name' = '')
+"""
+
+
 class Analyser_Osmosis_Relation_AssociatedStreet(Analyser_Osmosis):
 
     requires_tables_common = ['highways']
@@ -651,6 +661,13 @@ provide a consistent address.'''))
 '''Extend the relation to include the way with the same name.'''))
         self.classs[19] = self.def_class(item ="2060", level = 2, tags = ['addr', 'fix:chair'],
             title = T_('Tag "addr:street" not matching a street name around'))
+        self.classs[20] = self.def_class(
+            item=2060,
+            level=2,
+            tags=['addr', 'relation', 'fix:chair'],
+            title=T_('associatedStreet relation without name tag'),
+            detail=T_('The relation is missing the required "name" tag. Without a name, the relation cannot be used to validate addresses.')
+        )
 
         self.callback20 = lambda res: res[1] and {"class":2, "subclass":1, "data":[self.relation_full, self.positionAsText]}
         self.callback30 = lambda res: {"class":3, "subclass":1, "data":[self.way_full, self.relation, self.positionAsText]}
@@ -661,6 +678,7 @@ provide a consistent address.'''))
         self.callbackC2 = lambda res: {"class":12, "subclass":1, "data":[lambda t: self.typeMapping[res[1]](t), None, self.positionAsText]}
         self.callbackD1 = lambda res: {"class":19, "subclass":1, "data":[lambda t: self.typeMapping[res[1]](t), None, None, self.positionAsText], "text": T_("No street with name \"{0}\" found around", res[2])}
         self.callbackF0 = lambda res: {"class":18, "subclass":1, "data":[self.way_full, self.relation, self.positionAsText]}
+        self.callback200 = lambda res: {"class": 20, "subclass": 1, "data": [self.relation_full, self.positionAsText] }
 
     def analyser_osmosis_common(self):
         self.run(sql00.format(self.config.options.get("proj", 4326)))
@@ -689,6 +707,7 @@ provide a consistent address.'''))
             self.run(sqlD0)
             self.run(sqlD1.format(self.config.options.get("addr:street_distance", 500)), self.callbackD1)
         self.run(sqlF0.format(self.config.options.get("proj")), self.callbackF0)
+        self.run(sql200, self.callback200)
 
     def analyser_osmosis_full(self):
         self.run(sql20.format(""), self.callback20)
@@ -697,6 +716,7 @@ provide a consistent address.'''))
         self.run(sql41.format(""), self.callback41)
         self.run(sql50.format("", ""), self.callback50)
         self.run(sql51.format("", ""), self.callback51)
+        self.run(sql200, self.callback200)
 
     def analyser_osmosis_diff(self):
         self.run(sql20.format("touched_"), self.callback20)
@@ -708,3 +728,4 @@ provide a consistent address.'''))
         self.run(sql50.format("not_touched_", "touched_"), self.callback50)
         self.run(sql51.format("touched_", ""), self.callback51)
         self.run(sql51.format("not_touched_", "touched_"), self.callback51)
+        self.run(sql200, self.callback200)
