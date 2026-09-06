@@ -30,9 +30,9 @@ def normalize_csv(content):
     normalized = []
     for line in lines:
         if line.strip():  # Ignore blank lines
-            cols = line.count(',') + 1
+            cols = line.count(';') + 1
             if cols < 11:  # If fewer than 11 columns
-                line += ',' * (11 - cols)  # Add the missing commas
+                line += ';' * (11 - cols)  # Add the missing commas
         normalized.append(line)
     return '\n'.join(normalized)
 
@@ -53,9 +53,9 @@ class Analyser_Merge_Post_box_FR(Analyser_Merge_Point):
                 SourceDataFair(
                     attribution = "La Poste",
                     url="https://datanova.laposte.fr/datasets/laposte-boiterue",
-                    file_name="DATANOVA_20251002.csv",
+                    file_name="MUP_20260505_Datanova_0526.csv",
                     filter=normalize_csv),
-                separator = ","),
+                separator = ";"),
             Load_XY("VA_COORD_ADR_X", "VA_COORD_ADR_Y"),
             Conflate(
                 select = Select(
