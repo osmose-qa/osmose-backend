@@ -1,324 +1,319 @@
 # Osmose backend
 # Copyright (C) 2014
 # This file is distributed under the same license as the osmose-backend package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# Translators:
-# Supaplex <bejokeup@gmail.com>, 2017-2020,2022
-# Kuang-che Wu <kcwu@csie.org>, 2016
-# Sean Young <assanges@icloud.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Osmose\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2026-06-27 07:01+0000\n"
-"Last-Translator: Supaplex <bejokeup@gmail.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
-"projects/osmose/backend/zh_Hant/>\n"
-"Language: zh_TW\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.7.dev0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
-msgstr "學院未整合"
+msgstr ""
 
 #: ../analysers/analyser_merge_geodesie.py:41
 msgid "Missing survey point"
-msgstr "缺失測繪點"
+msgstr ""
 
 #: ../analysers/analyser_merge_geodesie.py:86
 msgid "Missing survey site"
-msgstr "缺失測繪地點"
+msgstr ""
 
 #: ../analysers/analyser_merge_railway_level_crossing_FR.py:31
 msgid "Crossing level not integrated"
-msgstr "人行穿越道未整合"
+msgstr ""
 
 #: ../analysers/analyser_merge_heritage_FR_merimee.py:47
 msgid "Historical monument not integrated"
-msgstr "歷史紀念物未整合"
+msgstr ""
 
 #: ../analysers/analyser_merge_heritage_FR_merimee.py:51
 msgid "Historical monument, integration suggestion"
-msgstr "歷史紀念物，整合建議"
+msgstr ""
 
 #: ../analysers/analyser_merge_poste_FR.py:34
 msgid "Post office not integrated"
-msgstr "郵局未整合"
+msgstr ""
 
 #: ../analysers/analyser_merge_poste_FR.py:38
 msgid "Post office, integration suggestion"
-msgstr "郵局，整合建議"
+msgstr ""
 
 #: ../analysers/analyser_merge_railway_railstation_FR.py:31
 msgid "Railway station not integrated"
-msgstr "火車站未整合"
+msgstr ""
 
 #: ../analysers/analyser_merge_railway_railstation_FR.py:35
 msgid "Railway station, integration suggestion"
-msgstr "火車站，整合建議"
+msgstr ""
 
 #: ../analysers/analyser_merge_school_FR.py:57
 msgid "School not integrated"
-msgstr "學校未整合"
+msgstr ""
 
 #: ../analysers/analyser_merge_school_FR.py:63
 msgid "School, integration suggestion"
-msgstr "學校，整合建議"
+msgstr ""
 
 #: ../analysers/analyser_merge_public_services_FR.py:36
 msgid "Public service not integrated"
-msgstr "公共服務未整合"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_boundary_administrative.py:138
 #: ../analysers/analyser_osmosis_boundary_intersect.py:96
 msgid "Boundary intersection"
-msgstr "邊界相交"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_boundary_administrative.py:144
 msgid "Lone boundary fragment"
-msgstr "單一的邊界片段"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_boundary_relation.py:131
 msgid "Missing wikipedia tag"
-msgstr "缺少維基百科 tag"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_boundary_relation.py:133
 msgid "Different population tag between relation and admin_centre"
-msgstr "relation 與 admin_centre 的人口統計 tag 不符"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_boundary_relation.py:138
 msgid "Invalid role"
-msgstr "無效的角色"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_broken_level_continuity.py:110
 msgid "Broken highway level continuity"
-msgstr "道路等級並不連續"
+msgstr ""
 
 msgid "Merge building (triangle)"
-msgstr "合併建築 (三角形)"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:162
 msgid "Building intersection"
-msgstr "建築交叉"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:165
 msgid "Large building intersection"
-msgstr "大型建築交叉"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:169
 msgid "Building too small"
-msgstr "建物過小"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:176
 msgid "Gap between buildings"
-msgstr "建物之間有間隙"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:181
 msgid "Large building intersection cluster"
-msgstr "大型建築交叉部分"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_building_shapes.py:68
 msgid "Special building (round)"
-msgstr "特殊建築 (圓形)"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_building_shapes.py:71
 msgid "Special building (large)"
-msgstr "特殊建築 (大型)"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:425
 msgid "Unconnected cycleway"
-msgstr "未連結的單車道"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_features.py:78
 msgid "Missing way on level crossing"
-msgstr "平交道缺少路徑"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_features.py:82
 msgid "Lone highway or barrier node"
-msgstr "單獨的道路或障礙節點"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_building_geodesie_FR.py:105
 msgid "Geodesic mark without building"
-msgstr "測繪標記沒有建築"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_traffic_signals.py:170
 msgid "Possible crossing=traffic_signals"
-msgstr "可能是 crossing=traffic_signals"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_link.py:132
 #: ../analysers/analyser_osmosis_highway_link.py:148
 msgid "Bad *_link highway"
-msgstr "壞掉的 *_link 道路"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_link.py:144
 msgid "Highway too long for a *_link"
-msgstr "*_link 道路太長了"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:464
 msgid "Highway intersecting building"
-msgstr "道路與建築相交"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:465
 msgid "Tree intersecting building"
-msgstr "樹與建築相交"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:466
 msgid "Tree and highway too close"
-msgstr "樹和道路靠太近了"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_natural_swimming-pool.py:85
 msgid "Swimming-pool, reservoir, pond as natural=water"
-msgstr "游泳池、水池與池壇一樣是 natural=water"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_node_like_way.py:80
 msgid "Way node tagged like way"
-msgstr "路徑上的節點像路徑一樣的標籤"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_orphan_nodes_cluster.py:56
 msgid "Orphan nodes cluster"
-msgstr "一大群單獨的節點"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_polygon.py:110
 msgid "Invalid polygon"
-msgstr "無效的多邊形"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_powerline.py:661
 msgid "Lone power tower or pole"
-msgstr "單獨的電塔或是電線桿"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_powerline.py:686
 msgid "Connection between different voltages"
-msgstr "不同伏特供電系統相互連接"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_powerline.py:692
 msgid "Non power node on power way"
-msgstr "輸電線路上沒有電力節點"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_powerline.py:700
 msgid "Missing power tower or pole"
-msgstr "遺漏電塔或電線桿"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:622
 msgid "No street role"
-msgstr "沒有道路角色"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:626
 msgid "street role is not a highway"
-msgstr "道路角色並非道路"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:630
 msgid "Roleless member"
-msgstr "沒有角色的成員"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:638
 msgid "Number twice in the street"
-msgstr "道路上有兩個號碼"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:640
 msgid "Many street names"
-msgstr "多個道路名稱"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:642
 msgid "Many relations on one street"
-msgstr "同一道路有許多關聯"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:644
 msgid "House too far away from street"
-msgstr "房屋離道路距離太遠"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_large.py:76
 msgid "Large relation"
-msgstr "大型關聯"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_multipolygon.py:206
 msgid "Double inner polygon"
-msgstr "雙重內部多邊形"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_multipolygon.py:214
 msgid "Inconsistent multipolygon nature with members nature"
-msgstr "不一致的多重多邊形以及其成員性質"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_multipolygon.py:219
 msgid "Inconsistent multipolygon member nature"
-msgstr "複合多邊形成員性質不一致"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_restriction.py:366
 msgid "Restriction relation, wrong number of members"
-msgstr "轉向限制：成員數量不正確"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_restriction.py:371
 msgid "Restriction relation, bad member type"
-msgstr "轉向限制：成員類型錯誤"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_restriction.py:373
 msgid "Unconnected restriction relation ways"
-msgstr "轉向限制路徑不相連"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_restriction.py:381
 msgid "Restriction doesn't match topology"
-msgstr "限制並不吻合形狀"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_roundabout_level.py:268
 msgid "Wrong highway on roundabout"
-msgstr "圓環有錯誤的道路"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_roundabout_level.py:279
 msgid "Missing oneway"
-msgstr "缺少單行道 oneway"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_roundabout_level.py:294
 msgid "Roundabout shortcut"
-msgstr "圓環的捷徑"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_roundabout_level.py:302
 msgid "Roundabout crossing"
-msgstr "圓環的交叉口"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_roundabout_reverse.py:49
 #: ../plugins/TagFix_MultipleTag.py:46
 msgid "Reverse roundabout"
-msgstr "反向圓環"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_tag_typo.py:134
 msgid "Typo in tag"
-msgstr "tag 拼寫錯誤"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_useless.py:135
 msgid "Missing tag or role on node"
-msgstr "缺少tag或role"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_useless.py:138
 msgid "Missing tag or role on way"
-msgstr "way 當中缺少 tag 或 role"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_useless.py:141
 msgid "Missing tag or role on relation"
-msgstr "關係缺少標籤或是角色"
+msgstr ""
 
 #: ../plugins/Administrative_INSEE_Name.py:33
 msgid "Place node without name tag"
-msgstr "缺少名稱 tag 的 place node "
+msgstr ""
 
 #: ../plugins/Administrative_INSEE_Name.py:59
 msgid "INSEE code cannot be found in INSEE database"
-msgstr "INSEE 資料庫中無匹配之 INSEE 代碼"
+msgstr ""
 
 #: ../plugins/Administrative_INSEE_Name.py:62
 msgid "Municipality name does not match INSEE code"
-msgstr "地方自治體名稱與 INSEE 代碼不符"
+msgstr ""
 
 #: ../plugins/Administrative_TooManyWays.py:31
 msgid "Duplicated way in relation"
-msgstr "關係中有重覆的路徑"
+msgstr ""
 
 #: ../plugins/Construction.py:34
 msgid "Finished construction"
-msgstr "建設已經完工"
+msgstr ""
 
 #: ../plugins/Date.py:33
 msgid "Bad date format"
@@ -350,7 +345,7 @@ msgstr ""
 
 #: ../plugins/Name_Dictionary.py:37
 msgid "Encoding problem"
-msgstr "編碼問題"
+msgstr ""
 
 #: ../plugins/Name_Initials.py:33
 msgid "Initial stuck to the name"
@@ -362,63 +357,63 @@ msgstr ""
 
 #: ../plugins/Name_Multiple.py:35
 msgid "The name tag contains two names"
-msgstr "不好的日期格式"
+msgstr ""
 
 #: ../plugins/Name_Spaces.py:32
 msgid "Too many spaces"
-msgstr "太多空白了"
+msgstr ""
 
 #: ../plugins/Name_Toponymy_FR.py:35
 msgid "Toponymy"
-msgstr "地名學"
+msgstr ""
 
 #: ../plugins/Ele_MontainPass_Peak.py:31
 msgid "Missing altitude"
-msgstr "缺少高度"
+msgstr ""
 
 #: ../plugins/Source.py:36
 msgid "Illegal or incomplete source tag"
-msgstr "不合法或不完整的 source tag"
+msgstr ""
 
 #: ../plugins/Source.py:45
 msgid "Missing source tag"
-msgstr "缺少 source tag"
+msgstr ""
 
 #: ../plugins/Structural_DuplicateNodes.py:34
 msgid "Duplicated nodes"
-msgstr "重覆的 node"
+msgstr ""
 
 #: ../plugins/Structural_Multipolygon.py:31
 msgid "Inadequate role for multipolygon"
-msgstr "多重多邊形中不洽當的角色"
+msgstr ""
 
 #: ../plugins/Structural_Multipolygon.py:35
 msgid "Inadequate member for multipolygon"
-msgstr "多重多邊形不洽當的成員"
+msgstr ""
 
 #: ../plugins/Structural_Multipolygon.py:46
 msgid "This multipolygon is a simple polygon"
-msgstr "這個多重多邊形是簡單多邊形"
+msgstr ""
 
 #: ../plugins/Structural_UnclosedArea.py:30
 msgid "Unclosed area"
-msgstr "非閉合的 area"
+msgstr ""
 
 #: ../plugins/Structural_Useless_Relation.py:31
 msgid "1-member relation"
-msgstr "只有 1 成員的關係"
+msgstr ""
 
 #: ../plugins/Structural_Waterway.py:30
 msgid "Closed waterway"
-msgstr "閉合的水路"
+msgstr ""
 
 #: ../plugins/Structural_WayOneNode.py:31
 msgid "Way with one node"
-msgstr "只有 1 節點的路徑"
+msgstr ""
 
 #: ../plugins/TagFix_Deprecated.py:74 ../plugins/TagFix_MultipleTag2.py:29
 msgid "Deprecated tag"
-msgstr "已棄用的標籤"
+msgstr ""
 
 #: ../plugins/TagFix_MultipleTag2.py:24 ../plugins/TagFix_MultipleTag_FR.py:34
 #: ../plugins/TagFix_MultipleTag_Lang_es.py:33
@@ -461,90 +456,90 @@ msgstr ""
 
 #: ../plugins/TagFix_Note_Lang_fr.py:38
 msgid "Possible improvement for note or comment tag"
-msgstr "注釋或是補充標籤可能會有所改進"
+msgstr ""
 
 #: ../plugins/TagFix_Postcode.py:86
 msgid "Invalid postcode"
-msgstr "無效的郵遞區號"
+msgstr ""
 
 #: ../plugins/TagFix_Role.py:32
 msgid "Inadequate role"
-msgstr "不足的角色"
+msgstr ""
 
 #: ../plugins/TagFix_Tree_Lang_fr.py:68
 msgid "Tree tagging"
-msgstr "加樹木的標籤"
+msgstr ""
 
 #: ../plugins/TagFix_Wikipedia.py:46
 msgid "Not a Wikipedia URL"
-msgstr "不是一個正確維基百科的 URL"
+msgstr ""
 
 #: ../plugins/TagFix_Wikipedia.py:49
 msgid "Wikipedia URL instead of article title"
-msgstr "使用維基百科 URL 而非條目名稱"
+msgstr ""
 
 #: ../plugins/TagFix_Wikipedia.py:55
 msgid "Missing Wikipedia language before article title"
-msgstr "在文章標題之前缺漏維基百科語言"
+msgstr ""
 
 #: ../plugins/TagFix_Wikipedia.py:63
 msgid "Use human Wikipedia page title"
-msgstr "使用人類可讀的維基百科頁面標題"
+msgstr ""
 
 #: ../plugins/TagFix_Wikipedia.py:73
 msgid "Missing primary Wikipedia tag"
-msgstr "缺漏主要維基百科標籤"
+msgstr ""
 
 #: ../plugins/TagFix_Wikipedia.py:79
 msgid "Invalid wikipedia suffix"
-msgstr "無效的維基百科後綴"
+msgstr ""
 
 #: ../plugins/TagFix_Wikipedia.py:82
 msgid "Duplicate wikipedia tag as suffix and prefix"
-msgstr "重覆的維基百科標籤前綴與後綴"
+msgstr ""
 
 #: ../plugins/TagRemove_FR.py:33
 msgid "Misused tag in this country"
-msgstr "這一國家誤用標籤"
+msgstr ""
 
 #: ../plugins/TagFix_MultipleTag2.py:31
 #: ../plugins/TagRemove_Incompatibles.py:31
 msgid "Tag conflict"
-msgstr "標籤衝突"
+msgstr ""
 
 #: ../plugins/TagRemove_NameIsRef_FR.py:34
 msgid "Highway reference in name tag"
-msgstr "道路編號在名稱標籤當中"
+msgstr ""
 
 #: ../plugins/TagRemove_OpenSeaMap.py:33
 msgid "OpenSeaMap import, very approximative position."
-msgstr "開放海洋地圖匯入，非常概略的位置。"
+msgstr ""
 
 #: ../plugins/TagRemove_Roundabout.py:31
 #: ../plugins/TagRemove_Roundabout_Ref.py:33
 msgid "Unneeded tag on junction=roundabout"
-msgstr "在圓環 junction=roundabout 上的非必要標籤"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_fantoir.py:109
 msgid "Multiple name for the same ref FANTOIR"
-msgstr "相同 ref FANTOIR 有多個名稱"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_relation_associatedStreet.py:647
 msgid "Tag \"addr:city\" not matching a city"
-msgstr "\"addr:city\" 標籤並不吻合所在城市"
+msgstr ""
 
 #: ../plugins/TagFix_MultipleTag_FR.py:47
 msgid "FANTOIR object type not match OSM feature"
-msgstr "FANTOIR 物件類別並不吻合 OSM 圖徵"
+msgstr ""
 
 #: ../analysers/analyser_merge_police_FR_pn.py:31
 msgid "Police not integrated"
-msgstr "未整合的警政單位"
+msgstr ""
 
 #: ../analysers/analyser_merge_fuel_FR.py:31
 #: ../analysers/analyser_merge_fuel_IT.py:47
 msgid "Gas station not integrated"
-msgstr "未整合的加油站"
+msgstr ""
 
 #: ../plugins/TagFix_Wikipedia.py:85
 msgid "Same wikipedia topic on other language"
@@ -806,16 +801,16 @@ msgstr ""
 #: ../analysers/analyser_merge_fuel_FR.py:33
 #: ../analysers/analyser_merge_fuel_IT.py:51
 msgid "Gas station integration suggestion"
-msgstr "加油站整合建議"
+msgstr ""
 
 #: ../analysers/analyser_merge_fuel_FR.py:35
 #: ../analysers/analyser_merge_fuel_IT.py:53
 msgid "Gas station update"
-msgstr "加油站更新"
+msgstr ""
 
 #: ../plugins/TagFix_Housenumber.py:34
 msgid "Invalid addr:housenumber value"
-msgstr "無效的 addr:housenumber 數值"
+msgstr ""
 
 #: ../plugins/Administrative_INSEE_Name.py:99
 #, python-format, python-brace-format
@@ -946,7 +941,7 @@ msgstr ""
 
 #: ../plugins/TagFix_MultipleTag2.py:23 ../plugins/TagFix_MultipleTag2.py:666
 msgid "Missing relation type"
-msgstr "缺失關聯類型"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_traffic_signals.py:176
 msgid ""
@@ -965,15 +960,15 @@ msgstr ""
 #: ../analysers/analyser_merge_power_substation_FR.py:72
 #, python-format, python-brace-format
 msgid "Power substation of {0}"
-msgstr "{0}變電所"
+msgstr ""
 
 #: ../analysers/analyser_merge_power_substation_FR.py:33
 msgid "Power substation, integration suggestion"
-msgstr "變電所，整合建議"
+msgstr ""
 
 #: ../analysers/analyser_merge_power_substation_FR.py:35
 msgid "Power substation update"
-msgstr "變電所更新"
+msgstr ""
 
 #: ../analysers/analyser_merge_power_tower_FR.py:31
 msgid "Power support not integrated"
@@ -985,7 +980,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_wikipedia.py:97
 msgid "Duplicate wikipedia tag"
-msgstr "重覆的維基百科標籤"
+msgstr ""
 
 #: ../plugins/TagRemove_Roundabout_Ref.py:41
 #, python-format, python-brace-format
@@ -1578,16 +1573,16 @@ msgstr ""
 
 #: ../plugins/TagFix_Deprecated.py:77
 msgid "Deprecated value"
-msgstr "棄用的數值"
+msgstr ""
 
 #: ../plugins/Highway_Parking_Lane.py:105
 #: ../plugins/TagFix_DuplicateValue.py:44
 msgid "Duplicated values"
-msgstr "重覆的數值"
+msgstr ""
 
 #: ../plugins/TagFix_DuplicateValue.py:47
 msgid "Similar values"
-msgstr "相似的值"
+msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_cul-de-sac_level.py:73
 #: ../analysers/analyser_osmosis_highway_cul-de-sac_level.py:77
@@ -2759,7 +2754,7 @@ msgstr ""
 
 #: ../plugins/TagRemove_FR.py:35
 msgid "`designation=*` is a United Kingdom-specific tag."
-msgstr "`designation=*`是英國特有標籤。"
+msgstr ""
 
 #: ../plugins/TagRemove_FR.py:37
 msgid "Translate it to another tag or remove."
@@ -5871,10 +5866,8 @@ msgid ""
 msgstr ""
 
 #: ../plugins/TagFix_Maxspeed_AT.py:63
-#, fuzzy
-#| msgid "Invalid addr:housenumber value"
 msgid "Invalid speed limit value"
-msgstr "無效的 addr:housenumber 數值"
+msgstr ""
 
 #: ../plugins/TagFix_Maxspeed_AT.py:65
 msgid ""
