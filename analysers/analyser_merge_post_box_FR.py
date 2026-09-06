@@ -24,17 +24,14 @@ from modules.OsmoseTranslation import T_
 from .Analyser_Merge import Analyser_Merge_Point, SourceDataFair, CSV, Load_XY, Conflate, Select, Mapping
 
 
-def normalize_csv(content):
+def normalize_csv(stream):
     """Add the missing commas at the end of the line to have 11 columns"""
-    lines = content.split('\n')
-    normalized = []
-    for line in lines:
+    for line in stream:
         if line.strip():  # Ignore blank lines
             cols = line.count(',') + 1
             if cols < 11:  # If fewer than 11 columns
                 line += ',' * (11 - cols)  # Add the missing commas
-        normalized.append(line)
-    return '\n'.join(normalized)
+        yield line
 
 class Analyser_Merge_Post_box_FR(Analyser_Merge_Point):
     def __init__(self, config, logger = None):

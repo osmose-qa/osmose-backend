@@ -23,7 +23,7 @@
 import json
 from modules.OsmoseTranslation import T_
 from .Analyser_Merge_Dynamic import Analyser_Merge_Dynamic, SubAnalyser_Merge_Dynamic
-from .Analyser_Merge import SourceHttpLastModified, CSV, Load_XY, Conflate, Select, Mapping
+from .Analyser_Merge import SourceDataGouv, CSV, Load_XY, Conflate, Select, Mapping
 from modules import reaccentue
 
 
@@ -54,14 +54,15 @@ class SubAnalyser_Merge_Shop_FR(SubAnalyser_Merge_Dynamic):
         dep_code = config.options.get('dep_code') or config.options.get('country').split('-')[1]
 
         self.init(
-            "http://www.sirene.fr/sirene/public/static/open-data",
+            "https://www.data.gouv.fr/datasets/geolocalisation-des-etablissements-du-repertoire-sirene-pour-les-etudes-statistiques",
             "Sirene",
-            CSV(SourceHttpLastModified(
+            CSV(SourceDataGouv(
                 attribution="INSEE",
-                gzip=True,
-                fileUrl="http://data.cquest.org/geo_sirene/v2019/last/dep/geo_siret_{0}.csv.gz".format(dep_code))),
+                dataset="61d5e2d372a52d9f9411ff88",
+                resource="ba6a4e4c-aac6-4764-bbd2-f80ae345afc5",
+                zip="*.csv")),
             Load_XY("longitude", "latitude",
-                select = {"activitePrincipaleEtablissement": classs, "geo_type": "housenumber", "etatAdministratifEtablissement": "A"},
+                select = {"activitePrincipaleEtablissement": classs, "geo_type": "housenumber", "etatAdministratifEtablissement": "A", "codeCommuneEtablissement": {"like": f"{dep_code}%"}},
                 where = lambda res: (
                     float(res["geo_score"]) > 0.9 and
                     (not res["complementAdresseEtablissement"] or (" APP" not in res["complementAdresseEtablissement"] and " CHEZ " not in res["complementAdresseEtablissement"])) and

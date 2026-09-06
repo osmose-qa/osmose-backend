@@ -368,6 +368,9 @@ class Source:
             self.attribution_re = re.compile(self.attribution.replace("{0}", ".*"))
 
     def zipFile(self):
+        if self.zipFile:
+            return self.zipFile
+
         if not self.zip:
             return None
         if self.file:
@@ -376,9 +379,10 @@ class Source:
             f = downloader.urlopen(self.fileUrl, self.fileUrlCache, mode='rb', post=self.post)
 
         z = zipfile.ZipFile(f, 'r')
-        print(z.namelist())
-        filename = next(filter(lambda zipinfo: fnmatch.fnmatch(zipinfo.filename, self.zip), z.infolist()))
-        return filename
+        zipinfo = next(filter(lambda zipinfo: fnmatch.fnmatch(zipinfo.filename, self.zip), z.infolist()))
+
+        self.zipFile = zipinfo
+        return zipinfo
 
     def time(self):
         if self.file:
@@ -403,32 +407,32 @@ class Source:
         elif self.fileUrl:
             f = downloader.urlopen(self.fileUrl, self.fileUrlCache, mode='rb', post=self.post)
 
-        if self.zipFile():
-            z = zipfile.ZipFile(f, 'r').open(self.zipFile().filename)
-            f = io.BytesIO(z.read())
-            f.seek(0)
+        info = self.zipFile()
+        if info:
+            self._zip_archive = zipfile.ZipFile(f, 'r')
+            f = self._zip_archive.open(info)
         elif self.extract:
             import libarchive.public # type: ignore
-            with libarchive.public.memory_reader(f.read()) as archive:
-                f = io.BytesIO()
+            _path = f.name
+            with libarchive.public.file_reader(_path) as archive:
+                out = io.BytesIO()
                 for entry in archive:
                     if pathlib.Path(entry.pathname).match(self.extract):
                         for block in entry.get_blocks():
-                            f.write(block)
+                            out.write(block)
                         break
-            f.seek(0)
+            out.seek(0)
+            f.close()
+            f = out
         elif self.bz2:
-            f = io.BytesIO(bz2.decompress(f.read()))
-            f.seek(0)
+            f = bz2.open(f)
         elif self.gzip:
             f = gzip.GzipFile(fileobj=f)
 
         if not binary:
-            f = io.StringIO(f.read().decode(self.encoding, 'ignore'))
-            f.seek(0)
+            f = io.TextIOWrapper(f, encoding=self.encoding, errors='ignore')
             if self.filter:
-                f = io.StringIO(self.filter(f.read()))
-                f.seek(0)
+                f = self.filter(f)
         return f
 
     def _get_millesime(self) -> Optional[str]:

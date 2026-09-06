@@ -23,7 +23,6 @@
 import re
 from modules.OsmoseTranslation import T_
 from .Analyser_Merge import Analyser_Merge_Point, SourceOpenDataSoft, CSV, Load_XY, Conflate, Select, Mapping
-from functools import reduce
 
 
 class Analyser_Merge_Heritage_FR_Merimee(Analyser_Merge_Point):
@@ -88,7 +87,7 @@ World Heritage.'''))
             CSV(SourceOpenDataSoft(
                 attribution="Ministère de la Culture",
                 url="https://data.culture.gouv.fr/explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques",
-                filter=lambda s: reduce(lambda a, v: a.replace(v, ''), SKIP, (u'' + s).encode('utf-8').replace(b'l\x92', b"l'").replace(b'\x85)', b"...)").decode('utf-8', 'ignore')))),
+                filter=lambda stream: map(lambda l: l.encode('utf-8').replace(b'l\x92', b"l'").replace(b'\x85)', b"...").decode('utf-8', 'ignore'), filter(lambda l: all(s not in l for s in SKIP), stream)))),
             Load_XY("coordonnees_au_format_WGS84", "coordonnees_au_format_WGS84",
                 xFunction = lambda x: x and x.split(',')[1],
                 yFunction = lambda y: y and y.split(',')[0],
