@@ -345,18 +345,8 @@ class Test(TestAnalyserOsmosis):
         self.check_err(cl="5", elems=[("node", "4"), ("node", "14")])
         self.check_err(cl="5", elems=[("node", "5"), ("node", "15")])
         self.check_err(cl="3", elems=[("node", "6"), ("node", "16")])
-#        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1002")]) #not found
-#        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1003")]) #not found
-#        self.check_err(cl="1", elems=[("way", "1001"), ("way", "1004")]) #not found
-#        self.check_err(cl="1", elems=[("way", "1002"), ("way", "1003")]) #not found
-#        self.check_err(cl="1", elems=[("way", "1002"), ("way", "1004")]) #not found
         self.check_err(cl="1", elems=[("way", "1003"), ("way", "1004")])
-#        self.check_err(cl="1", elems=[("way", "2020"), ("way", "2021")]) # FALSE POSITIVE fixed
-#        self.check_err(cl="1", elems=[("way", "2021"), ("way", "2022")]) #not found
         self.check_err(cl="1", elems=[("way", "2030"), ("way", "2031")])
-#        self.check_err(cl="1", elems=[("way", "2030"), ("way", "2032")]) #not found
-#        self.check_err(cl="1", elems=[("way", "2031"), ("way", "2032")]) #not found
         self.check_err(cl="2", elems=[("way", "2040"), ("way", "2041")]) #not found
-#        self.check_err(cl="2", elems=[("way", "2040"), ("way", "2042")]) #not found
         self.check_err(cl="2", elems=[("way", "2041"), ("way", "2042")]) #not found
         self.check_num_err(9)
