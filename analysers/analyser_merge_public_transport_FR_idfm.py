@@ -50,7 +50,9 @@ class _Analyser_Merge_Public_Transport_FR_IdFM(Analyser_Merge_Point):
                 mapping = Mapping(
                     static1 = defaultTag,
                     static2 = {"source": self.source},
-                    mapping1 = {"ref:FR:STIF": lambda fields: fields["id_refa"] and int(fields["id_refa"] or None)},
+                    mapping1 = {
+                        "ref:FR:STIF": lambda fields: fields["id_refa"] and int(fields["id_refa"] or None),
+                        "gtfs:stop_id:FR-IDF-IDFM": lambda fields: fields["id_refa"] and "IDFM:{0}".format(int(fields["id_refa"])) or None},
                     mapping2 = {"name": "nom_lda"},
                     text = lambda tags, fields: T_("{0} stop of {1}", place, tags["name"]) )))
 
