@@ -38,7 +38,8 @@ import fnmatch
 import shutil
 import subprocess
 import pathlib
-from typing import Optional, Dict, Union, Callable
+from pyarrow import parquet
+from typing import Optional, Dict, Union, Callable, Any
 from collections import defaultdict
 from .Analyser_Osmosis import Analyser_Osmosis
 from modules.OsmoseTranslation import T_
@@ -866,6 +867,88 @@ class GDAL(Parser):
 
 SHP = GDAL
 GPKG = GDAL
+
+class Parquet(Parser):
+    def __init__(self, source, srid: Optional[int] = None, columns: Optional[list] = None, filters: Optional[Any] = None):
+        """
+        Load a Parquet file directly with pyarrow, without shelling out to
+        GDAL/ogr2ogr. This reads the file's schema for the header, then
+        streams rows through a postgres COPY, same as the CSV parser.
+
+        Binary columns (typically a WKB-encoded geometry column, as found in
+        GeoParquet files) are hex-encoded so they survive the text COPY.
+        Turn them back into a real geometry downstream via the `geom` param
+        of Load, e.g. geom = ("ST_GeomFromWKB(decode(\\"geometry\\", 'hex'), {0})".format(srid),)
+
+        @param source: source file reader
+        @param srid: overwrite the projection; if not given, Parquet tries to
+            read it from GeoParquet "geo" schema metadata, falling back to 4326
+        @param columns: optional list of column names to read, default all
+        """
+        super().__init__(srid = srid, source = source)
+        self.columns = columns
+        self.filters = filters
+        self.parquet = None
+        self._geo_srid = None
+
+    def _load(self):
+        if self.parquet is None:
+            f = self.source.open(binary = True)
+            self.parquet = parquet.read_table(f, columns = self.columns, filters = self.filters)
+            self._geo_srid = self._read_geo_srid(self.parquet.schema.metadata)
+        return self.parquet
+
+    @staticmethod
+    def _read_geo_srid(metadata):
+        """Best-effort read of the GeoParquet "geo" schema metadata to find the CRS EPSG code."""
+        if not metadata:
+            return None
+        geo = metadata.get(b"geo")
+        if not geo:
+            return None
+        try:
+            geo = json.loads(geo)
+            crs = geo["columns"][geo["primary_column"]].get("crs")
+            if isinstance(crs, dict):
+                return int(crs["id"]["code"])
+        except Exception:
+            pass
+        return None
+
+    def header(self):
+        return list(self._load().schema.names)
+
+    def imported_srid(self):
+        return self._srid or self._geo_srid or 4326
+
+    def import_(self, table, osmosis):
+        pa_table = self._load()
+        columns = pa_table.schema.names
+        binary_columns = {
+            i for i, field in enumerate(pa_table.schema)
+            if str(field.type) in ("binary", "large_binary")
+        }
+
+        buffer = io.StringIO()
+        writer = csv.writer(buffer, lineterminator = '\n')
+        for row in pa_table.to_pylist():
+            out = []
+            for i, column in enumerate(columns):
+                value = row[column]
+                if value is None:
+                    out.append('')
+                elif i in binary_columns and isinstance(value, (bytes, bytearray)):
+                    out.append(value.hex())
+                else:
+                    out.append(str(value))
+            writer.writerow(out)
+        buffer.seek(0)
+
+        copy = "COPY {0} FROM STDIN WITH CSV".format(table)
+        osmosis.giscurs.copy_expert(copy, buffer)
+
+    def close(self):
+        self.parquet = None
 
 class Load(object):
     def __init__(self, geom = ("NULL",), table_name = None, create = None,
