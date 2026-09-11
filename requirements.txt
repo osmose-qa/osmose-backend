@@ -16,6 +16,7 @@ vt2geojson
 tiletanic
 sentry-sdk
 wikitextparser
+pyarrow
 pycountry
 myanmartools
 PyICU
