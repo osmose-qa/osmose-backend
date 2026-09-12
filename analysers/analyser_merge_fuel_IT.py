@@ -109,7 +109,7 @@ class Source_Fuel(Source):
 
         #         0              1      2      3      4
         #idImpianto;descCarburante;prezzo;isSelf;dtComu
-        csvreader = csv.reader(f, delimiter=';')
+        csvreader = csv.reader(f, delimiter='|')
         next(csvreader) # Skip date
         next(csvreader) # Skip header
 
@@ -129,7 +129,7 @@ class Source_Fuel(Source):
         writer = csv.writer(csvfile)
 
         f = self.source.open()
-        csvreader = csv.reader(f, delimiter=';', quotechar = '~')
+        csvreader = csv.reader(f, delimiter='|')
         next(csvreader) # Skip date
         header = next(csvreader)
         writer.writerow(header + ['Carburanti'])
