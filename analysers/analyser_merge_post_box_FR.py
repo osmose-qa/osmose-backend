@@ -24,18 +24,6 @@ from modules.OsmoseTranslation import T_
 from .Analyser_Merge import Analyser_Merge_Point, SourceDataFair, CSV, Load_XY, Conflate, Select, Mapping
 
 
-def normalize_csv(content):
-    """Add the missing commas at the end of the line to have 11 columns"""
-    lines = content.split('\n')
-    normalized = []
-    for line in lines:
-        if line.strip():  # Ignore blank lines
-            cols = line.count(',') + 1
-            if cols < 11:  # If fewer than 11 columns
-                line += ',' * (11 - cols)  # Add the missing commas
-        normalized.append(line)
-    return '\n'.join(normalized)
-
 class Analyser_Merge_Post_box_FR(Analyser_Merge_Point):
     def __init__(self, config, logger = None):
         Analyser_Merge_Point.__init__(self, config, logger)
@@ -53,9 +41,8 @@ class Analyser_Merge_Post_box_FR(Analyser_Merge_Point):
                 SourceDataFair(
                     attribution = "La Poste",
                     url="https://datanova.laposte.fr/datasets/laposte-boiterue",
-                    file_name="DATANOVA_20251002.csv",
-                    filter=normalize_csv),
-                separator = ","),
+                    file_name="MUP_DATANOVA_20260903.csv"),
+                separator = ";"),
             Load_XY("VA_COORD_ADR_X", "VA_COORD_ADR_Y"),
             Conflate(
                 select = Select(
@@ -70,4 +57,4 @@ class Analyser_Merge_Post_box_FR(Analyser_Merge_Point):
                         "operator:wikidata": "Q373724"},
                     static2 = {"source": self.source},
                     mapping1 = {"ref": "CO_MUP"},
-                text = lambda tags, fields: {"en": ", ".join(filter(lambda x: x, [fields["VA_NO_VOIE"], fields["LB_EXTENSION"], fields["LB_VOIE_EXT"], fields["CO_POSTAL"], fields["LB_COM"]]))} )))
+                text = lambda tags, fields: {"en": " ".join(filter(lambda x: x and x != 'None', [fields["VA_NO_VOIE"], fields["LB_EXTENSION"], fields["LB_VOIE_EXT"], fields["CO_POSTAL"], fields["LB_COM"]]))} )))
