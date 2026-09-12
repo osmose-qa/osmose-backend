@@ -23,7 +23,6 @@
 import re
 from modules.OsmoseTranslation import T_
 from .Analyser_Merge import Analyser_Merge_Point, SourceDataGouv, CSV, Load_XY, Conflate, Select, Mapping
-from functools import reduce
 
 
 class Analyser_Merge_Heritage_FR_Merimee(Analyser_Merge_Point):
