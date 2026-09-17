@@ -19,8 +19,8 @@
 ##                                                                       ##
 ###########################################################################
 
-# langue : http://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1
-# PAYS   : http://fr.wikipedia.org/wiki/ISO_3166-1
+# languages : https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1
+# Countries : https://fr.wikipedia.org/wiki/ISO_3166-1
 
 import os
 import unittest
@@ -33,9 +33,9 @@ import modules.config
 
 ###########################################################################
 
-GEOFABRIK = u"http://download.geofabrik.de/"
-OSMFR = u"http://download.openstreetmap.fr/extracts/"
-OSMCH = u"https://planet.osm.ch/"
+GEOFABRIK = "https://download.geofabrik.de/"
+OSMFR = "https://download.openstreetmap.fr/extracts/"
+OSMCH = "https://planet.osm.ch/"
 
 class template_config:
 
@@ -2154,7 +2154,7 @@ china_province("macau", 1867188, "CN-92", proj=32649, language=["zh", "pt"], dri
 #########################################################################
 
 ogf = default_simple("ogf", None, {"project": "opengeofiction"},
-        download_url=u"http://opengeofiction.net/backup/ogf_latest.osm.pbf")
+        download_url=u"https://opengeofiction.net/backup/ogf_latest.osm.pbf")
 del ogf.analyser["osmosis_soundex"]
 
 ###########################################################################
