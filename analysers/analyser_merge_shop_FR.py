@@ -65,7 +65,7 @@ class SubAnalyser_Merge_Shop_FR(SubAnalyser_Merge_Dynamic):
             ), srid=proj, filters=(
                 (
                     ('codeCommuneEtablissement', '>=', str(dep_code)),
-                    ('codeCommuneEtablissement', '<', str(int(dep_code) + 1)),
+                    ('codeCommuneEtablissement', '<', dep_code[:-1] + chr(ord(dep_code[-1]) + 1)),
                     ('coordonneeLambertAbscisseEtablissement', '!=', '[ND]'),
                     ('coordonneeLambertOrdonneeEtablissement', '!=', '[ND]'),
                     ('activitePrincipaleEtablissement', '=', classs),
