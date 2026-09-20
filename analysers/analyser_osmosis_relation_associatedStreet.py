@@ -707,7 +707,6 @@ provide a consistent address.'''))
             self.run(sqlD0)
             self.run(sqlD1.format(self.config.options.get("addr:street_distance", 500)), self.callbackD1)
         self.run(sqlF0.format(self.config.options.get("proj")), self.callbackF0)
-        self.run(sql200, self.callback200)
 
     def analyser_osmosis_full(self):
         self.run(sql20.format(""), self.callback20)
@@ -716,7 +715,7 @@ provide a consistent address.'''))
         self.run(sql41.format(""), self.callback41)
         self.run(sql50.format("", ""), self.callback50)
         self.run(sql51.format("", ""), self.callback51)
-        self.run(sql200, self.callback200)
+        self.run(sql200.format(""), self.callback200)
 
     def analyser_osmosis_diff(self):
         self.run(sql20.format("touched_"), self.callback20)
@@ -728,4 +727,4 @@ provide a consistent address.'''))
         self.run(sql50.format("not_touched_", "touched_"), self.callback50)
         self.run(sql51.format("touched_", ""), self.callback51)
         self.run(sql51.format("not_touched_", "touched_"), self.callback51)
-        self.run(sql200, self.callback200)
+        self.run(sql200.format("touched_"), self.callback200)
