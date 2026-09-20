@@ -609,11 +609,15 @@ FROM
 
 # associatedStreet without tag "name" or empty "name"
 sql200 = """
-SELECT id, ST_AsText(relation_locate(id))
-FROM relations
-WHERE tags?'type'
-  AND tags->'type' = 'associatedStreet'
-  AND (tags->'name' IS NULL OR tags->'name' = '')
+SELECT
+    id,
+    ST_AsText(relation_locate(id))
+FROM
+    {0}relations AS relations
+WHERE
+    tags?'type' AND
+    tags->'type' = 'associatedStreet' AND
+    (NOT tags?'name' OR tags->'name' = '')
 """
 
 
