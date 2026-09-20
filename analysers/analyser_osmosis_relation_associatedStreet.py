@@ -665,13 +665,9 @@ provide a consistent address.'''))
 '''Extend the relation to include the way with the same name.'''))
         self.classs[19] = self.def_class(item ="2060", level = 2, tags = ['addr', 'fix:chair'],
             title = T_('Tag "addr:street" not matching a street name around'))
-        self.classs[20] = self.def_class(
-            item=2060,
-            level=2,
-            tags=['addr', 'relation', 'fix:chair'],
+        self.classs[20] = self.def_class(item=2060, level=2, tags=['addr', 'fix:chair'],
             title=T_('associatedStreet relation without name tag'),
-            detail=T_('The relation is missing the required "name" tag. Without a name, the relation cannot be used to validate addresses.')
-        )
+            detail=T_('The relation is missing the required `name` tag.'))
 
         self.callback20 = lambda res: res[1] and {"class":2, "subclass":1, "data":[self.relation_full, self.positionAsText]}
         self.callback30 = lambda res: {"class":3, "subclass":1, "data":[self.way_full, self.relation, self.positionAsText]}
