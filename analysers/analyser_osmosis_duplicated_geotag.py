@@ -172,6 +172,7 @@ FROM
         b1.id > b2.id AND
         b1.linestring_hash = b2.linestring_hash
 WHERE
+    (
     (ST_Equals(b1.linestring_rv, b2.linestring_rv) AND
     (
         (b1.tags->'area' = b2.tags->'area') OR
@@ -188,18 +189,20 @@ WHERE
         ((b1.tags->'man_made' = b2.tags->'man_made') AND NOT (b1.tags->'man_made' = 'embankment' AND b2.tags->'man_made' = 'embankment')) OR
         (b1.tags->'aeroway' = b2.tags->'aeroway') OR
         (b1.tags->'power' = b2.tags->'power')
-    ) AND
-    (NOT b1.tags?'layer' AND NOT b2.tags?'layer' OR b1.tags->'layer' = b2.tags->'layer') AND
-    (NOT b1.tags?'level' AND NOT b2.tags?'level' OR b1.tags->'level' = b2.tags->'level') AND
-    (NOT b1.tags?'addr:floor' AND NOT b2.tags?'addr:floor' OR b1.tags->'addr:floor' = b2.tags->'addr:floor') AND
-    (NOT b1.tags?'min_height' AND NOT b2.tags?'min_height' OR b1.tags->'min_height' = b2.tags->'min_height') AND
-    (NOT b1.tags?'ele' AND NOT b2.tags?'ele' OR b1.tags->'ele' = b2.tags->'ele'))
+    )) 
     OR
     (ST_OrderingEquals(b1.linestring, b2.linestring) and
     ((b1.tags->'natural' = 'cliff' AND b2.tags->'natural' = 'cliff') OR
      (b1.tags->'man_made' = 'embankment' AND b2.tags->'man_made' = 'embankment') OR
      (b1.tags->'barrier' = 'guard_rail' AND b2.tags->'barrier' = 'guard_rail') OR
-     (b1.tags->'barrier' = 'retaining_wall' AND b2.tags->'barrier' = 'retaining_wall')))
+     (b1.tags->'barrier' = 'retaining_wall' AND b2.tags->'barrier' = 'retaining_wall')))    
+    )
+    AND
+    (NOT b1.tags?'layer' AND NOT b2.tags?'layer' OR b1.tags->'layer' = b2.tags->'layer') AND
+    (NOT b1.tags?'level' AND NOT b2.tags?'level' OR b1.tags->'level' = b2.tags->'level') AND
+    (NOT b1.tags?'addr:floor' AND NOT b2.tags?'addr:floor' OR b1.tags->'addr:floor' = b2.tags->'addr:floor') AND
+    (NOT b1.tags?'min_height' AND NOT b2.tags?'min_height' OR b1.tags->'min_height' = b2.tags->'min_height') AND
+    (NOT b1.tags?'ele' AND NOT b2.tags?'ele' OR b1.tags->'ele' = b2.tags->'ele'))
 """
 
 sql30 = """
