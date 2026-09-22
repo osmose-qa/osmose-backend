@@ -345,7 +345,8 @@ france_departement("bourgogne/saone_et_loire", 7397, "FR-71", include=[
     'merge_hydrants_FR_SDIS_71',
 ])
 france_departement("bourgogne/yonne", 7392, "FR-89", include=[
-    'merge_power_pole_FR_spec_sdey'
+    'merge_power_pole_FR_spec_sdey',
+    'merge_power_pole_FR_spec_enedis'
 ])
 
 include_bretagne = [
@@ -388,7 +389,8 @@ france_departement("corse/haute_corse", 76931, "FR-2B")
 france_departement("franche_comte/doubs", 7462, "FR-25")
 france_departement("franche_comte/jura", 7460, "FR-39", include=[
     'merge_hydrants_FR_SDIS_39',
-    'merge_power_pole_FR_gracethd3_jura'
+    'merge_power_pole_FR_gracethd3_jura',
+    'merge_power_pole_FR_spec_enedis'
 ])
 france_departement("franche_comte/haute_saone", 7423, "FR-70")
 france_departement("franche_comte/territoire_de_belfort", 7410, "FR-90")
@@ -479,6 +481,7 @@ france_departement("nord_pas_de_calais/pas_de_calais", 7394, "FR-62", include=[
 ])
 
 france_departement("pays_de_la_loire/loire_atlantique", 7432, "FR-44", include=[
+    'merge_power_pole_FR_spec_enedis',
     # Nantes
     'merge_recycling_FR_nm_glass',
     'merge_public_equipment_FR_nantes_toilets',
