@@ -21,11 +21,10 @@
 
 from modules.OsmoseTranslation import T_
 from plugins.Plugin import Plugin
-from modules.downloader import urlread
 from modules.Stablehash import stablehash, stablehash64
 import re
 from collections import defaultdict
-from plugins.modules.wikiReader import read_wiki_table, wikitag2text
+from plugins.modules.wikiReader import read_wiki_table, wikitag2text, urlwikiread
 
 
 class TagWatchFrViPofm(Plugin):
@@ -54,7 +53,7 @@ class TagWatchFrViPofm(Plugin):
         self._update_kr_vr = defaultdict(dict)
 
         # Obtain the info from https://wiki.openstreetmap.org/wiki/Dubious_tags
-        data = urlread(u"https://wiki.openstreetmap.org/w/index.php?title=Dubious_tags&action=raw", 1)
+        data = urlwikiread("https://wiki.openstreetmap.org/w/index.php?title=Dubious_tags&action=raw", 1)
         data = read_wiki_table(data, skip_headers = False)[1:] # Headers in the middle of the table, not supported yet in read_wiki_table
 
         for row in data:

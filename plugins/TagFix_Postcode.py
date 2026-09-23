@@ -21,8 +21,7 @@
 
 from modules.OsmoseTranslation import T_
 from plugins.Plugin import Plugin
-from modules.downloader import urlread
-from plugins.modules.wikiReader import read_wiki_table
+from plugins.modules.wikiReader import read_wiki_table, urlwikiread
 import re
 
 
@@ -53,7 +52,7 @@ class TagFix_Postcode(Plugin):
 
     def list_postcode(self):
         reline = re.compile("^[-CAN ?]+$")
-        data = urlread(u"https://en.wikipedia.org/wiki/List_of_postal_codes?action=raw", 1)
+        data = urlwikiread("https://en.wikipedia.org/wiki/List_of_postal_codes?action=raw", 1)
         data = read_wiki_table(data)
 
         postcode = {}
