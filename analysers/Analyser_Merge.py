@@ -908,8 +908,11 @@ class GDAL(Parser):
     def imported_srid(self):
         return self.proj
 
-SHP = GDAL
 GPKG = GDAL
+
+class SHP(GDAL):
+    def __init__(self, source, zip = None, **kwargs):
+        super().__init__(source, zip or '*.shp', **kwargs)
 
 class Parquet(Parser):
     def __init__(self, source, srid: Optional[int] = None, columns: Optional[list] = None, filters: Optional[Any] = None):

@@ -27,10 +27,11 @@ from .Analyser_Merge import Source
 class Analyser_Merge_Hydrants_FR_SDIS_21(_Analyser_Merge_Afigeo_Hydrants):
     def __init__(self, config, logger = None):
         _Analyser_Merge_Afigeo_Hydrants.__init__(self, config,
-            source_url='https://trouver.ternum-bfc.fr/dataset/points-deau-incendie-pei-du-sdis-cote-dor',
+            source_url='https://ideo.data.arnia-bfc.fr/databfc/dataset/points-deau-incendie-pei-du-sdis-cote-dor/informations',
             dataset_name='Points d\'eau incendie (PEI) du SDIS Côte d\'Or',
-            source=Source(attribution='Service Départemental d\'Incendie et de Secours de la Côte d\'Or (SDIS21) Service Prévision',
-                millesime='2023-07',
-                fileUrl='https://trouver.ternum-bfc.fr/dataset/230e8d9c-8a4d-446c-b910-7d1f85aff047/resource/b991c949-8068-4f9d-ba6a-7765eb2e0504/service_proxy?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=poteaux_incendie_a11c796&OUTPUTFORMAT=geojson&CRSNAME=EPSG:4326'),
+            source=Source(attribution='Service Départemental d\'Incendie et de Secours de la Côte d\'Or (SDIS21)',
+                millesime='2026-09',
+                fileUrl='https://ckan2.data.arnia-bfc.fr/dataset/9b0ff096-fdb9-46b2-8c66-d9dfeb12c01d/resource/929f4a04-6707-497d-aab0-0e8c6bd912ae/download/poteaux.zip'),
+            srid=2154,
             osmRef='ref:FR:SDIS21',
             logger=logger)

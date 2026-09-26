@@ -340,7 +340,9 @@ france_departement("basse_normandie/orne", 7419, "FR-61")
 france_departement("bourgogne/cote_d_or", 7424, "FR-21", include=[
     'merge_hydrants_FR_SDIS_21',
 ])
-france_departement("bourgogne/nievre", 7448, "FR-58")
+france_departement("bourgogne/nievre", 7448, "FR-58", include=[
+    'merge_hydrants_FR_SDIS_58',
+])
 france_departement("bourgogne/saone_et_loire", 7397, "FR-71", include=[
     'merge_hydrants_FR_SDIS_71',
 ])
@@ -393,8 +395,9 @@ france_departement("franche_comte/jura", 7460, "FR-39", include=[
     'merge_power_pole_FR_spec_enedis'
 ])
 france_departement("franche_comte/haute_saone", 7423, "FR-70")
-france_departement("franche_comte/territoire_de_belfort", 7410, "FR-90")
-
+france_departement("franche_comte/territoire_de_belfort", 7410, "FR-90", include=[
+    'merge_hydrants_FR_SDIS_90',
+])
 france_departement("haute_normandie/eure", 7435, "FR-27")
 france_departement("haute_normandie/seine_maritime", 7426, "FR-76", include=[
     # Le Havre

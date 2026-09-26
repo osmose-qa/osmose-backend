@@ -27,10 +27,11 @@ from .Analyser_Merge import Source
 class Analyser_Merge_Hydrants_FR_SDIS_71(_Analyser_Merge_Afigeo_Hydrants):
     def __init__(self, config, logger = None):
         _Analyser_Merge_Afigeo_Hydrants.__init__(self, config,
-            source_url='https://trouver.ternum-bfc.fr/dataset/points-deau-incendie-repertories-en-saone-et-loire',
-            dataset_name='Points d\'eau incendie répertoriés en Saône-et-Loire',
-            source=Source(attribution='Service départemental d\'incendie et de secours 71',
-                millesime='2022-02',
-                fileUrl='https://trouver.ternum-bfc.fr/dataset/59d07ea2-ca9a-444a-b977-0e32b280af1c/resource/5b76d323-d0b6-404b-9156-133b688aa9ca/service_proxy?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=pei_a3260f9&OUTPUTFORMAT=geojson&CRSNAME=EPSG:4326'),
+            source_url='https://ideo.data.arnia-bfc.fr/databfc/dataset/points-deau-incendie-repertories-en-saone-et-loire/informations',
+            dataset_name='Points d\'eau incendie (pei) répertoriés en Saône-et-Loire (71)',
+            source=Source(attribution='Service départemental d\'incendie et de secours de Saône-et-Loire (SDIS 71)',
+                millesime='2026-09',
+                fileUrl='https://ckan2.data.arnia-bfc.fr/dataset/d34769e3-e696-41da-a841-bd7665b8574c/resource/5411d34f-af20-4a29-94f8-38a63e93fe65/download/pei.zip'),
+            srid=4326,
             osmRef='ref:FR:SDIS71',
             logger=logger)
