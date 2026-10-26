@@ -79,6 +79,7 @@ However, this should probably still conform to the typical format used for value
                                  "surface": ( "concrete:plates", "concrete:lanes",
                                             "paving_stones:20", "paving_stones:30", "paving_stones:50",
                                             "cobblestone:10", "cobblestone:20", "cobblestone:flattened"),
+                                 "amenity": ( "kick-scooter_parking" ),
                                  "shop": ( "e-cigarette" ),
                                  "sport": ( "five-a-side", "jiu-jitsu", "pesäpallo", "shot-put" ),
                                  "barrier": ( "full-height_turnstile" ),
