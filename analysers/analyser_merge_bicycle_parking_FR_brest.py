@@ -45,6 +45,7 @@ class Analyser_Merge_Bicycle_Parking_FR_Brest(Analyser_Merge_Point):
                     types = ["nodes", "ways"],
                     tags = {"amenity": "bicycle_parking"}),
                 conflationDistance = 10,
+                subclass_hash = lambda fields: {},
                 mapping = Mapping(
                     static1 = {"amenity": "bicycle_parking"},
                     static2 = {"source": self.source},
