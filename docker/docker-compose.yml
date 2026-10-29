@@ -1,49 +1,43 @@
-volumes:
-  pgdata:
-
 services:
   postgis:
     shm_size: 1g
-    image: postgis/postgis:17-3.5-alpine
+    image: postgis/postgis:18-3.6-alpine
     volumes:
-      - type: bind
-        source: ./postgis-init.sh
-        target: /docker-entrypoint-initdb.d/postgis-init.sh
-      - pgdata:/var/lib/postgresql/data
-      ## Alternate, to keep the data outside of container
-      #- ./postgresql-data:/var/lib/postgresql/data
-      ## Alternate, with tmpfs database is only on memory, lost on stop. Save SSD lifetime.
-      #- type: tmpfs
-      #  target: /var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/18/docker
+      - ./postgis-init.sh:/docker-entrypoint-initdb.d/postgis-init.sh
     environment:
       - POSTGRES_PASSWORD=zei8diu4ohSh
     command: postgres -c synchronous_commit=off -c full_page_writes=off -c max_wal_senders=0 -c wal_level=minimal
-    networks:
-      - osmose-backend-internal
+    restart: unless-stopped
 
   backend:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    image: osm-fr/osmose_backend
+    image: osmose-qa/osmose_backend
     depends_on:
       - postgis
     volumes:
-      - type: bind
-        source: ../osmose_config_password.py
-        target: /opt/osmose-backend/osmose_config_password.py
-        read_only: true
-      - type: bind
-        source: ./work
-        target: /data/work/osmose
+      - ../osmose_config_password.py:/opt/osmose-backend/osmose_config_password.py:ro
+      - ./work:/data/work/osmose
     environment:
       - DB_HOST=postgis
       - JUPYTER_RUNTIME_DIR=/tmp
       #- SENTRY_DSN=
     user: "1000:1000"
-    command: ./osmose_run.py --country=monaco --analyser=osmosis_highway_floating_islands
-    networks:
-      - osmose-backend-internal
+    restart: unless-stopped
 
-networks:
-  osmose-backend-internal:
+volumes:
+  pgdata:
+    ## To keep the data on local directory
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: ./pgdata
+
+    ## To keep the data on a tmpfs (memory only, lost on stop)
+    # driver: local
+    # driver_opts:
+    #   type: tmpfs
+    #   device: tmpfs

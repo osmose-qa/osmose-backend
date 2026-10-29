@@ -1,15 +1,6 @@
 services:
   backend:
     volumes:
-      - type: bind
-        source: ../osmose_config_password-example.py
-        target: /opt/osmose-backend/osmose_config_password.py
+      - ../osmose_config_password-example.py:/opt/osmose-backend/osmose_config_password.py
     environment:
       - URL_FRONTEND_UPDATE=http://api:20009/control/send-update
-    networks:
-      - osmose-frontend
-
-networks:
-  osmose-frontend:
-    external:
-      name: docker_osmose-frontend
