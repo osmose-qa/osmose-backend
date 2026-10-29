@@ -8,6 +8,14 @@ services:
     environment:
       - POSTGRES_PASSWORD=zei8diu4ohSh
     command: postgres -c synchronous_commit=off -c full_page_writes=off -c max_wal_senders=0 -c wal_level=minimal
+    healthcheck:
+      # Test if the database is ready and has been initialized with the osmose_frontend database and items table
+      test: pg_isready
+      start_interval: 1s
+      start_period: 30s
+      interval: 30s
+      timeout: 10s
+      retries: 5
     restart: unless-stopped
 
   backend:

@@ -41,13 +41,6 @@ To enable results to be uploaded to the frontend you must configure
 the frontend passwords in `osmose_config_password.py`.
 
 
-## Tuning
-
-The database configuration can be tuned by setting the `POSTGRESQL_POSTCREATION`
-environment variable to a SQL statement. The SQL statement will be executed at
-startup using the postgres user account.
-
-
 ## Develop on Osmose using docker
 
 * A Backend alone with the **Jupyter** web editor and visualizer can be
