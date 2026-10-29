@@ -5,11 +5,10 @@ services:
       dockerfile: docker/Dockerfile
       args:
         PIP_INSTALL: -r requirements-dev.txt
-    image: osm-fr/osmose_backend:dev
+    image: osmose-qa/osmose_backend:dev
     volumes:
       - ..:/opt/osmose-backend
       - ../osmose_config_password-example.py:/opt/osmose-backend/osmose_config_password.py:ro
-    command: bash
     environment:
       - DB_HOST=postgis
       - DB_BASE_TEST=osmose
