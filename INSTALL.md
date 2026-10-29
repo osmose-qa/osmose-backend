@@ -1,8 +1,6 @@
-Install
-=======
+# Install
 
-Installing Python
------------------
+## Installing Python
 
 Osmose QA backend requires python > 3.6.
 
@@ -46,7 +44,7 @@ Tests can then be run with:
 pytest-3
 ```
 
-### Compile the OMS PBF parser
+### Compile the OSM PBF parser
 
 Build the native python module lib to parse .osm.pbf files:
 ```
@@ -57,8 +55,7 @@ make
 ```
 
 
-Installing the Database
------------------------
+## Installing the Database
 
 Setup system dependencies (Debian Buster):
 ```
@@ -76,8 +73,7 @@ psql -c "CREATE extension hstore; CREATE extension fuzzystrmatch; CREATE extensi
 ```
 
 
-Dependencies
-------------
+## Dependencies
 
 Java JRE for osmosis:
 ```
@@ -88,8 +84,8 @@ osmosis is installed in osmosis/osmosis-0.47.4/.
 osmconvert is installed in osmconvert/.
 
 
-Configuration
--------------
+## Configuration
+
 A few paths are hardcoded in modules/config.py, and should be adapted or created.
 
   - dir_osmose is the path of where osmose is installed
@@ -111,8 +107,8 @@ See https://wiki.postgresql.org/wiki/Pgpass for more info.
 
 You may use `SENTRY_DSN` environment variable to enable error report centralization.
 
-Run Tests
----------
+## Run Tests
+
 Setup a `~/.pgpass` file to allow pgsql to connect to the test database without asking for a password:
 ```
 hostname:port:database:username:password
