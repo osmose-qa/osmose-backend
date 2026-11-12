@@ -242,7 +242,7 @@ def execc(conf, logger, analysers, options, osmosis_manager):
                         with obj(analyser_conf, logger.sub()) as analyser_obj:
                             remote_timestamp = None
                             if not options.skip_frontend_check:
-                                url = modules.config.url_frontend_update + "/../../control/status/%s/%s?%s" % (conf.country, analyser_name, 'objects=true' if resume else '')
+                                url = modules.config.url_frontend_update + "control/status/%s/%s?%s" % (conf.country, analyser_name, 'objects=true' if resume else '')
                                 resp = downloader.request_get(url)
                                 if not resp.ok:
                                     logger.sub().err("Fails to get status from frontend: {0}".format(resp.status_code))
