@@ -435,7 +435,7 @@ class Source:
 
     @staticmethod
     def _libarchive_extract(archive_path, pattern, out):
-        import libarchive
+        import libarchive # type: ignore
         with libarchive.file_reader(archive_path) as archive:
             for entry in archive:
                 if pathlib.Path(entry.pathname).match(pattern):
