@@ -39,7 +39,7 @@ class template_config:
 
     clean_at_end   = True
 
-    updt_url       = modules.config.url_frontend_update
+    updt_url       = modules.config.url_frontend_update + "control/send-update"
     dir_work       = modules.config.dir_work
     dir_tmp        = modules.config.dir_tmp
     dir_cache      = modules.config.dir_cache
