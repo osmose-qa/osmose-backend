@@ -9,6 +9,6 @@ services:
     volumes:
       - ..:/opt/osmose-backend
       - ../osmose_config_password-example.py:/opt/osmose-backend/osmose_config_password.py:ro
+      - /opt/osmose-backend/modules/osm_pbf_parser
     environment:
-      - DB_HOST=postgis
       - DB_BASE_TEST=osmose
