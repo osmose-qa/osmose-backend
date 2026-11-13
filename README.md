@@ -15,19 +15,12 @@ Analysers can be build in many ways:
   - With SQL/PostGIS queries on the Osmosis database: [analysers/analyser_osmosis_*.py](analysers).
   - By configuring a comparator of OpenData and OSM objects: [analysers/analyser_merge_*.py](analysers).
 
-## Installation
+## Setup
 
 The default way to setup Osmose Backend is through Docker. Look at the
 [docker/README.md](docker/README.md).
 
 You can also install manually on a debian distribution [INSTALL.md](INSTALL.md).
-
-## Run
-
-Look at the osmose_run.py help for options
-```
-osmose_run.py -h
-```
 
 ## Contributing
 

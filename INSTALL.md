@@ -127,3 +127,10 @@ Finally run the tests:
 pytest-3 analysers/Analyser_Osmosis.py
 pytest-3 analysers/analyser_sax.py
 ```
+
+# Run
+
+Look at the osmose_run.py help for options
+```
+osmose_run.py -h
+```
