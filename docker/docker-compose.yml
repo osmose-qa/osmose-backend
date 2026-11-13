@@ -3,7 +3,7 @@ services:
     shm_size: 1g
     image: postgis/postgis:18-3.6-alpine
     volumes:
-      - pgdata:/var/lib/postgresql/18/docker
+      - backend_pgdata:/var/lib/postgresql/18/docker
       - ./postgis-init.sh:/docker-entrypoint-initdb.d/postgis-init.sh
     environment:
       - POSTGRES_PASSWORD=zei8diu4ohSh
@@ -31,12 +31,12 @@ services:
     environment:
       - DB_HOST=postgis
       - JUPYTER_RUNTIME_DIR=/tmp
-      #- SENTRY_DSN=
+      - SENTRY_DSN=${SENTRY_DSN}
     user: "1000:1000"
     restart: unless-stopped
 
 volumes:
-  pgdata:
+  backend_pgdata:
     ## To keep the data on local directory
     # driver: local
     # driver_opts:

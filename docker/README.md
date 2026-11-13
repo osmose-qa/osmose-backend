@@ -8,17 +8,14 @@ docker compose and doesn't need be installed manually.
 The osmose-frontend docker may also be run but is not mandatory.
 
 
-## Setup
+## Setup for production
 
-To build the docker image run this command from the docker folder:
+Build the Docker images
 ```sh
 docker compose build
 ```
 
-For production setup, you may fill the `SENTRY_DSN` field in
-`docker-compose.yml` to enable error report centralization.
-
-## Running on a single country
+For production setup, you may fill the `SENTRY_DSN` in the `.env` to enable error reporting.
 
 The `./work` directory on your host must be writable by anyone, as the
 `osmose` user in the container will have some random UID (probably 1000).
@@ -29,64 +26,77 @@ chmod a+w ./work
 Taking Monaco (a quick and small one) as an example, once the docker
 image is built, you can run Osmose analyzers using:
 ```sh
-docker compose --project-name monaco run --rm backend ./osmose_run.py --country=monaco
-docker compose --project-name monaco down # Destroy the loaded data base
+docker compose run --rm backend ./osmose_run.py --country=monaco
+docker compose down # Destroy the loaded data base
 ```
 
 This will run interactively and you will see the output scrolling on your
 screen. The container will be deleted at the end of the process. All
 downloaded and output data will be saved in the `./work` directory.
 
-To enable results to be uploaded to the frontend you must configure
-the frontend passwords in `osmose_config_password.py`.
-
 
 ## Develop on Osmose using docker
 
-* A Backend alone with the **Jupyter** web editor and visualizer can be
-used.
-* Alternatively, using docker-compose, you can run a **full development
-environment** with backend and frontend. In develop mode, the Backend can
-run an analysis and send the results to the local Frontend without
-requiring extra configuration or upload password.
+Run every thing from the `docker` directory.
 
-
-## Build the develop tools
-
-Build the docker image with develop tools included:
+Add the `osmose-frontend` project, it will allow you to show the result on a web map.
 ```sh
-docker compose -f docker-compose.yml -f docker-compose-dev.yml build
+git clone https://github.com/osmose-qa/osmose-frontend.git
 ```
 
+Copy `.env.template` as `.env` and uncomment the `COMPOSE_FILE` line.
 
-## Start Docker Backend container
-
-On the first execution only:
+Build the Docker images
 ```sh
-chmod a+w ../modules/osm_pbf_parser/
+docker compose build
 ```
 
-Enter the container with:
+### Run
+
+Start e.g. with Monaco, a quick and small one. Import the OSM data.
 ```sh
-docker compose -f docker-compose.yml -f docker-compose-dev.yml run --rm backend
+docker compose run --rm backend ./osmose_run.py --country=monaco --skip-analyser --skip-upload --no-clean
 ```
 
-On the first execution only, compile the OSM PBF parser:
+Then you can run all Osmose analysers using:
 ```sh
-cd modules/osm_pbf_parser/ && make && cd -
+docker compose run --rm backend ./osmose_run.py --skip-init --no-clean --country=monaco
 ```
 
-Note: when exiting the backend, the dependency Database container will still be
-running. You can stop it with `docker compose stop`.
+List configured "countries" and analysers with:
+```sh
+docker compose run --rm backend ./osmose_run.py --list-country
+docker compose run --rm backend ./osmose_run.py --list-analyser
+```
+
+To test a specific analyser:
+```sh
+docker compose run --rm backend ./osmose_run.py --skip-init --no-clean --country=monaco --analyser=osmosis_highway_floating_islands
+```
+
+To run one plugin only use:
+```sh
+docker compose run --rm backend ./osmose_run.py --skip-init --no-clean --country=monaco --analyser=sax --plugin=Name_Multiple
+```
+
+The files containing the results will be in `./work/results`.
+
+### Show the results on the map
+
+```sh
+docker compose up api web
+```
+
+The result will be available on the frontend at: http://127.0.0.1:8080/en/issues/open?item=xxxx&useDevItem=all
 
 
-## Access to the Database
+### Access to the Database
 
-After data load (see later) the Database will contain the OSM data. You
+After data load the Database will contain the OSM data. You
 can enter to explore and test SQL directly. Open a psql shell on database
 from within the Backend container with:
 ```sh
-psql -h postgis
+docker compose run --rm backend psql -h postgis
 ```
 Password: `-osmose-`.
 
@@ -101,31 +111,13 @@ docker compose down -v
 ```
 
 
-## Run the tests
+### Alternative: Develop with Jupyter
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for details. But, for short:
-```sh
-pytest plugins/TagFix_Housenumber.py
-./tools/pytest.sh lint
-./tools/pytest.sh mypy
-./tools/pytest.sh sax # Run all plugins tests
-./tools/pytest.sh merge # Not required, run all test on merge from analysers directory
-./tools/pytest.sh other # Not required, run all other analysers and non analyser tests
-```
-
-
-## Alternative 1: Develop with Jupyter
-
-Download and load a country into the Database:
-```sh
-docker compose -f docker-compose.yml -f docker-compose-dev.yml run -p 8888:8888 --rm backend ./osmose_run.py --no-clean --country=monaco --skip-analyser --skip-upload
-```
-You do not need to load the country each time. It remains in the Database.
-
+Load OSM data, as before.
 
 Then run the jupyter-notebook web server:
 ```sh
-docker compose -f docker-compose.yml -f docker-compose-dev.yml run -p 8888:8888 --rm backend jupyter-notebook
+docker compose run -p 8888:8888 --rm backend jupyter-notebook
 ```
 Note the `8888:8888`, which exposes port `8888` to localhost.
 
@@ -136,64 +128,14 @@ Start by reading the index documentation, and copy template to test your
 own analyzer code.
 
 
-## Alternative 2: Develop with Full environment
+## Run the tests
 
-From docker container you can test all the analyzers using:
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for details. But, for short:
 ```sh
-docker compose -f docker-compose.yml -f docker-compose-dev.yml run --rm backend
+docker compose run --rm backend pytest plugins/TagFix_Housenumber.py
+docker compose run --rm backend ./tools/pytest.sh lint
+docker compose run --rm backend ./tools/pytest.sh mypy
+docker compose run --rm backend ./tools/pytest.sh sax # Run all plugins tests
+docker compose run --rm backend ./tools/pytest.sh merge # Not required, run all test on merge from analysers directory
+docker compose run --rm backend ./tools/pytest.sh other # Not required, run all other analysers and non analyser tests
 ```
-
-To test a specific analyzer:
-```sh
-./osmose_run.py --no-clean --country=monaco --analyser=osmosis_highway_floating_islands
-```
-
-To run one plugin only use:
-```sh
-./osmose_run.py --no-clean --country=monaco --analyser=sax --plugin=Name_Multiple
-```
-
-The execution time of the process may be pretty long, depending on the area:
-```sh
-[...]
-2018-01-25 20:19:04   DROP SCHEMA monaco
-2018-01-25 20:19:04   DROP SCHEMA IF EXISTS monaco CASCADE;
-2018-01-25 20:19:04 end of analyses
-```
-
-The files containing the results will be in `./work/results`.
-
-To debug, keep the container running, edit the python files from outside the container,
-then run `osmose-run` again. You can add the `--skip-init` parameter to speed up the execution.
-
-### Showing the results on the Osmose Frontend Map
-
-Quick Osmose Frontend setup.
-
-First time build
-```sh
-git clone https://github.com/osmose-qa/osmose-frontend.git
-cd osmose-frontend/docker
-curl https://osmose.openstreetmap.fr/export/osmose-menu.sql.bz2 | bzcat > osmose-menu.sql
-docker compose build
-docker compose -f docker-compose.yml -f docker-compose-test.yml up -d postgres
-# Wait fwe seconds for postgres ready
-docker compose -f docker-compose.yml -f docker-compose-test.yml run --rm api bash -c "cd web_api/static && npm run build"
-docker compose -f docker-compose.yml -f docker-compose-test.yml stop postgres
-```
-
-Run the frontend
-```sh
-docker compose -f docker-compose.yml -f docker-compose-test.yml up
-```
-
-For a detailed description of the procedure see
-https://github.com/osmose-qa/osmose-frontend/tree/master/docker
-
-
-To upload the results of the analysis to the frontend, use:
-```sh
-docker compose -f docker-compose.yml -f docker-compose-dev.yml -f docker-compose-frontend.yml run --rm backend bash
-```
-
-The result will be available at: http://127.0.0.1:8080/en/issues/open?item=xxxx&useDevItem=all

@@ -1,6 +1,17 @@
+include:
+  - osmose-frontend/docker-compose.yml
+  # - osmose-frontend/docker-compose-dev.yml
+  - osmose-frontend/docker-compose-unlock.yml
+
 services:
   backend:
     volumes:
       - ../osmose_config_password-example.py:/opt/osmose-backend/osmose_config_password.py
+    depends_on:
+      - api
     environment:
       - URL_FRONTEND_UPDATE=http://api:20009/
+
+  web:
+    environment:
+      - API_URL=http://localhost:20009
