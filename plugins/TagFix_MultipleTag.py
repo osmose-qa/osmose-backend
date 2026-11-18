@@ -18,7 +18,34 @@
 ###########################################################################
 
 from modules.OsmoseTranslation import T_
+from modules.Stablehash import stablehash64
+from plugins.modules.units import convertToUnit
 from plugins.Plugin import Plugin
+
+
+def _size_in_meters(value):
+    """Return the value in meters, or None when it is not a length we can parse."""
+    try:
+        return convertToUnit(value, 'm')
+    except NotImplementedError:
+        # A number with a unit the converter does not know (e.g. `3 furlong`).
+        return None
+
+
+def _sizes_disagree(first, second):
+    """Whether two size values contradict each other.
+
+    `3`, `3.0`, `3 m`, `300 cm` and `3ft` are the same length; values that cannot be
+    parsed as a length are compared as text, and a numeric value against a non-numeric
+    one is left alone because there is nothing to compare.
+    """
+    first_meters = _size_in_meters(first)
+    second_meters = _size_in_meters(second)
+    if first_meters is not None and second_meters is not None:
+        return abs(first_meters - second_meters) > 0.01
+    if first_meters is None and second_meters is None:
+        return first.strip().lower() != second.strip().lower()
+    return False
 
 
 class TagFix_MultipleTag(Plugin):
@@ -74,6 +101,7 @@ For further detail, see [the wiki](https://wiki.openstreetmap.org/wiki/Key:acces
 
         self.driving_side_right = not (self.father.config.options.get("driving_side") == "left")
         self.driving_direction = "anticlockwise" if self.driving_side_right else "clockwise"
+        self.size_estimate_tags = (("width", "est_width"), ("height", "est_height"))
         name_parent = []
         for i in main_tags:
             name_parent.append(i)
@@ -94,8 +122,20 @@ For further detail, see [the wiki](https://wiki.openstreetmap.org/wiki/Key:acces
             name_parent.append(i + ":forward")
         self.name_parent = set(name_parent)
 
-    def common(self, tags, key_set):
+    def _conflicting_size_estimates(self, tags):
         err = []
+        for key, estimate_key in self.size_estimate_tags:
+            if key not in tags or estimate_key not in tags:
+                continue
+            if not _sizes_disagree(tags[key], tags[estimate_key]):
+                continue
+            err.append({"class": 30323, "subclass": stablehash64(key),
+                        "text": T_("`{0}` is {1} but `{2}` is {3}", key, tags[key], estimate_key, tags[estimate_key])})
+
+        return err
+
+    def common(self, tags, key_set):
+        err = self._conflicting_size_estimates(tags)
         if tags.get("name") and len(key_set & self.name_parent) == 0 and tags.get("naptan:verified") != "no":
             err.append({"class": 21101, "subclass": 1})
 
@@ -165,3 +205,34 @@ class Test(TestPluginCommon):
 
         assert a.way(None, {"tracktype": "foo"}, None)
         assert not a.way(None, {"tracktype": "foo", "leisure": "track"}, None)
+
+    def test_conflicting_size_estimates(self):
+        a = TagFix_MultipleTag(None)
+        self.set_default_config(a)
+        a.init(None)
+
+        for t in [{"width": "3", "est_width": "4"},
+                  {"width": "3", "est_width": "4 m"},
+                  {"height": "2", "est_height": "2.5"},
+                  {"width": "3ft", "est_width": "1 m"},
+                  {"width": "3", "est_width": "3.5", "height": "2", "est_height": "2"}]:
+            self.check_err(a.node(None, t), t)
+            self.check_err(a.way(None, t, None), t)
+            self.check_err(a.relation(None, t, None), t)
+
+        for t in [{"width": "3", "est_width": "3"},
+                  {"width": "3", "est_width": "3.0"},
+                  {"width": "3", "est_width": "3 m"},
+                  {"width": "3", "est_width": "300 cm"},
+                  {"width": "3ft", "est_width": "0.9144 m"},
+                  {"height": "2", "est_height": "2.00"},
+                  {"width": "narrow", "est_width": "narrow"},
+                  {"width": "3", "est_width": "narrow"},
+                  {"width": "3"},
+                  {"est_width": "4"},
+                  {"height": "2", "est_height": "2"},
+                  ]:
+            assert not a.node(None, t), t
+            assert not a.way(None, t, None), t
+            assert not a.relation(None, t, None), t
+
