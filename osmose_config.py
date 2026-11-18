@@ -386,7 +386,9 @@ france_departement("champagne_ardenne/haute_marne", 7396, "FR-52")
 france_departement("corse/corse_du_sud", 76932, "FR-2A")
 france_departement("corse/haute_corse", 76931, "FR-2B")
 
-france_departement("franche_comte/doubs", 7462, "FR-25")
+france_departement("franche_comte/doubs", 7462, "FR-25", include=[
+    'merge_power_pole_FR_spec_enedis'
+])
 france_departement("franche_comte/jura", 7460, "FR-39", include=[
     'merge_hydrants_FR_SDIS_39',
     'merge_power_pole_FR_gracethd3_jura',
@@ -449,10 +451,13 @@ france_departement("limousin/creuse", 7459, "FR-23")
 france_departement("limousin/haute_vienne", 7418, "FR-87")
 
 france_departement("lorraine/meurthe_et_moselle", 51856, "FR-54", include=[
+    'merge_power_pole_FR_spec_enedis',
     # Nancy
     'merge_public_transport_FR_stan',
 ])
-france_departement("lorraine/meuse", 7382, "FR-55")
+france_departement("lorraine/meuse", 7382, "FR-55", include=[
+    'merge_power_pole_FR_spec_enedis'
+])
 france_departement("lorraine/moselle", 51854, "FR-57")
 france_departement("lorraine/vosges", 7384, "FR-88")
 
