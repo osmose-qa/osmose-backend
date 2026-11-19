@@ -65,7 +65,7 @@
 65,Swingolf,,sport=golf,golf=driving_range
 66,,,,
 67,Parcours sportif/santé,leisure=fitness_station,sport=exercise,
-68,Pas de tir à l'arc,leisure=pitch,sport=archery,
+68,Pas de tir à l'arc,leisure=pitch,sport=archery|pole_archery,
 69,Pas de tir à la cible,leisure=pitch,sport=shooting,
 70,Pas de tir aux plateaux,leisure=pitch,sport=shooting,
 71,,,,

@@ -32,7 +32,9 @@ class Analyser_Merge_Pitch_FR(Analyser_Merge_Dynamic):
             spamreader = csv.reader(mappingfile)
             for row in spamreader:
                 classs, topic = row[0:2]
-                tags = list(map(lambda t: t.split('=') if t else None, row[2:5]))
+                tags = map(lambda t: t.split('='), filter(lambda t: t, row[2:5]))
+                tags = map(lambda t: [t[0], t[1].split('|')], tags)
+                tags = list(tags)
                 osmTags = dict(filter(lambda t: t, tags[0:2]))
                 if len(osmTags) > 0:
                     defaultTags = dict(filter(lambda t: t, tags[2:3]))
@@ -63,7 +65,7 @@ class SubAnalyser_Merge_Pitch_FR(SubAnalyser_Merge_Dynamic):
                     tags = osmTags),
                 conflationDistance = 200,
                 mapping = Mapping(
-                    static1 = dict(dict(**osmTags), **defaultTags),
+                    static1 = dict(dict(map(lambda kv: [kv[0], kv[1][0]], osmTags)), **defaultTags),
                     static2 = {"source": self.source},
                     mapping1 = {"surface": self.surface},
                 text = lambda tags, fields: {"en": ", ".join(filter(lambda i: i != "None", [fields["Numéro de l'installation sportive"], fields["Type d'équipement sportif"], fields["Nom de l'installation sportive"], fields["Nom de l'équipement sportif"]]))} )))
