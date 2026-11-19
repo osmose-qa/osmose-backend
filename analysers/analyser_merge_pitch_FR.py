@@ -36,11 +36,14 @@ class Analyser_Merge_Pitch_FR(Analyser_Merge_Dynamic):
                 osmTags = dict(filter(lambda t: t, tags[0:2]))
                 if len(osmTags) > 0:
                     defaultTags = dict(filter(lambda t: t, tags[2:3]))
-                    self.classFactory(SubAnalyser_Merge_Pitch_FR, classs, classs, topic, osmTags, defaultTags)
+                    # A value can list alternatives separated by "|": all are searched, the first one is used for new objects
+                    selectTags = {k: v.split('|') if '|' in v else v for k, v in osmTags.items()}
+                    osmTags = {k: v.split('|')[0] for k, v in osmTags.items()}
+                    self.classFactory(SubAnalyser_Merge_Pitch_FR, classs, classs, topic, osmTags, selectTags, defaultTags)
 
 
 class SubAnalyser_Merge_Pitch_FR(SubAnalyser_Merge_Dynamic):
-    def __init__(self, config, error_file, logger, classs, topic, osmTags, defaultTags):
+    def __init__(self, config, error_file, logger, classs, topic, osmTags, selectTags, defaultTags):
         SubAnalyser_Merge_Dynamic.__init__(self, config, error_file, logger)
         self.def_class_missing_official(item = 8170, id = classs, level = 3, tags = ['merge', 'leisure', 'fix:imagery', 'fix:survey'],
             title = T_('Pitch not integrated {0}', topic))
@@ -60,7 +63,7 @@ class SubAnalyser_Merge_Pitch_FR(SubAnalyser_Merge_Dynamic):
             Conflate(
                 select = Select(
                     types = ["nodes", "ways", "relations"],
-                    tags = osmTags),
+                    tags = selectTags),
                 conflationDistance = 200,
                 mapping = Mapping(
                     static1 = dict(dict(**osmTags), **defaultTags),
