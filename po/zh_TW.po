@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2026-09-28 18:13+0000\n"
-"Last-Translator: Steve Lee <stevel2520@gmail.com>\n"
+"PO-Revision-Date: 2026-11-20 02:19+0000\n"
+"Last-Translator: Supaplex <supaplex@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/osmose/backend/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -322,23 +322,23 @@ msgstr "建設已經完工"
 
 #: ../plugins/Date.py:33
 msgid "Bad date format"
-msgstr ""
+msgstr "不好的日期格式"
 
 #: ../plugins/Highway_Lanes.py:32
 msgid "Bad lanes value"
-msgstr ""
+msgstr "不良的車道數"
 
 #: ../plugins/Highway_Parking_Lane.py:37
 msgid "Bad parking:lane:[side]"
-msgstr ""
+msgstr "不良的停車通道數：[side]"
 
 #: ../plugins/Highway_Parking_Lane.py:44
 msgid "Too many parking:lane:[side]"
-msgstr ""
+msgstr "太多停車通道數：[side]"
 
 #: ../plugins/Highway_Parking_Lane.py:51
 msgid "Bad parking:lane:[side] value"
-msgstr ""
+msgstr "不良的停車：車道：[side]數值"
 
 #: ../plugins/Highway_Parking_Lane.py:56
 msgid "parking:condition:[side] without parking:lane:[side] value"
