@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2026-11-19 16:51+0000\n"
+"PO-Revision-Date: 2026-11-21 22:48+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fito@libreoffice.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/osmose/backend/"
 "es/>\n"
@@ -492,7 +492,7 @@ msgstr "Etiquetar árboles"
 
 #: ../plugins/TagFix_Wikipedia.py:46
 msgid "Not a Wikipedia URL"
-msgstr "Sin una URL Wikipedia"
+msgstr "No es un URL de Wikipedia"
 
 #: ../plugins/TagFix_Wikipedia.py:49
 msgid "Wikipedia URL instead of article title"
@@ -3946,9 +3946,8 @@ msgid ""
 "If after review you are sure that it is new data and right for\n"
 "OpenStreetMap, then you can add it."
 msgstr ""
-"Si tras la revisión está seguro de que se trata de datos nuevos y adecuados "
-"para\n"
-"OpenStreetMap, entonces puedes añadirlo."
+"Si tras la revisión confía en que se trata de datos nuevos y adecuados\n"
+"para OpenStreetMap, entonces puede añadirlos."
 
 #: ../analysers/Analyser_Merge.py:1230
 msgid "Be sure that it does not already exist in another place."
