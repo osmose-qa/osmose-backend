@@ -283,7 +283,6 @@ class Josm_powerQA(PluginMapCSS):
         self.re_2687a5ba = re.compile(r'^(11000|33000|132000|330000)$')
         self.re_26c08bf9 = re.compile(r'^(thermal|photovoltaic)$')
         self.re_285399d2 = re.compile(r'^(([0-9]+(\.[0-9]+)? *(W|kW|MW|GW))|yes)$')
-        self.re_28f9c3db = re.compile(r'^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$')
         self.re_296b474d = re.compile(r'^(main|auxiliary|generator|converter|phase_angle_regulator|converter|distribution|yes|traction|minor_distribution|auto)$')
         self.re_2ba8e0b8 = re.compile(r'^(230|400|690|10000|13000|20000|22000|23000|24000|25000|30000|33000|34000|50000|66000|110000|150000|220000|320000|380000|450000|600000)$')
         self.re_2bb1cd2e = re.compile(r'^(20000|110000|330000)$')
@@ -302,7 +301,6 @@ class Josm_powerQA(PluginMapCSS):
         self.re_309280d5 = re.compile(r'^(35000|40000|100000|110000|220000|330000|750000)$')
         self.re_313e83ad = re.compile(r'^(25000|33000|110000|115000|132000|230000|380000|400000)$')
         self.re_333c4ef6 = re.compile(r'^(30000|33000|60000|66000|138000|220000|230000|500000)$')
-        self.re_33f4b70a = re.compile(r'^(20000|25000|35000|110000|220000|400000|500000)$')
         self.re_34230a2b = re.compile(r'^(90000|132000|225000)$')
         self.re_34dfedad = re.compile(r'^(12000|34500|66000|69000|132000|138000|220000|500000)$')
         self.re_351dc689 = re.compile(r'^(11000|161000|225000|330000)$')
@@ -341,6 +339,7 @@ class Josm_powerQA(PluginMapCSS):
         self.re_4a39b920 = re.compile(r'^(11000|22000|23000|34500|46000|48000|69000|138000|230000|500000)$')
         self.re_4c208d10 = re.compile(r'^(10500|13800|15000|16000|17500|20000|25000|30000|55000|60000|110000|132000|150000|220000|380000|400000)$')
         self.re_4c6c0f8c = re.compile(r'^(66000|132000|400000)$')
+        self.re_4cb11796 = re.compile(r'^(230|400|10000|20000|30000|35000|110000|220000|400000)$')
         self.re_4e6ba896 = re.compile(r'^(132000|220000|400000)$')
         self.re_5079f988 = re.compile(r'^(110000|220000)$')
         self.re_526934a1 = re.compile(r'^(11000|66000|110000|154000|220000)$')
@@ -363,6 +362,7 @@ class Josm_powerQA(PluginMapCSS):
         self.re_642c98f5 = re.compile(r'^(fission|fusion)$')
         self.re_643751fc = re.compile(r'^(11000|18000|20000|22000|25000|35000|110000|132000|220000|400000|750000)$')
         self.re_64f34b83 = re.compile(r'^(11000|33000|132000|220000)$')
+        self.re_65a1c7d6 = re.compile(r'^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$')
         self.re_65c9364b = re.compile(r'^(33000|66000|88000|110000|132000|220000|330000|400000)$')
         self.re_65ecf8ac = re.compile(r'^(110000|115000|220000|230000|500000)$')
         self.re_65ed1a9a = re.compile(r'^(10500|11000|22000|23000|25000|27000|27500|33000|35000|50000|63000|66000|100000|110000|132000|160000|220000|230000|275000|320000|330000|400000|500000|544000|660000|750000|800000|1000000|1100000|1150000|2200001|2200002|22000011)$')
@@ -1859,12 +1859,12 @@ class Josm_powerQA(PluginMapCSS):
                 # suggestAlternative:"138000/230000"
                 err.append({'class': 7040069, 'subclass': 316878503, 'text': mapcss.tr('Invalid voltage value for this country (Costa Rica)')})
 
-        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|35000|110000|220000|400000|500000)$/][inside("HR")]
+        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(230|400|10000|20000|30000|35000|110000|220000|400000)$/][inside("HR")]
         if ('power' in keys and 'voltage' in keys):
             match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_33f4b70a, '^(20000|25000|35000|110000|220000|400000|500000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'HR')))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_4cb11796, '^(230|400|10000|20000|30000|35000|110000|220000|400000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'HR')))
                 except mapcss.RuleAbort: pass
             if match:
                 # -osmoseFix:tr("Check the list of possible values for this country on the wiki and correct the `{0}` tag.","voltage")
@@ -1873,8 +1873,8 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseTrap:"If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check."
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Croatia"
                 # throwError:tr("Invalid voltage value for this country (Croatia)")
-                # suggestAlternative:"20000/25000/35000/110000/220000/400000/500000"
-                err.append({'class': 7040070, 'subclass': 1920686550, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
+                # suggestAlternative:"230/400/10000/20000/30000/35000/110000/220000/400000"
+                err.append({'class': 7040070, 'subclass': 74156474, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|110000|220000)$/][inside("CU")]
         if ('power' in keys and 'voltage' in keys):
@@ -2216,12 +2216,12 @@ class Josm_powerQA(PluginMapCSS):
                 # suggestAlternative:"35000/110000/154000/220000/330000/350000/380000/400000/500000"
                 err.append({'class': 7040090, 'subclass': 608739745, 'text': mapcss.tr('Invalid voltage value for this country (Georgia)')})
 
-        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
+        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
         if ('power' in keys and 'voltage' in keys):
             match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_28f9c3db, '^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'DE')))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_65a1c7d6, '^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'DE')))
                 except mapcss.RuleAbort: pass
             if match:
                 # -osmoseFix:tr("Check the list of possible values for this country on the wiki and correct the `{0}` tag.","voltage")
@@ -2230,8 +2230,8 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseTrap:"If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check."
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Germany"
                 # throwError:tr("Invalid voltage value for this country (Germany)")
-                # suggestAlternative:"10500/11000/15000/16000/20000/21000/22000/25000/27000/30000/33000/35000/50000/55000/60000/63000/65000/110000/132000/150000/155000/200000/220000/225000/250000/300000/320000/362000/380000/400000/450000/525000/600000"
-                err.append({'class': 7040091, 'subclass': 1186612248, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
+                # suggestAlternative:"230/400/10000/10500/11000/15000/16000/20000/21000/22000/25000/27000/30000/33000/35000/50000/55000/60000/63000/65000/110000/132000/150000/155000/200000/220000/225000/250000/300000/320000/362000/380000/400000/450000/525000/600000"
+                err.append({'class': 7040091, 'subclass': 1315177166, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|161000|225000|330000)$/][inside("GH")]
         if ('power' in keys and 'voltage' in keys):
@@ -5751,17 +5751,17 @@ class Josm_powerQA(PluginMapCSS):
                 # suggestAlternative:"138000/230000"
                 err.append({'class': 7040069, 'subclass': 322410606, 'text': mapcss.tr('Invalid voltage value for this country (Costa Rica)')})
 
-        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|35000|110000|220000|400000|500000)$/][inside("HR")]
-        # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(20000|25000|35000|110000|220000|400000|500000)$/][inside("HR")]
+        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(230|400|10000|20000|30000|35000|110000|220000|400000)$/][inside("HR")]
+        # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(230|400|10000|20000|30000|35000|110000|220000|400000)$/][inside("HR")]
         if ('power' in keys and 'voltage' in keys):
             match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_33f4b70a, '^(20000|25000|35000|110000|220000|400000|500000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'HR')))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_4cb11796, '^(230|400|10000|20000|30000|35000|110000|220000|400000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'HR')))
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss.regexp_test(mapcss._value_capture(capture_tags, 0, self.re_74005c1f), mapcss._tag_capture(capture_tags, 0, tags, 'power'))) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_33f4b70a, '^(20000|25000|35000|110000|220000|400000|500000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'HR')))
+                try: match = ((mapcss.regexp_test(mapcss._value_capture(capture_tags, 0, self.re_74005c1f), mapcss._tag_capture(capture_tags, 0, tags, 'power'))) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_4cb11796, '^(230|400|10000|20000|30000|35000|110000|220000|400000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'HR')))
                 except mapcss.RuleAbort: pass
             if match:
                 # -osmoseFix:tr("Check the list of possible values for this country on the wiki and correct the `{0}` tag.","voltage")
@@ -5770,8 +5770,8 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseTrap:"If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check."
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Croatia"
                 # throwError:tr("Invalid voltage value for this country (Croatia)")
-                # suggestAlternative:"20000/25000/35000/110000/220000/400000/500000"
-                err.append({'class': 7040070, 'subclass': 772212595, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
+                # suggestAlternative:"230/400/10000/20000/30000/35000/110000/220000/400000"
+                err.append({'class': 7040070, 'subclass': 789973072, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|110000|220000)$/][inside("CU")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|110000|220000)$/][inside("CU")]
@@ -6213,17 +6213,17 @@ class Josm_powerQA(PluginMapCSS):
                 # suggestAlternative:"35000/110000/154000/220000/330000/350000/380000/400000/500000"
                 err.append({'class': 7040090, 'subclass': 2062879893, 'text': mapcss.tr('Invalid voltage value for this country (Georgia)')})
 
-        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
-        # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
+        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
+        # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
         if ('power' in keys and 'voltage' in keys):
             match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_28f9c3db, '^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'DE')))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_65a1c7d6, '^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'DE')))
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss.regexp_test(mapcss._value_capture(capture_tags, 0, self.re_74005c1f), mapcss._tag_capture(capture_tags, 0, tags, 'power'))) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_28f9c3db, '^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'DE')))
+                try: match = ((mapcss.regexp_test(mapcss._value_capture(capture_tags, 0, self.re_74005c1f), mapcss._tag_capture(capture_tags, 0, tags, 'power'))) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_65a1c7d6, '^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'DE')))
                 except mapcss.RuleAbort: pass
             if match:
                 # -osmoseFix:tr("Check the list of possible values for this country on the wiki and correct the `{0}` tag.","voltage")
@@ -6232,8 +6232,8 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseTrap:"If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check."
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Germany"
                 # throwError:tr("Invalid voltage value for this country (Germany)")
-                # suggestAlternative:"10500/11000/15000/16000/20000/21000/22000/25000/27000/30000/33000/35000/50000/55000/60000/63000/65000/110000/132000/150000/155000/200000/220000/225000/250000/300000/320000/362000/380000/400000/450000/525000/600000"
-                err.append({'class': 7040091, 'subclass': 731334531, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
+                # suggestAlternative:"230/400/10000/10500/11000/15000/16000/20000/21000/22000/25000/27000/30000/33000/35000/50000/55000/60000/63000/65000/110000/132000/150000/155000/200000/220000/225000/250000/300000/320000/362000/380000/400000/450000/525000/600000"
+                err.append({'class': 7040091, 'subclass': 664547746, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|161000|225000|330000)$/][inside("GH")]
         # way[power=~/line|minor_line|cable/][voltage][voltage!~/;/][voltage!~/^(11000|161000|225000|330000)$/][inside("GH")]
@@ -10358,17 +10358,17 @@ class Josm_powerQA(PluginMapCSS):
                 # suggestAlternative:"138000/230000"
                 err.append({'class': 7040069, 'subclass': 754734875, 'text': mapcss.tr('Invalid voltage value for this country (Costa Rica)')})
 
-        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(20000|25000|35000|110000|220000|400000|500000)$/][inside("HR")]
-        # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(20000|25000|35000|110000|220000|400000|500000)$/][inside("HR")]
+        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(230|400|10000|20000|30000|35000|110000|220000|400000)$/][inside("HR")]
+        # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(230|400|10000|20000|30000|35000|110000|220000|400000)$/][inside("HR")]
         if ('power' in keys and 'voltage' in keys):
             match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_33f4b70a, '^(20000|25000|35000|110000|220000|400000|500000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'HR')))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_4cb11796, '^(230|400|10000|20000|30000|35000|110000|220000|400000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'HR')))
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss.regexp_test(mapcss._value_capture(capture_tags, 0, self.re_262476e6), mapcss._tag_capture(capture_tags, 0, tags, 'power'))) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_33f4b70a, '^(20000|25000|35000|110000|220000|400000|500000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'HR')))
+                try: match = ((mapcss.regexp_test(mapcss._value_capture(capture_tags, 0, self.re_262476e6), mapcss._tag_capture(capture_tags, 0, tags, 'power'))) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_4cb11796, '^(230|400|10000|20000|30000|35000|110000|220000|400000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'HR')))
                 except mapcss.RuleAbort: pass
             if match:
                 # -osmoseFix:tr("Check the list of possible values for this country on the wiki and correct the `{0}` tag.","voltage")
@@ -10377,8 +10377,8 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseTrap:"If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check."
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Croatia"
                 # throwError:tr("Invalid voltage value for this country (Croatia)")
-                # suggestAlternative:"20000/25000/35000/110000/220000/400000/500000"
-                err.append({'class': 7040070, 'subclass': 397296757, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
+                # suggestAlternative:"230/400/10000/20000/30000/35000/110000/220000/400000"
+                err.append({'class': 7040070, 'subclass': 56900431, 'text': mapcss.tr('Invalid voltage value for this country (Croatia)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|110000|220000)$/][inside("CU")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|110000|220000)$/][inside("CU")]
@@ -10820,17 +10820,17 @@ class Josm_powerQA(PluginMapCSS):
                 # suggestAlternative:"35000/110000/154000/220000/330000/350000/380000/400000/500000"
                 err.append({'class': 7040090, 'subclass': 553346185, 'text': mapcss.tr('Invalid voltage value for this country (Georgia)')})
 
-        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
-        # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
+        # *[power=substation][voltage][voltage!~/;/][voltage!~/^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
+        # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$/][inside("DE")]
         if ('power' in keys and 'voltage' in keys):
             match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_28f9c3db, '^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'DE')))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'power') == mapcss._value_capture(capture_tags, 0, 'substation')) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_65a1c7d6, '^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'DE')))
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss.regexp_test(mapcss._value_capture(capture_tags, 0, self.re_262476e6), mapcss._tag_capture(capture_tags, 0, tags, 'power'))) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_28f9c3db, '^(10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'DE')))
+                try: match = ((mapcss.regexp_test(mapcss._value_capture(capture_tags, 0, self.re_262476e6), mapcss._tag_capture(capture_tags, 0, tags, 'power'))) and (mapcss._tag_capture(capture_tags, 1, tags, 'voltage')) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 2, self.re_4399527a, ';'), mapcss._tag_capture(capture_tags, 2, tags, 'voltage'))) and (not mapcss.regexp_test(mapcss._value_const_capture(capture_tags, 3, self.re_65a1c7d6, '^(230|400|10000|10500|11000|15000|16000|20000|21000|22000|25000|27000|30000|33000|35000|50000|55000|60000|63000|65000|110000|132000|150000|155000|200000|220000|225000|250000|300000|320000|362000|380000|400000|450000|525000|600000)$'), mapcss._tag_capture(capture_tags, 3, tags, 'voltage'))) and (mapcss.inside(self.father.config.options, 'DE')))
                 except mapcss.RuleAbort: pass
             if match:
                 # -osmoseFix:tr("Check the list of possible values for this country on the wiki and correct the `{0}` tag.","voltage")
@@ -10839,8 +10839,8 @@ class Josm_powerQA(PluginMapCSS):
                 # -osmoseTrap:"If the voltage in OSM is correct but is showing as an error here, check the wiki page and make the necessary corrections. Then create [an issue on GitHub](https://github.com/open-energy-transition/validate-my-grid/issues) to update this check."
                 # -osmoseResource:"https://wiki.openstreetmap.org/wiki/Power_networks/Germany"
                 # throwError:tr("Invalid voltage value for this country (Germany)")
-                # suggestAlternative:"10500/11000/15000/16000/20000/21000/22000/25000/27000/30000/33000/35000/50000/55000/60000/63000/65000/110000/132000/150000/155000/200000/220000/225000/250000/300000/320000/362000/380000/400000/450000/525000/600000"
-                err.append({'class': 7040091, 'subclass': 327437283, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
+                # suggestAlternative:"230/400/10000/10500/11000/15000/16000/20000/21000/22000/25000/27000/30000/33000/35000/50000/55000/60000/63000/65000/110000/132000/150000/155000/200000/220000/225000/250000/300000/320000/362000/380000/400000/450000/525000/600000"
+                err.append({'class': 7040091, 'subclass': 2115284304, 'text': mapcss.tr('Invalid voltage value for this country (Germany)')})
 
         # *[power=substation][voltage][voltage!~/;/][voltage!~/^(11000|161000|225000|330000)$/][inside("GH")]
         # relation[power=~/line_section|circuit/][voltage][voltage!~/;/][voltage!~/^(11000|161000|225000|330000)$/][inside("GH")]

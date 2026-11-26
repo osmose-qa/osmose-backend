@@ -40,6 +40,7 @@ class Josm_FranceSpecificRules(PluginMapCSS):
         self.errors[9019005] = self.def_class(item = 9019, level = 3, tags = mapcss.list_('ref', 'highway'), title = mapcss.tr('validation rules Fantoir in France'))
         self.errors[9019006] = self.def_class(item = 9019, level = 3, tags = [], title = mapcss.tr('{0} is not a valid SIREN number', mapcss._tag_uncapture(capture_tags, '{0.tag}')))
         self.errors[9019007] = self.def_class(item = 9019, level = 3, tags = [], title = mapcss.tr('{0} is not a valid SIRET number', mapcss._tag_uncapture(capture_tags, '{0.tag}')))
+        self.errors[9019008] = self.def_class(item = 9019, level = 2, tags = mapcss.list_('highway'), title = {'en': 'maxweight tags are invalid on highways in France, use maxweightrating tags instead.'}, detail = {"en": 'Maximum weight road signs in France are about vehicle permitted weight, i.e. maxweightrating, so maxweight should never be used on a highway.'}, fix = {"en": 'Retag highway to only use maxweightrating tags, not maxweight tags.'}, trap = {"en": 'maxweight:signed is the exception: it should not be removed or retagged.'})
 
         self.re_045a0f34 = re.compile(r'(?i)co.?voiturage')
         self.re_107d2c86 = re.compile(r'PT[1-9]{1}[0-9]*')
@@ -47,6 +48,7 @@ class Josm_FranceSpecificRules(PluginMapCSS):
         self.re_173ac8d4 = re.compile(r'[0-9]{5}[A-Z0-9]{3}')
         self.re_2341f750 = re.compile(r'^(0[1-9]|1[0-9]|2[1-9]|[3-8][0-9]|9[0-5]|973|975|976)[ANP](8|9)[0-9]{3}(|A|N)([0-9]?[0-9]|B1|B2)(|[A-Z]|[a-z])(|CD)_(1[0-9]|[1-9])D$')
         self.re_23d0d993 = re.compile(r'[A-Z0-9]{3}')
+        self.re_27d5dcef = re.compile(r'^maxweight:(?!signed)(.*)')
         self.re_299ea34e = re.compile(r'^(motorway_link|trunk_link|primary_link|secondary_link|tertiary_link)$')
         self.re_30299d59 = re.compile(r'^(Enedis|GRDF)$')
         self.re_3b28b3c0 = re.compile(r'^(motorway|trunk|primary|secondary|tertiary|unclassified|service)$')
@@ -855,6 +857,27 @@ class Josm_FranceSpecificRules(PluginMapCSS):
                 # -osmoseItemClassLevel:"3260/32602/3"
                 # throwWarning:tr("{0} is not a valid code NAF/APE value","{0.tag}")
                 err.append({'class': 32602, 'subclass': 0, 'text': mapcss.tr('{0} is not a valid code NAF/APE value', mapcss._tag_uncapture(capture_tags, '{0.tag}'))})
+
+        # way[highway]["maxweight"][inside("FR")]
+        # way[highway][/^maxweight:(?!signed)(.*)/][inside("FR")]
+        if ('highway' in keys) or ('highway' in keys and 'maxweight' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'highway')) and (mapcss._tag_capture(capture_tags, 1, tags, 'maxweight')) and (mapcss.inside(self.father.config.options, 'FR')))
+                except mapcss.RuleAbort: pass
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'highway')) and (mapcss._tag_capture(capture_tags, 1, tags, self.re_27d5dcef)) and (mapcss.inside(self.father.config.options, 'FR')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # -osmoseTags:list("highway")
+                # -osmoseItemClassLevel:"9019/9019008/2"
+                # -osmoseDetail:"Maximum weight road signs in France are about vehicle permitted weight, i.e. maxweightrating, so maxweight should never be used on a highway."
+                # -osmoseFix:"Retag highway to only use maxweightrating tags, not maxweight tags."
+                # -osmoseTrap:"maxweight:signed is the exception: it should not be removed or retagged."
+                # throwWarning:"maxweight tags are invalid on highways in France, use maxweightrating tags instead."
+                err.append({'class': 9019008, 'subclass': 0, 'text': {'en': 'maxweight tags are invalid on highways in France, use maxweightrating tags instead.'}})
 
         return err
 
