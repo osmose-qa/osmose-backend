@@ -23,16 +23,17 @@ class Josm_combinations(PluginMapCSS):
         self.errors[9001004] = self.def_class(item = 9001, level = 3, tags = ["tag"], title = mapcss.tr('incomplete usage of {0} on a way without {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), mapcss._tag_uncapture(capture_tags, '{1.key}')))
         self.errors[9001005] = self.def_class(item = 9001, level = 3, tags = ["tag"], title = mapcss.tr('Use {0} only as value of {1}', 'transition', 'placement'))
         self.errors[9001006] = self.def_class(item = 9001, level = 2, tags = ["tag"], title = mapcss.tr('power=circuit relations should have a topology tag with value linear or branched'))
+        self.errors[9001007] = self.def_class(item = 9001, level = 3, tags = ["tag"], title = mapcss.tr('bicycle_road without bicycle access'))
 
         self.re_01d4d495 = re.compile(r'^(paved|asphalt|cobblestone|cobblestone:flattened|sett|concrete|concrete:plates|paving_stones|metal|wood|unhewn_cobblestone)$')
         self.re_050395e0 = re.compile(r'^maxspeed:?')
         self.re_06b82725 = re.compile(r'^(yes|minor|no)$')
-        self.re_0737b0c4 = re.compile(r'^(addr:housenumber|addr:housename|addr:flats|addr:conscriptionnumber|addr:street|addr:place|addr:city|addr:country|addr:full|addr:hamlet|addr:suburb|addr:subdistrict|addr:district|addr:province|addr:state|addr:interpolation|addr:interpolation|addr:inclusion)$')
         self.re_0889a956 = re.compile(r'^(basin|reservoir)$')
         self.re_088b0835 = re.compile(r'^addr:')
         self.re_0aef1f28 = re.compile(r'^cycleway(:|$)')
         self.re_0f2da17b = re.compile(r'^cycleway:right:')
         self.re_12ce6b85 = re.compile(r':forward')
+        self.re_1427e0b3 = re.compile(r'^(unpaved|compacted|gravel|fine_gravel|pebblestone|ground|earth|dirt|grass|sand|mud|ice|salt|snow|woodchips|laterite)$')
         self.re_143f11c5 = re.compile(r'^(no|use_sidepath)$')
         self.re_19e33301 = re.compile(r'^no$')
         self.re_1bc43c40 = re.compile(r'^(left|right|both)$')
@@ -80,8 +81,8 @@ class Josm_combinations(PluginMapCSS):
         self.re_60ec5bd8 = re.compile(r'^bicycle:')
         self.re_65503bed = re.compile(r'^cycleway(:right|:left|:both|):buffer')
         self.re_68c05e86 = re.compile(r'^(wall|retaining_wall)$')
-        self.re_6f957488 = re.compile(r'^(unpaved|compacted|gravel|fine_gravel|pebblestone|ground|earth|dirt|grass|sand|mud|ice|salt|snow|woodchips)$')
         self.re_70553ac1 = re.compile(r'^cycleway(:left|:both|):buffer')
+        self.re_71ccafd5 = re.compile(r'^(addr:housenumber|addr:housename|addr:flats|addr:conscriptionnumber|addr:street|addr:place|addr:city|addr:country|addr:full|addr:hamlet|addr:suburb|addr:subdistrict|addr:district|addr:province|addr:state|addr:interpolation|addr:inclusion)$')
         self.re_7346b495 = re.compile(r':backward')
         self.re_73498f6f = re.compile(r'^cycleway(:right|:both):.')
         self.re_734e4397 = re.compile(r'^(yes|stepping_stones)$')
@@ -796,14 +797,14 @@ class Josm_combinations(PluginMapCSS):
                 # throwWarning:tr("incomplete object: only {0} and {1}","{0.key}","{1.tag}")
                 err.append({'class': 9001001, 'subclass': 13522860, 'text': mapcss.tr('incomplete object: only {0} and {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
 
-        # *[place][place!=farm][place!=plot][/^(addr:housenumber|addr:housename|addr:flats|addr:conscriptionnumber|addr:street|addr:place|addr:city|addr:country|addr:full|addr:hamlet|addr:suburb|addr:subdistrict|addr:district|addr:province|addr:state|addr:interpolation|addr:interpolation|addr:inclusion)$/]
+        # *[place][place!=farm][place!=plot][/^(addr:housenumber|addr:housename|addr:flats|addr:conscriptionnumber|addr:street|addr:place|addr:city|addr:country|addr:full|addr:hamlet|addr:suburb|addr:subdistrict|addr:district|addr:province|addr:state|addr:interpolation|addr:inclusion)$/]
         # *[boundary][/^addr:/]
         # *[highway][/^addr:/][highway!=services][highway!=rest_area][!"addr:postcode"]
         if ('boundary' in keys) or ('highway' in keys) or ('place' in keys):
             match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'place')) and (mapcss._tag_capture(capture_tags, 1, tags, 'place') != mapcss._value_const_capture(capture_tags, 1, 'farm', 'farm')) and (mapcss._tag_capture(capture_tags, 2, tags, 'place') != mapcss._value_const_capture(capture_tags, 2, 'plot', 'plot')) and (mapcss._tag_capture(capture_tags, 3, tags, self.re_0737b0c4)))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'place')) and (mapcss._tag_capture(capture_tags, 1, tags, 'place') != mapcss._value_const_capture(capture_tags, 1, 'farm', 'farm')) and (mapcss._tag_capture(capture_tags, 2, tags, 'place') != mapcss._value_const_capture(capture_tags, 2, 'plot', 'plot')) and (mapcss._tag_capture(capture_tags, 3, tags, self.re_71ccafd5)))
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
@@ -819,7 +820,7 @@ class Josm_combinations(PluginMapCSS):
                 # assertNoMatch:"node place=foo  addr:postcode=12345"
                 # assertMatch:"node place=foo addr:housenumber=5 addr:postcode=12345"
                 # assertMatch:"node place=foo addr:housenumber=5"
-                err.append({'class': 9001002, 'subclass': 1053814004, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), 'addr:*')})
+                err.append({'class': 9001002, 'subclass': 547377591, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), 'addr:*')})
 
         # *[postal_code]["addr:postcode"][!highway][postal_code=*"addr:postcode"]
         if ('addr:postcode' in keys and 'postal_code' in keys):
@@ -1351,12 +1352,12 @@ class Josm_combinations(PluginMapCSS):
         err = []
         set_AllSameCycleway = set_AllSameMaxspeed = set_AllSameSidewalk = set_MotorwayTrunk = set_PlacementTransitionWarning = set_TunnelCulvertWithoutWaterway = set_fully_paved_surface = set_only_one_tag = set_unpaved_surface = False
 
-        # way[surface=~/^(unpaved|compacted|gravel|fine_gravel|pebblestone|ground|earth|dirt|grass|sand|mud|ice|salt|snow|woodchips)$/]
+        # way[surface=~/^(unpaved|compacted|gravel|fine_gravel|pebblestone|ground|earth|dirt|grass|sand|mud|ice|salt|snow|woodchips|laterite)$/]
         if ('surface' in keys):
             match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss.regexp_test(mapcss._value_capture(capture_tags, 0, self.re_6f957488), mapcss._tag_capture(capture_tags, 0, tags, 'surface'))))
+                try: match = ((mapcss.regexp_test(mapcss._value_capture(capture_tags, 0, self.re_1427e0b3), mapcss._tag_capture(capture_tags, 0, tags, 'surface'))))
                 except mapcss.RuleAbort: pass
             if match:
                 # set unpaved_surface
@@ -2383,14 +2384,14 @@ class Josm_combinations(PluginMapCSS):
                 # throwWarning:tr("incomplete object: only {0} and {1}","{0.key}","{1.tag}")
                 err.append({'class': 9001001, 'subclass': 1755320367, 'text': mapcss.tr('incomplete object: only {0} and {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), mapcss._tag_uncapture(capture_tags, '{1.tag}'))})
 
-        # *[place][place!=farm][place!=plot][/^(addr:housenumber|addr:housename|addr:flats|addr:conscriptionnumber|addr:street|addr:place|addr:city|addr:country|addr:full|addr:hamlet|addr:suburb|addr:subdistrict|addr:district|addr:province|addr:state|addr:interpolation|addr:interpolation|addr:inclusion)$/]
+        # *[place][place!=farm][place!=plot][/^(addr:housenumber|addr:housename|addr:flats|addr:conscriptionnumber|addr:street|addr:place|addr:city|addr:country|addr:full|addr:hamlet|addr:suburb|addr:subdistrict|addr:district|addr:province|addr:state|addr:interpolation|addr:inclusion)$/]
         # *[boundary][/^addr:/]
         # *[highway][/^addr:/][highway!=services][highway!=rest_area][!"addr:postcode"]
         if ('boundary' in keys) or ('highway' in keys) or ('place' in keys):
             match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'place')) and (mapcss._tag_capture(capture_tags, 1, tags, 'place') != mapcss._value_const_capture(capture_tags, 1, 'farm', 'farm')) and (mapcss._tag_capture(capture_tags, 2, tags, 'place') != mapcss._value_const_capture(capture_tags, 2, 'plot', 'plot')) and (mapcss._tag_capture(capture_tags, 3, tags, self.re_0737b0c4)))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'place')) and (mapcss._tag_capture(capture_tags, 1, tags, 'place') != mapcss._value_const_capture(capture_tags, 1, 'farm', 'farm')) and (mapcss._tag_capture(capture_tags, 2, tags, 'place') != mapcss._value_const_capture(capture_tags, 2, 'plot', 'plot')) and (mapcss._tag_capture(capture_tags, 3, tags, self.re_71ccafd5)))
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
@@ -2403,7 +2404,7 @@ class Josm_combinations(PluginMapCSS):
             if match:
                 # group:tr("suspicious tag combination")
                 # throwWarning:tr("{0} together with {1}","{0.key}","addr:*")
-                err.append({'class': 9001002, 'subclass': 1053814004, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), 'addr:*')})
+                err.append({'class': 9001002, 'subclass': 547377591, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), 'addr:*')})
 
         # *[postal_code]["addr:postcode"][!highway][postal_code=*"addr:postcode"]
         if ('addr:postcode' in keys and 'postal_code' in keys):
@@ -3738,6 +3739,17 @@ class Josm_combinations(PluginMapCSS):
                     'substance'])
                 }})
 
+        # way[highway][bicycle_road=yes][vehicle][vehicle!=yes][!bicycle]
+        if ('bicycle_road' in keys and 'highway' in keys and 'vehicle' in keys):
+            match = False
+            if not match:
+                capture_tags = {}
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'highway')) and (mapcss._tag_capture(capture_tags, 1, tags, 'bicycle_road') == mapcss._value_capture(capture_tags, 1, 'yes')) and (mapcss._tag_capture(capture_tags, 2, tags, 'vehicle')) and (mapcss._tag_capture(capture_tags, 3, tags, 'vehicle') != mapcss._value_const_capture(capture_tags, 3, 'yes', 'yes')) and (not mapcss._tag_capture(capture_tags, 4, tags, 'bicycle')))
+                except mapcss.RuleAbort: pass
+            if match:
+                # throwWarning:tr("bicycle_road without bicycle access")
+                err.append({'class': 9001007, 'subclass': 287375177, 'text': mapcss.tr('bicycle_road without bicycle access')})
+
         return err
 
     def relation(self, data, tags, members):
@@ -4353,14 +4365,14 @@ class Josm_combinations(PluginMapCSS):
                 # throwWarning:tr("{0} together with {1}","{0.key}","{1.key}")
                 err.append({'class': 9001002, 'subclass': 1590654104, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), mapcss._tag_uncapture(capture_tags, '{1.key}'))})
 
-        # *[place][place!=farm][place!=plot][/^(addr:housenumber|addr:housename|addr:flats|addr:conscriptionnumber|addr:street|addr:place|addr:city|addr:country|addr:full|addr:hamlet|addr:suburb|addr:subdistrict|addr:district|addr:province|addr:state|addr:interpolation|addr:interpolation|addr:inclusion)$/]
+        # *[place][place!=farm][place!=plot][/^(addr:housenumber|addr:housename|addr:flats|addr:conscriptionnumber|addr:street|addr:place|addr:city|addr:country|addr:full|addr:hamlet|addr:suburb|addr:subdistrict|addr:district|addr:province|addr:state|addr:interpolation|addr:inclusion)$/]
         # *[boundary][/^addr:/]
         # *[highway][/^addr:/][highway!=services][highway!=rest_area][!"addr:postcode"]
         if ('boundary' in keys) or ('highway' in keys) or ('place' in keys):
             match = False
             if not match:
                 capture_tags = {}
-                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'place')) and (mapcss._tag_capture(capture_tags, 1, tags, 'place') != mapcss._value_const_capture(capture_tags, 1, 'farm', 'farm')) and (mapcss._tag_capture(capture_tags, 2, tags, 'place') != mapcss._value_const_capture(capture_tags, 2, 'plot', 'plot')) and (mapcss._tag_capture(capture_tags, 3, tags, self.re_0737b0c4)))
+                try: match = ((mapcss._tag_capture(capture_tags, 0, tags, 'place')) and (mapcss._tag_capture(capture_tags, 1, tags, 'place') != mapcss._value_const_capture(capture_tags, 1, 'farm', 'farm')) and (mapcss._tag_capture(capture_tags, 2, tags, 'place') != mapcss._value_const_capture(capture_tags, 2, 'plot', 'plot')) and (mapcss._tag_capture(capture_tags, 3, tags, self.re_71ccafd5)))
                 except mapcss.RuleAbort: pass
             if not match:
                 capture_tags = {}
@@ -4373,7 +4385,7 @@ class Josm_combinations(PluginMapCSS):
             if match:
                 # group:tr("suspicious tag combination")
                 # throwWarning:tr("{0} together with {1}","{0.key}","addr:*")
-                err.append({'class': 9001002, 'subclass': 1053814004, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), 'addr:*')})
+                err.append({'class': 9001002, 'subclass': 547377591, 'text': mapcss.tr('{0} together with {1}', mapcss._tag_uncapture(capture_tags, '{0.key}'), 'addr:*')})
 
         # *[postal_code]["addr:postcode"][!highway][postal_code=*"addr:postcode"]
         if ('addr:postcode' in keys and 'postal_code' in keys):
@@ -4959,9 +4971,9 @@ class Test(TestPluginMapcss):
 
         self.check_err(n.node(data, {'source:addr:postcode': 'postman'}), expected={'class': 9001001, 'subclass': 31231113})
         self.check_not_err(n.node(data, {'maxspeed:hgv:conditional': '80 @ (weight>7.5 AND 22:00-05:00)', 'traffic_sign': 'maxspeed'}), expected={'class': 9001001, 'subclass': 2095780217})
-        self.check_not_err(n.node(data, {'addr:postcode': '12345', 'place': 'foo'}), expected={'class': 9001002, 'subclass': 1053814004})
-        self.check_err(n.node(data, {'addr:housenumber': '5', 'addr:postcode': '12345', 'place': 'foo'}), expected={'class': 9001002, 'subclass': 1053814004})
-        self.check_err(n.node(data, {'addr:housenumber': '5', 'place': 'foo'}), expected={'class': 9001002, 'subclass': 1053814004})
+        self.check_not_err(n.node(data, {'addr:postcode': '12345', 'place': 'foo'}), expected={'class': 9001002, 'subclass': 547377591})
+        self.check_err(n.node(data, {'addr:housenumber': '5', 'addr:postcode': '12345', 'place': 'foo'}), expected={'class': 9001002, 'subclass': 547377591})
+        self.check_err(n.node(data, {'addr:housenumber': '5', 'place': 'foo'}), expected={'class': 9001002, 'subclass': 547377591})
         self.check_not_err(n.node(data, {'highway': 'street_lamp', 'natural': 'birds_nest'}), expected={'class': 9001002, 'subclass': 1750941961})
         self.check_not_err(n.node(data, {'amenity': 'restaurant', 'sport': '10pin'}), expected={'class': 9001001, 'subclass': 1738767711})
         self.check_not_err(n.node(data, {'natural': 'beach', 'sport': 'beachvolleyball'}), expected={'class': 9001001, 'subclass': 1738767711})

@@ -4029,10 +4029,10 @@ class Josm_deprecated(PluginMapCSS):
                 except mapcss.RuleAbort: pass
             if match:
                 # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
                 # suggestAlternative:"transformer=distribution"
                 # fixAdd:"transformer=distribution"
-                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
                     '+': dict([
                     ['transformer','distribution']])
                 }})
@@ -4073,15 +4073,6 @@ class Josm_deprecated(PluginMapCSS):
                     '-': ([
                     'transformer'])
                 }})
-
-        # *[transformer=minor_distribution]
-        # Part of rule not implemented
-
-        # *[transformer=traction]
-        # Part of rule not implemented
-
-        # *[transformer=auto]
-        # Part of rule not implemented
 
         # *[building:roof:shape]
         if ('building:roof:shape' in keys):
@@ -8710,10 +8701,10 @@ class Josm_deprecated(PluginMapCSS):
                 except mapcss.RuleAbort: pass
             if match:
                 # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
                 # suggestAlternative:"transformer=distribution"
                 # fixAdd:"transformer=distribution"
-                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
                     '+': dict([
                     ['transformer','distribution']])
                 }})
@@ -8754,15 +8745,6 @@ class Josm_deprecated(PluginMapCSS):
                     '-': ([
                     'transformer'])
                 }})
-
-        # *[transformer=minor_distribution]
-        # Part of rule not implemented
-
-        # *[transformer=traction]
-        # Part of rule not implemented
-
-        # *[transformer=auto]
-        # Part of rule not implemented
 
         # *[building:roof:shape]
         if ('building:roof:shape' in keys):
@@ -12839,10 +12821,10 @@ class Josm_deprecated(PluginMapCSS):
                 except mapcss.RuleAbort: pass
             if match:
                 # group:tr("deprecated tagging")
-                # throwWarning:tr("{0} is deprecated","{1.tag}")
+                # throwWarning:tr("{0} is deprecated","{0.tag}")
                 # suggestAlternative:"transformer=distribution"
                 # fixAdd:"transformer=distribution"
-                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{1.tag}')), 'allow_fix_override': True, 'fix': {
+                err.append({'class': 9002001, 'subclass': 649189530, 'text': mapcss.tr('{0} is deprecated', mapcss._tag_uncapture(capture_tags, '{0.tag}')), 'allow_fix_override': True, 'fix': {
                     '+': dict([
                     ['transformer','distribution']])
                 }})
@@ -12883,15 +12865,6 @@ class Josm_deprecated(PluginMapCSS):
                     '-': ([
                     'transformer'])
                 }})
-
-        # *[transformer=minor_distribution]
-        # Part of rule not implemented
-
-        # *[transformer=traction]
-        # Part of rule not implemented
-
-        # *[transformer=auto]
-        # Part of rule not implemented
 
         # *[building:roof:shape]
         if ('building:roof:shape' in keys):
