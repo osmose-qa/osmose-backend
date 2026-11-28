@@ -25,8 +25,8 @@ msgstr ""
 "Project-Id-Version: Osmose\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-28 19:47+0200\n"
-"PO-Revision-Date: 2026-09-28 18:07+0000\n"
-"Last-Translator: Franco <francobenedetti.59+weblate1@gmail.com>\n"
+"PO-Revision-Date: 2026-11-21 22:48+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fito@libreoffice.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/osmose/backend/"
 "es/>\n"
 "Language: es\n"
@@ -35,7 +35,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == "
 "0) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 
 #: ../analysers/analyser_merge_college_FR.py:31
 msgid "College not integrated"
@@ -127,11 +127,11 @@ msgstr "Intersección de edificio grande"
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:169
 msgid "Building too small"
-msgstr "Edificio demasiado pequeño"
+msgstr "Edificación demasiado pequeña"
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:176
 msgid "Gap between buildings"
-msgstr "Separación entre edificios"
+msgstr "Separación entre edificaciones"
 
 #: ../analysers/analyser_osmosis_building_overlaps.py:181
 msgid "Large building intersection cluster"
@@ -139,11 +139,11 @@ msgstr "Grupo de intersecciones de edificio grande"
 
 #: ../analysers/analyser_osmosis_building_shapes.py:68
 msgid "Special building (round)"
-msgstr "Edificio especial (redondo)"
+msgstr "Edificación especial (redonda)"
 
 #: ../analysers/analyser_osmosis_building_shapes.py:71
 msgid "Special building (large)"
-msgstr "Edificio especial (grande)"
+msgstr "Edificación especial (grande)"
 
 #: ../analysers/analyser_osmosis_highway_deadend.py:425
 msgid "Unconnected cycleway"
@@ -159,7 +159,7 @@ msgstr "Carretera aislada o barrera como nodo"
 
 #: ../analysers/analyser_osmosis_building_geodesie_FR.py:105
 msgid "Geodesic mark without building"
-msgstr "Marca geodésica sin edificio"
+msgstr "Marca geodésica sin edificación"
 
 #: ../analysers/analyser_osmosis_highway_traffic_signals.py:170
 msgid "Possible crossing=traffic_signals"
@@ -176,11 +176,11 @@ msgstr "Carretera demasiada larga para un *_link"
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:464
 msgid "Highway intersecting building"
-msgstr "Carretera intersecta con edificio"
+msgstr "La carretera interseca la edificación"
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:465
 msgid "Tree intersecting building"
-msgstr "Árbol intersecta con edificio"
+msgstr "El árbol interseca la edificación"
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:466
 msgid "Tree and highway too close"
@@ -492,7 +492,7 @@ msgstr "Etiquetar árboles"
 
 #: ../plugins/TagFix_Wikipedia.py:46
 msgid "Not a Wikipedia URL"
-msgstr "Sin una URL Wikipedia"
+msgstr "No es un URL de Wikipedia"
 
 #: ../plugins/TagFix_Wikipedia.py:49
 msgid "Wikipedia URL instead of article title"
@@ -3281,7 +3281,7 @@ msgstr ""
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:471
 msgid "Highway intersecting highway"
-msgstr "Carretera intersecciona con carretera"
+msgstr "La carretera interseca otra carretera"
 
 #: ../analysers/analyser_osmosis_highway_vs_building.py:473
 msgid "Waterway intersecting waterway"
@@ -3946,9 +3946,8 @@ msgid ""
 "If after review you are sure that it is new data and right for\n"
 "OpenStreetMap, then you can add it."
 msgstr ""
-"Si tras la revisión está seguro de que se trata de datos nuevos y adecuados "
-"para\n"
-"OpenStreetMap, entonces puedes añadirlo."
+"Si tras la revisión confía en que se trata de datos nuevos y adecuados\n"
+"para OpenStreetMap, entonces puede añadirlos."
 
 #: ../analysers/Analyser_Merge.py:1230
 msgid "Be sure that it does not already exist in another place."
