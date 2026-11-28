@@ -6,8 +6,8 @@ import sys
 import osmose_config
 
 main_url = 'http://polygons.openstreetmap.fr/'
-relation_generation_url = main_url + 'index.py'
-polygon_union_url = main_url + 'get_poly.py'
+relation_generation_url = main_url + 'relation/%d'
+polygon_union_url = main_url + 'union/%s.poly'
 
 fails = []
 for c in osmose_config.config.values():
@@ -27,7 +27,7 @@ for c in osmose_config.config.values():
     relation_failing = False
     for poly_id in polygon_id:
         try:
-            r = requests.post(relation_generation_url, params={'id': str(poly_id)}, data={'refresh': 1}, timeout=120)
+            r = requests.post(relation_generation_url % poly_id, data={'refresh': 1}, timeout=120)
         except requests.exceptions.Timeout:
             print("      Timeout")
             fails.append([c.country, polygon_id, 'Timeout'])
@@ -50,7 +50,7 @@ for c in osmose_config.config.values():
     # get associated poly file
     try:
         poly_id = ",".join(map(str, polygon_id))
-        r = requests.get(polygon_union_url, params={'id': poly_id, 'params': '0'}, timeout=120)
+        r = requests.get(polygon_union_url % poly_id, timeout=120)
     except requests.exceptions.Timeout:
         print("      Poly Timeout")
         fails.append([c.country, polygon_id, 'Poly Timeout'])
