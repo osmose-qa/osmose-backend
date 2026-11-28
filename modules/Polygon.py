@@ -32,10 +32,10 @@ class Polygon:
             polygon_id = (polygon_id, )
 
         polygon_url = "http://polygons.openstreetmap.fr/"
-        for id in polygon_id:
-            url = polygon_url + "index.py?id="+str(id)
-            downloader.urlread(url, cache_delay)
-        url = polygon_url + "get_wkt.py?params=0&id=" + ",".join(map(str, polygon_id))
+        if len(polygon_id) == 1:
+            url = polygon_url + "relation/%d.wkt" % polygon_id[0]
+        else:
+            url = polygon_url + "union/%s.wkt" % (",".join(map(str, polygon_id)))
         wkt = downloader.urlread(url, cache_delay)
         if wkt.startswith("SRID="):
             wkt = wkt.split(";", 1)[1]
